@@ -49,7 +49,11 @@ module.exports = function (app)
         })
         .post(Model.upload);
 
-    // app.route('/Media')
-        // .post(Model.uploadedMedia);
+    app.route('/home')
+        .get((_res, res) => {
+            const page = fs.readFileSync("webSite/html/home.html", "utf-8");
+            res.setHeader("Content-Type", "text/html");
+            res.send(page);
+        })
 
 }
