@@ -21,7 +21,12 @@ module.exports = {
         res.send(err);
       } else {
         if (doctor) {
-          res.json(doctor);
+          
+            const page = fs.readFileSync("webSite/html/home.html", "utf-8");
+            res.setHeader("Content-Type", "text/html");
+            res.send(page);
+        
+    
         } else {
           res.send(404);
         }
@@ -43,7 +48,10 @@ module.exports = {
         if (err) {
           res.send(err);
         } else {
-          res.json(saved);
+          const page = fs.readFileSync("webSite/html/login.html", "utf-8");
+          res.setHeader("Content-Type", "text/html");
+          res.send(page);
+          
         }
       });
   },
