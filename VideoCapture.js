@@ -14,7 +14,19 @@ function uploadVideo(videoFile) {
 	let videoURL = window.URL.createObjectURL(videoFile);
 	uploadedVideo.src = videoURL;
 
-	submitVideo(uploadedVideo.src, false); // Submit the video
+	fetchVideo(uploadedVideo.src).then(blob => {
+		sendBlob(blob);
+	});
+}
+
+function sendBlob(blob) {
+  submitVideo(blob, false); // Submit the video
+}
+
+function fetchVideo(url) {
+  return fetch(url).then(response => {        
+    return response.blob();
+  });
 }
 
 // The main function to capture the video stream
@@ -106,7 +118,7 @@ function takeVideoStream() {
 			capturedVideoStream.style.visibility = "visible"; // Make the captured video element visiable
 			capturedVideoStream.src = videoURL;
 
-			submitVideo(capturedVideoStream.src, true); // Submit the video
+			submitVideo(blob, true); // Submit the video
 		};
 	}).catch(error => {
 		console.log(error.name, error.message);
