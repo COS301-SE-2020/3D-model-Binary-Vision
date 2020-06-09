@@ -33,7 +33,7 @@ function createModel(_data){
 	createCanvas();
 	initialiseContext();	
 	
-	gl_context.viewport(0,0, RESOLUTION_WIDTH, RESOLUTION_HEIGHT);
+	gl_context.viewport(0,0, canvas.width, canvas.height);
 	gl_context.clearColor(0.3,0.3,0.3,1.0);
 	
 	initialiseShaders();
@@ -96,10 +96,10 @@ function createCanvas()
 {
 canvas = document.createElement('canvas');
 canvas.id = "gl_canvas";
-canvas.width = RESOLUTION_WIDTH;
-canvas.height = RESOLUTION_HEIGHT;
+canvas.width = RESOLUTION_WIDTH-canvas.width;
+canvas.height = RESOLUTION_HEIGHT-canvas.height;
 canvas.style.border = "1px solid";
-var body = document.getElementsByTagName("body")[0];
+var body = document.getElementsByClassName("outputModule")[0];
 body.appendChild(canvas);
 }
 
