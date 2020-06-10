@@ -24,7 +24,7 @@ module.exports = {
           
             const page = fs.readFileSync("webSite/html/home.html", "utf-8");
             res.setHeader("Content-Type", "text/html");
-            res.send(page);
+            res.status(202).send(page);
         
     
         } else {
@@ -48,16 +48,15 @@ module.exports = {
         if (err) {
           res.send(err);
         } else {
-          const page = fs.readFileSync("webSite/html/login.html", "utf-8");
-          res.setHeader("Content-Type", "text/html");
-          res.send(page);
-          
+          	const page = fs.readFileSync("webSite/html/login.html", "utf-8");
+          	res.setHeader("Content-Type", "text/html");
+          	res.status(201).send(page);        
         }
       });
   },
 
   addPatient: function (req, res) {
-    var new_Parient = new Patients(req.body);
+    var new_Patient = new Patients(req.body);
     new_Patient.save(function (err, patient) {
       if (err) res.send(err);
       res.json(patient);
@@ -73,7 +72,7 @@ module.exports = {
         if (patient) {
           res.json(patient);
         } else {
-          res.send(404);
+          res.sendStatus(404);
         }
       }
     });
@@ -85,7 +84,7 @@ module.exports = {
       if (err) {
         res.status(500).send("Error looking up patients");
       } else {
-        res.json(patients);
+        res.sendStatus(202).json(patients);
       }
     });
   },
@@ -104,7 +103,7 @@ module.exports = {
             res.status(500).send("Error updating patient");
           } else {
             if (patient) {
-              res.json(patient);
+              res.sendStatus(201).json(patient);
             } else {
               res.send(404);
             }
@@ -114,6 +113,7 @@ module.exports = {
     });
   },
 
+//upload
   upload: function(req, res) {
     // use default grid-fs bucket
     const Files = createModel();
@@ -146,7 +146,7 @@ module.exports = {
               video: file._id
             });
             consultation.save(function (err, saved) {
-              res.send(saved);
+              res.sendStatus(201).send(saved);
             });
             // res.send(`Uploaded file ${video.name}`);
           });
