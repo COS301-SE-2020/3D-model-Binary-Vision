@@ -10,6 +10,8 @@ System Requirements Specification: (pending)
 
 Project Management: https://app.clubhouse.io/flapjacks301/stories/space/9/everything
 
+User Manual: (pending)
+
 Installation Instructions:
 
 (pending)
@@ -26,7 +28,7 @@ Quinn du Piesanie:
   
   Contribiution: (pending)
 
-Jacoubus Janse van Rensburg:
+Jacobus Janse van Rensburg:
   github.io: https://jacobus1998.github.io/
   
   Contribiution: (pending)
@@ -34,7 +36,12 @@ Jacoubus Janse van Rensburg:
 Steven Visser:
   github.io: https://vanillav.github.io/
   
-  Contribiution: (pending)
+  Contribiution: 
+  
+  For Demo 1: Created and managed the user stories using the project management tools and set deadlines for work to be
+              completed. Created the Use Case Diagram for the Media & Render Subsystem. Revised the System Requirements
+              Specification Document and created Functional Requirements. Implemented Unit Testing for the Signup operations with
+              the API integration.
 
 Marcus Werren:
   github.io: https://marcuswerren.github.io/
