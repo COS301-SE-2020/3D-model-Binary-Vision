@@ -9,14 +9,32 @@ chai.should();
 chai.use(chaiHttp);
 
 describe('API unit testing:', () => {
-	// Test case 1 : Login
-	describe('Login:', () => {
-		it('Testing Login feature returns error', (done) => {
-			const tempLogin = {
-				username: "MrDoc",
+	// Test case 1 : Signup
+	describe('Sign Up:', () => {
+		it('Testing create new user (should return html page)', (done) => {
+			const tempUser = {
+				name: "Peter",
+				surname: "Piper",
+				username: "DrPP", 
 				password: "12345"
 			};
-			chai.request("localhost:3000")
+			chai.request("http://localhost:3000")
+				.post("/signup". db.signup)
+				.send(tempUser)
+				.end((error, response) => {
+					response.should.be.a('object');
+				done();
+				})
+		});
+	});
+	// Test case 2 : Login
+	describe('Login:', () => {
+		it('Testing Login feature (returns error)', (done) => {
+			const tempLogin = {
+				username: "DrPP",
+				password: "12345"
+			};
+			chai.request("http://localhost:3000")
 				.post("/login", db.login)
 				.send(tempLogin)
 				.end((error, response) => {
@@ -24,10 +42,6 @@ describe('API unit testing:', () => {
 				done();
 				});
 		});
-	});
-	// Test case 2 : Signup
-	describe('Sign Up:', () => {
-
 	});
 	// Test case 3 : Add Patient
 	describe('Add Patient:', () => {
