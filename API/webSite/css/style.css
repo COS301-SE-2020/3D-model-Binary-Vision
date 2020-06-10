@@ -1,0 +1,73 @@
+h1 {
+	position: relative;
+	text-align: center;
+	margin: 0px auto;
+	color: white;
+}
+
+body {
+	background-image: url("images/blue.jpg");
+	background-attachment:fixed;
+	background-size:cover;
+}
+
+.profile {
+	position: relative;
+	margin: 0px auto;
+	text-align: center;
+	
+}
+
+image {
+	width: 2em;
+	height: 2em;
+}
+
+table {
+	background-color: rgba(136,136,136,0.8);
+}
+
+td {
+	color: white;
+}
+
+
+.nav-link {
+	color: blue;
+	position: relative;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding: 0px;
+}
+
+.nav-link1 {
+	color: white;
+}
+
+.nav-link1:hover {
+	color: lightblue;
+	text-decoration: none; 
+}
+
+.renderButton {
+	position: relative;
+	text-align: center;
+}
+
+.renderCenter {
+	position: relative;
+	text-align: center; 
+	margin: 0 auto;
+}
+
+.outputModule{
+	position: relative;
+	text-align: center; 
+	margin: 0 auto;
+}
+
+form {
+	text-align: center; 
+}

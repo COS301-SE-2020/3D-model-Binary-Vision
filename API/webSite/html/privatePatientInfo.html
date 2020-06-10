@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Private Info</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+
+		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		  <a class="navbar-brand" href="#">
+		      <img src="/css/images/profile.png" alt="Profile Picture" width="30px" height="30px">
+		  </a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+		    <ul class="navbar-nav">
+		      <li class="nav-item">
+		        <a class="nav-link" href="displayPatients.html">Patients</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="signup.html">Sign Up</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="login.html">Login</a>
+		      </li>      
+		    </ul>
+		  </div>  
+		</nav>
+		<br>
+
+		<div class="container">
+		  <h1> Information on Patient X </h1> 
+		</div>
+		<div class="profile">
+		  <img src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
+		</div>
+		<br>
+
+
+		<div class="container">   
+		    <table class="table table-striped">
+		      <thead class="thead-dark">
+		        <tr>
+		          <th scope="col">#</th>
+		          <th>Date</th>
+		          <th>Notes</th>
+		        </tr>
+		      </thead>
+
+		      <tbody>
+		        <tr>
+		          <th scope="row">1</th>
+		          <td>01/02/2020</td>
+		          <td>Came for checkup and found that tooth c-16 is loose. We also found that the patient might need braces.</td>
+		        </tr>
+		        <tr>
+		          <th scope="row">2</th>
+		          <td>06/02/2020</td>
+		          <td>Performed operation to remoce tooth c-16</td>
+		        </tr>
+		        <tr>
+		          <th scope="row">3</th>
+		          <td>17/02/2020</td>
+		          <td>weekly checkup</td>
+		        </tr>
+		      </tbody>
+		    </table>
+		    <div class="renderButton">
+		    	<button type="button" class="btn btn-dark"><a class="nav-link1" href="../renderPage/render.html">Render Teeth</a></button>
+		    </div>
+  </div>
+
+	</body>
+</html>
