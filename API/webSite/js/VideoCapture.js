@@ -138,6 +138,18 @@ function submitVideo(video, videoStreamed) {
 
 	submitVideoButton.addEventListener('click', (ev) => {
 		alert("ACTION: Video sent (" + video + ")");
+		//post method
+		var VideoSending = new FormData();
+		//will need to append the patient ID / consultation ID to save it in the database "Jaco"
+		VideoSending.append("video", video);
+
+		var response = fetch("/upload",{
+			method:"POST",
+			body: VideoSending
+		});
+		
+		response.then(res=> {console.log("uploaded")});
+
 	});
 }
 
