@@ -77,7 +77,7 @@ Marcus Werren:
 github.io: 
 https://marcuswerren.github.io/
 
-(Contribiution): (pending)
+(contribution): (pending)
 -----------------------------------------------------------------------------------------------------------------
 
 End of README
