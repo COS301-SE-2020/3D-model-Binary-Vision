@@ -55,7 +55,12 @@ Jacobus Janse van Rensburg:
 github.io: 
 https://jacobus1998.github.io/
 
-(Contribiution): (pending)
+(Contribiution): For demo: Created the database and the Node.js API that 
+connects the front and back end. I was part of the Integration process to 
+integrate the front end and back end. For the documentation I did the Introduction, 
+functional and quality requirements. I also set up the basic document that the
+team then changed and inserted into as they seemed nescesary and what was assigned 
+to them.
 
 Steven Visser: 
 github.io: 
