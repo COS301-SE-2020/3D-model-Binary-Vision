@@ -79,7 +79,9 @@ Marcus Werren:
 github.io: 
 https://marcuswerren.github.io/
 
-(contribution): (pending)
------------------------------------------------------------------------------------------------------------------
+(Contribution): For Demo 1: I created the tractability matrix for the documentation 
+of the system. I implemented the Video capture functionality that allows the users 
+to send a live recorded video or a pre-recorded video from the clients machine to 
+back end for processing. I also contributed to the unit testing of the systems API calls.
 
 End of README
