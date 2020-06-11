@@ -17,7 +17,7 @@ on a Web Page, where they will be able to rotate the model.
 
 Demo 1 Download: 
 ================
-(pending) 
+https://drive.google.com/file/d/1urvzRHTTUYAgFXoPAeqhKeeuAuu2Y3_j/view?usp=sharing 
 -----------------------------------------------------------------------------------------------------------------
 System Requirements Specification:
 ==================================
@@ -33,6 +33,18 @@ User Manual:
 -----------------------------------------------------------------------------------------------------------------
 Installation Instructions:
 ===========================
+
+Must be tested on Linux.
+MongoDB must be installed on the system.
+Node must be installed on the system.
+
+Download the master branch and unzip.
+
+Open terminal in this location, type: node server.js
+
+This will open the local host server on port 3000.
+
+In your browser, go to localhost:3000/signup
 
 Collaborators: 
 =============== 
