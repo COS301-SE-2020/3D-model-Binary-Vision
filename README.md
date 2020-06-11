@@ -21,7 +21,7 @@ https://drive.google.com/file/d/1urvzRHTTUYAgFXoPAeqhKeeuAuu2Y3_j/view?usp=shari
 -----------------------------------------------------------------------------------------------------------------
 System Requirements Specification:
 ==================================
-(pending) 
+https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/System%20Requirements%20Specification.pdf
 -----------------------------------------------------------------------------------------------------------------
 Project Management:
 ====================
