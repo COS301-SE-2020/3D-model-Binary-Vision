@@ -127,3 +127,7 @@ p {
 #viewLogin{
 	cursor: pointer;
 }
+
+.active{
+	color: white;
+}
