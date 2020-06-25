@@ -15,7 +15,7 @@ body {
 	position: relative;
 	margin: 0px auto;
 	text-align: center;
-	
+
 }
 
 image {
@@ -40,6 +40,7 @@ td {
 	margin-left: 0px;
 	margin-right: 0px;
 	padding: 0px;
+
 }
 
 .nav-link1 {
@@ -48,7 +49,7 @@ td {
 
 .nav-link1:hover {
 	color: lightblue;
-	text-decoration: none; 
+	text-decoration: none;
 }
 
 .renderButton {
@@ -58,16 +59,71 @@ td {
 
 .renderCenter {
 	position: relative;
-	text-align: center; 
+	text-align: center;
 	margin: 0 auto;
 }
 
 .outputModule{
 	position: relative;
-	text-align: center; 
+	text-align: center;
 	margin: 0 auto;
 }
 
+#formCheck {
+	text-align: center;
+	background-color: #343a40;
+	position: relative;
+	width: 300px;
+	padding: 5px;
+	margin: 0 auto;
+	border-radius: 5px;
+	animation: scaleForm 1s;
+	box-shadow: 0 12px 12px -7px rgba(0,0,0,.9);
+
+}
+
+#formSignup {
+	text-align: center;
+	background-color: #343a40;
+	position: relative;
+	width: 300px;
+	padding: 5px;
+	margin: 0 auto;
+	border-radius: 5px;
+	animation: scaleForm 1s;
+	box-shadow: 0 12px 12px -7px rgba(0,0,0,.9);
+
+}
+
 form {
-	text-align: center; 
+	text-align: center;
+	background-color: #343a40;
+	position: relative;
+	width: 300px;
+	padding: 5px;
+	margin: 0 auto;
+	border-radius: 5px;
+
+}
+
+@keyframes scaleForm {
+	0%{
+		transform: scale(0.0,0.0);
+		-webkit-transform: scale(0.0,0.0);
+		opacity: 0.0;
+	}
+	100%{
+		transform: scale(1.0,1.0);
+		-webkit-transform: scale(1.0,1.0);
+		opacity: 1.0;
+	}
+
+}
+
+p {
+	color: white;
+}
+
+#viewLogin{
+	cursor: pointer;
 }
