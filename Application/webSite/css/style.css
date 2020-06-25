@@ -1,36 +1,24 @@
-h1 {
-	position: relative;
-	text-align: center;
-	margin: 0px auto;
-	color: black;
-}
-
-body {
-	background-image: url("images/white.jpg");
-	background-attachment:fixed;
-	background-size:cover;
-}
-
-.profile {
-	position: relative;
-	margin: 0px auto;
-	text-align: center;
-
-}
-
-image {
-	width: 2em;
-	height: 2em;
-}
-
-table {
-	background-color: rgba(136,136,136,0.8);
-}
-
-td {
+/*class*/
+.active{
 	color: white;
 }
 
+.renderButton {
+	position: relative;
+	text-align: center;
+}
+
+.renderCenter {
+	position: relative;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.outputModule{
+	position: relative;
+	text-align: center;
+	margin: 0 auto;
+}
 
 .nav-link {
 	color: blue;
@@ -52,24 +40,27 @@ td {
 	text-decoration: none;
 }
 
-.renderButton {
+.profile {
 	position: relative;
+	margin: 0px auto;
 	text-align: center;
+
 }
 
-.renderCenter {
-	position: relative;
-	text-align: center;
-	margin: 0 auto;
+/*elements*/
+h2 {
+	color: white;
 }
 
-.outputModule{
-	position: relative;
-	text-align: center;
-	margin: 0 auto;
+a:hover {
+	cursor: pointer;
 }
 
-#formCheck {
+p {
+	color: white;
+}
+
+form {
 	text-align: center;
 	background-color: #343a40;
 	position: relative;
@@ -77,10 +68,49 @@ td {
 	padding: 5px;
 	margin: 0 auto;
 	border-radius: 5px;
-	animation: scaleForm 1s;
-	animation: opacityForm 2s;
-	box-shadow: 0 12px 12px -7px rgba(0,0,0,.9);
+}
 
+image {
+	width: 2em;
+	height: 2em;
+}
+
+table {
+	background-color: rgba(136,136,136,0.8);
+}
+
+td {
+	color: white;
+}
+
+h1 {
+	position: relative;
+	text-align: center;
+	margin: 0px auto;
+	color: black;
+}
+
+body {
+	background-image: url("images/white.jpg");
+	background-attachment:fixed;
+	background-size:cover;
+}
+
+/*IDs*/
+#carouselExampleIndicators{
+	border: 1px solid;
+}
+
+#para {
+	color: black;
+}
+
+#viewLogin{
+	cursor: pointer;
+}
+
+#container {
+	animation: opacityForm 2s;
 }
 
 #formSignup {
@@ -97,7 +127,7 @@ td {
 
 }
 
-form {
+#formCheck {
 	text-align: center;
 	background-color: #343a40;
 	position: relative;
@@ -105,6 +135,20 @@ form {
 	padding: 5px;
 	margin: 0 auto;
 	border-radius: 5px;
+	animation: scaleForm 1s;
+	animation: opacityForm 2s;
+	box-shadow: 0 12px 12px -7px rgba(0,0,0,.9);
+
+}
+
+/*animations*/
+@keyframes opacityForm {
+	0%{
+		opacity: 0.0;
+	}
+	100%{
+		opacity: 1.0;
+	}
 
 }
 
@@ -120,42 +164,4 @@ form {
 		opacity: 1.0;
 	}
 
-}
-
-p {
-	color: white;
-}
-
-#viewLogin{
-	cursor: pointer;
-}
-
-#container {
-	animation: opacityForm 2s;
-}
-
-@keyframes opacityForm {
-	0%{
-		opacity: 0.0;
-	}
-	100%{
-		opacity: 1.0;
-	}
-
-}
-
-#para {
-	color: black;
-}
-
-.active{
-	color: white;
-}
-
-h2 {
-	color: white;
-}
-
-#carouselExampleIndicators{
-	box-shadow: 0 12px 12px -7px rgba(0,0,0,.9);
 }
