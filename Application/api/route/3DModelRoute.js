@@ -7,27 +7,17 @@ module.exports = function (app)
 {
 
     //routes depending on the header
-    app.route('/index')
-    .get((_res, res) => {
+
+    app.route('').get((_res, res) => {
         const page = fs.readFileSync("webSite/html/index.html", "utf-8");
         res.setHeader("Content-Type", "text/html");
         res.send(page);
     })
 
     app.route('/login')
-        .get((_res, res) => {
-            const page = fs.readFileSync("webSite/html/login.html", "utf-8");
-            res.setHeader("Content-Type", "text/html");
-            res.send(page);
-        })
         .post(Model.login);
 
     app.route('/signup')
-        .get((_res, res) => {
-            const page = fs.readFileSync("webSite/html/signup.html", "utf-8");
-            res.setHeader("Content-Type", "text/html");
-            res.send(page);
-        })
         .post(Model.signup);
 
     //handle get put delete
