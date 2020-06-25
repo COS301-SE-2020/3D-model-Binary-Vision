@@ -2,11 +2,11 @@ h1 {
 	position: relative;
 	text-align: center;
 	margin: 0px auto;
-	color: white;
+	color: black;
 }
 
 body {
-	background-image: url("images/blue.jpg");
+	background-image: url("images/white.jpg");
 	background-attachment:fixed;
 	background-size:cover;
 }
@@ -78,6 +78,7 @@ td {
 	margin: 0 auto;
 	border-radius: 5px;
 	animation: scaleForm 1s;
+	animation: opacityForm 2s;
 	box-shadow: 0 12px 12px -7px rgba(0,0,0,.9);
 
 }
@@ -91,6 +92,7 @@ td {
 	margin: 0 auto;
 	border-radius: 5px;
 	animation: scaleForm 1s;
+	animation: opacityForm 2s;
 	box-shadow: 0 12px 12px -7px rgba(0,0,0,.9);
 
 }
@@ -128,6 +130,32 @@ p {
 	cursor: pointer;
 }
 
+#container {
+	animation: opacityForm 2s;
+}
+
+@keyframes opacityForm {
+	0%{
+		opacity: 0.0;
+	}
+	100%{
+		opacity: 1.0;
+	}
+
+}
+
+#para {
+	color: black;
+}
+
 .active{
 	color: white;
+}
+
+h2 {
+	color: white;
+}
+
+#carouselExampleIndicators{
+	box-shadow: 0 12px 12px -7px rgba(0,0,0,.9);
 }
