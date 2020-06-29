@@ -141,6 +141,20 @@ body {
 
 }
 
+#formForgotPassword {
+	text-align: center;
+	background-color: #343a40;
+	position: relative;
+	width: 300px;
+	padding: 5px;
+	margin: 0 auto;
+	border-radius: 5px;
+	animation: scaleForm 1s;
+	animation: opacityForm 2s;
+	box-shadow: 0 12px 12px -7px rgba(0,0,0,.9);
+
+}
+
 /*animations*/
 @keyframes opacityForm {
 	0%{
