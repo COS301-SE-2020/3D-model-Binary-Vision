@@ -28,11 +28,10 @@ function login()
         else{
             //login credentials are correct so we set it to the frontend cookie
             var doctorID = data._id;
-            doctorCookie = "id="+doctorID;
+            doctorCookie = "id="+doctorID+";domain=;path=/;";
             console.log(doctorCookie);
             console.log("AAAAH");
             //RANI!!!!!   cookie is set and now send us to home page bellow here rani
-
 
         }
         alert("response: ");
@@ -46,4 +45,9 @@ function login()
 function deleteCookie()
 {
     doctorCookie = "id=";
+}
+
+function displayCookieData()
+{
+    console.log(doctorCookie);
 }

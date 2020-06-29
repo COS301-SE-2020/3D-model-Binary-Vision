@@ -54,5 +54,7 @@ module.exports = function (app)
         });
 
     app.route('/email')
-        .post(Emailer.sendMail);
+        .post(Emailer.passwordChangeEmail);
+
+    
 }
