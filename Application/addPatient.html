@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
-
+<script type="text/javascript" src="DrCookie.js"></script>
 <body>
     <h1>Add A Patient</h1>
     <form action="/addPatient" method="POST">
     <input type="text" name="idNumber" placeholder="id number"></input>
     <input type="text" name="name" placeholder="name"></input>
     <input type="text" name="surname" placeholder="surname"></imput>
-    
+
     <button type="submit">submit</button>
     </form>
     <br><br><br>
@@ -16,6 +16,15 @@
         <input type="text" name="idNumber" placeholder="idNumber"></input>
         <button type="submit">submit</button>
     </form>
+
+    <br><br><br>
+    <h1>login with set cookie data</h1>
+    <form>
+        <input type="text" placeholder="username" name="username" id="username">
+        <input type="password" placeholder="password" name="password" id="password">
+        <button type="button" onclick="login()">submit</button>
+    </form>
+
 
     <br><br><br>
     <h1>Send a email to flapjacks "basic"</h1>

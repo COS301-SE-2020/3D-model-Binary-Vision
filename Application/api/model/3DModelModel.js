@@ -12,6 +12,7 @@ var DoctorSchema = new Schema({
         type:String
     },
     username: { type: String },
+    email:{type:String},
     password:{
         type:String
     },

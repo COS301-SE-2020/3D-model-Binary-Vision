@@ -15,16 +15,16 @@ module.exports = {
     // const form = formidable();
     // form.parse(req, (err, fields) => {
       // if (err) return res.send(err);
+    console.log(req.body);
+    console.log("Robert");
     const { username, password } = req.body;
     Doctor.findOne({ username, password }, function (err, doctor) {
       if (err) {
         res.send(err);
       } else {
         if (doctor) {
-          
-            const page = fs.readFileSync("webSite/html/home.html", "utf-8");
-            res.setHeader("Content-Type", "text/html");
-            res.status(202).send(page);
+          console.log(doctor);
+          res.json(doctor);//send(page);
         
     
         } else {
@@ -41,9 +41,9 @@ module.exports = {
     //   if (err) return res.send(err);
     //   console.log(fields);
 
-      const { name , surname, username, password } = req.body;
+      const { name , surname,email, username, password } = req.body;
 
-      const doctor = new Doctor({name,surname,username, password});
+      const doctor = new Doctor({name,surname,email,username, password});
       doctor.save(function (err, saved) {
         if (err) {
           res.send(err);

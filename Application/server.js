@@ -18,8 +18,10 @@ mongoose.connect('mongodb://localhost/ModelDB', MONGO_OPTIONS);
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-app.use(serveStatic('webSite/'));
 
+
+app.use(serveStatic('webSite/'));
+app.use(serveStatic('JacoCookie/'));
 var routes = require('./api/route/3DModelRoute');
 routes(app);
 
