@@ -15,7 +15,7 @@ body {
 	position: relative;
 	margin: 0px auto;
 	text-align: center;
-	
+
 }
 
 image {
@@ -48,7 +48,7 @@ td {
 
 .nav-link1:hover {
 	color: lightblue;
-	text-decoration: none; 
+	text-decoration: none;
 }
 
 .renderButton {
@@ -58,16 +58,21 @@ td {
 
 .renderCenter {
 	position: relative;
-	text-align: center; 
+	text-align: center;
 	margin: 0 auto;
 }
 
 .outputModule{
 	position: relative;
-	text-align: center; 
+	text-align: center;
 	margin: 0 auto;
 }
 
 form {
-	text-align: center; 
+	text-align: center;
+}
+
+li {
+	position: relative;
+	float: right;
 }
