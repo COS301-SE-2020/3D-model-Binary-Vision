@@ -30,7 +30,7 @@ function login()
             var doctorID = data._id;
             doctorCookie = "id="+doctorID+";domain=;path=/;";
             console.log(doctorCookie);
-            console.log("AAAAH");
+            
             //RANI!!!!!   cookie is set and now send us to home page bellow here rani
 
         }
