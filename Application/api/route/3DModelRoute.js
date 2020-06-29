@@ -3,6 +3,8 @@
 const fs = require("fs");
 
 var Model = require('../controller/3DModelController');
+var Emailer = require('../controller/EmailController');
+
 module.exports = function (app)
 {
 
@@ -12,7 +14,7 @@ module.exports = function (app)
         const page = fs.readFileSync("webSite/html/index.html", "utf-8");
         res.setHeader("Content-Type", "text/html");
         res.send(page);
-    })
+    });
 
     app.route('/login')
         .post(Model.login);
@@ -21,14 +23,19 @@ module.exports = function (app)
         .post(Model.signup);
 
     //handle get put delete
-    app.route('/patients')
-        .put(Model.addPatient);
+    app.route('/addPatient')
+        .post(Model.addPatient)
+        .get((_res, res) => {
+            const page = fs.readFileSync("addPatient.html", "utf-8");
+            res.setHeader("Content-Type", "text/html");
+            res.send(page);
+        });
 
-    app.route('/patients')
-        .get(Model.getPatients);
+    // app.route('/patients')
+    //     .get(Model.getPatients);
 
     app.route('/patients/:id')
-        .get(Model.getSinglePatient)
+        .post(Model.getSinglePatient)
         .patch(Model.updatePatient);
 
     app.route('/upload')
@@ -44,6 +51,8 @@ module.exports = function (app)
             const page = fs.readFileSync("webSite/html/home.html", "utf-8");
             res.setHeader("Content-Type", "text/html");
             res.send(page);
-        })
+        });
 
+    app.route('/email')
+        .post(Emailer.sendMail);
 }

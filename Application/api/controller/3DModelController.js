@@ -56,6 +56,7 @@ module.exports = {
   },
 
   addPatient: function (req, res) {
+    // console.log(req.body);
     var new_Patient = new Patient(req.body);
     new_Patient.save(function (err, patient) {
       if (err) res.send(err);
@@ -65,7 +66,11 @@ module.exports = {
 
   // get single patient by id number
   getSinglePatient: function (req, res) {
-    Patient.findOne({ idNumber: req.param.id }, function (err, patient) {
+    console.log(req.body);
+    const idnumber = req.body.idNumber;
+    console.log(idnumber);
+    Patient.findOne({ 'idNumber' : req.body.idNumber }, function (err, patient) {
+      console.log(patient);
       if (err) {
         res.send(err);
       } else {

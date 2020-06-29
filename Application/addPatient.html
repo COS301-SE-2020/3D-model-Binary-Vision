@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Add A Patient</h1>
+    <form action="/addPatient" method="POST">
+    <input type="text" name="idNumber" placeholder="id number"></input>
+    <input type="text" name="name" placeholder="name"></input>
+    <input type="text" name="surname" placeholder="surname"></imput>
+    
+    <button type="submit">submit</button>
+    </form>
+    <br><br><br>
+    <h1>Find patient By ID</h1>
+    <form action="/patients/:id" method="POST">
+        <input type="text" name="idNumber" placeholder="idNumber"></input>
+        <button type="submit">submit</button>
+    </form>
+
+    <br><br><br>
+    <h1>Send a email to flapjacks "basic"</h1>
+    <form action="/email" method="POST">
+        <button type="submit"> Send email</button>
+    </form>
+</body>
+</html>
