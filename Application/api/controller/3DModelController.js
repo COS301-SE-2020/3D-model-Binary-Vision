@@ -11,24 +11,22 @@ var Consultation = require("../model/3DModelModel.js").Consultation;
 
 module.exports = {
   login: function (req, res) {
-    //need to check if the user data matches as well then send the appropriate message
-    // const form = formidable();
-    // form.parse(req, (err, fields) => {
-      // if (err) return res.send(err);
-    console.log(req.body);
-    console.log("Robert");
+
     const { username, password } = req.body;
     Doctor.findOne({ username, password }, function (err, doctor) {
       if (err) {
         res.send(err);
       } else {
         if (doctor) {
-          console.log(doctor);
+          // console.log(doctor);
+
           res.json(doctor);//send(page);
         
     
         } else {
-          res.sendStatus(404);
+          var resp ={name:""}; 
+          resp = JSON.stringify(resp)
+          res.json(resp);
         }
       }
     });

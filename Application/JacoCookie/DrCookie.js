@@ -1,4 +1,4 @@
-//var x = document.cookie;
+const doctorCookie = document.cookie;
 
 
 function login()
@@ -16,16 +16,33 @@ function login()
     body: JSON.stringify({ username, password })
     });
 
-    response.then(res=> {
+    response.then(res => res.json().then( data => {
+        console.log(data);
+        console.log(data.name);
+        if (data.name == "")
+        {
+            console.log("Not found");
+            //reload page with incorrect information thing
+        }
+        else{
+            //login credentials are correct so we set it to the frontend cookie
+            var doctorID = data._id;
+            doctorCookie = "id="+doctorID;
+            console.log(doctorCookie);
 
-        console.log(res);
+            //RANI!!!!!   cookie is set and now send us to home page bellow here rani
+
+
+        }
         alert("response: ");
 
-    })
+    }))
     .catch(err=> {
         alert(err);
     });
+}
 
-
-
+function deleteCookie()
+{
+    doctorCookie = "id=";
 }
