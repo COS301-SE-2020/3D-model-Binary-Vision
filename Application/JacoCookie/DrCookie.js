@@ -1,4 +1,4 @@
-const doctorCookie = document.cookie;
+var doctorCookie = document.cookie;
 
 
 function login()
@@ -22,14 +22,15 @@ function login()
         if (data.name == "")
         {
             console.log("Not found");
-            //reload page with incorrect information thing
+
+            //RANI!!!!!! reload page with incorrect information thing
         }
         else{
             //login credentials are correct so we set it to the frontend cookie
             var doctorID = data._id;
             doctorCookie = "id="+doctorID;
             console.log(doctorCookie);
-
+            console.log("AAAAH");
             //RANI!!!!!   cookie is set and now send us to home page bellow here rani
 
 
