@@ -31,6 +31,7 @@ app.use((req, res, next) => {
 })
 
 app.use(serveStatic('webSite/'));
+app.use(serveStatic('webSite/html/'))
 app.use(serveStatic('JacoCookie/'));
 var routes = require('./api/route/3DModelRoute');
 routes(app);

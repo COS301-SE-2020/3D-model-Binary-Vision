@@ -11,7 +11,7 @@ module.exports = function (app)
     //routes depending on the header
 
     app.route('').get((_res, res) => {
-        const page = fs.readFileSync("webSite/html/index.html", "utf-8");
+        const page = fs.readFileSync("webSite/html/preview.html", "utf-8");
         res.setHeader("Content-Type", "text/html");
         res.send(page);
     });

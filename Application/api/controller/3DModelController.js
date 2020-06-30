@@ -35,6 +35,11 @@ module.exports = {
     });
   },
 
+  logout:function (req, res){
+    res.cookie("drCookie","",{maxAge:0,httpOnly:true});
+    res.redirect("/login.html");
+  },
+
   signup: function (req, res) {
     // const form = formidable();
     
@@ -74,7 +79,7 @@ module.exports = {
     console.log(req.body);
     const idnumber = req.body.idNumber;
     console.log(idnumber);
-    Patient.findOne({ 'idNumber' : req.body.idNumber }, function (err, patient) {
+    Patient.findOne({ 'idNumber' : req.body.idNumber , 'doctor':req.user}, function (err, patient) {
       console.log(patient);
       if (err) {
         res.send(err);
@@ -90,7 +95,7 @@ module.exports = {
 
   // get list of patients and filter using query parameters
   getPatients: function (req, res) {
-    Patient.find(req.query, function (err, patients) {
+    Patient.find({'doctor': req.user}, function (err, patients) {
       if (err) {
         res.status(500).send("Error looking up patients");
       } else {
@@ -151,7 +156,7 @@ module.exports = {
             // handle err
             // handle if patient == null (not found)
             const consultation = new Consultation({
-              doctor: new mongoose.Types.ObjectId(), // get from session, e.g. cookies
+              doctor: req.user, // get from session, e.g. cookies
               patient,
               video: file._id
             });
