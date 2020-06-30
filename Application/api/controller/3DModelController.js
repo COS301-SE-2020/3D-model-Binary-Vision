@@ -1,6 +1,7 @@
 "use strict";
 //set up the database first
 var fs = require("fs");
+
 const { createModel } = require('mongoose-gridfs');
 var formidable = require("formidable");
 var mongoose = require("mongoose");
@@ -20,9 +21,11 @@ module.exports = {
         if (doctor) {
           // console.log(doctor);
 
-          res.json(doctor);//send(page);
-        
-    
+         // res.json(doctor);//send(page);
+        //set cookie  redirect to different page
+          res.cookie("drCookie",doctor._id,{maxAge:9000000,httpOnly:true});
+          res.redirect("/home.html");
+
         } else {
           var resp ={name:""}; 
           resp = JSON.stringify(resp)
@@ -55,7 +58,11 @@ module.exports = {
 
   addPatient: function (req, res) {
     // console.log(req.body);
+    if (!req.user) {
+      return res.status(401);
+    }
     var new_Patient = new Patient(req.body);
+    new_Patient.doctor = req.user;
     new_Patient.save(function (err, patient) {
       if (err) res.send(err);
       res.status(201).json(patient);
