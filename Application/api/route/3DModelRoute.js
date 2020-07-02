@@ -22,6 +22,9 @@ module.exports = function (app)
     app.route('/signup')
         .post(Model.signup);
 
+    app.route('/getDoctor')
+        .post(Model.getDoctorSurname);
+
     //handle get put delete
     app.route('/addPatient')
         .post(Model.addPatient)
@@ -51,6 +54,9 @@ module.exports = function (app)
             res.setHeader("Content-Type", "text/html");
             res.send(page);
         });
+
+    app.route('/logout')
+        .post(Model.logout);
 
     app.route('/email')
         .post(Emailer.passwordChangeEmail);

@@ -30,7 +30,7 @@ var transporter = nodeMailer.createTransport({
       };
 
 
-      var resetURL="";
+      var resetURL="www.google.com";
       
       passwordChangeOptions.html.replace("RESET_PASSWORD_URL",resetURL);
       passwordChangeOptions.html.replace("USER_EMAIL_HERE",req.body.email);

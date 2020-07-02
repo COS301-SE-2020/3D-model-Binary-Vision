@@ -54,3 +54,34 @@ function displayCookieData()
 {
     console.log(doctorCookie);
 }
+
+
+function docName()
+{
+
+    var response = fetch("/getDoctor",{
+        method:"POST",
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        }
+        });
+
+        response.then(res => res.json().then( data => {
+
+            if (res.status==200)
+            {
+                document.getElementById("nameId").innerHTML = data.surname;
+            }
+            else {
+                alert("Doctor Not Logged In");
+                var response = fetch("/logout",{
+                    method:"POST",
+                    headers: {
+                      'Content-Type': 'application/json; charset=UTF-8',
+                    }
+                });
+            }
+
+        }));
+    
+}

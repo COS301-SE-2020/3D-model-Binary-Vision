@@ -71,11 +71,11 @@ module.exports = {
 
   // get single patient by id number
   getSinglePatient: function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     const idnumber = req.body.idNumber;
-    console.log(idnumber);
+    // console.log(idnumber);
     Patient.findOne({ 'idNumber' : req.body.idNumber , 'doctor':req.user}, function (err, patient) {
-      console.log(patient);
+      // console.log(patient);
       if (err) {
         res.send(err);
       } else {
@@ -151,6 +151,28 @@ module.exports = {
     })
   },
 
+  getDoctorSurname: function(req, res)
+  {
+    if (!req.user)
+    {
+      res.status(401).send("unauthorised");
+      return;
+    }
+
+    Doctor.findOne({"_id":res.user} , function (err , doctor){
+
+      if (err)
+      {
+        res.send("No docotor found").status(404);
+
+      }
+      else{
+        res.json(doctor.surname);
+      }
+    })
+
+  },
+
 //upload
   upload: function(req, res) {
     // use default grid-fs bucket
@@ -189,8 +211,9 @@ module.exports = {
             // res.send(`Uploaded file ${video.name}`);
           });
         }
-      });
+      }); 
     });
+
   }
 };
 
