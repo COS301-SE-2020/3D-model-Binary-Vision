@@ -29,6 +29,10 @@ var PatientSchema = new Schema({
     email:{
         type:String
     },
+    gender:
+    {
+        type:String
+    },
     doctor:{
         type: Schema.Types.ObjectId
     }

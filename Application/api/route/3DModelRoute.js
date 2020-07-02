@@ -31,12 +31,11 @@ module.exports = function (app)
             res.send(page);
         });
 
-    // app.route('/patients')
-    //     .get(Model.getPatients);
 
     app.route('/patients/:id')
         .post(Model.getSinglePatient)
-        .patch(Model.updatePatient);
+        .patch(Model.updatePatient)
+        .get(Model.getPatientConsultations);
 
     app.route('/upload')
         .get((_res, res) => {

@@ -41,11 +41,6 @@ module.exports = {
   },
 
   signup: function (req, res) {
-    // const form = formidable();
-    
-    // form.parse(req, (err, fields) => {
-    //   if (err) return res.send(err);
-    //   console.log(fields);
 
       const { name , surname,email, username, password } = req.body;
 
@@ -106,6 +101,12 @@ module.exports = {
 
   // update patient from form data using id number
   updatePatient: function (req, res) {
+    if (!req.user) //user is not logged in and un authorized to access the data
+    {
+      res.status(404);
+      return;
+    }
+    
     const form = formidable();
     form.parse(req, (err, fields) => {
       if (err) return res.send(err);
@@ -126,6 +127,28 @@ module.exports = {
         }
       );
     });
+  },
+
+  //get all the consultations for a certain patient
+  getPatientConsultations : function (req , res){
+
+    if (!req.user) //user is not logged in and un authorized to access the data
+    {
+      res.status(404);
+      return;
+    }
+
+    Consultation.find({"doctor":req.user, "patient":req.body.patientID} , function(err, consultations){
+      if (err)
+      {
+        res.status(500).send("error geting patient consultation data");
+        return;
+      }
+      else{
+        res.json(consultations);
+      }
+  
+    })
   },
 
 //upload
@@ -170,6 +193,8 @@ module.exports = {
     });
   }
 };
+
+
 
 
 

@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 const cookieparser = require("cookie-parser")
 app.use(cookieparser());
-[]
+
 app.use((req, res, next) => {
   console.log(req.cookies)
   if (req.cookies.drCookie) {

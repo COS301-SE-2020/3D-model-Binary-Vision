@@ -17,6 +17,9 @@ function login()
     });
 
     response.then(res => res.json().then( data => {
+
+        
+        
         console.log(data);
         console.log(data.name);
         if (data.name == "")
