@@ -15,22 +15,23 @@ both the stereo-lithography as well as the surface information (such as
 colouring). The user can select a stored model and generate a 3D render
 on a Web Page, where they will be able to rotate the model.
 
-Demo 1 Download: 
+Demo Downloads: 
 ================
-https://drive.google.com/file/d/1urvzRHTTUYAgFXoPAeqhKeeuAuu2Y3_j/view?usp=sharing 
+Demo 1: https://drive.google.com/file/d/1urvzRHTTUYAgFXoPAeqhKeeuAuu2Y3_j/view?usp=sharing 
+Demo 2: pending
 -----------------------------------------------------------------------------------------------------------------
-System Requirements Specification:
-==================================
-https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/System%20Requirements%20Specification.pdf
+
+Documentation Download:
+=======================
+SR Specification: https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/System%20Requirements%20Specification.pdf
+User Manual     : pending
 -----------------------------------------------------------------------------------------------------------------
+
 Project Management:
 ====================
 https://app.clubhouse.io/flapjacks301/stories/space/9/everything
 -----------------------------------------------------------------------------------------------------------------
-User Manual: 
-=============
-(pending) 
------------------------------------------------------------------------------------------------------------------
+
 Installation Instructions:
 ===========================
 
@@ -52,48 +53,95 @@ Rani Arraf:
 github.io:
 https://raniarraf.github.io/
 
-(Contribution): For Demo 1: Created the html and css for all pages, also
+Contributions:
+
+Demo 1: Created the html and css for all pages, also
 included some js to help with the integration between the signup/login
 and the API. Created the forms for the signup and login. Revised over
 the final analysis of the system functionality. 
 
+Demo 2: pending
+
+Demo 3: pending
+
+Demo 4: pending
+
+-----------------------------------------------------------------------------------------------------------------
 Quinn du Piesanie: 
 github.io: 
 https://quinnman202.github.io/
 
-(Contribution): Demo 1: Created simple javascript webGL program that renders verticies
+Contributions:
+
+Demo 1: Created simple javascript webGL program that renders verticies
 that are passed to it. For documentation, I created a use-case diagram from retrieving
 patient information and editing patients.
 
+Demo 2: pending
+
+Demo 3: pending
+
+Demo 4: pending
+
+-----------------------------------------------------------------------------------------------------------------
 Jacobus Janse van Rensburg: 
 github.io: 
 https://jacobus1998.github.io/
 
-(Contribution): For demo 1: Created the database and the Node.js API that 
+Contributions:
+
+Demo 1: Created the database and the Node.js API that 
 connects the front and back end. I was part of the Integration process to 
 integrate the front end and back end. For the documentation I did the Introduction, 
 functional and quality requirements. I also set up the basic document that the
 team then changed and inserted into as they seemed nescesary and what was assigned 
 to them.
 
+Demo 2: pending
+
+Demo 3: pending
+
+Demo 4: pending
+
+-----------------------------------------------------------------------------------------------------------------
 Steven Visser: 
 github.io: 
 https://vanillav.github.io/
 
-(Contribution): For Demo 1: Created and managed the user stories using the project
+Contributions:
+
+Demo 1: Created and managed the user stories using the project
 management tools and set deadlines for work to be completed. Created the
 Use Case Diagram for the Media & Render Subsystem. Revised the System
 Requirements Specification Document and created Functional Requirements.
 Implemented Unit Testing for the Signup operations with the API
 integration.
 
+Demo 2: pending
+
+Demo 3: pending
+
+Demo 4: pending
+
+-----------------------------------------------------------------------------------------------------------------
+
 Marcus Werren: 
 github.io: 
 https://marcuswerren.github.io/
 
-(Contribution): For Demo 1: I created the tractability matrix for the documentation 
+Contributions:
+
+Demo 1: I created the tractability matrix for the documentation 
 of the system. I implemented the Video capture functionality that allows the users 
 to send a live recorded video or a pre-recorded video from the clients machine to 
 back end for processing. I also contributed to the unit testing of the systems API calls.
+
+Demo 2: pending
+
+Demo 3: pending
+
+Demo 4: pending
+
+-----------------------------------------------------------------------------------------------------------------
 
 End of README
