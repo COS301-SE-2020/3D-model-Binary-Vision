@@ -1,9 +1,6 @@
 \# 3D Model Binary Vision Project
 =================================
 
-Team Landing Page:
-==================
-
 https://vanillav.github.io/FlapJacks.github.io/
 
 A mobile web application that will allow a user to scan a physical
@@ -17,38 +14,32 @@ on a Web Page, where they will be able to rotate the model.
 
 Demo Downloads: 
 ================
+
 Demo 1: https://drive.google.com/file/d/1urvzRHTTUYAgFXoPAeqhKeeuAuu2Y3_j/view?usp=sharing 
+
 Demo 2: pending
+
 -----------------------------------------------------------------------------------------------------------------
 
 Documentation Download:
 =======================
+
 SR Specification: https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/System%20Requirements%20Specification.pdf
+
 User Manual     : pending
+
 -----------------------------------------------------------------------------------------------------------------
 
 Project Management:
 ====================
+
 https://app.clubhouse.io/flapjacks301/stories/space/9/everything
+
 -----------------------------------------------------------------------------------------------------------------
-
-Installation Instructions:
-===========================
-
-Must be tested on Linux.
-MongoDB must be installed on the system.
-Node must be installed on the system.
-
-Download the master branch and unzip.
-
-Open terminal in this location, type: node server.js
-
-This will open the local host server on port 3000.
-
-In your browser, go to localhost:3000/signup
 
 Collaborators: 
 =============== 
+
 Rani Arraf: 
 github.io:
 https://raniarraf.github.io/
