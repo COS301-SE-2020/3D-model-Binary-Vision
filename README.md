@@ -40,9 +40,9 @@ https://app.clubhouse.io/flapjacks301/stories/space/9/everything
 Collaborators: 
 =============== 
 
-Rani Arraf: 
-github.io:
-https://raniarraf.github.io/
+Rani Arraf
+
+github.io: https://raniarraf.github.io/
 
 Contributions:
 
@@ -58,9 +58,9 @@ Demo 3: pending
 Demo 4: pending
 
 -----------------------------------------------------------------------------------------------------------------
-Quinn du Piesanie: 
-github.io: 
-https://quinnman202.github.io/
+Quinn du Piesanie
+
+github.io: https://quinnman202.github.io/
 
 Contributions:
 
@@ -75,9 +75,9 @@ Demo 3: pending
 Demo 4: pending
 
 -----------------------------------------------------------------------------------------------------------------
-Jacobus Janse van Rensburg: 
-github.io: 
-https://jacobus1998.github.io/
+Jacobus Janse van Rensburg
+
+github.io: https://jacobus1998.github.io/
 
 Contributions:
 
@@ -95,9 +95,9 @@ Demo 3: pending
 Demo 4: pending
 
 -----------------------------------------------------------------------------------------------------------------
-Steven Visser: 
-github.io: 
-https://vanillav.github.io/
+Steven Visser
+
+github.io: https://vanillav.github.io/
 
 Contributions:
 
@@ -116,9 +116,9 @@ Demo 4: pending
 
 -----------------------------------------------------------------------------------------------------------------
 
-Marcus Werren: 
-github.io: 
-https://marcuswerren.github.io/
+Marcus Werren
+
+github.io: https://marcuswerren.github.io/
 
 Contributions:
 
