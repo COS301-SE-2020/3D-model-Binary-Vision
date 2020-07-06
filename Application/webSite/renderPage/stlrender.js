@@ -1,17 +1,5 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <title>stl viewer</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    </head>
-    <body>
-        <script src="three.js"></script>
-        <script src="detector.js"></script>
-        <script>
-
-            var camera, scene, renderer,
-            geometry, material, mesh, light1;
+var camera, scene, renderer,
+    geometry, material, mesh, light1;
 
             function trim (str) {
                 str = str.replace(/^\s+/, '');
@@ -200,18 +188,13 @@
                 }
             };
 
-            
-
-            init();
-            animate();
-
             function init() {
 
                 //Detector.addGetWebGLMessage();
 
                 scene = new THREE.Scene();
 
-                camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+                camera = new THREE.PerspectiveCamera( 75, document.getElementById("gl_canvas").width / document.getElementById("gl_canvas").height, 1, 10000 );
                 camera.position.z = 8000;
                 camera.position.y = 3000;
                 scene.add( camera );
@@ -249,9 +232,15 @@
                 xhr.send( null );
 
                 renderer = new THREE.WebGLRenderer(); //new THREE.CanvasRenderer();
-                renderer.setSize( 800, 600 );
+                renderer.setSize( document.getElementById("gl_canvas").width,document.getElementById("gl_canvas").height);
 
-                document.body.appendChild( renderer.domElement );
+                renderer.domElement.style.border = "1px solid"
+
+                //renderer.setClearColor( 0x000000);
+
+                document.getElementById("outputModule1").removeChild(document.getElementById("gl_canvas"));
+                document.getElementById("outputModule1").appendChild( renderer.domElement );
+
             }
 
             function animate() {
@@ -273,6 +262,27 @@
 
             }
 
-        </script>
-    </body>
-</html>
+            var done = false;
+            function begin()
+            {
+                if(!done)
+                {
+                    init();
+                    animate();
+                }
+                done = true;
+            }
+
+            var RESOLUTION_WIDTH = 800;
+            var RESOLUTION_HEIGHT = 600;
+
+            function createCanvas()
+            {
+                var canvas = document.createElement('canvas');
+                canvas.id = "gl_canvas";
+                canvas.width = RESOLUTION_WIDTH-canvas.width;
+                canvas.height = RESOLUTION_HEIGHT-canvas.height;
+                canvas.style.border = "1px solid";
+                var body = document.getElementsByClassName("outputModule")[0];
+                body.appendChild(canvas);
+            }
