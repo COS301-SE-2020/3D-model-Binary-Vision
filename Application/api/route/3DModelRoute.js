@@ -25,6 +25,9 @@ module.exports = function (app)
     app.route('/getDoctor')
         .post(Model.getDoctorSurname);
 
+
+    app.route('/patients')
+        .post(Model.getPatients);
     //handle get put delete
     app.route('/addPatient')
         .post(Model.addPatient)

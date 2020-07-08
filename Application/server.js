@@ -23,7 +23,7 @@ const cookieparser = require("cookie-parser")
 app.use(cookieparser());
 
 app.use((req, res, next) => {
-  // console.log(req.cookies)
+  console.log(req.cookies)
   if (req.cookies.drCookie) {
     req.user = req.cookies.drCookie;
   }

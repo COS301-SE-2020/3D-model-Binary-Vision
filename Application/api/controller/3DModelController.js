@@ -36,8 +36,10 @@ module.exports = {
   },
 
   logout:function (req, res){
+    console.log("logging out")
     res.cookie("drCookie","",{maxAge:0,httpOnly:true});
-    res.redirect("/login.html");
+    res.redirect("/");//redirect not working
+  
   },
 
   signup: function (req, res) {
@@ -61,11 +63,22 @@ module.exports = {
     if (!req.user) {
       return res.status(401);
     }
-    var new_Patient = new Patient(req.body);
-    new_Patient.doctor = req.user;
+
+    const {idNumber, name , surname , email , gender} = req.body;
+
+    //can add checks here too see if the id number matches a patient that belongs to the doctor already exists
+
+    var new_Patient = new Patient({idNumber , name , surname , email , gender}); //set the patients info
+    new_Patient.doctor = req.user; // add doctor id to the patient
     new_Patient.save(function (err, patient) {
-      if (err) res.send(err);
-      res.status(201).json(patient);
+      if (err) {
+        res.status(400).send(err);
+        return;
+      }
+      else{
+        res.status(201).json(patient);
+        return;
+      }
     });
   },
 
@@ -90,11 +103,22 @@ module.exports = {
 
   // get list of patients and filter using query parameters
   getPatients: function (req, res) {
-    Patient.find({'doctor': req.user}, function (err, patients) {
+
+    if (!req.user)
+    {
+      res.status(401).send("Unauthorized");
+      return;
+    }
+    console.log("Req.user = "+ req.user);
+    Patient.find({'doctor': mongoose.Types.ObjectId(req.user)}, function (err, patients) {
       if (err) {
+        console.log(err);
         res.status(500).send("Error looking up patients");
+        return;
       } else {
-        res.sendStatus(202).json(patients);
+        console.log(patients);
+        res.status(202).json(patients);
+        return;
       }
     });
   },
@@ -158,16 +182,17 @@ module.exports = {
       res.status(401).send("unauthorised");
       return;
     }
-
-    Doctor.findOne({"_id":res.user} , function (err , doctor){
-
+    
+    Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doctor){
+      // console.log(doctor);
       if (err)
       {
         res.send("No docotor found").status(404);
 
       }
       else{
-        res.json(doctor.surname);
+        //return only surname for security reasons
+        res.json({"surname":doctor.surname});
       }
     })
 
