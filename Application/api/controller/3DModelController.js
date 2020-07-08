@@ -34,14 +34,16 @@ module.exports = {
       }
     });
   },
+//======================================================================================
 
   logout:function (req, res){
     console.log("logging out")
     res.cookie("drCookie","",{maxAge:0,httpOnly:true});
+    res.cookie("patientCookie","",{maxAge:0,httpOnly:true})
     res.redirect("/");//redirect not working
   
   },
-
+//======================================================================================
   signup: function (req, res) {
 
       const { name , surname,email, username, password } = req.body;
@@ -57,6 +59,22 @@ module.exports = {
         }
       });
   },
+//======================================================================================
+
+  selectPatient: function(req,res){
+    if (!req.user)
+    {
+      return res.status(404);
+    }
+
+    // console.log("Setting the patient cookie, Patient Id: "+req.body.PatientID);
+
+    res.cookie("patientCookie",req.body.PatientID).send("Patient Cookie is set");
+    // console.log("PatientCookie: "+req.cookies.patientCookie)
+    return;
+  },
+//======================================================================================
+
 
   addPatient: function (req, res) {
     // console.log(req.body);
@@ -81,6 +99,7 @@ module.exports = {
       }
     });
   },
+//======================================================================================
 
   // get single patient by id number
   getSinglePatient: function (req, res) {
@@ -100,6 +119,7 @@ module.exports = {
       }
     });
   },
+//======================================================================================
 
   // get list of patients and filter using query parameters
   getPatients: function (req, res) {
@@ -109,19 +129,20 @@ module.exports = {
       res.status(401).send("Unauthorized");
       return;
     }
-    console.log("Req.user = "+ req.user);
+    // console.log("Req.user = "+ req.user);
     Patient.find({'doctor': mongoose.Types.ObjectId(req.user)}, function (err, patients) {
       if (err) {
         console.log(err);
         res.status(500).send("Error looking up patients");
         return;
       } else {
-        console.log(patients);
+        // console.log(patients);
         res.status(202).json(patients);
         return;
       }
     });
   },
+//======================================================================================
 
   // update patient from form data using id number
   updatePatient: function (req, res) {
@@ -152,28 +173,30 @@ module.exports = {
       );
     });
   },
+//======================================================================================
 
   //get all the consultations for a certain patient
   getPatientConsultations : function (req , res){
 
-    if (!req.user) //user is not logged in and un authorized to access the data
+    if (!req.user || req.cookies.patientCookie=="") //user is not logged in and un authorized to access the data
     {
       res.status(404);
       return;
     }
 
-    Consultation.find({"doctor":req.user, "patient":req.body.patientID} , function(err, consultations){
+    Consultation.find({"doctor":mongoose.Types.ObjectId(req.user), "patient":mongoose.Types.ObjectId(req.cookies.patientCookie)} , function(err, consultations){
       if (err)
       {
         res.status(500).send("error geting patient consultation data");
         return;
       }
       else{
-        res.json(consultations);
+        res.status(200).json(consultations);
       }
   
     })
   },
+//======================================================================================
 
   getDoctorSurname: function(req, res)
   {
@@ -197,6 +220,7 @@ module.exports = {
     })
 
   },
+//======================================================================================
 
 //upload
   upload: function(req, res) {
@@ -240,6 +264,8 @@ module.exports = {
     });
 
   }
+//======================================================================================
+
 };
 
 

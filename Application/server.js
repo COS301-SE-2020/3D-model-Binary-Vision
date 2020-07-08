@@ -27,6 +27,7 @@ app.use((req, res, next) => {
   if (req.cookies.drCookie) {
     req.user = req.cookies.drCookie;
   }
+  
   next();
 })
 

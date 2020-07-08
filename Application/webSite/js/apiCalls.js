@@ -56,7 +56,7 @@ function getPatients()
         if (res.status == 202){
             for (var i in data){    
                 console.log("Name: "+ data[i].name +"\nsurname: "+data[i].surname+"\nIdNumber: "+data[i].idNumber+"\nemail: "+data[i].email+"\ngender: "+data[i].gender);
-                addToTable(data[i].name , data[i].surname, data[i].idNumber, data[i].gender, data[i].email, data[i]._id)
+                // addToTable(data[i].name , data[i].surname, data[i].idNumber, data[i].gender, data[i].email, data[i]._id)
                 //RANI !!! -- use the data above to populate the table witht the fields that you made
             
             }//make the tables with this data
@@ -117,3 +117,50 @@ function addPatient()
     }))
 }
 
+
+//sets the patient cookie with the patient id
+function selectPatient(PatientID)
+{
+    var response = fetch('/selectPatient' ,{
+        method:"POST",
+        headers: {'Content-Type':'application/json ; charset=UTF-8',},
+        body:JSON.stringify({PatientID})
+    })
+
+    response.then( res =>{
+        if (res.status == 201)
+        {
+            //fine
+        }
+        else{
+            //not fine
+        }
+    })
+}
+
+
+//retrieves the doctor -> patient consultations
+function getConceltations()
+{
+    var response = fetch('/consultations' ,{
+        method:"GET",
+        headers: {'Content-Type':'application/json ; charset=UTF-8',}
+    }) 
+
+    response.then(res => res.json.then(data=> {
+
+        if (res.status == 200)
+        {
+            //consultations correctly retrieved 
+            for(var i in data)
+            {
+                //do the table for data[i] with its respective fields
+            }
+        }
+        else{
+            //something wrong happened 
+            console.error(data);
+        }
+
+    }))
+}
