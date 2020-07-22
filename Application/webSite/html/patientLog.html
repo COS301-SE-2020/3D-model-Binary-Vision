@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Private Info</title>
+		<title>Log</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <script type="text/javascript" src="../js/DrCookie.js"></script> -->
+    <script type="text/javascript" src="../js/registration.js"></script>
 		<link rel="stylesheet" href="../css/style.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -13,7 +15,7 @@
 	<body>
 
 		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		  <a class="navbar-brand" href="#">
+		  <a class="navbar-brand" href="home.html">
 		      <img src="../css/images/profile.png" alt="Profile Picture" width="30px" height="30px">
 		  </a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -25,56 +27,44 @@
 		        <a class="nav-link" href="displayPatients.html">Patients</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="signup.html">Sign Up</a>
+		        <a class="nav-link" onclick="logout">Logout</a>
 		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="login.html">Login</a>
-		      </li>      
 		    </ul>
-		  </div>  
+		  </div>
 		</nav>
 		<br>
 
 		<div class="container">
-		  <h1> Information on Patient X </h1> 
-		</div>
-		<div class="profile">
-		  <img src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
+		  <h1> Information on Patient <p name="name" id=""name>X</p> </h1>
 		</div>
 		<br>
 
 
-		<div class="container">   
-		    <table class="table table-striped">
+		<div class="container">
+      <!--<form style="width:108px; margin-bottom:10px;" method="get" action="patientLog.html">-->
+          <button style="border-radius:0;" class="btn btn-dark" type="submit" onclick="addToTable()">Add Entry</button>
+          <button style="border-radius:0;" type="button" class="btn btn-dark"><a class="nav-link1" href="../renderPage/render.html">Render Teeth</a></button>
+
+      <!--</form>-->
+
+        <table class="table table-striped" id="addToTable">
 		      <thead class="thead-dark">
 		        <tr>
-		          <th scope="col">#</th>
+              <th>#</th>
 		          <th>Date</th>
 		          <th>Notes</th>
 		        </tr>
 		      </thead>
-
+          <tr>
+            <td id="date">1</td>
+            <td id="id">546725364</td>
+            <td><textarea rows="3" cols ="40"></textarea></td>
+          </tr>
 		      <tbody>
-		        <tr>
-		          <th scope="row">1</th>
-		          <td>01/02/2020</td>
-		          <td>Came for checkup and found that tooth c-16 is loose. We also found that the patient might need braces.</td>
-		        </tr>
-		        <tr>
-		          <th scope="row">2</th>
-		          <td>06/02/2020</td>
-		          <td>Performed operation to remoce tooth c-16</td>
-		        </tr>
-		        <tr>
-		          <th scope="row">3</th>
-		          <td>17/02/2020</td>
-		          <td>weekly checkup</td>
-		        </tr>
+
 		      </tbody>
 		    </table>
-		    <div class="renderButton">
-		    	<button type="button" class="btn btn-dark"><a class="nav-link1" href="../renderPage/render.html">Render Teeth</a></button>
-		    </div>
+		    <br>
   </div>
 
 	</body>
