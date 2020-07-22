@@ -108,7 +108,13 @@ Requirements Specification Document and created Functional Requirements.
 Implemented Unit Testing for the Signup operations with the API
 integration.
 
-Demo 2: pending
+Demo 2: Assisted in the research for the 3D model render from SFM footage.
+I integrated the code for the high level render from an STL file for the
+patients model. I set up the HTML page to take an STL file as input from 
+the user. Updated the System Requirement Specification to meet the new
+demo requirements by adding in new Use cases and functional requirements, 
+as well as updating the old use case diagrams. I also made the user manual
+for the system.
 
 Demo 3: pending
 
