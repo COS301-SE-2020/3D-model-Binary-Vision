@@ -18,8 +18,22 @@ mongoose.connect('mongodb://localhost/ModelDB', MONGO_OPTIONS);
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-app.use(serveStatic('webSite/'));
 
+const cookieparser = require("cookie-parser")
+app.use(cookieparser());
+
+app.use((req, res, next) => {
+  console.log(req.cookies)
+  if (req.cookies.drCookie) {
+    req.user = req.cookies.drCookie;
+  }
+  
+  next();
+})
+
+app.use(serveStatic('webSite/'));
+app.use(serveStatic('webSite/html/'))
+app.use(serveStatic('JacoCookie/'));
 var routes = require('./api/route/3DModelRoute');
 routes(app);
 
