@@ -12,6 +12,7 @@ var DoctorSchema = new Schema({
         type:String
     },
     username: { type: String },
+    email:{type:String},
     password:{
         type:String
     },
@@ -24,6 +25,16 @@ var PatientSchema = new Schema({
     },
     surname:{
         type:String
+    },
+    email:{
+        type:String
+    },
+    gender:
+    {
+        type:String
+    },
+    doctor:{
+        type: Schema.Types.ObjectId
     }
 });
 
@@ -47,18 +58,6 @@ var ConsultationSchema = new Schema({
     }
 });
 
-// var RecordsSchema = new Schema({
-//     drID:{
-//         type:String
-//     },
-//     patientID:{
-//         type:String
-//     },
-//     date:{
-//         type:Date,
-//         default:Date.now
-//     }
-// });
 
 module.exports = {
     Doctor: mongoose.model("Doctor",DoctorSchema),

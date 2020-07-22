@@ -3,43 +3,48 @@
 const fs = require("fs");
 
 var Model = require('../controller/3DModelController');
+var Emailer = require('../controller/EmailController');
+
 module.exports = function (app)
 {
 
     //routes depending on the header
-    app.route('/index')
-    .get((_res, res) => {
-        const page = fs.readFileSync("webSite/html/index.html", "utf-8");
+
+    app.route('').get((_res, res) => {
+        const page = fs.readFileSync("webSite/html/preview.html", "utf-8");
         res.setHeader("Content-Type", "text/html");
         res.send(page);
-    })
+    });
 
     app.route('/login')
-        .get((_res, res) => {
-            const page = fs.readFileSync("webSite/html/login.html", "utf-8");
-            res.setHeader("Content-Type", "text/html");
-            res.send(page);
-        })
         .post(Model.login);
 
     app.route('/signup')
-        .get((_res, res) => {
-            const page = fs.readFileSync("webSite/html/signup.html", "utf-8");
-            res.setHeader("Content-Type", "text/html");
-            res.send(page);
-        })
         .post(Model.signup);
 
-    //handle get put delete
-    app.route('/patients')
-        .put(Model.addPatient);
+    app.route('/getDoctor')
+        .post(Model.getDoctorSurname);
+
 
     app.route('/patients')
-        .get(Model.getPatients);
+        .post(Model.getPatients);
+    //handle get put delete
+    app.route('/addPatient')
+        .post(Model.addPatient)
+        .get((_res, res) => {
+            const page = fs.readFileSync("addPatient.html", "utf-8");
+            res.setHeader("Content-Type", "text/html");
+            res.send(page);
+        });
+
 
     app.route('/patients/:id')
-        .get(Model.getSinglePatient)
-        .patch(Model.updatePatient);
+        .post(Model.getSinglePatient)
+        .patch(Model.updatePatient)
+        .get(Model.getPatientConsultations);
+
+    app.route('/selectPatient')
+        .post(Model.selectPatient);
 
     app.route('/upload')
         .get((_res, res) => {
@@ -49,11 +54,14 @@ module.exports = function (app)
         })
         .post(Model.upload);
 
-    app.route('/home')
-        .get((_res, res) => {
-            const page = fs.readFileSync("webSite/html/home.html", "utf-8");
-            res.setHeader("Content-Type", "text/html");
-            res.send(page);
-        })
+    app.route('/consultations')
+        .get(Model.getPatientConsultations);
 
+    app.route('/logout')
+        .post(Model.logout);
+
+    app.route('/email')
+        .post(Emailer.passwordChangeEmail);
+
+    
 }
