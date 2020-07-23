@@ -68,7 +68,8 @@ Demo 1: Created simple javascript webGL program that renders verticies
 that are passed to it. For documentation, I created a use-case diagram from retrieving
 patient information and editing patients.
 
-Demo 2: pending
+Demo 2: Researched and created the first step to 3d Point cloud generation (Camera calibration).
+Created the deployment model diagram.
 
 Demo 3: pending
 
