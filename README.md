@@ -138,7 +138,11 @@ of the system. I implemented the Video capture functionality that allows the use
 to send a live recorded video or a pre-recorded video from the clients machine to
 back end for processing. I also contributed to the unit testing of the systems API calls.
 
-Demo 2: pending
+Demo 2: I was in control of unit testing and code integration for the project. I 
+implemented some new unit tests for the api, and linked travis ci (the continuous 
+integration tool we are using) to our Github repository so that when a commit is 
+sent the repository it will be built and then run the unit tests to see that meaningful 
+code was uploaded. I also edited the demo video. 
 
 Demo 3: pending
 
