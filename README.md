@@ -26,7 +26,7 @@ Documentation Download:
 
 SR Specification: https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/System%20Requirements%20Specification.pdf
 
-User Manual     : pending
+User Manual     : https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/User%20Manual.pdf
 
 -----------------------------------------------------------------------------------------------------------------
 
