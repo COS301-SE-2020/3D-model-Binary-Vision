@@ -89,7 +89,9 @@ functional and quality requirements. I also set up the basic document that the
 team then changed and inserted into as they seemed nescesary and what was assigned 
 to them.
 
-Demo 2: pending
+Demo 2: Created API functions to handle requests of add patients, view patients, view single patients 
+send emails, creating and clearing cookie data , make sure all data returned belongs to a certain doctor.
+Database queries to get the information on the backend. Created the Front End API calls as well.
 
 Demo 3: pending
 
