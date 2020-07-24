@@ -17,7 +17,7 @@ Demo Downloads:
 
 Demo 1: https://drive.google.com/file/d/1urvzRHTTUYAgFXoPAeqhKeeuAuu2Y3_j/view?usp=sharing
 
-Demo 2: pending
+Demo 2: https://drive.google.com/file/d/1a6tvSa4dhbSURALP31Q9EbFMByTVWWvP/view?usp=sharing
 
 -----------------------------------------------------------------------------------------------------------------
 
