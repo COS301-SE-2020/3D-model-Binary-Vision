@@ -30,6 +30,8 @@ SR Specification: https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/
 
 User Manual     : https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/User%20Manual.pdf
 
+Coding Standards :
+
 Technical Installation Manual : 
 
 -----------------------------------------------------------------------------------------------------------------
