@@ -11,8 +11,9 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../js/apiCalls.js"></script>
 	</head>
-	<body>
+	<body onload="getSinglePatient()">
 
 		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
 		  <a class="navbar-brand" href="home.html">
@@ -35,7 +36,7 @@
 		<br>
 
 		<div class="container">
-		  <h1> Information on Patient <p name="name" id=""name>X</p> </h1>
+		  <h1> Information on Patient <p name="name" id="nameLog" style="color:black">X</p> </h1>
 		</div>
 		<br>
 

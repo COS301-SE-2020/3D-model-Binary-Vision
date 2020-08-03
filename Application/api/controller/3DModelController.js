@@ -109,9 +109,9 @@ module.exports = {
   // get single patient by id number
   getSinglePatient: function (req, res) {
     // console.log(req.body);
-    const idnumber = req.body.idNumber;
-    // console.log(idnumber);
-    Patient.findOne({ 'idNumber' : req.body.idNumber , 'doctor':req.user}, function (err, patient) {
+    // const idnumber = req.body.idNum
+    //  console.log(idnumber);
+    Patient.findOne({ '_id' : req.cookies.patientCookie , 'doctor':req.user}, function (err, patient) {
       // console.log(patient);
       if (err) {
         res.send(err);

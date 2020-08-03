@@ -56,10 +56,12 @@ function getPatients()
             var tableContent = document.getElementById('addToTable');
             var rowNumber = 1;
 
+                
             var counter = 1;
         if (res.status == 202){
             for (var i in data){
               var row = tableContent.insertRow(rowNumber);
+              var num = data[i]._id;
                 //console.log("Name: "+ data[i].name +"\nsurname: "+data[i].surname+"\nIdNumber: "+data[i].idNumber+"\nemail: "+data[i].email+"\ngender: "+data[i].gender);
                 // addToTable(data[i].name , data[i].surname, data[i].idNumber, data[i].gender, data[i].email, data[i]._id)
                 //RANI !!! -- use the data above to populate the table witht the fields that you made
@@ -69,14 +71,16 @@ function getPatients()
                 var email = row.insertCell(3);
                 var gender = row.insertCell(4);
                 var link = row.insertCell(5);
-
+                var string = []
+                string [0] = data[i]._id;
 
                 number.innerHTML = counter;
                 id.innerHTML = data[i].idNumber;
                 surname.innerHTML = data[i].surname;
                 email.innerHTML = data[i].email;
                 gender.innerHTML = data[i].gender;
-                link.innerHTML = "<a onclick= 'selectPatient(" + data[i]._id + "') href= 'patientLog.html'> link </a>";
+                //<a onclick='selectPatient("5efb1682221ad0d67fb93495")'>link</a></td>-->
+                link.innerHTML = "<a onclick='selectPatient(\""+data[i]._id+"\")' href='patientLog.html'>link</a>";
                 rowNumber++;
                 counter++;
 
@@ -194,11 +198,12 @@ function getSinglePatient()
         header:{'Content-Type':'application/json ; charset=UTF-8'}
     })
 
-    response.then(res=>res.json.then(data => {
+    response.then(res =>res.json().then(data => {
 
         if (res.status == 200)
         {
             console.log(data);
+            document.getElementById("nameLog").innerHTML = data.name+" "+data.surname;
         }
         else{
             console.error(data);
