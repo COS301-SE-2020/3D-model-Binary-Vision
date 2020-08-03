@@ -79,8 +79,10 @@ function getPatients()
                 surname.innerHTML = data[i].surname;
                 email.innerHTML = data[i].email;
                 gender.innerHTML = data[i].gender;
+
                 //<a onclick='selectPatient("5efb1682221ad0d67fb93495")'>link</a></td>-->
                 link.innerHTML = "<a onclick='selectPatient(\""+data[i]._id+"\")' href='patientLog.html'>link</a>";
+
                 rowNumber++;
                 counter++;
 
@@ -210,3 +212,12 @@ function getSinglePatient()
         }
     }))
 }
+
+$(document).ready(function(){
+  $("#searchID").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tableContent tr").filter(function() {
+      $(this).toggle($(this).text().indexOf(value) > -1)
+    });
+  });
+});
