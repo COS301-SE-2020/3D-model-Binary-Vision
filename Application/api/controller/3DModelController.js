@@ -27,7 +27,7 @@ module.exports = {
           res.redirect("/home.html");
 
         } else {
-          var resp ={name:""}; 
+          var resp ={name:""};
           resp = JSON.stringify(resp)
           res.json(resp);
         }
@@ -41,7 +41,7 @@ module.exports = {
     res.cookie("drCookie","",{maxAge:0,httpOnly:true});
     res.cookie("patientCookie","",{maxAge:0,httpOnly:true})
     res.redirect("/");//redirect not working
-  
+
   },
 //======================================================================================
   signup: function (req, res) {
@@ -55,7 +55,7 @@ module.exports = {
         } else {
           	const page = fs.readFileSync("webSite/html/login.html", "utf-8");
           	res.setHeader("Content-Type", "text/html");
-          	res.status(201).send(page);        
+          	res.status(201).send(page);
         }
       });
   },
@@ -65,6 +65,9 @@ module.exports = {
     if (!req.user)
     {
       return res.status(404);
+    }
+    else {
+      //
     }
 
     // console.log("Setting the patient cookie, Patient Id: "+req.body.PatientID);
@@ -95,6 +98,7 @@ module.exports = {
       }
       else{
         res.status(201).json(patient);
+        //res.redirect("/displayPatients.html");
         return;
       }
     });
@@ -151,7 +155,7 @@ module.exports = {
       res.status(404);
       return;
     }
-    
+
     const form = formidable();
     form.parse(req, (err, fields) => {
       if (err) return res.send(err);
@@ -193,7 +197,7 @@ module.exports = {
       else{
         res.status(200).json(consultations);
       }
-  
+
     })
   },
 //======================================================================================
@@ -205,7 +209,7 @@ module.exports = {
       res.status(401).send("unauthorised");
       return;
     }
-    
+
     Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doctor){
       // console.log(doctor);
       if (err)
@@ -260,7 +264,7 @@ module.exports = {
             // res.send(`Uploaded file ${video.name}`);
           });
         }
-      }); 
+      });
     });
 
   }

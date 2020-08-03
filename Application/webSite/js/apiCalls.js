@@ -1,10 +1,10 @@
 //
 // AUTHORS : Jacobus AND Rani
 //
-//Proof read By: 
+//Proof read By:
 
 
-//JACO NOTE: This works 
+//JACO NOTE: This works
 function getDrName()
 {
     //gets the name of the dr and sets it too the heading in the page
@@ -44,29 +44,50 @@ function getPatients()
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         }
-        }); 
-    
+        });
+
         console.log("patient data: \n\n"+ response);
 
     response.then(res => res.json().then( data => {
 
-     
+
             //data was successfully send
             //populate the tables with the json data
+            var tableContent = document.getElementById('addToTable');
+            var rowNumber = 1;
+
+            var counter = 1;
         if (res.status == 202){
-            for (var i in data){    
-                console.log("Name: "+ data[i].name +"\nsurname: "+data[i].surname+"\nIdNumber: "+data[i].idNumber+"\nemail: "+data[i].email+"\ngender: "+data[i].gender);
+            for (var i in data){
+              var row = tableContent.insertRow(rowNumber);
+                //console.log("Name: "+ data[i].name +"\nsurname: "+data[i].surname+"\nIdNumber: "+data[i].idNumber+"\nemail: "+data[i].email+"\ngender: "+data[i].gender);
                 // addToTable(data[i].name , data[i].surname, data[i].idNumber, data[i].gender, data[i].email, data[i]._id)
                 //RANI !!! -- use the data above to populate the table witht the fields that you made
-            
+                var number = row.insertCell(0);
+                var id = row.insertCell(1);
+                var surname = row.insertCell(2);
+                var email = row.insertCell(3);
+                var gender = row.insertCell(4);
+                var link = row.insertCell(5);
+
+
+                number.innerHTML = counter;
+                id.innerHTML = data[i].idNumber;
+                surname.innerHTML = data[i].surname;
+                email.innerHTML = data[i].email;
+                gender.innerHTML = data[i].gender;
+                link.innerHTML = "<a onclick= 'selectPatient(" + data[i]._id + "') href= 'patientLog.html'> link </a>";
+                rowNumber++;
+                counter++;
+
             }//make the tables with this data
-        
+
         }
         else if ( res.status == 500)
         {
             //something went wrong , Steven will need to tell us what to do here
         }
-    
+
     }))
 }
 
@@ -74,13 +95,13 @@ function logout() {
     var resposne = fetch ("/logout",{
         method:"POST",
         headers: {
-          'Content-Type': 'application/json; charset=UTF-8',    
+          'Content-Type': 'application/json; charset=UTF-8',
     }});
     //logout of cookie
 }
 
 //JACO NOTES: add patient works perfect on my end to add data to the DB
-function addPatient() 
+function addPatient()
 {
     //RANI i made the email field in the patients page , looks ugly now , can you please fix thanks - jaco
 
@@ -93,7 +114,7 @@ function addPatient()
     //RANI ----do some varification on the data eg. check that email is valid and stuff like that -jaco
 
 
-    //add the patient to the database 
+    //add the patient to the database
     var response = fetch ("/addPatient",{
         method:"POST",
         headers:{
@@ -113,7 +134,7 @@ function addPatient()
             //patient not added
             console.log("Error adding patient")
         }
-        
+
     }))
 }
 
@@ -145,20 +166,20 @@ function getConceltations()
     var response = fetch('/consultations' ,{
         method:"GET",
         headers: {'Content-Type':'application/json ; charset=UTF-8',}
-    }) 
+    })
 
     response.then(res => res.json.then(data=> {
 
         if (res.status == 200)
         {
-            //consultations correctly retrieved 
+            //consultations correctly retrieved
             for(var i in data)
             {
                 //do the table for data[i] with its respective fields
             }
         }
         else{
-            //something wrong happened 
+            //something wrong happened
             console.error(data);
         }
 
