@@ -10,6 +10,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../js/apiCalls.js"></script>
 		<script src="three.js"></script>
 		<script src="detector.js"></script>
 		<script src="stlrender.js"></script>
@@ -28,14 +29,14 @@
 		      <li class="nav-item">
 		        <a class="nav-link" href="../html/displayPatients.html">Patients</a>
 		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="../html/signup.html">Sign Up</a>
+					<li class="nav-item">
+		        <a class="nav-link" href="../html/patientLog.html">Logs</a>
 		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="../html/login.html">Login</a>
-		      </li>      
+					<li class="nav-item">
+		        <a class="nav-link" onclick="logout()" href="/preview.html">Logout</a>
+		      </li>
 		    </ul>
-		  </div>  
+		  </div>
 		</nav>
 		<br>
 
@@ -44,7 +45,7 @@
 		</div><br>
 
 		<div id = "outputModule1" class="outputModule"></div>
-			
+
 		<br>
 
 		<div  class="renderCenter">
@@ -53,7 +54,7 @@
 		</div>
 		<br>
 		<div id = 'videoRec' class='renderCenter'>
-			
+
 		</div>
 		<br>
 		</body>
