@@ -55,6 +55,13 @@ var ConsultationSchema = new Schema({
     video: {
         type: Schema.Types.ObjectId,
         required: true
+    },
+    STL: {
+        type: Schema.Types.ObjectId
+    },
+    Note:{
+        type:String, 
+        required: true
     }
 });
 

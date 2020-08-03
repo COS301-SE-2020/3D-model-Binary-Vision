@@ -37,9 +37,10 @@ module.exports = {
 //======================================================================================
 
   logout:function (req, res){
-    console.log("logging out")
+    console.log("logging out");
     res.cookie("drCookie","",{maxAge:0,httpOnly:true});
-    res.cookie("patientCookie","",{maxAge:0,httpOnly:true})
+    res.cookie("patientCookie","",{maxAge:0,httpOnly:true});
+    res.cookie("consultation","",{maxAge:0});
     res.redirect("/");//redirect not working
 
   },
@@ -202,6 +203,50 @@ module.exports = {
   },
 //======================================================================================
 
+  selectConsultation: function(req,res)
+  {
+    //set the consultation cookie id
+    if(!req.user)
+    {
+      res.send(401);
+      return;
+    }
+
+    res.cookie("consultation",req.body.ConsultationID).send(200);
+    return;
+  },
+
+  retrieveConsultationFiles: function(req,res){
+
+    if (!req.user || req.cookies.consultation=="")
+    {
+      res.send(401);
+      return;
+    }
+
+    Consultation.findOne({"_id":mongoose.Types.ObjectId(req.cookies.consultation)},function(err , consultation){
+      if(err)
+      {
+        res.status(500).send("consultation not found");
+        return;
+      }
+
+      const fileID = consultation.STL;
+      if (fileID == null){
+        res.status(404).send("STL File Not Present");
+        return;
+      }
+
+      //patch the file back together and send the file back
+
+      const returnFile = ModelDB.fs.chunks.find({"files_id": fileID}).sort({n:1});
+
+      res.json({"STL":returnFile});
+
+    })
+  },
+
+//======================================================================================
   getDoctorSurname: function(req, res)
   {
     if (!req.user)
@@ -225,7 +270,7 @@ module.exports = {
 
   },
 //======================================================================================
-
+  
 //upload
   upload: function(req, res) {
     // use default grid-fs bucket
@@ -267,17 +312,10 @@ module.exports = {
       });
     });
 
-  }
+  },
 //======================================================================================
+
+  
 
 };
 
-
-
-
-
-//will use GridFS to send and retrieve data
-// exports.uploadedMedia = function(req,res)
-// {
-
-// }

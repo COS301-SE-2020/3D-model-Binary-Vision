@@ -37,6 +37,8 @@ module.exports = function (app)
             res.send(page);
         });
 
+    app.route("/singlePatient")
+        .post(Model.getSinglePatient);
 
     app.route('/patients/:id')
         .post(Model.getSinglePatient)
