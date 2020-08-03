@@ -185,8 +185,7 @@ function getConceltations()
 
     }))
 }
-<<<<<<< HEAD
-=======
+
 
 function getSinglePatient()
 {
@@ -206,4 +205,3 @@ function getSinglePatient()
         }
     }))
 }
->>>>>>> 544cc4ed4d19450614d85a5fd3bef21cb5baf4ca
