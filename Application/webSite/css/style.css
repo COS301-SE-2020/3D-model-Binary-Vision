@@ -1,54 +1,6 @@
-h1 {
-	position: relative;
-	text-align: center;
-	margin: 0px auto;
+/*class*/
+.active{
 	color: white;
-}
-
-body {
-	background-image: url("images/blue.jpg");
-	background-attachment:fixed;
-	background-size:cover;
-}
-
-.profile {
-	position: relative;
-	margin: 0px auto;
-	text-align: center;
-
-}
-
-image {
-	width: 2em;
-	height: 2em;
-}
-
-table {
-	background-color: rgba(136,136,136,0.8);
-}
-
-td {
-	color: white;
-}
-
-
-.nav-link {
-	color: blue;
-	position: relative;
-	margin-bottom: 0px;
-	margin-top: 0px;
-	margin-left: 0px;
-	margin-right: 0px;
-	padding: 0px;
-}
-
-.nav-link1 {
-	color: white;
-}
-
-.nav-link1:hover {
-	color: lightblue;
-	text-decoration: none;
 }
 
 .renderButton {
@@ -68,11 +20,173 @@ td {
 	margin: 0 auto;
 }
 
-form {
-	text-align: center;
+.nav-link {
+	color: blue;
+	position: relative;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding: 0px;
+
 }
 
-li {
+.nav-link1 {
+	color: white;
+}
+
+.nav-link1:hover {
+	color: lightblue;
+	text-decoration: none;
+}
+
+.profile {
 	position: relative;
-	float: right;
+	margin: 0px auto;
+	text-align: center;
+
+}
+
+/*elements*/
+h2 {
+	color: white;
+}
+
+a:hover {
+	cursor: pointer;
+}
+
+p {
+	color: white;
+}
+
+form {
+	text-align: center;
+	background-color: #343a40;
+	position: relative;
+	width: 300px;
+	padding: 5px;
+	margin: 0 auto;
+	border-radius: 5px;
+}
+
+image {
+	width: 2em;
+	height: 2em;
+}
+
+table {
+	background-color: rgba(136,136,136,0.8);
+
+}
+
+td {
+	color: white;
+}
+
+h1 {
+	position: relative;
+	text-align: center;
+	margin: 0px auto;
+	color: black;
+}
+
+body {
+	background-image: url("images/white.jpg");
+	background-attachment:fixed;
+	background-size:cover;
+}
+
+/*IDs*/
+#carouselExampleIndicators{
+	border: 1px solid;
+}
+
+#para {
+	color: black;
+}
+
+#viewLogin{
+	cursor: pointer;
+}
+
+#container {
+	animation: opacityForm 2s;
+}
+
+#formSignup {
+	text-align: center;
+	background-color: #343a40;
+	position: relative;
+	width: 300px;
+	padding: 5px;
+	margin: 0 auto;
+	border-radius: 5px;
+	animation: scaleForm 1s;
+	animation: opacityForm 2s;
+	box-shadow: 0 12px 12px -7px rgba(0,0,0,.9);
+
+}
+
+#formCheck {
+	text-align: center;
+	background-color: #343a40;
+	position: relative;
+	width: 300px;
+	padding: 5px;
+	margin: 0 auto;
+	border-radius: 5px;
+	animation: scaleForm 1s;
+	animation: opacityForm 2s;
+	box-shadow: 0 12px 12px -7px rgba(0,0,0,.9);
+
+}
+
+#formForgotPassword {
+	text-align: center;
+	background-color: #343a40;
+	position: relative;
+	width: 300px;
+	padding: 5px;
+	margin: 0 auto;
+	border-radius: 5px;
+	animation: scaleForm 1s;
+	animation: opacityForm 2s;
+	box-shadow: 0 12px 12px -7px rgba(0,0,0,.9);
+
+}
+
+#inputPlace {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+}
+
+#showHidden{
+	border-radius: 0;
+}
+
+/*animations*/
+@keyframes opacityForm {
+	0%{
+		opacity: 0.0;
+	}
+	100%{
+		opacity: 1.0;
+	}
+
+}
+
+@keyframes scaleForm {
+	0%{
+		transform: scale(0.0,0.0);
+		-webkit-transform: scale(0.0,0.0);
+		opacity: 0.0;
+	}
+	100%{
+		transform: scale(1.0,1.0);
+		-webkit-transform: scale(1.0,1.0);
+		opacity: 1.0;
+	}
+
 }

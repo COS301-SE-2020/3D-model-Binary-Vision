@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8" />
 		<title> Model Render Test </title>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link rel="stylesheet" href="../css/style.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 		<script type="text/javascript" src="../js/VideoCapture.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<script src="three.js"></script>
+		<script src="detector.js"></script>
+		<script src="stlrender.js"></script>
+		<script src="Function.js"></script>
 	</head>
-
-		<script type="text/javascript" src ="source.js"></script>
-	</head>
-	<body>
+	<body onload=createCanvas()>
 		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
 		  <a class="navbar-brand" href="../html/home.html">
 		      <img src="../css/images/profile.png" alt="Profile Picture" width="30px" height="30px">
@@ -39,49 +39,22 @@
 		</nav>
 		<br>
 
-		<h1>Render Model Test: Development in progress</h1><br>
-		<div class="renderCenter">
-			<button class="btn btn-dark" onclick="createModel([	-1.0, -1.0, 1.0,
-										0.0, 1.0, 0.0,
-										1.0, -1.0, 1.0,
-									
-										-1.0, -1.0, -1.0,
-										0.0, 1.0, 0.0,
-										-1.0, -1.0, 1.0,
-										
-										1.0, -1.0, 1.0,
-										0.0, 1.0, 0.0,
-										1.0, -1.0, -1.0,
-										
-										1.0, -1.0, -1.0,
-										0.0, 1.0, 0.0,
-										-1.0, -1.0, -1.0,
-									
-										])">Render Model</button>
+		<div  class="renderCenter">
+			<button class="btn btn-dark" onclick=begin()>Render Model</button>
 		</div><br>
 
-		<div class="outputModule"></div>
+		<div id = "outputModule1" class="outputModule"></div>
+			
 		<br>
 
-
-		<hr>
-		<h1>Video Streamer</h1>
-		<br><br>
-		<div class="renderCenter">
-			<input type="file" id="UploadVideo" accept="video/mp4"/>
-			<input class="btn btn-dark" type="submit" value="Upload Video" onclick="uploadVideo(document.getElementById('UploadVideo').files[0])"><br><br>
-			<div id="uploadedVideoElement"></div>
-			<div id="submitVideoUploadElement"></div>
-
-			<input class="btn btn-dark" type="submit" name="takeVideoStream" value="Stream Video" onclick="takeVideoStream()"/>
-			<div id="videoStreamElement"></div>
-			<div id="submitVideoStreamElement"></div>
-
-			<div class="footer" style="position: fixed; right: 10px; top: 0; color: black;">
-				<p>Created by:<br>
-			  		Flap Jacks (University of Pretoria)
-				</p>
-			</div>
+		<div  class="renderCenter">
+			<button class="btn btn-dark" style="left:0px;" onclick=newSTL()>New Model</button>
+			<button class="btn btn-dark" onclick=newVideo()>New Media</button>
 		</div>
+		<br>
+		<div id = 'videoRec' class='renderCenter'>
+			
+		</div>
+		<br>
 		</body>
 </html>
