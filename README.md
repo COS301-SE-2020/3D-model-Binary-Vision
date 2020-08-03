@@ -19,6 +19,8 @@ Demo 1: https://drive.google.com/file/d/1urvzRHTTUYAgFXoPAeqhKeeuAuu2Y3_j/view?u
 
 Demo 2: https://drive.google.com/file/d/1a6tvSa4dhbSURALP31Q9EbFMByTVWWvP/view?usp=sharing
 
+Demo 3:
+
 -----------------------------------------------------------------------------------------------------------------
 
 Documentation Download:
@@ -27,6 +29,10 @@ Documentation Download:
 SR Specification: https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/System%20Requirements%20Specification.pdf
 
 User Manual     : https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/User%20Manual.pdf
+
+Coding Standards :
+
+Technical Installation Manual : 
 
 -----------------------------------------------------------------------------------------------------------------
 
