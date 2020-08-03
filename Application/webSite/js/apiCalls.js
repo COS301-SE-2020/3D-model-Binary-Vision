@@ -164,3 +164,22 @@ function getConceltations()
 
     }))
 }
+
+function getSinglePatient()
+{
+    var response = fetch("/singlePatient",{
+        method:"POST",
+        header:{'Content-Type':'application/json ; charset=UTF-8'}
+    })
+
+    response.then(res=>res.json.then(data => {
+
+        if (res.status == 200)
+        {
+            console.log(data);
+        }
+        else{
+            console.error(data);
+        }
+    }))
+}
