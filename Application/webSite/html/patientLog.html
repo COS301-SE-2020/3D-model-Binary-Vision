@@ -46,7 +46,8 @@
 
 		<div class="container">
       <!--<form style="width:108px; margin-bottom:10px;" method="get" action="patientLog.html">-->
-          <button style="border-radius:0;" class="btn btn-dark" type="submit" onclick="addToTable()">Add Entry</button>
+          <button style="border-radius:0;" class="btn btn-dark" type="submit">
+						<a class="nav-link1" href="addEntity.html">Add Entry</a></button>
           <button style="border-radius:0;" type="button" class="btn btn-dark"><a class="nav-link1" href="../renderPage/render.html">Render Teeth</a></button>
 
       <!--</form>-->
@@ -54,16 +55,13 @@
         <table class="table table-striped" id="addToTable">
 		      <thead class="thead-dark">
 		        <tr>
-              <th>#</th>
+              <th>Session #</th>
 		          <th>Date</th>
-		          <th>Notes</th>
+		          <th>Time</th>
+							<th>Notes</th>
+							<th>Attached File</th>
 		        </tr>
 		      </thead>
-          <tr>
-            <td id="date">1</td>
-            <td id="id">546725364</td>
-            <td><textarea rows="3" cols ="40"></textarea></td>
-          </tr>
 		      <tbody>
 
 		      </tbody>
