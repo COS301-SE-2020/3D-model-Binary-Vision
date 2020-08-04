@@ -188,7 +188,9 @@ module.exports = {
       res.status(404);
       return;
     }
-
+    
+    console.log("dr: "+mongoose.Types.ObjectId(req.user)+"\nPatient: "+mongoose.Types.ObjectId(req.cookies.patientCookie));
+    console.log("getting consultations");
     Consultation.find({"doctor":mongoose.Types.ObjectId(req.user), "patient":mongoose.Types.ObjectId(req.cookies.patientCookie)} , function(err, consultations){
       if (err)
       {
@@ -196,7 +198,9 @@ module.exports = {
         return;
       }
       else{
+        console.log(consultations);
         res.status(200).json(consultations);
+        return;
       }
 
     })
@@ -212,7 +216,7 @@ module.exports = {
       return;
     }
 
-    res.cookie("consultation",req.body.ConsultationID).send(200);
+    res.cookie("consultation",req.body.ConsultationID).status(200).send("Consultation Cookie successfully set");
     return;
   },
 
@@ -272,6 +276,7 @@ module.exports = {
 //======================================================================================
   
 //upload
+ 
   upload: function(req, res) {
     // use default grid-fs bucket
     const Files = createModel();
@@ -295,16 +300,24 @@ module.exports = {
         } else {
           console.log(file);
 
-          Patient.findOne({ idNumber: fields.idNumber }, function(err, patient) {
+          Patient.findOne({ "_id": req.cookies.patientCookie }, function(err, patient) {
             // handle err
             // handle if patient == null (not found)
             const consultation = new Consultation({
               doctor: req.user, // get from session, e.g. cookies
-              patient,
-              video: file._id
+              patient: patient._id,
+              video: file._id,
+              Note: "Video upload"
             });
             consultation.save(function (err, saved) {
-              res.sendStatus(201).send(saved);
+              if (err)
+              {
+                console.log(err);
+                
+              }
+              console.log("created consultation");
+              res.status(201).send("Created");
+              return;
             });
             // res.send(`Uploaded file ${video.name}`);
           });
@@ -313,9 +326,61 @@ module.exports = {
     });
 
   },
-//======================================================================================
 
-  
+  //======================================================================================
+  //saves an stl file and makes a consultation 
+  STLConsultationUpload: function(req,res){
+    const files = createModel();
+    const form = formidable();
+    form.parse(req, (err, fields , files) => {
+
+      if (err) return res.send(err);
+
+      const stlFile = files.stlFile;
+
+      const readStream = fs.createReadStream(stlFile.path); 
+
+      const options = {
+        filename: stlFile.name,
+        contentType: stlFile.type
+      }
+      
+      Files.write(options , readStream , ( err , file)=> {
+
+        if (err)
+        {
+          res.send(err);
+          return;
+        }
+        console.log(file);
+        Patients.findOne({"_id":req.cookies.patientCookie} , function(err , patient){
+
+          if (err)
+          {
+            res.status(403).send("patient cookie not set");
+            return;
+          }
+
+          const consultation = new Consultaion({
+            doctor: req.user,
+            patient,
+            STL: file._id,
+            Note: req.body.note
+          });
+          
+          consultation.save(function (err , consultation){
+            res.sendStatus(200).send("Consultation saved");
+          });
+
+
+        });
+      });
+
+
+    });
+
+  }
+  //=====================================================================================
 
 };
 
