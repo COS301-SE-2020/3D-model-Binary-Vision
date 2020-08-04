@@ -211,6 +211,8 @@ function getSinglePatient()
             console.error(data);
         }
     }))
+
+    getSinglePatientConsultations();
 }
 
 $(document).ready(function(){
@@ -221,3 +223,45 @@ $(document).ready(function(){
     });
   });
 });
+
+function selectConsultation(ConsultationID)
+{
+    var response = fetch("/consultations",{
+        method:"POST",
+        headers: {'Content-Type':'application/json ; charset=UTF-8',},
+        body:JSON.stringify({ConsultationID})
+    })
+
+    response.then(res=> res.json().then(data=> {
+        if (res.status == 200)
+        {
+            //ok
+            console.log("Consultation cookie set");
+        }
+        else {
+            //try again or quit ?
+            console.error("Consultation cookie not set");
+        }
+    }))
+
+}
+
+function getSinglePatientConsultations()
+{
+    console.log('getting single patient consultations')
+
+    var response = fetch("/consultations",{
+        method:"GET",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+    })
+
+    response.then(res => res.json().then(data =>{
+
+        console.log("DATA:\n");
+        for( var i in data)
+        {
+            console.log(data[i]);
+        }
+    }))
+
+}

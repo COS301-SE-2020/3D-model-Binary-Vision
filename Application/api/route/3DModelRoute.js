@@ -57,7 +57,12 @@ module.exports = function (app)
         .post(Model.upload);
 
     app.route('/consultations')
-        .get(Model.getPatientConsultations);
+        .get(Model.getPatientConsultations)
+        .post(Model.selectConsultation);
+
+    app.route("/stlConsultation")
+        .post(Model.STLConsultationUpload)
+        .get(Model.retrieveConsultationFiles);
 
     app.route('/logout')
         .post(Model.logout);
