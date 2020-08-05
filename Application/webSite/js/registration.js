@@ -37,44 +37,68 @@ function addToTable(name , surname , id , gender ,email , objectId)
   //<a  onclick=('setPatientIDCookie("+objectId+")')    >
 
 }
-var check = false;
+
+// Global vairables to see which tab is curretly selected
+var disSearch = false;
+var disAdd = false;
+
+// On click for the search tab
 function showDoctorForm(){
+  if (disSearch)
+    disSearch = false;
+  else
+    disSearch = true;
 
-  var doctorColor = document.getElementById("selectDoc");
-  var doctor = document.getElementById("doctorFormSignup");
-  if(doctor.style.display === "none" && check == false)
-  {
-    check = true;
-    doctor.style.display = "block"
-    doctorColor.style.backgroundColor = "#d8e6ad"
-  }
-  else if(doctor.style.display === "block" && check == true)
-  {
-    check = false;
-    doctor.style.display = "none";
-    doctorColor.style.backgroundColor = "#292b2c";
-  }
-
-
+  disAdd = false;
+  displayTabs(disSearch, disAdd);
 }
 
-function showPatientForm(){
-  var doctorColor = document.getElementById("selectPatient");
-  var doctor = document.getElementById("patientFormSignup");
-  if(doctor.style.display === "none" && check == false)
-  {
-    check = true;
-    doctor.style.display = "block"
-    doctorColor.style.backgroundColor = "#d8e6ad";
-  }
-  else if(doctor.style.display === "block" && check == true)
-  {
-    check = false;
-    doctor.style.display = "none";
-    doctorColor.style.backgroundColor = "#292b2c";
-  }
+// On click for add tab
+function showPatientForm(){ 
+  if (disAdd)
+    disAdd = false;
+  else
+    disAdd = true;
 
+  disSearch = false;
+  displayTabs(disSearch, disAdd);
+}
 
+function displayTabs(displaySearch, displayAdd) {
+  // Get the relavent tab elements 
+  let selectTab = document.getElementById("selectDoc");
+  let selectForm = document.getElementById("doctorFormSignup");
+
+  let addTab = document.getElementById("selectPatient");
+  let addForm = document.getElementById("patientFormSignup");
+
+  if (displaySearch && !displayAdd) { // Display the search tab
+    //Enable the search tab
+    selectForm.style.display = "block";
+    selectTab.style.backgroundColor = "#d8e6ad";
+
+    //Disable the add tab
+    addForm.style.display = "none";
+    addTab.style.backgroundColor = "#292b2c";
+
+  } else if (!displaySearch && displayAdd) { // Display the add tab
+    //Disable the search tab
+    selectForm.style.display = "none";
+    selectTab.style.backgroundColor = "#292b2c";
+
+    //Enable the add tab
+    addForm.style.display = "block"
+    addTab.style.backgroundColor = "#d8e6ad"
+
+  } else if (!displaySearch && !displayAdd) { // Display neither tabs
+    //Disable the search tab
+    selectForm.style.display = "none";
+    selectTab.style.backgroundColor = "#292b2c";
+
+    //Disable the search tab
+    addForm.style.display = "none";
+    addTab.style.backgroundColor = "#292b2c";
+  }
 }
 
 function moveSideBar(){
@@ -83,12 +107,14 @@ function moveSideBar(){
   var show = document.getElementById('buttonShow')
 
   if(bodyA.style.display == "none"){
-    bodyA.style.display = "block";
+    //bodyA.style.display = "block";
     show.style.display = "none";
   }
   else{
-    bodyA.style.display = "none";
+    //bodyA.style.display = "none";
     show.style.display = "block";
+    $('.transformSideBar').toggleClass('transformSideBar-active');
+    console.log("here");
   }
 
 }

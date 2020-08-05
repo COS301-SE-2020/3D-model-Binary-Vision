@@ -40,8 +40,8 @@
   </nav>
 
   <!--sideBar-->
-  <button style="position:fixed; margin-left:50px; display:none; top: 10px;
-  z-index:4;" class="btn btn-dark" id="buttonShow" type="button" onclick="moveSideBar();">Show</button>
+  <button style="position:fixed; margin-left:50px; display:none; top: 10px; 
+  z-index:4;" class="btn btn-dark" id="buttonShow" type="button" onclick="moveSideBar();">Show Profile</button>
   <div id="sideBody" >
     <br>
     <div id="sideBar" >
@@ -53,9 +53,10 @@
         <br>
         <p>Welcome back <i onload="getGender();">Mrs </i><b onload="getName();"> asdasdasX</b></p>
         <hr>
+        <p> You are now logged in </p>
         <p>Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
-        <p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>
-        <button class="btn btn-dark" id="buttonSee" type="button" onclick="moveSideBar();">Hide</button>
+        <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
+        <button class="btn btn-dark" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>
 
       </div>
 
