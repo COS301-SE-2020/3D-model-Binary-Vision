@@ -101,20 +101,22 @@ function displayTabs(displaySearch, displayAdd) {
   }
 }
 
+var showSideBar = true;
+
 function moveSideBar(){
   var bodyA = document.getElementById("sideBody");
   var dependent = document.getElementsByClassName("conatinerHome");
   var show = document.getElementById('buttonShow')
 
-  if(bodyA.style.display == "none"){
-    //bodyA.style.display = "block";
+  if(!showSideBar){
+    showSideBar = true;
     show.style.display = "none";
+    bodyA.classList.remove("moveSideBar");
   }
   else{
-    //bodyA.style.display = "none";
+    showSideBar = false;
     show.style.display = "block";
-    $('.transformSideBar').toggleClass('transformSideBar-active');
-    console.log("here");
+    bodyA.classList.add("moveSideBar");
   }
-
+  
 }

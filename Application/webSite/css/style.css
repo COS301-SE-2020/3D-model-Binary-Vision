@@ -95,16 +95,11 @@
 	z-index: 1;
 	width: 240px;
 	height: 100%;
-	animation: moveSideBar 1s;
-	animation-direction: alternate;
+	transition: 0.8s;
 }
 
-.transformSideBar {
-	transition: 2s;
-}
-
-.transformSideBar-active {
-	transform: translateX(-240px);
+.moveSideBar {
+  transform: translateX(-240px);
 }
 
 /*elements*/
@@ -325,14 +320,14 @@ input {
 
 }
 
-@keyframes moveSideBar {
+/*@keyframes moveSideBar {
 	0% {
 		transform: translateX(0px);
 	}
 	100% {
 		transform: translateX(-240px);
 	}
-}
+}*/
 
 .doctor-btn {
 	position: relative;
