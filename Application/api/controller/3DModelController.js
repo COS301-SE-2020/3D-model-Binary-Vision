@@ -472,5 +472,34 @@ module.exports = {
   },
 //======================================================================================
 
+  getDoctorsBooking: function (req, res) {
+
+    if (!req.user)
+    {
+      res.status(401).send("Unauthorized");
+      return;
+    }
+    
+    var year = Date.now().getFullYear();
+    var month = Date.now().getMonth();
+    var day = Date.now().getDate();
+
+    var d = day + "/" + month + "/" + year; 
+
+    Booking.find({"_id" : req.user, "date" : d}, function (err, bookings) {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error looking up bookings");
+        return;
+      } else {
+        // console.log(patients);
+        res.status(202).json(bookings);
+        return;
+      }
+    });
+  },
+
+//======================================================================================
+
 };
 

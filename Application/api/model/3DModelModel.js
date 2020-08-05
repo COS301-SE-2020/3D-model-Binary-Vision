@@ -39,10 +39,10 @@ var PatientSchema = new Schema({
 });
 
 var Receptionist = new Schema({
-    idNumber:{type:"String", required:true},
-    name:{type:"String"},
-    surname:{type:"String"},
-    email:{type:"String"}
+    idNumber:{type:String, required:true},
+    name:{type:String},
+    surname:{type:String},
+    email:{type:String}
 });
 
 var ConsultationSchema = new Schema({
@@ -73,8 +73,8 @@ var ConsultationSchema = new Schema({
 });
 
 var Booking = new Schema({
-    date:{type:Date,require:true},
-    time:{type:"String", required:true},
+    date:{type:String,require:true},
+    time:{type:String, required:true},
     patient:{type: Schema.Types.ObjectId, requred: true},
     doctor:{type: Schema.Types.ObjectId , require: true}
 });
