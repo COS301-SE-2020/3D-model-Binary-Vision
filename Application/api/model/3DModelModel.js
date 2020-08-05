@@ -38,6 +38,13 @@ var PatientSchema = new Schema({
     }
 });
 
+var Receptionist = new Schema({
+    idNumber:{type:"String", required:true},
+    name:{type:"String"},
+    surname:{type:"String"},
+    email:{type:"String"}
+});
+
 var ConsultationSchema = new Schema({
     created: {
         type: Date,
@@ -69,6 +76,7 @@ var ConsultationSchema = new Schema({
 module.exports = {
     Doctor: mongoose.model("Doctor",DoctorSchema),
     Patient: mongoose.model("Patient", PatientSchema),
-    Consultation: mongoose.model("Consultation", ConsultationSchema)
+    Consultation: mongoose.model("Consultation", ConsultationSchema),
+    Receptionist: mongoose.model("Receptionist", Receptionist)
 }
 // module.exports = mongoose.model("Records", RecordsSchema);

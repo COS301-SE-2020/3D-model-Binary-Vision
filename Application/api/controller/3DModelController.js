@@ -9,6 +9,7 @@ var mongoose = require("mongoose");
 var Doctor = require("../model/3DModelModel.js").Doctor;
 var Patient = require("../model/3DModelModel.js").Patient;
 var Consultation = require("../model/3DModelModel.js").Consultation;
+var Receptionist = require("../model/3DModelModel.js").Receptionist;
 
 module.exports = {
   login: function (req, res) {
@@ -34,8 +35,33 @@ module.exports = {
       }
     });
   },
-//======================================================================================
+// ===================================================================================
+//Login Function for a receptionist
+  RepLogin: function(req,res){
 
+    const { username, password } = req.body;
+    Receptionist.findOne({ username, password }, function (err, receptionist) {
+      if (err) {
+        res.send(err);
+      } else {
+        if (receptionist) {
+          // console.log(receptionist);
+
+         // res.json(receptionist);//send(page);
+        //set cookie  redirect to different page
+          res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
+          res.redirect("/RepHome.html"); //will neeed to redirect to receptionist home page
+
+        } else {
+          var resp ={name:""};
+          resp = JSON.stringify(resp)
+          res.json(resp);
+        }
+      }
+    });
+  },
+  
+//======================================================================================
   logout:function (req, res){
     console.log("logging out");
     res.cookie("drCookie","",{maxAge:0,httpOnly:true});
@@ -78,8 +104,6 @@ module.exports = {
     return;
   },
 //======================================================================================
-
-
   addPatient: function (req, res) {
     // console.log(req.body);
     if (!req.user) {
@@ -380,7 +404,6 @@ module.exports = {
     });
 
   }
-  //=====================================================================================
-
+  //======================================================================================
 };
 
