@@ -93,13 +93,20 @@
 }
 
 
-
-.transformSideBar {
-	transition: 2s;
+#sideBody{
+	background-color: #C1CDCD;
+	background-repeat:repeat-x;
+	background-repeat: repeat-y;
+	background-attachment: fixed;
+	position: fixed;
+	z-index: 1;
+	width: 240px;
+	height: 100%;
+	transition: 0.8s;
 }
 
-.transformSideBar-active {
-	transform: translateX(-240px);
+.moveSideBar {
+  transform: translateX(-240px);
 }
 
 /*elements*/
@@ -165,9 +172,7 @@ h1 {
 	color: black;
 }
 
-body {
 
-}
 input {
 	max-width: 300px;
 	text-align: center;
@@ -346,14 +351,14 @@ input {
 
 }
 
-@keyframes moveSideBar {
+/*@keyframes moveSideBar {
 	0% {
 		transform: translateX(0px);
 	}
 	100% {
 		transform: translateX(-240px);
 	}
-}
+}*/
 
 .doctor-btn {
 	position: relative;
@@ -416,18 +421,16 @@ input {
 
 }
 
-.centerContainer{
 
-}
 .doctor-list {
   margin: 0;
   max-width: 250px;
-  !important;
+
 }
 
 .abv-txt {
 	color: white;
   width: 55px;
   max-width: 55px;
-  !important;
+
 }
