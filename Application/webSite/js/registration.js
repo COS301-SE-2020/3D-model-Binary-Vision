@@ -33,7 +33,46 @@ function addToTable(name , surname , id , gender ,email , objectId)
   cell3.innerHTML = "<td><textarea rows='3' cols ='40'></textarea></td>";
   i++;
 
-  
+
   //<a  onclick=('setPatientIDCookie("+objectId+")')    >
+
+}
+var check = false;
+function showDoctorForm(){
+
+  var doctorColor = document.getElementById("selectDoc");
+  var doctor = document.getElementById("doctorFormSignup");
+  if(doctor.style.display === "none" && check == false)
+  {
+    check = true;
+    doctor.style.display = "block"
+    doctorColor.style.backgroundColor = "#d8e6ad"
+  }
+  else if(doctor.style.display === "block" && check == true)
+  {
+    check = false;
+    doctor.style.display = "none";
+    doctorColor.style.backgroundColor = "#292b2c";
+  }
+
+
+}
+
+function showPatientForm(){
+  var doctorColor = document.getElementById("selectPatient");
+  var doctor = document.getElementById("patientFormSignup");
+  if(doctor.style.display === "none" && check == false)
+  {
+    check = true;
+    doctor.style.display = "block"
+    doctorColor.style.backgroundColor = "#d8e6ad";
+  }
+  else if(doctor.style.display === "block" && check == true)
+  {
+    check = false;
+    doctor.style.display = "none";
+    doctorColor.style.backgroundColor = "#292b2c";
+  }
+
 
 }
