@@ -448,8 +448,29 @@ module.exports = {
       }
 
     });
-  }
+  },
 //===========================================================================================================================================
+
+  getAllDoctors: function (req, res) {
+
+    if (!req.user)
+    {
+      res.status(401).send("Unauthorized");
+      return;
+    }
+
+    Doctor.find({}, function (err, doctor) {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error looking up doctor");
+        return;
+      } else {
+        res.status(202).json(doctor);
+        return;
+      }
+    });
+  },
+//======================================================================================
 
 };
 
