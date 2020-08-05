@@ -59,15 +59,21 @@
 }
 
 .conatinerHome{
+
+	background-size: cover;
+	background-attachment: fixed;
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
-	background-color: #C1CDCD;
+	background-color: #003366;
 	text-align: center;
 	width: 45%;
 	margin-top: 24px;
 	border-radius: 10px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+
 	min-width: 405px;
 	max-width: 540px;
 
@@ -75,8 +81,8 @@
 
 .body{
 	background-color: white;
-	background-repeat:repeat-x;
-	background-repeat: repeat-y;
+	background-image: url("../css/images/doodle.jpeg");
+	background-size:auto;
 	background-attachment: fixed;
 	position: fixed;
 	width: 100%;
@@ -86,18 +92,7 @@
 
 }
 
-#sideBody{
-	background-color: #C1CDCD;
-	background-repeat:repeat-x;
-	background-repeat: repeat-y;
-	background-attachment: fixed;
-	position: fixed;
-	z-index: 1;
-	width: 240px;
-	height: 100%;
-	animation: moveSideBar 1s;
-	animation-direction: alternate;
-}
+
 
 .transformSideBar {
 	transition: 2s;
@@ -139,7 +134,7 @@ hr{
 
 form {
 	text-align: center;
-	background-color: #343a40;
+	background-color: #003366;
 	position: relative;
 	height: 400px;
 	margin-bottom: auto;
@@ -208,11 +203,36 @@ input {
 	padding-right: 5px;
 }
 
+#sideBody{
+	background-color: #C1CDCD;
+	background-size:auto;
+	background-attachment: fixed;
+	opacity: 0.9;
+	position: fixed;
+	z-index: 1;
+	width: 240px;
+	height: 100%;
+	animation: moveSideBar 1s;
+	animation-direction: alternate;
+}
+#sideBody{
+	background-color: lightblue;
+	background-size:auto;
+	background-attachment: fixed;
+	position: fixed;
+	z-index: 1;
+	width: 240px;
+	height: 100%;
+	animation: moveSideBar 1s;
+	animation-direction: alternate;
+}
+
 #sideBar{
+	border: solid 1px;
 	width:25%;
 	height: 100%;
 	position: absolute;
-	background-color: #343a40;
+	background-color: #003366;
 	max-width: 240px;
 	min-width: 240px;
 	min-height: 100px;
@@ -232,6 +252,7 @@ input {
 #containInfo{
 	margin-top: 5px;
 	text-align:center;
+	color: white;
 
 }
 
@@ -340,30 +361,34 @@ input {
 
   width: 200px;
   margin: 0px;
-	background-color: #003366;
+	background-color: lightblue;
 
 }
+
+
 
 #selectDoc{
 	border: none;
 	display: inline-block;
-	background-color: #292b2c;
+	background-color: #003366;
 	border-radius: 10px;
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px;
 	border-top-right-radius: 0px;
+	border-top-left-radius: 0px;
 
 }
 
 #selectDoc:hover{
-	background-color: #d8e6ad;
+	background-color: lightblue;
 	border: none;
 	border-radius: 10px;
-	box-shadow: 9px 0 15px -3px rgba(136,136,136,0.8);
+
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px;
 	border-top-right-radius: 0px;
-	color: #292b2c;
+	border-top-left-radius: 0px;
+
 }
 
 
@@ -371,23 +396,24 @@ input {
 
 	border: none;
 	display: inline-block;
-	background-color: #292b2c;
+	background-color: #003366;
 	border-radius: 10px;
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px;
 	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
 
 }
 
 #selectPatient:hover{
-	background-color: #d8e6ad;
+	background-color: lightblue;
 	border: none;
-	box-shadow: 9px 0 15px -3px rgba(136,136,136,0.8);
 	border-radius: 10px;
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px;
 	border-top-left-radius: 0px;
-	color: #292b2c;
+	border-top-right-radius: 0px;
+
 }
 
 .centerContainer{
