@@ -14,7 +14,7 @@
 
 <body >
 <div class="body">
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <nav class="navbar navbar-expand-md  navbar-dark">
     <a class="navbar-brand" href="#">
         <img src="../css/images/tooth.png" alt="Profile Picture" width="30px" height="30px">
     </a>
@@ -39,8 +39,10 @@
   </nav>
 
   <!--sideBar-->
+
   <button style="position:fixed; margin-left:50px; display:none; top: 10px; 
   z-index:4;" class="btn btn-dark" id="buttonShow" type="button" onclick="moveSideBar();">Profile Info</button>
+
   <div id="sideBody" >
     <br>
     <div id="sideBar" >
@@ -50,10 +52,10 @@
           <img src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
         </div>
         <br>
-        <p>Welcome back <i onload="getGender();">Mrs </i><b onload="getName();"> asdasdasX</b></p>
+        <p id="containInfo">Welcome back <i onload="getGender();">Mrs </i><b onload="getName();"> asdasdasX</b></p>
         <hr>
-        <p> You are now logged in </p>
-        <p>Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
+        <p id="containInfo"> You are now logged in </p>
+        <p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
         <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
         <button class="btn btn-dark" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>
 

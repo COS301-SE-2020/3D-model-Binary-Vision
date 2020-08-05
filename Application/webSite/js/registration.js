@@ -72,7 +72,7 @@ function showDoctorForm(){
 }
 
 // On click for add tab
-function showPatientForm(){ 
+function showPatientForm(){
   if (disAdd)
     disAdd = false;
   else
@@ -83,7 +83,7 @@ function showPatientForm(){
 }
 
 function displayTabs(displaySearch, displayAdd) {
-  // Get the relavent tab elements 
+  // Get the relavent tab elements
   let selectTab = document.getElementById("selectDoc");
   let selectForm = document.getElementById("doctorFormSignup");
 
@@ -97,12 +97,12 @@ function displayTabs(displaySearch, displayAdd) {
 
     //Disable the add tab
     addForm.style.display = "none";
-    addTab.style.backgroundColor = "#292b2c";
+    addTab.style.backgroundColor = "#003366";
 
   } else if (!displaySearch && displayAdd) { // Display the add tab
     //Disable the search tab
     selectForm.style.display = "none";
-    selectTab.style.backgroundColor = "#292b2c";
+    selectTab.style.backgroundColor = "#003366";
 
     //Enable the add tab
     addForm.style.display = "block"
@@ -111,11 +111,11 @@ function displayTabs(displaySearch, displayAdd) {
   } else if (!displaySearch && !displayAdd) { // Display neither tabs
     //Disable the search tab
     selectForm.style.display = "none";
-    selectTab.style.backgroundColor = "#292b2c";
+    selectTab.style.backgroundColor = "#003366";
 
     //Disable the search tab
     addForm.style.display = "none";
-    addTab.style.backgroundColor = "#292b2c";
+    addTab.style.backgroundColor = "#003366";
   }
 }
 
