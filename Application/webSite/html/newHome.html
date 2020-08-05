@@ -10,7 +10,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../js/apiCalls.js"></script>
-  <script type="text/javascript" src="../js/registration.js"></script>
 </head>
 
 <body >
@@ -87,14 +86,19 @@
     <!--main body form for doctor-->
             <form action="/signup" method="post" id="doctorFormSignup" style="display: none;">
             <br>
-            <h2> Search Patient</h2><br>
+            <h2> Search Patient</h2>
 
-            <input  class="box" type="text" name="name" id="name"
-            placeholder="Name"  required /><br><br>
-            <input name="surname" placeholder="Surname"/><br><br>
-            <input   name="username" placeholder="Username" /><br><br>
-            <input  class="box" type="password" name="password"
-            id="password" placeholder="Password " required/><br><br>
+            <input type="checkbox" id="searchByName" name="searchBy" onclick="searchByInputDisplay()">
+            <label for="searchByName"> Search By Name </label> 
+
+            <input type="checkbox" id="searchBySurname" name="searchBy" onclick="searchByInputDisplay()">
+            <label for="searchBySurname"> Search By Surname </label>
+
+            <input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()">
+            <label for="searchByPatientID"> Search By Patient ID </label> <br><br>
+
+            <div id="inputBoxes"></div>
+
             <input class="btn btn-dark" type="submit" id="submitDetails"
             name="submitDetails" value="Submit" /><br>
 
@@ -122,6 +126,6 @@
 
   <div>
 </div>
-
+  <script type="text/javascript" src="../js/registration.js"></script>
 </body>
 </html>

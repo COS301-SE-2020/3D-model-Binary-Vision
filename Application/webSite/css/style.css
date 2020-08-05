@@ -230,7 +230,6 @@ input {
 	background-color: #C1CDCD;
 	background-size:auto;
 	background-attachment: fixed;
-
 	position: fixed;
 	z-index: 1;
 	width: 240px;
@@ -368,15 +367,6 @@ input {
 	}
 
 }
-
-/*@keyframes moveSideBar {
-	0% {
-		transform: translateX(0px);
-	}
-	100% {
-		transform: translateX(-240px);
-	}
-}*/
 
 .doctor-btn {
 	position: relative;

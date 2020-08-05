@@ -38,6 +38,24 @@ function addToTable(name , surname , id , gender ,email , objectId)
 
 }
 
+var inputBoxes = document.getElementById("inputBoxes");
+
+function searchByInputDisplay() {
+  inputBoxes.innerHTML = "";
+
+  if (document.getElementById("searchByName").checked) {
+    inputBoxes.innerHTML = '<input  class="box" type="text" name="name" id="name" placeholder="Name"  required /><br><br>';
+  }
+
+  if (document.getElementById("searchBySurname").checked) {
+    inputBoxes.innerHTML += '<input name="surname" placeholder="Surname"/><br><br>';
+  }
+
+  if (document.getElementById("searchByPatientID").checked) {
+    inputBoxes.innerHTML += '<input   name="patientid" placeholder="Patient ID" /><br><br>';
+  }
+}
+
 // Global vairables to see which tab is curretly selected
 var disSearch = false;
 var disAdd = false;
