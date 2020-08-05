@@ -10,6 +10,7 @@ var Doctor = require("../model/3DModelModel.js").Doctor;
 var Patient = require("../model/3DModelModel.js").Patient;
 var Consultation = require("../model/3DModelModel.js").Consultation;
 var Receptionist = require("../model/3DModelModel.js").Receptionist;
+var Booking = require("../model/3DModelModel.js").Booking;
 
 module.exports = {
   login: function (req, res) {
@@ -60,7 +61,7 @@ module.exports = {
       }
     });
   },
-  
+
 //======================================================================================
   logout:function (req, res){
     console.log("logging out");
@@ -203,7 +204,7 @@ module.exports = {
     });
   },
 //======================================================================================
-
+//======================================================================================
   //get all the consultations for a certain patient
   getPatientConsultations : function (req , res){
 
@@ -403,7 +404,52 @@ module.exports = {
 
     });
 
-  }
+  },
   //======================================================================================
+  //review date thing
+  addBooking: function(req, res){
+
+    if (!req.user){
+      res.status(401).send("Unauthorized");
+      return;
+    }
+
+    const date = req.body.date;
+    const time = req.body.time;
+    const patient = req.body.patient;
+    const doctor = req.body.doctor;
+
+    console.log(req.body);
+
+    Booking.find({"doctor":mongoose.Types.ObjectId(doctor), "date":date , "time": time} , function(err, bookings){
+
+      if (err)
+      {
+        console.log(err);
+        res.send(400);
+      }
+
+      if (!bookings){
+
+        var booking = new Booking({
+          date, time , patient, doctor
+        });
+
+        booking.save(function(err, saved){
+          if (err){
+            console.log("could not save booking \n"+ err);
+            res.send(400);
+          }
+        })
+
+      }
+      else {
+        return res.send(400);
+      }
+
+    });
+  }
+//===========================================================================================================================================
+
 };
 
