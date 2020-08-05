@@ -13,7 +13,7 @@
   <script type="text/javascript" src="../js/registration.js"></script>
 </head>
 
-<body onload="getDrName()" >
+<body >
 <div class="body">
   <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <a class="navbar-brand" href="#">
@@ -22,6 +22,8 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li id="otherLi" class="nav-item">
@@ -38,9 +40,11 @@
   </nav>
 
   <!--sideBar-->
-  <div class="sideBody">
+  <button style="position:fixed; margin-left:50px; display:none; top: 10px;
+  z-index:4;" class="btn btn-dark" id="buttonShow" type="button" onclick="moveSideBar();">Show</button>
+  <div id="sideBody" >
     <br>
-    <div id="sideBar">
+    <div id="sideBar" >
 
       <div id="containInfo">
         <div class="profile">
@@ -51,11 +55,15 @@
         <hr>
         <p>Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
         <p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>
+        <button class="btn btn-dark" id="buttonSee" type="button" onclick="moveSideBar();">Hide</button>
+
       </div>
+
     </div>
+
   </div>
   <!--main body options-->
-  <div class="conatinerHome">
+  <div class="conatinerHome" >
     <div class="centerContainer">
       <a id="selectDoc" class="btn btn-lg px-3 btn-outline-dark align-middle doctor-btn" onclick="showDoctorForm();" role="button">
         <ul class="list-inline doctor-list">

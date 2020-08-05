@@ -76,3 +76,19 @@ function showPatientForm(){
 
 
 }
+
+function moveSideBar(){
+  var bodyA = document.getElementById("sideBody");
+  var dependent = document.getElementsByClassName("conatinerHome");
+  var show = document.getElementById('buttonShow')
+
+  if(bodyA.style.display == "none"){
+    bodyA.style.display = "block";
+    show.style.display = "none";
+  }
+  else{
+    bodyA.style.display = "none";
+    show.style.display = "block";
+  }
+
+}
