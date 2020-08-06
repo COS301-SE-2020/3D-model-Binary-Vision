@@ -317,7 +317,7 @@ function getDoctors()
 
 function getSingleDoctorBookings()
 {
-// =========================================================================================================================================================
+
     var response = fetch('/getDoctorsBookings',{
         method:"POST",
         header:{'Content-Type':'Application/json ; charset=UTF-8'}
@@ -336,3 +336,5 @@ function getSingleDoctorBookings()
 
     }));
 }
+
+// =========================================================================================================================================================
