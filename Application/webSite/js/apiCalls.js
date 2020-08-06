@@ -263,5 +263,24 @@ function getSinglePatientConsultations()
             console.log(data[i]);
         }
     }))
+}
 
+function makeBooking()
+{
+
+}
+
+function getDoctors()
+{
+
+}
+
+function receptionistLogin()
+{
+
+}
+
+function getSingleDoctorBookings()
+{
+    
 }
