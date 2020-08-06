@@ -462,10 +462,10 @@ module.exports = {
     Doctor.find({}, function (err, doctor) {
       if (err) {
         console.log(err);
-        res.status(500).send("Error looking up doctor");
+        res.status(404).send("Error looking up doctor");
         return;
       } else {
-        res.status(202).json(doctor);
+        res.status(200).json(doctor);
         return;
       }
     });
