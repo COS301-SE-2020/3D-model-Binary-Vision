@@ -75,5 +75,7 @@ module.exports = function (app)
     app.route('/makeBooking').post(Model.addBooking);
 
     app.route('/getAllDoctors').post(Model.getAllDoctors);
+
+    app.route('/getDoctorsBookings').post(Model.getDoctorsBookings);
     
 }
