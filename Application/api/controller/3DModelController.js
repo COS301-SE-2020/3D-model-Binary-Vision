@@ -9,6 +9,8 @@ var mongoose = require("mongoose");
 var Doctor = require("../model/3DModelModel.js").Doctor;
 var Patient = require("../model/3DModelModel.js").Patient;
 var Consultation = require("../model/3DModelModel.js").Consultation;
+var Receptionist = require("../model/3DModelModel.js").Receptionist;
+var Booking = require("../model/3DModelModel.js").Booking;
 
 module.exports = {
   login: function (req, res) {
@@ -34,8 +36,33 @@ module.exports = {
       }
     });
   },
-//======================================================================================
+// ===================================================================================
+//Login Function for a receptionist
+  RepLogin: function(req,res){
 
+    const { username, password } = req.body;
+    Receptionist.findOne({ username, password }, function (err, receptionist) {
+      if (err) {
+        res.send(err);
+      } else {
+        if (receptionist) {
+          // console.log(receptionist);
+
+         // res.json(receptionist);//send(page);
+        //set cookie  redirect to different page
+          res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
+          res.redirect("/RepHome.html"); //will neeed to redirect to receptionist home page
+
+        } else {
+          var resp ={name:""};
+          resp = JSON.stringify(resp)
+          res.json(resp);
+        }
+      }
+    });
+  },
+
+//======================================================================================
   logout:function (req, res){
     console.log("logging out");
     res.cookie("drCookie","",{maxAge:0,httpOnly:true});
@@ -78,19 +105,17 @@ module.exports = {
     return;
   },
 //======================================================================================
-
-
   addPatient: function (req, res) {
     // console.log(req.body);
     if (!req.user) {
       return res.status(401);
     }
 
-    const {idNumber, name , surname , email , gender} = req.body;
+    const {idNumber, name , surname , email , gender , number} = req.body;
 
     //can add checks here too see if the id number matches a patient that belongs to the doctor already exists
 
-    var new_Patient = new Patient({idNumber , name , surname , email , gender}); //set the patients info
+    var new_Patient = new Patient({idNumber , name , surname , email , gender, number}); //set the patients info
     new_Patient.doctor = req.user; // add doctor id to the patient
     new_Patient.save(function (err, patient) {
       if (err) {
@@ -179,7 +204,7 @@ module.exports = {
     });
   },
 //======================================================================================
-
+//======================================================================================
   //get all the consultations for a certain patient
   getPatientConsultations : function (req , res){
 
@@ -188,7 +213,9 @@ module.exports = {
       res.status(404);
       return;
     }
-
+    
+    console.log("dr: "+mongoose.Types.ObjectId(req.user)+"\nPatient: "+mongoose.Types.ObjectId(req.cookies.patientCookie));
+    console.log("getting consultations");
     Consultation.find({"doctor":mongoose.Types.ObjectId(req.user), "patient":mongoose.Types.ObjectId(req.cookies.patientCookie)} , function(err, consultations){
       if (err)
       {
@@ -196,7 +223,9 @@ module.exports = {
         return;
       }
       else{
+        console.log(consultations);
         res.status(200).json(consultations);
+        return;
       }
 
     })
@@ -212,7 +241,7 @@ module.exports = {
       return;
     }
 
-    res.cookie("consultation",req.body.ConsultationID).send(200);
+    res.cookie("consultation",req.body.ConsultationID).status(200).send("Consultation Cookie successfully set");
     return;
   },
 
@@ -272,6 +301,7 @@ module.exports = {
 //======================================================================================
   
 //upload
+ 
   upload: function(req, res) {
     // use default grid-fs bucket
     const Files = createModel();
@@ -295,16 +325,24 @@ module.exports = {
         } else {
           console.log(file);
 
-          Patient.findOne({ idNumber: fields.idNumber }, function(err, patient) {
+          Patient.findOne({ "_id": req.cookies.patientCookie }, function(err, patient) {
             // handle err
             // handle if patient == null (not found)
             const consultation = new Consultation({
               doctor: req.user, // get from session, e.g. cookies
-              patient,
-              video: file._id
+              patient: patient._id,
+              video: file._id,
+              Note: "Video upload"
             });
             consultation.save(function (err, saved) {
-              res.sendStatus(201).send(saved);
+              if (err)
+              {
+                console.log(err);
+                
+              }
+              console.log("created consultation");
+              res.status(201).send("Created");
+              return;
             });
             // res.send(`Uploaded file ${video.name}`);
           });
@@ -313,9 +351,155 @@ module.exports = {
     });
 
   },
+
+  //======================================================================================
+  //saves an stl file and makes a consultation 
+  STLConsultationUpload: function(req,res){
+    const files = createModel();
+    const form = formidable();
+    form.parse(req, (err, fields , files) => {
+
+      if (err) return res.send(err);
+
+      const stlFile = files.stlFile;
+
+      const readStream = fs.createReadStream(stlFile.path); 
+
+      const options = {
+        filename: stlFile.name,
+        contentType: stlFile.type
+      }
+      
+      Files.write(options , readStream , ( err , file)=> {
+
+        if (err)
+        {
+          res.send(err);
+          return;
+        }
+        console.log(file);
+        Patients.findOne({"_id":req.cookies.patientCookie} , function(err , patient){
+
+          if (err)
+          {
+            res.status(403).send("patient cookie not set");
+            return;
+          }
+
+          const consultation = new Consultaion({
+            doctor: req.user,
+            patient,
+            STL: file._id,
+            Note: req.body.note
+          });
+          
+          consultation.save(function (err , consultation){
+            res.sendStatus(200).send("Consultation saved");
+          });
+
+
+        });
+      });
+
+
+    });
+
+  },
+  //======================================================================================
+  //review date thing
+  addBooking: function(req, res){
+
+    if (!req.user){
+      res.status(401).send("Unauthorized");
+      return;
+    }
+
+    const date = req.body.date;
+    const time = req.body.time;
+    const patient = req.body.patient;
+    const doctor = req.body.doctor;
+
+    console.log(req.body);
+
+    Booking.find({"doctor":mongoose.Types.ObjectId(doctor), "date":date , "time": time} , function(err, bookings){
+
+      if (err)
+      {
+        console.log(err);
+        res.send(400);
+      }
+
+      if (!bookings){
+
+        var booking = new Booking({
+          date, time , patient, doctor
+        });
+
+        booking.save(function(err, saved){
+          if (err){
+            console.log("could not save booking \n"+ err);
+            res.send(400);
+          }
+        })
+
+      }
+      else {
+        return res.send(400);
+      }
+
+    });
+  },
+//===========================================================================================================================================
+
+  getAllDoctors: function (req, res) {
+
+    if (!req.user)
+    {
+      res.status(401).send("Unauthorized");
+      return;
+    }
+
+    Doctor.find({}, function (err, doctor) {
+      if (err) {
+        console.log(err);
+        res.status(404).send("Error looking up doctor");
+        return;
+      } else {
+        res.status(200).json(doctor);
+        return;
+      }
+    });
+  },
 //======================================================================================
 
-  
+  getDoctorsBooking: function (req, res) {
+
+    if (!req.user)
+    {
+      res.status(401).send("Unauthorized");
+      return;
+    }
+    
+    var year = Date.now().getFullYear();
+    var month = Date.now().getMonth();
+    var day = Date.now().getDate();
+
+    var d = day + "/" + month + "/" + year; 
+
+    Booking.find({"_id" : req.user, "date" : d}, function (err, bookings) {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error looking up bookings");
+        return;
+      } else {
+        // console.log(patients);
+        res.status(200).json(bookings);
+        return;
+      }
+    });
+  },
+
+//======================================================================================
 
 };
 

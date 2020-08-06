@@ -34,7 +34,7 @@ function getDrName()
         }));
 
 }
-
+// =========================================================================================================================================================
 //Jaco Notes: works perfect just needs to use the returned data to populate tables
 function getPatients()
 {
@@ -96,7 +96,7 @@ function getPatients()
 
     }))
 }
-
+// =========================================================================================================================================================
 function logout() {
     var resposne = fetch ("/logout",{
         method:"POST",
@@ -105,7 +105,7 @@ function logout() {
     }});
     //logout of cookie
 }
-
+// =========================================================================================================================================================
 //JACO NOTES: add patient works perfect on my end to add data to the DB
 function addPatient()
 {
@@ -143,6 +143,7 @@ function addPatient()
 
     }))
 }
+// =========================================================================================================================================================
 
 
 //sets the patient cookie with the patient id
@@ -164,6 +165,7 @@ function selectPatient(PatientID)
         }
     })
 }
+// =========================================================================================================================================================
 
 
 //retrieves the doctor -> patient consultations
@@ -191,6 +193,7 @@ function getConceltations()
 
     }))
 }
+// =========================================================================================================================================================
 
 
 function getSinglePatient()
@@ -211,7 +214,10 @@ function getSinglePatient()
             console.error(data);
         }
     }))
+
+    getSinglePatientConsultations();
 }
+// =========================================================================================================================================================
 
 $(document).ready(function(){
   $("#searchID").on("keyup", function() {
@@ -221,3 +227,112 @@ $(document).ready(function(){
     });
   });
 });
+// =========================================================================================================================================================
+
+function selectConsultation(ConsultationID)
+{
+    var response = fetch("/consultations",{
+        method:"POST",
+        headers: {'Content-Type':'application/json ; charset=UTF-8',},
+        body:JSON.stringify({ConsultationID})
+    })
+
+    response.then(res=> res.json().then(data=> {
+        if (res.status == 200)
+        {
+            //ok
+            console.log("Consultation cookie set");
+        }
+        else {
+            //try again or quit ?
+            console.error("Consultation cookie not set");
+        }
+    }))
+
+}
+// =========================================================================================================================================================
+
+function getSinglePatientConsultations()
+{
+    console.log('getting single patient consultations')
+
+    var response = fetch("/consultations",{
+        method:"GET",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+    })
+
+    response.then(res => res.json().then(data =>{
+
+        console.log("DATA:\n");
+        for( var i in data)
+        {
+            console.log(data[i]);
+        }
+    }))
+}
+// =========================================================================================================================================================
+
+function makeBooking(date , time ,patient ,doctor)
+{
+    var respose = fetch('/makeBooking',{
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'},
+        body:JSON.stringify({date,time, patient, doctor})
+    })
+
+    response.then(res => res.json().then(data => {
+
+        if(data.status != 200){
+            //something went wrong
+        }
+
+        console.log(data);
+
+    }));
+
+}
+// =========================================================================================================================================================
+
+function getDoctors()
+{
+    var response = fetch('/getAllDoctors',{
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+    });
+    response.then(res => res.json().then(data=>{
+
+        if(data.status != 200)
+        {
+            //There was an issue
+            console.log("Error: " + data);
+        }
+        else
+        {
+            console.log("Success: " + data);
+        }
+
+    }));
+}
+// =========================================================================================================================================================
+
+function getSingleDoctorBookings()
+{
+    var response = fetch('/getDoctorsBookings',{
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+    });
+
+    response.then(res => res.json().then(data => {
+
+        if(data.status != 200)
+        {
+            console.log("Error: " + data);
+        }
+        else
+        {
+            console.log("Success: " + data);
+        }
+
+    }));
+}
+// ========================================================================================================================================================

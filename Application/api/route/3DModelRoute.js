@@ -57,7 +57,12 @@ module.exports = function (app)
         .post(Model.upload);
 
     app.route('/consultations')
-        .get(Model.getPatientConsultations);
+        .get(Model.getPatientConsultations)
+        .post(Model.selectConsultation);
+
+    app.route("/stlConsultation")
+        .post(Model.STLConsultationUpload)
+        .get(Model.retrieveConsultationFiles);
 
     app.route('/logout')
         .post(Model.logout);
@@ -65,5 +70,12 @@ module.exports = function (app)
     app.route('/email')
         .post(Emailer.passwordChangeEmail);
 
+    app.route('/receptionistLogin').post(Model.RepLogin);
+
+    app.route('/makeBooking').post(Model.addBooking);
+
+    app.route('/getAllDoctors').post(Model.getAllDoctors);
+
+    app.route('/getDoctorsBookings').post(Model.getDoctorsBookings);
     
 }

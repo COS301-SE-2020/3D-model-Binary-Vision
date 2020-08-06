@@ -35,7 +35,15 @@ var PatientSchema = new Schema({
     },
     doctor:{
         type: Schema.Types.ObjectId
-    }
+    },
+    number:{type:String, required: true}
+});
+
+var Receptionist = new Schema({
+    idNumber:{type:String, required:true},
+    name:{type:String},
+    surname:{type:String},
+    email:{type:String}
 });
 
 var ConsultationSchema = new Schema({
@@ -65,10 +73,18 @@ var ConsultationSchema = new Schema({
     }
 });
 
+var Booking = new Schema({
+    date:{type:String,require:true},
+    time:{type:String, required:true},
+    patient:{type: Schema.Types.ObjectId, requred: true},
+    doctor:{type: Schema.Types.ObjectId , require: true}
+});
 
 module.exports = {
     Doctor: mongoose.model("Doctor",DoctorSchema),
     Patient: mongoose.model("Patient", PatientSchema),
-    Consultation: mongoose.model("Consultation", ConsultationSchema)
+    Consultation: mongoose.model("Consultation", ConsultationSchema),
+    Receptionist: mongoose.model("Receptionist", Receptionist),
+    Bookings : mongoose.model("Bookings",Bookings)
 }
 // module.exports = mongoose.model("Records", RecordsSchema);
