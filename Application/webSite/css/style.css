@@ -88,7 +88,7 @@
 
 .body{
 	background-color: white;
-	background-image: url("../css/images/doodle.jpeg");
+	background-image: url("../css/images/doodle(OO).jpg");
 	background-size:auto;
 	background-attachment: fixed;
 	position: fixed;
@@ -396,11 +396,12 @@ input {
 	border-bottom-right-radius: 0px;
 	border-top-right-radius: 0px;
 	border-top-left-radius: 0px;
+	transition: 0.5s;
 
 }
 
 #selectDoc:hover{
-	background-color: lightblue;
+	background-color: lightgreen;
 	border: none;
 	border-radius: 10px;
 
@@ -410,6 +411,7 @@ input {
 	border-top-left-radius: 0px;
 
 }
+
 
 
 #selectPatient{
@@ -422,11 +424,11 @@ input {
 	border-bottom-right-radius: 0px;
 	border-top-left-radius: 0px;
 	border-top-right-radius: 0px;
-
+	transition: 0.5s;
 }
 
 #selectPatient:hover{
-	background-color: lightblue;
+	background-color: lightgreen;
 	border: none;
 	border-radius: 10px;
 	border-bottom-left-radius: 0px;
