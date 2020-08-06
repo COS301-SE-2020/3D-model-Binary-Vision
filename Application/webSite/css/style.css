@@ -75,7 +75,15 @@
 	border-bottom-right-radius: 0px;
 	min-width: 405px;
 	max-width: 540px;
+	transition: 0.8s;
+}
 
+#conatinerHomeOuter {
+	margin-left: 120px;
+}
+
+.moveContainerHome {
+	transform: translateX(-60px);
 }
 
 .body{

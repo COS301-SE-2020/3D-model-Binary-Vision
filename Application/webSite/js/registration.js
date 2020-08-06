@@ -130,11 +130,13 @@ function moveSideBar(){
     showSideBar = true;
     show.style.display = "none";
     bodyA.classList.remove("moveSideBar");
+    document.getElementById("conatinerHome").classList.remove("moveContainerHome");
   }
   else{
     showSideBar = false;
     show.style.display = "block";
     bodyA.classList.add("moveSideBar");
+    document.getElementById("conatinerHome").classList.add("moveContainerHome");
   }
   
 }
