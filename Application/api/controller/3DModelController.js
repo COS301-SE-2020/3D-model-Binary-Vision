@@ -111,11 +111,11 @@ module.exports = {
       return res.status(401);
     }
 
-    const {idNumber, name , surname , email , gender} = req.body;
+    const {idNumber, name , surname , email , gender , number} = req.body;
 
     //can add checks here too see if the id number matches a patient that belongs to the doctor already exists
 
-    var new_Patient = new Patient({idNumber , name , surname , email , gender}); //set the patients info
+    var new_Patient = new Patient({idNumber , name , surname , email , gender, number}); //set the patients info
     new_Patient.doctor = req.user; // add doctor id to the patient
     new_Patient.save(function (err, patient) {
       if (err) {

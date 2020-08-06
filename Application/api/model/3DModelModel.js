@@ -35,7 +35,8 @@ var PatientSchema = new Schema({
     },
     doctor:{
         type: Schema.Types.ObjectId
-    }
+    },
+    number:{type:String, required: true}
 });
 
 var Receptionist = new Schema({
