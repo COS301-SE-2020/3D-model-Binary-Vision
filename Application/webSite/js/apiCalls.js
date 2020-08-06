@@ -282,6 +282,7 @@ function makeBooking(date , time ,patient ,doctor)
 
     response.then(res => res.json().then(data => {
 
+<<<<<<< HEAD
         if(data.status != 200){
             //something went wrong
         }
@@ -295,12 +296,53 @@ function makeBooking(date , time ,patient ,doctor)
 
 function getDoctors()
 {
+=======
+function getDoctors()
+{
+    var response = fetch('/getAllDoctors',{
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+    });
+    response.then(res => res.json().then(data=>{
 
+        if(data.status != 200)
+        {
+            //There was an issue
+            console.log("Error: " + data);
+        }
+        else
+        {
+            console.log("Success: " + data);
+        }
+>>>>>>> 3b64ce54d0406018b9e1ad02f0cd52dc3b586b23
+
+    }));
 }
 // =========================================================================================================================================================
 
 function getSingleDoctorBookings()
 {
+<<<<<<< HEAD
 
 }
 // =========================================================================================================================================================
+=======
+    var response = fetch('/getDoctorsBookings',{
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+    });
+
+    response.then(res => res.json().then(data => {
+
+        if(data.status != 200)
+        {
+            console.log("Error: " + data);
+        }
+        else
+        {
+            console.log("Success: " + data);
+        }
+
+    }));
+}
+>>>>>>> 3b64ce54d0406018b9e1ad02f0cd52dc3b586b23
