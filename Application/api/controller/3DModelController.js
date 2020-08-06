@@ -493,7 +493,7 @@ module.exports = {
         return;
       } else {
         // console.log(patients);
-        res.status(202).json(bookings);
+        res.status(200).json(bookings);
         return;
       }
     });
