@@ -13,6 +13,12 @@
 </head>
 
 <body >
+  <div id="mydiv">
+      <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+      <div id="mydivheader">Notes (Drag)</div>
+      <textarea></textarea></div>
+
+  </div>
 <div class="body">
   <nav class="navbar navbar-expand-md  navbar-dark">
     <a class="navbar-brand" href="newHome.html">
@@ -43,7 +49,7 @@
   z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>
 
   <div id="sideBody" >
-    <br>
+    <br><br>
     <div id="sideBar" >
 
       <div id="containInfo">
@@ -57,11 +63,16 @@
         <p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
         <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
         <button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>
-
+        <br><br><br><hr>
       </div>
     </div>
   </div>
   <!--main body options-->
+  <div id="miBody">
+    <div id="header">
+      <p id="headerTitle">ADMIN HOME PAGE</p>
+    </div>
+  </div>
   <div id="conatinerHomeOuter">
   <div class="conatinerHome" id="conatinerHome">
     <div class="centerContainer">
@@ -82,7 +93,7 @@
       </a>
     </div>
     <!--main body form for doctor-->
-    <hr>
+    
             <form action="/signup" method="post" id="doctorFormSignup" style="display: block;">
               <br>
               <h2> Search Patient</h2><br>
