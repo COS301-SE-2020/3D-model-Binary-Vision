@@ -1,5 +1,8 @@
 // chrome://settings/content/camera
 
+var canvas = document.createElement('canvas'); // Create a canvas so that the video footage can be converted into images 
+var images = []; // The array to store the images generated 
+
 // The main function to upload an video file
 function uploadVideo(videoFile) {
 	cleanElements(); // CLean all the elements
@@ -13,6 +16,9 @@ function uploadVideo(videoFile) {
 	// link the video sent by the user and the video tag
 	let videoURL = window.URL.createObjectURL(videoFile);
 	uploadedVideo.src = videoURL;
+
+	/*images = [];
+	generateImages(document.getElementById("uploadedVideo"));*/
 
 	fetchVideo(uploadedVideo.src).then(blob => {
 		sendBlob(blob);
@@ -89,6 +95,7 @@ function takeVideoStream() {
 		//store the blobs of the video stream
 		let mediaRecorder = new MediaRecorder(stream);
 		let recordedBlobs = [];
+		var timedInterval;
 
 		// Start recording
 		start.addEventListener('click', (ev) => {
@@ -101,6 +108,7 @@ function takeVideoStream() {
 		stop.addEventListener('click', (ev)=> {
 			mediaRecorder.stop();
 			console.log(mediaRecorder.state);
+			clearInterval(timedInterval);
 		});
 
 		// Record all of the blobs
@@ -117,6 +125,9 @@ function takeVideoStream() {
 
 			capturedVideoStream.style.visibility = "visible"; // Make the captured video element visiable
 			capturedVideoStream.src = videoURL;
+
+			images = [];
+			generateImages(document.getElementById("capturedVideoStream"));
 
 			submitVideo(blob, true); // Submit the video
 		};
@@ -149,7 +160,6 @@ function submitVideo(video, videoStreamed) {
 		});
 		
 		response.then(res=> {console.log("uploaded")});
-
 	});
 }
 
@@ -166,4 +176,36 @@ function cleanElements() {
 
 	element = document.getElementById('submitVideoStreamElement');
 	element.innerHTML = "";
+}
+
+// Generate the images form the videos stored in the relavent tags
+function generateImages(video) {
+	var i = 0;
+
+	video.addEventListener('loadeddata', function() {
+	    this.currentTime = i;
+	});
+
+	video.addEventListener('seeked', function() {
+	    generateImage(i, video);
+	    i += 0.5; // get an image every 0.5 seconds
+	    if (i <= this.duration)
+	        this.currentTime = i;
+	});
+}
+
+// Generate a image at that time stamp i.e. 'i'
+function generateImage(i, video) { 
+	// Generate and load the image into the canvas
+    var context = canvas.getContext('2d');
+    context.drawImage(video, 0, 0, 220, 150);
+    var dataURL = canvas.toDataURL();
+
+    // Create the src's for each image ... probably not needed
+    var img = document.createElement('img');
+    img.setAttribute('src', dataURL);
+
+    // Push the new image into the images array.
+    images.push(dataURL);
+    //document.getElementById('testDraw').appendChild(img);
 }
