@@ -15,18 +15,18 @@
 <body >
 <div class="body">
   <nav class="navbar navbar-expand-md  navbar-dark">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="newHome.html">
         <img src="../css/images/tooth.png" alt="Profile Picture" width="30px" height="30px">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <p style="position:absolute; right:0px; margin-right:100px;">3D BINARY SYSTEM</p>
+
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li id="otherLi" class="nav-item">
-          <a class="nav-link active" href="newHome.html">Home</a>
+          <a class="nav-link active" href="newHome.html"><u>Home</u></a>
         </li>
         <li id="otherLi" class="nav-item">
           <a class="nav-link" href="displayPatients.html">Logs</a>
@@ -39,9 +39,8 @@
   </nav>
 
   <!--sideBar-->
-
   <button style="position:fixed; margin-left:60px; display:none; top: 10px;
-  z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();">Profile Info</button>
+  z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>
 
   <div id="sideBody" >
     <br>
@@ -49,7 +48,7 @@
 
       <div id="containInfo">
         <div class="profile">
-          <img src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
+          <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
         </div>
         <br>
         <p id="containInfo">Welcome back <i onload="getGender();">Mrs </i><b onload="getName();"> asdasdasX</b></p>
@@ -60,9 +59,7 @@
         <button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>
 
       </div>
-
     </div>
-
   </div>
   <!--main body options-->
   <div id="conatinerHomeOuter">
@@ -85,48 +82,48 @@
       </a>
     </div>
     <!--main body form for doctor-->
+    <hr>
             <form action="/signup" method="post" id="doctorFormSignup" style="display: block;">
-            <br>
-            <h2> Search Patient</h2>
+              <br>
+              <h2> Search Patient</h2><br>
+              <div class="change">
+                <input type="checkbox" id="searchByName" name="searchBy" onclick="searchByInputDisplay()">
+                <label style="color:white;" for="searchByName"> Search By Name </label><br>
 
-            <input type="checkbox" id="searchByName" name="searchBy" onclick="searchByInputDisplay()">
-            <label style="color:white;" for="searchByName"> Search By Name </label><br>
+                <input type="checkbox" id="searchBySurname" name="searchBy" onclick="searchByInputDisplay()">
+                <label style="color:white;" for="searchBySurname"> Search By Surname </label><br>
 
-            <input type="checkbox" id="searchBySurname" name="searchBy" onclick="searchByInputDisplay()">
-            <label style="color:white;" for="searchBySurname"> Search By Surname </label><br>
+                <input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()">
+                <label style="color:white;" for="searchByPatientID"> Search By Patient ID </label> <br><br>
+              </div>
+              <div id="inputBoxes"></div>
 
-            <input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()">
-            <label style="color:white;" for="searchByPatientID"> Search By Patient ID </label> <br><br>
-
-            <div id="inputBoxes"></div>
-
-            <input class="btn btn-dark" type="submit" id="submitDetails"
-            name="submitDetails" value="Submit" /><br>
-
+              <input class="btn" type="submit" id="buttonSee"
+              name="submitDetails" value="Search" /><br><br>
             </form>
 
 
-    <!--main body form for patient-->
+          <!--main body form for patient-->
 
             <form action="/signup" method="post" id="patientFormSignup" style="display: none;">
-            <br>
-            <h2> Patient</h2><br>
+              <br>
+              <h2> Patient</h2><br>
 
-            <input class="box" type="text" name="name" id="name"
-            placeholder="Name"  required /><br><br>
-            <input name="surname" placeholder="Surname"/><br><br>
-            <input class="box" type="email" name="email" id="email"
-            placeholder="Email" required /><br><br>
-            <input name="username" placeholder="Username" /><br><br>
-            <input class="box" type="password" name="password"
-            id="password" placeholder="Password " required/><br><br>
-            <input class="btn btn-dark" type="submit" id="submitDetails"
-            name="submitDetails" value="Submit" /><br><hr>
-            <p style="font-size: 12px;">Already have an account?<a style="font-size: 12px;" href="login.html" onclick="preview()"> Login Here</a></p>
+              <input class="box" type="text" name="name" id="name"
+              placeholder="Name"  required /><br><br>
+              <input name="surname" placeholder="Surname"/><br><br>
+              <input class="box" type="email" name="email" id="email"
+              placeholder="Email" required /><br><br>
+              <input name="username" placeholder="Username" /><br><br>
+              <input class="box" type="password" name="password"
+              id="password" placeholder="Password " required/><br><br>
+              <input class="btn" type="submit" id="buttonSee"
+              name="submitDetails" value="Submit" /><br><hr>
+              <p style="font-size: 12px;">Already have an account?<a style="font-size: 12px;" href="login.html" onclick="preview()"> Login Here</a></p><br>
             </form>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-  <script type="text/javascript" src="../js/registration.js"></script>
-</body>
+    <script type="text/javascript" src="../js/registration.js"></script>
+  </body>
 </html>

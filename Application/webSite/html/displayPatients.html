@@ -15,64 +15,97 @@
 	</head>
 
 	<body onload="getPatients()">
+	<div class="body">
 
-		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		  <a class="navbar-brand" href="home.html">
-		      <img src="../css/images/profile.png" alt="Profile Picture" width="30px" height="30px">
-		  </a>
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
-		  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-		    <ul class="navbar-nav">
-		      <li class="nav-item">
-		        <a class="nav-link active" href="displayPatients.html">Patients</a>
-		      </li>
-					<li class="nav-item">
-		        <a class="nav-link" onclick="logout()" href="/preview.html">Logout</a>
-		      </li>
-		    </ul>
+		<nav class="navbar navbar-expand-md  navbar-dark">
+		    <a class="navbar-brand" href="newHome.html">
+		        <img src="../css/images/tooth.png" alt="Profile Picture" width="30px" height="30px">
+		    </a>
+		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>
+
+		   
+		    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+		      <ul class="navbar-nav">
+		        <li id="otherLi" class="nav-item">
+		          <a class="nav-link" href="newHome.html">Home</a>
+		        </li>
+		        <li id="otherLi" class="nav-item">
+		          <a class="nav-link active" href="displayPatients.html"><u>Logs</u></a>
+		        </li>
+		        <li id="logout" class="nav-item" id="logout">
+		          <a id="logoutA"class="nav-link" onclick="logout()" href="/preview.html">Logout</a>
+		        </li>
+		      </ul>
+		    </div>
+		  </nav>
+
+		  <!--sideBar-->
+		  <button style="position:fixed; margin-left:60px; display:none; top: 10px;
+		  z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>
+
+		  <div id="sideBody" >
+		    <br>
+		    <div id="sideBar" >
+		      <div id="containInfo">
+		        <div class="profile">
+		          <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
+		        </div>
+		        <br>
+		        <p id="containInfo">Welcome back <i onload="getGender();">Mrs </i><b onload="getName();"> asdasdasX</b></p>
+		        <hr>
+		        <p id="containInfo"> You are now logged in </p>
+		        <p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
+		        <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
+		        <button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>
+
+		      </div>
+		    </div>
 		  </div>
-		</nav>
-		<br>
 
-		<!--<div class="container">
-		  <h1> Information on Patient X </h1>
-		</div>
-		<div class="profile">
-		  <img src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
-		</div>
-		<br>-->
-
-    <form  id="showHidden" style="display:none;" action="/patients/:id" method="POST">
-      <h6 style="float:left; color:white; margin-left:12px; margin-top:6px;">Find Patient by ID</h6>
-        <input class="form-control" type="text" name="idNumber" id="searchID" placeholder="idNumber" required>
-        <a onclick="hide()">hide</a>
-    </form><br>
-
-		<div class="container">
-
-      <button type="button" style="position: relative; margin: 0 auto; text-align: center; border-radius: 0;" class="btn btn-dark">
-        <a class="nav-link1" href="addPatient.html">Add Patient</a></button>
-      <button type="button" style="position: relative; margin: 0 auto; text-align: center; border-radius: 0;" class="btn btn-dark">
-        <a class="nav-link1" onclick="find();">Find Patient</a></button>
-
+		<div class="container"><br>
         <table class="table table-striped" id="addToTable">
-		      <thead class="thead-dark">
-		        <tr>
-		          <th scope="col">#</th>
-              <th>ID</th>
-              <th>Surname</th>
-							<th>Email</th>
-              <th>Gender</th>
-		          <th>Log</th>
-		        </tr>
-		      </thead>
+		    <thead>
+			    <tr>
+			        <th scope="col">#</th>
+	                <th>ID</th>
+	                <th>Surname</th>
+					<th>Time/Date</th>
+	                <th>Number</th>
+			        <th>Book</th>
+			    </tr>
+		    </thead>
 
-		      <tbody>
-              <!-- <td><a onclick='selectPatient("5efb1682221ad0d67fb93495")'>link</a></td> -->
-		      </tbody>
-		    </table>
+		    <tbody>
+            	<tr>
+            		<td>1</td>
+            		<td>14325</td>
+            		<td>James</td>
+            		<td>12:30</td>
+            		<td>0836530083</td>
+            		<td><button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="background-color: lightgreen; margin-right: 2px; position: relative;
+            		padding: 3px;">Send</button>
+            			<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="background-color: #8a3636; margin-right: 2px;position: relative;
+            			padding: 3px;">Hide</button>
+            		</td>
+            	</tr>
+            	<tr>
+            		<td>2</td>
+            		<td>52365</td>
+            		<td>Harrison</td>
+            		<td>00:01</td>
+            		<td>0834651183</td>
+            		<td><button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="background-color: lightgreen; margin-right: 2px; position: relative;
+            		padding: 3px;">Send</button>
+            			<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="background-color: #8a3636; margin-right: 2px;position: relative;
+            			padding: 3px;">Hide</button>
+            		</td>
+            	</tr>
+
+		    </tbody>
+		</table>
+		</div>
 
   </div>
 
