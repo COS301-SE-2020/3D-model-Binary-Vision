@@ -1,0 +1,31 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "RestApi ",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha||true"
+  },
+  "keywords": [
+    "Restful",
+    "API",
+    "Media"
+  ],
+  "author": "jaco",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "formidable": "^1.2.2",
+    "mongoose": "^5.9.17",
+    "mongoose-gridfs": "^1.2.42",
+    "nodemailer": "^6.4.10"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^7.1.0",
+    "nodemon": "^2.0.4"
+  }
+}

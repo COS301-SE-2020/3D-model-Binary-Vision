@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Log</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <script type="text/javascript" src="../js/DrCookie.js"></script> -->
+    <script type="text/javascript" src="../js/registration.js"></script>
+		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../js/apiCalls.js"></script>
+	</head>
+	<body onload="getSinglePatient()">
+
+		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		  <a class="navbar-brand" href="home.html">
+		      <img src="../css/images/profile.png" alt="Profile Picture" width="30px" height="30px">
+		  </a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+		    <ul class="navbar-nav">
+		      <li class="nav-item">
+		        <a class="nav-link" href="displayPatients.html">Patients</a>
+		      </li>
+					<li class="nav-item">
+		        <a class="nav-link active" href="patientLog.html">Logs</a>
+		      </li>
+					<li class="nav-item">
+		        <a class="nav-link" onclick="logout()" href="/preview.html">Logout</a>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
+		<br>
+
+		<div class="container">
+		  <h1> Information on Patient <p name="name" id="nameLog" style="color:black">X</p> </h1>
+		</div>
+		<br>
+
+
+		<div class="container">
+      <!--<form style="width:108px; margin-bottom:10px;" method="get" action="patientLog.html">-->
+          <button style="border-radius:0;" class="btn btn-dark" type="submit">
+						<a class="nav-link1" href="addEntity.html">Add Entry</a></button>
+          <button style="border-radius:0;" type="button" class="btn btn-dark"><a class="nav-link1" href="../renderPage/render.html">Render Teeth</a></button>
+
+      <!--</form>-->
+
+        <table class="table table-striped" id="addToTable">
+		      <thead class="thead-dark">
+		        <tr>
+              <th>Session #</th>
+		          <th>Date</th>
+		          <th>Time</th>
+							<th>Notes</th>
+							<th>Attached File</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+
+		      </tbody>
+		    </table>
+		    <br>
+  </div>
+
+	</body>
+</html>
