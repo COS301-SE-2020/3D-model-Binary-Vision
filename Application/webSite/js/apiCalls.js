@@ -265,3 +265,17 @@ function getSinglePatientConsultations()
     }))
 
 }
+
+function getReceptionistNotes(){
+    var response = fetch("/getReceptionistNotes", {
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+    });
+
+    response.then(res => res.json().then (data=> {
+        if(res.status == 200){
+            var notes = data.Notes;
+            console.log(Notes);
+        }
+    }));
+}

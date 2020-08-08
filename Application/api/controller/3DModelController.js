@@ -73,9 +73,11 @@ module.exports = {
 //======================================================================================
   signup: function (req, res) {
 
-      const { name , surname,email, username, password } = req.body;
+      const { name , surname,email, username, password ,choice , practition} = req.body;
 
-      const doctor = new Doctor({name,surname,email,username, password});
+      if(choice==1){
+
+      const doctor = new Doctor({name,surname,email,username, password,practition});
       doctor.save(function (err, saved) {
         if (err) {
           res.send(err);
@@ -85,6 +87,20 @@ module.exports = {
           	res.status(201).send(page);
         }
       });
+    }
+    else if(choice == 2){
+      const receptionist = new Receptionist({name , surname , email , username, password});
+      receptionist.save(function(err, saved){
+        if(err){
+          res.send(err);
+        }
+        else{
+          const page = fs.readFileSync("webSite/html/login.html","utf-8");
+          res.setHeader("Content-Type","text/html");
+          res.status(200).send(page);
+        }
+      });
+    }
   },
 //======================================================================================
 

@@ -16,6 +16,9 @@ var DoctorSchema = new Schema({
     password:{
         type:String
     },
+    practition:{
+        type:String,require: false
+    }
 });
 
 var PatientSchema = new Schema({
@@ -39,10 +42,15 @@ var PatientSchema = new Schema({
 });
 
 var Receptionist = new Schema({
-    idNumber:{type:"String", required:true},
-    name:{type:"String"},
-    surname:{type:"String"},
-    email:{type:"String"}
+    name:{type:String},
+    surname:{type:String},
+    email:{type:String},
+    practition:{
+        type:String, required: false
+    },
+    Note:{
+        type:String
+    }
 });
 
 var ConsultationSchema = new Schema({
