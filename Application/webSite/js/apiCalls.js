@@ -114,8 +114,9 @@ function addPatient()
     var idNumber = document.getElementById("idNumber").value;
     var name = document.getElementById("name").value;
     var surname = document.getElementById("surname").value;
-    var email = document.getElementById("email").value;
     var gender = document.getElementById("gender").value;
+    var email = document.getElementById("email").value;
+    var cell = document.getElementById("cell").value;
 
     //RANI ----do some varification on the data eg. check that email is valid and stuff like that -jaco
 
@@ -126,7 +127,7 @@ function addPatient()
         headers:{
             'Content-Type':'application/json ; charset=UTF-8',
         },
-        body: JSON.stringify({idNumber,name,surname, email, gender})
+        body: JSON.stringify({idNumber,name,surname, email, gender,cell})
     })
 
     //check if the patient was successfully added by checking the status returned in the response
