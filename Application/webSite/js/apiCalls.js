@@ -277,5 +277,38 @@ function getReceptionistNotes(){
             var notes = data.Notes;
             console.log(Notes);
         }
+        else if (res.status == 404)
+        {
+            //receptionist not in database
+        }
+        else if (res.status == 401)
+        {
+            //receptionist not signed in
+        }
     }));
 }
+
+function saveReceptionistNotes(Notes)
+{
+    var response = fetch("/saveReceptionistNotes", {
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'},
+        body: JSON.stringify(Notes)
+    });
+
+    response.then(res => res.json().then(data=>{
+        if (res.status ==200){
+            //everything is fine with updating notes
+        }
+        else if (res.status == 400)
+        {
+            //could not update
+        }
+        else if(res.status == 401){
+            //not logged in
+        }
+
+    }));
+
+}
+
