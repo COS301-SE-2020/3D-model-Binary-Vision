@@ -117,21 +117,19 @@
 
           <!--main body form for patient-->
 
-            <form action="/signup" method="post" id="patientFormSignup" style="display: none;">
+            <form action="/addPatient" method="post" id="patientFormSignup" style="display: none;">
               <br>
               <h2> Patient</h2><br>
 
-              <input class="box" type="text" name="name" id="name"
+              <input class="box" type="text" name="Name" id="name"
               placeholder="Name"  required /><br><br>
-              <input name="surname" placeholder="Surname"/><br><br>
+              <input id="surname" placeholder="Surname"/><br><br>
+              <input id="idNumber" placeholder="ID Number"/><br><br>
               <input class="box" type="email" name="email" id="email"
               placeholder="Email" required /><br><br>
-              <input name="username" placeholder="Username" /><br><br>
-              <input class="box" type="password" name="password"
-              id="password" placeholder="Password " required/><br><br>
+              <input id="cell" placeholder="Cellphone Number"/><br><br>
               <input class="btn" type="submit" id="buttonSee"
               name="submitDetails" value="Submit" /><br><hr>
-              <p style="font-size: 12px;">Already have an account?<a style="font-size: 12px;" href="login.html" onclick="preview()"> Login Here</a></p><br>
             </form>
         </div>
       </div>

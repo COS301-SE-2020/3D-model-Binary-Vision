@@ -73,9 +73,11 @@ module.exports = {
 //======================================================================================
   signup: function (req, res) {
 
-      const { name , surname,email, username, password } = req.body;
+      const { name , surname,email, username, password ,choice , practition} = req.body;
 
-      const doctor = new Doctor({name,surname,email,username, password});
+      if(choice==1){
+
+      const doctor = new Doctor({name,surname,email,username, password,practition});
       doctor.save(function (err, saved) {
         if (err) {
           res.send(err);
@@ -85,6 +87,20 @@ module.exports = {
           	res.status(201).send(page);
         }
       });
+    }
+    else if(choice == 2){
+      const receptionist = new Receptionist({name , surname , email , username, password});
+      receptionist.save(function(err, saved){
+        if(err){
+          res.send(err);
+        }
+        else{
+          const page = fs.readFileSync("webSite/html/login.html","utf-8");
+          res.setHeader("Content-Type","text/html");
+          res.status(200).send(page);
+        }
+      });
+    }
   },
 //======================================================================================
 
@@ -110,11 +126,11 @@ module.exports = {
       return res.status(401);
     }
 
-    const {idNumber, name , surname , email , gender} = req.body;
+    const {idNumber, name , surname , email , gender, cell} = req.body;
 
     //can add checks here too see if the id number matches a patient that belongs to the doctor already exists
 
-    var new_Patient = new Patient({idNumber , name , surname , email , gender}); //set the patients info
+    var new_Patient = new Patient({idNumber , name , surname , email , gender, cell}); //set the patients info
     new_Patient.doctor = req.user; // add doctor id to the patient
     new_Patient.save(function (err, patient) {
       if (err) {

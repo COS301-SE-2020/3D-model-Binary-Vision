@@ -4,6 +4,7 @@ const fs = require("fs");
 
 var Model = require('../controller/3DModelController');
 var Emailer = require('../controller/EmailController');
+var Receptionist = require('../controller/ReceptionistController');
 
 module.exports = function (app)
 {
@@ -70,5 +71,10 @@ module.exports = function (app)
     app.route('/email')
         .post(Emailer.passwordChangeEmail);
 
+    app.route('/getReceptionistNotes').post(Receptionist.getNotes);
+    
+    app.route('/saveReceptionistNotes').post(Receptionist.saveNotes);
+
+    app.route('makeBooking').post(Receptionist.makeBooking);
     
 }

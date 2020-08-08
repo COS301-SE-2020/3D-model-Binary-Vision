@@ -114,8 +114,9 @@ function addPatient()
     var idNumber = document.getElementById("idNumber").value;
     var name = document.getElementById("name").value;
     var surname = document.getElementById("surname").value;
-    var email = document.getElementById("email").value;
     var gender = document.getElementById("gender").value;
+    var email = document.getElementById("email").value;
+    var cell = document.getElementById("cell").value;
 
     //RANI ----do some varification on the data eg. check that email is valid and stuff like that -jaco
 
@@ -126,7 +127,7 @@ function addPatient()
         headers:{
             'Content-Type':'application/json ; charset=UTF-8',
         },
-        body: JSON.stringify({idNumber,name,surname, email, gender})
+        body: JSON.stringify({idNumber,name,surname, email, gender,cell})
     })
 
     //check if the patient was successfully added by checking the status returned in the response
@@ -264,4 +265,68 @@ function getSinglePatientConsultations()
         }
     }))
 
+}
+
+function getReceptionistNotes(){
+    var response = fetch("/getReceptionistNotes", {
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+    });
+
+    response.then(res => res.json().then (data=> {
+        if(res.status == 200){
+            var notes = data.Notes;
+            console.log(Notes);
+        }
+        else if (res.status == 404)
+        {
+            //receptionist not in database
+        }
+        else if (res.status == 401)
+        {
+            //receptionist not signed in
+        }
+    }));
+}
+
+function saveReceptionistNotes(Notes)
+{
+    var response = fetch("/saveReceptionistNotes", {
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'},
+        body: JSON.stringify(Notes)
+    });
+
+    response.then(res => res.json().then(data=>{
+        if (res.status ==200){
+            //everything is fine with updating notes
+        }
+        else if (res.status == 400)
+        {
+            //could not update
+        }
+        else if(res.status == 401){
+            //not logged in
+        }
+
+    }));
+
+}
+
+function receptionistMakeBooking(){
+    var patient,doctor, time , date , reason , employeeID;
+    //Why the employeeID ?
+
+    var response = fetch ("/makeBooking", {
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'},
+        body: JSON.stringify(patient,doctor,time, date, reason)
+    })
+
+    response.then(res=>res.json().then(data=>{
+        if(res.status == 200)
+        {
+            //booking made
+        }
+    }));
 }
