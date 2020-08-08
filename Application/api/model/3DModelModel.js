@@ -36,8 +36,9 @@ var PatientSchema = new Schema({
     {
         type:String
     },
-    doctor:{
-        type: Schema.Types.ObjectId
+    cellnumber:
+    {
+        type:String
     }
 });
 
