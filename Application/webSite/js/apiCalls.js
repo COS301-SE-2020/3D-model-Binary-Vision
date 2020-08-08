@@ -313,3 +313,20 @@ function saveReceptionistNotes(Notes)
 
 }
 
+function receptionistMakeBooking(){
+    var patient,doctor, time , date , reason , employeeID;
+    //Why the employeeID ?
+
+    var response = fetch ("/makeBooking", {
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'},
+        body: JSON.stringify(patient,doctor,time, date, reason)
+    })
+
+    response.then(res=>res.json().then(data=>{
+        if(res.status == 200)
+        {
+            //booking made
+        }
+    }));
+}

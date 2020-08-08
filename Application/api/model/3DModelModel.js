@@ -81,11 +81,19 @@ var ConsultationSchema = new Schema({
     }
 });
 
+var Booking = new Booking({
+    date:{type:String,required:true},
+    time:{type:String,required:true},
+    patient:{type:mongoose.Types.ObjectId,required:true},
+    doctor:{type:mongoose.Types.ObjectId,required:true},
+    reason:{type:String}
+})
 
 module.exports = {
     Doctor: mongoose.model("Doctor",DoctorSchema),
     Patient: mongoose.model("Patient", PatientSchema),
     Consultation: mongoose.model("Consultation", ConsultationSchema),
-    Receptionist: mongoose.model("Receptionist", Receptionist)
+    Receptionist: mongoose.model("Receptionist", Receptionist),
+    Booking:mongoose.model("Booking", Booking)
 }
 // module.exports = mongoose.model("Records", RecordsSchema);
