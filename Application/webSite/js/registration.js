@@ -48,7 +48,7 @@ function searchByInputDisplay() {
   }
 
   if (document.getElementById("searchBySurname").checked) {
-    inputBoxes.innerHTML += '<input name="surname" placeholder="Surname"/><br><br>';
+    inputBoxes.innerHTML += '<input id="surname" name="surname" placeholder="Surname"/><br><br>';
   }
 
   if (document.getElementById("searchByPatientID").checked) {

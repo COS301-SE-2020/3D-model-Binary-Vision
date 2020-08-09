@@ -419,7 +419,33 @@ module.exports = {
 
     });
 
-  }
+  },
+  //======================================================================================
+
+  //this isnt done yet, i had to go 
+  searchPatient: function(req, res)
+  {
+    if (!req.user)
+    {
+      res.status(401).send("unauthorised");
+      return;
+    }
+
+    Patient.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doctor){
+      // console.log(doctor);
+      if (err)
+      {
+        res.send("No docotor found").status(404);
+
+      }
+      else{
+        //return only surname for security reasons
+        res.json({"surname":doctor.surname});
+      }
+    })
+
+  },
+
   //======================================================================================
 };
 

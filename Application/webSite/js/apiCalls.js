@@ -280,3 +280,8 @@ function getReceptionistNotes(){
         }
     }));
 }
+
+function getAllPatients()
+{
+    
+}
