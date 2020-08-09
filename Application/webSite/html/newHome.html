@@ -45,13 +45,14 @@
   </nav>
 
   <!--sideBar-->
-  <button style="position:fixed; margin-left:60px; display:none; top: 10px;
-  z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>
+  <!--<button style="position:fixed; margin-left:60px; display:none; top: 10px;
+  z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>-->
 
   <div id="sideBody" >
+    <img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrow('arrowSideBody')">
+    <label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 15px); display: none;" onclick="rotateArrow('arrowSideBody')">Profile Info</label>
     <br><br>
     <div id="sideBar" >
-
       <div id="containInfo">
         <div class="profile">
           <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
@@ -62,7 +63,7 @@
         <p id="containInfo"> You are now logged in </p>
         <p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
         <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
-        <button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>
+        <!--<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>-->
         <br><br><br><hr>
       </div>
     </div>
