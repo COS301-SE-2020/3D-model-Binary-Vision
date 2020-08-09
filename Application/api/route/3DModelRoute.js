@@ -79,4 +79,8 @@ module.exports = function (app)
 
     app.route('/searchPatient').post(Model.searchPatient);
     
+    app.route('/getAllDoctors').post(Model.getAllDoctors);
+
+    app.route('/getDoctorsBookings').post(Model.getDoctorsBookings);
+    
 }

@@ -374,3 +374,46 @@ function getAllPatients()
     }));
 
 }
+
+function getDoctors()
+{
+    var response = fetch('/getAllDoctors',{
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+    });
+    response.then(res => res.json().then(data=>{
+
+        if(data.status != 200)
+        {
+            //There was an issue
+            console.log("Error: " + data);
+        }
+        else
+        {
+            console.log("Success: " + data);
+        }
+
+    }));
+}
+
+
+function getSingleDoctorBookings()
+{
+    var response = fetch('/getDoctorsBookings',{
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+    });
+
+    response.then(res => res.json().then(data => {
+
+        if(data.status != 200)
+        {
+            console.log("Error: " + data);
+        }
+        else
+        {
+            console.log("Success: " + data);
+        }
+
+    }));
+}
