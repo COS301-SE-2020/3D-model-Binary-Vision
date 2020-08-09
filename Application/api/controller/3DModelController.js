@@ -167,6 +167,7 @@ module.exports = {
 //======================================================================================
 
   // get list of patients and filter using query parameters
+  //may need to be deprecated
   getPatients: function (req, res) {
 
     if (!req.user)
@@ -431,18 +432,78 @@ module.exports = {
       return;
     }
 
-    Patient.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doctor){
-      // console.log(doctor);
-      if (err)
-      {
-        res.send("No docotor found").status(404);
+    var name = req.body.name;
+    var surname = req.body.surname;
+    var id = req.body.id;
 
-      }
-      else{
-        //return only surname for security reasons
-        res.json({"surname":doctor.surname});
-      }
-    })
+    if(id != "")
+    {
+      //ID is unique, so only one person can come up, no matter the name/surname
+      Patient.find({"idNumber":id} , function (err , patient){
+        if (err)
+        {
+          res.send("No Patient Found").status(404);
+          return;
+        }
+        else
+        {
+          //return only basic details (name,surname,email,cell)
+          res.status(200).json(patients);
+          return;
+        }
+      });
+    }
+    else if(name != "" && surname != "")
+    {
+        //search name & surname
+        Patient.find({"name":name,"surname":surname} , function (err , patient){
+          if (err)
+        {
+          res.send("No Patient Found").status(404);
+          return;
+        }
+        else
+        {
+          //return only basic details (name,surname,email,cell)
+          res.status(200).json(patients);
+          return;
+        }
+        });
+    }
+    else if(name != "")
+    {
+      //only search for name
+      Patient.find({"name":name} , function (err , patient){
+        if (err)
+        {
+          res.send("No Patient Found").status(404);
+          return;
+        }
+        else
+        {
+          //return only basic details (name,surname,email,cell)
+          res.status(200).json(patients);
+          return;
+        }
+      });
+    }
+    else
+    {
+      //only search for surname
+      Patient.find({"surname":surname} , function (err , patients){
+        if (err)
+        {
+          res.send("No Patient Found").status(404);
+          return;
+        }
+        else
+        {
+          //return only basic details (name,surname,email,cell)
+          res.status(200).json(patients);
+          return;
+        }
+      });
+    }
 
   },
 

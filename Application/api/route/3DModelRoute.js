@@ -76,5 +76,7 @@ module.exports = function (app)
     app.route('/saveReceptionistNotes').post(Receptionist.saveNotes);
 
     app.route('makeBooking').post(Receptionist.makeBooking);
+
+    app.route('/searchPatient').post(Model.searchPatient);
     
 }

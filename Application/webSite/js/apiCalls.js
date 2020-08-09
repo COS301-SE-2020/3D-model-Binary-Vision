@@ -333,5 +333,44 @@ function receptionistMakeBooking(){
 
 function getAllPatients()
 {
+    var name = "";
+    var surname = "";
+    var id = "";
+
+    if (document.getElementById("searchByName").checked)
+    {
+        name = document.getElementById("searchName");
+    }
     
+    if (document.getElementById("searchBySurname").checked) 
+    {
+        surname = document.getElementById("searchSurname");
+    }
+    
+    if (document.getElementById("searchByPatientID").checked) 
+    {
+        id = document.getElementById("searchPatientID");
+    }
+
+    var response = fetch ("/searchPatient", {
+        method:"POST",
+        header:{'Content-Type':'Application/json ; charset=UTF-8'},
+        body: JSON.stringify(name,surname,id)
+    })
+
+    response.then(res=>res.json().then(data=>{
+        if(res.status == 200)
+        {
+            //patients found, do the table population
+            for (i in data)
+            {
+                console.log(data[i]);
+            }
+        }
+        else
+        {
+            //error (maybe no patients exist on the system. Should we prompt the user to add a patient?)
+        }
+    }));
+
 }

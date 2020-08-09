@@ -44,15 +44,15 @@ function searchByInputDisplay() {
   inputBoxes.innerHTML = "";
 
   if (document.getElementById("searchByName").checked) {
-    inputBoxes.innerHTML = '<input  class="box" type="text" name="name" id="name" placeholder="Name"  required /><br><br>';
+    inputBoxes.innerHTML = '<input  class="box" type="text" name="name" id="searchName" placeholder="Name"  required /><br><br>';
   }
 
   if (document.getElementById("searchBySurname").checked) {
-    inputBoxes.innerHTML += '<input id="surname" name="surname" placeholder="Surname"/><br><br>';
+    inputBoxes.innerHTML += '<input id="searchSurname" name="surname" placeholder="Surname"/><br><br>';
   }
 
   if (document.getElementById("searchByPatientID").checked) {
-    inputBoxes.innerHTML += '<input   name="patientid" placeholder="Patient ID" /><br><br>';
+    inputBoxes.innerHTML += '<input   id="searchPatientID" placeholder="Patient ID" /><br><br>';
   }
 }
 
