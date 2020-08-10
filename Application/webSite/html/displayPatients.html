@@ -14,7 +14,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	</head>
 
-	<body onload="getPatients()">
+	<body>
 	<div class="body">
 
 		<nav class="navbar navbar-expand-md  navbar-dark">
@@ -44,33 +44,11 @@
 		    </div>
 		  </nav>
 
-		  <!--sideBar-->
-		  <button style="position:fixed; margin-left:60px; display:none; top: 10px;
-		  z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>
-
-		  <div id="sideBody" >
-		  	<img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrow('arrowSideBody')">
-    		<label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 15px); display: none;" onclick="rotateArrow('arrowSideBody')">Profile Info</label>
-		    <br><br>
-		    <div id="sideBar" >
-		      <div id="containInfo">
-		        <div class="profile">
-		          <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
-		        </div>
-		        <br>
-		        <p id="containInfo">Welcome back <i onload="getGender();">Mrs </i><b onload="getName();"> asdasdasX</b></p>
-		        <hr>
-		        <p id="containInfo"> You are now logged in </p>
-		        <p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
-		        <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
-		        <!--<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>-->
-
-		      </div>
-		    </div>
+		
 		</div>
 		<div id="miBody">
 		    <div id="header">
-		      <p id="headerTitle">LOGS OF WAITING PATIENTS</p>
+		      <p id="headerTitle" style="z-index: 1;">LOGS OF WAITING PATIENTS</p>
 		    </div>
 
 		</div>
@@ -79,25 +57,36 @@
 
 		<div class="container"><br><br>
 			<br>
-			<div id="checkDoctor" style="">
-				<label for="doctors">Choose a Doctor:</label>
+			<div id="checkDoctor" style="position: relative; top:0px;  box-shadow: 0px 30px 40px 0px black; border-top-left-radius: 10px; border-top-right-radius: 10px;" >
+				<div id = "centerSearchBox">
+					<label for="doctors">Choose a Doctor:</label>
 
-				<select class="form-control" name="doctrs" id="doctors" style=" margin-left: auto; margin-right: auto;">
-				  <option value="volvo">Dr Anderson</option>
-				  <option value="saab">Dr James</option>
-				  <option value="mercedes">Dr Heilburg</option>
-				  <option value="audi">Dr Francis</option>
-				</select>
-			</div><br><br>
-        <table class="table table-striped" id="addToTable">
+					
+
+					<label for="patients">Search for Patient:</label>
+					<select class="form-control" name="doctrs" id="doctors" style=" margin-left: auto; margin-right: auto; text-align: center; width: 200px;">
+					  <option value="volvo">Dr Anderson</option>
+					  <option value="saab">Dr James</option>
+					  <option value="mercedes">Dr Heilburg</option>
+					  <option value="audi">Dr Francis</option>
+					</select>
+					<input class="form-control"type="text" id ="patients" style=" margin-left: auto; margin-right: auto; position: relative; display: inline;text-align: center; width: 200px;">
+
+				</div>
+				<br>
+			</div>
+
+        <table class="table table-striped" id="addToTable"style="position: absolute; top: 270px; bottom: 0; left: 0; right: 0;
+        	 ">
 		    <thead>
-			    <tr>
+			    <tr >
 			        <th scope="col">#</th>
 	                <th>ID</th>
 	                <th>Surname</th>
 					<th>Time/Date</th>
 	                <th>Number</th>
 			        <th>Book</th>
+			
 			    </tr>
 		    </thead>
 
@@ -108,24 +97,111 @@
             		<td>James</td>
             		<td>12:30</td>
             		<td>0836530083</td>
-            		<td><button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="background-color: lightgreen; margin-right: 2px; position: relative;
-            		padding: 3px;">Send</button>
-            			<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="background-color: #8a3636; margin-right: 2px;position: relative;
-            			padding: 3px;">Hide</button>
+            		<td><button class="btn btn-success"  type="button">Send</button>
+            			<button class="btn btn-danger"  type="button">Hide</button>
             		</td>
+
             	</tr>
             	<tr>
-            		<td>2</td>
-            		<td>52365</td>
-            		<td>Harrison</td>
-            		<td>00:01</td>
-            		<td>0834651183</td>
-            		<td><button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="background-color: lightgreen; margin-right: 2px; position: relative;
-            		padding: 3px;">Send</button>
-            			<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="background-color: #8a3636; margin-right: 2px;position: relative;
-            			padding: 3px;">Hide</button>
+            		<td>1</td>
+            		<td>14325</td>
+            		<td>James</td>
+            		<td>12:30</td>
+            		<td>0836530083</td>
+            		<td><button class="btn btn-success"  type="button">Send</button>
+            			<button class="btn btn-danger"  type="button">Hide</button>
             		</td>
+
             	</tr>
+            	<tr>
+            		<td>1</td>
+            		<td>14325</td>
+            		<td>James</td>
+            		<td>12:30</td>
+            		<td>0836530083</td>
+            		<td><button class="btn btn-success"  type="button">Send</button>
+            			<button class="btn btn-danger"  type="button">Hide</button>
+            		</td>
+
+            	</tr>
+            	<tr>
+            		<td>1</td>
+            		<td>14325</td>
+            		<td>James</td>
+            		<td>12:30</td>
+            		<td>0836530083</td>
+            		<td><button class="btn btn-success"  type="button">Send</button>
+            			<button class="btn btn-danger"  type="button">Hide</button>
+            		</td>
+
+            	</tr>
+            	<tr>
+            		<td>1</td>
+            		<td>14325</td>
+            		<td>James</td>
+            		<td>12:30</td>
+            		<td>0836530083</td>
+            		<td><button class="btn btn-success"  type="button">Send</button>
+            			<button class="btn btn-danger"  type="button">Hide</button>
+            		</td>
+
+            	</tr>
+            	<tr>
+            		<td>1</td>
+            		<td>14325</td>
+            		<td>James</td>
+            		<td>12:30</td>
+            		<td>0836530083</td>
+            		<td><button class="btn btn-success"  type="button">Send</button>
+            			<button class="btn btn-danger"  type="button">Hide</button>
+            		</td>
+
+            	</tr>
+            	<tr>
+            		<td>1</td>
+            		<td>14325</td>
+            		<td>James</td>
+            		<td>12:30</td>
+            		<td>0836530083</td>
+            		<td><button class="btn btn-success"  type="button">Send</button>
+            			<button class="btn btn-danger"  type="button">Hide</button>
+            		</td>
+
+            	</tr>
+            	<tr>
+            		<td>1</td>
+            		<td>14325</td>
+            		<td>James</td>
+            		<td>12:30</td>
+            		<td>0836530083</td>
+            		<td><button class="btn btn-success"  type="button">Send</button>
+            			<button class="btn btn-danger"  type="button">Hide</button>
+            		</td>
+
+            	</tr>
+            	<tr>
+            		<td>1</td>
+            		<td>14325</td>
+            		<td>James</td>
+            		<td>12:30</td>
+            		<td>0836530083</td>
+            		<td><button class="btn btn-success"  type="button">Send</button>
+            			<button class="btn btn-danger"  type="button">Hide</button>
+            		</td>
+
+            	</tr>
+            	<tr>
+            		<td>1</td>
+            		<td>14325</td>
+            		<td>James</td>
+            		<td>12:30</td>
+            		<td>0836530083</td>
+            		<td><button class="btn btn-success"  type="button">Send</button>
+            			<button class="btn btn-danger"  type="button">Hide</button>
+            		</td>
+
+            	</tr>
+
 
 		    </tbody>
 		</table>
