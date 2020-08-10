@@ -1,5 +1,4 @@
-var dt = new Date();
-document.getElementById("datetime").innerHTML = dt.toLocaleTimeString();
+var currentTime = "";
 
 function rotateArrow(arrowID, currentDivID) {
 	let arrowElement = document.getElementById(arrowID);
@@ -28,21 +27,134 @@ function rotateArrow(arrowID, currentDivID) {
 
 function hideConInfo() {
 
+	let timeRemainding = document.getElementById("conInfoTime");
 	let startInfo = document.getElementById("conInfoStart");
 	let endInfo = document.getElementById("conInfoEnd");
-	let patInfo = document.getElementById("conInfoPatientID");
 
 	if (startInfo.style.display == "block") {
+		timeRemainding.innerHTML = '<span id="remainingTime" style="font-weight: bold;"></span>';
+		
+		if (timeRemainding.classList.contains("conInfoTimeCenterMessage"))
+			timeRemainding.classList.remove("conInfoTimeCenterMessage");
+		timeRemainding.classList.add("conInfoTimeCenter");
+
 		startInfo.style.display = "none";
 		endInfo.style.display = "none";
-		patInfo.style.display = "none";
 	} else {
+		timeRemainding.innerHTML = 'Time Remaining: <br><span id="remainingTime" style="font-weight: bold;" ></span>';
+		if (timeRemainding.classList.contains("conInfoTimeCenterMessage"))
+			timeRemainding.classList.remove("conInfoTimeCenterMessage");
+		timeRemainding.classList.remove("conInfoTimeCenter");
 		startInfo.style.display = "block";
 		endInfo.style.display = "block";
-		patInfo.style.display = "block";
 	}
 }
 
 function hidePatInfo() {
+ 	let displayMessage = document.getElementById("patientDisplayMessage");
+	let name = document.getElementById("patientName");
+	let surname = document.getElementById("patientSurname");
+	let id = document.getElementById("patientID");
+	let gender = document.getElementById("patientGender");
+	let email = document.getElementById("patientEmail");
+	let contactNo = document.getElementById("patientContactNo");
+	let inner = document.getElementById("patientInfoInner");
 
+	if (displayMessage.style.display == "none") {
+		displayMessage.style.display = "block";
+		name.style.display = "none";
+		surname.style.display = "none";
+		id.style.display = "none";
+		gender.style.display = "none";
+		email.style.display = "none";
+		contactNo.style.display = "none";
+		inner.classList.replace("patientInfoInner", "patientInfoInnerMessage");
+
+	} else {
+		displayMessage.style.display = "none";
+		name.style.display = "block";
+		surname.style.display = "block";
+		id.style.display = "block";
+		gender.style.display = "block";
+		email.style.display = "block";
+		contactNo.style.display = "block";
+		inner.classList.replace("patientInfoInnerMessage", "patientInfoInner");
+
+	}
+}
+
+function saveDoctorNote() {
+
+	let docNote = document.getElementById("doctorsNotes");
+
+	if (docNote.value != "") {
+		alert("Note saved!");
+		console.log(docNote.value);
+	} else {
+		alert("No note to be saved!");
+	}
+}
+
+
+function startTime() {
+	var today = new Date();
+	var h = today.getHours();
+	var m = today.getMinutes();
+	var s = today.getSeconds();
+
+	document.getElementById('remainingTime').innerHTML = getRemainingTime(h, m, s);
+
+	var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+	if (i < 10) {
+		i = "0" + i
+	};
+	return i;
+}
+
+function getRemainingTime(h, m, s) {
+	let startTime = document.getElementById("startTime").innerHTML;
+	let endTime = document.getElementById("endTime").innerHTML;
+
+	let sh = parseInt(startTime[0] + startTime[1]);
+	let sm = parseInt(startTime[3] + startTime[4]);
+
+	let eh = parseInt(endTime[0] + endTime[1]);
+	let em = parseInt(endTime[3] + endTime[4]);
+
+	h = eh - 1 - h;
+	m = (59 - m) + em;
+	s = 59 - s;
+
+	if (m > 60) {
+		m = m - 60;
+		h++;
+	}
+
+	m = checkTime(m);
+	s = checkTime(s);
+
+	console.log(h);
+
+	if ((h == 0 && m < 5) || (h == -1 && m == 60))
+		document.getElementById("remainingTime").style.color = "red";
+	else if (h <= -1 && m < 60)  
+		document.getElementById("remainingTime").style.color = "green";
+	else
+		document.getElementById("remainingTime").style.color = "black";
+
+	if (h < 0 && m==60) {
+		return "00:00:" + s;
+	} else if (h < 0) {
+
+		let timeRemainding = document.getElementById("conInfoTime");
+		if (timeRemainding.classList.contains("conInfoTimeCenter"))
+			timeRemainding.classList.replace("conInfoTimeCenter", "conInfoTimeCenterMessage");
+
+		return "The consultation has ended";
+	} else {
+		h = checkTime(h);
+		return h + ":" + m + ":" + s;
+	}
 }

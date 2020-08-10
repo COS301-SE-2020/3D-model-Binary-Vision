@@ -58,10 +58,7 @@
 }
 
 .container{
-	position: relative;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+
 	text-align: center;
 	transition: 0.8s;
 }
@@ -112,7 +109,7 @@ body{
 
 .infoContainer {
 	display: grid;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: 4fr 9fr;
     grid-template-rows: 1fr;
     height: 300px;
     margin: 10px;
@@ -128,7 +125,8 @@ body{
 	position: relative;
 	text-align: center;
 	margin: 0 auto;
-	width: 90%;
+	margin-left: 7%;
+	margin-right: 3%;
 	border-radius: 10px;
 	box-shadow: 1px 0px 15px 0px black;
 	transition: 1s;
@@ -139,7 +137,8 @@ body{
 	position: relative;
 	text-align: center;
 	margin: 0 auto;
-	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
 	border-radius: 10px;
 	box-shadow: 1px 0px 15px 0px black;
 	transition: 1s;
@@ -153,8 +152,47 @@ body{
 	padding: 15px 20px 20px 20px;
 	padding-bottom: 15px;
 	background-color: #003366;
-	border-radius: 10px;
+	border-radius: 5px;
+	min-width: 420px;
 	box-shadow: 1px 0px 15px 0px black;
+}
+
+#saveDoctorNote {
+	color: white;
+}
+
+#centerSearchBox
+{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+}
+
+#bodyContainer{
+	position: relative;
+
+	margin-left: auto;
+	margin-right: auto; 
+	width: 60%;
+
+}
+#saveDoctorNote:hover {
+	background-color: white;
+	color: #003366;
+}
+
+.conInfoTimeCenter {
+	position: relative;
+	text-align: center;
+	margin: 0 auto;
+	transform: translateY(-10px);
+}
+
+.conInfoTimeCenterMessage {
+	position: relative;
+	text-align: center;
+	margin: 0 auto;
+	transform: translateX(-5px);
 }
 
 .renderCenter {
@@ -235,7 +273,25 @@ body{
 	position: relative;
 	text-align: left;
 	margin-left: 10px;
-	font-size: 20px;
+	transform: translateY(100px;);
+}
+
+.patientInfoInner {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	color: black;
+	position: relative;
+	min-width: 150px;
+	text-align: left;
+	padding-left: 10px;
+	transform: translateY(100px;);
+}
+
+.patientInfoInnerMessage {
+	color: black;
+	position: relative;
+	text-align: left;
+	margin-left: 10px;
 	transform: translateY(100px;);
 }
 
@@ -255,7 +311,7 @@ body{
 
 textarea{
 	width: 235px;
-	padding: px;
+	padding: 5px;
 	border: none;
 }
 
@@ -291,7 +347,7 @@ hr{
 	background-color: lightgray;
 }
 
-form {
+#form {
 	text-align: center;
 	background-color: #003366;
 	position: relative;
@@ -311,16 +367,23 @@ image {
 }
 
 table {
-	box-shadow: 0px 0px 30px black;
+
 	border-top: solid 3px #003366;	
 	margin-right: auto;
 	margin-right: auto;
+	text-align: center;
 	display: inline-table;
 
 }
 
+select{
+	margin: 0 auto;
+	text-align: center;
+}
+
 thead{
 	background-color: #003366;	
+	right: 0;
 }
 
 
@@ -329,7 +392,7 @@ th{
 }
 
 td{
-	position: relative;
+
 	padding: 0px;
 	color: black;
 	background-color: white;	
@@ -456,7 +519,8 @@ input {
 	background-repeat:repeat-x;
 	background-repeat: repeat-y;
 	background-attachment: fixed;
-	position: fixed;
+	position: relative;
+	display: inline;
 	z-index: 1;
 	width: 240px;
 	height: 100%;
@@ -485,14 +549,11 @@ input {
 	border-radius: 360px;
 }
 #logout:hover{
-	position: relative;
+	
 	background-color: #8a3636;
 	border-radius: 10px;
-	margin-right: 270px;
 	padding-left: 5px;
 	padding-right: 5px;
-	margin-left: auto;
-	margin-right: auto;
 
 }
 
@@ -548,8 +609,6 @@ input {
 	background-color: #003366; 
 	color: white; 
 	padding: 20px; 
-	border-radius: 10px;
-	box-shadow: 1px 0px 15px 0px black;
 }
 
 
