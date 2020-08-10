@@ -10,14 +10,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../js/apiCalls.js"></script>
+  <script type="text/javascript" src="../js/receptionist.js"></script>
 </head>
 
-<body >
+<body onload="initReceptionist()">
   <div id="mydiv">
       <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
       <div id="mydivheader">Notes (Drag)</div>
-      <textarea></textarea></div>
-
+      <textarea id="receptionistNotes"></textarea></div>
   </div>
 <div class="body">
   <nav class="navbar navbar-expand-md  navbar-dark">
@@ -58,12 +58,14 @@
           <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
         </div>
         <br>
-        <p id="containInfo">Welcome back <i onload="getGender();">Mrs </i><b onload="getName();"> asdasdasX</b></p>
+        <p id="containInfo">Welcome back <b id="receptionistName"> asdasdasX</b></p>
         <hr>
         <p id="containInfo"> You are now logged in </p>
         <p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
         <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
         <!--<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>-->
+        <input type="button" value="Save Notes" onclick="saveNotes()"></input>
+
         <br><br><br><hr>
       </div>
     </div>

@@ -71,6 +71,8 @@ module.exports = function (app)
     app.route('/email')
         .post(Emailer.passwordChangeEmail);
 
+    app.route('/getReceptionist').post(Receptionist.getReceptionistInfo);
+
     app.route('/getReceptionistNotes').post(Receptionist.getNotes);
     
     app.route('/saveReceptionistNotes').post(Receptionist.saveNotes);

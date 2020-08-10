@@ -14,7 +14,10 @@ var MONGO_OPTIONS = {
 
 //mongoose instance connection url connection
 // mongoose.Promise = global.Promise;
+
+
 mongoose.connect('mongodb://localhost/ModelDB', MONGO_OPTIONS);
+
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());

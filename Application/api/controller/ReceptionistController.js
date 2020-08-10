@@ -25,8 +25,8 @@ module.exports ={
                 res.status(400).send(err);
                 return;
             }
-
-            res.json(receptionist).status(200);
+            // console.log(receptionist);
+            res.json({"name":receptionist.name,"surname":receptionist.surname,"practition": receptionist.practition,"Note":receptionist.Note}).status(200);
             return;
         });
     },
