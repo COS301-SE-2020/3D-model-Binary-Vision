@@ -302,10 +302,12 @@ function getReceptionistNotes(){
 
 function saveReceptionistNotes(Notes)
 {
+    console.log("planning to save the note: "+Notes);
+
     var response = fetch("/saveReceptionistNotes", {
         method:"POST",
         header:{'Content-Type':'Application/json ; charset=UTF-8'},
-        body: JSON.stringify(Notes)
+        body: JSON.stringify({"Notes":Notes})
     });
 
     response.then(res => res.json().then(data=>{
@@ -319,7 +321,7 @@ function saveReceptionistNotes(Notes)
         else if(res.status == 401){
             //not logged in
         }
-
+        console.log(res);
     }));
 
 }

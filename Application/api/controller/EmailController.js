@@ -1,3 +1,4 @@
+//created by Jacobus Janse van Rensburg
 var nodeMailer = require('nodemailer');
 
 var transporter = nodeMailer.createTransport({

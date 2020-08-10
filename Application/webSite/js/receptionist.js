@@ -34,8 +34,8 @@ function getReceptionistInfo(){
 
 
 function saveNotes(){
-    var noteSpace = document.getElementById('receptionistNotes').innerHTML;
-
+    var noteSpace = document.getElementById('receptionistNotes').value;
+    console.log("Note captured to save: "+ noteSpace);
     saveReceptionistNotes(noteSpace);
 
 }
