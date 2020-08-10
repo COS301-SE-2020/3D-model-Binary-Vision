@@ -1,3 +1,6 @@
+//created by : Jacobus Janse van Rensburg
+   //===========================================================================
+
 var fs = require("fs");
 
 const { createModel } = require('mongoose-gridfs');
@@ -12,7 +15,7 @@ var Receptionist = require("../model/3DModelModel.js").Receptionist;
 var Booking = require("../model/3DModelModel.js").Bookings;
 
 module.exports ={
-   
+   //===========================================================================
     getReceptionistInfo: function(req,res){
         if(!req.user){
             res.status(401);
@@ -25,11 +28,12 @@ module.exports ={
                 res.status(400).send(err);
                 return;
             }
-
-            res.json(receptionist).status(200);
+            // console.log(receptionist);
+            res.json({"name":receptionist.name,"surname":receptionist.surname,"practition": receptionist.practition,"Note":receptionist.Note}).status(200);
             return;
         });
     },
+   //===========================================================================
 
     getNotes : function (req, res){
         if(!req.user){
@@ -52,6 +56,7 @@ module.exports ={
 
         });
     },
+   //===========================================================================
 
     saveNotes: function(req, res){
         if (!req.user)
@@ -59,20 +64,22 @@ module.exports ={
             res.status(401);
             return;
         }
+        const Notes = req.body.Notes;
+        console.log("requiest: "+Notes);
 
-        const notes = req.body.Notes;
-
-        Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(req.user)},{$set:{"Note":notes}},{"new":true},function(err,peceptionist){
+        Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(req.user)},{$set:{"Note":Notes}},{'new':false},function(err,peceptionist){
             if(err)
             {
-                res.status(400);
+                res.status(400).send("NO NO");
                 return;
             }
 
             res.status(200);
+            return;
         })
 
     },
+   //===========================================================================
 
     makeBooking:function (req,res){
 
@@ -95,7 +102,9 @@ module.exports ={
 
         })
 
-    }
-
+    },
+   //===========================================================================
+ 
 
 }
+   //===========================================================================

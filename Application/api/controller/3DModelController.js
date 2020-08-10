@@ -1,3 +1,4 @@
+// created by : Jacobus Jasnse van Rensburg
 "use strict";
 //set up the database first
 var fs = require("fs");
@@ -18,20 +19,29 @@ module.exports = {
     Doctor.findOne({ username, password }, function (err, doctor) {
       if (err) {
         res.send(err);
-      } else {
-        if (doctor) {
-          // console.log(doctor);
+        return;
+      } 
+      if (doctor) {
+        //it is a doctor logging in and we return to the doctors home page 
+        res.cookie("drCookie",doctor._id,{maxAge:9000000,httpOnly:true});
+        res.redirect("/home.html");
+        return;
+      } 
+      //there was no doctor and we will now check if it is a receptionist 
+    });
 
-         // res.json(doctor);//send(page);
-        //set cookie  redirect to different page
-          res.cookie("drCookie",doctor._id,{maxAge:9000000,httpOnly:true});
-          res.redirect("/home.html");
+    Receptionist.findOne({username,password}, function(err, receptionist){
 
-        } else {
-          var resp ={name:""};
-          resp = JSON.stringify(resp)
-          res.json(resp);
-        }
+      if (err){
+        res.send(err);
+        return;
+      }
+
+      if (receptionist)
+      {
+        res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
+        res.redirect("/newHome.html");
+        return;
       }
     });
   },
@@ -74,8 +84,8 @@ module.exports = {
   signup: function (req, res) {
 
       const { name , surname,email, username, password ,choice , practition} = req.body;
-
-      if(choice==1){
+      console.log(req.body);
+      if(choice=="Doctor"){
 
       const doctor = new Doctor({name,surname,email,username, password,practition});
       doctor.save(function (err, saved) {
@@ -88,8 +98,8 @@ module.exports = {
         }
       });
     }
-    else if(choice == 2){
-      const receptionist = new Receptionist({name , surname , email , username, password});
+    else if(choice == "Receptionist"){
+      const receptionist = new Receptionist({name , surname , email , username, password,practition});
       receptionist.save(function(err, saved){
         if(err){
           res.send(err);
@@ -138,7 +148,8 @@ module.exports = {
         return;
       }
       else{
-        res.status(201).json(patient);
+        res.status(201);
+        res.redirect("newHome.html");
         //res.redirect("/displayPatients.html");
         return;
       }
@@ -424,88 +435,6 @@ module.exports = {
   //======================================================================================
 
   //this isnt done yet, i had to go 
-  searchPatient: function(req, res)
-  {
-    if (!req.user)
-    {
-      res.status(401).send("unauthorised");
-      return;
-    }
-
-    var name = req.body.name;
-    var surname = req.body.surname;
-    var id = req.body.id;
-
-    if(id != "")
-    {
-      //ID is unique, so only one person can come up, no matter the name/surname
-      Patient.find({"idNumber":id} , function (err , patient){
-        if (err)
-        {
-          res.send("No Patient Found").status(404);
-          return;
-        }
-        else
-        {
-          //return only basic details (name,surname,email,cell)
-          res.status(200).json(patients);
-          return;
-        }
-      });
-    }
-    else if(name != "" && surname != "")
-    {
-        //search name & surname
-        Patient.find({"name":name,"surname":surname} , function (err , patient){
-          if (err)
-        {
-          res.send("No Patient Found").status(404);
-          return;
-        }
-        else
-        {
-          //return only basic details (name,surname,email,cell)
-          res.status(200).json(patients);
-          return;
-        }
-        });
-    }
-    else if(name != "")
-    {
-      //only search for name
-      Patient.find({"name":name} , function (err , patient){
-        if (err)
-        {
-          res.send("No Patient Found").status(404);
-          return;
-        }
-        else
-        {
-          //return only basic details (name,surname,email,cell)
-          res.status(200).json(patients);
-          return;
-        }
-      });
-    }
-    else
-    {
-      //only search for surname
-      Patient.find({"surname":surname} , function (err , patients){
-        if (err)
-        {
-          res.send("No Patient Found").status(404);
-          return;
-        }
-        else
-        {
-          //return only basic details (name,surname,email,cell)
-          res.status(200).json(patients);
-          return;
-        }
-      });
-    }
-
-  },
 
   //======================================================================================
 
@@ -558,5 +487,93 @@ module.exports = {
   },
 
 //======================================================================================
+   // search for patients based on certain criteria
+   //developed by: Jacobus Janse van Rensburg
+   searchPatient: function(req, res){
+
+    if (!req.user){
+        res.status(401);
+        return;
+    }
+
+    const {name , surname , idNumber} = req.body;
+
+    console.log(name+" "+surname+" "+idNumber);
+    // console.log(req.body.name);
+    if(idNumber != null){
+      Patient.find({"idNumber":idNumber}, function(err,patient){
+        if(err){
+          res.status(400);
+          return;
+        }
+        if(patient){
+          res.json(patient).status(200);
+          return;
+        }
+        else{
+          res.status(404);
+          return;
+        }
+
+      });
+    }
+    else if(name != null && surname !=null)
+    {
+      Patient.find({"name":name,"surname":surname}, function(err,patient){
+        if(err){
+          res.status(400);
+          return;
+        }
+        if(patient){
+          res.json(patient).status(200);
+          return;
+        }
+        else{
+          res.status(404);
+          return;
+        }
+
+      });
+    }
+    else if(name !=null)
+    {
+      Patient.find({"name":name}, function(err,patient){
+        if(err){
+          res.status(400);
+          return;
+        }
+        if(patient){
+          res.json(patient).status(200);
+          return;
+        }
+        else{
+          res.status(404);
+          return;
+        }
+      });
+    }
+    else if (surname!=null)
+    {
+      Patient.find({"surname":surname}, function(err,patient){
+        if(err){
+          res.status(400);
+          return;
+        }
+        if(patient){
+          res.json(patient).status(200);
+          return;
+        }
+        else{
+          res.status(404);
+          return;
+        }
+      });
+    }
+    else{
+      res.status(400);
+      return;
+    }
+}
+
 };
 

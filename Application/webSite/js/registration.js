@@ -52,7 +52,7 @@ function searchByInputDisplay() {
   }
 
   if (document.getElementById("searchByPatientID").checked) {
-    inputBoxes.innerHTML += '<input   id="searchPatientID" placeholder="Patient ID" /><br><br>';
+    inputBoxes.innerHTML += '<input   id="searchPatientID" name="idNumber" placeholder="Patient ID" /><br><br>';
   }
 }
 

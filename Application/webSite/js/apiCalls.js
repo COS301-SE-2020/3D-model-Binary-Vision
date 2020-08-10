@@ -34,6 +34,7 @@ function getDrName()
         }));
 
 }
+// ====================================================================================================
 
 //Jaco Notes: works perfect just needs to use the returned data to populate tables
 function getPatients()
@@ -96,6 +97,7 @@ function getPatients()
 
     }))
 }
+// ====================================================================================================
 
 function logout() {
     var resposne = fetch ("/logout",{
@@ -105,6 +107,7 @@ function logout() {
     }});
     //logout of cookie
 }
+// ====================================================================================================
 
 //JACO NOTES: add patient works perfect on my end to add data to the DB
 function addPatient()
@@ -145,6 +148,7 @@ function addPatient()
     }))
 }
 
+// ====================================================================================================
 
 //sets the patient cookie with the patient id
 function selectPatient(PatientID)
@@ -166,6 +170,7 @@ function selectPatient(PatientID)
     })
 }
 
+// ====================================================================================================
 
 //retrieves the doctor -> patient consultations
 function getConceltations()
@@ -192,6 +197,7 @@ function getConceltations()
 
     }))
 }
+// ====================================================================================================
 
 
 function getSinglePatient()
@@ -215,6 +221,7 @@ function getSinglePatient()
 
     getSinglePatientConsultations();
 }
+// ====================================================================================================
 
 $(document).ready(function(){
   $("#searchID").on("keyup", function() {
@@ -224,6 +231,7 @@ $(document).ready(function(){
     });
   });
 });
+// ====================================================================================================
 
 function selectConsultation(ConsultationID)
 {
@@ -246,6 +254,7 @@ function selectConsultation(ConsultationID)
     }))
 
 }
+// ====================================================================================================
 
 function getSinglePatientConsultations()
 {
@@ -266,6 +275,7 @@ function getSinglePatientConsultations()
     }))
 
 }
+// ====================================================================================================
 
 function getReceptionistNotes(){
     var response = fetch("/getReceptionistNotes", {
@@ -288,13 +298,16 @@ function getReceptionistNotes(){
         }
     }));
 }
+// ====================================================================================================
 
 function saveReceptionistNotes(Notes)
 {
+    console.log("planning to save the note: "+Notes);
+
     var response = fetch("/saveReceptionistNotes", {
         method:"POST",
         header:{'Content-Type':'Application/json ; charset=UTF-8'},
-        body: JSON.stringify(Notes)
+        body: JSON.stringify({Notes})
     });
 
     response.then(res => res.json().then(data=>{
@@ -308,10 +321,11 @@ function saveReceptionistNotes(Notes)
         else if(res.status == 401){
             //not logged in
         }
-
+        console.log(res);
     }));
 
 }
+// ====================================================================================================
 
 function receptionistMakeBooking(){
     var patient,doctor, time , date , reason , employeeID;
@@ -330,6 +344,7 @@ function receptionistMakeBooking(){
         }
     }));
 }
+// ====================================================================================================
 
 function getAllPatients()
 {
@@ -374,6 +389,7 @@ function getAllPatients()
     }));
 
 }
+// ====================================================================================================
 
 function getDoctors()
 {
@@ -396,7 +412,7 @@ function getDoctors()
     }));
 }
 
-
+// ====================================================================================================
 function getSingleDoctorBookings()
 {
     var response = fetch('/getDoctorsBookings',{

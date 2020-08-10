@@ -337,7 +337,7 @@ hr{
 	background-color: lightgray;
 }
 
-form {
+#form {
 	text-align: center;
 	background-color: #003366;
 	position: relative;
@@ -359,7 +359,6 @@ image {
 table {
 	box-shadow: 0px 0px 30px black;
 	border-top: solid 3px #003366;	
-	max-width: 800px;
 	margin-right: auto;
 	margin-right: auto;
 	display: inline-table;
@@ -532,16 +531,14 @@ input {
 	border-radius: 360px;
 }
 #logout:hover{
-	position: relative;
+	
 	background-color: #8a3636;
 	border-radius: 10px;
-	margin-right: 270px;
 	padding-left: 5px;
 	padding-right: 5px;
-	margin-left: auto;
-	margin-right: auto;
 
 }
+
 
 #logoutA:hover{
 	color: white;
@@ -747,4 +744,14 @@ input {
 
 }
 
+
+
+#calender{
+	position: relative;
+	margin-left: 0;
+	margin-right: 0;
+	text-align: center;
+	z-index: 10;
+
+}
 
