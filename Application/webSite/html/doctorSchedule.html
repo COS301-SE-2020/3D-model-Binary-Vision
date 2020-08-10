@@ -29,9 +29,6 @@
           <li id="otherLi" class="nav-item">
             <a class="nav-link active" href="doctorSchedule.html"><u>Schedule</u></a>
           </li>
-          <li id="otherLi" class="nav-item">
-            <a class="nav-link" href="displayPatients.html">Logs</a>
-          </li>
           <li id="logout" class="nav-item" id="logout">
             <a id="logoutA"class="nav-link" onclick="logout()" href="/preview.html">Logout</a>
           </li>
@@ -70,10 +67,22 @@
   <div class="containerRight">
     <div id="rightSideBody" >
         <div id="containInfoRight" style="position: fixed;">
+          TIME: 12:30 <hr>
           NOTES ON PATIENT: <br>
           MR TOM
+          <br><br><br><br><br><br>
+          TIME SETTINGS<hr>
+          <form>
+            <button class="btn btn-success" type="button" onclick="successTime();" style="margin-right: 10px; margin-bottom: 10px;">Complete</button>
+            <button class="btn btn-danger" type="button" onclick="cancelTime();" style="margin-right: 10px; margin-bottom: 10px;">Cancel</button>
+            <button class="btn btn-warning" type="button" onclick="postponeTime();" style="margin-right: 10px; margin-bottom: 10px;">Postpone</button>
+            <button class="btn btn-primary" type="submit" formaction="Consultation.html" style="margin-right: 10px; margin-bottom: 10px;">Consultation</button>
+          </form>
+
+          <div>
+          </div>
         </div>
-    </div>
+      </div>
   </div>
   <!--notifications main-->
   <div id="notifications">

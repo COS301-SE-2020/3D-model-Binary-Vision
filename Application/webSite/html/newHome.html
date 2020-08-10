@@ -113,7 +113,7 @@
                 <input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()">
                 <label style="color:white;" for="searchByPatientID"> Search By Patient ID </label> <br><br>
               </div>
-              <form action="/searchPatient" method="POST" id=>
+              <form action="/searchPatient" method="POST" id="form">
               
                 <div id="inputBoxes"></div>
                 <input type="submit" class="btn" value="Search">
@@ -127,7 +127,7 @@
 
           <!--main body form for patient-->
 
-            <form action="/addPatient" method="post" id="patientFormSignup" style="display: none;">
+            <form action="/addPatient" method="post" id="patientFormSignup" style="display: none;" id="form">
               <br>
               <h2> Patient</h2><br>
 
