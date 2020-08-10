@@ -307,7 +307,7 @@ function saveReceptionistNotes(Notes)
     var response = fetch("/saveReceptionistNotes", {
         method:"POST",
         header:{'Content-Type':'Application/json ; charset=UTF-8'},
-        body: JSON.stringify({"Notes":Notes})
+        body: JSON.stringify({Notes})
     });
 
     response.then(res => res.json().then(data=>{

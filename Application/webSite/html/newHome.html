@@ -96,8 +96,8 @@
       </a>
     </div>
     <!--main body form for doctor-->
-    
-            <form action="/searchPatient" method="post" id="doctorFormSignup" style="display: block;">
+    <!-- form modifications made by Jacobus Janse van Rensburg -->
+            <div id="doctorFormSignup">
               <br>
               <h2> Search Patient</h2><br>
               <div class="change">
@@ -110,11 +110,16 @@
                 <input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()">
                 <label style="color:white;" for="searchByPatientID"> Search By Patient ID </label> <br><br>
               </div>
-              <div id="inputBoxes"></div>
-
-              <input class="btn" type="submit" id="buttonSee"
-              name="submitDetails" value="Search" /><br><br>
-            </form>
+              <form action="/searchPatient" method="POST" id=>
+              
+                <div id="inputBoxes"></div>
+                <input type="submit" class="btn" value="Search">
+              </form>
+            </div>
+              
+              <!-- <input class="btn" type="submit" id="buttonSee"  
+              name="submitDetails" value="Search" /><br><br> -->
+            
 
 
           <!--main body form for patient-->

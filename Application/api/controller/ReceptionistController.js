@@ -64,9 +64,9 @@ module.exports ={
             res.status(401);
             return;
         }
-        const {Notes} = req.body;
-        console.log("saving notes: "+ Notes);
-        
+        const Notes = req.body.Notes;
+        console.log("requiest: "+Notes);
+
         Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(req.user)},{$set:{"Note":Notes}},{'new':false},function(err,peceptionist){
             if(err)
             {
@@ -102,8 +102,9 @@ module.exports ={
 
         })
 
-    }
-
+    },
+   //===========================================================================
+ 
 
 }
    //===========================================================================
