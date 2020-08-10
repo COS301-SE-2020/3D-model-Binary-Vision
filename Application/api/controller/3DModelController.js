@@ -148,7 +148,8 @@ module.exports = {
         return;
       }
       else{
-        res.status(201).json(patient);
+        res.status(201);
+        res.redirect("newHome.html");
         //res.redirect("/displayPatients.html");
         return;
       }
