@@ -38,9 +38,10 @@ function addToTable(name , surname , id , gender ,email , objectId)
 
 }
 
-var inputBoxes = document.getElementById("inputBoxes");
 
 function searchByInputDisplay() {
+var inputBoxes = document.getElementById("inputBoxes");
+   
   inputBoxes.innerHTML = "";
 
   if (document.getElementById("searchByName").checked) {

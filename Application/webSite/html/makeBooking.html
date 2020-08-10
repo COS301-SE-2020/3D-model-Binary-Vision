@@ -1,0 +1,37 @@
+<!-- Created By: Jacobus Janse van Rensburg -->
+<!-- Eddited By: Ranni Arraf -->
+<!Doctype html>
+<html>
+    <head>
+        <title>Make a Booking</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/makeBookings.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/apiCalls.js"></script>
+        <script type="text/javascript" src="../js/registration.js"></script>
+        <script type="text/javascript" src="../js/receptionist.js"></script>
+        <script type="text/javascript" src="../js/booking.js"></script>
+    </head>
+
+    <body>
+        
+        <!-- A booking needs to have a doctor , time , date and patient -->
+        <!-- have 4 buttons that will do different acctions that will produce these values through different overlays -->
+        <!-- doctor button , display an overlay of doctors to choose from  , capture the id of the selected doctor-->
+        <!-- time/date button , display a timetable that displays the selectable available slots for selected doctor -->
+        <!-- search patient by criteria and select the correct patient and capture the selected patients id -->
+        
+        <input type="button" value="Select Doctor" name="drSelect" onclick="displayDoctorOverlay()"><br><br>
+        <input type="button" value="Select Date" name="timeSelect" onclick="dispayTimeTableOverlay()"><br><br>
+        <input type="button" value="Select Patient" name="patientSelect" onclick="displayPatientSearchOverlay()"><br><br>
+        <input type="text" name="reason" id="reasonForBooking">
+        <div id="currentOverlay"></div>
+
+    
+    </body>
+</html>

@@ -111,7 +111,43 @@ module.exports ={
 
     },
    //===========================================================================
+   //Function Developed By: Jacobus Janse van Rensburg
+   //Returns a json list of doctors that belong to the same practition as the 
+   //receptionist
+    getDoctors: function(req,res){
+        if(!req.user)
+        {
+            res.status(401).send("Unauthorised access to doctors");
+            return;
+        }
+
+        var practition;
+
+        Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)}, function(err, receptionist){
+            if(err){
+                res.status(400).send(err);
+                return;
+            }
  
+                practition= receptionist.practition;
+            
+                Doctor.find({"practition":practition},'-password -username',function(err, doctors){
+                    if(err){
+                        res.status(400).send(err);
+                        return;
+                    }
+                    //cant send all the information since usernames and passwords are high security breaches
+        
+                    res.status(200).json(doctors);
+                    return;
+        
+                });
+        });
+            
+    },
+
+   //===========================================================================
+    
 
 }
    //===========================================================================

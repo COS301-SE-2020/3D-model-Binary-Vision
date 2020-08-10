@@ -71,6 +71,6 @@ function receptionistSearchPatient()
         for(var i in data){
             console.log(data[i]);
         }
-        
+        return data;
     }));
 }
