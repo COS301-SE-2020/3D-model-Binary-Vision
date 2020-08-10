@@ -1,3 +1,4 @@
+//created by: Jacobus Janse van Rensburg
 'use strict';
 
 const fs = require("fs");
@@ -70,6 +71,8 @@ module.exports = function (app)
 
     app.route('/email')
         .post(Emailer.passwordChangeEmail);
+
+    app.route('/getReceptionist').post(Receptionist.getReceptionistInfo);
 
     app.route('/getReceptionistNotes').post(Receptionist.getNotes);
     

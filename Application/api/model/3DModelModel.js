@@ -1,3 +1,5 @@
+//created by:Jacobus Janse van Rensburg
+
 'use strict';
 
 var mongoose = require('mongoose');
@@ -46,6 +48,8 @@ var Receptionist = new Schema({
     name:{type:String},
     surname:{type:String},
     email:{type:String},
+    username:{type:String, required:true},
+    password:{type:String, required:true},
     practition:{
         type:String, required: false
     },
@@ -81,7 +85,7 @@ var ConsultationSchema = new Schema({
     }
 });
 
-var Booking = new Booking({
+var Booking = new Schema({
     date:{type:String,required:true},
     time:{type:String,required:true},
     patient:{type:mongoose.Types.ObjectId,required:true},
