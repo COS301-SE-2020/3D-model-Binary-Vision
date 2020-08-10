@@ -13,7 +13,7 @@
   <script type="text/javascript" src="../js/receptionist.js"></script>
 </head>
 
-<body onload="initReceptionist()">
+<body onload="initReceptionist()" onunload="saveNotes()">
   <div id="mydiv">
       <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
       <div id="mydivheader">Notes (Drag)</div>
@@ -39,6 +39,9 @@
         </li>
         <li id="otherLi" class="nav-item">
           <a class="nav-link" href="timetable.html">Timetable</a>
+        </li>
+        <li id="makeBooking" class="nav-item" >
+          <a class="nav-link" href="makeBooking.html">Make booking</a>
         </li>
         <li id="logout" class="nav-item" id="logout">
           <a id="logoutA"class="nav-link" onclick="logout()" href="/preview.html">Logout</a>
@@ -112,11 +115,12 @@
                 <input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()" style="transform: translateX(0px);">
                 <label style="color:white; transform: translateX(0px);" for="searchByPatientID"> Search By Patient ID </label> <br><br>
               </div>
-              <form action="/searchPatient" method="POST" id="form">
+              <!-- <form > -->
               
                 <div id="inputBoxes"></div>
-                <input type="submit" class="btn" value="Search" style="color: white;">
-              </form>
+
+                <input type="submit" class="btn" value="Search" onclick="receptionistSearchPatient()">
+              <!-- </form> -->
             </div>
               
               <!-- <input class="btn" type="submit" id="buttonSee"  

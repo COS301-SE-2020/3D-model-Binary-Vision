@@ -370,11 +370,7 @@ image {
 table {
 
 	border-top: solid 3px #003366;	
-	margin-right: auto;
-	margin-right: auto;
 	text-align: center;
-	display: inline-table;
-
 }
 
 select{
@@ -632,6 +628,8 @@ input {
 
 #container {
 	animation: opacityForm 2s;
+	position: absolute;
+	margin-left:240px;
 }
 
 #formSignup {

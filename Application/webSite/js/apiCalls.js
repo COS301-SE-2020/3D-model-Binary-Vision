@@ -204,7 +204,7 @@ function getSinglePatient()
 {
     var response = fetch("/singlePatient",{
         method:"POST",
-        header:{'Content-Type':'application/json ; charset=UTF-8'}
+        headers:{'Content-Type':'application/json ; charset=UTF-8'}
     })
 
     response.then(res =>res.json().then(data => {
@@ -262,7 +262,7 @@ function getSinglePatientConsultations()
 
     var response = fetch("/consultations",{
         method:"GET",
-        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+        headers:{'Content-Type':'Application/json ; charset=UTF-8'}
     })
 
     response.then(res => res.json().then(data =>{
@@ -280,7 +280,7 @@ function getSinglePatientConsultations()
 function getReceptionistNotes(){
     var response = fetch("/getReceptionistNotes", {
         method:"POST",
-        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+        headers:{'Content-Type':'Application/json ; charset=UTF-8'}
     });
 
     response.then(res => res.json().then (data=> {
@@ -306,7 +306,7 @@ function saveReceptionistNotes(Notes)
 
     var response = fetch("/saveReceptionistNotes", {
         method:"POST",
-        header:{'Content-Type':'Application/json ; charset=UTF-8'},
+        headers:{'Content-Type':'Application/json ; charset=UTF-8'},
         body: JSON.stringify({Notes})
     });
 
@@ -333,7 +333,7 @@ function receptionistMakeBooking(){
 
     var response = fetch ("/makeBooking", {
         method:"POST",
-        header:{'Content-Type':'Application/json ; charset=UTF-8'},
+        headers:{'Content-Type':'Application/json ; charset=UTF-8'},
         body: JSON.stringify(patient,doctor,time, date, reason)
     })
 
@@ -369,7 +369,7 @@ function getAllPatients()
 
     var response = fetch ("/searchPatient", {
         method:"POST",
-        header:{'Content-Type':'Application/json ; charset=UTF-8'},
+        headers:{'Content-Type':'Application/json ; charset=UTF-8'},
         body: JSON.stringify(name,surname,id)
     })
 
@@ -395,7 +395,7 @@ function getDoctors()
 {
     var response = fetch('/getAllDoctors',{
         method:"POST",
-        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+        headers:{'Content-Type':'Application/json ; charset=UTF-8'}
     });
     response.then(res => res.json().then(data=>{
 
@@ -417,7 +417,7 @@ function getSingleDoctorBookings()
 {
     var response = fetch('/getDoctorsBookings',{
         method:"POST",
-        header:{'Content-Type':'Application/json ; charset=UTF-8'}
+        headers:{'Content-Type':'Application/json ; charset=UTF-8'}
     });
 
     response.then(res => res.json().then(data => {

@@ -19,7 +19,7 @@ var DoctorSchema = new Schema({
         type:String
     },
     practition:{
-        type:String,require: false
+        type:String,require: true
     }
 });
 
@@ -51,7 +51,7 @@ var Receptionist = new Schema({
     username:{type:String, required:true},
     password:{type:String, required:true},
     practition:{
-        type:String, required: false
+        type:String, required: true
     },
     Note:{
         type:String
