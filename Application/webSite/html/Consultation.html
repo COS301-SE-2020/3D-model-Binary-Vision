@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="../js/Consultation.js"></script>
 	<script src="../renderPage/Function.js"></script>
 </head>
-	<body>
+	<body onload="startTime()">
 		<div class="body">
 			<nav class="navbar navbar-expand-md  navbar-dark">
 				<a class="navbar-brand" href="#">
@@ -57,10 +57,9 @@
 						</p>
 
 						<div id="consultationInner">
-							<p id="conInfoTime" style="color: black;">Time Remaining: <span id="datetime"></span> </p>
-							<p id="conInfoStart" style="color: black; display: block;">Start of consultation:</p>
-							<p id="conInfoEnd" style="color: black; display: block;">End of consultation:</p>
-							<p id="conInfoPatientID" style="color: black; display: block;">Pateint id:</p>
+							<p id="conInfoTime" style="color: black;">Time Remaining: <br><span id="remainingTime" style="font-weight: bold;"></span> </p>
+							<p id="conInfoStart" style="color: black; display: block;">Start of consultation: <br><span id="startTime">13:00</span> </p>
+							<p id="conInfoEnd" style="color: black; display: block;">End of consultation: <br><span id="endTime">20:46</span> </p>
 						</div>
 					</div>  
 
@@ -69,17 +68,28 @@
 							Patient info
 							<img src="../css/images/arrow.png" class="arrow" id="arrowPatInfo" onclick="rotateArrow('arrowPatInfo', 'pateientsInfo')">
 						</p>
+
+						<div class="patientInfoInner" id="patientInfoInner">
+							<p id="patientDisplayMessage" style="color: black; display: none; text-align: center; margin: auto; color: gray">All the patients relavent information</p>
+							<p id="patientName" style="color: black; display: block;"> Name: <br> Test Name </p>
+							<p id="patientSurname" style="color: black; display: block;">Surname: <br> Test Surname</p>
+							<p id="patientID" style="color: black; display: block;">ID: <br> 123456789 </p>
+							<p id="patientGender" style="color: black; display: block;">Gender: <br> Non-offensive </p>
+							<p id="patientEmail" style="color: black; display: block;">Email: <br> TNameTSurname@gmail.com</p>
+							<p id="patientContactNo" style="color: black; display: block;">Contact Number: <br> 082 678 7289</p>
+						</div>
 					</div>
 				</div>
 
 				<div class="doctorsNotes">
 					<p style="font-size: 25px;">Doctors Notes:</p>
-					<textarea style="width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 7px;"></textarea>
+					<textarea id="doctorsNotes" style="width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 7px;"></textarea>
+					<button class="btn" id="saveDoctorNote" type="button" style="margin-top: 10px;" onclick="saveDoctorNote()">Save Note</button>
 				</div>
 
 				<div class="renderCenter">
-					<button class="btn btn-dark" style="left:0px;" onclick=newSTL()>New Model</button>
-					<button class="btn btn-dark" onclick=newVideo()>New Media</button>
+					<button class="btn" style="left:0px; background-color: #003366; color: white;" onclick=newSTL()>New Model</button>
+					<button class="btn" onclick=newVideo() style=" background-color: #003366; color: white;">New Media</button>
 				</div><br>
 				<div id = 'videoRec' class='renderCenter'></div>
 			</div>

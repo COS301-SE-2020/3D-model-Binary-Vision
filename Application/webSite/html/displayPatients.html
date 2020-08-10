@@ -8,8 +8,8 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- <script type="text/javascript" src="../js/DrCookie.js"></script> -->
-	<script type="text/javascript" src="../js/apiCalls.js"></script>
-    <script type="text/javascript" src="../js/registration.js"></script>
+		<script type="text/javascript" src="../js/apiCalls.js"></script>
+    	<script type="text/javascript" src="../js/displayPatients.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	</head>
@@ -46,6 +46,8 @@
 		  z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>
 
 		  <div id="sideBody" >
+		  	<img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrow('arrowSideBody')">
+    		<label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 15px); display: none;" onclick="rotateArrow('arrowSideBody')">Profile Info</label>
 		    <br><br>
 		    <div id="sideBar" >
 		      <div id="containInfo">
@@ -58,7 +60,7 @@
 		        <p id="containInfo"> You are now logged in </p>
 		        <p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
 		        <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
-		        <button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>
+		        <!--<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>-->
 
 		      </div>
 		    </div>

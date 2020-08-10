@@ -112,7 +112,7 @@ body{
 
 .infoContainer {
 	display: grid;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: 4fr 9fr;
     grid-template-rows: 1fr;
     height: 300px;
     margin: 10px;
@@ -128,7 +128,8 @@ body{
 	position: relative;
 	text-align: center;
 	margin: 0 auto;
-	width: 90%;
+	margin-left: 7%;
+	margin-right: 3%;
 	border-radius: 10px;
 	box-shadow: 1px 0px 15px 0px black;
 	transition: 1s;
@@ -139,7 +140,8 @@ body{
 	position: relative;
 	text-align: center;
 	margin: 0 auto;
-	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
 	border-radius: 10px;
 	box-shadow: 1px 0px 15px 0px black;
 	transition: 1s;
@@ -155,6 +157,30 @@ body{
 	background-color: #003366;
 	border-radius: 10px;
 	box-shadow: 1px 0px 15px 0px black;
+}
+
+#saveDoctorNote {
+	color: white;
+}
+
+#saveDoctorNote:hover {
+	background-color: white;
+	color: #003366;
+}
+
+.conInfoTimeCenter {
+	position: relative;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 30px;
+	transform: translateY(-10px);
+}
+
+.conInfoTimeCenterMessage {
+	position: relative;
+	text-align: center;
+	margin: 0 auto;
+	transform: translateX(-5px);
 }
 
 .renderCenter {
@@ -232,6 +258,26 @@ body{
 
 
 #consultationInner {
+	position: relative;
+	text-align: left;
+	margin-left: 10px;
+	font-size: 20px;
+	transform: translateY(100px;);
+}
+
+.patientInfoInner {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	color: black;
+	position: relative;
+	text-align: left;
+	margin-left: 10px;
+	font-size: 20px;
+	transform: translateY(100px;);
+}
+
+.patientInfoInnerMessage {
+	color: black;
 	position: relative;
 	text-align: left;
 	margin-left: 10px;
