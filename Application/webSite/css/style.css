@@ -214,13 +214,14 @@ body{
 }
 
 .arrowSideBody {
+	position: relative;
 	border-radius: 20px;
 	width: 30px;
 	height: 30px;
 	transition: 0.5s;
 	background-color: white;
 	float: right;
-	transform: rotate(270deg) translate(-10px, -10px);
+	transform: translate(-10px, 10px) rotate(270deg);
 }
 
 .arrowSideBody:hover {
@@ -238,7 +239,7 @@ body{
 	transition: 0.5s;
 	background-color: white;
 	float: right;
-	transform: rotate(90deg) translate(10px, -50px);
+	transform: translate(50px, 10px) rotate(90deg);
 }
 
 #sideBarLabel:hover {
@@ -564,8 +565,7 @@ input {
 	z-index: 1;
 	width: 240px;
 	height: 100%;
-	animation: moveSideBar 1s;
-	animation-direction: alternate;
+	position: absolute;
 }
 
 #sideBar{
@@ -578,12 +578,12 @@ input {
 	min-width: 240px;
 	min-height: 100px;
 	max-height: 330px;
-	z-index:1;
-	display: inline-flex;
+	/*z-index:1;
+	display: inline-flex;*/
 	padding: 10px;
 	text-align: center;
 	border-bottom: solid 20px lightblue;
-
+	transform: translateY(45px);
 
 }
 
