@@ -35,8 +35,29 @@ function displayDoctorOverlay(){
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
 function displayTimeTableOverlay(){
+    var overlay = document.getElementById('currentOver');
+
+    var response = fetch('/getDoctorsTimetable',{
+        method:"POST",
+        headers:{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+        body: JSON.stringify({"doctor":selectedDoctor})    
+    });
+
+    response.then(res => res.json().then(data=> {
+
+        //go and create the schedule for the doctor
+        createSheduler(data, overlay);
+    }));
 
 }
+// ===========================================================================================
+// Function developed by: Jacobus Janse van Rensburg
+function createScheduler(data, overlay){
+    
+}
+
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
@@ -45,6 +66,8 @@ function displayPatientSearchOverlay(){
     createPatientSearchOverlay();
 
 }
+
+
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
@@ -66,7 +89,7 @@ function createPatientsListForBooking(patients){
     var data = receptionistSearchPatient();
 
     //populate a list with this data
-    
+
 }
 
 // ===========================================================================================

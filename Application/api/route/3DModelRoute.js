@@ -86,6 +86,8 @@ module.exports = function (app)
 
     app.route('/getDoctorsBookings').post(Model.getDoctorsBookings);
     
+    app.route('/getDoctorsTimetable').post(Receptionist.getDoctorsSchedule);
+
     app.route('/getDoctorsOfReceptionist').post(Receptionist.getDoctors);
     
 }

@@ -146,8 +146,26 @@ module.exports ={
             
     },
 
-   //===========================================================================
+    //===========================================================================
+    //Function developed by: Jacobus Janse van Rensburg
+    //returns all the bookings that the doctor has in the future
+    getDoctorsSchedule: function(req, res){
+        if (!req.user){
+            res.status(401).send("Unauthorized access to doctors scheduling info");
+        }
+
+        Bookings.find({"doctor":mongoose.Types.ObjectId(req.body.doctor)},"-reason",function(err,bookings){
+            if(err){
+                res.status(400).send("error finding doctors bookings");
+                return;
+            }
+
+            res.status(200).json(bookings);
+            return;
+        });
+    },
     
+   //===========================================================================
 
 }
    //===========================================================================
