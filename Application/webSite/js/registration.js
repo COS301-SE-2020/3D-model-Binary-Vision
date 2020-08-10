@@ -45,17 +45,27 @@ var inputBoxes = document.getElementById("inputBoxes");
   inputBoxes.innerHTML = "";
 
   if (document.getElementById("searchByName").checked) {
-    inputBoxes.innerHTML = '<input  class="box" type="text" name="name" id="searchName" placeholder="Name"  required /><br><br>';
+    inputBoxes.innerHTML += '<label for="searchName" style="color: white;">Patients name</label><br>';
+    inputBoxes.innerHTML += '<input  class="box" type="text" name="name" id="searchName" placeholder="Name"  required /><br><br>';
   }
 
   if (document.getElementById("searchBySurname").checked) {
+    inputBoxes.innerHTML += '<label for="searchSurname" style="color: white;">Pateints surname</label><br>';
     inputBoxes.innerHTML += '<input id="searchSurname" name="surname" placeholder="Surname"/><br><br>';
   }
 
   if (document.getElementById("searchByPatientID").checked) {
+    inputBoxes.innerHTML += '<label for="searchPatientID" style="color: white;">Patients ID number</label><br>';
     inputBoxes.innerHTML += '<input   id="searchPatientID" name="idNumber" placeholder="Patient ID" /><br><br>';
   }
 }
+
+
+
+
+
+
+
 
 // Global vairables to see which tab is curretly selected
 var disSearch = false;

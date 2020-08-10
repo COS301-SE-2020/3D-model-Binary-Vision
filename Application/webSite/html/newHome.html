@@ -57,7 +57,6 @@
   <div id="sideBody" >
     <img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrow('arrowSideBody')">
     <label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 15px); display: none;" onclick="rotateArrow('arrowSideBody')">Profile Info</label>
-    <br><br>
     <div id="sideBar" >
       <div id="containInfo">
         <div class="profile">
@@ -107,18 +106,19 @@
               <br>
               <h2> Search Patient</h2><br>
               <div class="change">
-                <input type="checkbox" id="searchByName" name="searchBy" onclick="searchByInputDisplay()">
-                <label style="color:white;" for="searchByName"> Search By Name </label><br>
+                <input type="checkbox" id="searchByName" name="searchBy" onclick="searchByInputDisplay()" style="transform: translateX(-13px);">
+                <label style="color:white; transform: translateX(-13px);" for="searchByName"> Search By Name </label><br>
 
-                <input type="checkbox" id="searchBySurname" name="searchBy" onclick="searchByInputDisplay()">
-                <label style="color:white;" for="searchBySurname"> Search By Surname </label><br>
+                <input type="checkbox" id="searchBySurname" name="searchBy" onclick="searchByInputDisplay()" style="transform: translateX(-2px);">
+                <label style="color:white; transform: translateX(-2px);" for="searchBySurname"> Search By Surname </label><br>
 
-                <input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()">
-                <label style="color:white;" for="searchByPatientID"> Search By Patient ID </label> <br><br>
+                <input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()" style="transform: translateX(0px);">
+                <label style="color:white; transform: translateX(0px);" for="searchByPatientID"> Search By Patient ID </label> <br><br>
               </div>
               <!-- <form > -->
               
                 <div id="inputBoxes"></div>
+
                 <input type="submit" class="btn" value="Search" onclick="receptionistSearchPatient()">
               <!-- </form> -->
             </div>
@@ -134,15 +134,23 @@
               <br>
               <h2> Patient</h2><br>
 
-              <input class="box" type="text" name="Name" id="name"
-              placeholder="Name"  required /><br><br>
+              <label for="name" style="color: white;">Patients name</label><br>
+              <input class="box" type="text" name="Name" id="name" placeholder="Name"  required /><br><br>
+              
+              <label for="surname" style="color: white;">Pateints surname</label><br>
               <input id="surname" name="surname" placeholder="Surname"/><br><br>
+              
+              <label for="idNumber" style="color: white;">Patients ID number</label><br>
               <input id="idNumber" name="idNumber" placeholder="ID Number"/><br><br>
-              <input class="box" type="email" name="email" id="email"
-              placeholder="Email" required /><br><br>
+              
+              <label for="email" style="color: white;">Patients Email</label><br>
+              <input class="box" type="email" name="email" id="email" placeholder="Email" required /><br><br>
+              
+              <label for="cell" style="color: white;">Patients cell phone number</label><br>
               <input id="cell" name="cell" placeholder="Cellphone Number"/><br><br>
-              <input class="btn" type="submit" id="buttonSee"
-              name="submitDetails" value="Submit" /><br><hr>
+              
+              <input class="btn" type="submit" id="buttonSee" name="submitDetails" value="Submit" /><br><hr>
+
             </form>
         </div>
       </div>
