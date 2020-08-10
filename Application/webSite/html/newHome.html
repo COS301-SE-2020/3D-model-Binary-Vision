@@ -13,7 +13,7 @@
   <script type="text/javascript" src="../js/receptionist.js"></script>
 </head>
 
-<body onload="initReceptionist()">
+<body onload="initReceptionist()" onunload="saveNotes()">
   <div id="mydiv">
       <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
       <div id="mydivheader">Notes (Drag)</div>

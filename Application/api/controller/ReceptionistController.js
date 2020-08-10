@@ -16,6 +16,8 @@ var Booking = require("../model/3DModelModel.js").Bookings;
 
 module.exports ={
    //===========================================================================
+   //function developed by: Jacobus Janse van Rensburg
+   //return non-security fatal information about receptionist
     getReceptionistInfo: function(req,res){
         if(!req.user){
             res.status(401);
@@ -34,7 +36,8 @@ module.exports ={
         });
     },
    //===========================================================================
-
+   //function developed by: Jacobus Janse van Rensburg
+   // return the notes that the receptionist might have saved as reminders
     getNotes : function (req, res){
         if(!req.user){
             res.status(401);
@@ -56,8 +59,10 @@ module.exports ={
 
         });
     },
-   //===========================================================================
-
+   
+    //===========================================================================
+   //function developed by: Jacobus Janse van Rensburg
+   //save a note that is accompanied to a receptionist
     saveNotes: function(req, res){
         if (!req.user)
         {
@@ -79,8 +84,10 @@ module.exports ={
         })
 
     },
-   //===========================================================================
 
+   //===========================================================================
+   //function developed by: Jacobus Janse van Rensburg
+   //function that creates a booking object in the database for the receptionist
     makeBooking:function (req,res){
 
         if (!req.user){

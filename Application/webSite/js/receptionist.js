@@ -11,7 +11,7 @@ function initReceptionist()
 
 }
 
-
+window.onbeforeunload = saveNotes();
 // ==================================================================
 //function developed by : Jacobus Janse van Rensburg
 //used to get the information of the receptionist and populate the html elements with data
