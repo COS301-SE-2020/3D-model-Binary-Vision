@@ -163,17 +163,17 @@ module.exports = {
     // console.log(req.body);
     // const idnumber = req.body.idNum
     //  console.log(idnumber);
-    Patient.findOne({ '_id' : req.cookies.patientCookie , 'doctor':req.user}, function (err, patient) {
+    Patient.findOne({ '_id' : mongoose.Types.ObjectId(req.body.patient) }, function (err, patient) {
       // console.log(patient);
       if (err) {
         res.send(err);
-      } else {
-        if (patient) {
-          res.json(patient);
-        } else {
-          res.sendStatus(404);
-        }
-      }
+        return;
+      } 
+
+  
+      res.json(patient);
+      return;  
+      
     });
   },
 //======================================================================================
@@ -321,7 +321,7 @@ module.exports = {
       }
       else{
         //return only surname for security reasons
-        res.json({"surname":doctor.surname});
+        res.json({"surname":doctor.surname,"name":doctor.name});
       }
     })
 
@@ -465,21 +465,12 @@ module.exports = {
       res.status(401).send("Unauthorized");
       return;
     }
-<<<<<<< HEAD
     
     // var year = Date.now().getFullYear();
     // var month = Date.now().getMonth();
     // var day = Date.now().getDate();
 
     // var d = day + "/" + month + "/" + year; 
-=======
-
-    var year = Date.now().getFullYear();
-    var month = Date.now().getMonth();
-    var day = Date.now().getDate();
-
-    var d = day + "/" + month + "/" + year;
->>>>>>> cba6c058cb562d2ea4b77808fc9d3515b6179cf2
 
     Booking.find({"doctor" : mongoose.Types.ObjectId(req.user)}, function (err, bookings) {
       if (err) {
@@ -581,6 +572,35 @@ module.exports = {
       res.status(400);
       return;
     }
-}
+},
+
+// ======================================================================================
+// function Developed By: Jacobus Janse van Rensburg
+// returns the bookings that the doctor has for the current date
+  getTodaysBookings: function(req, res)
+  {
+    if (!req.user)
+    {
+      res.status(401).send("Unauthorized");
+      return;
+    }
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    var day = date.getDate();
+
+    var d = day + "/" + month + "/" + year; 
+
+    Booking.find({"doctor":mongoose.Types.ObjectId(req.user), "date":d}, function(err, bookings){
+      if (err)
+      {
+        res.status(400).send("error looking up bookings");
+        return;
+      }
+
+      res.json(bookings).status(200);
+      return;
+    });
+  },
 
 };

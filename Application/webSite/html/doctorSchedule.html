@@ -11,9 +11,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../js/apiCalls.js"></script>
   <script type="text/javascript" src="../js/registration.js"></script>
+  <script type="text/javascript" src="../js/doctorSchedule.js"></script>
 </head>
 
-<body >
+<body onload="initPage()">
   <div class="body">
     <nav class="navbar navbar-expand-md  navbar-dark">
       <a class="navbar-brand" href="doctorSchedule.html">
@@ -52,7 +53,7 @@
           <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
         </div>
         <br>
-        <p id="containInfo">Welcome back <i onload="getGender();">Doctor </i><b onload="getName();"> asdasdasX</b></p>
+        <p id="containInfo">Welcome back <i onload="getGender();">Doctor </i><b id="doctorsName"> asdasdasX</b></p>
         <hr>
         <p id="containInfo"> You are now logged in </p>
         <p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>

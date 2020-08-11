@@ -32,13 +32,8 @@ module.exports = function (app)
         .post(Model.getPatients);
     //handle get put delete
     app.route('/addPatient')
-        .post(Model.addPatient)
-        .get((_res, res) => {
-            const page = fs.readFileSync("addPatient.html", "utf-8");
-            res.setHeader("Content-Type", "text/html");
-            res.send(page);
-        });
-
+        .post(Model.addPatient);
+        
     app.route("/singlePatient")
         .post(Model.getSinglePatient);
 
@@ -89,5 +84,6 @@ module.exports = function (app)
     app.route('/getDoctorsTimetable').post(Receptionist.getDoctorsSchedule);
 
     app.route('/getDoctorsOfReceptionist').post(Receptionist.getDoctors);
-    
+ 
+    app.route('/getTodaysBookings').post(Model.getTodaysBookings);
 }
