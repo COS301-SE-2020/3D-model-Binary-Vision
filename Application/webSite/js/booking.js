@@ -88,6 +88,7 @@ function populateCalander(data)
             //mark as red since a booking already exists
             element.setAttribute("style","background-color:red;");
             element.setAttribute("onclick","");
+            element.innerHTML=data[i].name+" "+data[i].surname;
         }
     }
 

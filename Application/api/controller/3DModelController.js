@@ -11,6 +11,7 @@ var Doctor = require("../model/3DModelModel.js").Doctor;
 var Patient = require("../model/3DModelModel.js").Patient;
 var Consultation = require("../model/3DModelModel.js").Consultation;
 var Receptionist = require("../model/3DModelModel.js").Receptionist;
+var Booking = require("../model/3DModelModel.js").Booking;
 
 module.exports = {
   login: function (req, res) {
@@ -24,7 +25,7 @@ module.exports = {
       if (doctor) {
         //it is a doctor logging in and we return to the doctors home page 
         res.cookie("drCookie",doctor._id,{maxAge:9000000,httpOnly:true});
-        res.redirect("/home.html");
+        res.redirect("/doctorSchedule.html");
         return;
       } 
       //there was no doctor and we will now check if it is a receptionist 
@@ -465,13 +466,13 @@ module.exports = {
       return;
     }
     
-    var year = Date.now().getFullYear();
-    var month = Date.now().getMonth();
-    var day = Date.now().getDate();
+    // var year = Date.now().getFullYear();
+    // var month = Date.now().getMonth();
+    // var day = Date.now().getDate();
 
-    var d = day + "/" + month + "/" + year; 
+    // var d = day + "/" + month + "/" + year; 
 
-    Booking.find({"_id" : req.user, "date" : d}, function (err, bookings) {
+    Booking.find({"doctor" : mongoose.Types.ObjectId(req.user)}, function (err, bookings) {
       if (err) {
         console.log(err);
         res.status(500).send("Error looking up bookings");
