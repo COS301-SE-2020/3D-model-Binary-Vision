@@ -19,25 +19,58 @@
     </head>
 
     <body>
+        <nav class="navbar navbar-expand-md  navbar-dark">
+            <a class="navbar-brand" href="newHome.html">
+                <img src="../css/images/tooth.png" alt="Profile Picture" width="30px" height="30px">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul class="navbar-nav">
+                <li id="otherLi" class="nav-item">
+                  <a class="nav-link" href="newHome.html">Home</a>
+                </li>
+                <li id="otherLi" class="nav-item">
+                  <a class="nav-link" href="displayPatients.html">Logs</a>
+                </li>
+                <li id="otherLi" class="nav-item">
+                  <a class="nav-link" href="timetable.html">Timetable</a>
+                </li>
+                <li id="otherLi" class="nav-item" >
+                  <a class="nav-link active" href="makeBooking.html"><u>Booking</u></a>
+                </li>
+                <li id="logout" class="nav-item" id="logout">
+                  <a id="logoutA"class="nav-link" onclick="logout()" href="/preview.html">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
         
         <!-- A booking needs to have a doctor , time , date and patient -->
         <!-- have 4 buttons that will do different acctions that will produce these values through different overlays -->
         <!-- doctor button , display an overlay of doctors to choose from  , capture the id of the selected doctor-->
         <!-- time/date button , display a timetable that displays the selectable available slots for selected doctor -->
         <!-- search patient by criteria and select the correct patient and capture the selected patients id -->
-        
-        <input type="button" value="Select Doctor" name="drSelect" onclick="displayDoctorOverlay()"><br><br>
-        <input type="button" value="Select Date" name="timeSelect" onclick="displayTimeTableOverlay()"><br><br>
-        <input type="button" value="Select Patient" name="patientSelect" onclick="displayPatientSearchOverlay()"><br><br>
-        <input type="text" name="reason" id="reasonForBooking" placeholder="reason for booking">
-        <div id="currentOverlay" ></div>
+        <div id="bookingBackground">
+            <div id="centerBookingOverlay">
+                <input type="button" class="btn btn-primary" value="Select Doctor" name="drSelect" onclick="displayDoctorOverlay()" style="margin: 5px;">
+                <input type="button" class="btn btn-warning" value="Select Date" name="timeSelect" onclick="displayTimeTableOverlay()" style="margin: 5px;">
+                <input type="button" class="btn btn-danger" value="Select Patient" name="patientSelect" onclick="displayPatientSearchOverlay()" style="margin: 5px;"><br><br>
+                <label for="reasonForBooking">Reason for booking</label><br>
+                <input type="text" type="form-control" name="reason" id="reasonForBooking" style="margin-bottom: 20px; width: 300px; padding: 10px; border-radius: 5px; border: none;">
+                <div id="currentOverlay" ></div><br><hr>
 
-        <div id="bookingInfo">
-            <p>Booking for patient: <p id="patientInfoDisplay"></p></p>
-            <p>With Dr: <p id="doctorInfoDisplay"></p></p>
-            <p>Date: <p id="dateInfoDisplay"></p></p>
-            <p>Time: <p id="timeInfoDisplay"></p></p>
-            <button onclick="makeBooking()">make booking</button>
+                <div id="bookingInfo" style="padding: 20px; background-color: #003366; border-radius: 5px;">
+                    <p>BOOKING FOR PATIENT: <p id="patientInfoDisplay"></p></p><hr>
+                    <p>With Dr: <p id="doctorInfoDisplay"></p></p>
+                    <p>Date: <p id="dateInfoDisplay"></p></p>
+                    <p>Time: <p id="timeInfoDisplay"></p></p>
+                    <button class="btn btn-success" onclick="makeBooking()" >make booking</button>
+                </div>
+            </div>
         </div>
 
     </body>

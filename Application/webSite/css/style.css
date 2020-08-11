@@ -412,6 +412,20 @@ input {
 }
 
 /*IDs*/
+#doctorFormSignup{
+	background-color: #003366;
+	border-radius: 5px;
+}
+
+#bookingBackground{
+	background-color: lightblue;
+	box-shadow: 1px 0px 15px 0px black;	
+}
+
+#centerBookingOverlay{
+	text-align: center;
+	padding: 20px;
+}
 
 #notifyContainer{
 	margin-top: 70px;
