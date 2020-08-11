@@ -176,12 +176,12 @@ function displayPatientSearchOverlay(){
 function createPatientSearchOverlay()
 {
     var overlay = document.getElementById("currentOverlay");
-    overlay.innerHTML = '  <div id="doctorFormSignup"><br>';
+    overlay.innerHTML='<div style="background-color:#003366;"><div id="doctorFormSignup"><br>';
     overlay.innerHTML+='<h2> Search Patient</h2><br>';
     overlay.innerHTML+='<div class="change"><input type="checkbox" id="searchByName" name="searchBy" onclick="searchByInputDisplay()"><label style="color:white;" for="searchByName"> Search By Name </label><br>';
     overlay.innerHTML+='<input type="checkbox" id="searchBySurname" name="searchBy" onclick="searchByInputDisplay()"><label style="color:white;" for="searchBySurname"> Search By Surname </label><br>';
     overlay.innerHTML+='<input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()"><label style="color:white;" for="searchByPatientID"> Search By Patient ID </label> <br><br></div>';
-    overlay.innerHTML+='<div id="inputBoxes"></div><input type="submit" class="btn" value="Search" onclick="createPatientsListForBooking()"></div>';
+    overlay.innerHTML+='<div id="inputBoxes"></div><input style="margin-bottom: 20px;" class="btn btn-warning" type="submit" class="btn" value="Search" onclick="createPatientsListForBooking()"></div></div>';
  
 }
 

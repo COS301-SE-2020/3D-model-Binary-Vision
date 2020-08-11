@@ -21,14 +21,14 @@ module.exports = {
       if (err) {
         res.send(err);
         return;
-      } 
+      }
       if (doctor) {
-        //it is a doctor logging in and we return to the doctors home page 
+        //it is a doctor logging in and we return to the doctors home page
         res.cookie("drCookie",doctor._id,{maxAge:9000000,httpOnly:true});
         res.redirect("/doctorSchedule.html");
         return;
-      } 
-      //there was no doctor and we will now check if it is a receptionist 
+      }
+      //there was no doctor and we will now check if it is a receptionist
     });
 
     Receptionist.findOne({username,password}, function(err, receptionist){
@@ -71,7 +71,7 @@ module.exports = {
       }
     });
   },
-  
+
 //======================================================================================
   logout:function (req, res){
     console.log("logging out");
@@ -241,7 +241,7 @@ module.exports = {
       res.status(404);
       return;
     }
-    
+
     console.log("dr: "+mongoose.Types.ObjectId(req.user)+"\nPatient: "+mongoose.Types.ObjectId(req.cookies.patientCookie));
     console.log("getting consultations");
     Consultation.find({"doctor":mongoose.Types.ObjectId(req.user), "patient":mongoose.Types.ObjectId(req.cookies.patientCookie)} , function(err, consultations){
@@ -327,9 +327,9 @@ module.exports = {
 
   },
 //======================================================================================
-  
+
 //upload
- 
+
   upload: function(req, res) {
     // use default grid-fs bucket
     const Files = createModel();
@@ -366,7 +366,7 @@ module.exports = {
               if (err)
               {
                 console.log(err);
-                
+
               }
               console.log("created consultation");
               res.status(201).send("Created");
@@ -381,7 +381,7 @@ module.exports = {
   },
 
   //======================================================================================
-  //saves an stl file and makes a consultation 
+  //saves an stl file and makes a consultation
   STLConsultationUpload: function(req,res){
     const files = createModel();
     const form = formidable();
@@ -391,13 +391,13 @@ module.exports = {
 
       const stlFile = files.stlFile;
 
-      const readStream = fs.createReadStream(stlFile.path); 
+      const readStream = fs.createReadStream(stlFile.path);
 
       const options = {
         filename: stlFile.name,
         contentType: stlFile.type
       }
-      
+
       Files.write(options , readStream , ( err , file)=> {
 
         if (err)
@@ -420,7 +420,7 @@ module.exports = {
             STL: file._id,
             Note: req.body.note
           });
-          
+
           consultation.save(function (err , consultation){
             res.sendStatus(200).send("Consultation saved");
           });
@@ -433,7 +433,7 @@ module.exports = {
   },
   //======================================================================================
 
-  //this isnt done yet, i had to go 
+  //this isnt done yet, i had to go
 
   //======================================================================================
 
@@ -465,12 +465,21 @@ module.exports = {
       res.status(401).send("Unauthorized");
       return;
     }
+<<<<<<< HEAD
     
     // var year = Date.now().getFullYear();
     // var month = Date.now().getMonth();
     // var day = Date.now().getDate();
 
     // var d = day + "/" + month + "/" + year; 
+=======
+
+    var year = Date.now().getFullYear();
+    var month = Date.now().getMonth();
+    var day = Date.now().getDate();
+
+    var d = day + "/" + month + "/" + year;
+>>>>>>> cba6c058cb562d2ea4b77808fc9d3515b6179cf2
 
     Booking.find({"doctor" : mongoose.Types.ObjectId(req.user)}, function (err, bookings) {
       if (err) {
@@ -575,4 +584,3 @@ module.exports = {
 }
 
 };
-
