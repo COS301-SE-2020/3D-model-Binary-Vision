@@ -108,10 +108,11 @@ function createScheduler(overlay){
     var currentDate = d.getDate();
     var currentDay = d.getDay();
     var currentYear=d.getFullYear();
-    replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">Tues, 11</td>';
+    replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">Time</td>';
     //set the headings now
     var count =0;
     var dd = currentDay;
+    
     while (count<days.length){
         if(dd > days.length-1 ){
             dd =0;
