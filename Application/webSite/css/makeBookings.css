@@ -4,3 +4,17 @@
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     
   }
+
+.selectableTimeSlot:hover{
+  background-color: blueviolet;
+}
+
+.selectableTimeSlot:active{
+  background-color: rgb(202, 37, 202);
+}
+
+
+
+#bookingInfo{
+  background-color: black;
+}

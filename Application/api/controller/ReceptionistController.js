@@ -12,7 +12,7 @@ var Doctor = require("../model/3DModelModel.js").Doctor;
 var Patient = require("../model/3DModelModel.js").Patient;
 var Consultation = require("../model/3DModelModel.js").Consultation;
 var Receptionist = require("../model/3DModelModel.js").Receptionist;
-var Booking = require("../model/3DModelModel.js").Bookings;
+var Booking = require("../model/3DModelModel.js").Booking;
 
 module.exports ={
    //===========================================================================
@@ -154,15 +154,15 @@ module.exports ={
             res.status(401).send("Unauthorized access to doctors scheduling info");
         }
 
-        
+        console.log("looging for dr with id: "+req.body.doctor);        
 
         Booking.find({"doctor":mongoose.Types.ObjectId(req.body.doctor)},"-reason",function(err,bookings){
             if(err){
                 res.status(400).send("error finding doctors bookings");
                 return;
             }
-
-            res.status(200).json(bookings);
+            console.log("Bookings found: "+bookings);
+            res.json(bookings);
             return;
         });
     },
