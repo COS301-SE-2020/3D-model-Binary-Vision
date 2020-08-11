@@ -154,7 +154,9 @@ module.exports ={
             res.status(401).send("Unauthorized access to doctors scheduling info");
         }
 
-        Bookings.find({"doctor":mongoose.Types.ObjectId(req.body.doctor)},"-reason",function(err,bookings){
+        
+
+        Booking.find({"doctor":mongoose.Types.ObjectId(req.body.doctor)},"-reason",function(err,bookings){
             if(err){
                 res.status(400).send("error finding doctors bookings");
                 return;
@@ -164,7 +166,7 @@ module.exports ={
             return;
         });
     },
-    
+
    //===========================================================================
 
 }
