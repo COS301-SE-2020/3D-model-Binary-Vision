@@ -154,6 +154,7 @@ body{
 	background-color: #003366;
 	border-radius: 5px;
 	min-width: 420px;
+	max-height: 400px;
 	box-shadow: 1px 0px 15px 0px black;
 }
 
@@ -479,11 +480,14 @@ input {
 {
 	position: fixed;
 	right: 0px;
+	top: 0;
 	height: 100%;
 	background-color: white;
 	box-shadow: 1px 0px 15px 0px black;
 	transition: 1s;
 	width: 200px;
+	bottom: 0;
+
 }
 
 
@@ -496,7 +500,7 @@ input {
   position: absolute;
   z-index: 9;
   width: 240px;
-  background-color: lightblue;
+  background-color: white;
   text-align: center;
   left: 0;
   top:500px;
@@ -513,14 +517,10 @@ input {
 
 #sideBody{
 	background-color: #C1CDCD;
-	background-repeat:repeat-x;
-	background-repeat: repeat-y;
-	background-attachment: fixed;
-	position: relative;
-	display: inline;
-	z-index: 1;
+	position: fixed;
+
 	width: 240px;
-	height: 100%;
+	bottom: 0;
 	transition: 0.8s;
 }
 
@@ -585,8 +585,8 @@ input {
 #sideBar{
 	
 	width:25%;
-	height: 100%;
-	position: absolute;
+	position: fixed;
+	top: 65px;
 	background-color: #003366;
 	max-width: 240px;
 	min-width: 240px;
@@ -761,11 +761,13 @@ input {
 
 
 #calender{
+	top: 50px;
 	position: relative;
 	margin-left: 0;
 	margin-right: 0;
 	text-align: center;
 	z-index: 10;
+	box-shadow: 0px 0px 15px 0px black;
 
 }
 

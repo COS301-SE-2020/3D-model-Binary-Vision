@@ -45,9 +45,9 @@
 			
 			<!--sideBar-->
 		    
-				<div id="sideBody" >
+			<div id="sideBody" style="background-color: white; height: 100%; position: fixed;">
 					
-			    <br><br>
+			 
 			    <div id="sideBar">
 
 			      <div id="containInfo">
@@ -66,9 +66,29 @@
 			
 				<div id="miBody">
 					<div id="header">
-						<p id="headerTitle">Consultation</p>
+						<p id="headerTitle">CONSULTATION</p>
 					</div>
 				</div>
+
+				 <div class="containerRight">
+				    <div id="rightSideBody" style="width: 220px;">
+				        <div id="containInfoRight" style="position: fixed;">
+				        	<br><br>
+				          TIME: 12:30 <hr>
+				          NOTES ON PATIENT: <br>
+				          MR TOM
+				          <br><br><br><br><br><br>
+				          3D SETTINGS<hr>
+				       
+										<button class="btn btn-warning" style="margin-right: 10px; margin-bottom: 10px; margin-top: 10px;" onclick=newSTL()>Model</button>
+										<button class="btn btn-success" onclick="newVideo()" style="">Media</button>
+									</div>
+									<br>
+									
+						  
+		        
+		  
+		  </div>
 
 				<br>
 			<div id="bodyContainer">	
@@ -109,15 +129,11 @@
 					<div class="doctorsNotes">
 
 						<p style="">Doctors Notes:</p>
-						<textarea id="doctorsNotes" style="width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px;"></textarea>
+						<textarea id="doctorsNotes" style="width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;"></textarea>
 						<button class="btn btn-primary" id="saveDoctorNote" type="button" style="margin-top: 10px;" onclick="saveDoctorNote()">Save Note</button>
 					</div>
-
-					<div class="renderCenter">
-						<button class="btn btn-primary" style="left:0px; background-color: #003366; color: white;" onclick=newSTL()>New Model</button>
-						<button class="btn btn-primary" onclick="newVideo()" style=" background-color: #003366; color: white;">New Media</button>
-					</div><br>
 					<div id = 'videoRec' class='renderCenter'></div>
+					
 				</div>
 			</div>
 		</div>
