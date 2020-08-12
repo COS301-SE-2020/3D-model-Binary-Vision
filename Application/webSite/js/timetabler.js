@@ -31,7 +31,7 @@ function createTable()
             dd =0;
         }
 
-        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd]+','+(currentDate+(count+1))+'</td>';
+        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd-1]+','+(currentDate+(count))+'</td>';
         count++;
         dd++;
     }
