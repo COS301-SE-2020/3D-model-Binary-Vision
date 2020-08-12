@@ -80,7 +80,7 @@ function populateCalander(data)
     {
         var date = data[i].date;
         var time = data[i].time;
-        var searchPageId = date+":"+time;
+        var searchPageId = date+"&"+time;
 
         var element = document.getElementById(searchPageId);
         if (element!=null)
