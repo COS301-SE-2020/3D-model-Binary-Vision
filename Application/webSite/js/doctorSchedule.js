@@ -7,7 +7,7 @@
 function initPage(){
     setDoctorInfo();
     setTodaysBookings();
-
+    setDate();
 }
 
 //================================================================================================
@@ -68,4 +68,15 @@ function populateBookings(data)
         }));
 
     }
+}
+
+//================================================================================================
+// Function developed by:Steven Visser
+// Function used to set todays date on top of schedule
+function setDate()
+{
+    var container = document.getElementById("headerTitle");
+    var today = new Date();
+    var date = today.getDate() + ' / ' + (today.getMonth()+1) +' / '+ today.getFullYear();
+    container.innerHTML = "SCHEDULE FOR [" + date + "]";
 }
