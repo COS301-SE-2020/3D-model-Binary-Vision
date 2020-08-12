@@ -78,7 +78,7 @@ module.exports = {
     res.cookie("drCookie","",{maxAge:0,httpOnly:true});
     res.cookie("patientCookie","",{maxAge:0,httpOnly:true});
     res.cookie("consultation","",{maxAge:0});
-    res.redirect("/");//redirect not working
+    res.redirect("preview.html");//redirect not working
 
   },
 //======================================================================================
