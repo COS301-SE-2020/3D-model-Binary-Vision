@@ -1,5 +1,5 @@
 //  created by: Jacobus Janse van Rensburg
-
+//  Updated & Reviewed by: Steven Visser
 // import { response } from "express";
 
 var selectedDoctor;
@@ -139,7 +139,7 @@ function createScheduler(overlay){
         replacement+='<tr><td id="time">'+times[i]+'</td>';
         for (var j =0 ; j < days.length; j ++)
         {
-            replacement+='<td class="selectableTimeSlot" id="'+(currentDate+j)+'/'+currentMonth+'/'+currentYear+':'+times[i]+'" onclick="selectTime(\''+(currentDate+j)+'/'+currentMonth+'/'+currentYear+':'+times[i]+'\')"></td>';
+            replacement+='<td class="selectableTimeSlot" id="'+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'" onclick="selectTime(\''+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'\')"></td>';
 
             replacement+='</td>';
         }
@@ -166,7 +166,7 @@ function selectTime(timeslot){
     element=document.getElementById(timeslot);
     element.setAttribute("style","background-color:green;");
 
-    var parts = timeslot.split(":");
+    var parts = timeslot.split("&");
     selectTimeSlot(parts[0],parts[1]);
 }
 
