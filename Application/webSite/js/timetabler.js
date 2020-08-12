@@ -2,8 +2,8 @@
 
 function initPage(){
 	createTable();
-	
-	populateTable()
+	setDates();
+	populateTable();
 }
 
 function createTable()
@@ -99,6 +99,25 @@ function fillData(data)
     	}
 }
 
+//Function by: Steven Visser
+function setDates()
+{
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+
+    var months = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
+
+    document.getElementById("firstDay").innerHTML = "{"+d+"}";
+    document.getElementById("firstMonth").innerHTML = "{"+months[m]+"}";
+    document.getElementById("firstYear").innerHTML = "{"+y+"}";
+
+    document.getElementById("lastDay").innerHTML = "{"+(d+6)+"}";
+    document.getElementById("lastMonth").innerHTML = "{"+months[m]+"}";
+    document.getElementById("lastYear").innerHTML = "{"+y+"}";
+    
+}
 
 		
 		
