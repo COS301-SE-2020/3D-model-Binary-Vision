@@ -10,7 +10,7 @@ function createTable()
 {
 	var tableDiv = document.getElementById("dayTable");
 
-	var days = ["mon","tue","wed","thu","fri","sat","sun"];
+	var days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
     var times=[
         "09:00","09:15","09:30","09:45",
         "10:00","10:15","10:30","10:45",
@@ -36,8 +36,8 @@ function createTable()
     var dd = currentDay;
     
     while (count<days.length){
-        if(dd > days.length-1 ){
-            dd =0;
+        if(dd > days.length ){
+            dd =1;
         }
 
         replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd-1]+','+(currentDate+(count))+'</td>';
