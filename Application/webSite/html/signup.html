@@ -13,7 +13,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-      <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -37,7 +37,7 @@
       <br><br><br>
 
         <div class="container" >
-                <form action="/signup" method="post" id="formSignup">
+                <form action="/signup" method="post" id="form" style="max-width: 300px; border-top-right-radius:10px; border-top-left-radius: 10px;">
                 <br>
                 <h2> Registration</h2><br>
 
@@ -49,9 +49,9 @@
                 <input name="username" placeholder="Username" /><br><br>
                 <input class="box" type="password" name="password"
                 id="password" placeholder="Password " required/><br><br>
-                <input type="text " name="choice" placeholder="Doctor/Receptionist">
-                <input type="text" name="practition" placeholder="Practition">
-                <input class="btn btn-dark" type="submit" id="submitDetails"
+                <input type="text " name="choice" placeholder="Doctor/Receptionist"> <br><br>
+                <input type="text" name="practition" placeholder="Practition"><br><br>
+                <input class="btn btn-primary" type="submit" id="submitDetails"
                 name="submitDetails" value="Submit" /><br><hr>
                 <p style="font-size: 12px;">Already have an account?<a style="font-size: 12px;" href="login.html" onclick="preview()"> Login Here</a></p>
                 </form>
