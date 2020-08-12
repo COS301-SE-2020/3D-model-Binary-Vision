@@ -63,7 +63,7 @@ function receptionistSearchPatient()
     var response = fetch("/searchPatient",{
         method:"POST",
         headers:{'Content-Type':'application/json; charset=UTF-8'},
-        body:JSON.stringify({ name,surname, idNumber })
+        body:JSON.stringify({ name ,surname, idNumber })
     });
 
     response.then(res=> res.json().then(data=>{

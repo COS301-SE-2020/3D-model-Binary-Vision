@@ -130,7 +130,7 @@ function addPatient()
         headers:{
             'Content-Type':'application/json ; charset=UTF-8',
         },
-        body: JSON.stringify({idNumber,name,surname, email, gender,cell})
+        body: JSON.stringify({"idNumber":idNumber,"name":name,"surname":surname,"email": email,"gender": gender,"cell":cell})
     })
 
     //check if the patient was successfully added by checking the status returned in the response

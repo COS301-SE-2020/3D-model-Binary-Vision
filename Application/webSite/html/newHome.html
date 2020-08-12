@@ -131,19 +131,22 @@
 
           <!--main body form for patient-->
 
-            <form action="/addPatient" method="post" id="patientFormSignup" style="display: none;" id="form">
+            <form action="/addPatient" method="POST" id="patientFormSignup" style="display: none;" id="form">
               <br>
               <h2> Patient</h2><br>
 
               <label for="name" style="color: white;">Patients name</label><br>
-              <input class="box" type="text" name="Name" id="name" placeholder="Name"  required /><br><br>
+              <input class="box" type="text" name="name" id="name" placeholder="Name"  required /><br><br>
               
               <label for="surname" style="color: white;">Pateints surname</label><br>
               <input id="surname" name="surname" placeholder="Surname"/><br><br>
               
               <label for="idNumber" style="color: white;">Patients ID number</label><br>
               <input id="idNumber" name="idNumber" placeholder="ID Number"/><br><br>
-              
+
+              <label for="gender" style="color: white;">gender</label><br>
+              <input id="gender" name="gender" placeholder="gender"/><br><br>
+
               <label for="email" style="color: white;">Patients Email</label><br>
               <input class="box" type="email" name="email" id="email" placeholder="Email" required /><br><br>
               

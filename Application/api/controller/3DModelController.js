@@ -137,6 +137,7 @@ module.exports = {
       return res.status(401);
     }
 
+
     const {idNumber, name , surname , email , gender, cell} = req.body;
 
     //can add checks here too see if the id number matches a patient that belongs to the doctor already exists
