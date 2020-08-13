@@ -1,5 +1,42 @@
 var currentTime = "";
 
+function rotateArrowSideBody(arrowID) {
+  
+  let arrowElement = document.getElementById(arrowID);
+  
+  if(arrowElement.classList.contains("arrowSideBarTransform")) {
+    document.getElementById("sideBarLabel").style.display = "none";
+    arrowElement.classList.replace("arrowSideBarTransform", "arrowSideBody");
+    moveSideBar();
+  } else {
+    document.getElementById("sideBarLabel").style.display = "block";
+    arrowElement.classList.replace("arrowSideBody", "arrowSideBarTransform");
+    moveSideBar();
+  }
+}
+
+var showSideBar = true;
+
+function moveSideBar(){
+  var bodyA = document.getElementById("sideBody");
+  var info = document.getElementsByClassName("bodyContainer");
+
+  if(!showSideBar){
+    showSideBar = true;
+    bodyA.classList.remove("moveSideBar");
+    bodyContainer.style.width = "60%";
+    bodyContainer.classList.remove("bodyContainerIncreaseWidth");
+
+  }
+  else{
+    showSideBar = false;
+    bodyA.classList.add("moveSideBar");
+    bodyContainer.style.width = "75%";
+    bodyContainer.classList.add("bodyContainerIncreaseWidth");
+  }
+  
+}
+
 function rotateArrow(arrowID, currentDivID) {
 	let arrowElement = document.getElementById(arrowID);
 	let classElement = document.getElementById(currentDivID);
@@ -134,8 +171,6 @@ function getRemainingTime(h, m, s) {
 
 	m = checkTime(m);
 	s = checkTime(s);
-
-	console.log(h);
 
 	if ((h == 0 && m < 5) || (h == -1 && m == 60))
 		document.getElementById("remainingTime").style.color = "red";

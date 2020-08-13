@@ -14,10 +14,14 @@
 </head>
 
 <body onload="initReceptionist()" onunload="saveNotes()">
-  <div id="mydiv">
+  <div id="mydiv" style="display: none;">
       <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
       <div id="mydivheader">Notes (Drag) </div>
-      <textarea id="receptionistNotes"></textarea><input type="button" class="btn btn-primary" value="Save Notes" onclick="saveNotes()"></input><br><br></div>
+      <textarea id="receptionistNotes"></textarea>
+      <div class="noteButtonsContainer">  
+        <input type="button" class="btn btn-primary" style="margin:5px;" value="Save Notes" onclick="saveNotes()">
+        <button class="btn btn-danger" style="margin:5px;" onclick="showNote()">Hide Note</button>
+      </div>
   </div>
 <div class="body">
   <nav class="navbar navbar-expand-md  navbar-dark">
@@ -56,7 +60,7 @@
 
   <div id="sideBody" style="background-color: white; height: 100%; position: fixed;">
     <img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrow('arrowSideBody')" style="top: 60px;">
-    <label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 15px); display: none;" onclick="rotateArrow('arrowSideBody')">Profile Info</label>
+    <label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 73px); display: none; position: relative;" onclick="rotateArrow('arrowSideBody')">Profile Info</label>
     <div id="sideBar" >
       <div id="containInfo">
         <div class="profile">
@@ -70,6 +74,7 @@
         <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
         <!--<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>-->
         
+        <button id="displayNote" class="btn btn-primary" style="transform: translateY(55px);" onclick="showNote()">Show Note</button>
 
         <br><br><br><hr>
       </div>
@@ -138,7 +143,7 @@
               <label for="name" style="color: white;">Patients name</label><br>
               <input class="box" type="text" name="name" id="name" placeholder="Name"  required /><br><br>
               
-              <label for="surname" style="color: white;">Pateints surname</label><br>
+              <label for="surname" style="color: white;">Patients surname</label><br>
               <input id="surname" name="surname" placeholder="Surname"/><br><br>
               
               <label for="idNumber" style="color: white;">Patients ID number</label><br>

@@ -60,13 +60,6 @@ var inputBoxes = document.getElementById("inputBoxes");
   }
 }
 
-
-
-
-
-
-
-
 // Global vairables to see which tab is curretly selected
 var disSearch = false;
 var disAdd = false;
@@ -195,6 +188,7 @@ function moveRightBar()
 }
 
 function rotateArrow(arrowID) {
+  
   let arrowElement = document.getElementById(arrowID);
   
   if(arrowElement.classList.contains("arrowSideBarTransform")) {
@@ -227,4 +221,17 @@ function moveSideBar(){
     document.getElementById("conatinerHome").classList.add("moveContainerHome");
   }
   
+}
+
+function showNote() {
+  let note = document.getElementById("mydiv");
+  let displayButton = document.getElementById("displayNote");
+
+  if (note.style.display == "none") {
+    note.style.display = "block";
+    displayButton.innerHTML = "Hide Note";
+  } else {
+    note.style.display = "none";
+    displayButton.innerHTML = "Show Note";
+  }
 }

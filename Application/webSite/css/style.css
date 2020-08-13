@@ -169,6 +169,13 @@ body{
 	grid-template-rows: 1fr 1fr;
 }
 
+#sideBarLabel {
+	background-color: white;
+	border-radius: 10px;
+	width: 90px;
+	text-align: center;
+}
+
 #bodyContainer{
 	position: relative;
 
@@ -176,7 +183,13 @@ body{
 	margin-right: auto;
 	width: 60%;
 
+	transition: 0.8s;
 }
+
+.bodyContainerIncreaseWidth {
+	transform: translateX(-120px);
+}
+
 #saveDoctorNote:hover {
 	background-color: white;
 	color: #003366;
@@ -246,6 +259,7 @@ body{
 }
 
 .arrowSideBarTransform {
+	position: relative;
 	border-radius: 20px;
 	width: 30px;
 	height: 30px;
@@ -504,11 +518,52 @@ input {
 
 }
 
+.noteButtonsContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
 
 
 #conatinerHomeOuter {
 	margin-left: 120px;
 }
+
+
+#VideoRecorder {
+	/*display: none;*/
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 1px 0px 15px 0px black;
+	padding: 20px;
+	border-style: solid;
+	border-color: #003366;
+	border-width: 5px;
+	margin-left: 3%;
+	margin-right: 4%;
+}
+
+#videoRecoderHeader {
+	background-color: #28A745;
+	color: white;
+	margin: 0 -20px;
+	margin-top: -30px;
+	padding: 10px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	text-align: center;
+	height: 55px;
+	transform: translateY(10px);
+}
+
+input[type="file"] {
+    display: none;
+}
+
+#UploadVideo {
+	transform: translateY(4px);
+}
+
+
 
 #mydiv {
   position: absolute;
