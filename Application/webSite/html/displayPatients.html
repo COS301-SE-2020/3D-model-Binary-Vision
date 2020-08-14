@@ -14,7 +14,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	</head>
 
-	<body>
+	<body onload="init()">
 	<div class="body">
 
 		<nav class="navbar navbar-expand-md  navbar-dark">
@@ -69,10 +69,7 @@
 
 					<label for="patients">Search for Patient:</label>
 					<select class="form-control" name="doctrs" id="doctors" style=" margin-left: auto; margin-right: auto; text-align: center; width: 200px;">
-					  <option value="volvo">Dr Anderson</option>
-					  <option value="saab">Dr James</option>
-					  <option value="mercedes">Dr Heilburg</option>
-					  <option value="audi">Dr Francis</option>
+					 <!-- options are populated dynamically -->
 					</select>
 					<input class="form-control"type="text" id ="patients" style=" margin-left: auto; margin-right: auto; position: relative; display: inline;text-align: center; width: 200px;">
 
@@ -94,7 +91,7 @@
 			    </tr>
 		    </thead>
 
-		    <tbody>
+		    <tbody id="patientTable">
             	<tr>
             		<td>1</td>
             		<td>14325</td>
@@ -106,105 +103,7 @@
             		</td>
 
             	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
+            	
 
 
 		    </tbody>

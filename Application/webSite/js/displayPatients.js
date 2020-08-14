@@ -1,3 +1,6 @@
+// File created by: 
+// File modified by: Jacobus Janse van Rensburg
+
 function rotateArrow(arrowID) {
   let arrowElement = document.getElementById(arrowID);
   
@@ -32,3 +35,55 @@ function moveSideBar(){
   }
   
 }
+
+// =================================================================================
+// Function developed by: Jacobus Janse van Rensburg
+// function used to initiaise the page with the required information
+function init(){
+  populateDoctorChoices();
+  // populatePatients();  
+  document.querySelector("#doctors").addEventListener("change", populatePatients);
+}
+
+// =================================================================================
+// Function developed by: Jacobus Janse van Rensburg
+//function used to retrieve the doctors and set the the fields to chose a doctor that is visible to the receptionist
+function populateDoctorChoices(){
+  //retrieve the doctors using the api
+  var response = fetch("/getDoctorsOfReceptionist",{
+    method:"POST",
+    headers:{'Content-Type': 'application/json; charset=UTF-8'}
+  });
+
+  //decode the response from the api and use the information
+  response.then(res => res.json().then(data=> {
+    if ( res.status == 200){
+      //there was no error fetching the data and we can pupulate the dr choice bar
+      var replacement = "<option >Select Doctor</option>";
+      for (var i in data)
+      {
+        replacement+= "<option value='"+data[i]._id+"'>Dr "+data[i].surname+" ("+data[i].name+")</option>";
+      }
+      document.getElementById("doctors").innerHTML=replacement;
+    }
+    else{
+      //there was an error that needs to be handled in the front end RANI PLS
+    }
+  }));
+}
+
+// =================================================================================
+// Function developed by: Jacobus Janse van Rensburg
+//function used to fetch the patients belonging to the selected doctor and populate thet table
+function populatePatients()
+{
+
+  var selectionElement = document.getElementById("doctors");
+
+  var selectedDoctor = selectionElement.options[selectionElement.selectedIndex].value ;
+  console.log(selectedDoctor);
+
+
+ 
+}
+
