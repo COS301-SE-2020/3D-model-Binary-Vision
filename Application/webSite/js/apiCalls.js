@@ -1,7 +1,5 @@
-//
-// AUTHORS : Jacobus AND Rani
-//
-//Proof read By:
+//Created by: Jacobus Janse van Rensburg & Rani Arraf
+//Modified by: Steven Visser
 
 
 //JACO NOTE: This works
