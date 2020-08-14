@@ -11,66 +11,80 @@ var Schema = mongoose.Schema;
 var DoctorSchema = new Schema({
     name:{
         type:String,
-        required: 'This field is required!'
+        required: true
     },
     surname:{
         type:String,
-        required: 'This field is required!'
+        required: true
     },
     username:{ 
         type: String ,
-        required: 'This field is required!'
+        required: true
     },
     email:{
         type:String,
-        required: 'This field is required!'
+        required: true
     },
     password:{
         type:String,
-        required: 'This field is required!'
+        required: true
     },
     practition:{
         type:String,
-        required: 'This field is required!'
+        required: true
     }
 });
 
 var PatientSchema = new Schema({
     idNumber:{ 
         type: String, 
-        required: 'This field is required!'
+        required: true
     },
     name:{
         type:String,
-        required: 'This field is required!'
+        required: true
     },
     surname:{
         type:String,
-        required: 'This field is required!'
+        required: true
     },
     email:{
         type:String,
-        required: 'This field is required!'
+        required: true
     },
-    gender:
-    {
+    gender:{
         type:String
     },
-    cellnumber:
-    {
+    cellnumber:{
         type:String,
-        required: 'This field is required!'
+        required: true
     }
 });
 
 var Receptionist = new Schema({
-    name:{type:String},
-    surname:{type:String},
-    email:{type:String},
-    username:{type:String, required:true},
-    password:{type:String, required:true},
+    name:{
+        type:String,
+        required: true
+    },
+    surname:{
+        type:String,
+        required: true
+    },
+    email:{
+        type:String,
+        required: true
+    },
+    username:{
+        type:String,
+        required:true
+    },
+    password:{
+        type:String, 
+        required:true
+    },
     practition:{
-        type:String, required: true
+        type:String, 
+        required: true
     },
     Note:{
         type:String
@@ -78,24 +92,24 @@ var Receptionist = new Schema({
 });
 
 var ConsultationSchema = new Schema({
-    created: {
+    created:{
         type: Date,
         required: true,
         default: Date.now
     },
-    doctor: {
+    doctor:{
         type: Schema.Types.ObjectId,
         required: true
     },
-    patient: {
+    patient:{
         type: Schema.Types.ObjectId,
         required: true
     },
-    video: {
+    video:{
         type: Schema.Types.ObjectId,
         required: true
     },
-    STL: {
+    STL:{
         type: Schema.Types.ObjectId
     },
     Note:{
@@ -105,11 +119,25 @@ var ConsultationSchema = new Schema({
 });
 
 var Booking = new Schema({
-    date:{type:String,required:true},
-    time:{type:String,required:true},
-    patient:{type:mongoose.Types.ObjectId,required:true},
-    doctor:{type:mongoose.Types.ObjectId,required:true},
-    reason:{type:String}
+    date:{
+        type:String,
+        required:true
+    },
+    time:{
+        type:String,
+        required:true
+    },
+    patient:{
+        type:mongoose.Types.ObjectId,
+        required:true
+    },
+    doctor:{
+        type:mongoose.Types.ObjectId,
+        required:true
+    },
+    reason:{
+        type:String
+    }
 })
 
 module.exports = {
