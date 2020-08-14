@@ -28,16 +28,17 @@ module.exports = {
 
         passwordChangeOptions.html.replace("RESET_PASSWORD_URL",resetURL);
         passwordChangeOptions.html.replace("USER_EMAIL_HERE",req.body.email);
-          transporter.sendMail(passwordChangeOptions, function(error, info){
-              if (error) {
-                console.log(error);
-              } else {
-                console.log('Email sent: ' + info.response);
-              }
-            });
+        transporter.sendMail(passwordChangeOptions, function(error, info){
+            if (error) 
+            {
+              console.log(error);
+            } 
+            else
+            {
+              console.log('Email sent: ' + info.response);
+            }
+        });
 
-            res.send(200);
+        res.send(200);
     }
-
-
 }
