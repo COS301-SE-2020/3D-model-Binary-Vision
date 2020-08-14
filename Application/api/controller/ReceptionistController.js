@@ -164,6 +164,27 @@ module.exports ={
         });
     },
 
+    getDoctorScheduleToday: function (req, res){
+        if (!req.user){
+            res.status(401).send("Unauthorized access to doctors scheduling info");
+        }
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth();
+        var day = date.getDate();
+    
+        var d = day + "/" + month + "/" + year;
+
+        Booking.find({"doctor":mongoose.Types.ObjectId(req.body.doctor),"date":d},function(err,bookings){
+            if(err){
+                res.status(400).send("error finding doctors bookings");
+                return;
+            }
+            res.json(bookings);
+            return;
+        });
+    }
+
    //===========================================================================
 
 }
