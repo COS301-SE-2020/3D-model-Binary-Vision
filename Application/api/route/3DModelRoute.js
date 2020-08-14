@@ -88,4 +88,6 @@ module.exports = function (app)
     app.route('/getDoctorsOfReceptionist').post(Receptionist.getDoctors);
  
     app.route('/getTodaysBookings').post(Model.getTodaysBookings);
+
+    app.route('/removeBooking').post(Model.removeBooking);
 }
