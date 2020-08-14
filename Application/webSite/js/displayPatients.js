@@ -111,11 +111,20 @@ function populatePatients()
 
 //================================================================================================
 // Function developed by:Steven Visser
-// Removes a booking from the databse & notifies patient
-function cancelBooking()
+// Removes a booking from the database & notifies patient
+function cancelBooking(bookingID)
 {
-    var time = document.getElementById("bookingTime").innerText;
-    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+  var response = fetch("/removeBooking",{
+    method:"POST",
+    headers:{'Content-Type': 'application/json; charset=UTF-8'},
+    body: JSON.stringify({"bookingID":bookingID})
+  });
+
+  response.then(res => {
+    //check status code
+    // remove the patient from the waiting log
+    console.log(res.status);
+  });
 
 }
 
@@ -123,9 +132,8 @@ function cancelBooking()
 //================================================================================================
 // Function developed by:Steven Visser
 // Updates a booking to a different time & notifies patient
-function postponeBooking()
+function postponeBooking(bookingID)
 {
-    var time = document.getElementById("bookingTime").innerText;
-    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
     
+
 }

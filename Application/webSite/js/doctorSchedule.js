@@ -96,11 +96,8 @@ function setDate()
 //================================================================================================
 // Function developed by:Steven Visser
 // Completes a Booking and removes it from the databse
-function completeBooking()
+function completeBooking(bookingID)
 {
-    var time = document.getElementById("bookingTime").innerText;
-    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
-    var bookingID;
     
     var response = fetch("/removeBooking",{
         method:"POST",
