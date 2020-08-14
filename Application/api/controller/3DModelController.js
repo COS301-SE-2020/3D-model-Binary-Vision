@@ -576,4 +576,30 @@ module.exports = {
     });
   },
 
+// ======================================================================================
+// function Developed By: Steven Visser
+// Updates a booking date & time based on booking id
+updateBooking: function(req, res)
+{
+  if (!req.user)
+  {
+    res.status(401).send("Unauthorized");
+    return;
+  }
+  
+  var id = mongoose.Types.ObjectId(req.body._id)
+  var date = mongoose.Types.ObjectId(req.body.date);
+  var time = mongoose.Types.ObjectId(req.body.time);
+
+  Booking.updateOne({"_id":id}, {$set:{"date":date,"time":time}} , function(err){
+    if (err)
+    {
+      res.status(400).send("Error Finding Booking");
+      return;
+    }
+    res.status(200).send("Booking successfully updated!");
+    return;
+  });
+},
+
 };
