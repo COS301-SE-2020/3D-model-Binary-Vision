@@ -80,3 +80,30 @@ function setDate()
     var date = today.getDate() + ' / ' + (today.getMonth()+1) +' / '+ today.getFullYear();
     container.innerHTML = "SCHEDULE FOR [" + date + "]";
 }
+
+//================================================================================================
+// Function developed by:Steven Visser
+// Completes a Booking and removes it from the databse
+function completeBooking()
+{
+
+}
+
+//================================================================================================
+// Function developed by:Steven Visser
+// Removes a booking from the databse & notifies patient
+function cancelBooking()
+{
+
+}
+
+
+//================================================================================================
+// Function developed by:Steven Visser
+// Updates a booking to a different time & notifies patient
+function postponeBooking()
+{
+
+}
+
+

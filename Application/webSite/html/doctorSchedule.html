@@ -72,15 +72,15 @@
   <div class="containerRight">
     <div id="rightSideBody" >
         <div id="containInfoRight" style="position: fixed; top: 40px;">
-          TIME: 12:30 <hr>
-          NOTES ON PATIENT: <br>
-          MR TOM
+          TIME: <p id = "bookingTime">time</p>
+          PATIENT: <p id = "patientName">name</p><hr>
+          NOTES ON PATIENT: <p id = patientNotes></p><br>
           <br><br><br><br><br><br>
-          TIME SETTINGS<hr>
+          SETTINGS<hr>
           <form>
-            <button class="btn btn-success" type="button" onclick="successTime();" style="margin-right: 10px; margin-bottom: 10px;">Complete</button>
-            <button class="btn btn-danger" type="button" onclick="cancelTime();" style="margin-right: 10px; margin-bottom: 10px;">Cancel</button>
-            <button class="btn btn-warning" type="button" onclick="postponeTime();" style="margin-right: 10px; margin-bottom: 10px;">Postpone</button>
+            <button class="btn btn-success" type="button" onclick="completeBooking();" style="margin-right: 10px; margin-bottom: 10px;">Complete</button>
+            <button class="btn btn-danger" type="button" onclick="cancelBooking();" style="margin-right: 10px; margin-bottom: 10px;">Cancel</button>
+            <button class="btn btn-warning" type="button" onclick="postponeBooking();" style="margin-right: 10px; margin-bottom: 10px;">Postpone</button>
             <button class="btn btn-primary" type="submit" formaction="Consultation.html" style="margin-right: 10px; margin-bottom: 10px;">Consultation</button>
           </form>
 
