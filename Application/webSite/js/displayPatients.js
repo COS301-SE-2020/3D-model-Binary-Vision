@@ -84,27 +84,42 @@ function populatePatients()
   console.log(selectedDoctor);
 
   //get the information regarding the doctor
-  var response = ("/getDoctorsScheduleToday",{
+  var response = fetch("/getDoctorsScheduleToday",{
     method: "POST",
     headers:{'Content-Type': 'application/json; charset=UTF-8'},
     body: JSON.stringify({"doctor":selectedDoctor})
   });
 
-  response.then(res => res.json().then(data =>{
-    if (res.status == 200){
 
-      for(var i in data)
-      {
-        console.log(data[i]);
-      }
+ response.then(res=> res.json().then(data=> {
+    var replacement ="";
+    var count = 1;
 
+    for( var i in data)
+    {
+
+      //fetch the patients information
+      var get = fetch("/singlePatient",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body: JSON.stringify({"patient":data[i].patient})
+      });
+
+      get.then(g => g.json().then(patientInfo=>{
+
+        if(g.status ==200){
+        console.log(patientInfo);
+        replacement+="<tr><td>"+count+"</td><td>"+patientInfo.idNumber+"</td><td>"+patientInfo.name+"</td><td>"+data[i].time+"</td><td>"+patientInfo.cellnumber+"</td><td><button class='btn btn-success'  type='button' onclick='postponeBooking(\""+data[i]._id+"\")'>POSTPONE</button><button class='btn btn-danger'  type='button' onclick='cancelBooking(\""+data[i]._id+"\")'>CANCEL</button></td></tr>";
+        console.log(replacement);
+        document.getElementById("patientTable").innerHTML+=replacement;
+        }
+        else{
+          //error occured getting patient information for a booking
+        }
+     
+      }));
     }
-    else{
-      //something went wrong and needs handling in the front end
-    }
-
-  }));
-
+ }));
 
  
 }
