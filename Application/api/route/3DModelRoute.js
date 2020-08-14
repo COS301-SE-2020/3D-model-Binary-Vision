@@ -90,4 +90,6 @@ module.exports = function (app)
     app.route('/getTodaysBookings').post(Model.getTodaysBookings);
 
     app.route('/removeBooking').post(Model.removeBooking);
+
+    app.route('/postponeBooking').post(Model.updateBooking);
 }
