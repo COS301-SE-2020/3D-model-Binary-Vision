@@ -45,8 +45,7 @@ function setTodaysBookings()
     //   maybe sort the times in accending order ?? then populate the fields
         for(var i in data){
             console.log(data[i]);
-            //change id notify to booking id
-            var replacement = '<li id="'+data[i]._id+'">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'
+            var replacement = '<li class= "notify" id="'+data[i]._id+'">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'
             document.getElementById("notifyContainer").innerHTML += replacement;
         }
     }));
