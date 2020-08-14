@@ -563,9 +563,9 @@ module.exports = {
       return;
     }
     
-    var id = res.body.bookingID;
+    var id = mongoose.Types.ObjectId(req.body._id)
 
-    Booking.remove({"_id":id}, function(err){
+    Booking.deleteOne({"_id":id}, function(err){
       if (err)
       {
         res.status(400).send("Error Removing Booking");

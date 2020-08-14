@@ -45,8 +45,9 @@ function setTodaysBookings()
     //   maybe sort the times in accending order ?? then populate the fields
         for(var i in data){
             console.log(data[i]);
-            var replacement = '<li id="notify">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'
-            document.getElementById("notifyContainer").innerHTML = replacement;
+            //change id notify to booking id
+            var replacement = '<li id="'+data[i]._id+'">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'
+            document.getElementById("notifyContainer").innerHTML += replacement;
         }
     }));
 }
@@ -105,13 +106,22 @@ function completeBooking(bookingID)
     var response = fetch("/removeBooking",{
         method:"POST",
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
-        body: JSON.stringify({"bookingID":bookingID})
+        body: JSON.stringify({"_id":bookingID})
     });
 
     response.then(res => {
         //remove the bar holding this booking and load the next one
         //check status code
         console.log(res.status);
+        if(res.status == 401)
+        {
+            alert("You are not authorized to do this action!");
+        }
+        else if(res.status== 200)
+        {
+            //remove successful, dynamically update the page to remove the block
+            document.getElementById(bookingID).remove();
+        }
     });
 
 }
