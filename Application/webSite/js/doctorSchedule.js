@@ -100,28 +100,22 @@ function completeBooking()
 {
     var time = document.getElementById("bookingTime").innerText;
     var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
-    //use this to get find the correct booking in database to be removed
+    var bookingID;
+    
+    var response = fetch("/removeBooking",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body: JSON.stringify({"bookingID":bookingID})
+    });
+
+    response.then(res => {
+        //remove the bar holding this booking and load the next one
+        //check status code
+        console.log(res.status);
+    });
 
 }
 
-//================================================================================================
-// Function developed by:Steven Visser
-// Removes a booking from the databse & notifies patient
-function cancelBooking()
-{
-    var time = document.getElementById("bookingTime").innerText;
-    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
 
-}
-
-
-//================================================================================================
-// Function developed by:Steven Visser
-// Updates a booking to a different time & notifies patient
-function postponeBooking()
-{
-    var time = document.getElementById("bookingTime").innerText;
-    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
-}
 
 

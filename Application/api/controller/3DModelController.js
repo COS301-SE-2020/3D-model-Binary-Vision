@@ -438,89 +438,89 @@ module.exports = {
 //======================================================================================
    // search for patients based on certain criteria
    //developed by: Jacobus Janse van Rensburg
-   searchPatient: function(req, res){
+   searchPatient: function(req, res)
+   {
+      if (!req.user){
+          res.status(401);
+          return;
+      }
 
-    if (!req.user){
-        res.status(401);
+      const {name , surname , idNumber} = req.body;
+
+      if(idNumber != null){
+        Patient.find({"idNumber":idNumber}, function(err,patient){
+          if(err){
+            res.status(400);
+            return;
+          }
+          if(patient){
+            res.json(patient).status(200);
+            return;
+          }
+          else{
+            res.status(404);
+            return;
+          }
+
+        });
+      }
+      else if(name != null && surname !=null)
+      {
+        Patient.find({"name":name,"surname":surname}, function(err,patient){
+          if(err){
+            res.status(400);
+            return;
+          }
+          if(patient){
+            res.json(patient).status(200);
+            return;
+          }
+          else{
+            res.status(404);
+            return;
+          }
+
+        });
+      }
+      else if(name !=null)
+      {
+        Patient.find({"name":name}, function(err,patient){
+          if(err){
+            res.status(400);
+            return;
+          }
+          if(patient){
+            res.json(patient).status(200);
+            return;
+          }
+          else{
+            res.status(404);
+            return;
+          }
+        });
+      }
+      else if (surname!=null)
+      {
+        Patient.find({"surname":surname}, function(err,patient){
+          if(err){
+            res.status(400);
+            return;
+          }
+          if(patient){
+            res.json(patient).status(200);
+            return;
+          }
+          else{
+            res.status(404);
+            return;
+          }
+        });
+      }
+      else{
+        res.status(400);
         return;
-    }
-
-    const {name , surname , idNumber} = req.body;
-
-    if(idNumber != null){
-      Patient.find({"idNumber":idNumber}, function(err,patient){
-        if(err){
-          res.status(400);
-          return;
-        }
-        if(patient){
-          res.json(patient).status(200);
-          return;
-        }
-        else{
-          res.status(404);
-          return;
-        }
-
-      });
-    }
-    else if(name != null && surname !=null)
-    {
-      Patient.find({"name":name,"surname":surname}, function(err,patient){
-        if(err){
-          res.status(400);
-          return;
-        }
-        if(patient){
-          res.json(patient).status(200);
-          return;
-        }
-        else{
-          res.status(404);
-          return;
-        }
-
-      });
-    }
-    else if(name !=null)
-    {
-      Patient.find({"name":name}, function(err,patient){
-        if(err){
-          res.status(400);
-          return;
-        }
-        if(patient){
-          res.json(patient).status(200);
-          return;
-        }
-        else{
-          res.status(404);
-          return;
-        }
-      });
-    }
-    else if (surname!=null)
-    {
-      Patient.find({"surname":surname}, function(err,patient){
-        if(err){
-          res.status(400);
-          return;
-        }
-        if(patient){
-          res.json(patient).status(200);
-          return;
-        }
-        else{
-          res.status(404);
-          return;
-        }
-      });
-    }
-    else{
-      res.status(400);
-      return;
-    }
-},
+      }
+  },
 
 // ======================================================================================
 // function Developed By: Jacobus Janse van Rensburg
@@ -548,6 +548,30 @@ module.exports = {
 
 
       res.json(bookings).status(200);
+      return;
+    });
+  },
+
+// ======================================================================================
+// function Developed By: Steven Visser
+// removes a booking from databse
+  removeBooking: function(req, res)
+  {
+    if (!req.user)
+    {
+      res.status(401).send("Unauthorized");
+      return;
+    }
+    
+    var id = res.body.bookingID;
+
+    Booking.remove({"_id":id}, function(err){
+      if (err)
+      {
+        res.status(400).send("Error Removing Booking");
+        return;
+      }
+      res.status(200).send("Booking successfully removed!");
       return;
     });
   },

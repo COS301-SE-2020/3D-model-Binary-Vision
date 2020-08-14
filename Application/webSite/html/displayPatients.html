@@ -29,17 +29,17 @@
 		    <div class="collapse navbar-collapse" id="collapsibleNavbar">
 		      <ul class="navbar-nav">
 		        <li id="otherLi" class="nav-item">
-		          <a class="nav-link" href="newHome.html">Home</a>
+		          	<a class="nav-link" href="newHome.html">Home</a>
 		        </li>
 		        <li id="otherLi" class="nav-item">
-		          <a class="nav-link active" href="displayPatients.html"><u>Logs</u></a>
+		          	<a class="nav-link active" href="displayPatients.html"><u>Logs</u></a>
 		        </li>
 		        <li id="otherLi" class="nav-item">
-                      <a class="nav-link" href="timetable.html">Timetable</a>
-                    </li>
-                    <li id="otherLi" class="nav-item" >
-                      <a class="nav-link" href="makeBooking.html">Booking</a>
-                    </li>
+                    <a class="nav-link" href="timetable.html">Timetable</a>
+                </li>
+                <li id="otherLi" class="nav-item" >
+                    <a class="nav-link" href="makeBooking.html">Booking</a>
+                </li>
 		        <li id="logout" class="nav-item" id="logout">
 					<a id="logoutA"class="nav-link" onclick="logout()" href="preview.html">Logout</a>
 		        </li>
@@ -98,8 +98,9 @@
             		<td>James</td>
             		<td>12:30</td>
             		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
+            		<td>
+						<button class="btn btn-danger" type="button" onclick="cancelBooking();" style="margin-right: 10px; margin-bottom: 10px;">Cancel</button>
+						<button class="btn btn-warning" type="button" onclick="postponeBooking();" style="margin-right: 10px; margin-bottom: 10px;">Postpone</button>
             		</td>
 
             	</tr>
