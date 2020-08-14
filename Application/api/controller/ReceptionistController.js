@@ -105,7 +105,8 @@ module.exports ={
                 return;
             }
 
-            res.status(200).json(booking);
+            res.redirect("/newHome.html"); //will neeed to redirect to receptionist home page
+
 
         })
 

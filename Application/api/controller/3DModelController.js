@@ -47,30 +47,30 @@ module.exports = {
     });
   },
 // ===================================================================================
-//Login Function for a receptionist
-  RepLogin: function(req,res){
+//Login Function for a receptionist  -> function never used
+  // RepLogin: function(req,res){
 
-    const { username, password } = req.body;
-    Receptionist.findOne({ username, password }, function (err, receptionist) {
-      if (err) {
-        res.send(err);
-      } else {
-        if (receptionist) {
-          // console.log(receptionist);
+  //   const { username, password } = req.body;
+  //   Receptionist.findOne({ username, password }, function (err, receptionist) {
+  //     if (err) {
+  //       res.send(err);
+  //     } else {
+  //       if (receptionist) {
+  //         // console.log(receptionist);
 
-         // res.json(receptionist);//send(page);
-        //set cookie  redirect to different page
-          res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
-          res.redirect("/RepHome.html"); //will neeed to redirect to receptionist home page
+  //        // res.json(receptionist);//send(page);
+  //       //set cookie  redirect to different page
+  //         res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
+  //         res.redirect("/RepHome.html"); //will neeed to redirect to receptionist home page
 
-        } else {
-          var resp ={name:""};
-          resp = JSON.stringify(resp)
-          res.json(resp);
-        }
-      }
-    });
-  },
+  //       } else {
+  //         var resp ={name:""};
+  //         resp = JSON.stringify(resp)
+  //         res.json(resp);
+  //       }
+  //     }
+  //   });
+  // },
 
 //======================================================================================
   logout:function (req, res){
@@ -159,7 +159,7 @@ module.exports = {
   },
 //======================================================================================
 
-  // get single patient by id number
+  //  single patient by id number
   getSinglePatient: function (req, res) {
     // console.log(req.body);
     // const idnumber = req.body.idNum
@@ -598,6 +598,8 @@ module.exports = {
         res.status(400).send("error looking up bookings");
         return;
       }
+
+      console.log("Found bookings: "+ bookings);
 
       res.json(bookings).status(200);
       return;
