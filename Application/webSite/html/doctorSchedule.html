@@ -72,15 +72,21 @@
   <div class="containerRight">
     <div id="rightSideBody" >
         <div id="containInfoRight" style="position: fixed; top: 40px;">
+<<<<<<< HEAD
           TIME: <p id="bookingTime" style="color: black;" >time</p> 
           Patient: <p id="patientName" style="color: black;">name</p><hr>
           NOTES ON PATIENT: <p id="patientNotes" style="color: black;"></p> <br>
+=======
+          TIME: <p id = "bookingTime">time</p>
+          PATIENT: <p id = "patientName">name</p><hr>
+          NOTES ON PATIENT: <p id = patientNotes></p><br>
+>>>>>>> d53478584a86dba3f763abffab9b672cca60b25c
           <br><br><br><br><br><br>
-          TIME SETTINGS<hr>
+          SETTINGS<hr>
           <form>
-            <button class="btn btn-success" type="button" onclick="successTime();" style="margin-right: 10px; margin-bottom: 10px;">Complete</button>
-            <button class="btn btn-danger" type="button" onclick="cancelTime();" style="margin-right: 10px; margin-bottom: 10px;">Cancel</button>
-            <button class="btn btn-warning" type="button" onclick="postponeTime();" style="margin-right: 10px; margin-bottom: 10px;">Postpone</button>
+            <button class="btn btn-success" type="button" onclick="completeBooking();" style="margin-right: 10px; margin-bottom: 10px;">Complete</button>
+            <button class="btn btn-danger" type="button" onclick="cancelBooking();" style="margin-right: 10px; margin-bottom: 10px;">Cancel</button>
+            <button class="btn btn-warning" type="button" onclick="postponeBooking();" style="margin-right: 10px; margin-bottom: 10px;">Postpone</button>
             <button class="btn btn-primary" type="submit" formaction="Consultation.html" style="margin-right: 10px; margin-bottom: 10px;">Consultation</button>
           </form>
 
