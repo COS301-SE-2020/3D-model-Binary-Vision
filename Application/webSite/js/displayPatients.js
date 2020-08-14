@@ -83,6 +83,28 @@ function populatePatients()
   var selectedDoctor = selectionElement.options[selectionElement.selectedIndex].value ;
   console.log(selectedDoctor);
 
+  //get the information regarding the doctor
+  var response = ("/getDoctorsScheduleToday",{
+    method: "POST",
+    headers:{'Content-Type': 'application/json; charset=UTF-8'},
+    body: JSON.stringify({"doctor":selectedDoctor})
+  });
+
+  response.then(res => res.json().then(data =>{
+    if (res.status == 200){
+
+      for(var i in data)
+      {
+        console.log(data[i]);
+      }
+
+    }
+    else{
+      //something went wrong and needs handling in the front end
+    }
+
+  }));
+
 
  
 }
