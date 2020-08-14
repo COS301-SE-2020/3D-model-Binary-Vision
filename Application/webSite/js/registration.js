@@ -185,6 +185,8 @@ function moveRightBar()
     right.style.width ="500px";
     
   }
+
+
 }
 
 function rotateArrow(arrowID) {

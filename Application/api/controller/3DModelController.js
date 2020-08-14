@@ -46,35 +46,9 @@ module.exports = {
       }
     });
   },
-// ===================================================================================
-//Login Function for a receptionist
-  RepLogin: function(req,res){
-
-    const { username, password } = req.body;
-    Receptionist.findOne({ username, password }, function (err, receptionist) {
-      if (err) {
-        res.send(err);
-      } else {
-        if (receptionist) {
-          // console.log(receptionist);
-
-         // res.json(receptionist);//send(page);
-        //set cookie  redirect to different page
-          res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
-          res.redirect("/RepHome.html"); //will neeed to redirect to receptionist home page
-
-        } else {
-          var resp ={name:""};
-          resp = JSON.stringify(resp)
-          res.json(resp);
-        }
-      }
-    });
-  },
 
 //======================================================================================
   logout:function (req, res){
-    console.log("logging out");
     res.cookie("drCookie","",{maxAge:0,httpOnly:true});
     res.cookie("patientCookie","",{maxAge:0,httpOnly:true});
     res.cookie("consultation","",{maxAge:0});
@@ -85,7 +59,6 @@ module.exports = {
   signup: function (req, res) {
 
       const { name , surname,email, username, password ,choice , practition} = req.body;
-      console.log(req.body);
       if(choice=="Doctor"){
 
       const doctor = new Doctor({name,surname,email,username, password,practition});
@@ -124,15 +97,12 @@ module.exports = {
       //
     }
 
-    // console.log("Setting the patient cookie, Patient Id: "+req.body.PatientID);
 
     res.cookie("patientCookie",req.body.PatientID).send("Patient Cookie is set");
-    // console.log("PatientCookie: "+req.cookies.patientCookie)
     return;
   },
 //======================================================================================
   addPatient: function (req, res) {
-    // console.log(req.body);
     if (!req.user) {
       return res.status(401);
     }
@@ -159,13 +129,10 @@ module.exports = {
   },
 //======================================================================================
 
-  // get single patient by id number
+  //  single patient by id number
   getSinglePatient: function (req, res) {
-    // console.log(req.body);
-    // const idnumber = req.body.idNum
-    //  console.log(idnumber);
+   
     Patient.findOne({ '_id' : mongoose.Types.ObjectId(req.body.patient) }, function (err, patient) {
-      // console.log(patient);
       if (err) {
         res.send(err);
         return;
@@ -188,14 +155,11 @@ module.exports = {
       res.status(401).send("Unauthorized");
       return;
     }
-    // console.log("Req.user = "+ req.user);
     Patient.find({'doctor': mongoose.Types.ObjectId(req.user)}, function (err, patients) {
       if (err) {
-        console.log(err);
         res.status(500).send("Error looking up patients");
         return;
       } else {
-        // console.log(patients);
         res.status(202).json(patients);
         return;
       }
@@ -243,8 +207,6 @@ module.exports = {
       return;
     }
 
-    console.log("dr: "+mongoose.Types.ObjectId(req.user)+"\nPatient: "+mongoose.Types.ObjectId(req.cookies.patientCookie));
-    console.log("getting consultations");
     Consultation.find({"doctor":mongoose.Types.ObjectId(req.user), "patient":mongoose.Types.ObjectId(req.cookies.patientCookie)} , function(err, consultations){
       if (err)
       {
@@ -252,7 +214,6 @@ module.exports = {
         return;
       }
       else{
-        console.log(consultations);
         res.status(200).json(consultations);
         return;
       }
@@ -314,7 +275,6 @@ module.exports = {
     }
 
     Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doctor){
-      // console.log(doctor);
       if (err)
       {
         res.send("No docotor found").status(404);
@@ -366,14 +326,12 @@ module.exports = {
             consultation.save(function (err, saved) {
               if (err)
               {
-                console.log(err);
+                res.send(400);
 
               }
-              console.log("created consultation");
               res.status(201).send("Created");
               return;
             });
-            // res.send(`Uploaded file ${video.name}`);
           });
         }
       });
@@ -448,7 +406,6 @@ module.exports = {
 
     Doctor.find({}, function (err, doctor) {
       if (err) {
-        console.log(err);
         res.status(404).send("Error looking up doctor");
         return;
       } else {
@@ -465,21 +422,13 @@ module.exports = {
     {
       res.status(401).send("Unauthorized");
       return;
-    }
-    
-    // var year = Date.now().getFullYear();
-    // var month = Date.now().getMonth();
-    // var day = Date.now().getDate();
-
-    // var d = day + "/" + month + "/" + year; 
+    } 
 
     Booking.find({"doctor" : mongoose.Types.ObjectId(req.user)}, function (err, bookings) {
       if (err) {
-        console.log(err);
         res.status(500).send("Error looking up bookings");
         return;
       } else {
-        // console.log(patients);
         res.status(200).json(bookings);
         return;
       }
@@ -498,8 +447,6 @@ module.exports = {
 
     const {name , surname , idNumber} = req.body;
 
-    console.log(name+" "+surname+" "+idNumber);
-    // console.log(req.body.name);
     if(idNumber != null){
       Patient.find({"idNumber":idNumber}, function(err,patient){
         if(err){
@@ -598,6 +545,7 @@ module.exports = {
         res.status(400).send("error looking up bookings");
         return;
       }
+
 
       res.json(bookings).status(200);
       return;

@@ -30,7 +30,6 @@ module.exports ={
                 res.status(400).send(err);
                 return;
             }
-            // console.log(receptionist);
             res.json({"name":receptionist.name,"surname":receptionist.surname,"practition": receptionist.practition,"Note":receptionist.Note}).status(200);
             return;
         });
@@ -70,7 +69,6 @@ module.exports ={
             return;
         }
         const Notes = req.body.Notes;
-        console.log("requiest: "+Notes);
 
         Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(req.user)},{$set:{"Note":Notes}},{'new':false},function(err,peceptionist){
             if(err)
@@ -105,7 +103,8 @@ module.exports ={
                 return;
             }
 
-            res.status(200).json(booking);
+            res.redirect("/newHome.html"); //will neeed to redirect to receptionist home page
+
 
         })
 
@@ -154,14 +153,12 @@ module.exports ={
             res.status(401).send("Unauthorized access to doctors scheduling info");
         }
 
-        console.log("looging for dr with id: "+req.body.doctor);        
 
         Booking.find({"doctor":mongoose.Types.ObjectId(req.body.doctor)},"-reason",function(err,bookings){
             if(err){
                 res.status(400).send("error finding doctors bookings");
                 return;
             }
-            console.log("Bookings found: "+bookings);
             res.json(bookings);
             return;
         });

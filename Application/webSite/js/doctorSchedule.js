@@ -43,31 +43,43 @@ function setTodaysBookings()
       //Send the data to various functions that will populate the different fields of the bookings
 
     //   maybe sort the times in accending order ?? then populate the fields
-
-        populateBookings(data);
-
+        for(var i in data){
+            console.log(data[i]);
+            var replacement = '<li id="notify">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\');" >Check</button></li>'
+            document.getElementById("notifyContainer").innerHTML = replacement;
+        }
     }));
 }
 
+function dynamicBarMoveAndPopulate(id,time,reason){
+    moveRightBar();
+    populateBookings(id,time,reason);
+}
 //================================================================================================
 // Function developed by: Jacobus janse van Rensburg
 // Function used to populate the fields of the bookings retrieved
-function populateBookings(data)
+function populateBookings(patientId,time,reason)
 {
-    for (var i in data)
-    {
+   
         // get the patients information 
         
         var response = fetch("/singlePatient",{
             method:"POST",
             headers:{'Content-Type': 'application/json; charset=UTF-8'},
-            body: JSON.stringify({"patient":data[i].patient})
+            body: JSON.stringify({"patient":patientId})
         });
+
         response.then(res=> res.json().then(patient=> {
         //    do what needs to be done with the patients information
+            //populate right bar over here 
+            console.log("hello "+ patient.name+" "+time+ " "+ reason);
+            document.getElementById("patientName").innerHTML= patient.name ;
+            document.getElementById("bookingTime").innerHTML=time;
+            document.getElementById("patientNotes").innerHTML = reason;
+           console.log(patient);
         }));
 
-    }
+    
 }
 
 //================================================================================================
