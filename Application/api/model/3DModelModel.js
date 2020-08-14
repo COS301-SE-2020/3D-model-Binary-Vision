@@ -1,4 +1,7 @@
-//created by:Jacobus Janse van Rensburg
+//Created by: Jacobus Janse van Rensburg
+//Modified by: Steven Visser
+//
+//This is the Model file. This is where the Schemas for the MongoDB database are created and set.
 
 'use strict';
 
@@ -8,31 +11,46 @@ var Schema = mongoose.Schema;
 var DoctorSchema = new Schema({
     name:{
         type:String,
-        required: 'kindly enter name'
+        required: 'This field is required!'
     },
     surname:{
-        type:String
+        type:String,
+        required: 'This field is required!'
     },
-    username: { type: String },
-    email:{type:String},
+    username:{ 
+        type: String ,
+        required: 'This field is required!'
+    },
+    email:{
+        type:String,
+        required: 'This field is required!'
+    },
     password:{
-        type:String
+        type:String,
+        required: 'This field is required!'
     },
     practition:{
-        type:String,require: true
+        type:String,
+        required: 'This field is required!'
     }
 });
 
 var PatientSchema = new Schema({
-    idNumber: { type: String, required: true },
+    idNumber:{ 
+        type: String, 
+        required: 'This field is required!'
+    },
     name:{
-        type:String
+        type:String,
+        required: 'This field is required!'
     },
     surname:{
-        type:String
+        type:String,
+        required: 'This field is required!'
     },
     email:{
-        type:String
+        type:String,
+        required: 'This field is required!'
     },
     gender:
     {
@@ -40,7 +58,8 @@ var PatientSchema = new Schema({
     },
     cellnumber:
     {
-        type:String
+        type:String,
+        required: 'This field is required!'
     }
 });
 
@@ -100,4 +119,3 @@ module.exports = {
     Receptionist: mongoose.model("Receptionist", Receptionist),
     Booking:mongoose.model("Booking", Booking)
 }
-// module.exports = mongoose.model("Records", RecordsSchema);

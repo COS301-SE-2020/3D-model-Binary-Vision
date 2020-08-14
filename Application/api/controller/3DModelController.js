@@ -1,4 +1,10 @@
-// created by : Jacobus Jasnse van Rensburg
+//Created by : Jacobus Janse van Rensburg
+//Modified by: Steven Visser
+//
+//This file is where most of the API Functions are declared and initialized. It contains all of the API functions
+//that pertain to Logging in/Out, Registration to the system, and functions for most areas of the program that
+//require data to be returned from the database.
+
 "use strict";
 //set up the database first
 var fs = require("fs");

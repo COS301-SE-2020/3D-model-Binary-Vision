@@ -1,5 +1,5 @@
-//created by : Jacobus Janse van Rensburg
-   //===========================================================================
+//Created by : Jacobus Janse van Rensburg
+//===========================================================================
 
 var fs = require("fs");
 
@@ -15,6 +15,7 @@ var Receptionist = require("../model/3DModelModel.js").Receptionist;
 var Booking = require("../model/3DModelModel.js").Booking;
 
 module.exports ={
+
    //===========================================================================
    //function developed by: Jacobus Janse van Rensburg
    //return non-security fatal information about receptionist
@@ -164,6 +165,9 @@ module.exports ={
         });
     },
 
+    //===========================================================================
+    //Function Developed By: Jacobus Janse van Rensburg
+    //Returns a json list of all of the bookings scheduled for current day for specific doctor
     getDoctorScheduleToday : function (req, res){
         if (!req.user){
             res.status(401).send("Unauthorized access to doctors scheduling info");
@@ -188,4 +192,3 @@ module.exports ={
    //===========================================================================
 
 }
-   //===========================================================================

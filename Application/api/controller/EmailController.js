@@ -1,4 +1,7 @@
-//created by Jacobus Janse van Rensburg
+//Created by Jacobus Janse van Rensburg
+//
+//This file contains the API function declarations and implementations for all functionality of sending emails to users
+
 var nodeMailer = require('nodemailer');
 
 var transporter = nodeMailer.createTransport({
