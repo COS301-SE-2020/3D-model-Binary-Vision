@@ -62,27 +62,37 @@ function dynamicBarMoveAndPopulate(id,time,reason,booking){
 function populateBookings(patientId,time,reason,booking)
 {
    
-        // get the patients information 
+        if(patientId != null)
+        {
+            // get the patients information 
         
-        var response = fetch("/singlePatient",{
-            method:"POST",
-            headers:{'Content-Type': 'application/json; charset=UTF-8'},
-            body: JSON.stringify({"patient":patientId})
-        });
-        console.log("booking id:"+booking);
-        response.then(res=> res.json().then(patient=> {
-        //    do what needs to be done with the patients information
-            //populate right bar over here 
-            console.log("hello "+ patient.name+" "+time+ " "+ reason);
-            document.getElementById("patientName").innerHTML= patient.name ;
-            document.getElementById("bookingTime").innerHTML=time;
-            document.getElementById("patientNotes").innerHTML = reason;
+            var response = fetch("/singlePatient",{
+                method:"POST",
+                headers:{'Content-Type': 'application/json; charset=UTF-8'},
+                body: JSON.stringify({"patient":patientId})
+            });
+            console.log("booking id:"+booking);
+            response.then(res=> res.json().then(patient=> {
+            //    do what needs to be done with the patients information
+                //populate right bar over here 
+                console.log("hello "+ patient.name+" "+time+ " "+ reason);
+                document.getElementById("patientName").innerHTML= patient.name ;
+                document.getElementById("bookingTime").innerHTML=time;
+                document.getElementById("patientNotes").innerHTML = reason;
+            
+                document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' onclick='completeBooking(\""+booking+"\");' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><button class='btn btn-primary' type='submit' formaction='Consultation.html' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</button>"
 
-            document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' onclick='completeBooking(\""+booking+"\");' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><button class='btn btn-primary' type='submit' formaction='Consultation.html' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</button>"
 
-           console.log(patient);
-        }));
-
+               console.log(patient);
+            }));
+        }
+        else
+        {
+            document.getElementById("patientName").innerHTML= "";
+            document.getElementById("bookingTime").innerHTML="";
+            document.getElementById("patientNotes").innerHTML = "";   
+            document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><button class='btn btn-primary' type='submit' formaction='' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</button>"
+        }
     
 }
 
@@ -102,27 +112,28 @@ function setDate()
 // Completes a Booking and removes it from the databse
 function completeBooking(bookingID)
 {
+        var response = fetch("/removeBooking",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json; charset=UTF-8'},
+            body: JSON.stringify({"_id":bookingID})
+        });
     
-    var response = fetch("/removeBooking",{
-        method:"POST",
-        headers:{'Content-Type': 'application/json; charset=UTF-8'},
-        body: JSON.stringify({"_id":bookingID})
-    });
+        response.then(res => {
+            //remove the bar holding this booking and load the next one
+            //check status code
+            console.log(res.status);
+            if(res.status == 401)
+            {
+                alert("You are not authorized to do this action!");
+            }
+            else if(res.status== 200)
+            {
+                //remove successful, dynamically update the page to remove the block
+                document.getElementById(bookingID).remove();
+                dynamicBarMoveAndPopulate(null,null,null,null);
 
-    response.then(res => {
-        //remove the bar holding this booking and load the next one
-        //check status code
-        console.log(res.status);
-        if(res.status == 401)
-        {
-            alert("You are not authorized to do this action!");
-        }
-        else if(res.status== 200)
-        {
-            //remove successful, dynamically update the page to remove the block
-            document.getElementById(bookingID).remove();
-        }
-    });
+            }
+        });
 
 }
 
