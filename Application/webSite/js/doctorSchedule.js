@@ -98,6 +98,9 @@ function setDate()
 // Completes a Booking and removes it from the databse
 function completeBooking()
 {
+    var time = document.getElementById("bookingTime").innerText;
+    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+    //use this to get find the correct booking in database to be removed
 
 }
 
@@ -106,6 +109,8 @@ function completeBooking()
 // Removes a booking from the databse & notifies patient
 function cancelBooking()
 {
+    var time = document.getElementById("bookingTime").innerText;
+    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
 
 }
 
@@ -115,7 +120,8 @@ function cancelBooking()
 // Updates a booking to a different time & notifies patient
 function postponeBooking()
 {
-
+    var time = document.getElementById("bookingTime").innerText;
+    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
 }
 
 
