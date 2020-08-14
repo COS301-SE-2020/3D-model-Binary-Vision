@@ -45,20 +45,20 @@ function setTodaysBookings()
     //   maybe sort the times in accending order ?? then populate the fields
         for(var i in data){
             console.log(data[i]);
-            var replacement = '<li id="notify">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\');" >Check</button></li>'
+            var replacement = '<li id="notify">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'
             document.getElementById("notifyContainer").innerHTML = replacement;
         }
     }));
 }
 
-function dynamicBarMoveAndPopulate(id,time,reason){
+function dynamicBarMoveAndPopulate(id,time,reason,booking){
     moveRightBar();
-    populateBookings(id,time,reason);
+    populateBookings(id,time,reason,booking);
 }
 //================================================================================================
 // Function developed by: Jacobus janse van Rensburg
 // Function used to populate the fields of the bookings retrieved
-function populateBookings(patientId,time,reason)
+function populateBookings(patientId,time,reason,booking)
 {
    
         // get the patients information 
@@ -68,7 +68,7 @@ function populateBookings(patientId,time,reason)
             headers:{'Content-Type': 'application/json; charset=UTF-8'},
             body: JSON.stringify({"patient":patientId})
         });
-
+        console.log("booking id:"+booking);
         response.then(res=> res.json().then(patient=> {
         //    do what needs to be done with the patients information
             //populate right bar over here 
@@ -76,6 +76,9 @@ function populateBookings(patientId,time,reason)
             document.getElementById("patientName").innerHTML= patient.name ;
             document.getElementById("bookingTime").innerHTML=time;
             document.getElementById("patientNotes").innerHTML = reason;
+
+            document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' onclick='completeBooking(\""+booking+"\");' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><button class='btn btn-primary' type='submit' formaction='Consultation.html' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</button>"
+
            console.log(patient);
         }));
 
