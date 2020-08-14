@@ -164,7 +164,7 @@ module.exports ={
         });
     },
 
-    getDoctorScheduleToday: function (req, res){
+    getDoctorScheduleToday : function (req, res){
         if (!req.user){
             res.status(401).send("Unauthorized access to doctors scheduling info");
         }
