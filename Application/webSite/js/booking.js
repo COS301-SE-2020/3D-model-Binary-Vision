@@ -121,7 +121,7 @@ function createScheduler(overlay)
     replacement += '<thead id="dayTableHead">';
 
     var d = new Date();
-    var currentMonth = d.getMonth()+1;
+    var currentMonth = d.getMonth();
     var currentDate = d.getDate();
     var currentDay = d.getDay();
     var currentYear=d.getFullYear();
@@ -132,11 +132,11 @@ function createScheduler(overlay)
     
     while (count<days.length)
     {
-        if(dd > days.length-1 )
+        if(dd > days.length )
         {
-            dd =0;
+            dd =1;
         }
-        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd]+','+(currentDate+(count+1))+'</td>';
+        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd-1]+','+(currentDate+(count))+'</td>';
         count++;
         dd++;
     }
