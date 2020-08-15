@@ -82,8 +82,8 @@ function populateBookings(patientId,time,reason,booking)
                 //do what needs to be done with the patients information
                 //populate right bar over here 
                 console.log("hello "+ patient.name+" "+time+ " "+ reason);
-                document.getElementById("patientName").innerHTML= patient.name ;
-                document.getElementById("bookingTime").innerHTML=time;
+                document.getElementById("patientName").innerHTML = patient.name ;
+                document.getElementById("bookingTime").innerHTML = time;
                 document.getElementById("patientNotes").innerHTML = reason;
             
                 document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' onclick='completeBooking(\""+booking+"\");' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><button class='btn btn-primary' type='button' onclick='openConsultation(\""+booking+"\")' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</button>"
