@@ -14,6 +14,7 @@ window.onbeforeunload = saveNotes();
 
 //=======================================================================================
 //Function developed by : Jacobus Janse van Rensburg
+//Modified by: Steven Visser
 //used to get the information of the receptionist and populate the html elements with data
 function getReceptionistInfo()
 {
@@ -28,10 +29,18 @@ function getReceptionistInfo()
         info[0] = data.name;
         info[1] = data.surname;
         info[3] = data.practition;
-        info[4] = data.Note;
+
+        if(typeof data.Note === "undefined")
+        {
+            info[4] = " ";
+        }
+        else
+        {
+            info[4] = data.Note;
+        }
 
         document.getElementById("receptionistName").innerHTML = data.name+" "+ data.surname;
-        document.getElementById("receptionistNotes").innerText = data.Note;
+        document.getElementById("receptionistNotes").innerText = info[4];
     }));
     return info;
 }
