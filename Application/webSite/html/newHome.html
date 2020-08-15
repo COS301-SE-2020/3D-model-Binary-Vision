@@ -138,24 +138,35 @@
               <h2> Patient</h2><br>
 
               <label for="name" style="color: white;">Patients name</label><br>
-              <input class="box" type="text" name="name" id="name" placeholder="Name"  required /><br><br>
+              <input class="box" type="text" name="name" id="name" placeholder="Name"  required />
+              <br><br>
               
               <label for="surname" style="color: white;">Patients surname</label><br>
-              <input id="surname" name="surname" placeholder="Surname"/><br><br>
+              <input id="surname" name="surname" placeholder="Surname" required/>
+              <br><br>
               
               <label for="idNumber" style="color: white;">Patients ID number</label><br>
-              <input id="idNumber" name="idNumber" placeholder="ID Number"/><br><br>
+              <input id="idNumber" name="idNumber" placeholder="ID Number" required/>
+              <br><br>
 
               <label for="gender" style="color: white;">Gender</label><br>
-              <input id="gender" name="gender" placeholder="gender"/><br><br>
+              <select  id = "gender" name = "gender">        
+                <option value = "Male">Male</option>
+                <option value = "Female">Female</option>
+                <option value = "Other">Other</option>
+              </select>
+              <br><br>
 
               <label for="email" style="color: white;">Patients Email</label><br>
-              <input class="box" type="email" name="email" id="email" placeholder="Email" required /><br><br>
+              <input class="box" type="email" name="email" id="email" placeholder="Email" required />
+              <br><br>
               
               <label for="cell" style="color: white;">Patients cell phone number</label><br>
-              <input id="cell" name="cellnumber" placeholder="Cellphone Number"/><br><br>
+              <input id="cell" name="cellnumber" placeholder="Cellphone Number" required/>
+              <br><br>
               
-              <input class="btn btn-primary" type="submit"  name="submitDetails" value="Submit" /><br><br>
+              <input class="btn btn-primary" type="submit"  name="submitDetails" value="Submit" />
+              <br><br>
 
             </form>
         </div>
