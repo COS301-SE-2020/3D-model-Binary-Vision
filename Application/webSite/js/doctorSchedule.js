@@ -86,17 +86,17 @@ function populateBookings(patientId,time,reason,booking)
                 document.getElementById("bookingTime").innerHTML=time;
                 document.getElementById("patientNotes").innerHTML = reason;
             
-                document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' onclick='completeBooking(\""+booking+"\");' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><button class='btn btn-primary' type='submit' formaction='Consultation.html' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</button>"
+                document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' onclick='completeBooking(\""+booking+"\");' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><button class='btn btn-primary' type='button' onclick='openConsultation(\""+booking+"\")' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</button>"
 
                 console.log(patient);
             }));
         }
         else
         {
-            document.getElementById("patientName").innerHTML= "";
-            document.getElementById("bookingTime").innerHTML="";
-            document.getElementById("patientNotes").innerHTML = "";   
-            document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><button class='btn btn-primary' type='submit' formaction='' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</button>"
+            document.getElementById("patientName").innerHTML = "N/A";
+            document.getElementById("bookingTime").innerHTML = "N/A";
+            document.getElementById("patientNotes").innerHTML = "N/A";   
+            document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><button class='btn btn-primary' type='button' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</button>"
         }
     
 }
@@ -140,6 +140,13 @@ function completeBooking(bookingID)
 
             }
         });
+}
+
+// Function developed by:Steven Visser
+// Opens consultation page with correct id's
+function openConsultation(id)
+{
+    //redicrect to consultation page
 }
 
 
