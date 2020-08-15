@@ -1,6 +1,5 @@
 //  created by: Jacobus Janse van Rensburg
 //  Updated & Reviewed by: Steven Visser
-// import { response } from "express";
 
 var selectedDoctor;
 var selectedDate;
@@ -8,25 +7,25 @@ var selectedTime;
 var selectedPatient;
 var selectedReason;
 
-// ===========================================================================================
+//===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
 //fetch all the doctors that is available to the receptionist and display them in a list overlay
-function displayDoctorOverlay(){
+function displayDoctorOverlay()
+{
 
     var response = fetch("/getDoctorsOfReceptionist",{
         method:"POST",
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
-          }    
-        });
+        }    
+    });
 
-    response.then(res => res.json().then(data=> {
-
+    response.then(res => res.json().then(data=> 
+    {
         for(var i in data)
         {
             console.log(data[i].name+"\n "+data[i].surname+" \nid:"+data[i]._id+" \nusername: "+data[i].username+" \npassword: "+data[i].password +"\n\n");
         }
-
         //createDoctorslist with the data
         createDoctorsList(data);
     }));
@@ -35,10 +34,12 @@ function displayDoctorOverlay(){
 // ==========================================================================================
 // Function developed by: Jacobus Janse Van Rensburg
 // creates a list of all the doctors that the receptionist is allowed to schedule bookings for
-function createDoctorsList(data){
+function createDoctorsList(data)
+{
     var overlay = document.getElementById('currentOverlay');
     var replacement;
-    for(var i in data){
+    for(var i in data)
+    {
         replacement+='<li>Dr.'+data[i].surname+' ('+data[i].name+') </li><a onclick="selectDoctor(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\')">select</a> <br>';
     }
     overlay.innerHTML=replacement;
@@ -46,13 +47,16 @@ function createDoctorsList(data){
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
-function displayTimeTableOverlay(){
+// 
+function displayTimeTableOverlay()
+{
     var overlay = document.getElementById('currentOverlay');
 
      createScheduler(overlay);
     //still need to populate the table with bookings
 
-    if(selectedDoctor!=null){
+    if(selectedDoctor!=null)
+    {
         var response = fetch("/getDoctorsTimeTable", {
             method:"POST",
             headers: {
@@ -61,8 +65,10 @@ function displayTimeTableOverlay(){
             body: JSON.stringify({"doctor":selectedDoctor}) 
         });
 
-        response.then(res=> res.json().then(data=>{
-            for(var i in data){
+        response.then(res=> res.json().then(data=>
+        {
+            for(var i in data)
+            {
                 console.log("Bookins already made for dr: \n"+data[i]);
             }
             populateCalander(data);
@@ -96,10 +102,12 @@ function populateCalander(data)
 
 // ===========================================================================================
 // Function developed by: Jacobus Janse van Rensburg
+// Modified by: Steven Visser
 // Dynamically produces a schedule for the week for a doctor
-function createScheduler(overlay){
+function createScheduler(overlay)
+{
     var days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
-    var times=[
+    var times = [
                "09:00","09:15","09:30","09:45",
                "10:00","10:15","10:30","10:45",
                "11:00","11:15","11:30","11:45",
@@ -109,12 +117,11 @@ function createScheduler(overlay){
                "15:00","15:15","15:30","15:45",
                "16:00","16:15","16:30","16:45"
               ];
-    var replacement;
-    replacement='<table class="table table-bordered" id="dayTable">';
-    replacement+='<thead id="dayTableHead">';
+    var replacement ='<table class="table table-bordered" id="dayTable">';
+    replacement += '<thead id="dayTableHead">';
 
     var d = new Date();
-    var currentMonth = d.getMonth();
+    var currentMonth = d.getMonth()+1;
     var currentDate = d.getDate();
     var currentDay = d.getDay();
     var currentYear=d.getFullYear();
@@ -123,27 +130,29 @@ function createScheduler(overlay){
     var count =0;
     var dd = currentDay;
     
-    while (count<days.length){
-        if(dd > days.length-1 ){
+    while (count<days.length)
+    {
+        if(dd > days.length-1 )
+        {
             dd =0;
         }
-
         replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd]+','+(currentDate+(count+1))+'</td>';
         count++;
         dd++;
     }
 
     replacement += '</thead>'
-    replacement+='<tbody>';
-    for(var i = 0 ; i < times.length; i ++){
+    replacement += '<tbody>';
+    for(var i = 0 ; i < times.length; i ++)
+    {
         replacement+='<tr><td id="time">'+times[i]+'</td>';
         for (var j =0 ; j < days.length; j ++)
         {
-            replacement+='<td class="selectableTimeSlot" id="'+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'" onclick="selectTime(\''+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'\')"></td>';
+            replacement += '<td class="selectableTimeSlot" id="'+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'" onclick="selectTime(\''+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'\')"></td>';
 
-            replacement+='</td>';
+            replacement += '</td>';
         }
-        replacement+='</tr>'
+        replacement += '</tr>'
     }
 
     replacement+='</tbody></table>';
@@ -154,7 +163,8 @@ function createScheduler(overlay){
 // Function developed by: Jacobus Janse van Rensburg
 //function that colours the selected time slot and sets the values to make a booking
 var oldTimeSlotID;
-function selectTime(timeslot){
+function selectTime(timeslot)
+{
     var element = document.getElementById(oldTimeSlotID);
     if (element!=null)
     {
@@ -172,16 +182,17 @@ function selectTime(timeslot){
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
-function displayPatientSearchOverlay(){
-
+//
+function displayPatientSearchOverlay()
+{
     createPatientSearchOverlay();
-
 }
 
 
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
+//
 function createPatientSearchOverlay()
 {
     var overlay = document.getElementById("currentOverlay");
@@ -196,26 +207,35 @@ function createPatientSearchOverlay()
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
-function createPatientsListForBooking(){
+//
+function createPatientsListForBooking()
+{
     var nameElement= document.getElementById("searchName");
     var surnameElement = document.getElementById("searchSurname");
     var idNumberElement = document.getElementById("searchPatientID");
 
     var name , surname , idNumber;
-    if(nameElement!=null) name=nameElement.value;
-    if(surnameElement!=null) surname= surnameElement.value;
-    if(idNumberElement!=null) idNumber=idNumberElement.value;
-
+    if(nameElement!=null)
+    {
+        name=nameElement.value;
+    } 
+    if(surnameElement!=null)
+    {
+        surname= surnameElement.value;
+    } 
+    if(idNumberElement!=null)
+    {
+        idNumber=idNumberElement.value;
+    } 
     var response = fetch("/searchPatient",{
         method:"POST",
         headers:{'Content-Type':'application/json; charset=UTF-8'},
         body:JSON.stringify({ name,surname, idNumber })
     });
 
-    response.then(res=> res.json().then(data=>{
-
+    response.then(res=> res.json().then(data=>
+    {
        fillPatientSearchedList(data);
-        
     }));
     //populate a list with this data
 }
@@ -223,22 +243,24 @@ function createPatientsListForBooking(){
 // ==========================================================================================
 // Function developed by: Jacobus Janse van Rensburg
 // fillse the patients overlay list that is selectable
-function fillPatientSearchedList(data){
+function fillPatientSearchedList(data)
+{
     var overlay = document.getElementById("currentOverlay");
     var replacement;
 
     for (var i in data)
     {
-        replacement+='<li>'+data[i].name+'</li><li>'+data[i].surname+'</li><li>'+data[i].idNumber+'</li><li>'+data[i].cell+'</li><a onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</a><br>';
+        replacement += '<li>'+data[i].name+'</li><li>'+data[i].surname+'</li><li>'+data[i].idNumber+'</li><li>'+data[i].cell+'</li><a onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</a><br>';
     }
-    overlay.innerHTML=replacement;
+    overlay.innerHTML = replacement;
 }
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
+//
 function selectDoctor(drID,name, surname)
 {
-    selectedDoctor=drID;
+    selectedDoctor = drID;
     console.log("Selected doctor with id: "+selectedDoctor);
 
     document.getElementById("doctorInfoDisplay").innerHTML="("+name+") "+surname;
@@ -248,31 +270,34 @@ function selectDoctor(drID,name, surname)
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
-function selectTimeSlot(date,time){
+//
+function selectTimeSlot(date, time)
+{
     selectedDate = date;
     selectedTime = time;
     console.log("Selected Time: "+ selectedTime+"\t selected date: "+selectedDate);
     
-    document.getElementById("timeInfoDisplay").innerHTML= time;
-    document.getElementById("dateInfoDisplay").innerHTML= date;
-    
-    // document.getElementById("currentOverlay").innerHTML="";
-
+    document.getElementById("timeInfoDisplay").innerHTML = time;
+    document.getElementById("dateInfoDisplay").innerHTML = date;
 }
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
-function selectPatient(patientID, name , surname, idNumber){
+//
+function selectPatient(patientID, name , surname, idNumber)
+{
     selectedPatient = patientID;
-    document.getElementById("patientInfoDisplay").innerHTML="("+idNumber+") "+name+" "+surname;
-    document.getElementById("currentOverlay").innerHTML="";
+    document.getElementById("patientInfoDisplay").innerHTML = "("+idNumber+") " + name  +" " + surname;
+    document.getElementById("currentOverlay").innerHTML = "";
 }
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
-function providedReason(){
+//
+function providedReason()
+{
     selectedReason = document.getElementById('reasonForBooking').value;
-    document.getElementById("currentOverlay").innerHTML="";
+    document.getElementById("currentOverlay").innerHTML = "";
 }
 
 // ===========================================================================================
@@ -281,7 +306,8 @@ function providedReason(){
 function makeBooking()
 {
     console.log("Making booking with details:\nDoctor: "+selectedDoctor+"\nPatient: "+selectedPatient+"\nDate: "+selectedDate+"\nTime: "+selectedTime);
-    if (selectedDoctor != null && selectedPatient!= null && selectedDate != null && selectedTime!=null){
+    if (selectedDoctor != null && selectedPatient!= null && selectedDate != null && selectedTime!=null)
+    {
         //booking can be created
         var reason = document.getElementById("reasonForBooking").value;
 
@@ -289,22 +315,25 @@ function makeBooking()
             method:"POST",
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
-              },
+            },
             body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason})   
         });
 
-        response.then(res=> res.json().then(data=>{
-            if(res.status ==200){
+        response.then(res=> res.json().then(data=>
+        {
+            if(res.status == 200)
+            {
                 //everything is fine
+                //make a redirect here
             }
-            else{
+            else
+            {
                 //something is wrong
             }
         }));
     }
-    else {
-        //Some fields are missing
+    else 
+    {
         alert("Please provide all fields to make a booking");
     }
-    
 }
