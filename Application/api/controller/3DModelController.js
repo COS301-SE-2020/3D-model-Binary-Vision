@@ -78,7 +78,7 @@ module.exports = {
     //This function allows a user to register to the database as either a doctor or a receptionist
     signup: function (req, res) 
     {
-        const { name , surname,email, username, password ,choice , practition} = req.body;
+        const { name, surname, email, username, password ,choice , practition} = req.body;
         if(choice=="Doctor")
         {
             const doctor = new Doctor({name,surname,email,username, password,practition});
