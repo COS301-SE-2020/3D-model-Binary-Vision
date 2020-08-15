@@ -27,6 +27,12 @@ module.exports = {
     {
 
         const { username, password } = req.body;
+
+        // var frontSalt = "Pancakes";
+        // var backSalt ="bad";
+        // var saltedPassword =frontSalt+password+backSalt;
+        // password = hash(saltedPassword);
+
         Doctor.findOne({ username, password }, function (err, doctor) 
         {
             if (err) 
@@ -60,6 +66,9 @@ module.exports = {
               return;
             }
         });
+
+        res.status(404);
+        return;
     },
 
     //======================================================================================
@@ -79,6 +88,9 @@ module.exports = {
     signup: function (req, res) 
     {
         const { name, surname, email, username, password ,choice , practition} = req.body;
+        
+        console.log("name: "+name+"\nsurname: "+ surname+"\nemail: "+email+"\nusername: "+username+"\npassword: "+password+"\nchoice: "+choice+"\npractice: "+practition);
+
         if(choice=="Doctor")
         {
             const doctor = new Doctor({name,surname,email,username, password,practition});
@@ -86,14 +98,19 @@ module.exports = {
             {
                 if (err) 
                 {
+                    res.status(400);
                     res.send(err);
+                    return;
                 }
                 else 
                 {
-                  	const page = fs.readFileSync("webSite/html/login.html", "utf-8");
-                  	res.setHeader("Content-Type", "text/html");
-                    res.status(201)
-                      .send(page);
+                    console.log("Saved doctor: "+saved);
+                  	// const page = fs.readFileSync("webSite/html/login.html", "utf-8");
+                  	// res.setHeader("Content-Type", "text/html");
+                    // res.status(200)
+                    //   .send(page);
+                    res.redirect("/login.html")
+                    return;
                 }
             });
         }
@@ -115,6 +132,62 @@ module.exports = {
                 }
             });
         }
+    },
+
+    //======================================================================================
+    //Function developed by: Jacobus Janse van Rensburg
+    //This function is used for signup to check if the username requested has not already been used by another user
+    isValidUsername:function (req, res){
+        //no need to check for res.user since this is for signup purposes
+        var username = req.body.username;
+
+        Doctor.find({"username":username}, function(err, doctor){
+            if(doctor!=null)
+            {
+                // a doctor has this username already and it cannot be used
+                res.status(422).send("invalid");//send invalid errorCode
+                return;
+            }
+        });
+
+        Receptionist.find({"username":username},function(err,receptionist){
+            if(receptionist!=null){
+                //a receptionist exists with the user name and therefore cannot be used
+                res.status(422).send("invalid");//send invalid errorCode
+                return;
+            }
+        })
+
+        res.status(200).send("valid");
+        return;
+    },
+
+     //======================================================================================
+    //Function developed by: Jacobus Janse van Rensburg
+    //This function is used for signup to check if the email requested has not already been used by another user
+    isValidEmail:function (req, res){
+        //no need to check for res.user since this is for signup purposes
+        var email = req.body.email;
+
+        Doctor.find({"email":email}, function(err, doctor){
+            if(doctor!=null)
+            {
+                // a doctor has this email already and it cannot be used
+                res.status(422).send("invalid");//send invalid errorCode
+                return;
+            }
+        });
+
+        Receptionist.find({"email":email},function(err,receptionist){
+            if(receptionist!=null){
+                //a receptionist exists with the user name and therefore cannot be used
+                res.status(422).send("invalid");//send invalid errorCode
+                return;
+            }
+        })
+
+        res.status(200).send("valid");
+        return;
     },
 
     //======================================================================================

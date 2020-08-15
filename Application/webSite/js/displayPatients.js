@@ -92,7 +92,6 @@ function populatePatients()
     var selectionElement = document.getElementById("doctors");
 
     var selectedDoctor = selectionElement.options[selectionElement.selectedIndex].value ;
-    console.log(selectedDoctor);
 
     //get the information regarding the doctor
     var response = fetch("/getDoctorsScheduleToday",{

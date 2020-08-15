@@ -29,6 +29,10 @@ module.exports = function (app)
 
     app.route('/signup')
         .post(Model.signup);
+    
+    app.route('/isValidUsername').post(Model.isValidUsername);
+
+    app.route('/isValidEmail').post(Model.isValidEmail);
 
     app.route('/getDoctor')
         .post(Model.getDoctorSurname);

@@ -11,8 +11,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/signup.js"></script>
+        <!-- hashing library used below -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+        
     </head>
-    <body>
+    <body onload="init()">
       <nav class="navbar navbar-expand-lg navbar-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
@@ -35,31 +40,36 @@
       <br><br><br>
 
       <div class="container" >
-              <form action="/signup" method="post" id="form" style="max-width: 300px; border-top-right-radius:10px; border-top-left-radius: 10px;">
+              <form id="form" style="max-width: 300px; border-top-right-radius:10px; border-top-left-radius: 10px;">
               <br>
               <h2> Registration</h2>
               <br>
               <input class="box" type="text" name="name" id="name" placeholder="Name"  required />
               <br><br>
-              <input name="surname" placeholder="Surname" required />
+              <input name="surname" placeholder="Surname" id="surname" required />
               <br><br>
               <input class="box" type="email" name="email" id="email" placeholder="Email" required />
               <br><br>
-              <input name="username" placeholder="Username" required/>
+              <input class="box" type="email" name="emailCheck" id="emailCheck" placeholder="Retype Email" required />
+              <br><br>
+              <input name="username" placeholder="Username" id="username" required/>
               <br><br>
               <input class="box" type="password" name="password" id="password" placeholder="Password " required/>
+              <br><br>
+              <input class="box" type="password" name="passwordCheck" id="passwordCheck" placeholder="Retype Password " required/>
               <br><br>
               <!--
               <input type="text " name="choice" placeholder="Doctor/Receptionist" required /> 
               <br><br> -->
-              <select  id = "choice" name = "choice">        
+              <select  id = "choice" name = "choice">  
+                <option value="">Select an Option</option>      
                 <option value = "Receptionist">Receptionist</option>
                 <option value = "Doctor">Doctor</option>
               </select>
               <br><br>
-              <input type="text" name="practition" placeholder="Practice" required /> 
+              <input type="text" name="practition" placeholder="Practice" id="practice" required /> 
               <br><br>
-              <input class="btn btn-primary" type="submit" id="submitDetails" name="submitDetails" value="Submit" />
+              <input class="btn btn-primary" type="button" id="submitDetails" name="submitDetails" value="Submit" onclick="signup()" />
               <br><hr>
               <p style="font-size: 12px;">Already have an account?<a style="font-size: 12px;" href="login.html" onclick="preview()"> Login Here</a></p>
               </form>
