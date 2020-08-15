@@ -1,0 +1,45 @@
+
+//variables needed
+var express = require('express'),
+    app = express(),
+    port =process.env.PORT || 3000,
+    mongoose =require('mongoose'),
+    bodyParser = require('body-parser'),
+    serveStatic= require('serve-static');
+
+var MONGO_OPTIONS = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}
+
+//mongoose instance connection url connection
+// mongoose.Promise = global.Promise;
+
+
+mongoose.connect('mongodb://localhost/ModelDB', MONGO_OPTIONS);
+mongoose.set('useFindAndModify',false);
+
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+
+const cookieparser = require("cookie-parser")
+app.use(cookieparser());
+
+app.use((req, res, next) => {
+  // console.log(req.cookies)
+  if (req.cookies.drCookie) {
+    req.user = req.cookies.drCookie;
+  }
+  
+  next();
+})
+
+app.use(serveStatic('webSite/'));
+app.use(serveStatic('webSite/html/'))
+app.use(serveStatic('JacoCookie/'));
+var routes = require('./api/route/3DModelRoute');
+routes(app);
+
+app.listen(port);
+
+console.log("Restful API for 3DModel Flap Jacks Started On Port "+ port);

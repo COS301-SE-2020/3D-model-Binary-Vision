@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Consultation</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/apiCalls.js"></script>
+	<script type="text/javascript" src="../js/VideoCapture.js"></script>
+	<script type="text/javascript" src="../js/Consultation.js"></script>
+	<script src="../renderPage/Function.js"></script>
+</head>
+	<body onload="startTime()">
+
+		<div class="body">
+
+			<nav class="navbar navbar-expand-md  navbar-dark">
+				<a class="navbar-brand" href="doctorSchedule.html">
+					<img src="../css/images/tooth.png" alt="Profile Picture" width="30px" height="30px">
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+
+				<div class="collapse navbar-collapse" id="collapsibleNavbar">
+					<ul class="navbar-nav">
+						<li id="otherLi" class="nav-item">
+				            <a class="nav-link" href="doctorSchedule.html">Schedule</a>
+				          </li>
+						<li id="otherLi" class="nav-item">
+							<a class="nav-link active" href="Consultation.html"><u>Consultation</u></a>
+						</li>
+						<li class="nav-item" id="logout">
+							<a id="logoutA"class="nav-link" onclick="logout()" href="preview.html">Logout</a>
+						</li>
+					</ul>
+				</div>
+
+			</nav>
+
+			<!--sideBar-->
+
+			<div id="sideBody" style="background-color: white; height: 100%; position: fixed;">
+				<img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrowSideBody('arrowSideBody')" style="top: 60px;">
+    			<label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 73px); display: none; position: relative;" onclick="rotateArrowSideBody('arrowSideBody')">Profile Info</label>
+
+			    <div id="sideBar">
+
+			      <div id="containInfo">
+			        <div class="profile">
+			          <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
+			        </div>
+			        <br>
+			        <p id="containInfo">Welcome back <i onload="getGender();">Doctor </i><b onload="getName();"> asdasdasX</b></p>
+			        <hr>
+			        <p id="containInfo"> You are now logged in </p>
+			        <p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
+			        <br><br><br><hr>
+			      </div>
+			    </div>
+			  </div>
+
+				<div id="miBody">
+					<div id="header">
+						<p id="headerTitle">CONSULTATION</p>
+					</div>
+				</div>
+
+				<div class="containerRight">
+				    <div id="rightSideBody" style="width: 240px;">
+				        <div id="containInfoRight" style="position: fixed;">
+				        	<br><br>
+				          	TIME: 12:30 <hr>
+				          	NOTES ON PATIENT: <br>
+				          	MR TOM
+				          	<br><br><br><br><br><br>
+				          	3D SETTINGS<hr>
+
+							<button class="btn btn-warning" style="margin-right: 10px; margin-bottom: 10px; margin-top: 10px;" onclick=newSTL()>Model</button>
+							<button class="btn btn-success" onclick="newVideo()" style="">Media</button>
+						</div>
+						<br>
+					</div>
+				</div>
+
+				<br>
+				<div id="bodyContainer">
+					<div class="consultaionBody">
+						<div class="infoContainer" id ="infoContainer">
+							<div class="consultationInfo" id="consultationInfo">
+								<p style="background-color: #003366; border-radius: 5px 5px 0px 0px; padding: 10px 15px 10px 10px; font-weight: bold;">
+									Consultation info
+									<img src="../css/images/arrow.png" class="arrow" id="arrowConInfo" onclick="rotateArrow('arrowConInfo', 'consultationInfo')">
+								</p>
+
+								<div id="consultationInner">
+									<p id="conInfoTime" style="color: black;">Time Remaining: <br><span id="remainingTime" style="font-weight: bold;"></span> </p>
+									<p id="conInfoStart" style="color: black; display: block;">Start of consultation: <br><span id="startTime">17:56</span> </p>
+									<p id="conInfoEnd" style="color: black; display: block;">End of consultation: <br><span id="endTime">18:13</span> </p>
+								</div>
+							</div>
+
+							<div class="pateientsInfo" id="pateientsInfo">
+								<p style="background-color: #003366; border-radius: 5px 5px 0px 0px; padding: 10px 15px 10px 10px; font-weight: bold;">
+									Patient info
+									<img src="../css/images/arrow.png" class="arrow" id="arrowPatInfo" onclick="rotateArrow('arrowPatInfo', 'pateientsInfo')">
+								</p>
+
+								<div class="patientInfoInner" id="patientInfoInner">
+									<p id="patientDisplayMessage" style="color: black; display: none; text-align: center; margin: auto; color: gray;">All the patients relavent information</p>
+									<p id="patientName" style="color: black; display: block;"> Name: <br> Test Name </p>
+									<p id="patientSurname" style="color: black; display: block;">Surname: <br> Test Surname</p>
+									<p id="patientID" style="color: black; display: block;">ID: <br> 123456789 </p>
+									<p id="patientGender" style="color: black; display: block;">Gender: <br> Female </p>
+									<p id="patientEmail" style="color: black; display: inline-block;">Email: <br> TNameTSurname@gmail.com</p>
+									<p id="patientContactNo" style="color: black; display: block; ">Contact Number: <br> 082 678 7289</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="doctorsNotes">
+							<p style="font-weight: bold;">Doctors Notes:</p>
+							<textarea id="doctorsNotes" style="width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;"></textarea>
+							<button class="btn btn-primary" id="saveDoctorNote" type="button" style="margin-top: 10px;" onclick="saveDoctorNote()">Save Note</button>
+						</div>
+
+						<br><br>
+
+						<div id="VideoRecorder">
+							<h2 id="videoRecoderHeader">Video Recorder</h2><br>
+						    <div id="VideoRecorderCenter">
+						        <label for="file-upload" class="btn btn-primary" id="UploadVideo">Select Video</label>
+								<input id="file-upload" type="file" accept='video/mp4'/>
+
+						        <input class='btn btn-primary' type='submit' value='Upload Video' onclick='uploadVideo(document.getElementById("file-upload").files[0])'>
+						        
+						        <br><br>
+						        
+						        <div id='uploadedVideoElement'></div>
+						        <div id='submitVideoUploadElement'></div>
+						        
+						        <input class='btn btn-primary' type='submit' name='takeVideoStream' value='Stream Video' onclick='takeVideoStream()'/>
+						        
+						        <div id='videoStreamElement' style="display: none;">
+						        	<br><button class="btn btn-success" id="startStream">Start recording</button><br>
+									<button class="btn btn-danger" id="stopStream">Stop recording</button><br>
+									<br><br><video></video>
+									<br><br><video id="capturedVideoStream" controls></video>
+						        </div>
+
+						        <div id='submitVideoStreamElement'></div>
+								
+								<div id = 'videoRec' class='renderCenter'></div>
+							</div>
+						</div>
+						<br><br><br>
+					</div>
+				</div>
+		</div>
+	</body>
+</html>

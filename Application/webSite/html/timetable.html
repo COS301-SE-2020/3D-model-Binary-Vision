@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Timetable</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- <script type="text/javascript" src="../js/DrCookie.js"></script> -->
+		<script type="text/javascript" src="../js/apiCalls.js"></script>
+    	<script type="text/javascript" src="../js/registration.js"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	</head>
+
+	<body onload="initPage()">
+
+		<nav class="navbar navbar-expand-md  navbar-dark">
+		    <a class="navbar-brand" href="newHome.html">
+		        <img src="../css/images/tooth.png" alt="Profile Picture" width="30px" height="30px">
+		    </a>
+		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>
+
+		   
+		    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+		      <ul class="navbar-nav">
+		        <li id="otherLi" class="nav-item">
+		          <a class="nav-link" href="doctorSchedule.html">Home</a>
+		        </li>
+		        <!-- <li id="otherLi" class="nav-item">
+		          <a class="nav-link" href="displayPatients.html">Logs</a>
+		        </li> -->
+		        <li id="otherLi" class="nav-item">
+          			<a class="nav-link active" href="timetable.html"><u>Weekly Planner</u></a>
+        		</li>
+        		<!-- <li id="otherLi" class="nav-item" >
+		          <a class="nav-link" href="makeBooking.html">Booking</a>
+		        </li> -->
+		        <li id="logout" class="nav-item" id="logout">
+					<a id="logoutA"class="nav-link" onclick="logout()" href="preview.html">Logout</a>
+		        </li>
+		      </ul>
+		    </div>
+		  </nav>
+
+			 
+		<div>
+		    <div id="header" style="z-index: 11;">
+		      <p id="headerTitle">TIMETABLE</p>     
+			</div>
+		</div>
+
+		<div id="calender">
+			<br><br>
+			<div id="header" style="z-index: 11;">
+		      <p id="headerTitle" style="background-color: lightblue;">
+		      	<span id="firstDay">{day}</span> 
+		      	<b id="firstMonth">Month</b> 
+		      	<span id="firstYear">{year}</span> - 
+		      	<span id="lastDay">{day}</span>
+		      	<b id="lastMonth">Month</b>
+		      	<span id="lastYear">{year}</span>
+		      </p>     
+			</div><br><br>
+			<table class="table table-bordered" id="dayTable">
+
+		</div>
+		<script type="text/javascript" src="../js/timetabler.js"></script>
+
+	</body>
+</html>

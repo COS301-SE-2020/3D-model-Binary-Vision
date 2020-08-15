@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Schedule</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../js/apiCalls.js"></script>
+  <script type="text/javascript" src="../js/registration.js"></script>
+  <script type="text/javascript" src="../js/doctorSchedule.js"></script>
+</head>
+
+<body onload="initPage()">
+  <div class="body">
+    <nav class="navbar navbar-expand-md  navbar-dark">
+      <a class="navbar-brand" href="doctorSchedule.html">
+          <img src="../css/images/tooth.png" alt="Profile Picture" width="30px" height="30px">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li id="otherLi" class="nav-item">
+            <a class="nav-link active" href="doctorSchedule.html"><u>Schedule</u></a>
+          </li>
+          <li id="otherLi" class="nav-item">
+            <!--i took this away because the timetable href takes you to the receptionist side of the application-->
+            <a class="nav-link" href="timetable.html">Weekly Planner</a>
+          </li>
+          <li id="logout" class="nav-item">
+            <a id="logoutA"class="nav-link" onclick="logout()" href="preview.html">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!--sideBar-->
+    <button style="position:fixed; margin-left:60px; display:none; top: 10px;
+    z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>
+
+    <div id="sideBody" style="background-color: white; height: 100%; position: fixed;">
+    <br><br>
+    <div id="sideBar">
+
+      <div id="containInfo">
+        <div class="profile">
+          <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
+        </div>
+        <br>
+        <p id="containInfo">Welcome back <i onload="getGender();">Doctor </i><b id="doctorsName"> asdasdasX</b></p>
+        <hr>
+        <p id="containInfo"> You are now logged in </p>
+        <p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
+        <br><br><br><hr>
+      </div>
+    </div>
+  </div>
+  <!--main body options-->
+  <div id="miBody">
+    <div id="header">
+      <p id="headerTitle">SCHEDULE FOR [DATE]</p>
+    </div>
+  </div>
+  <!--right Nav-->
+  <div class="containerRight">
+    <div id="rightSideBody" >
+        <div id="containInfoRight" style="position: fixed; top: 40px;">
+          TIME: <p id="bookingTime" style="color: black;" >N/A</p> 
+          PATIENT: <p id="patientName" style="color: black;">N/A</p><hr>
+          REASON: <p id="patientNotes" style="color: black;"></p> N/A<br>
+          <br><br><br><br>
+          SETTINGS<hr>
+          <div id="manageBookingForm">
+            <button class="btn btn-success" type="button"  style="margin-right: 10px; margin-bottom: 10px;">Complete</button>
+            <button class="btn btn-primary" type="button" style="margin-right: 10px; margin-bottom: 10px;">Consultation</button>
+          </div>
+
+          <div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!--notifications main-->
+  <div id="notifications">
+    <ul id="notifyContainer">
+      
+      <!-- dynamiccally allocates this : DONE -->
+      
+    </ul>
+  </div>
+
+  </body>
+</html>

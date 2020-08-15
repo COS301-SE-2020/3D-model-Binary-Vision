@@ -1,0 +1,101 @@
+<!-- Modified by Jacobus Janse van Rensburg -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Patients</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- <script type="text/javascript" src="../js/DrCookie.js"></script> -->
+		<script type="text/javascript" src="../js/apiCalls.js"></script>
+    	<script type="text/javascript" src="../js/displayPatients.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	</head>
+
+	<body onload="init()">
+	<div class="body">
+
+		<nav class="navbar navbar-expand-md  navbar-dark">
+		    <a class="navbar-brand" href="newHome.html">
+		        <img src="../css/images/tooth.png" alt="Profile Picture" width="30px" height="30px">
+		    </a>
+		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>
+
+		   
+		    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+		      <ul class="navbar-nav">
+		        <li id="otherLi" class="nav-item">
+		          	<a class="nav-link" href="newHome.html">Home</a>
+		        </li>
+		        <li id="otherLi" class="nav-item">
+		          	<a class="nav-link active" href="displayPatients.html"><u>Logs</u></a>
+		        </li>
+                <li id="otherLi" class="nav-item" >
+                    <a class="nav-link" href="makeBooking.html">Booking</a>
+                </li>
+		        <li id="logout" class="nav-item" id="logout">
+					<a id="logoutA"class="nav-link" onclick="logout()" href="preview.html">Logout</a>
+		        </li>
+		      </ul>
+		    </div>
+		  </nav>
+		  
+
+		
+		</div>
+		<div id="miBody">
+		    <div id="header">
+		      <p id="headerTitle" style="z-index: 1;">WAITING PATIENTS</p>
+		    </div>
+
+		</div>
+
+		
+
+		<div class="container"><br><br>
+			<br>
+			<div id="checkDoctor" style="position: relative; top:0px;  box-shadow: 0px 30px 40px 0px black; border-top-left-radius: 10px; border-top-right-radius: 10px;" >
+				<div id = "centerSearchBox">
+					<label for="doctors">Choose a Doctor:</label>
+
+					
+
+					<label for="patients">Search for Patient:</label>
+					<select class="form-control" name="doctrs" id="doctors" style=" margin-left: auto; margin-right: auto; text-align: center; width: 200px;">
+					 <!-- options are populated dynamically -->
+					</select>
+					<input class="form-control"type="text" id ="patients" style=" margin-left: auto; margin-right: auto; position: relative; display: inline;text-align: center; width: 200px;">
+
+				</div>
+				<br>
+			</div>
+
+        <table class="table table-striped" id="addToTable"style="position: absolute; top: 270px; bottom: 0; left: 0; right: 0;
+        	 ">
+		    <thead>
+			    <tr >
+			        <th scope="col">#</th>
+	                <th>ID</th>
+	                <th>Surname</th>
+					<th>Time/Date</th>
+	                <th>Number</th>
+			        <th>Options</th>
+			
+			    </tr>
+		    </thead>
+
+		    <tbody id="patientTable">
+			<!-- dynamically alocated -->
+		    </tbody>
+		</table>
+		</div>
+
+  </div>
+
+	</body>
+</html>
