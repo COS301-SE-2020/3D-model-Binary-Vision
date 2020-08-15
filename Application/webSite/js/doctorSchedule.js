@@ -1,10 +1,11 @@
-//created by Jacobus Janse van Rensburg
-// file intended to handel all the dynamic allocations and api calls done on the doctorSchedule.html page
+//Created by Jacobus Janse van Rensburg
+//file intended to handel all the dynamic allocations and api calls done on the doctorSchedule.html page
 
 //================================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 //function that sets all the various aspects of the page bassed on the doctor that logged in
-function initPage(){
+function initPage()
+{
     setDoctorInfo();
     setTodaysBookings();
     setDate();
@@ -20,12 +21,11 @@ function setDoctorInfo()
         headers:{'Content-Type': 'application/json; charset=UTF-8'}
     })
 
-    response.then( res=> res.json().then( data => {
-
+    response.then( res=> res.json().then( data => 
+    {
         console.log("Doctors surname: "+data.surname);
         // set the surname field 
         document.getElementById("doctorsName").innerHTML=data.surname+" ("+data.name+")";
-
     }));
 }
 
@@ -39,35 +39,66 @@ function setTodaysBookings()
         headers:{'Content-Type': 'application/json; charset=UTF-8'}
     });
 
-    response.then(res => res.json().then(data=>{
-      //Send the data to various functions that will populate the different fields of the bookings
+    response.then(res => res.json().then(data=>
+    {
+        //Send the data to various functions that will populate the different fields of the bookings
 
-    //   maybe sort the times in accending order ?? then populate the fields
-
-        populateBookings(data);
-
+        //maybe sort the times in accending order ?? then populate the fields
+        for(var i in data)
+        {
+            console.log(data[i]);
+            var replacement = '<li class= "notify" id="'+data[i]._id+'">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'
+            document.getElementById("notifyContainer").innerHTML += replacement;
+        }
     }));
 }
 
 //================================================================================================
-// Function developed by: Jacobus janse van Rensburg
-// Function used to populate the fields of the bookings retrieved
-function populateBookings(data)
+// Function developed by: Jacobus Janse van Rensburg
+//
+function dynamicBarMoveAndPopulate(id,time,reason,booking)
 {
-    for (var i in data)
-    {
-        // get the patients information 
+    moveRightBar();
+    populateBookings(id,time,reason,booking);
+}
+//================================================================================================
+// Function developed by: Jacobus Janse van Rensburg
+// Function used to populate the fields of the bookings retrieved
+function populateBookings(patientId,time,reason,booking)
+{
+   
+        if(patientId != null)
+        {
+            // get the patients information 
         
-        var response = fetch("/singlePatient",{
-            method:"POST",
-            headers:{'Content-Type': 'application/json; charset=UTF-8'},
-            body: JSON.stringify({"patient":data[i].patient})
-        });
-        response.then(res=> res.json().then(patient=> {
-        //    do what needs to be done with the patients information
-        }));
+            var response = fetch("/singlePatient",{
+                method:"POST",
+                headers:{'Content-Type': 'application/json; charset=UTF-8'},
+                body: JSON.stringify({"patient":patientId})
+            });
+            console.log("booking id:"+booking);
+            response.then(res=> res.json().then(patient=> 
+            {
+                //do what needs to be done with the patients information
+                //populate right bar over here 
+                console.log("hello "+ patient.name+" "+time+ " "+ reason);
+                document.getElementById("patientName").innerHTML = patient.name ;
+                document.getElementById("bookingTime").innerHTML = time;
+                document.getElementById("patientNotes").innerHTML = reason;
+            
+                document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' onclick='completeBooking(\""+booking+"\");' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><button class='btn btn-primary' type='button' onclick='openConsultation(\""+booking+"\")' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</button>"
 
-    }
+                console.log(patient);
+            }));
+        }
+        else
+        {
+            document.getElementById("patientName").innerHTML = "N/A";
+            document.getElementById("bookingTime").innerHTML = "N/A";
+            document.getElementById("patientNotes").innerHTML = "N/A";   
+            document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><button class='btn btn-primary' type='button' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</button>"
+        }
+    
 }
 
 //================================================================================================
@@ -80,3 +111,44 @@ function setDate()
     var date = today.getDate() + ' / ' + (today.getMonth()+1) +' / '+ today.getFullYear();
     container.innerHTML = "SCHEDULE FOR [" + date + "]";
 }
+
+//================================================================================================
+// Function developed by:Steven Visser
+// Completes a Booking and removes it from the databse
+function completeBooking(bookingID)
+{
+        var response = fetch("/removeBooking",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json; charset=UTF-8'},
+            body: JSON.stringify({"_id":bookingID})
+        });
+    
+        response.then(res => 
+        {
+            //remove the bar holding this booking and load the next one
+            //check status code
+            console.log(res.status);
+            if(res.status == 401)
+            {
+                alert("You are not authorized to do this action!");
+            }
+            else if(res.status== 200)
+            {
+                //remove successful, dynamically update the page to remove the block
+                document.getElementById(bookingID).remove();
+                dynamicBarMoveAndPopulate(null,null,null,null);
+
+            }
+        });
+}
+
+// Function developed by:Steven Visser
+// Opens consultation page with correct id's
+function openConsultation(id)
+{
+    //redicrect to consultation page
+}
+
+
+
+

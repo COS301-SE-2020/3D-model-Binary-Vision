@@ -4,7 +4,8 @@ var canvas = document.createElement('canvas'); // Create a canvas so that the vi
 var images = []; // The array to store the images generated 
 
 // The main function to upload an video file
-function uploadVideo(videoFile) {
+function uploadVideo(videoFile) 
+{
 	cleanElements(); // CLean all the elements
 
 	// create a new video tag
@@ -20,23 +21,27 @@ function uploadVideo(videoFile) {
 	/*images = [];
 	generateImages(document.getElementById("uploadedVideo"));*/
 
-	fetchVideo(uploadedVideo.src).then(blob => {
+	fetchVideo(uploadedVideo.src).then(blob => 
+	{
 		sendBlob(blob);
 	});
 }
 
-function sendBlob(blob) {
+function sendBlob(blob) 
+{
   submitVideo(blob, false); // Submit the video
 }
 
-function fetchVideo(url) {
+function fetchVideo(url) 
+{
   return fetch(url).then(response => {        
     return response.blob();
   });
 }
 
 // The main function to capture the video stream
-function takeVideoStream() {
+function takeVideoStream() 
+{
 	cleanElements(); // CLean all the elements
 	
 	// Create the start, stop and video elements for the video stream
@@ -60,7 +65,8 @@ function takeVideoStream() {
 	}
 
 	// Handle old browsers that do not support the medie capture API
-	if (navigator.mediaDevices == undefined) {
+	if (navigator.mediaDevices == undefined) 
+	{
 		/*navigator.mediaDevices = {};
 		navigator.mediaDevices.getUserMedia = function(constraintObj) {
 			let getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -71,25 +77,36 @@ function takeVideoStream() {
 				getUserMedia.call(navigator, constraintObj, resolve, reject);
 			});
 		}*/
-	} else { // List all the devices ... this is where we can implement the select video capture device
-		navigator.mediaDevices.enumerateDevices().then(devices => {
-			devices.forEach(device => {
+	} 
+	else 
+	{ // List all the devices ... this is where we can implement the select video capture device
+		navigator.mediaDevices.enumerateDevices().then(devices => 
+		{
+			devices.forEach(device => 
+			{
 				console.log(device.kind.toUpperCase(), device.label);
 			});
-		}).catch( error => {
+		}).catch( error => 
+		{
 			console.log(error.name, error.message);
 		});
 	}
 
-	navigator.mediaDevices.getUserMedia(constraint).then(stream => {
+	navigator.mediaDevices.getUserMedia(constraint).then(stream => 
+	{
 		// Connect the video stream to the the video element
 		let video = document.querySelector('video');
 		if ("srcObject" in video)
+		{
 			video.srcObject = stream; // send the stream to the video element
+		}
 		else
+		{
 			video.src = window.URL.createObjectURL(stream); //For old browers
-
-		video.onloadedmetadata = function(ev) {
+		}
+			
+		video.onloadedmetadata = function(ev) 
+		{
 			video.play(); // Display the video stream in the video element.
 		}
 
@@ -99,26 +116,30 @@ function takeVideoStream() {
 		var timedInterval;
 
 		// Start recording
-		start.addEventListener('click', (ev) => {
+		start.addEventListener('click', (ev) => 
+		{
 			mediaRecorder.start();
 			console.log(mediaRecorder.state);
 			capturedVideoStream.style.visibility = "hidden"; // Hide the second video element (the captured video element)
 		});
 
 		// Stop recording
-		stop.addEventListener('click', (ev)=> {
+		stop.addEventListener('click', (ev)=> 
+		{
 			mediaRecorder.stop();
 			console.log(mediaRecorder.state);
 			clearInterval(timedInterval);
 		});
 
 		// Record all of the blobs
-		mediaRecorder.ondataavailable = function(ev) {
+		mediaRecorder.ondataavailable = function(ev)
+		{
 			recordedBlobs.push(ev.data);
 		};
 
 		// When the stop recoding button is clicked
-		mediaRecorder.onstop = (ev)=> {
+		mediaRecorder.onstop = (ev)=> 
+		{
 			let blob = new Blob(recordedBlobs, { 'type': 'video/mp4;'});
 
 			recordedBlobs = [];
@@ -132,23 +153,30 @@ function takeVideoStream() {
 
 			submitVideo(blob, true); // Submit the video
 		};
-	}).catch(error => {
+	}).catch(error => 
+	{
 		console.log(error.name, error.message);
 	});
 }
 
-function submitVideo(video, videoStreamed) {
+function submitVideo(video, videoStreamed) 
+{
 
 	if (!videoStreamed)
+	{
 		var submitVideoElement = document.getElementById('submitVideoUploadElement');
+	}
 	else
+	{
 		var submitVideoElement = document.getElementById('submitVideoStreamElement');
+	}
 
 	submitVideoElement.innerHTML = '<br><button class="btn btn-dark" id="submitVideo">Submit Video</button><br><br><br>';
 
 	var submitVideoButton = document.getElementById('submitVideo');
 
-	submitVideoButton.addEventListener('click', (ev) => {
+	submitVideoButton.addEventListener('click', (ev) => 
+	{
 		alert("ACTION: Video sent (" + video + ")");
 		//post method
 		var VideoSending = new FormData();
@@ -165,7 +193,8 @@ function submitVideo(video, videoStreamed) {
 }
 
 // Function to clean out all fo the elements
-function cleanElements() {
+function cleanElements() 
+{
 	var element = document.getElementById('uploadedVideoElement');
 	element.innerHTML = "";
 
@@ -180,23 +209,30 @@ function cleanElements() {
 }
 
 // Generate the images form the videos stored in the relavent tags
-function generateImages(video) {
+function generateImages(video) 
+{
 	var i = 0;
 
-	video.addEventListener('loadeddata', function() {
+	video.addEventListener('loadeddata', function() 
+	{
 	    this.currentTime = i;
 	});
 
-	video.addEventListener('seeked', function() {
+	video.addEventListener('seeked', function() 
+	{
 	    generateImage(i, video);
 	    i += 0.5; // get an image every 0.5 seconds
-	    if (i <= this.duration)
-	        this.currentTime = i;
+		if (i <= this.duration)
+		{
+			this.currentTime = i;
+		}
+	        
 	});
 }
 
 // Generate a image at that time stamp i.e. 'i'
-function generateImage(i, video) { 
+function generateImage(i, video) 
+{ 
 	// Generate and load the image into the canvas
     var context = canvas.getContext('2d');
     context.drawImage(video, 0, 0, 220, 150);

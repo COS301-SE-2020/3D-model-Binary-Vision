@@ -1,11 +1,20 @@
+//Created by:
+//This file contains
 
-
-function initPage(){
+//================================================================================================
+// Function developed by:
+//
+function initPage()
+{
 	createTable();
 	setDates();
 	populateTable();
 }
 
+//================================================================================================
+// Function developed by:
+// Function modified by: Steven Visser
+//
 function createTable()
 {
 	var tableDiv = document.getElementById("dayTable");
@@ -21,9 +30,9 @@ function createTable()
         "15:00","15:15","15:30","15:45",
         "16:00","16:15","16:30","16:45"
        ];
-    var replacement;
-    replacement='<table class="table table-bordered" id="dayTable">';
-    replacement+='<thead id="dayTableHead">';
+
+    var replacement = '<table class="table table-bordered" id="dayTable">';
+    replacement += '<thead id="dayTableHead">';
 
     var d = new Date();
     var currentMonth = d.getMonth();
@@ -35,11 +44,12 @@ function createTable()
     var count =0;
     var dd = currentDay;
     
-    while (count<days.length){
-        if(dd > days.length ){
+    while (count<days.length)
+    {
+        if(dd > days.length )
+        {
             dd =1;
         }
-
         replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd-1]+','+(currentDate+(count))+'</td>';
         count++;
         dd++;
@@ -47,12 +57,12 @@ function createTable()
 
     replacement += '</thead>'
     replacement+='<tbody>';
-    for(var i = 0 ; i < times.length; i ++){
+    for(var i = 0 ; i < times.length; i ++)
+    {
         replacement+='<tr><td id="time">'+times[i]+'</td>';
         for (var j =0 ; j < days.length; j ++)
         {
             replacement+='<td class="selectableTimeSlot" id="'+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'" onclick="selectTime(\''+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'\')"></td>';
-
             replacement+='</td>';
         }
         replacement+='</tr>'
@@ -62,8 +72,12 @@ function createTable()
 	tableDiv.innerHTML= replacement;
 
 }
-			
-function populateTable(){
+            
+//================================================================================================
+// Function developed by:
+//
+function populateTable()
+{
 
 
 	var response = fetch("/getDoctorsBookings",{
@@ -72,18 +86,20 @@ function populateTable(){
 		// body: JSON.stringify({"doctor":})
 	});
 
-	response.then(res => res.json().then(data => {
-
+    response.then(res => res.json().then(data => 
+    {
 		console.log(data)
 		fillData(data);
-
-	}))
+	}));
 }
 
+//================================================================================================
+// Function developed by:
+//
 function fillData(data)
 {
 	for(var i in data)
-    	{
+    {
         var date = data[i].date;
         var time = data[i].time;
         var searchPageId = date+"&"+time;
@@ -96,10 +112,11 @@ function fillData(data)
             element.setAttribute("onclick","");
             element.innerHTML=data[i].reason;
         }
-    	}
+    }
 }
 
-//Function by: Steven Visser
+//Function developed by: Steven Visser
+//Dynamically sets the date 
 function setDates()
 {
     var date = new Date();
@@ -116,7 +133,6 @@ function setDates()
     document.getElementById("lastDay").innerHTML = "{"+(d+6)+"}";
     document.getElementById("lastMonth").innerHTML = "{"+months[m]+"}";
     document.getElementById("lastYear").innerHTML = "{"+y+"}";
-    
 }
 
 		

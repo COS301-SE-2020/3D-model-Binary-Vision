@@ -1,3 +1,4 @@
+<!-- Modified by Jacobus Janse van Rensburg -->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -14,7 +15,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	</head>
 
-	<body>
+	<body onload="init()">
 	<div class="body">
 
 		<nav class="navbar navbar-expand-md  navbar-dark">
@@ -29,17 +30,14 @@
 		    <div class="collapse navbar-collapse" id="collapsibleNavbar">
 		      <ul class="navbar-nav">
 		        <li id="otherLi" class="nav-item">
-		          <a class="nav-link" href="newHome.html">Home</a>
+		          	<a class="nav-link" href="newHome.html">Home</a>
 		        </li>
 		        <li id="otherLi" class="nav-item">
-		          <a class="nav-link active" href="displayPatients.html"><u>Logs</u></a>
+		          	<a class="nav-link active" href="displayPatients.html"><u>Logs</u></a>
 		        </li>
-		        <li id="otherLi" class="nav-item">
-                      <a class="nav-link" href="timetable.html">Timetable</a>
-                    </li>
-                    <li id="otherLi" class="nav-item" >
-                      <a class="nav-link" href="makeBooking.html">Booking</a>
-                    </li>
+                <li id="otherLi" class="nav-item" >
+                    <a class="nav-link" href="makeBooking.html">Booking</a>
+                </li>
 		        <li id="logout" class="nav-item" id="logout">
 					<a id="logoutA"class="nav-link" onclick="logout()" href="preview.html">Logout</a>
 		        </li>
@@ -52,7 +50,7 @@
 		</div>
 		<div id="miBody">
 		    <div id="header">
-		      <p id="headerTitle" style="z-index: 1;">LOGS OF WAITING PATIENTS</p>
+		      <p id="headerTitle" style="z-index: 1;">WAITING PATIENTS</p>
 		    </div>
 
 		</div>
@@ -69,10 +67,7 @@
 
 					<label for="patients">Search for Patient:</label>
 					<select class="form-control" name="doctrs" id="doctors" style=" margin-left: auto; margin-right: auto; text-align: center; width: 200px;">
-					  <option value="volvo">Dr Anderson</option>
-					  <option value="saab">Dr James</option>
-					  <option value="mercedes">Dr Heilburg</option>
-					  <option value="audi">Dr Francis</option>
+					 <!-- options are populated dynamically -->
 					</select>
 					<input class="form-control"type="text" id ="patients" style=" margin-left: auto; margin-right: auto; position: relative; display: inline;text-align: center; width: 200px;">
 
@@ -89,124 +84,13 @@
 	                <th>Surname</th>
 					<th>Time/Date</th>
 	                <th>Number</th>
-			        <th>Book</th>
+			        <th>Options</th>
 			
 			    </tr>
 		    </thead>
 
-		    <tbody>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-            	<tr>
-            		<td>1</td>
-            		<td>14325</td>
-            		<td>James</td>
-            		<td>12:30</td>
-            		<td>0836530083</td>
-            		<td><button class="btn btn-success"  type="button">Send</button>
-            			<button class="btn btn-danger"  type="button">Hide</button>
-            		</td>
-
-            	</tr>
-
-
+		    <tbody id="patientTable">
+			<!-- dynamically alocated -->
 		    </tbody>
 		</table>
 		</div>

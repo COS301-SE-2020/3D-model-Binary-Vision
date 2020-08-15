@@ -1,4 +1,7 @@
-//created by:Jacobus Janse van Rensburg
+//Created by: Jacobus Janse van Rensburg
+//Modified by: Steven Visser
+//
+//This is the Model file. This is where the Schemas for the MongoDB database are created and set.
 
 'use strict';
 
@@ -8,50 +11,80 @@ var Schema = mongoose.Schema;
 var DoctorSchema = new Schema({
     name:{
         type:String,
-        required: 'kindly enter name'
+        required: true
     },
     surname:{
-        type:String
+        type:String,
+        required: true
     },
-    username: { type: String },
-    email:{type:String},
+    username:{ 
+        type: String ,
+        required: true
+    },
+    email:{
+        type:String,
+        required: true
+    },
     password:{
-        type:String
+        type:String,
+        required: true
     },
     practition:{
-        type:String,require: true
+        type:String,
+        required: true
     }
 });
 
 var PatientSchema = new Schema({
-    idNumber: { type: String, required: true },
+    idNumber:{ 
+        type: String, 
+        required: true
+    },
     name:{
-        type:String
+        type:String,
+        required: true
     },
     surname:{
-        type:String
+        type:String,
+        required: true
     },
     email:{
+        type:String,
+        required: true
+    },
+    gender:{
         type:String
     },
-    gender:
-    {
-        type:String
-    },
-    cellnumber:
-    {
-        type:String
+    cellnumber:{
+        type:String,
+        required: true
     }
 });
 
 var Receptionist = new Schema({
-    name:{type:String},
-    surname:{type:String},
-    email:{type:String},
-    username:{type:String, required:true},
-    password:{type:String, required:true},
+    name:{
+        type:String,
+        required: true
+    },
+    surname:{
+        type:String,
+        required: true
+    },
+    email:{
+        type:String,
+        required: true
+    },
+    username:{
+        type:String,
+        required:true
+    },
+    password:{
+        type:String, 
+        required:true
+    },
     practition:{
-        type:String, required: true
+        type:String, 
+        required: true
     },
     Note:{
         type:String
@@ -59,24 +92,24 @@ var Receptionist = new Schema({
 });
 
 var ConsultationSchema = new Schema({
-    created: {
+    created:{
         type: Date,
         required: true,
         default: Date.now
     },
-    doctor: {
+    doctor:{
         type: Schema.Types.ObjectId,
         required: true
     },
-    patient: {
+    patient:{
         type: Schema.Types.ObjectId,
         required: true
     },
-    video: {
+    video:{
         type: Schema.Types.ObjectId,
         required: true
     },
-    STL: {
+    STL:{
         type: Schema.Types.ObjectId
     },
     Note:{
@@ -86,11 +119,25 @@ var ConsultationSchema = new Schema({
 });
 
 var Booking = new Schema({
-    date:{type:String,required:true},
-    time:{type:String,required:true},
-    patient:{type:mongoose.Types.ObjectId,required:true},
-    doctor:{type:mongoose.Types.ObjectId,required:true},
-    reason:{type:String}
+    date:{
+        type:String,
+        required:true
+    },
+    time:{
+        type:String,
+        required:true
+    },
+    patient:{
+        type:mongoose.Types.ObjectId,
+        required:true
+    },
+    doctor:{
+        type:mongoose.Types.ObjectId,
+        required:true
+    },
+    reason:{
+        type:String
+    }
 })
 
 module.exports = {
@@ -100,4 +147,3 @@ module.exports = {
     Receptionist: mongoose.model("Receptionist", Receptionist),
     Booking:mongoose.model("Booking", Booking)
 }
-// module.exports = mongoose.model("Records", RecordsSchema);

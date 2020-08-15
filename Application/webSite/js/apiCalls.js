@@ -1,10 +1,10 @@
-//
-// AUTHORS : Jacobus AND Rani
-//
-//Proof read By:
+//Created by: Jacobus Janse van Rensburg & Rani Arraf
+//Modified by: Steven Visser
 
 
-//JACO NOTE: This works
+//=============================================================================================
+//Function Developed by:
+//
 function getDrName()
 {
     //gets the name of the dr and sets it too the heading in the page
@@ -13,30 +13,32 @@ function getDrName()
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         }
-        });
+    });
 
-        response.then(res => res.json().then( data => {
-            console.log(data);
-            if (res.status==200)
-            {
-                document.getElementById("nameId").innerHTML = data.surname;
-            }
-            else {
-                alert("Doctor Not Logged In");
-                var response = fetch("/logout",{
-                    method:"POST",
-                    headers: {
-                      'Content-Type': 'application/json; charset=UTF-8',
-                    }
-                });
-            }
-
-        }));
+    response.then(res => res.json().then( data => 
+    {
+        console.log(data);
+        if (res.status==200)
+        {
+            document.getElementById("nameId").innerHTML = data.surname;
+        }
+        else 
+        {
+            alert("Doctor Not Logged In");
+            var response = fetch("/logout",{
+                method:"POST",
+                headers: {
+                  'Content-Type': 'application/json; charset=UTF-8',
+                }
+            });
+        }
+    }));
 
 }
-// ====================================================================================================
 
-//Jaco Notes: works perfect just needs to use the returned data to populate tables
+//=============================================================================================
+//Function Developed by: Jacobus
+//
 function getPatients()
 {
     //get the patients for the logged in doctor
@@ -45,27 +47,24 @@ function getPatients()
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         }
-        });
+    });
 
-        console.log("patient data: \n\n"+ response);
+    console.log("patient data: \n\n"+ response);
 
-    response.then(res => res.json().then( data => {
-
-
-            //data was successfully send
-            //populate the tables with the json data
-            var tableContent = document.getElementById('addToTable');
-            var rowNumber = 1;
-
-                
-            var counter = 1;
-        if (res.status == 202){
-            for (var i in data){
-              var row = tableContent.insertRow(rowNumber);
-              var num = data[i]._id;
-                //console.log("Name: "+ data[i].name +"\nsurname: "+data[i].surname+"\nIdNumber: "+data[i].idNumber+"\nemail: "+data[i].email+"\ngender: "+data[i].gender);
-                // addToTable(data[i].name , data[i].surname, data[i].idNumber, data[i].gender, data[i].email, data[i]._id)
-                //RANI !!! -- use the data above to populate the table witht the fields that you made
+    response.then(res => res.json().then( data => 
+    {
+        //data was successfully send
+        //populate the tables with the json data
+        var tableContent = document.getElementById('addToTable');
+        var rowNumber = 1;
+            
+        var counter = 1;
+        if (res.status == 202)
+        {
+            for (var i in data)
+            {
+                var row = tableContent.insertRow(rowNumber);
+                var num = data[i]._id;
                 var number = row.insertCell(0);
                 var id = row.insertCell(1);
                 var surname = row.insertCell(2);
@@ -88,7 +87,6 @@ function getPatients()
                 counter++;
 
             }//make the tables with this data
-
         }
         else if ( res.status == 500)
         {
@@ -97,9 +95,12 @@ function getPatients()
 
     }))
 }
-// ====================================================================================================
 
-function logout() {
+//=============================================================================================
+//Function Developed by: Jacobus
+//
+function logout() 
+{
     var resposne = fetch ("/logout",{
         method:"POST",
         headers: {
@@ -107,22 +108,18 @@ function logout() {
     }});
     //logout of cookie
 }
-// ====================================================================================================
 
-//JACO NOTES: add patient works perfect on my end to add data to the DB
+//=============================================================================================
+//Function Developed by: Steven Visser
+//This function takes in the patients information & sends it to the API to add it to the database
 function addPatient()
 {
-    //RANI i made the email field in the patients page , looks ugly now , can you please fix thanks - jaco
-
     var idNumber = document.getElementById("idNumber").value;
     var name = document.getElementById("name").value;
     var surname = document.getElementById("surname").value;
     var gender = document.getElementById("gender").value;
     var email = document.getElementById("email").value;
     var cell = document.getElementById("cell").value;
-
-    //RANI ----do some varification on the data eg. check that email is valid and stuff like that -jaco
-
 
     //add the patient to the database
     var response = fetch ("/addPatient",{
@@ -131,25 +128,26 @@ function addPatient()
             'Content-Type':'application/json ; charset=UTF-8',
         },
         body: JSON.stringify({"idNumber":idNumber,"name":name,"surname":surname,"email": email,"gender": gender,"cell":cell})
-    })
+    });
 
     //check if the patient was successfully added by checking the status returned in the response
-    response.then(res => res.json().then( data =>{
-
-        if(res.status ==201){
+    response.then(res => res.json().then( data =>
+    {
+        if(res.status ==201)
+        {
             //patient successfuly added and we can do something
             console.log("patient added successfully: check database for conformation");
         }
-        else{
+        else
+        {
             //patient not added
             console.log("Error adding patient")
         }
-
-    }))
+    }));
 }
 
-// ====================================================================================================
-
+//=============================================================================================
+//Function Developed by: Jacobus
 //sets the patient cookie with the patient id
 function selectPatient(PatientID)
 {
@@ -157,9 +155,10 @@ function selectPatient(PatientID)
         method:"POST",
         headers: {'Content-Type':'application/json ; charset=UTF-8',},
         body:JSON.stringify({PatientID})
-    })
+    });
 
-    response.then( res =>{
+    response.then( res =>
+    {
         if (res.status == 201)
         {
             //fine
@@ -167,20 +166,21 @@ function selectPatient(PatientID)
         else{
             //not fine
         }
-    })
+    });
 }
 
-// ====================================================================================================
-
+//=============================================================================================
+//Function Developed by: Jacobus
 //retrieves the doctor -> patient consultations
 function getConceltations()
 {
     var response = fetch('/consultations' ,{
         method:"GET",
         headers: {'Content-Type':'application/json ; charset=UTF-8',}
-    })
+    });
 
-    response.then(res => res.json.then(data=> {
+    response.then(res => res.json.then(data=> 
+    {
 
         if (res.status == 200)
         {
@@ -190,34 +190,38 @@ function getConceltations()
                 //do the table for data[i] with its respective fields
             }
         }
-        else{
+        else
+        {
             //something wrong happened
             console.error(data);
         }
 
-    }))
+    }));
 }
-// ====================================================================================================
 
-
+//=============================================================================================
+//Function Developed by: Jacobus
+//
 function getSinglePatient()
 {
     var response = fetch("/singlePatient",{
         method:"POST",
         headers:{'Content-Type':'application/json ; charset=UTF-8'}
-    })
+    });
 
-    response.then(res =>res.json().then(data => {
+    response.then(res =>res.json().then(data => 
+    {
 
         if (res.status == 200)
         {
             console.log(data);
             document.getElementById("nameLog").innerHTML = data.name+" "+data.surname;
         }
-        else{
+        else
+        {
             console.error(data);
         }
-    }))
+    }));
 
     getSinglePatientConsultations();
 }
@@ -231,31 +235,35 @@ $(document).ready(function(){
     });
   });
 });
-// ====================================================================================================
 
+//=============================================================================================
+//Function Developed by: Jacobus
+//
 function selectConsultation(ConsultationID)
 {
     var response = fetch("/consultations",{
         method:"POST",
         headers: {'Content-Type':'application/json ; charset=UTF-8',},
         body:JSON.stringify({ConsultationID})
-    })
+    });
 
-    response.then(res=> res.json().then(data=> {
+    response.then(res=> res.json().then(data=>
+    {
         if (res.status == 200)
         {
-            //ok
             console.log("Consultation cookie set");
         }
-        else {
+        else 
+        {
             //try again or quit ?
             console.error("Consultation cookie not set");
         }
-    }))
-
+    }));
 }
-// ====================================================================================================
 
+//=============================================================================================
+//Function Developed by: Jacobus
+//
 function getSinglePatientConsultations()
 {
     console.log('getting single patient consultations')
@@ -263,28 +271,34 @@ function getSinglePatientConsultations()
     var response = fetch("/consultations",{
         method:"GET",
         headers:{'Content-Type':'Application/json ; charset=UTF-8'}
-    })
+    });
 
-    response.then(res => res.json().then(data =>{
+    response.then(res => res.json().then(data =>
+    {
 
         console.log("DATA:\n");
         for( var i in data)
         {
             console.log(data[i]);
         }
-    }))
+    }));
 
 }
-// ====================================================================================================
 
-function getReceptionistNotes(){
+//=============================================================================================
+//Function Developed by: Jacobus
+//
+function getReceptionistNotes()
+{
     var response = fetch("/getReceptionistNotes", {
         method:"POST",
         headers:{'Content-Type':'Application/json ; charset=UTF-8'}
     });
 
-    response.then(res => res.json().then (data=> {
-        if(res.status == 200){
+    response.then(res => res.json().then (data=> 
+    {
+        if(res.status == 200)
+        {
             var notes = data.Notes;
             console.log(Notes);
         }
@@ -298,8 +312,10 @@ function getReceptionistNotes(){
         }
     }));
 }
-// ====================================================================================================
 
+//=============================================================================================
+//Function Developed by: Jacobus
+//
 function saveReceptionistNotes(Notes)
 {
     console.log("planning to save the note: "+Notes);
@@ -310,24 +326,30 @@ function saveReceptionistNotes(Notes)
         body: JSON.stringify({Notes})
     });
 
-    response.then(res => res.json().then(data=>{
-        if (res.status ==200){
+    response.then(res => res.json().then(data=>
+    {
+        if (res.status ==200)
+        {
             //everything is fine with updating notes
         }
         else if (res.status == 400)
         {
             //could not update
         }
-        else if(res.status == 401){
+        else if(res.status == 401)
+        {
             //not logged in
         }
         console.log(res);
     }));
 
 }
-// ====================================================================================================
 
-function receptionistMakeBooking(){
+//=============================================================================================
+//Function Developed by: Jacobus
+//
+function receptionistMakeBooking()
+{
     var patient,doctor, time , date , reason , employeeID;
     //Why the employeeID ?
 
@@ -335,17 +357,20 @@ function receptionistMakeBooking(){
         method:"POST",
         headers:{'Content-Type':'Application/json ; charset=UTF-8'},
         body: JSON.stringify(patient,doctor,time, date, reason)
-    })
+    });
 
-    response.then(res=>res.json().then(data=>{
+    response.then(res=>res.json().then(data=>
+    {
         if(res.status == 200)
         {
             //booking made
         }
     }));
 }
-// ====================================================================================================
 
+//=============================================================================================
+//Function Developed by: Steven Visser
+//Checks to see which search options are selected and then sends the appropriate data to the API to retrieve the patient data
 function getAllPatients()
 {
     var name = "";
@@ -371,9 +396,10 @@ function getAllPatients()
         method:"POST",
         headers:{'Content-Type':'Application/json ; charset=UTF-8'},
         body: JSON.stringify(name,surname,id)
-    })
+    });
 
-    response.then(res=>res.json().then(data=>{
+    response.then(res=>res.json().then(data=>
+    {
         if(res.status == 200)
         {
             //patients found, do the table population
@@ -389,16 +415,18 @@ function getAllPatients()
     }));
 
 }
-// ====================================================================================================
 
+//=============================================================================================
+//Function Developed by: Steven Visser
+//Sends a request to the API to retrieve all doctors from the database
 function getDoctors()
 {
     var response = fetch('/getAllDoctors',{
         method:"POST",
         headers:{'Content-Type':'Application/json ; charset=UTF-8'}
     });
-    response.then(res => res.json().then(data=>{
-
+    response.then(res => res.json().then(data=>
+    {
         if(data.status != 200)
         {
             //There was an issue
@@ -412,7 +440,9 @@ function getDoctors()
     }));
 }
 
-// ====================================================================================================
+//=============================================================================================
+//Function Developed by: Jacobus
+//Makes a call to the API to retrive the logged in doctors bookings
 function getSingleDoctorBookings()
 {
     var response = fetch('/getDoctorsBookings',{
@@ -420,8 +450,8 @@ function getSingleDoctorBookings()
         headers:{'Content-Type':'Application/json ; charset=UTF-8'}
     });
 
-    response.then(res => res.json().then(data => {
-
+    response.then(res => res.json().then(data => 
+    {
         if(data.status != 200)
         {
             console.log("Error: " + data);

@@ -17,8 +17,8 @@
 		<script src="Function.js"></script>
 	</head>
 	<body onload=createCanvas()>
-		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		  <a class="navbar-brand" href="../html/home.html">
+		<nav class="navbar navbar-expand-md  navbar-dark">
+		  <a class="navbar-brand" href="../html/doctorSchedule.html">
 		      <img src="../css/images/profile.png" alt="Profile Picture" width="30px" height="30px">
 		  </a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -27,13 +27,13 @@
 		  <div class="collapse navbar-collapse" id="collapsibleNavbar">
 		    <ul class="navbar-nav">
 		      <li class="nav-item">
-		        <a class="nav-link" href="../html/displayPatients.html">Patients</a>
+		        <a class="nav-link" href="../html/doctorSchedule.html">Schedule</a>
 		      </li>
 					<li class="nav-item">
-		        <a class="nav-link" href="../html/patientLog.html">Logs</a>
+		        <a class="nav-link" href="../html/timetable.html">Weekly Planner</a>
 		      </li>
 					<li class="nav-item">
-		        <a class="nav-link" onclick="logout()" href="/preview.html">Logout</a>
+		        <a class="nav-link" onclick="logout()" href="../html/preview.html">Logout</a>
 		      </li>
 		    </ul>
 		  </div>
@@ -41,13 +41,13 @@
 		<br>
 
 		<div  class="renderCenter">
-			<button class="btn btn-dark" onclick=begin()>Render Model</button>
+			<button class="btn btn-primary" onclick=begin()>Render Model</button>
 		</div><br>
 
 		<div id = "outputModule1" class="outputModule"></div>
 
 		<br>
-
+		<!--
 		<div  class="renderCenter">
 			<button class="btn btn-dark" style="left:0px;" onclick=newSTL()>New Model</button>
 			<button class="btn btn-dark" onclick=newVideo()>New Media</button>
@@ -56,5 +56,7 @@
 		<div id = 'videoRec' class='renderCenter'>
 
 		</div>
+		-->
 		</body>
+		
 </html>
