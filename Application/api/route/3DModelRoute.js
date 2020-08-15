@@ -111,4 +111,6 @@ module.exports = function (app)
 
     app.route('/postponeBooking')
         .post(Model.updateBooking);
+    
+    app.route('/getSingleBooking').post(Model.getSingleBooking);
 }

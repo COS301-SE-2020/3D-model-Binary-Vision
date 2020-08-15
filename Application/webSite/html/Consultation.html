@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="../js/Consultation.js"></script>
 	<script src="../renderPage/Function.js"></script>
 </head>
-	<body onload="startTime()">
+	<body onload="init()">
 
 		<div class="body">
 
@@ -56,9 +56,9 @@
 			          <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
 			        </div>
 			        <br>
-			        <p id="containInfo">Welcome back <i onload="getGender();">Doctor </i><b onload="getName();"> asdasdasX</b></p>
+			        <p id="containInfo">Welcome back Doctor:<b id="doctorName"> </b></p>
 			        <hr>
-			        <p id="containInfo"> You are now logged in </p>
+			        <!-- <p id="containInfo"> You are now logged in </p> -->
 			        <p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
 			        <br><br><br><hr>
 			      </div>
@@ -75,9 +75,9 @@
 				    <div id="rightSideBody" style="width: 240px;">
 				        <div id="containInfoRight" style="position: fixed;">
 				        	<br><br>
-				          TIME: 12:30 <hr>
-				          NOTES ON PATIENT: <br>
-				          MR TOM
+				          TIME: <p id="time2" style="color:black;"></p>  <hr>
+				          NOTES ON PATIENT: <p id="patientqq" style="color:black;"></p> <br>
+							
 				          <br><br><br><br><br><br>
 				          3D SETTINGS<hr>
 
