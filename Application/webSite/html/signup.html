@@ -28,33 +28,35 @@
             <li class="nav-item">
               <a id="viewLogin" class="nav-link" href="login.html">Login</a>
             </li>
-            <script type="text/javascript">
-
-            </script>
           </ul>
         </div>
       </nav>
+
       <br><br><br>
 
-        <div class="container" >
-                <form action="/signup" method="post" id="form" style="max-width: 300px; border-top-right-radius:10px; border-top-left-radius: 10px;">
-                <br>
-                <h2> Registration</h2><br>
-
-                <input class="box" type="text" name="name" id="name"
-                placeholder="Name"  required /><br><br>
-                <input name="surname" placeholder="Surname"/><br><br>
-                <input class="box" type="email" name="email" id="email"
-                placeholder="Email" required /><br><br>
-                <input name="username" placeholder="Username" /><br><br>
-                <input class="box" type="password" name="password"
-                id="password" placeholder="Password " required/><br><br>
-                <input type="text " name="choice" placeholder="Doctor/Receptionist"> <br><br>
-                <input type="text" name="practition" placeholder="Practice"><br><br>
-                <input class="btn btn-primary" type="submit" id="submitDetails"
-                name="submitDetails" value="Submit" /><br><hr>
-                <p style="font-size: 12px;">Already have an account?<a style="font-size: 12px;" href="login.html" onclick="preview()"> Login Here</a></p>
-                </form>
-        </div>
+      <div class="container" >
+              <form action="/signup" method="post" id="form" style="max-width: 300px; border-top-right-radius:10px; border-top-left-radius: 10px;">
+              <br>
+              <h2> Registration</h2>
+              <br>
+              <input class="box" type="text" name="name" id="name" placeholder="Name"  required />
+              <br><br>
+              <input name="surname" placeholder="Surname" required />
+              <br><br>
+              <input class="box" type="email" name="email" id="email" placeholder="Email" required />
+              <br><br>
+              <input name="username" placeholder="Username" required/>
+              <br><br>
+              <input class="box" type="password" name="password" id="password" placeholder="Password " required/>
+              <br><br>
+              <input type="text " name="choice" placeholder="Doctor/Receptionist" required /> 
+              <br><br>
+              <input type="text" name="practition" placeholder="Practice" required /> 
+              <br><br>
+              <input class="btn btn-primary" type="submit" id="submitDetails" name="submitDetails" value="Submit" />
+              <br><hr>
+              <p style="font-size: 12px;">Already have an account?<a style="font-size: 12px;" href="login.html" onclick="preview()"> Login Here</a></p>
+              </form>
+      </div>
     </body>
 </html>
