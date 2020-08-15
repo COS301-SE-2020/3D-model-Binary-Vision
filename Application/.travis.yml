@@ -1,18 +1,10 @@
 language: node_js
 node_js:
-	- 12.18.2
-cache: npm
+  - node
 
-install: 
-	- npm ci 
-  - npm run build 
+cache:
+  directories:
+    - "node_modules"
 
 script:
-	- npm test
-
-deploy:
-	provider: pages
-	skip-cleanup: ture
-	github-token: $GITHUB_TOKEN
-	on:
-		branch: master
+  - npm test 
