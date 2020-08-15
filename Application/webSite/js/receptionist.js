@@ -41,7 +41,7 @@ function getReceptionistInfo()
 //used to save receptionists notes to the database to be retrieved
 function saveNotes()
 {
-    var noteSpace = document.getElementById('receptionistNotes').innerText;
+    var noteSpace = document.getElementById('receptionistNotes').innerHTML;
     console.log("Note captured to save: "+ noteSpace);
     saveReceptionistNotes(noteSpace);
 }

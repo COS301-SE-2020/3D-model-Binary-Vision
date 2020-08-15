@@ -79,12 +79,12 @@ module.exports ={
 
         const Notes = req.body.Notes;
 
-        Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(req.user)},{$set:{"Note":Notes}},{'new':false},function(err,peceptionist)
+        //commented out where the error may be coming from
+        Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(req.user)},{$set:{"Note":Notes}}/*,{'new':false}*/,function(err)
         {
             if(err)
             {
                 res.status(400)
-                    .send("NO NO");
                 return;
             }
             res.status(200);
