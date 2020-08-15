@@ -40,11 +40,6 @@ app.use(serveStatic('JacoCookie/'));
 var routes = require('./api/route/3DModelRoute');
 routes(app);
 
-// A small tests to see that the server is being created and linking properly.
-app.get('/', (req, res) => {
-  res.send('ci with travis');
-});
-
 app.listen(port);
 
 console.log("Restful API for 3DModel Flap Jacks Started On Port "+ port);

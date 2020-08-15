@@ -121,7 +121,7 @@ module.exports = {
     //Function developed by: Jacobus Janse van Rensburg
     //
     selectPatient: function(req,res)
-    {
+    { 
         if (!req.user)
         {
             return res.status(404);
@@ -199,7 +199,7 @@ module.exports = {
                 return;
             } 
             else 
-            {
+            { 
                 res.status(202).json(patients);
                 return;
             }
