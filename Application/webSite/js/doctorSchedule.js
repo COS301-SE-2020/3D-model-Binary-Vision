@@ -85,8 +85,8 @@ function populateBookings(patientId,time,reason,booking)
                 document.getElementById("patientName").innerHTML = patient.name ;
                 document.getElementById("bookingTime").innerHTML = time;
                 document.getElementById("patientNotes").innerHTML = reason;
-            
-                document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' onclick='completeBooking(\""+booking+"\");' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><button class='btn btn-primary' type='button' onclick='openConsultation(\""+booking+"\")' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</button>"
+            // onclick='openConsultation(\""+booking+"\")'
+                document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' onclick='completeBooking(\""+booking+"\");' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><a class='btn btn-primary' href='/Consultation.html?bookingid="+booking+"' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</a>"
 
                 console.log(patient);
             }));
@@ -142,12 +142,22 @@ function completeBooking(bookingID)
         });
 }
 
-// Function developed by:Steven Visser
+// Function developed by:Steven Visser, Jacobus Janse van Rensburg
 // Opens consultation page with correct id's
-function openConsultation(id)
-{
-    //redicrect to consultation page
-}
+// function openConsultation(id)
+// {
+//     console.log("opening booking:" +id);
+//     var response = fetch ("/openBooking", {
+//         method: "POST",
+//         headers:{'Content-Type': 'application/json; charset=UTF-8'},
+//         body: JSON.stringify({"booking":id})
+//     });
+    
+//     response.then(res => res.json().then(data => {
+
+//         console.log(data);
+//     }));
+// }
 
 
 

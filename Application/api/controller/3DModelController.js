@@ -285,7 +285,7 @@ module.exports = {
 
     //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg
-    //
+    // used to set a cookie but will be replaced by other means of url encoding
     selectConsultation: function(req,res)
     {
         //set the consultation cookie id
@@ -728,4 +728,28 @@ module.exports = {
       });
     },
 
+     // ======================================================================================
+    // function Developed By: Jacobus Janse van Rensburg
+    // function to return a single bookings information provided a booking id 
+    getSingleBooking : function(req ,res){
+        if(!req.user)
+        {
+            res.status(401);
+            return;
+        }
+
+        Booking.findOne({"_id":mongoose.Types.ObjectId(req.body.booking)}, function(err , booking){
+            if (err)
+            {
+                res.status(400);
+                return;
+            }
+
+            res.status(200).json(booking);
+            return;
+
+        });
+
+    }
+   
 };
