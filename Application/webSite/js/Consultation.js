@@ -79,9 +79,11 @@ function hideConInfo() {
 		endInfo.style.display = "none";
 	} else {
 		timeRemainding.innerHTML = 'Time Remaining: <br><span id="remainingTime" style="font-weight: bold;" ></span>';
+		
 		if (timeRemainding.classList.contains("conInfoTimeCenterMessage"))
 			timeRemainding.classList.remove("conInfoTimeCenterMessage");
 		timeRemainding.classList.remove("conInfoTimeCenter");
+		
 		startInfo.style.display = "block";
 		endInfo.style.display = "block";
 	}

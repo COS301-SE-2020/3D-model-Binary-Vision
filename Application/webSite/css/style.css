@@ -199,14 +199,15 @@ body{
 	position: relative;
 	text-align: center;
 	margin: 0 auto;
-	transform: translateY(-10px);
+	transform: translate(-5px, -10px);
+	font-size: 35px;
 }
 
 .conInfoTimeCenterMessage {
 	position: relative;
 	text-align: center;
 	margin: 0 auto;
-	transform: translateX(-5px);
+	transform: translateX(0px);
 }
 
 .renderCenter {
@@ -479,7 +480,6 @@ input {
 	-ms-transition: all 0.3s ease-in-out;
 }
 
-
 #notify:hover{
 	background-color: lightgreen;
 	box-shadow: 0px 0px 5px 0px black;
@@ -489,6 +489,10 @@ input {
 	-moz-transform: translate(5em,0);
 	-o-transform: translate(5em,0);
 	-ms-transform: translate(5em,0);
+}
+
+#notify:visited {
+	background-color: lightgreen;
 }
 
 #header{
@@ -530,7 +534,7 @@ input {
 
 
 #VideoRecorder {
-	/*display: none;*/
+	display: none;
 	background-color: white;
 	border-radius: 10px;
 	box-shadow: 1px 0px 15px 0px black;
@@ -555,6 +559,13 @@ input {
 	transform: translateY(10px);
 }
 
+#VideoRecorderCenter {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative; 
+}
+
 input[type="file"] {
     display: none;
 }
@@ -562,8 +573,6 @@ input[type="file"] {
 #UploadVideo {
 	transform: translateY(4px);
 }
-
-
 
 #mydiv {
   position: absolute;

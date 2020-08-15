@@ -41,8 +41,9 @@ function takeVideoStream() {
 	
 	// Create the start, stop and video elements for the video stream
 	var videoStreamElement = document.getElementById("videoStreamElement");
-	videoStreamElement.innerHTML = '<br><button class="btn btn-dark" id="startStream">Start recording</button><br>';
-	videoStreamElement.innerHTML += '<button class="btn btn-dark" id="stopStream">Stop recording</button><br>';
+	videoStreamElement.style.display = "block";
+	videoStreamElement.innerHTML = '<br><button class="btn btn-success" id="startStream">Start recording</button><br>';
+	videoStreamElement.innerHTML += '<button class="btn btn-danger" id="stopStream">Stop recording</button><br>';
 	videoStreamElement.innerHTML += '<br><br><video></video>';
 	videoStreamElement.innerHTML += '<br><br><video id="capturedVideoStream" controls></video>';
 
