@@ -696,8 +696,8 @@ input[type="file"] {
 
 #container {
 	animation: opacityForm 2s;
-	position: absolute;
-	margin-left:240px;
+	position: relative;
+	text-align: center;
 }
 
 #formSignup {
