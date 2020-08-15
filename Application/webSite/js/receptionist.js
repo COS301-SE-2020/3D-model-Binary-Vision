@@ -31,7 +31,7 @@ function getReceptionistInfo()
         info[4] = data.Note;
 
         document.getElementById("receptionistName").innerHTML = data.name+" "+ data.surname;
-        document.getElementById("receptionistNotes").innerHTML = data.Note;
+        document.getElementById("receptionistNotes").innerText = data.Note;
     }));
     return info;
 }
@@ -41,7 +41,7 @@ function getReceptionistInfo()
 //used to save receptionists notes to the database to be retrieved
 function saveNotes()
 {
-    var noteSpace = document.getElementById('receptionistNotes').innerHTML;
+    var noteSpace = document.getElementById('receptionistNotes').innerText;
     console.log("Note captured to save: "+ noteSpace);
     saveReceptionistNotes(noteSpace);
 }
