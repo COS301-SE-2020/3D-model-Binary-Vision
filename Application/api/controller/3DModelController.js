@@ -745,7 +745,7 @@ module.exports = {
 
         var id = mongoose.Types.ObjectId(req.body._id)
 
-        Booking.findAndDeleteOne({"_id":id}, function(err)
+        Booking.deleteOne({"_id":id}, function(err)
         {
             if (err)
             {
