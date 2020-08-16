@@ -56,11 +56,30 @@ function setTodaysBookings()
 //================================================================================================
 // Function developed by: Jacobus Janse van Rensburg
 //
+
 function dynamicBarMoveAndPopulate(id,time,reason,booking)
 {
-    moveRightBar();
+    closeRightBar();
     populateBookings(id,time,reason,booking);
+    openRightBar();
 }
+
+//================================================================================================
+// Function developed by: Steven Visser
+// Makes the bar on the right smaller
+function closeRightBar()
+{
+    document.getElementById("rightSideBody").style.width = "200px";
+}
+
+//================================================================================================
+// Function developed by: Steven Visser
+// Makes the bar on the right bigger
+function openRightBar()
+{
+    document.getElementById("rightSideBody").style.width = "500px";
+}
+
 //================================================================================================
 // Function developed by: Jacobus Janse van Rensburg
 // Function used to populate the fields of the bookings retrieved
@@ -137,28 +156,10 @@ function completeBooking(bookingID)
                 //remove successful, dynamically update the page to remove the block
                 document.getElementById(bookingID).remove();
                 dynamicBarMoveAndPopulate(null,null,null,null);
-
+                closeRightBar();
             }
         });
 }
-
-// Function developed by:Steven Visser, Jacobus Janse van Rensburg
-// Opens consultation page with correct id's
-// function openConsultation(id)
-// {
-//     console.log("opening booking:" +id);
-//     var response = fetch ("/openBooking", {
-//         method: "POST",
-//         headers:{'Content-Type': 'application/json; charset=UTF-8'},
-//         body: JSON.stringify({"booking":id})
-//     });
-    
-//     response.then(res => res.json().then(data => {
-
-//         console.log(data);
-//     }));
-// }
-
 
 
 
