@@ -7,4 +7,4 @@ cache:
     - "node_modules"
 
 script: 
-  - Application/ "npm test"
+  - cd Application && npm test
