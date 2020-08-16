@@ -71,6 +71,7 @@ function signup()
     if(password.value != "" && passwordCheck.value !=""){
         if(password.value != passwordCheck.value){
             usedParamaters=true;
+            console.log(password.value +" "+passwordCheck.value);
             //indicate that they dont match
             passwordCheck.placeholder="password does not match";
             passwordCheck.value="";
