@@ -16,7 +16,7 @@
 		<script type="text/javascript" src="../js/login.js"></script>
     </head>
   <body>
-		<nav class="navbar navbar-expand-lg  navbar-dark">
+  		<nav class="navbar navbar-expand-lg  navbar-dark">
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
@@ -34,13 +34,22 @@
 		    </ul>
 		  </div>
 		</nav>
-		<br><br><br>
     <!-- <form method="POST" action="/login" enctype="multipart/form-data"> -->
-		<div id="container">
-			<img src="../css/images/45RS.gif" alt="tooth" style="position: fixed; margin-left: 40%; width:  300px;">
+
+	    <div id="miBody">
+		    <div id="header">
+		      <p id="headerTitle">LOGIN PAGE</p>
+		    </div>
+		</div>
+
+		<br><br><br><br>
+
+		<div id="containerLogin">
+			<img src="../css/images/45RS.gif" alt="tooth" style="position: relative; margin-left: auto; margin-right: auto; width:  300px;">
 			<form  style="border-top-right-radius:10px; border-top-left-radius: 10px; padding: 20px; margin-left: auto; margin-right: auto; position: relative; text-align: center;">
 			  <br>
-			  <h2> Login </h2><br>
+			  <h2> Login </h2>
+			  	<div id="errorResponse" style="color: red; font-style: italic;"></div><br>
 			    <input name="username" placeholder="Username" id="username" /><br><br>
 			    <input name="password" type="password" placeholder="Password" id="password" /><br><br>
 			    <button class="btn btn-primary" type="button" onclick="login()">Submit</button><br>
@@ -49,6 +58,5 @@
 			    <p style="font-size: 12px;">Don't have account?<a style="font-size: 12px;" href="signup.html"> Register Here</a></p>
 			</form>
 		</div>
-		<div id="errorResponse"></div>
   </body>
 </html>
