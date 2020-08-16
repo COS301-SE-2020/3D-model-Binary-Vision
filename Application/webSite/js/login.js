@@ -6,6 +6,8 @@
 //function used to handel the login of a patient
 function login()
 {
+    document.getElementById("errorResponse").innerHTML = "";
+
     var username = document.querySelector("#username");
     var password = document.querySelector("#password");
 
@@ -40,7 +42,12 @@ function login()
     }
     else{
         //indicate that some fields are missing
-        document.querySelector("#errorResponse").innerHTML="Please enter username and password";
-
+        if (username.value == "" && password.value == "") {
+            document.querySelector("#errorResponse").innerHTML="Please enter username and password";
+        } else if (username.value == "") {
+            document.querySelector("#errorResponse").innerHTML="Please enter username";
+        } else if (password.value == "") {
+            document.querySelector("#errorResponse").innerHTML="Please enter password";
+        }
     }
 }

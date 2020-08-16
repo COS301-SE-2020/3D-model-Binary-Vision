@@ -717,6 +717,32 @@ input[type="file"] {
 	animation: opacityForm 2s;
 	position: relative;
 	text-align: center;
+
+	margin-top: 20px;
+	padding: 20px;
+	padding-top: 30px;
+	box-shadow: 1px 0px 15px 0px black;
+	background-color: #003366;
+	margin-left: 10%;
+	margin-right: 10%;
+	border-radius: 10px;
+}
+
+#containerLogin {
+	box-shadow: 1px 0px 15px 0px black;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+
+	animation: opacityForm 2s;
+	position: relative;
+	text-align: center;
+
+	background-color: #003366;
+	margin-left: 20%;
+	margin-right: 20%;
+
+	border-radius: 10px;
 }
 
 #formSignup {
