@@ -7,4 +7,4 @@ cache:
     - "node_modules"
 
 script: 
-  - cd Application && npm install -g mocha && npm test 
+  - cd Application && npm install -g mocha && npm test && --exit
