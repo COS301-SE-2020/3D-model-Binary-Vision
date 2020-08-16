@@ -171,16 +171,24 @@ function cancelBooking(bookingID)
     var response = fetch("/removeBooking",{
         method:"POST",
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
-        body: JSON.stringify({"bookingID":bookingID})
+        body: JSON.stringify({"_id":bookingID})
     });
 
-    response.then(res =>
+    response.then(res => 
     {
+        //remove the bar holding this booking and load the next one
         //check status code
-        // remove the patient from the waiting log
-        //if its successful, display a message saying that the appointment has been cancelled
         console.log(res.status);
-    })
+        if(res.status == 401)
+        {
+            alert("You are not authorized to do this action!");
+        }
+        else if(res.status== 200)
+        {
+            //remove successful, dynamically update the page to remove the block
+            
+        }
+    });
 }
 
 
@@ -190,5 +198,9 @@ function cancelBooking(bookingID)
 function postponeBooking(bookingID)
 {
     //cancel the booking here
-
+    var response = fetch("/removeBooking",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body: JSON.stringify({"_id":bookingID})
+    });
 }
