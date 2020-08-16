@@ -56,8 +56,10 @@ function createTable()
 
     replacement += '</thead>'
     replacement+='<tbody>';
+   
     for(var i = 0 ; i < times.length; i ++)
     {
+       
         replacement+='<tr><td id="time">'+times[i]+'</td>';
         for (var j =0 ; j < days.length; j ++)
         {
@@ -97,12 +99,15 @@ function populateTable()
 // Modified by: Steven Visser
 function fillData(data)
 {
+    var count=0;
 	for(var i in data)
     {
-        var date = data[i].date;
-        var time = data[i].time;
-        var searchPageId = date+"&"+time;
+        var dataIndex = parseInt(i) ;
+        console.log(dataIndex);
 
+        var date = data[dataIndex].date;
+        var time = data[dataIndex].time;
+        var searchPageId = date+"&"+time;
         var element = document.getElementById(searchPageId);
         if (element!=null)
         {
@@ -110,19 +115,24 @@ function fillData(data)
             element.setAttribute("style","background-color:orange;");
             element.setAttribute("onclick","");
             //call api to get patient based on id, then put the patients full name ehre
-            var response = fetch("/singlePatient",{
-                method:"POST",
-                headers:{'Content-Type': 'application/json; charset=UTF-8'},
-                body:JSON.stringify({"patient":data[i].patient})
-            });
-            response.then(res => res.json().then(pat => 
-            {
-                console.log(pat);
-                element.innerHTML=pat.name + " " + pat.surname;
-            }));
+            setName(data[dataIndex].patient,searchPageId);
+           
             
         }
     }
+}
+
+function setName(patient, searchPageId){
+    var response = fetch("/singlePatient",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body:JSON.stringify({"patient":patient})
+    });
+    response.then(res => res.json().then(pat => 
+    {
+        console.log(pat.name);
+        document.getElementById(searchPageId).innerHTML=pat.name + " " + pat.surname;
+    }));
 }
 
 //Function developed by: Steven Visser
