@@ -46,7 +46,37 @@
               </ul>
             </div>
           </nav>
+          <div id="miBody">
+              <div id="header">
+                <p id="headerTitle" style="z-index: 1;">BOOKING PAGE</p>
+              </div>
+          </div>
+          <!--sideBar-->
+          <!--<button style="position:fixed; margin-left:60px; display:none; top: 10px;
+          z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>-->
 
+          <div id="sideBody" style="background-color: white; height: 100%; position: fixed;">
+            <img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrow('arrowSideBody')" style="top: 60px;">
+            <label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 73px); display: none; position: relative;" onclick="rotateArrow('arrowSideBody')">Profile Info</label>
+            <div id="sideBar" >
+              <div id="containInfo">
+                <div class="profile">
+                  <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
+                </div>
+                <br>
+                <p id="containInfo">Welcome back <b id="receptionistName"> asdasdasX</b></p>
+                <hr>
+                <p id="containInfo"> You are now logged in </p>
+                <p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
+                <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
+                <!--<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>-->
+
+                <button id="displayNote" class="btn btn-primary" style="transform: translateY(55px);" onclick="showNote()">Show Note</button>
+
+                <br><br><br><hr>
+              </div>
+            </div>
+          </div>
         <!-- A booking needs to have a doctor , time , date and patient -->
         <!-- have 4 buttons that will do different acctions that will produce these values through different overlays -->
         <!-- doctor button , display an overlay of doctors to choose from  , capture the id of the selected doctor-->
@@ -54,21 +84,29 @@
         <!-- search patient by criteria and select the correct patient and capture the selected patients id -->
         <div id="bookingBackground">
             <div id="centerBookingOverlay">
+                <input type="button" class="btn btn-danger" value="Select Patient" name="patientSelect" onclick="displayPatientSearchOverlay()" style="margin: 5px;">
                 <input type="button" class="btn btn-primary" value="Select Doctor" name="drSelect" onclick="displayDoctorOverlay()" style="margin: 5px;">
-                <input type="button" class="btn btn-warning" value="Select Date" name="timeSelect" onclick="displayTimeTableOverlay()" style="margin: 5px;">
-                <input type="button" class="btn btn-danger" value="Select Patient" name="patientSelect" onclick="displayPatientSearchOverlay()" style="margin: 5px;"><br><br>
-                <label for="reasonForBooking">Reason for booking</label><br>
-                <input type="text" type="form-control" name="reason" id="reasonForBooking" style="margin-bottom: 20px; width: 300px; padding: 10px; border-radius: 5px; border: none;">
-
-                <div id="currentOverlay" ></div><br><hr>
-
-                <div id="bookingInfo" style="padding: 20px; background-color: #003366; border-radius: 5px;">
-                    <p>BOOKING FOR PATIENT: <p id="patientInfoDisplay"></p><hr>
-                    <p>With Dr: <p id="doctorInfoDisplay"></p>
-                    <p>Date: <p id="dateInfoDisplay"></p><
-                    <p>Time: <p id="timeInfoDisplay"></p>
-                    <button class="btn btn-success" onclick="makeBooking()" >Make Booking!</button>
+                <input type="button" class="btn btn-warning" value="Select Date" name="timeSelect" onclick="displayTimeTableOverlay()" style="margin: 5px;"><br><br>
+                <div id="searchPatientInput" style="margin-left: auto; margin-right:auto; border-radius: 5px; background-color: #003366; width:300px;">
+                  <br><label for="reasonForBooking" style="color: white;">Reason for booking</label><br>
+                  <input type="text" type="form-control" name="reason" id="reasonForBooking" style="margin-bottom: 20px; width: 250px; padding: 10px; border-radius: 5px; border: none;">
+                </div><br>
+                <div id="currentOverlay"></div>
+                <div id="currentOverlayTable"></div><br>
+                <!--right Nav-->
+                <div class="containerRight">
+                  <div id="rightSideBody" >
+                        <div id="bookingInfo">
+                            <span>BOOKING FOR PATIENT: <p id="patientInfoDisplay"></p><hr>
+                            <span>With Dr: <p id="doctorInfoDisplay"></p></span>
+                            <span>Date: <p id="dateInfoDisplay"></p></span>
+                            <span>Time: <p id="timeInfoDisplay"></p></span>
+                            <button class="btn btn-success" onclick="makeBooking()" >Make Booking!</button>
+                      
+                      </div>
+                    </div>
                 </div>
+
             </div>
         </div>
 
