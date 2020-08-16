@@ -2,12 +2,9 @@ language: node_js
 node_js:
   - node
 
-before_install:
-  - git checkout UnitTesting
-
 cache:
   directories:
     - "node_modules"
 
 script:
-  - npm test 
+  - "Application/npm test" 
