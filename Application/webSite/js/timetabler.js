@@ -19,7 +19,7 @@ function createTable()
 {
 	var tableDiv = document.getElementById("dayTable");
 
-	var days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+	var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     var times=[
         "09:00","09:15","09:30","09:45",
         "10:00","10:15","10:30","10:45",
@@ -43,14 +43,13 @@ function createTable()
     //set the headings now
     var count =0;
     var dd = currentDay;
-    
     while (count<days.length)
     {
-        if(dd > days.length )
+        if(dd == days.length )
         {
-            dd =1;
+            dd =0;
         }
-        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd-1]+','+(currentDate+(count))+'</td>';
+        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd]+','+(currentDate+(count))+'</td>';
         count++;
         dd++;
     }
@@ -95,7 +94,7 @@ function populateTable()
 
 //================================================================================================
 // Function developed by:
-//
+// Modified by: Steven Visser
 function fillData(data)
 {
 	for(var i in data)
@@ -110,7 +109,20 @@ function fillData(data)
             //mark as red since a booking already exists
             element.setAttribute("style","background-color:orange;");
             element.setAttribute("onclick","");
-            element.innerHTML=data[i].reason;
+            //call api to get patient based on id, then put the patients full name ehre
+            var response = fetch("/singlePatient",{
+                method:"POST",
+                headers:{'Content-Type': 'application/json; charset=UTF-8'},
+                body:JSON.stringify({"patient":data[i].patient})
+            });
+        
+
+            response.then(res => res.json().then(pat => 
+            {
+                console.log(pat)
+                element.innerHTML=pat.name + " " + pat.surname;
+            }));
+            
         }
     }
 }

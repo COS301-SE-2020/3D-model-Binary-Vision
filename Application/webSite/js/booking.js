@@ -17,10 +17,10 @@ function displayDoctorOverlay()
         method:"POST",
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
-        }    
+        }
     });
 
-    response.then(res => res.json().then(data=> 
+    response.then(res => res.json().then(data=>
     {
         for(var i in data)
         {
@@ -47,7 +47,7 @@ function createDoctorsList(data)
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
-// 
+//
 function displayTimeTableOverlay()
 {
     var overlay = document.getElementById('currentOverlay');
@@ -62,7 +62,7 @@ function displayTimeTableOverlay()
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
             } ,
-            body: JSON.stringify({"doctor":selectedDoctor}) 
+            body: JSON.stringify({"doctor":selectedDoctor})
         });
 
         response.then(res=> res.json().then(data=>
@@ -106,7 +106,7 @@ function populateCalander(data)
 // Dynamically produces a schedule for the week for a doctor
 function createScheduler(overlay)
 {
-    var days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+    var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     var times = [
                "09:00","09:15","09:30","09:45",
                "10:00","10:15","10:30","10:45",
@@ -129,14 +129,15 @@ function createScheduler(overlay)
     //set the headings now
     var count =0;
     var dd = currentDay;
-    
+
     while (count<days.length)
     {
-        if(dd > days.length )
+        if(dd == days.length )
         {
-            dd =1;
+
+            dd =0;
         }
-        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd-1]+','+(currentDate+(count))+'</td>';
+        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd]+','+(currentDate+(count))+'</td>';
         count++;
         dd++;
     }
@@ -149,8 +150,6 @@ function createScheduler(overlay)
         for (var j =0 ; j < days.length; j ++)
         {
             replacement += '<td class="selectableTimeSlot" id="'+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'" onclick="selectTime(\''+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'\')"></td>';
-
-            replacement += '</td>';
         }
         replacement += '</tr>'
     }
@@ -202,7 +201,7 @@ function createPatientSearchOverlay()
     overlay.innerHTML+='<input type="checkbox" id="searchBySurname" name="searchBy" onclick="searchByInputDisplay()"><label style="color:white;" for="searchBySurname"> Search By Surname </label><br>';
     overlay.innerHTML+='<input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()"><label style="color:white;" for="searchByPatientID"> Search By Patient ID </label> <br><br></div>';
     overlay.innerHTML+='<div id="inputBoxes"></div><input style="margin-bottom: 20px;" class="btn btn-warning" type="submit" class="btn" value="Search" onclick="createPatientsListForBooking()"></div></div>';
- 
+
 }
 
 // ===========================================================================================
@@ -218,15 +217,15 @@ function createPatientsListForBooking()
     if(nameElement!=null)
     {
         name=nameElement.value;
-    } 
+    }
     if(surnameElement!=null)
     {
         surname= surnameElement.value;
-    } 
+    }
     if(idNumberElement!=null)
     {
         idNumber=idNumberElement.value;
-    } 
+    }
     var response = fetch("/searchPatient",{
         method:"POST",
         headers:{'Content-Type':'application/json; charset=UTF-8'},
@@ -276,7 +275,7 @@ function selectTimeSlot(date, time)
     selectedDate = date;
     selectedTime = time;
     console.log("Selected Time: "+ selectedTime+"\t selected date: "+selectedDate);
-    
+
     document.getElementById("timeInfoDisplay").innerHTML = time;
     document.getElementById("dateInfoDisplay").innerHTML = date;
 }
@@ -316,7 +315,7 @@ function makeBooking()
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
             },
-            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason})   
+            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason})
         });
 
         response.then(res=> res.json().then(data=>
@@ -332,7 +331,7 @@ function makeBooking()
             }
         }));
     }
-    else 
+    else
     {
         alert("Please provide all fields to make a booking");
     }
