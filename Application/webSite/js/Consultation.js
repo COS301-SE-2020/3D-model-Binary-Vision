@@ -6,7 +6,7 @@ var currentTime = "";
 //=============================================================================================
 //Function Developed by:
 //
-function rotateArrowSideBody(arrowID) 
+function rotateArrowConsultation(arrowID) 
 {
   
   	let arrowElement = document.getElementById(arrowID);
@@ -40,14 +40,14 @@ function moveSideBar()
   	  	showSideBar = true;
   	  	bodyA.classList.remove("moveSideBar");
   	  	bodyContainer.style.width = "60%";
-  	  	bodyContainer.classList.remove("bodyContainerIncreaseWidth");
+  	  	bodyContainer.classList.remove("centerBookingOverlayMove");
   	}
 	else
 	{
   	 	showSideBar = false;
   	 	bodyA.classList.add("moveSideBar");
   	 	bodyContainer.style.width = "75%";
-  	 	bodyContainer.classList.add("bodyContainerIncreaseWidth");
+  	 	bodyContainer.classList.add("centerBookingOverlayMove");
   	}
 }
 

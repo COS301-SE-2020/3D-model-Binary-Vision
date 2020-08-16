@@ -472,6 +472,14 @@ input {
 	padding-top: 100px;
 }
 
+#bookingBody {
+	transition: 0.8s;
+}
+
+.bookingBodyInceaseWidth {
+	transform: translateX(-120px);
+}
+
 #bookingInfo{
 	background-color: #003366;
 	position: fixed;

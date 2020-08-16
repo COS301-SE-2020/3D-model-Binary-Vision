@@ -56,8 +56,8 @@
           z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>-->
 
           <div id="sideBody" style="background-color: white; height: 100%; position: fixed;">
-            <img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrow('arrowSideBody')" style="top: 60px;">
-            <label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 73px); display: none; position: relative;" onclick="rotateArrow('arrowSideBody')">Profile Info</label>
+            <img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrowBooking('arrowSideBody')" style="top: 60px;">
+            <label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 73px); display: none; position: relative;" onclick="rotateArrowBooking('arrowSideBody')">Profile Info</label>
             <div id="sideBar" >
               <div id="containInfo">
                 <div class="profile">
@@ -71,7 +71,7 @@
                 <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
                 <!--<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>-->
 
-                <button id="displayNote" class="btn btn-primary" style="transform: translateY(55px);" onclick="showNote()">Show Note</button>
+                <!--<button id="displayNote" class="btn btn-primary" style="transform: translateY(55px);" onclick="showNote()">Show Note</button>-->
 
                 <br><br><br><hr>
               </div>
@@ -85,12 +85,16 @@
         <div id="bookingBackground">
             <div id="centerBookingOverlay">
 
-                <div id="searchPatientInput" style="margin-left: auto; margin-right:auto; border-radius: 5px; background-color: #003366; width:300px;">
-                  <br><label for="reasonForBooking" style="color: white;">Reason for booking</label><br>
-                  <input type="text" type="form-control" name="reason" id="reasonForBooking" style="margin-bottom: 20px; width: 250px; padding: 10px; border-radius: 5px; border: none;">
-                </div><br>
-                <div id="currentOverlay"></div>
-                <div id="currentOverlayTable"></div><br>
+                <div id="bookingBody">
+                   <div id="searchPatientInput" style="margin-left: auto; margin-right:auto; border-radius: 5px; background-color: #003366; width:300px;">
+                      <br><label for="reasonForBooking" style="color: white;">Reason for booking</label><br>
+                      <input type="text" type="form-control" name="reason" id="reasonForBooking" style="margin-bottom: 20px; width: 250px; padding: 10px; border-radius: 5px; border: none;">
+                    </div><br>
+                    <div id="currentOverlay"></div>
+                    <div id="currentOverlayTable"></div><br>
+                </div>
+
+
                 <!--right Nav-->
                 <div class="containerRight">
                   <div id="rightSideBody" >

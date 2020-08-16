@@ -468,3 +468,47 @@ function initPage()
         prepPostponement();
     }
 }
+
+
+function rotateArrowBooking(arrowID) 
+{  
+    let arrowElement = document.getElementById(arrowID);
+
+    if(arrowElement.classList.contains("arrowSideBarTransform")) 
+    {
+        document.getElementById("sideBarLabel").style.display = "none";
+        arrowElement.classList.replace("arrowSideBarTransform", "arrowSideBody");
+        moveSideBar();
+    } 
+    else 
+    {
+        document.getElementById("sideBarLabel").style.display = "block";
+        arrowElement.classList.replace("arrowSideBody", "arrowSideBarTransform");
+        moveSideBar();
+    }
+}
+
+var showSideBar = true;
+//=============================================================================================
+//Function Developed by:
+//
+function moveSideBar()
+{
+    var bodyA = document.getElementById("sideBody");
+    var bookingBody = document.getElementById("bookingBody");
+
+      if(!showSideBar)
+      {
+        showSideBar = true;
+        bodyA.classList.remove("moveSideBar");
+        //bookingBody.style.width = "60%";
+        bookingBody.classList.remove("bookingBodyInceaseWidth");
+    }
+    else
+    {
+        showSideBar = false;
+        bodyA.classList.add("moveSideBar");
+        //bookingBody.style.width = "75%";
+        bookingBody.classList.add("bookingBodyInceaseWidth");
+    }
+}
