@@ -94,7 +94,7 @@ function populateTable()
 
 //================================================================================================
 // Function developed by:
-//
+// Modified by: Steven Visser
 function fillData(data)
 {
 	for(var i in data)
@@ -109,7 +109,20 @@ function fillData(data)
             //mark as red since a booking already exists
             element.setAttribute("style","background-color:orange;");
             element.setAttribute("onclick","");
-            element.innerHTML=data[i].reason;
+            //call api to get patient based on id, then put the patients full name ehre
+            var response = fetch("/singlePatient",{
+                method:"POST",
+                headers:{'Content-Type': 'application/json; charset=UTF-8'},
+                body:JSON.stringify({"patient":data[i].patient})
+            });
+        
+
+            response.then(res => res.json().then(pat => 
+            {
+                console.log(pat)
+                element.innerHTML=pat.name + " " + pat.surname;
+            }));
+            
         }
     }
 }
