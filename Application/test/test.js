@@ -3,7 +3,7 @@ let chaiHttp = require("chai-http");
 let server = require("../server");
 let db = require("../api/controller/3DModelController");
 let dbR = require("../api/controller/ReceptionistController");
-let mongoose = require('mongoose');
+//let mongoose = require('mongoose');
 
 //Assertion sytle
 chai.should();
@@ -547,6 +547,6 @@ describe('API unit testing:', () => {
 		});
 	});
 
-	mongoose.connection.close();
+	//mongoose.connection.close();
 });
 
