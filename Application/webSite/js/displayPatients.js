@@ -129,6 +129,7 @@ function populatePatients()
     {
         var replacement ="";
         var count = 1;
+        document.getElementById("patientTable").innerHTML =replacement;
         for(var i in data)
         {
 
@@ -149,7 +150,7 @@ function populatePatients()
                     console.log("time index: "+timeIndex);
                     replacement="<tr><td>"+patientInfo.name+"</td><td>"+count+"</td><td>"+patientInfo.idNumber+"</td><td>"+data[timeIndex].time+" : "+data[timeIndex].date+"</td><td>"+patientInfo.cellnumber+"</td><td><a class='btn btn-success'  type='button' href='makeBooking.html?patient="+data[i].patient+"&doctor="+selectedDoctor+"' onclick='postponeBooking(\""+data[i]._id+"\")'>POSTPONE</a><button class='btn btn-danger'  type='button' onclick='cancelBooking(\""+data[i]._id+"\")'>CANCEL</button></td></tr>";
                     // count++;
-                    count++
+                    count++;
                     document.getElementById("patientTable").innerHTML+=replacement;
 
                 }
@@ -186,7 +187,7 @@ function cancelBooking(bookingID)
         else if(res.status== 200)
         {
             //remove successful, dynamically update the page to remove the block
-            populateDoctorChoices();
+            populatePatients();
         }
     });
 }
