@@ -47,7 +47,8 @@ function createDoctorsList(data)
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
-//
+//Modified by: Steven Visser
+//populates the booking table with all existing bookings & creates the schedule
 function displayTimeTableOverlay()
 {
     var overlay = document.getElementById('currentOverlay');
