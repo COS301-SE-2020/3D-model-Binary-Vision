@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 var doctor = chai.request.agent(server); // Create the agent to store the cookie 
 var rep = chai.request.agent(server); // Create the agent to store the cookie 
 	
-describe('API unit testing:', () => {
+describe('API unit testing:', (done) => {
 	// Test case 1: Signup
 	describe('(1) SignUp:', () => {
 		// test successful signup
@@ -545,5 +545,7 @@ describe('API unit testing:', () => {
 				});
 		});
 	});
+
+	done();
 });
 
