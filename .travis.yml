@@ -3,8 +3,9 @@ node_js:
   - node
 
 cache:
-  directories:
+  Application:
     - "node_modules"
 
 script:
-  - "Application/" npm test  
+  Application: 
+    - npm test  
