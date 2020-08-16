@@ -84,9 +84,7 @@
         <!-- search patient by criteria and select the correct patient and capture the selected patients id -->
         <div id="bookingBackground">
             <div id="centerBookingOverlay">
-                <input type="button" class="btn btn-danger" value="Select Patient" name="patientSelect" onclick="displayPatientSearchOverlay()" style="margin: 5px;">
-                <input type="button" class="btn btn-primary" value="Select Doctor" name="drSelect" onclick="displayDoctorOverlay()" style="margin: 5px;">
-                <input type="button" class="btn btn-warning" value="Select Date" name="timeSelect" onclick="displayTimeTableOverlay()" style="margin: 5px;"><br><br>
+
                 <div id="searchPatientInput" style="margin-left: auto; margin-right:auto; border-radius: 5px; background-color: #003366; width:300px;">
                   <br><label for="reasonForBooking" style="color: white;">Reason for booking</label><br>
                   <input type="text" type="form-control" name="reason" id="reasonForBooking" style="margin-bottom: 20px; width: 250px; padding: 10px; border-radius: 5px; border: none;">
@@ -96,13 +94,16 @@
                 <!--right Nav-->
                 <div class="containerRight">
                   <div id="rightSideBody" >
+                    <input type="button" class="btn btn-danger" value="Select Patient" name="patientSelect" onclick="displayPatientSearchOverlay()" style="margin: 5px; margin-top:100px;">
+                    <input type="button" class="btn btn-primary" value="Select Doctor" name="drSelect" onclick="displayDoctorOverlay()" style="margin: 5px;">
+                    <input type="button" class="btn btn-warning" value="Select Date" name="timeSelect" onclick="displayTimeTableOverlay()" style="margin: 5px;"><br><br>
                         <div id="bookingInfo">
                             <span>BOOKING FOR PATIENT: <p id="patientInfoDisplay"></p><hr>
                             <span>With Dr: <p id="doctorInfoDisplay"></p></span>
                             <span>Date: <p id="dateInfoDisplay"></p></span>
                             <span>Time: <p id="timeInfoDisplay"></p></span>
                             <button class="btn btn-success" onclick="makeBooking()" >Make Booking!</button>
-                      
+
                       </div>
                     </div>
                 </div>
