@@ -27,6 +27,7 @@ function displayDoctorOverlay()
             console.log(data[i].name+"\n "+data[i].surname+" \nid:"+data[i]._id+" \nusername: "+data[i].username+" \npassword: "+data[i].password +"\n\n");
         }
         //createDoctorslist with the data
+
         createDoctorsList(data);
     }));
 }
@@ -49,14 +50,18 @@ function createDoctorsList(data)
     overlay.style.textAlign = "center";
     overlay.style.borderRadius = "5px";
     overlay.style.boxShadow = "1px 0px 15px 0px black";
-    var replacement;
+    var replacement = "";
     for(var i in data)
     {
+      if(data != null){
         replacement += "<div style='background-color: #003366; width: 300px; color: white; margin-left: auto; margin-right: auto; text-align: auto; border-radius: 5px;'>";
         replacement +='<br><li>Dr.'+data[i].surname+' ('+data[i].name+') </li><br><button class="btn btn-primary" onclick="selectDoctor(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\')">Select</button> <br><br>';
         replacement += "</div>";
+      }
     }
-    overlay.innerHTML=replacement;
+    if(data != "undefined"){
+      overlay.innerHTML=replacement;
+    }
 }
 
 // ===========================================================================================
@@ -289,14 +294,14 @@ function createPatientsListForBooking()
 function fillPatientSearchedList(data)
 {
     var overlay = document.getElementById("currentOverlay");
-    var replacement;
+    var replacement = "";
     var overlayTable = document.getElementById('currentOverlayTable');
     overlayTable.style.display = "none";
     overlay.style.display = "block";
 
     for (var i in data)
     {
-        replacement += '<br><br><li> Name: '+data[i].name+'</li><li> Surname: '+data[i].surname+'</li><li>ID: '+data[i].idNumber+'</li><li>'+data[i].cell+'</li><br><button class="btn btn-warning" onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</button><br><br>';
+        replacement += '<br><br><li> Name: '+data[i].name+'</li><li> Surname: '+data[i].surname+'</li><li>ID: '+data[i].idNumber+'</li><li>Cell: '+data[i].cellnumber+'</li><br><button class="btn btn-warning" onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</button><br><br>';
     }
     overlay.innerHTML = replacement;
 }
@@ -361,7 +366,7 @@ function makeBooking()
     console.log("Making booking with details:\nDoctor: "+selectedDoctor+"\nPatient: "+selectedPatient+"\nDate: "+selectedDate+"\nTime: "+selectedTime);
     if (selectedDoctor != null && selectedPatient!= null && selectedDate != null && selectedTime!=null)
     {
-        
+
         //booking can be created
         var reason = document.getElementById("reasonForBooking").value;
 
@@ -419,7 +424,7 @@ function prepPostponement()
         docsurname = data.surname;
     }));
     selectDoctor(doctorID, docname,docsurname);
-    
+
     //make a call to find patient by id and get name/surname
     var patname; var patsurname;var idnmumber;
     var response = fetch("/singlePatient",{
