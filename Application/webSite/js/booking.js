@@ -94,7 +94,18 @@ function populateCalander(data)
             //mark as red since a booking already exists
             element.setAttribute("style","background-color:red;");
             element.setAttribute("onclick","");
-            element.innerHTML=data[i].name+" "+data[i].surname;
+
+            var response = fetch("/singlePatient",{
+                method:"POST",
+                headers:{'Content-Type': 'application/json; charset=UTF-8'},
+                body:JSON.stringify({"patient":data[i].patient})
+            });
+
+            response.then(res => res.json().then(pat => 
+            {
+                console.log(pat)
+                element.innerHTML=pat.name + " " + pat.surname;
+            }));
         }
     }
 
