@@ -26,7 +26,7 @@
 		      <span class="navbar-toggler-icon"></span>
 		    </button>
 
-		   
+
 		    <div class="collapse navbar-collapse" id="collapsibleNavbar">
 		      <ul class="navbar-nav">
 		        <li id="otherLi" class="nav-item">
@@ -44,9 +44,9 @@
 		      </ul>
 		    </div>
 		  </nav>
-		  
 
-		
+
+
 		</div>
 		<div id="miBody">
 		    <div id="header">
@@ -55,7 +55,7 @@
 
 		</div>
 
-		
+
 
 		<div class="container"><br><br>
 			<br>
@@ -63,34 +63,36 @@
 				<div id = "centerSearchBox">
 					<label for="doctors">Choose a Doctor:</label>
 
-					
+
 
 					<label for="patients">Search for Patient:</label>
 					<select class="form-control" name="doctrs" id="doctors" style=" margin-left: auto; margin-right: auto; text-align: center; width: 200px;">
 					 <!-- options are populated dynamically -->
 					</select>
-					<input class="form-control"type="text" id ="patients" style=" margin-left: auto; margin-right: auto; position: relative; display: inline;text-align: center; width: 200px;">
+
+					<input class="form-control"type="text" id ="patients" onkeyup="searchTable()"
+					style=" margin-left: auto; margin-right: auto; position: relative; display: inline;text-align: center; width: 200px;">
 
 				</div>
 				<br>
 			</div>
 
-        <table class="table table-striped" id="addToTable"style="position: absolute; top: 270px; bottom: 0; left: 0; right: 0;
+        <table class="table table-striped" id="addToTable" style="position: absolute; top: 270px; bottom: 0; left: 0; right: 0;
         	 ">
 		    <thead>
-			    <tr >
+			    <tr>
+							<th>Name</th>
 			        <th scope="col">#</th>
-	                <th>ID</th>
-	                <th>Surname</th>
-					<th>Time/Date</th>
-	                <th>Number</th>
-			        <th>Options</th>
-			
+	            <th>ID</th>
+							<th>Time/Date</th>
+	            <th>Number</th>
+			       	<th>Options</th>
 			    </tr>
 		    </thead>
 
 		    <tbody id="patientTable">
 			<!-- dynamically alocated -->
+
 		    </tbody>
 		</table>
 		</div>
