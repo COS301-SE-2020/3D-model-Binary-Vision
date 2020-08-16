@@ -115,11 +115,9 @@ function fillData(data)
                 headers:{'Content-Type': 'application/json; charset=UTF-8'},
                 body:JSON.stringify({"patient":data[i].patient})
             });
-        
-
             response.then(res => res.json().then(pat => 
             {
-                console.log(pat)
+                console.log(pat);
                 element.innerHTML=pat.name + " " + pat.surname;
             }));
             
