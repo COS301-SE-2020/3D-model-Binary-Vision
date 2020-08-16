@@ -145,10 +145,9 @@ function populatePatients()
                 if(g.status ==200)
                 {
                     console.log(patientInfo);
-                    replacement+="<tr><td>"+patientInfo.name+"</td><td>"+count+"</td><td>"+patientInfo.idNumber+"</td><td>"+data[i].time+"</td><td>"+patientInfo.cellnumber+"</td><td><button class='btn btn-success'  type='button' onclick='postponeBooking(\""+data[i]._id+"\")'>POSTPONE</button><button class='btn btn-danger'  type='button' onclick='cancelBooking(\""+data[i]._id+"\")'>CANCEL</button></td></tr>";
-                    count++;
-                    console.log(replacement);
-                    //count++;
+                    replacement="<tr><td>"+patientInfo.name+"</td><td>"+count+"</td><td>"+patientInfo.idNumber+"</td><td>"+data[i].time+"</td><td>"+patientInfo.cellnumber+"</td><td><a class='btn btn-success'  type='button' href='makeBooking.html?patient="+data[i].patient+"&doctor="+selectedDoctor+"' onclick='postponeBooking()'>POSTPONE</a><button class='btn btn-danger'  type='button' onclick='cancelBooking(\""+data[i]._id+"\")'>CANCEL</button></td></tr>";
+                    // count++;
+                    count++
                     document.getElementById("patientTable").innerHTML+=replacement;
 
                 }
@@ -164,7 +163,7 @@ function populatePatients()
 
 //================================================================================================
 // Function developed by:Steven Visser
-// Removes a booking from the database & notifies patient
+// Removes a booking from the database
 function cancelBooking(bookingID)
 {
     var response = fetch("/removeBooking",{
@@ -177,7 +176,7 @@ function cancelBooking(bookingID)
     {
         //check status code
         // remove the patient from the waiting log
-        //if its successful, call a function to notify patient of cancellation
+        //if its successful, display a message saying that the appointment has been cancelled
         console.log(res.status);
     })
 }
@@ -185,33 +184,9 @@ function cancelBooking(bookingID)
 
 //================================================================================================
 // Function developed by:Steven Visser
-// Gets new date & time for booking, notifies the patient, updates database
+// Gets new date & time for booking,  updates database
 function postponeBooking(bookingID)
 {
-    //these will be gotten from the new booking page
-    var date;
-    var time;
-    //open new booking postponement element & get new date/time
-    postpone(bookingID,date,time);
-    //call function to notify patient of update
+    //cancel the booking here
 
-}
-
-//================================================================================================
-// Function developed by:Steven Visser
-// Calls update for booking
-function postpone(bookingID,date,time)
-{
-    var response = fetch("/postponeBooking",{
-        method:"POST",
-        headers:{'Content-Type': 'application/json; charset=UTF-8'},
-        body: JSON.stringify({"bookingID":bookingID,"date":date,"time":time})
-    });
-
-    response.then(res =>
-    {
-        //check status code
-        //if its successful, remove patient from waiting log & check if it needs to be added back or not with new info
-        console.log(res.status);
-    });
 }
