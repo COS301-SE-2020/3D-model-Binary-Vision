@@ -186,7 +186,7 @@ function cancelBooking(bookingID)
         else if(res.status== 200)
         {
             //remove successful, dynamically update the page to remove the block
-            
+            populateDoctorChoices();
         }
     });
 }
