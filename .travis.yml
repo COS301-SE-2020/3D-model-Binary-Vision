@@ -7,4 +7,4 @@ cache:
     - "node_modules"
 
 script: 
-  - cd Application && npm install mongoose &&  npm install -g mocha && npm test --exit
+  - cd Application && npm install mongoose &&  npm install -g mocha && npm test
