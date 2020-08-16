@@ -133,7 +133,7 @@ function signup()
     //need to chack that the email is not used and that the user name hasnt already been used 
     console.log("username given: "+username.value);
     if (username.value !=""){
-        checkUsername(username);
+        checkUsername(username.value);
     }
     else{
         usedParamaters=true;
@@ -142,39 +142,15 @@ function signup()
 
 
     if (email.value != ""){
-        checkEmail(email);
+        checkEmail(email.value);
     }
     else{
         usedParamaters=true;
         email.style.backgroundColor="red";
     }
 
-    if(!usedParamaters && choice.value!=""){
-        //make the api call with the hashed password to sign up a new user 
-        var frontSalt ="COS301";
-        var backSalt ="FlapJacks";
-        var saltedPasword = frontSalt+ password.value+backSalt;
-
-        var frontEndHashedPassword = CryptoJS.MD5(saltedPasword).toString();
-        console.log(frontEndHashedPassword);
-
-        var response = fetch("/signup",{
-            method:"POST",
-            headers:{'Content-Type': 'application/json; charset=UTF-8'},
-            body: JSON.stringify({"name":name.value , "surname":surname.value , "email":email.value ,"username":username.value , "password":frontEndHashedPassword, choice,"practition":practice.value})
-        })
-
-        response.then(res=>res.json().then(data=> {
-            if(res.status ==400)
-            {
-                alert("error signing up");
-            }
-        }));
-
-    }
-    else{
-        //report all the problems 
-    }
+    console.log(usedParamaters +" "+ choice)
+    addUser(name , surname, email ,username,frontEndHashedPassword,choice,practice);    
 }
 
 //===============================================================================================
@@ -189,13 +165,14 @@ function checkUsername(username)
         body:JSON.stringify({"username":username})
     });
 
-    response.then(res=> res.json().then(data=>{
-        if(res.status ==422){
+    response.then(res=> {
+        if(res.status == 422){
             //the username was invalid
-            usedParamaters=true;
+            this.usedParamaters=true;
             document.querySelector("#username").style.backgroundColor="red";
+            stop();
         }
-    }));
+    });
 
     console.log("after user");
 }
@@ -215,10 +192,41 @@ function checkEmail(email)
     response.then(res=> res.json().then(data=>{
         if(res.status ==422){
             //the email was invalid
-            usedParamaters=true;
+            this.usedParamaters=true;
             document.querySelector("#email").style.backgroundColor="red";
+            stop();
         }
     }));
     console.log("after email");
 }
 
+async function stop(){
+    console.log("setting used")
+    usedParamaters=true;
+}
+
+//=====================================================================================
+//Function developed by: Jacobus Janse van Rensburg
+// adding a user if its allowed
+function addUser(name , surname, email ,username,frontEndHashedPassword,choice,practice){
+    
+    if(usedParamaters==false && choice!=""){
+        //make the api call with the hashed password to sign up a new user 
+
+        var frontSalt ="COS301";
+        var backSalt ="FlapJacks";
+        var saltedPasword = frontSalt+ password.value+backSalt;
+
+        var frontEndHashedPassword = CryptoJS.MD5(saltedPasword).toString();
+        console.log(frontEndHashedPassword);
+
+        var response = fetch("/signup",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json; charset=UTF-8'},
+            body: JSON.stringify({"name":name.value , "surname":surname.value , "email":email.value ,"username":username.value , "password":frontEndHashedPassword, choice,"practition":practice.value})
+        })
+    }
+    else{
+        console.log("Could not make a new doctor");
+    }
+}

@@ -16,7 +16,7 @@ function login()
         var backSalt ="FlapJacks";
         var saltedPasword = frontSalt+ password.value+backSalt;
 
-        var frontEndHashedPassword = hash(saltedPasword);
+        var frontEndHashedPassword = CryptoJS.MD5(saltedPasword).toSring();
         console.log(frontEndHashedPassword);
 
         var response = fetch("/login",{

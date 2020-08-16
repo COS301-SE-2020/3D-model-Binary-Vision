@@ -89,7 +89,7 @@ module.exports = {
     {
         const { name, surname, email, username, password ,choice , practition} = req.body;
         
-        console.log("name: "+name+"\nsurname: "+ surname+"\nemail: "+email+"\nusername: "+username+"\npassword: "+password+"\nchoice: "+choice+"\npractice: "+practition);
+        // console.log("name: "+name+"\nsurname: "+ surname+"\nemail: "+email+"\nusername: "+username+"\npassword: "+password+"\nchoice: "+choice+"\npractice: "+practition);
 
         if(choice=="Doctor")
         {
@@ -105,11 +105,10 @@ module.exports = {
                 else 
                 {
                     console.log("Saved doctor: "+saved);
-                  	// const page = fs.readFileSync("webSite/html/login.html", "utf-8");
-                  	// res.setHeader("Content-Type", "text/html");
-                    // res.status(200)
-                    //   .send(page);
-                    res.redirect("/login.html")
+                  	const page = fs.readFileSync("webSite/html/login.html", "utf-8");
+                  	res.setHeader("Content-Type", "text/html");
+                    res.status(200)
+                      .send(page);
                     return;
                 }
             });
@@ -140,26 +139,25 @@ module.exports = {
     isValidUsername:function (req, res){
         //no need to check for res.user since this is for signup purposes
         var username = req.body.username;
-
-        Doctor.find({"username":username}, function(err, doctor){
+        console.log("body: "+req.body+"username: "+username)
+        Doctor.findOne({"username":username}, function(err, doctor){
+            console.log("found: " +doctor);
             if(doctor!=null)
             {
                 // a doctor has this username already and it cannot be used
-                res.status(422).send("invalid");//send invalid errorCode
+                res.status(422).json(doctor);//send invalid errorCode
                 return;
             }
         });
 
-        Receptionist.find({"username":username},function(err,receptionist){
-            if(receptionist!=null){
+        Receptionist.findOne({"username":username},function(err,receptionist){
+            if(receptionist){
                 //a receptionist exists with the user name and therefore cannot be used
-                res.status(422).send("invalid");//send invalid errorCode
+                res.status(422).json(receptionist);//send invalid errorCode
                 return;
             }
         })
 
-        res.status(200).send("valid");
-        return;
     },
 
      //======================================================================================
@@ -169,25 +167,23 @@ module.exports = {
         //no need to check for res.user since this is for signup purposes
         var email = req.body.email;
 
-        Doctor.find({"email":email}, function(err, doctor){
-            if(doctor!=null)
+        Doctor.findOne({"email":email}, function(err, doctor){
+            if(doctor)
             {
                 // a doctor has this email already and it cannot be used
-                res.status(422).send("invalid");//send invalid errorCode
+                res.status(422).json(doctor);//send invalid errorCode
                 return;
             }
         });
 
-        Receptionist.find({"email":email},function(err,receptionist){
-            if(receptionist!=null){
+        Receptionist.findOne({"email":email},function(err,receptionist){
+            if(receptionist){
                 //a receptionist exists with the user name and therefore cannot be used
-                res.status(422).send("invalid");//send invalid errorCode
+                res.status(422).json(receptionist);//send invalid errorCode
                 return;
             }
-        })
+        });
 
-        res.status(200).send("valid");
-        return;
     },
 
     //======================================================================================
