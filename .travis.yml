@@ -7,5 +7,5 @@ cache:
     - "node_modules"
 
 script:
-  file: Application
+  windows_path: "Application"
     - npm test  
