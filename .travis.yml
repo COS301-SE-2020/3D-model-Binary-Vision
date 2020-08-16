@@ -6,5 +6,7 @@ cache:
   Application:
     - "node_modules"
 
-script: auto
-  - npm test  
+deploy:
+  script: npm test
+  on:
+    branch: UnitTesting/Application  
