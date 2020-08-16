@@ -542,6 +542,19 @@ input {
 	margin-right: 4%;
 }
 
+#STLUploader {
+	display: none;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 1px 0px 15px 0px black;
+	padding: 20px;
+	border-style: solid;
+	border-color: #003366;
+	border-width: 5px;
+	margin-left: 3%;
+	margin-right: 4%;
+}
+
 #videoRecoderHeader {
 	background-color: #28A745;
 	color: white;
