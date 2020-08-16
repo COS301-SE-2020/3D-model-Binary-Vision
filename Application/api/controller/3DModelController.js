@@ -89,7 +89,6 @@ module.exports = {
     {
         const { name, surname, email, username, password ,choice , practition} = req.body;
         
-        // console.log("name: "+name+"\nsurname: "+ surname+"\nemail: "+email+"\nusername: "+username+"\npassword: "+password+"\nchoice: "+choice+"\npractice: "+practition);
 
         if(choice=="Doctor")
         {
@@ -104,11 +103,7 @@ module.exports = {
                 }
                 else 
                 {
-                    console.log("Saved doctor: "+saved);
-                  	const page = fs.readFileSync("webSite/html/login.html", "utf-8");
-                  	res.setHeader("Content-Type", "text/html");
-                    res.status(200)
-                      .send(page);
+                    res.redirect("/login.html");
                     return;
                 }
             });
@@ -124,13 +119,12 @@ module.exports = {
                 }
                 else
                 {
-                  const page = fs.readFileSync("webSite/html/login.html","utf-8");
-                  res.setHeader("Content-Type","text/html");
-                  res.status(200)
-                    .send(page);
+                    res.redirect("/login.html");
+                    return;
                 }
             });
         }
+        return;
     },
 
     //======================================================================================
@@ -139,9 +133,7 @@ module.exports = {
     isValidUsername:function (req, res){
         //no need to check for res.user since this is for signup purposes
         var username = req.body.username;
-        console.log("body: "+req.body+"username: "+username)
         Doctor.findOne({"username":username}, function(err, doctor){
-            console.log("found: " +doctor);
             if(doctor!=null)
             {
                 // a doctor has this username already and it cannot be used

@@ -68,7 +68,6 @@ function signup()
     var selectionElement = document.getElementById("choice");
     var choice = selectionElement.options[selectionElement.selectedIndex].value ;
     //check that the passwords match
-    console.log("choice: "+choice);
     if(password.value != "" && passwordCheck.value !=""){
         if(password.value != passwordCheck.value){
             usedParamaters=true;
@@ -105,7 +104,6 @@ function signup()
     }
 
     //check that the choise is a valid one
-    console.log("choice:" + choice.value);
     if(choice.value == ""){
         usedParamaters=true;
         //indicate that the choice is ""
@@ -131,7 +129,6 @@ function signup()
     }
 
     //need to chack that the email is not used and that the user name hasnt already been used 
-    console.log("username given: "+username.value);
     if (username.value !=""){
         checkUsername(username.value);
     }
@@ -149,7 +146,6 @@ function signup()
         email.style.backgroundColor="red";
     }
 
-    console.log(usedParamaters +" "+ choice)
     addUser(name , surname, email ,username,choice,practice);    
 }
 
@@ -158,7 +154,6 @@ function signup()
 //Function used to check if the database contains a user that has the same username
 function checkUsername(username)
 {
-    console.log("check username");
     var response = fetch('/isValidUsername',{
         method:"POST",
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
@@ -174,7 +169,6 @@ function checkUsername(username)
         }
     });
 
-    console.log("after user");
 }
 
 //===============================================================================================
@@ -182,7 +176,6 @@ function checkUsername(username)
 //function used to check if there is someone that has the same email in use already
 function checkEmail(email)
 {
-    console.log("check email");
     var response = fetch('/isValidEmail',{
         method:"POST",
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
@@ -197,11 +190,9 @@ function checkEmail(email)
             stop();
         }
     }));
-    console.log("after email");
 }
 
 async function stop(){
-    console.log("setting used")
     usedParamaters=true;
 }
 
@@ -218,13 +209,16 @@ function addUser(name , surname, email ,username,choice,practice){
         var saltedPasword = frontSalt+ password.value+backSalt;
 
         var frontEndHashedPassword = CryptoJS.MD5(saltedPasword).toString();
-        console.log(frontEndHashedPassword);
 
         var response = fetch("/signup",{
             method:"POST",
             headers:{'Content-Type': 'application/json; charset=UTF-8'},
             body: JSON.stringify({"name":name.value , "surname":surname.value , "email":email.value ,"username":username.value , "password":frontEndHashedPassword, choice,"practition":practice.value})
         })
+
+        response.then(res => {
+            window.location.href = res.url;
+        });
     }
     else{
         console.log("Could not make a new doctor");

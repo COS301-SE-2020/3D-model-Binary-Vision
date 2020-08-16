@@ -16,7 +16,7 @@ function login()
         var backSalt ="FlapJacks";
         var saltedPasword = frontSalt+ password.value+backSalt;
 
-        var frontEndHashedPassword = CryptoJS.MD5(saltedPasword).toSring();
+        var frontEndHashedPassword = CryptoJS.MD5(saltedPasword).toString();
         console.log(frontEndHashedPassword);
 
         var response = fetch("/login",{
@@ -25,12 +25,17 @@ function login()
             body:JSON.stringify({"username":username.value,"password":frontEndHashedPassword})
         });
 
-        response.then(res => res.json().then(data=> {
+        response.then(res =>  {
 
             if(res.status== 404){
                 document.querySelector("#errorResponse").innerHTML="User information not matched";
             }
-        }));
+            else{
+                console.log(res);
+                // var parts= res.
+                window.location.href= res.url;
+            }
+        });
 
     }
     else{
