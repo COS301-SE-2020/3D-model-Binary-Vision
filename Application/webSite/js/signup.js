@@ -150,7 +150,7 @@ function signup()
     }
 
     console.log(usedParamaters +" "+ choice)
-    addUser(name , surname, email ,username,frontEndHashedPassword,choice,practice);    
+    addUser(name , surname, email ,username,choice,practice);    
 }
 
 //===============================================================================================
@@ -208,7 +208,7 @@ async function stop(){
 //=====================================================================================
 //Function developed by: Jacobus Janse van Rensburg
 // adding a user if its allowed
-function addUser(name , surname, email ,username,frontEndHashedPassword,choice,practice){
+function addUser(name , surname, email ,username,choice,practice){
     
     if(usedParamaters==false && choice!=""){
         //make the api call with the hashed password to sign up a new user 
