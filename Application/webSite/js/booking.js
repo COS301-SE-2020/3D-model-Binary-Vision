@@ -407,10 +407,13 @@ function prepPostponement()
     var url = window.location.href;
     var parts = url.split("=");
     var p = parts[1].split("&");
+
     var patientID = p[0];
     var doctorID = parts[2];
     //make a call to find doctor by id and get name/surname
-    var docname; var docsurname;
+    var docname; 
+    var docsurname;
+
     var response = fetch("/getSingleDoctor",{
         method:"POST",
         headers: {
@@ -421,11 +424,11 @@ function prepPostponement()
 
     response.then(res=> res.json().then(data=>
     {
-        console.log("Doctor For Postponement" + data);
-        docname = data.name;
-        docsurname = data.surname;
+        console.log("Doctor For Postponement");
+        console.log(data);
+        console.log(data.surname);
+        selectDoctor(doctorID,data.name, data.surname)
     }));
-    selectDoctor(doctorID, docname,docsurname);
 
     //make a call to find patient by id and get name/surname
     var patname; var patsurname;var idnmumber;
@@ -439,12 +442,12 @@ function prepPostponement()
 
     response.then(res=> res.json().then(data=>
     {
-        console.log("Patient For Postponement" + data);
-        patname = data.name;
-        patsurname = data.surname;
-        idnmumber = data.idNumber;
+        console.log("Patient For Postponement");
+        console.log(data);
+        console.log(data.surname);
+        selectPatient(patientID, data.name, data.surname, data.idNumber);
     }));
-    selectPatient(patientID, patname, patsurname,idnmumber);
+    
 
     //populate the reason
     selectedReason = "Postponed Booking";
