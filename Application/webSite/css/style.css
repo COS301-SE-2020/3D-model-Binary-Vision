@@ -703,6 +703,7 @@ input[type="file"] {
 	margin-top: 5px;
 	text-align:center;
 	color: white;
+	padding-top: 10px;
 }
 
 #para {
