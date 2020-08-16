@@ -98,7 +98,7 @@ describe('API unit testing:', () => {
 		/*it('Testing Get Receptionist Info Feature (With valid input) - Returns 200 code', (done) => {
 			rep
 				.post("/getReceptionistInfo", dbR.getReceptionistInfo)
-				.send()
+				.send("")
 				.end((error, response) => {
 					response.should.have.status(200);
 					response.should.be.json;
