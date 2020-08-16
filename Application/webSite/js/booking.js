@@ -106,7 +106,7 @@ function populateCalander(data)
 // Dynamically produces a schedule for the week for a doctor
 function createScheduler(overlay)
 {
-    var days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+    var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     var times = [
                "09:00","09:15","09:30","09:45",
                "10:00","10:15","10:30","10:45",
@@ -129,14 +129,13 @@ function createScheduler(overlay)
     //set the headings now
     var count =0;
     var dd = currentDay;
-    
     while (count<days.length)
     {
-        if(dd > days.length )
+        if(dd == days.length )
         {
-            dd =1;
+            dd =0;
         }
-        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd-1]+','+(currentDate+(count))+'</td>';
+        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd]+','+(currentDate+(count))+'</td>';
         count++;
         dd++;
     }
