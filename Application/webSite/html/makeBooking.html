@@ -46,7 +46,7 @@
               </ul>
             </div>
           </nav>
-        
+
         <!-- A booking needs to have a doctor , time , date and patient -->
         <!-- have 4 buttons that will do different acctions that will produce these values through different overlays -->
         <!-- doctor button , display an overlay of doctors to choose from  , capture the id of the selected doctor-->
@@ -59,14 +59,14 @@
                 <input type="button" class="btn btn-danger" value="Select Patient" name="patientSelect" onclick="displayPatientSearchOverlay()" style="margin: 5px;"><br><br>
                 <label for="reasonForBooking">Reason for booking</label><br>
                 <input type="text" type="form-control" name="reason" id="reasonForBooking" style="margin-bottom: 20px; width: 300px; padding: 10px; border-radius: 5px; border: none;">
-                
+
                 <div id="currentOverlay" ></div><br><hr>
 
                 <div id="bookingInfo" style="padding: 20px; background-color: #003366; border-radius: 5px;">
-                    <p>BOOKING FOR PATIENT: <p id="patientInfoDisplay"></p></p><hr>
-                    <p>With Dr: <p id="doctorInfoDisplay"></p></p>
-                    <p>Date: <p id="dateInfoDisplay"></p></p>
-                    <p>Time: <p id="timeInfoDisplay"></p></p>
+                    <p>BOOKING FOR PATIENT: <p id="patientInfoDisplay"></p><hr>
+                    <p>With Dr: <p id="doctorInfoDisplay"></p>
+                    <p>Date: <p id="dateInfoDisplay"></p><
+                    <p>Time: <p id="timeInfoDisplay"></p>
                     <button class="btn btn-success" onclick="makeBooking()" >Make Booking!</button>
                 </div>
             </div>
