@@ -373,17 +373,19 @@ function makeBooking()
             body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason})
         });
 
-        response.then(res=> res.json().then(data=>
+        response.then(res=> 
         {
+            console.log(res.url+ " statusCode: "+res.status);
             if(res.status == 200)
             {
-                window.location.href = "displayPatients.html";
+
+                window.location.href = res.url;
             }
             else
             {
                 //something is wrong
             }
-        }));
+        });
     }
     else
     {

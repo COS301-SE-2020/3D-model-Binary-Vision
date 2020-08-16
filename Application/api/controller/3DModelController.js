@@ -205,7 +205,7 @@ module.exports = {
 
         const {idNumber, name , surname , email , gender, cellnumber} = req.body;
 
-        var new_Patient = new Patient({idNumber , name , surname , email , gender, cellnumber}); //set the patients info
+        var new_Patient = new Patient({idNumber , name , surname , email ,gander, cellnumber}); //set the patients info
 
         new_Patient.doctor = req.user; // add doctor id to the patient
 

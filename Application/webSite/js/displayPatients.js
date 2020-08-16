@@ -150,7 +150,7 @@ function populatePatients()
                     console.log(replacement);
                     //count++;
                     document.getElementById("patientTable").innerHTML+=replacement;
-
+                   
                 }
                 else
                 {
