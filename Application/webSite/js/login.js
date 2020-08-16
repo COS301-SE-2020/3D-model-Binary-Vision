@@ -27,7 +27,7 @@ function login()
 
         response.then(res =>  {
 
-            if(res.status== 404){
+            if(res.status == 404){
                 document.querySelector("#errorResponse").innerHTML="User information not matched";
             }
             else{

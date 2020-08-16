@@ -67,7 +67,7 @@ module.exports = {
             }
         });
 
-        res.status(404);
+        res.status(404).send("not found");
         return;
     },
 
