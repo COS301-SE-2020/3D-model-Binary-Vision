@@ -105,7 +105,7 @@ function populateCalander(data)
             response.then(res => res.json().then(pat => 
             {
                 console.log(pat)
-                element.innerHTML=pat.name + " " + pat.surname;
+                element.innerText=pat.name + " " + pat.surname;
             }));
         }
     }
@@ -319,6 +319,7 @@ function makeBooking()
     console.log("Making booking with details:\nDoctor: "+selectedDoctor+"\nPatient: "+selectedPatient+"\nDate: "+selectedDate+"\nTime: "+selectedTime);
     if (selectedDoctor != null && selectedPatient!= null && selectedDate != null && selectedTime!=null)
     {
+        
         //booking can be created
         var reason = document.getElementById("reasonForBooking").value;
 
@@ -334,8 +335,7 @@ function makeBooking()
         {
             if(res.status == 200)
             {
-                //everything is fine
-                //make a redirect here
+                window.location.href = "displayPatients.html";
             }
             else
             {
@@ -346,5 +346,73 @@ function makeBooking()
     else
     {
         alert("Please provide all fields to make a booking");
+    }
+}
+
+// ===========================================================================================
+//Function developed by: Jacobus Janse van Rensburg
+//Modified by: Steven Visser
+//sets up the booking page to make the postponement
+function prepPostponement()
+{
+    var url = window.location.href;
+    var parts = url.split("=");
+    var p = parts[1].split("&");
+    var patientID = p[0];
+    var doctorID = parts[2];
+    //make a call to find doctor by id and get name/surname
+    var docname; var docsurname;
+    var response = fetch("/getSingleDoctor",{
+        method:"POST",
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body:JSON.stringify({"id":doctorID})
+    });
+
+    response.then(res=> res.json().then(data=>
+    {
+        console.log("Doctor For Postponement" + data);
+        docname = data.name;
+        docsurname = data.surname;
+    }));
+    selectDoctor(doctorID, docname,docsurname);
+    
+    //make a call to find patient by id and get name/surname
+    var patname; var patsurname;var idnmumber;
+    var response = fetch("/singlePatient",{
+        method:"POST",
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body:JSON.stringify({"patient":patientID})
+    });
+
+    response.then(res=> res.json().then(data=>
+    {
+        console.log("Patient For Postponement" + data);
+        patname = data.name;
+        patsurname = data.surname;
+        idnmumber = data.idNumber;
+    }));
+    selectPatient(patientID, patname, patsurname,idnmumber);
+
+    //populate the reason
+    selectedReason = "Postponed Booking";
+    document.getElementById("reasonForBooking").value = selectedReason;
+
+    //change Make Booking! to Postpone Booking
+    displayTimeTableOverlay();
+    document.getElementById("makeBookingButton").innerText = "Postpone Booking!";
+
+}
+
+function initPage()
+{
+    var url = window.location.href;
+    var parts = url.split("=");
+    if(parts.length > 1)
+    {
+        prepPostponement();
     }
 }

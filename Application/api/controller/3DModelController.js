@@ -745,7 +745,7 @@ module.exports = {
 
         var id = mongoose.Types.ObjectId(req.body._id)
 
-        Booking.deleteOne({"_id":id}, function(err)
+        Booking.findAndDeleteOne({"_id":id}, function(err)
         {
             if (err)
             {
@@ -811,6 +811,32 @@ module.exports = {
 
         });
 
-    }
+    },
+
+    //======================================================================================
+    //Function developed by: Steven Visser
+    //retrieves a specific doctor from the database. Search using object id
+    getSingleDoctor: function(req, res)
+    {
+        if (!req.user)
+        {
+          res.status(401)
+            .send("unauthorised");
+          return;
+        }
+      
+        Doctor.findOne({"_id":mongoose.Types.ObjectId(req.body.id)} , function (err , doctor)
+        {
+            if (err)
+            {
+                res.send("No docotor found")
+                  .status(404);
+            }
+            else
+            {
+                res.json({"surname":doctor.surname,"name":doctor.name});
+            }
+        });
+    },
    
 };

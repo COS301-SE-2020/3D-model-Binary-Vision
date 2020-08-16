@@ -19,7 +19,7 @@
         <script type="text/javascript" src="../js/booking.js"></script>
     </head>
 
-    <body>
+    <body onload="initPage()">
         <nav class="navbar navbar-expand-md  navbar-dark">
             <a class="navbar-brand" href="newHome.html">
                 <img src="../css/images/tooth.png" alt="Profile Picture" width="30px" height="30px">
@@ -65,9 +65,9 @@
                 <div id="bookingInfo" style="padding: 20px; background-color: #003366; border-radius: 5px;">
                     <p>BOOKING FOR PATIENT: <p id="patientInfoDisplay"></p><hr>
                     <p>With Dr: <p id="doctorInfoDisplay"></p>
-                    <p>Date: <p id="dateInfoDisplay"></p><
+                    <p>Date: <p id="dateInfoDisplay"></p>
                     <p>Time: <p id="timeInfoDisplay"></p>
-                    <button class="btn btn-success" onclick="makeBooking()" >Make Booking!</button>
+                    <button id="makeBookingButton" class="btn btn-success" onclick="makeBooking()" >Make Booking!</button>
                 </div>
             </div>
         </div>

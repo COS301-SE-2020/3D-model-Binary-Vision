@@ -118,4 +118,7 @@ module.exports = function (app)
     
     app.route('/getSingleBooking')
         .post(Model.getSingleBooking);
+
+    app.route('/getSingleDoctor')
+        .post(Model.getSingleDoctor);
 }
