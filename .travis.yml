@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - node
+
+cache:
+  directories:
+    - ~/Application/node_modules
+
+services:
+  - mongodb
+
+script: 
+  - cd Application &&  npm install -g mocha && npm test
