@@ -40,14 +40,14 @@ function moveSideBar()
   	  	showSideBar = true;
   	  	bodyA.classList.remove("moveSideBar");
   	  	bodyContainer.style.width = "60%";
-  	  	bodyContainer.classList.remove("centerBookingOverlayMove");
+  	  	bodyContainer.classList.remove("bodyContainerIncreaseWidth");
   	}
 	else
 	{
   	 	showSideBar = false;
   	 	bodyA.classList.add("moveSideBar");
   	 	bodyContainer.style.width = "75%";
-  	 	bodyContainer.classList.add("centerBookingOverlayMove");
+  	 	bodyContainer.classList.add("bodyContainerIncreaseWidth");
   	}
 }
 

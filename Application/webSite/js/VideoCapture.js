@@ -47,13 +47,18 @@ function takeVideoStream()
 	// Create the start, stop and video elements for the video stream
 	var videoStreamElement = document.getElementById("videoStreamElement");
 	videoStreamElement.style.display = "block";
-	videoStreamElement.innerHTML = '<br><button class="btn btn-success" id="startStream">Start recording</button><br>';
-	videoStreamElement.innerHTML += '<button class="btn btn-danger" id="stopStream">Stop recording</button><br>';
-	videoStreamElement.innerHTML += '<br><br><video></video>';
+	videoStreamElement.innerHTML = '<br><div id="recordButtonsContainer">';
+	videoStreamElement.innerHTML += '<button class="btn btn-success" id="startStream" style="position: relative; margin-left: auto;	margin-right: auto;	text-align: center;">Start recording</button>';
+	videoStreamElement.innerHTML += '<button class="btn btn-danger" id="stopStream" style="position: relative; margin-left: auto;	margin-right: auto;	text-align: center;">Stop recording</button><div>';
+	videoStreamElement.innerHTML += '<br><br><video id="liveVideoStream"></video>';
 	videoStreamElement.innerHTML += '<br><br><video id="capturedVideoStream" controls></video>';
 
 	var start = document.getElementById("startStream");
 	var stop = document.getElementById("stopStream");
+
+	stop.style.display = "none";
+
+	var liveVideoStream = document.getElementById("liveVideoStream");
 	var capturedVideoStream = document.getElementById("capturedVideoStream");
 	capturedVideoStream.style.visibility = "hidden"; // Hide the second video element (the captured video element)
 
@@ -117,7 +122,11 @@ function takeVideoStream()
 
 		// Start recording
 		start.addEventListener('click', (ev) => 
-		{
+		{	
+			liveVideoStream.classList.remove("liveVideoStreamScale");
+			capturedVideoStream.classList.remove("capturedVideoStreamScale");
+			start.style.display = "none";
+			stop.style.display = "block";
 			mediaRecorder.start();
 			console.log(mediaRecorder.state);
 			capturedVideoStream.style.visibility = "hidden"; // Hide the second video element (the captured video element)
@@ -125,7 +134,11 @@ function takeVideoStream()
 
 		// Stop recording
 		stop.addEventListener('click', (ev)=> 
-		{
+		{	
+			liveVideoStream.classList.add("liveVideoStreamScale");
+			capturedVideoStream.classList.add("capturedVideoStreamScale");
+			start.style.display = "block";
+			stop.style.display = "none";
 			mediaRecorder.stop();
 			console.log(mediaRecorder.state);
 			clearInterval(timedInterval);
@@ -171,7 +184,7 @@ function submitVideo(video, videoStreamed)
 		var submitVideoElement = document.getElementById('submitVideoStreamElement');
 	}
 
-	submitVideoElement.innerHTML = '<br><button class="btn btn-dark" id="submitVideo">Submit Video</button><br><br><br>';
+	submitVideoElement.innerHTML = '<br><button class="btn btn-primary" id="submitVideo" style="transform: translateY(-370px);">Submit Video</button><br><br><br>';
 
 	var submitVideoButton = document.getElementById('submitVideo');
 

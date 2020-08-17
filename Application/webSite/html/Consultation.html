@@ -76,18 +76,18 @@
 				    <div id="rightSideBody" style="width: 240px;">
 				        <div id="containInfoRight" style="position: fixed;">
 				        	<br><br>
-				          TIME: <p id="time2" style="color:black;"></p>  <hr>
-				          NOTES ON PATIENT: <p id="patientqq" style="color:black;"></p> <br>
+				          		TIME: <p id="time2" style="color:black;"></p>  <hr>
+				          		NOTES ON PATIENT: <p id="patientqq" style="color:black;"></p> <br>
 							
-				          <br><br><br><br><br><br>
-				          3D SETTINGS<hr>
+				          		<br><br><br><br><br><br>
+				          		3D SETTINGS<hr>
 
-										<button class="btn btn-warning" style="margin-right: 10px; margin-bottom: 10px; margin-top: 10px;" onclick=newSTL()>Model</button>
-										<button class="btn btn-success" onclick=newVideo()>Media</button>
-										<a class="btn btn-danger" href="#" id = "renderpage">Render</a>
-									</div>
-									<br>
-		  </div>
+								<button class="btn btn-warning" style="margin-right: 10px; margin-bottom: 10px; margin-top: 10px;" onclick=newSTL()>Model</button>
+								<button class="btn btn-success" onclick=newVideo()>Media</button>
+								<a class="btn btn-danger" href="#" id = "renderpage">Render</a>
+							</div>
+						<br>
+		  		</div>
 
 				<br>
 				<div id="bodyContainer">
@@ -148,10 +148,13 @@
 						        <input class='btn btn-primary' type='submit' name='takeVideoStream' value='Stream Video' onclick='takeVideoStream()'/>
 						        
 						        <div id='videoStreamElement' style="display: none;">
-						        	<br><button class="btn btn-success" id="startStream">Start recording</button><br>
-									<button class="btn btn-danger" id="stopStream">Stop recording</button><br>
+						        	<!--<br>
+						        	<div id="recordButtonsContainer">
+						        		<button class="btn btn-success" id="startStream">Start recording</button>
+										<button class="btn btn-danger" id="stopStream">Stop recording</button>
+									</div>
 									<br><br><video></video>
-									<br><br><video id="capturedVideoStream" controls></video>
+									<br><br><video id="capturedVideoStream" controls></video>-->
 						        </div>
 
 						        <div id='submitVideoStreamElement'></div>

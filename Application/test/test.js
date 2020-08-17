@@ -25,7 +25,7 @@ describe('API unit testing:', () => {
 				choice: "Doctor",
 				practition: "Dentists For Hire"
 			};
-			chai.request("localhost:3000")
+			doctor
 				.post("/signup", db.signup)
 				.send(tempUser)
 				.end((error, response) => {
@@ -46,7 +46,7 @@ describe('API unit testing:', () => {
 				choice: "Receptionist",
 				practition: "Dentists For Hire"
 			};
-			chai.request("localhost:3000")
+			rep
 				.post("/signup", db.signup)
 				.send(tempUser)
 				.end((error, response) => {

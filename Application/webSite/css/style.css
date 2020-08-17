@@ -189,6 +189,27 @@ body{
 	transform: translateX(-120px);
 }
 
+#recordButtonsContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+#liveVideoStream {
+	transition: 1s;
+}
+
+.liveVideoStreamScale {
+	transform: translateY(-190px) scale(0.3, 0.3);
+}
+
+#capturedVideoStream {
+	transition: 1s;
+}
+
+.capturedVideoStreamScale {
+	transform: translateY(-370px);
+}
+
 #saveDoctorNote:hover {
 	background-color: white;
 	color: #003366;
@@ -586,9 +607,6 @@ input {
 	border-radius: 10px;
 	box-shadow: 1px 0px 15px 0px black;
 	padding: 20px;
-	border-style: solid;
-	border-color: #003366;
-	border-width: 5px;
 	margin-left: 3%;
 	margin-right: 4%;
 }
