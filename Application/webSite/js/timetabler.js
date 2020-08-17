@@ -95,7 +95,6 @@ function populateTable()
 
 //================================================================================================
 // Function developed by:
-//
 function fillData(data)
 {
 	for(var i in data)
