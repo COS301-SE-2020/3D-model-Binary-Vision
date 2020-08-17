@@ -3,8 +3,11 @@ node_js:
   - node
 
 cache:
-  Application:
-    - "node_modules"
+  directories:
+    - ~/Application/node_modules
+
+services:
+  - mongodb
 
 script: 
-  - cd Application && npm install mongoose &&  npm install -g mocha && npm test
+  - cd Application &&  npm install -g mocha && npm test
