@@ -1,6 +1,13 @@
 // chrome://settings/content/camera
 
-var canvas = document.createElement('canvas'); // Create a canvas so that the video footage can be converted into images 
+var canvas = document.createElement('canvas'); // Create a canvas so that the video footage can be converted into images
+
+canvas.width = "640";
+canvas.height = "480";
+
+//canvas.width = "1280";
+//canvas.height = "960";
+
 var images = []; // The array to store the images generated 
 
 // The main function to upload an video file
@@ -35,7 +42,7 @@ function sendBlob(blob)
 function fetchVideo(url) 
 {
   return fetch(url).then(response => {        
-    return response.blob();
+	return response.blob();
   });
 }
 
@@ -174,7 +181,6 @@ function takeVideoStream()
 
 function submitVideo(video, videoStreamed) 
 {
-
 	if (!videoStreamed)
 	{
 		var submitVideoElement = document.getElementById('submitVideoUploadElement');
@@ -194,7 +200,9 @@ function submitVideo(video, videoStreamed)
 		//post method
 		var VideoSending = new FormData();
 		//will need to append the patient ID / consultation ID to save it in the database "Jaco"
-		VideoSending.append("video", video);
+		
+		//VideoSending.append("video", video); // Append the actual video to the form
+		VideoSending.append('images', JSON.stringify(images)); // Append the images to the form .... this might not work
 
 		var response = fetch("/upload",{
 			method:"POST",
@@ -228,18 +236,17 @@ function generateImages(video)
 
 	video.addEventListener('loadeddata', function() 
 	{
-	    this.currentTime = i;
+		this.currentTime = i;
 	});
 
 	video.addEventListener('seeked', function() 
 	{
-	    generateImage(i, video);
-	    i += 0.5; // get an image every 0.5 seconds
+		generateImage(i, video);
+		i += 0.5; // get an image every 0.5 seconds
 		if (i <= this.duration)
 		{
 			this.currentTime = i;
-		}
-	        
+		}	
 	});
 }
 
@@ -247,15 +254,31 @@ function generateImages(video)
 function generateImage(i, video) 
 { 
 	// Generate and load the image into the canvas
-    var context = canvas.getContext('2d');
-    context.drawImage(video, 0, 0, 220, 150);
-    var dataURL = canvas.toDataURL();
+	var context = canvas.getContext('2d');
 
-    // Create the src's for each image ... probably not needed
-    var img = document.createElement('img');
-    img.setAttribute('src', dataURL);
+	// Set the smotthing quality of the image
+	context.imageSmoothingEnabled = true;
+	context.imageSmoothingQuality = "low";
 
-    // Push the new image into the images array.
-    images.push(dataURL);
-    //document.getElementById('testDraw').appendChild(img);
+	//context.drawImage(video, 0, 0, 240, 150);
+	context.drawImage(video, 0, 0, 640, 480); // 323.84 KB
+	//context.drawImage(video, 0, 0, 1280, 960); // 955.347 KB
+	var dataURL = canvas.toDataURL();
+
+	// Create the src's for each image ... probably not needed
+	var img = document.createElement('img');
+	img.setAttribute('src', dataURL);
+
+	fetch(dataURL)
+	.then(function (response) {
+		return response.blob();
+	})
+	.then(function (blob) {
+		//console.log("blob.size = " + blob.size);
+		//console.log("blob.type = " + blob.type);
+		//console.log(blob);
+		images.push(blob);
+	});
+	//document.getElementById('testDraw').appendChild(img);
 }
+ 
