@@ -168,7 +168,7 @@ function takeVideoStream()
 			capturedVideoStream.style.visibility = "visible"; // Make the captured video element visiable
 			capturedVideoStream.src = videoURL;
 
-			images = [];
+			images = new Array();
 			generateImages(document.getElementById("capturedVideoStream"));
 
 			submitVideo(blob, true); // Submit the video
@@ -199,10 +199,12 @@ function submitVideo(video, videoStreamed)
 		alert("ACTION: Video sent (" + video + ")");
 		//post method
 		var VideoSending = new FormData();
-		//will need to append the patient ID / consultation ID to save it in the database "Jaco"
-		
+		//will need to append the patient ID / consultation ID to save it in the database "Jaco"	
 		//VideoSending.append("video", video); // Append the actual video to the form
-		VideoSending.append('images', JSON.stringify(images)); // Append the images to the form .... this might not work
+		
+
+		for (var i=0; i<images.length; i++)
+			VideoSending.append('images', images[i]); // Append the images to the form .... this might not work
 
 		var response = fetch("/upload",{
 			method:"POST",
@@ -242,7 +244,7 @@ function generateImages(video)
 	video.addEventListener('seeked', function() 
 	{
 		generateImage(i, video);
-		i += 0.5; // get an image every 0.5 seconds
+		i += 0.2; // get an image every 0.5 seconds
 		if (i <= this.duration)
 		{
 			this.currentTime = i;
@@ -257,7 +259,7 @@ function generateImage(i, video)
 	var context = canvas.getContext('2d');
 
 	// Set the smotthing quality of the image
-	context.imageSmoothingEnabled = true;
+	context.imageSmoothingEnabled = false;
 	context.imageSmoothingQuality = "low";
 
 	//context.drawImage(video, 0, 0, 240, 150);
@@ -277,8 +279,12 @@ function generateImage(i, video)
 		//console.log("blob.size = " + blob.size);
 		//console.log("blob.type = " + blob.type);
 		//console.log(blob);
+
 		images.push(blob);
 	});
+
+	//console.log(dataURL);
+
 	//document.getElementById('testDraw').appendChild(img);
 }
  
