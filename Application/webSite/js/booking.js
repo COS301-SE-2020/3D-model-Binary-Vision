@@ -479,6 +479,15 @@ function initPage()
     {
         prepPostponement();
     }
+
+    var response = fetch ('/getReceptionist',{
+        method: "POST",
+        headers:{'Content-Type':'Application/json ; charset=UTF-8'}
+    });
+
+    response.then(res=> res.json().then( data => {  
+        document.querySelector("#receptionistName").innerHTML = data.name +" "+ data.surname;
+    }));
 }
 
 
