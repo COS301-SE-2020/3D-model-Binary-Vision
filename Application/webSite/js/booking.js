@@ -438,12 +438,14 @@ function prepPostponement()
         console.log("Doctor For Postponement");
         console.log(data);
         console.log(data.surname);
-        selectDoctor(doctorID,data.name, data.surname)
+        selectDoctor(doctorID,data.name, data.surname);
+        displayTimeTableOverlay();
+
     }));
 
     //make a call to find patient by id and get name/surname
     var patname; var patsurname;var idnmumber;
-    var response = fetch("/singlePatient",{
+    var fetcher = fetch("/singlePatient",{
         method:"POST",
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
@@ -451,7 +453,7 @@ function prepPostponement()
         body:JSON.stringify({"patient":patientID})
     });
 
-    response.then(res=> res.json().then(data=>
+    fetcher.then(res=> res.json().then(data=>
     {
         console.log("Patient For Postponement");
         console.log(data);
@@ -465,7 +467,6 @@ function prepPostponement()
     document.getElementById("reasonForBooking").value = selectedReason;
 
     //change Make Booking! to Postpone Booking
-    displayTimeTableOverlay();
     document.getElementById("makeBookingButton").innerText = "Postpone Booking!";
 
 }
