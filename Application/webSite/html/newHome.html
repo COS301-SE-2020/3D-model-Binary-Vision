@@ -84,12 +84,8 @@
     </div>
   </div>
   <div id="conatinerHomeOuter">
-  <div class="conatinerHome" id="conatinerHome">
-    <div class="centerContainer">
+  <div class="conatinerHomeMain" id="conatinerHome">
 
-
-
-    </div>
     <!--main body form for doctor-->
     <!-- form modifications made by Jacobus Janse van Rensburg -->
 
@@ -101,24 +97,24 @@
 
           <!--main body form for patient-->
 
-            <form action="/addPatient" method="POST" id="patientFormSignup"  id="form">
+            <form action="/addPatient" method="POST" id="patientFormSignup">
               <br>
-              <h2>Add Patient</h2><br>
+              <h2>Add Patient</h2><hr>
 
               <label for="name" style="color: white;">Patients name</label><br>
-              <input class="box" type="text" name="name" id="name" placeholder="Name"  required />
+              <input class="form-control" class="form-control"  type="text" name="name" id="name" placeholder="Name"  required />
               <br><br>
 
               <label for="surname" style="color: white;">Patients surname</label><br>
-              <input id="surname" name="surname" placeholder="Surname" required/>
+              <input class="form-control" id="surname" name="surname" placeholder="Surname" required/>
               <br><br>
 
               <label for="idNumber" style="color: white;">Patients ID number</label><br>
-              <input id="idNumber" name="idNumber" placeholder="ID Number" required/>
+              <input class="form-control" id="idNumber" name="idNumber" placeholder="ID Number" required/>
               <br><br>
 
               <label for="gender" style="color: white;">Gender</label><br>
-              <select  id = "gender" name = "gender">
+              <select  class="form-control" id = "gender" name = "gender">
                 <option value = "Male">Male</option>
                 <option value = "Female">Female</option>
                 <option value = "Other">Other</option>
@@ -126,11 +122,11 @@
               <br><br>
 
               <label for="email" style="color: white;">Patients Email</label><br>
-              <input class="box" type="email" name="email" id="email" placeholder="Email" required />
+              <input class="form-control" class="box" type="email" name="email" id="email" placeholder="Email" required />
               <br><br>
 
               <label for="cell" style="color: white;">Patients cell phone number</label><br>
-              <input id="cell" name="cellnumber" placeholder="Cellphone Number" required/>
+              <input class="form-control" id="cell" name="cellnumber" placeholder="Cellphone Number" required/>
               <br><br>
 
               <input class="btn btn-primary" type="submit"  name="submitDetails" value="Submit" />

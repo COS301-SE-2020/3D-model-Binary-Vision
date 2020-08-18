@@ -81,6 +81,34 @@
 	box-shadow: 1px 0px 15px 0px black;
 }
 
+.conatinerHomeMain{
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	display: block;
+	background-color: #003366;
+	text-align: center;
+	margin-left: 140px;
+	margin-right: 140px;
+	margin-top:70px;
+	min-width: 240px;
+	border-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	transition: 0.8s;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+.form-control{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 350px;
+	min-width: 200px;
+
+}
+
 .moveContainerHome {
 	transform: translateX(-60px);
 }
