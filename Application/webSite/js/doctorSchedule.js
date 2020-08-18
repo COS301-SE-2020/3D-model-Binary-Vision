@@ -44,6 +44,19 @@ function setTodaysBookings()
         //Send the data to various functions that will populate the different fields of the bookings
 
         //maybe sort the times in accending order ?? then populate the fields
+        for(var i = 0; i < data.length; i++)
+        {
+            for(var j = i; j < data.length; j++)
+            {
+                if(data[i].time > data[j].time)
+                {
+                    var temp = data[i];
+                    data[i] = data[j];
+                    data[j] = temp;
+                }
+            }
+        }
+
         for(var i in data)
         {
             console.log(data[i]);
