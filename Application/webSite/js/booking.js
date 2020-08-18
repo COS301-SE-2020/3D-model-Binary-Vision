@@ -108,31 +108,41 @@ function populateCalander(data)
 {
     for(var i in data)
     {
-        var date = data[i].date;
-        var time = data[i].time;
-        var searchPageId = date+"&"+time;
-
-        var element = document.getElementById(searchPageId);
         if (element!=null)
         {
-            //mark as red since a booking already exists
-            element.setAttribute("style","background-color:red;");
-            element.setAttribute("onclick","");
-
-            var response = fetch("/singlePatient",{
-                method:"POST",
-                headers:{'Content-Type': 'application/json; charset=UTF-8'},
-                body:JSON.stringify({"patient":data[i].patient})
-            });
-
-            response.then(res => res.json().then(pat =>
+            var dataIndex = parseInt(i) ;
+            console.log(dataIndex);
+    
+            var date = data[dataIndex].date;
+            var time = data[dataIndex].time;
+            var searchPageId = date+"&"+time;
+            var element = document.getElementById(searchPageId);
+            if (element!=null)
             {
-                console.log(pat)
-                element.innerText=pat.name + " " + pat.surname;
-            }));
+                //mark as red since a booking already exists
+                element.setAttribute("style","background-color:red;");
+                element.setAttribute("onclick","");
+                //call api to get patient based on id, then put the patients full name ehre
+                setName(data[dataIndex].patient,searchPageId);
+               
+                
+            }
         }
     }
 
+}
+
+function setName(patient, searchPageId){
+    var response = fetch("/singlePatient",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body:JSON.stringify({"patient":patient})
+    });
+    response.then(res => res.json().then(pat => 
+    {
+        console.log(pat.name);
+        document.getElementById(searchPageId).innerHTML=pat.name + " " + pat.surname;
+    }));
 }
 
 // ===========================================================================================
