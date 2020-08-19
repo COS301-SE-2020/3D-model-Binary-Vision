@@ -640,7 +640,7 @@ input {
 #VideoRecorder {
 	display: none;
 	background-color: white;
-	border-radius: 10px;
+	border-radius: px;
 	box-shadow: 1px 0px 15px 0px black;
 	padding: 20px;
 	margin-left: 3%;
@@ -650,14 +650,24 @@ input {
 #STLUploader {
 	display: none;
 	background-color: white;
-	border-radius: 10px;
+	border-radius: 5px;
 	box-shadow: 1px 0px 15px 0px black;
 	padding: 20px;
-	border-style: solid;
-	border-color: #003366;
-	border-width: 5px;
 	margin-left: 3%;
 	margin-right: 4%;
+}
+
+#videoRecoderHeaderSTL{
+	background-color: #FFC107;
+	color: white;
+	margin: 0 -20px;
+	margin-top: -30px;
+	padding: 10px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	text-align: center;
+	height: 55px;
+	transform: translateY(10px);
 }
 
 #videoRecoderHeader {
@@ -671,7 +681,6 @@ input {
 	text-align: center;
 	height: 55px;
 	transform: translateY(10px);
-	box-shadow: 1px 0px 15px 0px black;
 }
 
 #VideoRecorderCenter {
@@ -696,7 +705,7 @@ input[type="file"] {
   background-color: white;
   text-align: center;
   left: 0;
-  top:595px;
+  top:590px;
   box-shadow: 1px 0px 15px 0px black;
 }
 
