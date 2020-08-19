@@ -140,8 +140,11 @@ function setDate()
 {
     var container = document.getElementById("headerTitle");
     var today = new Date();
+    var hours = today.getHours();
+    var minutes = today.getMinutes();
+    var seconds = today.getSeconds();
     var date = today.getDate() + ' / ' + (today.getMonth()+1) +' / '+ today.getFullYear();
-    container.innerHTML = "SCHEDULE FOR [" + date + "]";
+    container.innerHTML = "SCHEDULE FOR [" + date + "]" + " TIME [" + hours + ":" + minutes + ":" + seconds + "]";
 }
 
 //================================================================================================
