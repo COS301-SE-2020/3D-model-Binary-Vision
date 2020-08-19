@@ -19,7 +19,7 @@ function uploadVideo(videoFile)
 
 	// create a new video tag
 	var uploadedVideoElement = document.getElementById("uploadedVideoElement");
-	uploadedVideoElement.innerHTML = '<video id="uploadedVideo" controls></video><br>';
+	uploadedVideoElement.innerHTML = '<video id="uploadedVideo" controls width="320" height="240"></video><br>';
 
 	var uploadedVideo = document.getElementById('uploadedVideo');
 
@@ -27,8 +27,9 @@ function uploadVideo(videoFile)
 	let videoURL = window.URL.createObjectURL(videoFile);
 	uploadedVideo.src = videoURL;
 
-	/*images = [];
-	generateImages(document.getElementById("uploadedVideo"));*/
+	images = new Array();
+	generateImages(document.getElementById("uploadedVideo"));
+	//generateImages(document.getElementById("uploadedVideo"));*/
 
 	fetchVideo(uploadedVideo.src).then(blob => 
 	{
@@ -89,7 +90,7 @@ function takeVideoStream()
 	// Handle old browsers that do not support the medie capture API
 	if (navigator.mediaDevices == undefined) 
 	{
-		/*navigator.mediaDevices = {};
+		navigator.mediaDevices = {};
 		navigator.mediaDevices.getUserMedia = function(constraintObj) {
 			let getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 			if (!getUserMedia) {
@@ -98,7 +99,7 @@ function takeVideoStream()
 			return new Promise(function(resolve, reject) {
 				getUserMedia.call(navigator, constraintObj, resolve, reject);
 			});
-		}*/
+		}
 	} 
 	else 
 	{ // List all the devices ... this is where we can implement the select video capture device
