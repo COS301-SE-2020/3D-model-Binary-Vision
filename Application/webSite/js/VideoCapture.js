@@ -148,6 +148,7 @@ function takeVideoStream()
 			mediaRecorder.start();
 			console.log(mediaRecorder.state);
 			capturedVideoStream.style.visibility = "hidden"; // Hide the second video element (the captured video element)
+			document.getElementById("VideoRecorder").style.height = "1000px";
 		});
 
 		// Stop recording
@@ -200,13 +201,16 @@ function submitVideo(video, videoStreamed)
 	if (!videoStreamed)
 	{
 		var submitVideoElement = document.getElementById('submitVideoUploadElement');
+		submitVideoElement.innerHTML = '<br><button class="btn btn-primary" id="submitVideo">Submit Video</button><br><br><br>';
 	}
 	else
 	{
 		var submitVideoElement = document.getElementById('submitVideoStreamElement');
+		submitVideoElement.innerHTML = '<br><button class="btn btn-primary" id="submitVideo" style="transform: translateY(-370px);">Submit Video</button><br><br><br>';
+		document.getElementById("VideoRecorder").style.height = "1000px";
 	}
 
-	submitVideoElement.innerHTML = '<br><button class="btn btn-primary" id="submitVideo" style="transform: translateY(-370px);">Submit Video</button><br><br><br>';
+	
 
 	var submitVideoButton = document.getElementById('submitVideo');
 
