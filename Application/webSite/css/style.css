@@ -518,7 +518,7 @@ input {
 
 #centerBookingOverlay{
 	text-align: center;
-	padding-top: 100px;
+	padding-top: 50px;
 }
 
 #bookingBody {
@@ -532,7 +532,7 @@ input {
 #bookingInfo{
 	background-color: #003366;
 	position: fixed;
-	top: 300px;
+	top: 270px;
 	padding: 12px;
 
 }
