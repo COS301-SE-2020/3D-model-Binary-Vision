@@ -715,7 +715,7 @@ module.exports = {
             return;
         }
         var date = new Date();
-        var d = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear(); 
+        var d = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear(); 
 
         Booking.find({"doctor":mongoose.Types.ObjectId(req.user), "date":d}, function(err, bookings)
         {

@@ -198,7 +198,7 @@ module.exports ={
                 .send("Unauthorized access to doctors scheduling info");
         }
         var date = new Date();    
-        var d = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+        var d = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear();
 
         Booking.find({"doctor":mongoose.Types.ObjectId(req.body.doctor),"date":d},function(err,bookings)
         {
