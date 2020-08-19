@@ -44,20 +44,18 @@ function createDoctorsList(data)
     var overlayTable = document.getElementById('currentOverlayTable');
     overlayTable.style.display = "none";
     overlay.style.display = "block";
-    overlay.style.backgroundColor= "#003366";
-    overlay.style.width= "300px";
     overlay.style.color= "white";
-    overlay.style.marginLeft = "auto";
-    overlay.style.marginRight = "auto";
     overlay.style.textAlign = "center";
     overlay.style.borderRadius = "5px";
-    overlay.style.boxShadow = "1px 0px 15px 0px black";
     var replacement = "";
+    var inc = 1;
     for(var i in data)
     {
       if(data != null){
-        replacement += "<div style='background-color: #003366; width: 300px; color: white; margin-left: auto; margin-right: auto; text-align: auto; border-radius: 5px; display: inline-block;'>";
-        replacement +='<br><li>Dr.'+data[i].surname+' ('+data[i].name+') </li><br><button class="btn btn-primary" onclick="selectDoctor(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\')">Select</button> <br><br>';
+        //replacement += '<div style="display: block; float: left; background-color:#003366; color: white; width: 300px;position: relative;border-radius: 5px;box-shadow: 0px 0px 5px 0px black; margin-right: 10px; margin-left: 10px; margin-top: 20px;"><br><h2>' + data[i].name + ' ' + data[i].surname + ' ' + inc + ':</h2><hr><li> Name: '+data[i].name+'</li><li> Surname: '+data[i].surname+'</li><li>ID: '+data[i].idNumber+'</li><li>Cell: '+data[i].cellnumber+'</li><br><button class="btn btn-warning" onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</button><br><br></div>';
+
+        replacement += "<div style='display: block; float: left; background-color:#003366; color: white; width: 300px;position: relative;border-radius: 5px;box-shadow: 0px 0px 5px 0px black; margin-right: 10px; margin-left: 10px; margin-top: 20px;'>";
+        replacement +='<br><h2>Dr. ' + data[i].surname + '</h2><hr><li>Dr.'+data[i].surname+' ('+data[i].name+') </li><br><button class="btn btn-primary" onclick="selectDoctor(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\')">Select</button> <br><br>';
         replacement += "</div>";
       }
     }
