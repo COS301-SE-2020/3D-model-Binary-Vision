@@ -511,7 +511,7 @@ input {
 }
 
 #bookingBackground{
-	display: grid | inline-grid;
+	display: grid;
 	margin-right: 220px;
 	margin-left: 260px;
 }
