@@ -38,6 +38,8 @@ function displayDoctorOverlay()
 // creates a list of all the doctors that the receptionist is allowed to schedule bookings for
 function createDoctorsList(data)
 {
+    var indOverlay = document.getElementById("individual");
+    indOverlay.style.display = "none";
     var overlay = document.getElementById('currentOverlay');
     var overlayTable = document.getElementById('currentOverlayTable');
     overlayTable.style.display = "none";
@@ -71,6 +73,8 @@ function createDoctorsList(data)
 //populates the booking table with all existing bookings & creates the schedule
 function displayTimeTableOverlay()
 {
+    var indOverlay = document.getElementById("individual");
+    indOverlay.style.display = "none";
     var overlayTable = document.getElementById('currentOverlayTable');
     overlayTable.style.display = "block";
     overlayTable.style.boxShadow = "1px 0px 15px 0px black";
@@ -243,8 +247,11 @@ function displayPatientSearchOverlay()
 //
 function createPatientSearchOverlay()
 {
+    var indOverlay = document.getElementById("individual");
+    indOverlay.style.display = "none";
     var overlayTable = document.getElementById('currentOverlayTable');
     overlayTable.style.display = "none";
+    
 
     var overlay = document.getElementById("currentOverlay");
     overlay.style.position = "relative";
