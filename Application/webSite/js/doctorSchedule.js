@@ -143,12 +143,27 @@ function setDate()
     var hours = today.getHours();
     var minutes = today.getMinutes();
     var seconds = today.getSeconds();
+
+    hours = checkTime(hours);
+    minutes = checkTime(minutes);
+    seconds = checkTime(seconds);
+
     var date = today.getDate() + ' / ' + (today.getMonth()+1) +' / '+ today.getFullYear();
     container.innerHTML = "SCHEDULE FOR [" + date + "]" + " TIME [" + hours + ":" + minutes + ":" + seconds + "]";
-    var t = setTimeout(startTime, 500);
+    var t = setTimeout(setDate, 500);
 }
 
-
+//================================================================================================
+// Function developed by: Marcus Werren
+// Function to add a 0 if the time needs a 0
+function checkTime(i) 
+{
+    if (i < 10) 
+    {
+        i = "0" + i;
+    }
+    return i;
+}
 
 
 //================================================================================================
