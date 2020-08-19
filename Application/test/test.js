@@ -29,7 +29,7 @@ describe('API unit testing:', () => {
 				.post("/signup", db.signup)
 				.send(tempUser)
 				.end((error, response) => {
-					response.should.have.status(201); // If it returns 201 then it has created a new user
+					response.should.have.status(200); // If it returns 201 then it has created a new user
 					response.should.be.html; // Test is html is sent as a response for the new login page
 				done();
 				});

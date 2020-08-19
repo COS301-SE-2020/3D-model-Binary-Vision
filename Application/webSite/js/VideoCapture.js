@@ -171,6 +171,8 @@ function takeVideoStream()
 			images = new Array();
 			generateImages(document.getElementById("capturedVideoStream"));
 
+			//console.log(images);
+
 			submitVideo(blob, true); // Submit the video
 		};
 	}).catch(error => 
@@ -204,7 +206,11 @@ function submitVideo(video, videoStreamed)
 		
 
 		for (var i=0; i<images.length; i++)
-			VideoSending.append('images', images[i]); // Append the images to the form .... this might not work
+			VideoSending.append('image', images[i]); // Append the images to the form .... this might not work
+
+		for (var pair of VideoSending.entries()) {
+		    console.log(pair[1]); 
+		}
 
 		var response = fetch("/upload",{
 			method:"POST",
@@ -282,6 +288,9 @@ function generateImage(i, video)
 
 		images.push(blob);
 	});
+
+	//images.push(JSON.stringify(dataURL));
+	//images.push(dataURL);
 
 	//console.log(dataURL);
 
