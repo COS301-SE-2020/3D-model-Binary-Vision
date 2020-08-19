@@ -1,3 +1,6 @@
+//File created by: Marcus Werren
+// This file contains all of the unit tests for the api
+
 let chai = require("chai");
 let chaiHttp = require("chai-http");
 let server = require("../server");
