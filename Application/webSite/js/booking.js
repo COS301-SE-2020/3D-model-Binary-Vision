@@ -38,24 +38,24 @@ function displayDoctorOverlay()
 // creates a list of all the doctors that the receptionist is allowed to schedule bookings for
 function createDoctorsList(data)
 {
+    var indOverlay = document.getElementById("individual");
+    indOverlay.style.display = "none";
     var overlay = document.getElementById('currentOverlay');
     var overlayTable = document.getElementById('currentOverlayTable');
     overlayTable.style.display = "none";
     overlay.style.display = "block";
-    overlay.style.backgroundColor= "#003366";
-    overlay.style.width= "300px";
     overlay.style.color= "white";
-    overlay.style.marginLeft = "auto";
-    overlay.style.marginRight = "auto";
     overlay.style.textAlign = "center";
     overlay.style.borderRadius = "5px";
-    overlay.style.boxShadow = "1px 0px 15px 0px black";
     var replacement = "";
+    var inc = 1;
     for(var i in data)
     {
       if(data != null){
-        replacement += "<div style='background-color: #003366; width: 300px; color: white; margin-left: auto; margin-right: auto; text-align: auto; border-radius: 5px; display: inline-block;'>";
-        replacement +='<br><li>Dr.'+data[i].surname+' ('+data[i].name+') </li><br><button class="btn btn-primary" onclick="selectDoctor(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\')">Select</button> <br><br>';
+        //replacement += '<div style="display: block; float: left; background-color:#003366; color: white; width: 300px;position: relative;border-radius: 5px;box-shadow: 0px 0px 5px 0px black; margin-right: 10px; margin-left: 10px; margin-top: 20px;"><br><h2>' + data[i].name + ' ' + data[i].surname + ' ' + inc + ':</h2><hr><li> Name: '+data[i].name+'</li><li> Surname: '+data[i].surname+'</li><li>ID: '+data[i].idNumber+'</li><li>Cell: '+data[i].cellnumber+'</li><br><button class="btn btn-warning" onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</button><br><br></div>';
+
+        replacement += "<div style='display: block; float: left; background-color:#003366; color: white; width: 300px;position: relative;border-radius: 5px;box-shadow: 0px 0px 5px 0px black; margin-right: 10px; margin-left: 10px; margin-top: 20px;'>";
+        replacement +='<br><h2>Dr. ' + data[i].surname + '</h2><hr><li>Dr.'+data[i].surname+' ('+data[i].name+') </li><br><button class="btn btn-primary" onclick="selectDoctor(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\')">Select</button> <br><br>';
         replacement += "</div>";
       }
     }
@@ -71,6 +71,8 @@ function createDoctorsList(data)
 //populates the booking table with all existing bookings & creates the schedule
 function displayTimeTableOverlay()
 {
+    var indOverlay = document.getElementById("individual");
+    indOverlay.style.display = "none";
     var overlayTable = document.getElementById('currentOverlayTable');
     overlayTable.style.display = "block";
     overlayTable.style.boxShadow = "1px 0px 15px 0px black";
@@ -243,27 +245,29 @@ function displayPatientSearchOverlay()
 //
 function createPatientSearchOverlay()
 {
+    var indOverlay = document.getElementById("individual");
+    indOverlay.style.display = "none";
     var overlayTable = document.getElementById('currentOverlayTable');
     overlayTable.style.display = "none";
+    
 
     var overlay = document.getElementById("currentOverlay");
-    overlay.style.display = "block";
+    overlay.style.position = "relative";
+    overlay.style.display = "inline-block";
     overlay.style.backgroundColor= "#003366";
     overlay.style.width= "300px";
     overlay.style.color= "white";
-    overlay.style.marginLeft = "auto";
-    overlay.style.marginRight = "auto";
     overlay.style.textAlign = "center";
     overlay.style.borderRadius = "5px";
     overlay.style.boxShadow = "1px 0px 15px 0px black";
 
 
-    overlay.innerHTML ='<div style="background-color:#003366;"><div id="doctorFormSignup"><br>';
-    overlay.innerHTML+='<h2> Search Patient</h2><br>';
+    overlay.innerHTML ='<div style=""><div id="doctorFormSignup"><br>';
+    overlay.innerHTML+='<h2> Search Patient</h2><hr><br>';
     overlay.innerHTML+='<div class="change" class="custom-control"><input type="checkbox"  id="searchByName" name="searchBy" onclick="searchByInputDisplay()"><label class="form-check-label" style="color:white; padding: 5px; left: 0px;" for="searchByName">  Search By Name </label><br>';
     overlay.innerHTML+='<input type="checkbox" id="searchBySurname" name="searchBy" onclick="searchByInputDisplay()"><label class="form-check-label" style="color:white; padding: 5px; left: 0px;" for="searchBySurname">  Search By Surname </label><br>';
     overlay.innerHTML+='<input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()"><label class="form-check-label" style="color:white; padding: 5px; left: 0px;" for="searchByPatientID">  Search By Patient ID </label> <br><br></div>';
-    overlay.innerHTML+='<div id="inputBoxes"></div><input style="margin-bottom: 20px;" class="btn btn-danger" type="submit" class="btn" value="Search" onclick="createPatientsListForBooking()"></div></div>';
+    overlay.innerHTML+='<div id="inputBoxes" ></div><input style="margin-bottom: 20px;" class="btn btn-danger" type="submit" class="btn" value="Search" onclick="createPatientsListForBooking()"></div></div>';
 
 }
 
@@ -307,15 +311,20 @@ function createPatientsListForBooking()
 // fillse the patients overlay list that is selectable
 function fillPatientSearchedList(data)
 {
-    var overlay = document.getElementById("currentOverlay");
+    var overlay = document.getElementById("individual");
+    var cOverlay = document.getElementById("currentOverlay");
     var replacement = "";
     var overlayTable = document.getElementById('currentOverlayTable');
     overlayTable.style.display = "none";
+    cOverlay.style.display = "none";
     overlay.style.display = "block";
+    var inc = 1;
 
     for (var i in data)
     {
-        replacement += '<br><br><li> Name: '+data[i].name+'</li><li> Surname: '+data[i].surname+'</li><li>ID: '+data[i].idNumber+'</li><li>Cell: '+data[i].cellnumber+'</li><br><button class="btn btn-warning" onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</button><br><br>';
+        
+        replacement += '<div style="display: block; float: left; background-color:#003366; color: white; width: 300px;position: relative;border-radius: 5px;box-shadow: 0px 0px 5px 0px black; margin-right: 10px; margin-left: 10px; margin-top: 20px;"><br><h2>' + data[i].name + ' ' + data[i].surname + ' ' + inc + ':</h2><hr><li> Name: '+data[i].name+'</li><li> Surname: '+data[i].surname+'</li><li>ID: '+data[i].idNumber+'</li><li>Cell: '+data[i].cellnumber+'</li><br><button class="btn btn-warning" onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</button><br><br></div>';
+        inc++;
     }
     overlay.innerHTML = replacement;
 }
@@ -493,7 +502,9 @@ function initPage()
     }));
 }
 
-
+//=============================================================================================
+//Function Developed by: Marcus Werren
+// Rotates the arrows of the side bar
 function rotateArrowBooking(arrowID) 
 {  
     let arrowElement = document.getElementById(arrowID);
@@ -514,8 +525,8 @@ function rotateArrowBooking(arrowID)
 
 var showSideBar = true;
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+// This function hides the side bar 
 function moveSideBar()
 {
     var bodyA = document.getElementById("sideBody");
