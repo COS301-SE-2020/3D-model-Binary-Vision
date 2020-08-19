@@ -1,11 +1,11 @@
-//Created by:
-//This file contains functions for
+//Created by: Marcus Werren
+//This file contains functions for the consultations page
 
 var currentTime = "";
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+//This function rotates the arrow for the side bar on this page
 function rotateArrowConsultation(arrowID) 
 {
   
@@ -28,8 +28,8 @@ function rotateArrowConsultation(arrowID)
 var showSideBar = true;
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+// This function moves the side bar off screen and moves the body infromation of the page to fill the page
 function moveSideBar()
 {
   	var bodyA = document.getElementById("sideBody");
@@ -52,8 +52,8 @@ function moveSideBar()
 }
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+// This function rotates the arrows of the tabs "consultation info" and "patient info"
 function rotateArrow(arrowID, currentDivID) 
 {
 	let arrowElement = document.getElementById(arrowID);
@@ -89,8 +89,8 @@ function rotateArrow(arrowID, currentDivID)
 }
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+//This funtion hides the information about the cunsultation info
 function hideConInfo()
 {
 	let timeRemainding = document.getElementById("conInfoTime");
@@ -126,8 +126,8 @@ function hideConInfo()
 }
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+//This function hides the patients infromation tab
 function hidePatInfo() 
 {
  	let displayMessage = document.getElementById("patientDisplayMessage");
@@ -182,8 +182,8 @@ function saveDoctorNote()
 }
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+//This function is used to get the current time for the page
 function startTime() 
 {
 	var today = new Date();
@@ -197,8 +197,8 @@ function startTime()
 }
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+//This fucntion is used to update the time so that it updates in real time
 function checkTime(i) 
 {
 	if (i < 10) 
@@ -209,8 +209,8 @@ function checkTime(i)
 }
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+//This function calculates the remaining time for the consultation
 function getRemainingTime(h, m, s) 
 {
 	let startTime = document.getElementById("startTime").innerHTML;

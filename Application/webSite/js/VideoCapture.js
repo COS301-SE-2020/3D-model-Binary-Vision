@@ -10,6 +10,8 @@ canvas.height = "480";
 
 var images = []; // The array to store the images generated 
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
 // The main function to upload an video file
 function uploadVideo(videoFile) 
 {
@@ -34,11 +36,17 @@ function uploadVideo(videoFile)
 	});
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
+// Send the video blob to the submit function
 function sendBlob(blob) 
 {
   submitVideo(blob, false); // Submit the video
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
+// Fet the blob of the video
 function fetchVideo(url) 
 {
   return fetch(url).then(response => {        
@@ -46,6 +54,8 @@ function fetchVideo(url)
   });
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
 // The main function to capture the video stream
 function takeVideoStream() 
 {
@@ -171,6 +181,8 @@ function takeVideoStream()
 			images = new Array();
 			generateImages(document.getElementById("capturedVideoStream"));
 
+			//console.log(images);
+
 			submitVideo(blob, true); // Submit the video
 		};
 	}).catch(error => 
@@ -179,6 +191,9 @@ function takeVideoStream()
 	});
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
+// This function is the called when the submit button is clicked and will send the captured data from the video recorder
 function submitVideo(video, videoStreamed) 
 {
 	if (!videoStreamed)
@@ -204,7 +219,11 @@ function submitVideo(video, videoStreamed)
 		
 
 		for (var i=0; i<images.length; i++)
-			VideoSending.append('images', images[i]); // Append the images to the form .... this might not work
+			VideoSending.append('image', images[i]); // Append the images to the form .... this might not work
+
+		for (var pair of VideoSending.entries()) {
+		    console.log(pair[1]); 
+		}
 
 		var response = fetch("/upload",{
 			method:"POST",
@@ -215,6 +234,8 @@ function submitVideo(video, videoStreamed)
 	});
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
 // Function to clean out all fo the elements
 function cleanElements() 
 {
@@ -231,6 +252,8 @@ function cleanElements()
 	element.innerHTML = "";
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
 // Generate the images form the videos stored in the relavent tags
 function generateImages(video) 
 {
@@ -252,6 +275,8 @@ function generateImages(video)
 	});
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
 // Generate a image at that time stamp i.e. 'i'
 function generateImage(i, video) 
 { 
@@ -279,12 +304,8 @@ function generateImage(i, video)
 		//console.log("blob.size = " + blob.size);
 		//console.log("blob.type = " + blob.type);
 		//console.log(blob);
-
 		images.push(blob);
 	});
-
-	//console.log(dataURL);
-
 	//document.getElementById('testDraw').appendChild(img);
 }
  

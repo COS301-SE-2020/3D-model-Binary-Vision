@@ -502,7 +502,9 @@ function initPage()
     }));
 }
 
-
+//=============================================================================================
+//Function Developed by: Marcus Werren
+// Rotates the arrows of the side bar
 function rotateArrowBooking(arrowID) 
 {  
     let arrowElement = document.getElementById(arrowID);
@@ -523,8 +525,8 @@ function rotateArrowBooking(arrowID)
 
 var showSideBar = true;
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+// This function hides the side bar 
 function moveSideBar()
 {
     var bodyA = document.getElementById("sideBody");
