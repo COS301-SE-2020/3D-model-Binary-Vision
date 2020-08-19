@@ -276,7 +276,7 @@ body{
 }
 
 #renderHeader {
-	background-color: #FFC107;
+	background-color: #d9534f;
 	color: black;
 	height: 60px;
 	margin-top: -10px;
@@ -285,7 +285,6 @@ body{
 	padding-top: 10px;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	box-shadow: 1px 0px 15px 0px lightgray;
 }
 
 .renderCenter {
