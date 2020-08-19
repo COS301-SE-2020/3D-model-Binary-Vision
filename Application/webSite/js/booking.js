@@ -67,6 +67,7 @@ function createDoctorsList(data)
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
 //Modified by: Steven Visser
+// Style development by: Rani Arraf
 //populates the booking table with all existing bookings & creates the schedule
 function displayTimeTableOverlay()
 {
@@ -206,6 +207,7 @@ function createScheduler(overlay)
 
 // ===========================================================================================
 // Function developed by: Jacobus Janse van Rensburg
+// Style development by: Rani Arraf
 //function that colours the selected time slot and sets the values to make a booking
 var oldTimeSlotID;
 function selectTime(timeslot)
@@ -237,6 +239,7 @@ function displayPatientSearchOverlay()
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
+// Style development by: Rani Arraf
 //
 function createPatientSearchOverlay()
 {
