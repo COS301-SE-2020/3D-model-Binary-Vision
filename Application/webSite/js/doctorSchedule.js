@@ -145,7 +145,11 @@ function setDate()
     var seconds = today.getSeconds();
     var date = today.getDate() + ' / ' + (today.getMonth()+1) +' / '+ today.getFullYear();
     container.innerHTML = "SCHEDULE FOR [" + date + "]" + " TIME [" + hours + ":" + minutes + ":" + seconds + "]";
+    var t = setTimeout(startTime, 500);
 }
+
+
+
 
 //================================================================================================
 // Function developed by:Steven Visser
