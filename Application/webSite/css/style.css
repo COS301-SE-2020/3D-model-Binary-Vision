@@ -556,10 +556,16 @@ input {
     position: absolute;
 }
 
+#buttonSchedule:active{
+	opacity: 0.7;
+
+}
+
 
 
 #notify{
 	width: 50%;
+	min-width: 300px;
 	height: 60px;
 	position: relative;
 	background-color: lightgray;
@@ -588,7 +594,7 @@ input {
 	-ms-transform: translate(5em,0);
 }
 
-#notify:visited {
+#notify:active {
 	background-color: lightgreen;
 }
 
