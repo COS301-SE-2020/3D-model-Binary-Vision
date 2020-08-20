@@ -46,43 +46,65 @@
       <br><br><br><br>
 
       <div class="container" >
-              <form id="form" style="max-width: 500px; border-top-right-radius:10px; border-top-left-radius: 10px; box-shadow: 1px 0px 15px 0px black;">
+              <form id="form" style="max-width: 700px; border-top-right-radius:10px; border-top-left-radius: 10px; box-shadow: 1px 0px 15px 0px black;">
               <br>
               <h2> Registration</h2><hr>
-              <br>
-              <label for="name" style="color: white;">Please enter Name</label><br>
-              <input class="form-control" class="box" type="text" name="name" id="name" placeholder="Name"  required />
-              <br>
-              <label for="surname" style="color: white;">Please enter Surname</label><br>
-              <input class="form-control" name="surname" placeholder="Surname" id="surname" required />
-              <br>
-              <label for="email" style="color: white;">Please enter Email</label><br>
-              <input class="form-control" class="box" type="email" name="email" id="email" placeholder="Email" required />
-              <br>
-              <label for="emailCheck" style="color: white;">Please reEnter Email</label><br>
-              <input class="form-control" class="box" type="email" name="emailCheck" id="emailCheck" placeholder="Retype Email" required />
-              <br>
-              <label for="username" style="color: white;">Please enter Username</label><br>
-              <input class="form-control" name="username" placeholder="Username" id="username" required/>
-              <br>
-              <label for="password" style="color: white;">Please enter Password</label><br>
-              <input class="form-control" class="box" type="password" name="password" id="password" placeholder="Password " required/>
-              <br>
-              <label for="passwordCheck" style="color: white;">Please reEnter Password</label><br>
-              <input class="form-control" class="box" type="password" name="passwordCheck" id="passwordCheck" placeholder="Retype Password " required/>
-              <br>
-              <!--
-              <input type="text " name="choice" placeholder="Doctor/Receptionist" required /> 
-              <br><br> -->
-              <label for="choice" style="color: white;">Please enter position</label><br>
-              <select class="form-control" id = "choice" name = "choice">  
-                <option value="">Select an Option</option>      
-                <option value = "Receptionist">Receptionist</option>
-                <option value = "Doctor">Doctor</option>
-              </select>
-              <br>
-              <label for="practition" style="color: white;">Please enter Practice</label><br>
-              <input class="form-control" type="text" name="practition" placeholder="Practice" id="practice" required /> 
+              <div id="signupInputFildContrainer">
+                <div style="padding-left: 30px; padding-right: 15px; padding-bottom: 20px;">
+                  <label for="name" style="color: white;">Please enter Name</label><br>
+                  <input class="form-control" class="box" type="text" name="name" id="name" placeholder="Name"  required />
+                </div>
+
+                <div style="padding-left: 15px; padding-right: 30px; padding-bottom: 20px;">
+                  <label for="surname" style="color: white;">Please enter Surname</label><br>
+                  <input class="form-control" name="surname" placeholder="Surname" id="surname" required />
+                </div>
+                
+                <div style="padding-left: 30px; padding-right: 15px; padding-top: 20px; padding-bottom: 20px;">
+                  <label for="email" style="color: white;">Please enter Email</label><br>
+                  <input class="form-control" class="box" type="email" name="email" id="email" placeholder="Email" required />
+                </div>
+                  
+                  <!--
+                    <label for="emailCheck" style="color: white;">Please reEnter Email</label><br>
+                    <input class="form-control" class="box" type="email" name="emailCheck" id="emailCheck" placeholder="Retype Email" required />
+                    <br>
+                  -->
+                
+                <div style="padding-left: 15px; padding-right: 30px; padding-top: 20px; padding-bottom: 20px;">
+                  <label for="username" style="color: white;">Please enter Username</label><br>
+                  <input class="form-control" name="username" placeholder="Username" id="username" required/>
+                </div>
+                  
+                <div style="padding-left: 30px; padding-right: 15px; padding-top: 20px; padding-bottom: 20px;">
+                  <label for="password" style="color: white;">Please enter Password</label><br>
+                  <input class="form-control" class="box" type="password" name="password" id="password" placeholder="Password " required/>
+                </div>
+                  
+                <div style="padding-left: 15px; padding-right: 30px; padding-top: 20px; padding-bottom: 20px;">
+                  <label for="passwordCheck" style="color: white;">Please reEnter Password</label><br>
+                  <input class="form-control" class="box" type="password" name="passwordCheck" id="passwordCheck" placeholder="Retype Password " required/>
+                </div>
+                  
+                  <!--
+                    <input type="text " name="choice" placeholder="Doctor/Receptionist" required /> 
+                    <br><br> 
+                  -->
+                
+                <div style="padding-left: 30px; padding-right: 15px; padding-top: 20px;">
+                  <label for="choice" style="color: white;">Please enter position</label><br>
+                  <select class="form-control" id = "choice" name = "choice">  
+                    <option value="">Select an Option</option>      
+                    <option value = "Receptionist">Receptionist</option>
+                    <option value = "Doctor">Doctor</option>
+                  </select>
+                </div>
+                
+                <div style="padding-left: 15px; padding-right: 30px; padding-top: 20px;">
+                  <label for="practition" style="color: white;">Please enter Practice</label><br>
+                  <input class="form-control" type="text" name="practition" placeholder="Practice" id="practice" required /> 
+                </div>
+              </div>
               <br>
               <input class="btn btn-primary" type="button" id="submitDetails" name="submitDetails" value="Submit" onclick="signup()" />
               <br><hr>

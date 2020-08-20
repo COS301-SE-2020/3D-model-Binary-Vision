@@ -62,6 +62,11 @@
 	transition: 0.8s;
 }
 
+#signupInputFildContrainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
 .conatinerHome{
 	position: relative;
 	margin-left: auto;

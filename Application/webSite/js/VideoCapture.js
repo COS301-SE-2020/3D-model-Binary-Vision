@@ -224,7 +224,7 @@ function submitVideo(video, videoStreamed)
 		
 
 		for (var i=0; i<images.length; i++)
-			VideoSending.append('image', images[i]); // Append the images to the form .... this might not work
+			VideoSending.append('image', images[i]); // Append the images to the form
 
 		for (var pair of VideoSending.entries()) {
 		    console.log(pair[1]); 
