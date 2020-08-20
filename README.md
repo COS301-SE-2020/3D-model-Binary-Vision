@@ -79,7 +79,7 @@ patient information and editing patients.
 Demo 2: Researched and created the first step to 3d Point cloud generation (Camera calibration).
 Created the deployment model diagram.
 
-Demo 3: pending
+Demo 3: Implemented SFM algorithm to generate a point cloud from given images.
 
 Demo 4: pending
 
