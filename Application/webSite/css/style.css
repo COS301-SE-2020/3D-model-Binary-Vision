@@ -567,7 +567,7 @@ input {
 
 
 
-#notify{
+.notify{
 	width: 50%;
 	min-width: 300px;
 	height: 60px;
@@ -587,7 +587,7 @@ input {
 	-ms-transition: all 0.3s ease-in-out;
 }
 
-#notify:hover{
+.notify:hover{
 	background-color: lightgreen;
 	box-shadow: 0px 0px 5px 0px black;
 	color: black;
