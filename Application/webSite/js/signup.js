@@ -86,17 +86,20 @@ function signup()
     }
 
     //check that the emais match
-    if(email.value != "" && emailCheck.value !=""){
-        if(email.value != emailCheck.value){
-            //indicate that they dont match 
-            usedParamaters=true;
-            email.style.backgroundColor="red";
-            emailCheck.placeholder="Email does not match";
-            emailCheck.style.backgroundColor="red";
-            emailCheck.value="";
-        }
-    }
-    else{//one of the emails is "" 
+    // if(email.value != "" && emailCheck.value !=""){
+    //     if(email.value != emailCheck.value){
+        if(email.value == ""){
+    //         if(email.value != emailCheck.value){
+    //         //indicate that they dont match 
+    //         usedParamaters=true;
+    //         email.style.backgroundColor="red";
+    //         emailCheck.placeholder="Email does not match";
+    //         emailCheck.style.backgroundColor="red";
+    //         emailCheck.value="";
+    //     }
+    // }
+    //else {
+    //one of the emails is "" 
         usedParamaters=true;
         email.style.backgroundColor="red";
         emailCheck.placeholder="Email does not match";
