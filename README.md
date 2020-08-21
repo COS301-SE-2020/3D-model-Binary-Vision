@@ -104,7 +104,9 @@ Demo 2: Created API functions to handle requests of add patients, view patients,
 send emails, creating and clearing cookie data , make sure all data returned belongs to a certain doctor.
 Database queries to get the information on the backend. Created the Front End API calls as well.
 
-Demo 3: pending
+Demo 3: Developed API Functions for the receptionist and the doctor to manage the booking system that we
+developed as well as front end javascript files with functions to improve our signup system along with dynamic
+page api calls and populations of information that the api returns. Developed the dynamic booking page and the weekly pladder page that shows all the doctors bookings for the comming week.
 
 Demo 4: pending
 
