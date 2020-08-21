@@ -157,7 +157,11 @@ integration tool we are using) to our Github repository so that when a commit is
 sent the repository it will be built and then run the unit tests to see that meaningful
 code was uploaded. I also edited the demo video.
 
-Demo 3: pending
+Demo 3: I contributed to the new user interface, by adding/updating the html, CSS and 
+JavaScript. I also updated the video capture page, the page now sends the blob images 
+to the back end, instead of the full video. Lastly I was in control of the unit testing, 
+I had to update all the tests in accordance to the new API calls made, Travis CI code 
+was also updated. 
 
 Demo 4: pending
 
