@@ -19,7 +19,7 @@ Demo 1: https://drive.google.com/file/d/1urvzRHTTUYAgFXoPAeqhKeeuAuu2Y3_j/view?u
 
 Demo 2: https://drive.google.com/file/d/1a6tvSa4dhbSURALP31Q9EbFMByTVWWvP/view?usp=sharing
 
-Demo 3:
+Demo 3: https://drive.google.com/file/d/1VfmeiANV4ApCIPXjxeQu1LsL8j8on6E-/view?usp=sharing
 
 -----------------------------------------------------------------------------------------------------------------
 
@@ -30,9 +30,9 @@ SR Specification: https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/
 
 User Manual     : https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/User%20Manual.pdf
 
-Coding Standards :
+Coding Standards : https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/Coding%20Standards%20Document.pdf
 
-Technical Installation Manual : 
+Technical Installation Manual : https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/User%20Manual.pdf
 
 -----------------------------------------------------------------------------------------------------------------
 
@@ -127,7 +127,11 @@ demo requirements by adding in new Use cases and functional requirements,
 as well as updating the old use case diagrams. I also made the user manual
 for the system.
 
-Demo 3: pending
+Demo 3: Helped to extend the API and created and implemented new functions. 
+I typed the coding standards document. I typed the Technical Installation 
+Manual and I updated the User Manual to work for our new system redesign. 
+Went through the system and documented all bugs & fixes that needed to be
+made and then fixed alot of them too.
 
 Demo 4: pending
 
