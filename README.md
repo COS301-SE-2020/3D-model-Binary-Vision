@@ -57,11 +57,14 @@ included some js to help with the integration between the signup/login
 and the API. Created the forms for the signup and login. Revised over
 the final analysis of the system functionality.
 
-Demo 2: Add to the html and css as to update the UI and UX, helped work on the API
+Demo 2: Added to the html and css as to update the UI and UX, helped work on the API
 via front-end contribution in javascript. Made sure that all data is presented from the API on the website.
 Furthermore, ensured that all data is applicable to modern day dentists.
 
-Demo 3: pending
+Demo 3: I worked on the html and the css as to update the User Interface, helped work on the API
+via front-end contribution in javascript (functionality that helped make information easily accessible visually). Made sure that all data is presented from the API on the website (double checked).
+Furthermore, ensured that all data is applicable to modern day dentists.
+For this demo I further ensured that the project had an entirely new look that overhauled from the previous demo. I ensured that it would be easier, visually, for both the doctor and the receptionist to use the software.
 
 Demo 4: pending
 
@@ -127,9 +130,9 @@ demo requirements by adding in new Use cases and functional requirements,
 as well as updating the old use case diagrams. I also made the user manual
 for the system.
 
-Demo 3: Helped to extend the API and created and implemented new functions. 
-I typed the coding standards document. I typed the Technical Installation 
-Manual and I updated the User Manual to work for our new system redesign. 
+Demo 3: Helped to extend the API and created and implemented new functions.
+I typed the coding standards document. I typed the Technical Installation
+Manual and I updated the User Manual to work for our new system redesign.
 Went through the system and documented all bugs & fixes that needed to be
 made and then fixed alot of them too.
 
@@ -148,11 +151,11 @@ of the system. I implemented the Video capture functionality that allows the use
 to send a live recorded video or a pre-recorded video from the clients machine to
 back end for processing. I also contributed to the unit testing of the systems API calls.
 
-Demo 2: I was in control of unit testing and code integration for the project. I 
-implemented some new unit tests for the api, and linked travis ci (the continuous 
-integration tool we are using) to our Github repository so that when a commit is 
-sent the repository it will be built and then run the unit tests to see that meaningful 
-code was uploaded. I also edited the demo video. 
+Demo 2: I was in control of unit testing and code integration for the project. I
+implemented some new unit tests for the api, and linked travis ci (the continuous
+integration tool we are using) to our Github repository so that when a commit is
+sent the repository it will be built and then run the unit tests to see that meaningful
+code was uploaded. I also edited the demo video.
 
 Demo 3: pending
 
