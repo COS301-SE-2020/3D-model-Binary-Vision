@@ -32,6 +32,9 @@ var DoctorSchema = new Schema({
     practition:{
         type:String,
         required: true
+    },
+    active:{
+        type: Boolean, required: true , default: false
     }
 });
 
@@ -58,6 +61,9 @@ var PatientSchema = new Schema({
     cellnumber:{
         type:String,
         required: true
+    },
+    active:{
+        type: Boolean, required: true , default: false
     }
 });
 
@@ -138,6 +144,12 @@ var Booking = new Schema({
     reason:{
         type:String
     }
+})
+
+var Practice = new Schema({
+    practice: {type:String , required: true},
+    securityCode:{type: String , required: true },
+    headReceptionist: {type: mongoose.Types.ObjectId , required: true}
 })
 
 module.exports = {

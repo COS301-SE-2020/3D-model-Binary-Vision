@@ -17,6 +17,9 @@ function changePassword(){
     }
     else{
         //passwords match and we can store them in the database
-
+        var frontSalt ="COS301";
+        var backSalt ="FlapJacks";
+        var saltedPasword = frontSalt+ password.value+backSalt;
+        
     }
 }

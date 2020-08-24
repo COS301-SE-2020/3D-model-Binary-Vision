@@ -50,5 +50,17 @@ module.exports = {
         });
 
         res.sendStatus(200);
+    },
+
+    //===================================================================================
+    //function developed by Jacobus Janse van Rensburg
+    signupEmail: function (req ,res){
+        var passwordChangeOptions = {
+            from: 'flap.jacks.cs@gmail.com',
+            to:req.body.email,
+            subject: '3D Render Password Change',
+            html:'<div style="background-color: #343a40; width: 400px; padding: 10px; border-radius: 10px; position:relative;margin:0 auto; margin-top: 100px;"><h1 style="color:white;text-align: center;">Password Reset</h1><hr><h2 style="color:lightblue;text-align: center;" id="emailLink">USER_EMAIL_HERE</h2><p style="text-align: center; color:white;">You have requested to change your password. <br>Click on the link below to reset your password.</p><div style="text-align:center;"><a style="color:lightblue;" href="RESET_PASSWORD_URL">Reset Password</a></div><hr><p style="text-align: center; color:white; font-size: 13px;">If this was not you, please ignore this email.<br>Your passowrd will remain the same.</p></div>'
+        };
+
     }
 }
