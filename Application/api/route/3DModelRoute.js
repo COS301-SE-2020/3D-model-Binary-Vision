@@ -75,7 +75,12 @@ module.exports = function (app)
         .post(Model.logout);
 
     app.route('/email')
-        .post(Emailer.passwordChangeEmail);
+        .post(Emailer.passwordChangeEmail)
+        .get((_res, res) => {
+            const page = fs.readFileSync("webSite/html/emailTester.html", "utf-8");
+            res.setHeader("Content-Type", "text/html");
+            res.send(page);
+        });
 
     app.route('/getReceptionist')   
         .post(Receptionist.getReceptionistInfo);

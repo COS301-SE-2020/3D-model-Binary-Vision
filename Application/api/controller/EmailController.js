@@ -4,12 +4,21 @@
 
 var nodeMailer = require('nodemailer');
 
+// var transporter = nodeMailer.createTransport({
+//     service: 'gmail',
+//     auth:{
+//         user: 'flap.jacks.cs@gmail.com', //change to a project email
+//         pass: '' //I removed the password because everyone can see it
+//     }
+// });
+
 var transporter = nodeMailer.createTransport({
-    service: 'gmail',
-    auth:{
-        user: 'flap.jacks.cs@gmail.com', //change to a project email
-        pass: '' //I removed the password because everyone can see it
-    }
+   host:"smtp.mailtrap.io",
+   port: 2525,
+   auth:{
+       user:"0c9f2b08034ef4",
+       pass:"c1fd4b36bbc842"
+   } 
 });
 
 module.exports = {
@@ -24,10 +33,11 @@ module.exports = {
         };
 
 
-        var resetURL="www.google.com";
+        var resetURL="localhost:3000/ResetPassword.html?email="+req.body.email;
 
-        passwordChangeOptions.html.replace("RESET_PASSWORD_URL",resetURL);
-        passwordChangeOptions.html.replace("USER_EMAIL_HERE",req.body.email);
+        // console.log(passwordChangeOptions.html);
+        passwordChangeOptions.html = passwordChangeOptions.html.replace('RESET_PASSWORD_URL',resetURL);
+        passwordChangeOptions.html = passwordChangeOptions.html.replace('USER_EMAIL_HERE',req.body.email);
         transporter.sendMail(passwordChangeOptions, function(error, info){
             if (error) 
             {
@@ -39,6 +49,6 @@ module.exports = {
             }
         });
 
-        res.send(200);
+        res.sendStatus(200);
     }
 }
