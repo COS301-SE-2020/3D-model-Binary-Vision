@@ -1,9 +1,9 @@
-//Created by:
+//Created by: Jacobus Janse van Rensburg
 //This file contains
 
 //================================================================================================
-// Function developed by:
-//
+// Function developed by: Jacobus Janse van Rensburg
+// Initialises the page
 function initPage()
 {
 	createTable();
@@ -12,9 +12,9 @@ function initPage()
 }
 
 //================================================================================================
-// Function developed by:
+// Function developed by: Jacobus Janse van Rensburg
 // Function modified by: Steven Visser
-//
+// function that can create a time table for the doctor
 function createTable()
 {
 	var tableDiv = document.getElementById("dayTable");
@@ -75,8 +75,8 @@ function createTable()
 }
             
 //================================================================================================
-// Function developed by:
-//
+// Function developed by: Jacobus Janse van Rnsburg
+//Function that fetches all the doctors  bookings
 function populateTable()
 {
 
@@ -95,8 +95,9 @@ function populateTable()
 }
 
 //================================================================================================
-// Function developed by:
+// Function developed by: Jacobus Janse van Rensburg
 // Modified by: Steven Visser
+//function that fills the able with the booknings that was retrieced
 function fillData(data)
 {
     var count=0;
@@ -122,7 +123,7 @@ function fillData(data)
         }
     }
 }
-
+//function that sets the name of the patient in the element that he has a booking for
 function setName(patient, searchPageId){
     var response = fetch("/singlePatient",{
         method:"POST",
