@@ -18,6 +18,7 @@ var Patient = require("../model/3DModelModel.js").Patient;
 var Consultation = require("../model/3DModelModel.js").Consultation;
 var Receptionist = require("../model/3DModelModel.js").Receptionist;
 var Booking = require("../model/3DModelModel.js").Booking;
+var PasswordChanges = require("../model/3DModelModel.js").PasswordChanges;
 
 module.exports = {
 
@@ -842,13 +843,66 @@ module.exports = {
     //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg and Steven Visser
     //Function uses the users email address to find the correct user and change the password of that user
-    passwordChange: function (req , res)
+    resetPassord: function (req , res)
     {
-        const {email , password} = req.body;
+        const {email , password , code} = req.body;
 
-        console.log("email: "+email +"\npassword: "+pasword);
+        // console.log("email: "+email +"\npassword: "+password+"\nCode: "+code);
+        var updated = false;
+        PasswordChanges.findOne({"_id":mongoose.Types.ObjectId(code)}, function (err , record){
+            if (record)
+            {
+                if (email == record.email){
+                    // valid details in order to change the password 
+                    Doctor.findOneAndUpdate ({"email":email},{$set:{"password":password}}, function(err, doc){
+                      if(!doc)//doctor not found
+                      {
+                          Receptionist.findOneAndUpdate({"email":email}, {$set:{"password":password}},function(err, rec){
+                            if(!rec){
+                                //invalid user
+                                res.status(401).send("not ok");
+                                return;
+                            }
+                            else
+                            {
+                                updated = true;
+                            }
 
-        res.status(200).send("ok"); 
+                            if(updated)
+                            {   //remove the record so that someone cant use the same values to change the password again
+                                PasswordChanges.findOneAndRemove({"_id":mongoose.Types.ObjectId(code)}, function(err){
+                                    res.status(200).send("ok");
+                                    return;
+                                })
+                            }
+      
+                          })
+                      }
+                      else{
+                          updated = true;
+                      }
+
+                      if(updated)
+                      {
+                          //remove the record so that someone cant use the same values to change the password again
+                          PasswordChanges.findOneAndRemove({"_id":mongoose.Types.ObjectId(code)}, function(err){
+                              res.status(200).send("ok");
+                              return;
+                          })
+                      }
+
+                    })
+
+                }
+            }
+            else{
+                //invalid password change code
+                res.status(401).send("not ok");
+                return;
+            }
+
+        });
+
         return;
     }
 

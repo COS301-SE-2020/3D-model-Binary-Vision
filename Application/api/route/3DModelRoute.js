@@ -30,7 +30,7 @@ module.exports = function (app)
     app.route('/signup')
         .post(Model.signup);
 
-    app.route('/passwordChange').post(Model.passwordChange);
+    app.route('/resetPassord').post(Model.resetPassord);
     
     app.route('/isValidUsername').post(Model.isValidUsername);
 
@@ -76,13 +76,14 @@ module.exports = function (app)
     app.route('/logout')
         .post(Model.logout);
 
-    app.route('/email')
+    app.route('/passwordChangeEmail')
         .post(Emailer.passwordChangeEmail)
         .get((_res, res) => {
             const page = fs.readFileSync("webSite/html/emailTester.html", "utf-8");
             res.setHeader("Content-Type", "text/html");
             res.send(page);
         });
+    
 
     app.route('/getReceptionist')   
         .post(Receptionist.getReceptionistInfo);

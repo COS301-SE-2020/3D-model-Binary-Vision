@@ -6,6 +6,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
+const { passwordChange } = require('../controller/3DModelController');
 var Schema = mongoose.Schema;
 
 var DoctorSchema = new Schema({
@@ -146,6 +147,10 @@ var Booking = new Schema({
     }
 })
 
+var PasswordChanges = new Schema({
+    email:{type: String , required: true}
+})
+
 var Practice = new Schema({
     practice: {type:String , required: true},
     securityCode:{type: String , required: true },
@@ -157,5 +162,6 @@ module.exports = {
     Patient: mongoose.model("Patient", PatientSchema),
     Consultation: mongoose.model("Consultation", ConsultationSchema),
     Receptionist: mongoose.model("Receptionist", Receptionist),
-    Booking:mongoose.model("Booking", Booking)
+    Booking:mongoose.model("Booking", Booking),
+    PasswordChanges: mongoose.model("PasswordChanges",PasswordChanges)
 }
