@@ -839,4 +839,18 @@ module.exports = {
         });
     },
    
+    //======================================================================================
+    //Function developed by: Jacobus Janse van Rensburg and Steven Visser
+    //Function uses the users email address to find the correct user and change the password of that user
+    passwordChange: function (req , res)
+    {
+        const {email , password} = req.body;
+
+        console.log("email: "+email +"\npassword: "+pasword);
+
+        res.status(200).send("ok"); 
+        return;
+    }
+
+
 };

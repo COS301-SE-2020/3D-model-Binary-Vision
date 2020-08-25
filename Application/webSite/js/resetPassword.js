@@ -21,5 +21,21 @@ function changePassword(){
         var backSalt ="FlapJacks";
         var saltedPasword = frontSalt+ password.value+backSalt;
         
+
+        var url = window.location.href;
+        var parts = url.split("=");
+        var email = parts[1];
+
+
+        var response = fetch("/resetPassord",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json; charset=UTF-8'},
+            body: JSON.stringify({email , 'password':saltedPasword})
+        });
+
+        response.then(res => res.json().then(data => {
+            console.log(data);
+        }));
+
     }
 }

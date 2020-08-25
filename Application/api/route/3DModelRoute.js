@@ -29,6 +29,8 @@ module.exports = function (app)
 
     app.route('/signup')
         .post(Model.signup);
+
+    app.route('/passwordChange').post(Model.passwordChange);
     
     app.route('/isValidUsername').post(Model.isValidUsername);
 
