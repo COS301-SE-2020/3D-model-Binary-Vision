@@ -7,16 +7,19 @@ const { Doctor, Receptionist, PasswordChanges } = require('../model/3DModelModel
 
 
 var transporter = nodeMailer.createTransport({
-   host:"smtp.mailtrap.io",
-   port: 2525,
-   auth:{
-       user:"0c9f2b08034ef4",
-       pass:"c1fd4b36bbc842"
-   } 
-});
+    host:"smtp.mailtrap.io",
+    port: 2525,
+    auth:{
+        user:"0c9f2b08034ef4",
+        pass:"c1fd4b36bbc842"
+    } 
+ });
 
 module.exports = {
 
+    //========================================================================================
+    //function developed by Jacobus Janse van Rensburg
+    //sends a email to the user to allow the user to change their passwords
     passwordChangeEmail: function(req , res)
     {
         // need to see if the email is actually in the database
@@ -47,6 +50,7 @@ module.exports = {
         return;
     },
 
+
     //===================================================================================
     //function developed by Jacobus Janse van Rensburg
     signupEmail: function (req ,res){
@@ -60,13 +64,15 @@ module.exports = {
     }
 }
 
-
+//======================================================================================================
+//function developed by: Jacobus Jane van Rensburg 
+//Email HTML developed by rani
+//function that sends the actual email to reset the users password
 function sendPasswordResetEmail(req){
     var email = req.body.email;
     var record = new PasswordChanges({email});
     var id = record._id;
-
-    console.log("email sent to: "+email);
+    //store a temporary record in the database with a id to mach for a valid password change 
     record.save(function (err){
         if (err){
             console.log(err);
@@ -74,17 +80,19 @@ function sendPasswordResetEmail(req){
         
     });
 
-
+    //setting the details of the email to be sent
     var passwordChangeOptions = {
-        from: 'Jaco@gmail.com',
+        from: 'flap.jacks.cs@gmail.com',
         to:req.body.email,
         subject: '3D Render Password Change',
         html:'<div style="background-color: #343a40; width: 400px; padding: 10px; border-radius: 10px; position:relative;margin:0 auto; margin-top: 100px;"><h1 style="color:white;text-align: center;">Password Reset</h1><hr><h2 style="color:lightblue;text-align: center;" id="emailLink">USER_EMAIL_HERE</h2><p style="text-align: center; color:white;">You have requested to change your password. <br>Click on the link below to reset your password.</p><div style="text-align:center;"><a style="color:lightblue;" href="RESET_PASSWORD_URL">Reset Password</a></div><hr><p style="text-align: center; color:white; font-size: 13px;">If this was not you, please ignore this email.<br>Your passowrd will remain the same.</p></div>'
     };
+
+    //setting the variants in the email that is dependent on certain users
     var resetURL="localhost:3000/ResetPassword.html?email="+req.body.email+"&code="+id;
-    // console.log(passwordChangeOptions.html);
     passwordChangeOptions.html = passwordChangeOptions.html.replace('RESET_PASSWORD_URL',resetURL);
     passwordChangeOptions.html = passwordChangeOptions.html.replace('USER_EMAIL_HERE',req.body.email);
+    //send the actual email
     transporter.sendMail(passwordChangeOptions, function(error, info){
         if (error) 
         {

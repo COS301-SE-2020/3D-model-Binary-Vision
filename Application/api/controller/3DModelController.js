@@ -22,6 +22,18 @@ var Booking = require("../model/3DModelModel.js").Booking;
 var PasswordChanges = require("../model/3DModelModel.js").PasswordChanges;
 var Practice = require("../model/3DModelModel.js").Practice;
 
+//Email modules and settings to send emails
+var nodeMailer = require('nodemailer');
+const transporter = nodeMailer.createTransport({
+    host:"smtp.mailtrap.io",
+    port: 2525,
+    auth:{
+        user:"0c9f2b08034ef4",
+        pass:"c1fd4b36bbc842"
+    } 
+ });
+
+
 const frontsalt ="Lala";
 const  backSalt = "Bey";
 
@@ -139,7 +151,7 @@ module.exports = {
         var { name, surname, email, username, password ,choice , practition,securityCode} = req.body;
        
         //first check if the practition exists
-        Practice.findOne({"practice":practice}, function(err, practice){
+        Practice.findOne({"practice":practition}, function(err, practice){
             if (err)
             {
                 res.status(400);
@@ -166,6 +178,7 @@ module.exports = {
                                 else 
                                 {
                                     //email the head receptionist over here
+                                    sendsignupConfurmationEmail(practice , doctor);
                                     res.redirect("/login.html");
                                     return;
                                 }
@@ -183,6 +196,7 @@ module.exports = {
                                 else
                                 {
                                     //email the head receptionist over here
+                                    sendsignupConfurmationEmail(practice , receptionist);
                                     res.redirect("/login.html");
                                     return;
                                 }
@@ -988,5 +1002,31 @@ module.exports = {
         return;
     }
 
-
 };
+
+
+function sendsignupConfurmationEmail(practice , user){
+
+    var emailOptions={
+        from: 'flap.jacks.cs@gmail.com',
+            to:practice.headReceptionist,//send email to the head receptionist
+            subject: '3D Model Confirm User',
+            html:'<a href="A_Link_overHere">click here</a>'
+    }
+
+    var userId = user._id;
+    var userName = user.name;
+    var userSurname = user.surname;
+    var practiceName = practice.practice;
+
+    transporter.sendMail(emailOptions, function(error, info){
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log(info);
+        }
+    });
+
+
+}

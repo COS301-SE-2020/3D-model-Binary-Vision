@@ -66,6 +66,7 @@ function signup()
     var practice = document.querySelector("#practice");
     var selectionElement = document.getElementById("choice");
     var choice = selectionElement.options[selectionElement.selectedIndex].value ;
+    var securityCode = document.querySelector("#securityCode").value;
     //check that the passwords match
     if(password.value != "" && passwordCheck.value !=""){
         if(password.value != passwordCheck.value){
@@ -149,7 +150,7 @@ function signup()
         email.style.backgroundColor="red";
     }
 
-    addUser(name , surname, email ,username,choice,practice);    
+    addUser(name , surname, email ,username,choice,practice , securityCode);    
 }
 
 //===============================================================================================
@@ -202,7 +203,7 @@ async function stop(){
 //=====================================================================================
 //Function developed by: Jacobus Janse van Rensburg
 // adding a user if its allowed
-function addUser(name , surname, email ,username,choice,practice){
+function addUser(name , surname, email ,username,choice,practice , securityCode){
     
     if(usedParamaters==false && choice!=""){
         //make the api call with the hashed password to sign up a new user 
@@ -216,7 +217,7 @@ function addUser(name , surname, email ,username,choice,practice){
         var response = fetch("/signup",{
             method:"POST",
             headers:{'Content-Type': 'application/json; charset=UTF-8'},
-            body: JSON.stringify({"name":name.value , "surname":surname.value , "email":email.value ,"username":username.value , "password":frontEndHashedPassword, choice,"practition":practice.value})
+            body: JSON.stringify({"name":name.value , "surname":surname.value , "email":email.value ,"username":username.value , "password":frontEndHashedPassword, choice,"practition":practice.value , "securityCode":securityCode})
         })
 
         response.then(res => {

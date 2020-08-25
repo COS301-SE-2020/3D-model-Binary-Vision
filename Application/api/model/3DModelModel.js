@@ -154,7 +154,7 @@ var PasswordChanges = new Schema({
 var Practice = new Schema({
     practice: {type:String , required: true},
     securityCode:{type: String , required: true },
-    headReceptionist: {type: mongoose.Types.ObjectId , required: true}
+    headReceptionist: {type: String , required: true}
 })
 
 module.exports = {

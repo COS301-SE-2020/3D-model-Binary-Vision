@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="utf-8" />
+        <title> Register Practice </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<!-- hashing library used below -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+    </head>
+  <body>
+  		<nav class="navbar navbar-expand-lg  navbar-dark">
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+		    <ul class="navbar-nav">
+		      <li class="nav-item">
+		        <a class="nav-link" href="preview.html">Home</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="signup.html">Register</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link active" href="login.html">Login</a>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
+    <!-- <form method="POST" action="/login" enctype="multipart/form-data"> -->
+
+	    <div id="miBody">
+		    <div id="header">
+		      <p id="headerTitle">PRACTICE REGISTER PAGE</p>
+		    </div>
+		</div>
+
+		<br><br><br><br>
+
+		<div id="containerLogin">
+			<img src="../css/images/45RS.gif" alt="tooth" style="position: relative; margin-left: auto; margin-right: auto; width:  300px;">
+			<form  action="/registerPractice" method="POST" style="border-top-right-radius:10px; border-top-left-radius: 10px; padding: 20px; margin-left: auto; margin-right: auto; position: relative; text-align: center;">
+			  <br>
+			  <h2> REGISTER PRACTICE </h2>
+			  	<div id="errorResponse" style="color: red; font-style: italic;"></div><br>
+					<label for="practice" style="color: white;">Enter Practice Name </label><br>
+			    <input class="form-control" name="practice" placeholder="practice" id="practice" /><br>
+					<label for="securityCode" style="color: white;">Enter security Code </label><br>
+                <input class="form-control"  name="securityCode" type="securityCode" placeholder="securityCode" id="securityCode" /><br>
+                <label for="headReceptionist" style="color: white;">Enter Head receptionist Email </label><br>
+			    <input class="form-control"  name="headReceptionist" type="headReceptionist" placeholder="head receptionist email" id="headReceptionist" /><br>
+			    <button class="btn btn-primary" type="submit" >Submit</button><br>
+			  
+			</form>
+		</div>
+  </body>
+</html>
