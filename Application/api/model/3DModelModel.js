@@ -163,5 +163,6 @@ module.exports = {
     Consultation: mongoose.model("Consultation", ConsultationSchema),
     Receptionist: mongoose.model("Receptionist", Receptionist),
     Booking:mongoose.model("Booking", Booking),
-    PasswordChanges: mongoose.model("PasswordChanges",PasswordChanges)
+    PasswordChanges: mongoose.model("PasswordChanges",PasswordChanges),
+    Practice: mongoose.model("Practice",Practice)
 }

@@ -20,6 +20,7 @@ var Consultation = require("../model/3DModelModel.js").Consultation;
 var Receptionist = require("../model/3DModelModel.js").Receptionist;
 var Booking = require("../model/3DModelModel.js").Booking;
 var PasswordChanges = require("../model/3DModelModel.js").PasswordChanges;
+var Practice = require("../model/3DModelModel.js").Practice;
 
 const frontsalt ="Lala";
 const  backSalt = "Bey";
@@ -99,52 +100,111 @@ module.exports = {
     },
 
     //======================================================================================
+    //function developed by: Jacobus Janse van Rensburg
+    // allows the registration of a new practice
+    practiceRegistration: function(req, res){
+        const {practice , securityCode, headReceptionist} = req.body;
+
+        Practice.findOne({"practice":practice}, function(err, prac){
+            if (prac)
+            {
+                //practition already registered;
+                res.status(400);
+                return;
+            }
+
+            var newPractice =new Practice ({practice,securityCode,headReceptionist});
+            newPractice.save(function(err, pr){
+
+                if(err)
+                {
+                    res.send(err);
+                    return;
+                }
+                else{
+                    res.redirect('/signup.html');
+                    return;
+                }
+            })
+
+        })
+
+    },
+
+    //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg
     //This function allows a user to register to the database as either a doctor or a receptionist
     signup: function (req, res) 
     {
-        var { name, surname, email, username, password ,choice , practition} = req.body;
+        var { name, surname, email, username, password ,choice , practition,securityCode} = req.body;
        
-        password = frontsalt+password+backSalt;
-        bcrypt.hash(password,10,function(err, password1){
-            password = password1;
-            if(choice=="Doctor")
+        //first check if the practition exists
+        Practice.findOne({"practice":practice}, function(err, practice){
+            if (err)
             {
-                const doctor = new Doctor({name,surname,email,username, password,practition});
-                doctor.save(function (err, saved) 
-                {
-                    if (err) 
-                    {
-                        res.status(400);
-                        res.send(err);
-                        return;
-                    }
-                    else 
-                    {
-                        res.redirect("/login.html");
-                        return;
-                    }
-                });
+                res.status(400);
+                return;
             }
-            else if(choice == "Receptionist")
-            {
-                const receptionist = new Receptionist({name , surname , email , username, password,practition});
-                receptionist.save(function(err, saved)
+            if(practice){
+                if(practice.securityCode == securityCode)
                 {
-                    if(err)
-                    {
-                    res.send(err);
-                    }
-                    else
-                    {
-                        res.redirect("/login.html");
-                        return;
-                    }
-                });
+                    //valid practition code to add inactive user to database and send an email to head receptionist
+                    password = frontsalt+password+backSalt;
+                    bcrypt.hash(password,10,function(err, password1){
+                        password = password1;
+                        if(choice=="Doctor")
+                        {
+                            const doctor = new Doctor({name,surname,email,username, password,practition});
+                            doctor.save(function (err, saved) 
+                            {
+                                if (err) 
+                                {
+                                    res.status(400);
+                                    res.send(err);
+                                    return;
+                                }
+                                else 
+                                {
+                                    //email the head receptionist over here
+                                    res.redirect("/login.html");
+                                    return;
+                                }
+                            });
+                        }
+                        else if(choice == "Receptionist")
+                        {
+                            const receptionist = new Receptionist({name , surname , email , username, password,practition});
+                            receptionist.save(function(err, saved)
+                            {
+                                if(err)
+                                {
+                                res.send(err);
+                                }
+                                else
+                                {
+                                    //email the head receptionist over here
+                                    res.redirect("/login.html");
+                                    return;
+                                }
+                            });
+                        }
+                    });
+
+                }
+                else{
+                    //practition code not valid for signup attempt
+                    res.status(401);//unauthorized
+                    return;
+                }
+            }
+            else{
+                //no practice found
+                res.status(404);
+                return;
+                //register a new practice ?
             }
         });
 
-        
         return;
     },
 

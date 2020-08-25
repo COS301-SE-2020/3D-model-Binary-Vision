@@ -30,6 +30,8 @@ module.exports = function (app)
     app.route('/signup')
         .post(Model.signup);
 
+    app.route('/registerPractice').post(Model.practiceRegistration);
+
     app.route('/resetPassord').post(Model.resetPassord);
     
     app.route('/isValidUsername').post(Model.isValidUsername);
