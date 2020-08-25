@@ -60,7 +60,6 @@ function signup()
     var name = document.querySelector("#name");
     var surname = document.querySelector("#surname");
     var email = document.querySelector("#email");
-    var emailCheck = document.querySelector("#emailCheck");
     var username = document.querySelector("#username");
     var password = document.querySelector("#password");
     var passwordCheck = document.querySelector("#passwordCheck");

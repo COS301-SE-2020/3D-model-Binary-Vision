@@ -8,6 +8,7 @@
 "use strict";
 //set up the database first
 var fs = require("fs");
+const bcrypt = require('bcrypt');
 
 const { createModel } = require('mongoose-gridfs');
 var formidable = require("formidable");
@@ -20,6 +21,9 @@ var Receptionist = require("../model/3DModelModel.js").Receptionist;
 var Booking = require("../model/3DModelModel.js").Booking;
 var PasswordChanges = require("../model/3DModelModel.js").PasswordChanges;
 
+const frontsalt ="Lala";
+const  backSalt = "Bey";
+
 module.exports = {
 
     //Function Developed by: Jacobus Janse van Rensburg
@@ -27,48 +31,59 @@ module.exports = {
     login: function (req, res) 
     {
 
-        const { username, password } = req.body;
+        var { username, password } = req.body;
 
-        // var frontSalt = "Pancakes";
-        // var backSalt ="bad";
-        // var saltedPassword =frontSalt+password+backSalt;
-        // password = hash(saltedPassword);
-
-        Doctor.findOne({ username, password }, function (err, doctor) 
+        password = frontsalt+password+backSalt;
+    
+        Doctor.findOne({ username }, function (err, doctor) 
         {
             if (err) 
             {
-              res.send(err);
-              return;
+                res.send(err);
+                return;
             }
-
             if (doctor) 
             {
-              //it is a doctor logging in and we return to the doctors home page
-              res.cookie("drCookie",doctor._id,{maxAge:9000000,httpOnly:true});
-              res.redirect("/doctorSchedule.html");
-              return;
+                //check if the passwords match
+                bcrypt.compare(password , doctor.password, function(erro , result){
+                    if(result == true){
+                        //it is a doctor logging in and we return to the doctors home page
+                        res.cookie("drCookie",doctor._id,{maxAge:9000000,httpOnly:true});
+                        res.redirect("/doctorSchedule.html");
+                        return;
+                    }
+                    else{
+                        res.send(erro);
+                    }
+                })        
             }
             //there was no doctor and we will now check if it is a receptionist
         });
 
-        Receptionist.findOne({username,password}, function(err, receptionist)
-        {
+        Receptionist.findOne({username}, function(err, receptionist){
             if (err)
             {
               res.send(err);
               return;
             }
-
+    
             if (receptionist)
             {
-              res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
-              res.redirect("/newHome.html");
-              return;
+                bcrypt.compare(password , receptionist.password, function (error, result){
+                   if (result == true){
+                        res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
+                        res.redirect("/newHome.html");
+                        return;
+                   }
+                   else{
+                       res.send(error);
+                   }
+                    
+                })
+
             }
         });
-
-        //res.status(404).send("not found");
+     
         return;
     },
 
@@ -88,43 +103,48 @@ module.exports = {
     //This function allows a user to register to the database as either a doctor or a receptionist
     signup: function (req, res) 
     {
-        const { name, surname, email, username, password ,choice , practition} = req.body;
-        
-
-        if(choice=="Doctor")
-        {
-            const doctor = new Doctor({name,surname,email,username, password,practition});
-            doctor.save(function (err, saved) 
+        var { name, surname, email, username, password ,choice , practition} = req.body;
+       
+        password = frontsalt+password+backSalt;
+        bcrypt.hash(password,10,function(err, password1){
+            password = password1;
+            if(choice=="Doctor")
             {
-                if (err) 
+                const doctor = new Doctor({name,surname,email,username, password,practition});
+                doctor.save(function (err, saved) 
                 {
-                    res.status(400);
+                    if (err) 
+                    {
+                        res.status(400);
+                        res.send(err);
+                        return;
+                    }
+                    else 
+                    {
+                        res.redirect("/login.html");
+                        return;
+                    }
+                });
+            }
+            else if(choice == "Receptionist")
+            {
+                const receptionist = new Receptionist({name , surname , email , username, password,practition});
+                receptionist.save(function(err, saved)
+                {
+                    if(err)
+                    {
                     res.send(err);
-                    return;
-                }
-                else 
-                {
-                    res.redirect("/login.html");
-                    return;
-                }
-            });
-        }
-        else if(choice == "Receptionist")
-        {
-            const receptionist = new Receptionist({name , surname , email , username, password,practition});
-            receptionist.save(function(err, saved)
-            {
-                if(err)
-                {
-                  res.send(err);
-                }
-                else
-                {
-                    res.redirect("/login.html");
-                    return;
-                }
-            });
-        }
+                    }
+                    else
+                    {
+                        res.redirect("/login.html");
+                        return;
+                    }
+                });
+            }
+        });
+
+        
         return;
     },
 
@@ -845,8 +865,9 @@ module.exports = {
     //Function uses the users email address to find the correct user and change the password of that user
     resetPassord: function (req , res)
     {
-        const {email , password , code} = req.body;
+        var {email , password , code} = req.body;
 
+        password = frontsalt+password+backSalt;
         // console.log("email: "+email +"\npassword: "+password+"\nCode: "+code);
         var updated = false;
         PasswordChanges.findOne({"_id":mongoose.Types.ObjectId(code)}, function (err , record){
@@ -854,45 +875,46 @@ module.exports = {
             {
                 if (email == record.email){
                     // valid details in order to change the password 
-                    Doctor.findOneAndUpdate ({"email":email},{$set:{"password":password}}, function(err, doc){
-                      if(!doc)//doctor not found
-                      {
-                          Receptionist.findOneAndUpdate({"email":email}, {$set:{"password":password}},function(err, rec){
-                            if(!rec){
-                                //invalid user
-                                res.status(401).send("not ok");
-                                return;
-                            }
-                            else
+                    bcrypt.hash(password,10,function(err, p1){   //hash the new password in the back end as well
+                        console.log(p1);
+                        Doctor.findOneAndUpdate ({"email":email},{$set:{"password":p1}}, function(err, doc){
+                            if(!doc)//doctor not found
                             {
+                                Receptionist.findOneAndUpdate({"email":email}, {$set:{"password":p1}},function(err, rec){
+                                  if(!rec){
+                                      //invalid user
+                                      res.status(401).send("not ok");
+                                      return;
+                                  }
+                                  else
+                                  {
+                                      updated = true;
+                                  }
+      
+                                  if(updated)
+                                  {   //remove the record so that someone cant use the same values to change the password again
+                                      PasswordChanges.findOneAndRemove({"_id":mongoose.Types.ObjectId(code)}, function(err){
+                                          res.status(200).send("ok");
+                                          return;
+                                      })
+                                  }
+            
+                                })
+                            }
+                            else{
                                 updated = true;
                             }
-
+      
                             if(updated)
-                            {   //remove the record so that someone cant use the same values to change the password again
+                            {
+                                //remove the record so that someone cant use the same values to change the password again
                                 PasswordChanges.findOneAndRemove({"_id":mongoose.Types.ObjectId(code)}, function(err){
                                     res.status(200).send("ok");
                                     return;
                                 })
-                            }
-      
-                          })
-                      }
-                      else{
-                          updated = true;
-                      }
-
-                      if(updated)
-                      {
-                          //remove the record so that someone cant use the same values to change the password again
-                          PasswordChanges.findOneAndRemove({"_id":mongoose.Types.ObjectId(code)}, function(err){
-                              res.status(200).send("ok");
-                              return;
-                          })
-                      }
-
+                            }   
+                        })
                     })
-
                 }
             }
             else{

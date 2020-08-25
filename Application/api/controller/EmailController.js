@@ -66,6 +66,7 @@ function sendPasswordResetEmail(req){
     var record = new PasswordChanges({email});
     var id = record._id;
 
+    console.log("email sent to: "+email);
     record.save(function (err){
         if (err){
             console.log(err);
