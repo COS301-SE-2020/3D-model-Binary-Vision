@@ -1014,11 +1014,12 @@ function sendsignupConfurmationEmail(practice , user){
             html:''
     }
 
+    //set the emails html properties
     emailOptions.html+='<div id="head" style="background-color: #003366; width: 500px; text-align: center; border-radius: 5px;margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;"><br>';
     emailOptions.html+='<h2 style="color:white;">Enable Email Access</h2><hr style="background-color: white;">';
     emailOptions.html+='<span id="words" style="color: white;"> The email: <p style="color: lightblue;"id="emailAPI" name="emailAPI">xxxxxx@gmail.com</p>USER_NAME_HERE USER_SURNAME_HERE USER_ID_HERE Would like to signup with the system. <br> Would you like to <b style="color: lightgreen;">ACCEPT</b> or <b style="color: red;">REJECT</b> the request?</span>';
-    emailOptions.html+='<br><br><button style="margin: 5px;" class="btn btn-success" type="button" id="acceptSignup" name="acceptSignup" value="Submit" onclick="acceptSignup(ACCEPT_INFO_HERE)" /><b>ACCEPT</b></button>';
-    emailOptions.html+='<button style="margin: 5px;" class="btn btn-danger" type="button" id="rejectSignup" name="rejectSignup" value="Submit" onclick="rejectSignup(REJECT_INFO_HERE)" /><b>REJECT</b></button><br><br></div>';
+    emailOptions.html+='<br><br><button style="margin: 5px;" class="btn btn-success" type="button" id="acceptSignup" name="acceptSignup" value="Submit" href="ACCEPT_HREF" /><b>ACCEPT</b></button>';
+    emailOptions.html+='<button style="margin: 5px;" class="btn btn-danger" type="button" id="rejectSignup" name="rejectSignup" value="Submit" href="REJECT_HREF" /><b>REJECT</b></button><br><br></div>';
 
     //populate the email with the appropriate information 
 
@@ -1028,11 +1029,17 @@ function sendsignupConfurmationEmail(practice , user){
     emailOptions.html = emailOptions.html.replace('USER_ID_HERE',user.id);
 
     //fill the information on the button click actions
-    var userId = user._id;
-    var userName = user.name;
-    var userSurname = user.surname;
-    var practiceName = practice.practice;
+    //do href to a page with the information url encoded to be extracted on that page and take nescasary actions
 
+    var href ='localhost:3000/ValidateSignup.html';
+    //create url encoded hrefs
+    var reject = href+'?action=reject&user='+user._id;
+    var accept = href+'?action=accept&user='+user._id;
+    //place hrefs in appropriate spots
+    emailOptions.html = emailOptions.html.replace('REJECT_HREF',reject);
+    emailOptions.html = emailOptions.html.replace('ACCEPT_HREF',accept);
+
+    //send the email
     transporter.sendMail(emailOptions, function(error, info){
         if(err){
             console.log(err);
