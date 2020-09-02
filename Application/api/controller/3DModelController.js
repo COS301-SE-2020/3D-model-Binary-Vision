@@ -867,8 +867,8 @@ module.exports = {
         return;
       }
 
-      var id = mongoose.Types.ObjectId(req.body._id)
-      var status = mongoose.Types.ObjectId(req.body.status);
+      var id = mongoose.Types.ObjectId(req.body._id);
+      var status = req.body.status;
     
       Booking.findOneAndUpdate({"_id":id}, {$set:{"status":status}} , function(err)
       {

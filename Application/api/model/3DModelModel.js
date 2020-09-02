@@ -95,6 +95,9 @@ var Receptionist = new Schema({
     },
     Note:{
         type:String
+    },
+    active:{
+        type: Boolean , default:false
     }
 });
 
