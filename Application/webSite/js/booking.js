@@ -113,9 +113,11 @@ function populateCalander(data)
     for(var i in data)
     {
         
+        if(data[i].status == "Pending")
+        {
             var dataIndex = parseInt(i) ;
             console.log(dataIndex);
-    
+            
             var date = data[dataIndex].date;
             var time = data[dataIndex].time;
             var searchPageId = date+"&"+time;
@@ -128,9 +130,10 @@ function populateCalander(data)
                 element.setAttribute("onclick","");
                 //call api to get patient based on id, then put the patients full name ehre
                 setName(data[dataIndex].patient,searchPageId);
-               
+            
                 
             }
+        }
         
     }
 

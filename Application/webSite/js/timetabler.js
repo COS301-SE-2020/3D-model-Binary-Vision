@@ -103,23 +103,26 @@ function fillData(data)
 	for(var i in data)
     {
 
-        var dataIndex = parseInt(i) ;
-        console.log(dataIndex);
+       if(data[i].status == "Pending")
+       {
+            var dataIndex = parseInt(i) ;
+            console.log(dataIndex);
 
-        var date = data[dataIndex].date;
-        var time = data[dataIndex].time;
-        var searchPageId = date+"&"+time;
-        var element = document.getElementById(searchPageId);
-        if (element!=null)
-        {
-            //mark as red since a booking already exists
-            element.setAttribute("style","background-color:orange;");
-            element.setAttribute("onclick","");
-            //call api to get patient based on id, then put the patients full name ehre
-            setName(data[dataIndex].patient,searchPageId);
-           
+            var date = data[dataIndex].date;
+            var time = data[dataIndex].time;
+            var searchPageId = date+"&"+time;
+            var element = document.getElementById(searchPageId);
+            if (element!=null)
+            {
+                //mark as red since a booking already exists
+                element.setAttribute("style","background-color:orange;");
+                element.setAttribute("onclick","");
+                //call api to get patient based on id, then put the patients full name ehre
+                setName(data[dataIndex].patient,searchPageId);
             
-        }
+
+            }
+       }
     }
 }
 

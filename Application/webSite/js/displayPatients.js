@@ -133,32 +133,35 @@ function populatePatients()
         for(var i in data)
         {
             console.log(data[i]);
-            //fetch the patients information
-            var get = fetch("/singlePatient",{
-              method:"POST",
-              headers:{'Content-Type': 'application/json; charset=UTF-8'},
-              body: JSON.stringify({"patient":data[i].patient})
-            });
-
-            get.then(g => g.json().then(patientInfo=>
+            if(data[i].status == "Pending")
             {
-
-                if(g.status ==200)
+                //fetch the patients information
+                var get = fetch("/singlePatient",{
+                    method:"POST",
+                    headers:{'Content-Type': 'application/json; charset=UTF-8'},
+                    body: JSON.stringify({"patient":data[i].patient})
+                });
+              
+                get.then(g => g.json().then(patientInfo=>
                 {
-                    console.log(patientInfo);
-                    var timeIndex = parseInt(i)+count-data.length;
-                    console.log("time index: "+timeIndex);
-                    replacement="<tr><td>"+patientInfo.name+"</td><td>"+count+"</td><td>"+patientInfo.idNumber+"</td><td>"+data[timeIndex].time+" : "+data[timeIndex].date+"</td><td>"+patientInfo.cellnumber+"</td><td><a class='btn btn-success'  type='button' href='makeBooking.html?patient="+data[i].patient+"&doctor="+selectedDoctor+"' onclick='postponeBooking(\""+data[i]._id+"\")'>POSTPONE</a><button class='btn btn-danger'  type='button' onclick='cancelBooking(\""+data[i]._id+"\")'>CANCEL</button></td></tr>";
-                    // count++;
-                    count++;
-                    document.getElementById("patientTable").innerHTML+=replacement;
-
-                }
-                else
-                {
-                  //error occured getting patient information for a booking
-                }
-            }));
+            
+                    if(g.status ==200)
+                    {
+                        console.log(patientInfo);
+                        var timeIndex = parseInt(i)+count-data.length;
+                        console.log("time index: "+timeIndex);
+                        replacement="<tr><td>"+patientInfo.name+"</td><td>"+count+"</td><td>"+patientInfo.idNumber+"</td><td>"+data[timeIndex].time+" : "+data[timeIndex].date+"</td><td>"+patientInfo.cellnumber+"</td><td><a class='btn btn-success'  type='button' href='makeBooking.html?patient="+data[i].patient+"&doctor="+selectedDoctor+"' onclick='postponeBooking(\""+data[i]._id+"\")'>POSTPONE</a><button class='btn btn-danger'  type='button' onclick='cancelBooking(\""+data[i]._id+"\")'>CANCEL</button></td></tr>";
+                        // count++;
+                        count++;
+                        document.getElementById("patientTable").innerHTML+=replacement;
+                  
+                    }
+                    else
+                    {
+                      //error occured getting patient information for a booking
+                    }
+                }));
+            }
 
         }
     }));
@@ -169,10 +172,10 @@ function populatePatients()
 // Removes a booking from the database
 function cancelBooking(bookingID)
 {
-    var response = fetch("/removeBooking",{
+    var response = fetch("/updateBooking",{
         method:"POST",
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
-        body: JSON.stringify({"_id":bookingID})
+        body: JSON.stringify({"_id":bookingID,"status":"Cancelled"})
     });
 
     response.then(res => 
@@ -199,9 +202,9 @@ function cancelBooking(bookingID)
 function postponeBooking(bookingID)
 {
     //cancel the booking here
-    var response = fetch("/removeBooking",{
+    var response = fetch("/updateBooking",{
         method:"POST",
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
-        body: JSON.stringify({"_id":bookingID})
+        body: JSON.stringify({"_id":bookingID,"status":"Postponed"})
     });
 }

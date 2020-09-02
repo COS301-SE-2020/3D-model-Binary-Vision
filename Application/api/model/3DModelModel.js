@@ -144,6 +144,10 @@ var Booking = new Schema({
     },
     reason:{
         type:String
+    },
+    status:{
+        type:String,
+        default:'Pending'
     }
 })
 
