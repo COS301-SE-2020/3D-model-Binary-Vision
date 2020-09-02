@@ -1074,7 +1074,7 @@ function sendsignupConfurmationEmail(practice , user){
 
     emailOptions.html = emailOptions.html.replace('xxxxxx@gmail.com',user.email); //show the receptionist the email that wants to sign up
     emailOptions.html = emailOptions.html.replace('USER_NAME_HERE',user.name); //show the receptionist the email that wants to sign up
-    emailOptions.html = emailOptions.html.replace('USER_SValidateSignupURNAME_HERE',user.surname);
+    emailOptions.html = emailOptions.html.replace('USER_SURNAME_HERE',user.surname);
     emailOptions.html = emailOptions.html.replace('USER_ID_HERE',user.id);
 
     //fill the information on the a click actions
