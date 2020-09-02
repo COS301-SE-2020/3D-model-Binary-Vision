@@ -60,8 +60,11 @@ function setTodaysBookings()
         for(var i in data)
         {
             console.log(data[i]);
-            var replacement = '<li class= "notify" id="'+data[i]._id+'">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'
-            document.getElementById("notifyContainer").innerHTML += replacement;
+            if(data[i].status == "Pending")
+            {
+                var replacement = '<li class= "notify" id="'+data[i]._id+'">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'
+                document.getElementById("notifyContainer").innerHTML += replacement;
+            }
         }
     }));
 }
@@ -171,10 +174,10 @@ function checkTime(i)
 // Completes a Booking and removes it from the databse
 function completeBooking(bookingID)
 {
-        var response = fetch("/removeBooking",{
+        var response = fetch("/updateBooking",{
             method:"POST",
             headers:{'Content-Type': 'application/json; charset=UTF-8'},
-            body: JSON.stringify({"_id":bookingID})
+            body: JSON.stringify({"_id":bookingID,"status":"Completed"})
         });
 
         response.then(res =>

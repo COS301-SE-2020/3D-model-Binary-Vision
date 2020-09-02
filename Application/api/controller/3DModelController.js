@@ -867,10 +867,9 @@ module.exports = {
       }
 
       var id = mongoose.Types.ObjectId(req.body._id)
-      var date = mongoose.Types.ObjectId(req.body.date);
-      var time = mongoose.Types.ObjectId(req.body.time);
+      var status = mongoose.Types.ObjectId(req.body.status);
     
-      Booking.updateOne({"_id":id}, {$set:{"date":date,"time":time}} , function(err)
+      Booking.findOneAndUpdate({"_id":id}, {$set:{"status":status}} , function(err)
       {
           if (err)
           {

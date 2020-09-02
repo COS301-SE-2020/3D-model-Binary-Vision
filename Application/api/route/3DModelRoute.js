@@ -123,7 +123,7 @@ module.exports = function (app)
     app.route('/removeBooking')
         .post(Model.removeBooking);
 
-    app.route('/postponeBooking')
+    app.route('/updateBooking')
         .post(Model.updateBooking);
     
     app.route('/getSingleBooking')
