@@ -48,11 +48,11 @@ module.exports = {
 
         password = frontsalt+password+backSalt;
     
-        Doctor.findOne({ username ,"active":true}, function (err, doctor) 
+        Doctor.findOne({ username , "active":true}, function (err, doctor) 
         {
             if (err) 
             {
-                res.send(err);
+                console.log("error");
                 return;
             }
             if (doctor) 
@@ -98,7 +98,6 @@ module.exports = {
             }
         });
         
-        res.status(401).send("user not active or unauithirized");
         return;
     },
 
