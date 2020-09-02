@@ -48,7 +48,7 @@ module.exports = {
 
         password = frontsalt+password+backSalt;
     
-        Doctor.findOne({ username }, function (err, doctor) 
+        Doctor.findOne({ username ,"active":true}, function (err, doctor) 
         {
             if (err) 
             {
@@ -73,7 +73,7 @@ module.exports = {
             //there was no doctor and we will now check if it is a receptionist
         });
 
-        Receptionist.findOne({username}, function(err, receptionist){
+        Receptionist.findOne({username,"active":true}, function(err, receptionist){
             if (err)
             {
               res.send(err);
@@ -90,13 +90,15 @@ module.exports = {
                    }
                    else{
                        res.send(error);
+                       return;
                    }
                     
                 })
 
             }
         });
-     
+        
+        res.status(401).send("user not active or unauithirized");
         return;
     },
 
@@ -1000,11 +1002,58 @@ module.exports = {
         });
 
         return;
-    }
+    },
+
+    //=======================================================================================
+    //Function developed by: Jacobus Janse van Rensburg 
+    // function to accept / reject a user signing up
+    activateUser:function ( req, res)
+    {
+        const {user , choice } = req.body;
+
+        console.log(user + "\t "+ choice);
+        var setter;
+        if(choice =="accept")
+        {
+            setter = true;
+        }
+        else setter =false;
+
+        if (setter){
+            //acticate the user
+            Doctor.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)}, {$set:{"active":setter}}, function (err, doc){
+                //if doctor not look for a receptionist
+             if(!doc) {  
+                 //find and update receptionist
+                 Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)},{$set:{"active":setter}}, function(err, rec){
+
+                    });
+                }
+            });
+        }
+        else{
+            Doctor.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err,doc)
+            {
+               if (!doc){
+                   Receptionist.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err, rec)
+                   {
+                      
+                   });
+               }
+            });
+
+
+        }
+
+        res.status(200).send("ok");
+        return;
+    },
 
 };
 
-
+//============================================================================================
+// Function developed by: Jacobus Janse van Rensburg 
+// Function sends a email to head receptionist to confirm / reject a user signing up
 function sendsignupConfurmationEmail(practice , user){
 
     var emailOptions={
@@ -1018,23 +1067,23 @@ function sendsignupConfurmationEmail(practice , user){
     emailOptions.html+='<div id="head" style="background-color: #003366; width: 500px; text-align: center; border-radius: 5px;margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;"><br>';
     emailOptions.html+='<h2 style="color:white;">Enable Email Access</h2><hr style="background-color: white;">';
     emailOptions.html+='<span id="words" style="color: white;"> The email: <p style="color: lightblue;"id="emailAPI" name="emailAPI">xxxxxx@gmail.com</p>USER_NAME_HERE USER_SURNAME_HERE USER_ID_HERE Would like to signup with the system. <br> Would you like to <b style="color: lightgreen;">ACCEPT</b> or <b style="color: red;">REJECT</b> the request?</span>';
-    emailOptions.html+='<br><br><button style="margin: 5px;" class="btn btn-success" type="button" id="acceptSignup" name="acceptSignup" value="Submit" href="ACCEPT_HREF" /><b>ACCEPT</b></button>';
-    emailOptions.html+='<button style="margin: 5px;" class="btn btn-danger" type="button" id="rejectSignup" name="rejectSignup" value="Submit" href="REJECT_HREF" /><b>REJECT</b></button><br><br></div>';
+    emailOptions.html+='<br><br><a style="margin: 5px; color:white;" class="btn btn-success"  id="acceptSignup" name="acceptSignup"  href="ACCEPT_HREF" /><b>ACCEPT</b></a>';
+    emailOptions.html+='<a style="margin: 5px; color: white;" class="btn btn-danger" id="rejectSignup" name="rejectSignup" href="REJECT_HREF"><b>REJECT</b></a><br><br></div>';
 
     //populate the email with the appropriate information 
 
     emailOptions.html = emailOptions.html.replace('xxxxxx@gmail.com',user.email); //show the receptionist the email that wants to sign up
     emailOptions.html = emailOptions.html.replace('USER_NAME_HERE',user.name); //show the receptionist the email that wants to sign up
-    emailOptions.html = emailOptions.html.replace('USER_SURNAME_HERE',user.surname);
+    emailOptions.html = emailOptions.html.replace('USER_SValidateSignupURNAME_HERE',user.surname);
     emailOptions.html = emailOptions.html.replace('USER_ID_HERE',user.id);
 
-    //fill the information on the button click actions
+    //fill the information on the a click actions
     //do href to a page with the information url encoded to be extracted on that page and take nescasary actions
 
-    var href ='localhost:3000/ValidateSignup.html';
+    var href ="localhost:3000/ValidateSignup.html";
     //create url encoded hrefs
-    var reject = href+'?action=reject&user='+user._id;
-    var accept = href+'?action=accept&user='+user._id;
+    var reject = href+"?action=reject&user="+user._id;
+    var accept = href+"?action=accept&user="+user._id;
     //place hrefs in appropriate spots
     emailOptions.html = emailOptions.html.replace('REJECT_HREF',reject);
     emailOptions.html = emailOptions.html.replace('ACCEPT_HREF',accept);
@@ -1048,6 +1097,4 @@ function sendsignupConfurmationEmail(practice , user){
             console.log(info);
         }
     });
-
-
 }

@@ -131,4 +131,7 @@ module.exports = function (app)
 
     app.route('/getSingleDoctor')
         .post(Model.getSingleDoctor);
+
+    app.route('/activateUser')
+        .post(Model.activateUser);
 }

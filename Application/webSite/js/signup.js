@@ -205,7 +205,8 @@ async function stop(){
 // adding a user if its allowed
 function addUser(name , surname, email ,username,choice,practice , securityCode){
     
-    if(usedParamaters==false && choice!=""){
+    console.log(choice);
+    if(usedParamaters!=true && choice!=""){
         //make the api call with the hashed password to sign up a new user 
 
         var frontSalt ="COS301";
