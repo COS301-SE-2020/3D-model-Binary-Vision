@@ -135,4 +135,6 @@ module.exports = function (app)
 
     app.route('/activateUser')
         .post(Model.activateUser);
+
+    app.route('/uploadImages').post (UploadController.uploadImages);
 }
