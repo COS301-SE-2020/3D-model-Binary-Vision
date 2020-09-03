@@ -11,6 +11,7 @@ const fs = require("fs");
 var Model = require('../controller/3DModelController');
 var Emailer = require('../controller/EmailController');
 var Receptionist = require('../controller/ReceptionistController');
+var UploadController = require('../controller/UploadController');
 
 module.exports = function (app)
 {
