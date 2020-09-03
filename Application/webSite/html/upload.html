@@ -1,7 +1,7 @@
 <html>
   <body>
-    <form  enctype="multipart/form-data">
-      <input type="file" multiple/>
+    <form method="POST" action="/uploadImages" enctype="multipart/form-data">
+      <input type="file" name="images[]" multiple /><br>
       <button type="submit">Submit</button>
     </form>
   </body>
