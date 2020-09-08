@@ -12,7 +12,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../js/apiCalls.js"></script>
-        <script type="text/javascript" src="../js/Consultation.js"></script>
+        <script type="text/javascript" src="../js/records.js"></script>
 	</head>
 	<body>
 
@@ -66,8 +66,8 @@
             </tbody>
         </table>
 
-        <div class="containerRight">
-            <div id="rightSideBody" style="width: 240px;">
+        <div class="containerRight" style="right: 0;">
+            <div id="rightSideBody" style="width: 0;">
                 <div id="containInfoRight" style="position: fixed;">
                     <br><br>
                         DATE: <hr> <p id="date1" style="color:black; font-weight: bold;">xx/xx/xxxx</p>  
@@ -77,10 +77,15 @@
                     
                         <br><br><br>
                         RENDER<hr>
-                        <a class="btn btn-danger" href="../renderPage/render.html" id = "renderpage">Render</a>
+                        <a class="btn btn-success" href="../renderPage/render.html" id = "renderpage">Render</a>
+
+                        HIDE<hr>
+                        <button class="btn btn-danger" onclick=hideRecord()>Hide Info</button>
+                        
                         
                     </div>
                 <br>
+            </div>
         </div>
 
 	</body>
