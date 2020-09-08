@@ -14,5 +14,6 @@ function showRecord()
 }
 
 function hideRecord(){
-    
+    var rightBody = document.getElementById("rightSideBody");
+    rightBody.style.width = "0px";
 }
