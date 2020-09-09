@@ -19,7 +19,7 @@
 	font-family: Arial;
 	position: absolute;
 	left: 0px;
-	top: 110px;
+	top: 60px;
 	color: white;
 	font-size: 50px;
 	text-shadow: 0 0 8px #888888, 0 0 9px #222222;
@@ -544,6 +544,7 @@ input {
 
 #bookingBody {
 	transition: 0.8s;
+	margin-right: 40px;
 }
 
 .bookingBodyInceaseWidth {
@@ -554,6 +555,7 @@ input {
 	background-color: #003366;
 	position: fixed;
 	top: 270px;
+	width: 240px;
 	padding: 20px;
 
 }
@@ -642,7 +644,7 @@ input {
 	background-color: white;
 	box-shadow: 1px 0px 15px 0px black;
 	transition: 1s;
-	width: 200px;
+	width: 240px;
 	bottom: 0;
 
 }
