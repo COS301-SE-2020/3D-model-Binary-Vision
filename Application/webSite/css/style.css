@@ -3,11 +3,37 @@
 	color: white;
 }
 
+#logoContainer{
+	opacity: 0.8;
+	position: relative;
+	background-color:#888888; 
+	padding: 9px;
+	margin-top: 15px;
+	border-radius: 360px;
+	display: inline-block;
+
+
+}
+
+#logoWords{
+	font-family: Biome;
+	position: absolute;
+	left: 0px;
+	top: 110px;
+	color: black;
+	font-size: 50px;
+	text-shadow: 0 0 8px #888888, 0 0 9px #222222;
+
+}
 .renderButton {
 	position: relative;
 	text-align: center;
 }
 
+.section{
+	padding-right: 10%;
+	padding-left: 10%;
+}
 
 .outputModule{
 	position: relative;
@@ -855,23 +881,16 @@ input[type="file"] {
 
 #containerLogin {
 	box-shadow: 1px 0px 15px 0px black;
-
-	display: grid;
 	grid-template-columns: 1fr 1fr;
-
 	animation: opacityForm 2s;
 	position: relative;
 	text-align: center;
-
 	background-color: #003366;
-	margin-left: 20%;
-	margin-right: 20%;
-
 	border-radius: 10px;
 }
 
 #formSignup {
-	text-align: center;
+containerLogin	text-align: center;
 	background-color: #343a40;
 	position: relative;
 	width: 300px;
