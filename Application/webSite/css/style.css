@@ -16,11 +16,11 @@
 }
 
 #logoWords{
-	font-family: Biome;
+	font-family: Arial;
 	position: absolute;
 	left: 0px;
 	top: 110px;
-	color: black;
+	color: blue;
 	font-size: 50px;
 	text-shadow: 0 0 8px #888888, 0 0 9px #222222;
 
