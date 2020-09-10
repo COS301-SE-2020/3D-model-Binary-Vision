@@ -137,4 +137,8 @@ module.exports = function (app)
         .post(Model.activateUser);
 
     app.route('/uploadImages').post (UploadController.uploadImages);
+
+    app.route('/qrCode').get(Model.generatePatientSignupQRCode);
+
+    app.route('/consultation/:id/stl').get(Model.getSTLFile);
 }

@@ -2,16 +2,20 @@
 //controller for all the uploads and retrievals as well as the integrating of the c++ program 
 
 const formidable = require("formidable");
+const { createModel } = require('mongoose-gridfs');
 const mongoose = require("mongoose");
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const { spawn } = require('child_process');
+
 
 module.exports = {
     
-
+//================================================================================================
+// Function developed by: Jacobus Janse van Rensburg
+// Function used to upload multiple images , store them in a temp directory/file and start the c++ program
     uploadImages: function(req, res){
-
 
         const form = formidable({ multiples: true });
 
@@ -36,17 +40,46 @@ module.exports = {
                 
                 //temp store file 
                 var dir=""+req.user+"-"+Date.now()
-                console.log(dir);
                 fs.mkdirSync(dir);
-                console.log(images);
                 for (let image of images["images[]"] ) {
-                    console.log("path: "+image.path+"\tname: "+image.name)
                     fs.copyFileSync(image.path, path.join(dir, image.name));
                 }
 
-                //connect c++ program here and send file name when done c++ deletes file 
+                //connect c++ program here and send file name when done c++ deletes file
+                //using spawn as a chid-process 
+                const ls = spawn('./smfAlgorithm/Code/main ', [dir]);
 
-                // res.send(images);
+
+                ls.on('close', code=>{
+                    if (code ==0 )
+                    {
+                        //every thing is fine 
+
+                        //check that stl exists and store it in the db
+                        //write to the db 
+                        //read from disk with directory
+
+                        var stlFile = fs.createReadStream(dir+"/stlFile.stl");
+                        const options = ({ filename: req.body.consID , contentType: 'model/stl' });
+
+                        var attachment = createModel();
+                        attachment.write(options , stlFile , function(err, saved){
+
+                            if( err)
+                            {
+                                res.status(500).send("error saving stl file: "+ err);
+                            }
+                            else{
+                                res.status(200);
+                            }
+                        });
+
+                    }
+                    else {
+                        res.sendStatus(500);
+                    }
+                })
+
                 res.status(200);
                 return;
             }

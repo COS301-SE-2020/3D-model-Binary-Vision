@@ -7,12 +7,13 @@
 
 "use strict";
 //set up the database first
+
 var fs = require("fs");
 const bcrypt = require('bcrypt');
-
 const { createModel } = require('mongoose-gridfs');
 var formidable = require("formidable");
 var mongoose = require("mongoose");
+var qrCode = require('qrcode');
 
 var Doctor = require("../model/3DModelModel.js").Doctor;
 var Patient = require("../model/3DModelModel.js").Patient;
@@ -115,6 +116,8 @@ module.exports = {
     //======================================================================================
     //function developed by: Jacobus Janse van Rensburg
     // allows the registration of a new practice
+    //modified by: Jacobus 
+    //reason: Create a qr code for the practice to add patients as well
     practiceRegistration: function(req, res){
         const {practice , securityCode, headReceptionist} = req.body;
 
@@ -636,6 +639,37 @@ module.exports = {
             });
         });
     },
+
+    //
+
+    getSTLFile: function (req,res){
+        if(!req.user){
+
+        }
+        else {
+
+            var consultation = req.params.id;
+
+            Consultation.findOne({"_id":mongoose.Types.ObjectId(consultation)}, function(err , cons){
+                if (err){
+
+                }
+                else if (cons) {
+                    var attachment = createModel();
+                    const stlReturn  = attachment.read({"_id":mongoose.Types.ObjectId(cons.STL)});
+
+                    res.contentType('model/stl');
+                    stlReturn.pipe(res);
+                    return;
+                }
+                else{
+                    return res.sendStatus(404);
+                }
+
+            })
+
+        }
+    },
   
     //======================================================================================
     //Function developed by: Steven Visser
@@ -1046,6 +1080,50 @@ module.exports = {
         res.status(200).send("ok");
         return;
     },
+
+    //=======================================================================================
+    //function developed by:Jacobus Janse van Rensburg
+    //function returns a qr code for patients to scan when new to a practice
+    generatePatientSignupQRCode: function(req , res){
+        if(!req.user)
+        {
+            return res.status(401);
+        }
+
+        else{
+            
+            Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)},function(err, doctor){
+                if (err){
+
+                }
+                else if(doctor){
+                    var url = "flapjacks.goodx.co.za/addPatient?practice="+doctor.practice;
+                    res.contentType('png');
+                    qrCode.toFileStream(res , url);                    //return the qr code
+                }
+                else{
+                    Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)},function(err, recep){
+                        if(err){
+
+                        }
+                        else if(recep){
+                            var url = "flapjacks.goodx.co.za/addPatient?practice="+recep.practice;
+                            res.contentType('png');
+                            qrCode.toFileStream(res , url);
+                        }
+                        else{
+                            //no user found with id 
+                            res.sendStatus(404);
+                        }
+                    })
+                }
+            })
+                //create the qr code 
+           
+
+        }
+
+    }
 
 };
 
