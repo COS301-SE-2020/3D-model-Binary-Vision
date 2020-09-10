@@ -174,6 +174,7 @@ function checkTime(i)
 // Completes a Booking and removes it from the databse
 function completeBooking(bookingID)
 {
+
         var response = fetch("/updateBooking",{
             method:"POST",
             headers:{'Content-Type': 'application/json; charset=UTF-8'},

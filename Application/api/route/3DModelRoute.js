@@ -12,6 +12,7 @@ var Model = require('../controller/3DModelController');
 var Emailer = require('../controller/EmailController');
 var Receptionist = require('../controller/ReceptionistController');
 var UploadController = require('../controller/UploadController');
+var Logs = require('../controller/LogController');
 
 module.exports = function (app)
 {
@@ -137,4 +138,6 @@ module.exports = function (app)
         .post(Model.activateUser);
 
     app.route('/uploadImages').post (UploadController.uploadImages);
+
+    app.route('/createLog').post(Logs.createLog);
 }

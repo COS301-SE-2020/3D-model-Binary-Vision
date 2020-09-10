@@ -134,7 +134,13 @@ module.exports = {
                     res.send(err);
                     return;
                 }
-                else{
+                else
+                {
+                    var response = fetch("/createLog",{
+                        method:"POST",
+                        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+                        body: JSON.stringify({"_practice":practice})
+                    });
                     res.redirect('/signup.html');
                     return;
                 }
