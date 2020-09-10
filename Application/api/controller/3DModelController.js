@@ -115,8 +115,8 @@ module.exports = {
 
     //======================================================================================
     //function developed by: Jacobus Janse van Rensburg
-    // allows the registration of a new practice
-    //modified by: Jacobus 
+    //Allows the registration of a new practice
+    //modified by: Steven Visser 
     //reason: Create a qr code for the practice to add patients as well
     practiceRegistration: function(req, res){
         const {practice , securityCode, headReceptionist} = req.body;
@@ -137,7 +137,27 @@ module.exports = {
                     res.send(err);
                     return;
                 }
-                else{
+                else
+                {
+
+                    var today = new Date();
+                    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+                    var hours = today.getHours();
+                    var minutes = today.getMinutes();
+                    var seconds = today.getSeconds();
+                    var time = hours + ":" + minutes + ":" + seconds ;
+                    var line = date + "@" + time + "@Practice: " + practice + " Registered!";
+                    var fname = "./webSite/Logs/"+practice+".txt";
+                    fs.writeFile(fname,line,function(err){
+                        if(err)
+                        {
+                            console.log(err);
+                        }
+                        else
+                        {
+                            console.log("Practice Log File successfully created!");
+                        }
+                    });
                     res.redirect('/signup.html');
                     return;
                 }
@@ -1122,6 +1142,28 @@ module.exports = {
            
 
         }
+
+    },
+
+    //======================================================================================
+    //Function Developed By: Steven Visser
+    //Updates the logfile for a specific practice
+    updateLog: function(req, res)
+    {
+        var practice = req.body.practice;
+        var line = req.body.line + "\n";
+        var fname = "./webSite/Logs/"+practice+".txt";
+        fs.appendFile(fname,line,function(err)
+        {
+            if(err)
+            {
+                console.log(err);
+            }
+            else
+            {
+                console.log("Log successfully updated!");
+            }
+        });
 
     }
 
