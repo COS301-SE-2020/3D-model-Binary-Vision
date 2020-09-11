@@ -244,56 +244,72 @@ module.exports ={
 
             Booking.find({"date":date}, function(err , bookings){ //using callback function to enforce sequential execution
 
-                orderedBookings = orderBookings(bookings);  //order the bookings into a 2D array based on the doctors id
+                if(bookins){
+                    orderedBookings = orderBookings(bookings);  //order the bookings into a 2D array based on the doctors id
 
-                //loop through the doctors 
-                for(var i =0 ; i < orderedBookings.length ; i ++){
-                    var possible = []; //array to hold bookings that might be a possible match for what we need for specific doctor
+                    //loop through the doctors 
+                    for(var i =0 ; i < orderedBookings.length ; i ++){
+                        var possible = []; //array to hold bookings that might be a possible match for what we need for specific doctor
 
-                    //loop through the operating hours of to look for matches
-                    for (var j = 0 ; j < operationTimes.length; i ++){
-                        //loop trough the bookings that that doctor has
-                        for(var k =0 ; k < orderedBookings[i].length ; k++){
-                            if(orderedBookings[i][k].time == operationTimes[k])
-                            {
-                                continue; //ignore this time and continue with the next time 
-                            }
-                            else if (isOverlapping(orderedBookings[i][k], operationTimes[k],duration, operationTimes)){
-                                //check if the times overlap
-                                continue; //if the isOverlapping function returns true we move on to the next available time slot
-                            }
-                            var allowed = true;
+                        //loop through the operating hours of to look for matches
+                        for (var j = 0 ; j < operationTimes.length; i ++){
+                            //loop trough the bookings that that doctor has
+                            for(var k =0 ; k < orderedBookings[i].length ; k++){
+                                if(orderedBookings[i][k].time == operationTimes[j])
+                                {
+                                    continue; //ignore this time and continue with the next time 
+                                }
+                                else if (isOverlapping(orderedBookings[i][k], operationTimes[j],duration, operationTimes)){
+                                    //check if the times overlap
+                                    continue; //if the isOverlapping function returns true we move on to the next available time slot
+                                }
+                                var allowed = true;
 
-                            //test agaisnt the possible set that has been derived so long
-                            for(var l in possible){
-                                //test for a overlap with this 
-                                if((isOverlapping(possible[l], operationTimes[k] , duration , operationTimes)) || possible[i].start == operationTimes[k]){
-                                    //there is an overlap with a possible option 
-                                    allowed = false;
-                                    //remove the possible option
-                                    for (var m = l ; m < possible.length;m++)
-                                    {
-                                        var temp = possible[m+1]
-                                        possible[m]= temp;
+                                //test agaisnt the possible set that has been derived so long
+                                for(var l in possible){
+                                    //test for a overlap with this 
+                                    if((isOverlapping(possible[l], operationTimes[k] , duration , operationTimes[j])) || possible[l].start == operationTimes[j]){
+                                        //there is an overlap with a possible option 
+                                        allowed = false;
+                                        //remove the possible option
+                                        for (var m = l ; m < possible.length;m++)
+                                        {
+                                            var temp = possible[m+1]
+                                            possible[m]= temp;
+                                        }
+                                        possible.pop(); //remove the last element in the array
                                     }
-                                    possible.pop(); //remove the last element in the array
+                                }
+                                if(allowed){
+                                    //we can add this information as a possible
+                                    var record = JSON.stringify({"doctor":orderedBookings[i].doctor,"start":operationTimes[j],"end":(operationTimes[k]+(parseInt(duration)/15))});
+                                    possible.push(record);
+                                    j = j +(parseInt(duration)/15);   //look for spaced out possible booking spaces.
                                 }
                             }
-                            if(allowed){
-                                //we can add this information as a possible
-                                var record = JSON.stringify({"doctor":orderedBookings[i].doctor,"start":operationTimes[k],"end":(operationTimes[k]+(parseInt(duration)/15))});
-                                possible.push(record);
+
+                        }
+                        //add the left over possibles to the options
+                        if(possible){
+                            for (var n in possible)
+                            {
+                                options.push(possible[n]);
                             }
                         }
-
                     }
-                    //add the left over possibles to the options
-                    if(possible){
-                        for (var n in possible)
-                        {
-                            options.push(possible[n]);
+                }else{
+                    //there was no bookings 
+                    //find a doctor and use doctor to make an option
+                    var rec = Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)})
+                    Doctor.findOne({"practition":rec.practition}, function(err , doc){
+                        if(err || !doc){
+                            res.status(400).send("no doctor found for practice");
+                            return;
                         }
-                    }
+                        else{
+                            options.push(JSON.stringify({"doctor":doc._id, "start":"12:00", "end":(opperationTimes[12]+(parseInt(duration)/15))}));
+                        }
+                    });
                 }
             }); 
             
@@ -312,6 +328,14 @@ module.exports ={
         }
 
         //return the options back to the client 
+        //concat all the options to be returned 
+        var returnObject ;
+        for (var i in options)
+        {
+            returnObject = returnObject.concat(options[i]);
+        }
+
+        res.status(200).send(returnObject);
     },
 }
 
