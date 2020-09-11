@@ -1145,8 +1145,6 @@ module.exports = {
 
     },
 
-<<<<<<< HEAD
-=======
     //======================================================================================
     //Function Developed By: Steven Visser
     //Updates the logfile for a specific practice
@@ -1168,7 +1166,6 @@ module.exports = {
         });
 
     }
->>>>>>> ffd416cd436af0a48f6be40ebf9bd9e0be13fd7e
 
 };
 
