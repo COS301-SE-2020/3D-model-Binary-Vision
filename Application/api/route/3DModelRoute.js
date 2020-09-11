@@ -147,4 +147,6 @@ module.exports = function (app)
 
     app.route('/updateLog')
         .post(Model.updateLog);
+    
+    app.route('/fuzzyLogic').post(Receptionist.fuzzyLogicBooking);
 }

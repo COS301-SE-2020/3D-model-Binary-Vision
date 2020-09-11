@@ -401,7 +401,7 @@ function makeBooking()
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
             },
-            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason})
+            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason,"endTime":selectedTime})
         });
 
         response.then(res=> 
@@ -580,7 +580,7 @@ function findAvailableBookings(){
     console.log(reason+"\t"+time);
 
     //API CALL TO GET THE POSSIBLE BOOKING SLOTS
-    var response = fetch("" , {
+    var response = fetch("/fuzzyLogic" , {
         method:"POST",
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
         body: JSON.stringify({"reason":reason, "duration":time})
@@ -588,6 +588,10 @@ function findAvailableBookings(){
 
     response.then(res=> res.json().then(data => {
         //process the returned data from the server
+        for( var i in data)
+        {
+            console.log(data[i]);
+        }
     }));
 
 }

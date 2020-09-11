@@ -138,7 +138,8 @@ var Booking = new Schema({
         required:true
     },
     endTime:{
-        type:String
+        type:String,
+        default: this.time
     },
     patient:{
         type:mongoose.Types.ObjectId,
