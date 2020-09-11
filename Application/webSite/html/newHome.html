@@ -18,7 +18,7 @@
       <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
       <div id="mydivheader">Notes (Drag) </div>
       <textarea id="receptionistNotes"></textarea>
-      <div class="noteButtonsContainer">  
+      <div class="noteButtonsContainer">
         <input type="button" class="btn btn-primary" style="margin:5px;" value="Save Notes" onclick="saveNotes()">
         <button class="btn btn-danger" style="margin:5px;" onclick="showNote()">Hide Note</button>
       </div>
@@ -61,16 +61,16 @@
     <div id="sideBar" >
       <div id="containInfo">
         <div class="profile">
-          <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="100px" height="100px">
+          <img id="profilePic" src="../css/images/res.jpg" alt="Profile Picture" width="200px" height="200px">
         </div>
         <br>
         <p id="containInfo">Welcome back <b id="receptionistName"> asdasdasX</b></p>
         <hr>
-        <p id="containInfo"> You are now logged in </p>
-        <p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>
+        <p id="containInfo" style="color: lightgreen;"> You are now logged in </p>
+        <!--<p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>-->
         <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
         <!--<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>-->
-        
+
         <button id="displayNote" class="btn btn-primary" style="transform: translateY(55px);" onclick="showNote()">Show Note</button>
 
         <br><br><br><hr>
@@ -84,73 +84,37 @@
     </div>
   </div>
   <div id="conatinerHomeOuter">
-  <div class="conatinerHome" id="conatinerHome">
-    <div class="centerContainer">
-      <a id="selectDoc" class="btn btn-lg px-3 btn-outline-dark align-middle doctor-btn" onclick="showDoctorForm();" role="button">
-        <ul class="list-inline doctor-list">
-          <li class="list-inline-item abv-txt">
-            <h5>Search Patient</h5>
-          </li>
-        </ul>
-      </a>
+  <div class="conatinerHomeMain" id="conatinerHome">
 
-      <a id="selectPatient" class="btn btn-lg px-3 btn-outline-dark align-middle doctor-btn" onclick="showPatientForm();" role="button">
-        <ul class="list-inline doctor-list">
-          <li class="list-inline-item abv-txt">
-            <h5>Add Patient</h5>
-          </li>
-        </ul>
-      </a>
-    </div>
     <!--main body form for doctor-->
     <!-- form modifications made by Jacobus Janse van Rensburg -->
-            <div id="doctorFormSignup">
-              <br>
-              <h2> Search Patient</h2><br>
-              <div class="change">
-                <input type="checkbox" id="searchByName" name="searchBy" onclick="searchByInputDisplay()" style="transform: translateX(-13px);">
-                <label style="color:white; transform: translateX(-13px);" for="searchByName"> Search By Name </label><br>
 
-                <input type="checkbox" id="searchBySurname" name="searchBy" onclick="searchByInputDisplay()" style="transform: translateX(-3px);">
-                <label style="color:white; transform: translateX(-3px);" for="searchBySurname"> Search By Surname </label><br>
 
-                <input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()" style="transform: translateX(0px);">
-                <label style="color:white; transform: translateX(0px);" for="searchByPatientID"> Search By Patient ID </label> <br><br>
-              </div>
-              <!-- <form > -->
-              
-                <div id="inputBoxes"></div>
-
-                <input type="submit" class="btn btn-primary" value="Search" onclick="receptionistSearchPatient()"><br><br>
-
-              <!-- </form> -->
-            </div>
-              
-              <!-- <input class="btn" type="submit" id="buttonSee"  
+              <!-- <input class="btn" type="submit" id="buttonSee"
               name="submitDetails" value="Search" /><br><br> -->
-            
+
 
 
           <!--main body form for patient-->
 
-            <form action="/addPatient" method="POST" id="patientFormSignup" style="display: none;" id="form">
+            <form action="/addPatient" method="POST" id="patientFormSignup">
               <br>
-              <h2> Patient</h2><br>
+              <h2>Add Patient</h2><hr>
 
               <label for="name" style="color: white;">Patients name</label><br>
-              <input class="box" type="text" name="name" id="name" placeholder="Name"  required />
+              <input class="form-control"  type="text" name="name" id="name" placeholder="Name"  required />
               <br><br>
-              
+
               <label for="surname" style="color: white;">Patients surname</label><br>
-              <input id="surname" name="surname" placeholder="Surname" required/>
+              <input class="form-control" id="surname" name="surname" placeholder="Surname" required/>
               <br><br>
-              
+
               <label for="idNumber" style="color: white;">Patients ID number</label><br>
-              <input id="idNumber" name="idNumber" placeholder="ID Number" required/>
+              <input class="form-control" id="idNumber" name="idNumber" placeholder="ID Number" required/>
               <br><br>
 
               <label for="gender" style="color: white;">Gender</label><br>
-              <select  id = "gender" name = "gender">        
+              <select  class="form-control" id = "gender" name = "gender">
                 <option value = "Male">Male</option>
                 <option value = "Female">Female</option>
                 <option value = "Other">Other</option>
@@ -158,19 +122,24 @@
               <br><br>
 
               <label for="email" style="color: white;">Patients Email</label><br>
-              <input class="box" type="email" name="email" id="email" placeholder="Email" required />
+              <input class="form-control" class="box" type="email" name="email" id="email" placeholder="Email" required />
               <br><br>
-              
+
               <label for="cell" style="color: white;">Patients cell phone number</label><br>
-              <input id="cell" name="cellnumber" placeholder="Cellphone Number" required/>
+              <input class="form-control" id="cell" name="cellnumber" placeholder="Cellphone Number" required/>
               <br><br>
-              
+
               <input class="btn btn-primary" type="submit"  name="submitDetails" value="Submit" />
               <br><br>
 
             </form>
         </div>
-      </div>
+        <div id="qrCode">        
+          <p style='color: black;'>Patient Scan here to fill in first time visit form</p>
+          <img src="/qrCode"></img><br>
+          <a href="/qrCode" download="3D_Binary_Model_qrCode" >download</a>
+        </div>
+      </div><br><br>
     </div>
     <script type="text/javascript" src="../js/registration.js"></script>
   </body>

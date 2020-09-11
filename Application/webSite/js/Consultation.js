@@ -1,12 +1,12 @@
-//Created by:
-//This file contains functions for
+//Created by: Marcus Werren
+//This file contains functions for the consultations page
 
 var currentTime = "";
 
 //=============================================================================================
-//Function Developed by:
-//
-function rotateArrowSideBody(arrowID) 
+//Function Developed by: Marcus Werren
+//This function rotates the arrow for the side bar on this page
+function rotateArrowConsultation(arrowID) 
 {
   
   	let arrowElement = document.getElementById(arrowID);
@@ -28,8 +28,8 @@ function rotateArrowSideBody(arrowID)
 var showSideBar = true;
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+// This function moves the side bar off screen and moves the body infromation of the page to fill the page
 function moveSideBar()
 {
   	var bodyA = document.getElementById("sideBody");
@@ -52,8 +52,8 @@ function moveSideBar()
 }
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+// This function rotates the arrows of the tabs "consultation info" and "patient info"
 function rotateArrow(arrowID, currentDivID) 
 {
 	let arrowElement = document.getElementById(arrowID);
@@ -89,8 +89,8 @@ function rotateArrow(arrowID, currentDivID)
 }
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+//This funtion hides the information about the cunsultation info
 function hideConInfo()
 {
 	let timeRemainding = document.getElementById("conInfoTime");
@@ -126,8 +126,8 @@ function hideConInfo()
 }
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+//This function hides the patients infromation tab
 function hidePatInfo() 
 {
  	let displayMessage = document.getElementById("patientDisplayMessage");
@@ -165,7 +165,7 @@ function hidePatInfo()
 
 //=============================================================================================
 //Function Developed by:
-//
+// da hell is happening here , why do we need this ->
 function saveDoctorNote() 
 {
 	let docNote = document.getElementById("doctorsNotes");
@@ -182,8 +182,8 @@ function saveDoctorNote()
 }
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+//This function is used to get the current time for the page
 function startTime() 
 {
 	var today = new Date();
@@ -197,8 +197,8 @@ function startTime()
 }
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+//This fucntion is used to update the time so that it updates in real time
 function checkTime(i) 
 {
 	if (i < 10) 
@@ -209,8 +209,8 @@ function checkTime(i)
 }
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+//This function calculates the remaining time for the consultation
 function getRemainingTime(h, m, s) 
 {
 	let startTime = document.getElementById("startTime").innerHTML;
@@ -267,4 +267,115 @@ function getRemainingTime(h, m, s)
 		h = checkTime(h);
 		return h + ":" + m + ":" + s;
 	}
+}
+
+//=============================================================================================
+//Function Developed by: Jacobus Janse van Rensburg
+// function called when loading page to populate all the doctors information
+function init ()
+{
+	startTime();
+	pupulateDoctorInformation();
+	populateBookingInformation();
+}
+
+//=============================================================================================
+//Function Developed by: Jacobus Janse van Rensburg
+//function used to get and set the information of the doctor onto this page
+function pupulateDoctorInformation()
+{
+	var response = fetch("/getDoctor",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'}
+    })
+
+    response.then( res=> res.json().then( data => 
+    {
+        // console.log("Doctors surname: "+data.surname);
+        // set the surname field 
+        document.getElementById("doctorName").innerHTML=data.surname+" ("+data.name+")";
+    }));
+}
+
+//=============================================================================================
+//Function Developed by: Jacobus Janse van Rensburg
+//Function used to get the booking id from the url and populating the requied fields using that information
+function populateBookingInformation(){
+	//first we need to parse the url to find the booking id that was used
+
+	var url = window.location.href;
+	console.log(url);
+	var parts = url.split("=");
+	//parts[1] holds the booking information
+
+	document.getElementById("renderpage").setAttribute("href","../renderPage/render.html?bookingid="+parts[1]);
+
+	//get the booking details 
+	var response = fetch("/getSingleBooking",{
+		method:"POST",
+		headers:{'Content-Type': 'application/json; charset=UTF-8'},
+		body: JSON.stringify({"booking":parts[1]})
+	});
+
+	response.then(res => res.json().then(data => {
+
+		console.log(res.status +" "+data.patient);
+		
+		//set different times
+		document.querySelector("#startTime").innerHTML=data.time;
+		var time = data.time;
+		var mins = time.split(":");
+		var newMins = parseInt(mins[1])+15;
+		console.log(newMins);
+		var endTime;
+		if(newMins >=60)
+		{
+			newMins = 00;
+			newHour = mins[0]++;
+			endTime = newHour+":"+newMins;
+		}
+		else{
+			endTime= mins[0]+":"+newMins;
+		}
+		document.querySelector("#endTime").innerHTML = endTime;
+		document.querySelector("#time2").innerHTML = data.time;
+		
+		
+		//set the reason for the booking 
+
+		//set the patient information 
+		popuatePatientInfo(data.patient);
+	}));
+
+}
+
+//=============================================================================================
+//Function Developed by: Jacobus Janse van Rensburg
+// function to get the required patients information and populate the patient information
+function popuatePatientInfo(id){
+
+	var response = fetch ("/singlePatient",{
+		method:"POST",
+		headers:{'Content-Type':'application/json; charset=utf-8'},
+		body: JSON.stringify({"patient":id})
+	});
+
+	response.then(res=> res.json().then(data=> {
+
+		if(res.status != 200){
+			//do some fix here 
+		}
+		else{
+			//set the patients attributes
+			document.querySelector("#patientName").innerHTML ="Name: "+data.name;
+			document.querySelector("#patientSurname").innerHTML ="Surname: "+data.surname;
+			document.querySelector("#patientID").innerHTML ="ID: "+data.surname;
+			document.querySelector("#patientGender").innerHTML="Gender: "+data.gender;
+			document.querySelector("#patientEmail").innerHTML="Email: "+data.email;
+			document.querySelector("#patientContactNo").innerHTML="Contact Number: "+data.cellnumber; 
+
+			document.querySelector("#patientqq").innerHTML = data.surname+" ("+data.name+")";
+		}
+
+	}));
 }

@@ -3,11 +3,37 @@
 	color: white;
 }
 
+#logoContainer{
+	opacity: 0.8;
+	position: relative;
+ 
+	padding: 9px;
+	margin-top: 15px;
+
+	display: inline-block;
+
+
+}
+
+#logoWords{
+	font-family: Arial;
+	position: absolute;
+	left: 0px;
+	top: 60px;
+	color: white;
+	font-size: 50px;
+	text-shadow: 0 0 8px #888888, 0 0 9px #222222;
+
+}
 .renderButton {
 	position: relative;
 	text-align: center;
 }
 
+.section{
+	padding-right: 10%;
+	padding-left: 10%;
+}
 
 .outputModule{
 	position: relative;
@@ -62,6 +88,11 @@
 	transition: 0.8s;
 }
 
+#signupInputFildContrainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
 .conatinerHome{
 	position: relative;
 	margin-left: auto;
@@ -81,6 +112,34 @@
 	box-shadow: 1px 0px 15px 0px black;
 }
 
+.conatinerHomeMain{
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	display: block;
+	background-color: #003366;
+	text-align: center;
+	margin-left: 140px;
+	margin-right: 140px;
+	margin-top:70px;
+	min-width: 240px;
+	border-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	transition: 0.8s;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+.form-control{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 350px;
+	min-width: 200px;
+
+}
+
 .moveContainerHome {
 	transform: translateX(-60px);
 }
@@ -90,16 +149,7 @@
 	margin: 0 auto;
 }
 
-body{
-	background-color: white;
-	background-image: url("../css/images/doodle(OO).jpg");
-	background-attachment: fixed;
-	background-repeat: repeat;
-	width: 100%;
-	height: 100%;
-	z-index: 3;
 
-}
 
 .consultaionBody {
 	position: relative;
@@ -189,6 +239,27 @@ body{
 	transform: translateX(-120px);
 }
 
+#recordButtonsContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+#liveVideoStream {
+	transition: 1s;
+}
+
+.liveVideoStreamScale {
+	transform: translateY(-190px) scale(0.3, 0.3);
+}
+
+#capturedVideoStream {
+	transition: 1s;
+}
+
+.capturedVideoStreamScale {
+	transform: translateY(-370px);
+}
+
 #saveDoctorNote:hover {
 	background-color: white;
 	color: #003366;
@@ -207,6 +278,35 @@ body{
 	text-align: center;
 	margin: 0 auto;
 	transform: translateX(0px);
+}
+
+#outputModule1 {
+	background-color: lightgray;
+	padding: 10px;
+	margin-left: 200px;
+	margin-right: 200px;
+	border-radius: 20px;
+}
+
+#renderContainer {
+	padding: 10px 20px 20px 20px;
+	background-color: #003366;
+	margin-left: 50px;
+	margin-right: 50px;
+	border-radius: 10px;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#renderHeader {
+	background-color: #d9534f;
+	color: black;
+	height: 60px;
+	margin-top: -10px;
+	margin-left: -20px;
+	margin-right: -20px;
+	padding-top: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 }
 
 .renderCenter {
@@ -289,7 +389,6 @@ body{
 	position: relative;
 	text-align: left;
 	margin-left: 10px;
-	transform: translateY(100px);
 }
 
 .patientInfoInner {
@@ -300,7 +399,6 @@ body{
 	min-width: 150px;
 	text-align: left;
 	padding-left: 10px;
-	transform: translateY(100px);
 }
 
 .patientInfoInnerMessage {
@@ -308,16 +406,15 @@ body{
 	position: relative;
 	text-align: left;
 	margin-left: 10px;
-	transform: translateY(100px);
 }
 
 
 /*elements*/
 body{
-	background-color: white;
-	background-image: url("../css/images/doodle(OO).jpg");
+	background-color: #333333;
+	/*background-image: url("../css/images/doodle(OO).jpg");
 	background-size:auto;
-	background-attachment: scroll;
+	background-attachment: scroll;*/
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -357,7 +454,10 @@ p {
 	color: white;
 }
 
-
+span{
+	color: white;
+	text-decoration: bold;
+}
 
 hr{
 	background-color: lightgray;
@@ -432,13 +532,32 @@ input {
 }
 
 #bookingBackground{
-	background-color: lightblue;
-	box-shadow: 1px 0px 15px 0px black;
+	display: grid;
+	margin-right: 220px;
+	margin-left: 260px;
 }
 
 #centerBookingOverlay{
 	text-align: center;
+	padding-top: 50px;
+}
+
+#bookingBody {
+	transition: 0.8s;
+	margin-right: 40px;
+}
+
+.bookingBodyInceaseWidth {
+	transform: translateX(-120px);
+}
+
+#bookingInfo{
+	background-color: #003366;
+	position: fixed;
+	top: 270px;
+	width: 240px;
 	padding: 20px;
+
 }
 
 #notifyContainer{
@@ -460,8 +579,16 @@ input {
     position: absolute;
 }
 
+#buttonSchedule:active{
+	opacity: 0.7;
+
+}
+
+
+
 .notify{
 	width: 50%;
+	min-width: 300px;
 	height: 60px;
 	position: relative;
 	background-color: lightgray;
@@ -479,7 +606,7 @@ input {
 	-ms-transition: all 0.3s ease-in-out;
 }
 
-#notify:hover{
+.notify:hover{
 	background-color: lightgreen;
 	box-shadow: 0px 0px 5px 0px black;
 	color: black;
@@ -490,7 +617,7 @@ input {
 	-ms-transform: translate(5em,0);
 }
 
-#notify:visited {
+#notify:active {
 	background-color: lightgreen;
 }
 
@@ -499,6 +626,7 @@ input {
 	position: absolute;
 	line-height: 50px;
 	background-color: white;
+	box-shadow: 1px 0px 15px 0px lightgray;
 }
 
 #headerTitle{
@@ -516,7 +644,7 @@ input {
 	background-color: white;
 	box-shadow: 1px 0px 15px 0px black;
 	transition: 1s;
-	width: 200px;
+	width: 240px;
 	bottom: 0;
 
 }
@@ -535,14 +663,34 @@ input {
 #VideoRecorder {
 	display: none;
 	background-color: white;
-	border-radius: 10px;
+	border-radius: px;
 	box-shadow: 1px 0px 15px 0px black;
 	padding: 20px;
-	border-style: solid;
-	border-color: #003366;
-	border-width: 5px;
 	margin-left: 3%;
 	margin-right: 4%;
+}
+
+#STLUploader {
+	display: none;
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 1px 0px 15px 0px black;
+	padding: 20px;
+	margin-left: 3%;
+	margin-right: 4%;
+}
+
+#videoRecoderHeaderSTL{
+	background-color: #FFC107;
+	color: white;
+	margin: 0 -20px;
+	margin-top: -30px;
+	padding: 10px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	text-align: center;
+	height: 55px;
+	transform: translateY(10px);
 }
 
 #videoRecoderHeader {
@@ -562,7 +710,7 @@ input {
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
-	position: relative; 
+	position: relative;
 }
 
 input[type="file"] {
@@ -580,7 +728,7 @@ input[type="file"] {
   background-color: white;
   text-align: center;
   left: 0;
-  top:500px;
+  top:590px;
   box-shadow: 1px 0px 15px 0px black;
 }
 
@@ -668,7 +816,7 @@ input[type="file"] {
 	max-width: 240px;
 	min-width: 240px;
 	min-height: 100px;
-	max-height: 330px;
+	max-height: 430px;
 	/*z-index:1;
 	display: inline-flex;*/
 	padding: 10px;
@@ -693,6 +841,7 @@ input[type="file"] {
 	margin-top: 5px;
 	text-align:center;
 	color: white;
+	padding-top: 10px;
 }
 
 #para {
@@ -703,14 +852,38 @@ input[type="file"] {
 	cursor: pointer;
 }
 
+.custom-control-input:hover{
+	color: lightblue;
+	text-decoration: underline;
+}
+
 #container {
 	animation: opacityForm 2s;
 	position: relative;
 	text-align: center;
+
+	margin-top: 20px;
+	padding: 20px;
+	padding-top: 30px;
+	box-shadow: 1px 0px 15px 0px black;
+	background-color: #003366;
+	margin-left: 10%;
+	margin-right: 10%;
+	border-radius: 10px;
+}
+
+#containerLogin {
+	box-shadow: 1px 0px 15px 0px black;
+	grid-template-columns: 1fr 1fr;
+	animation: opacityForm 2s;
+	position: relative;
+	text-align: center;
+	background-color: #003366;
+	border-radius: 10px;
 }
 
 #formSignup {
-	text-align: center;
+containerLogin	text-align: center;
 	background-color: #343a40;
 	position: relative;
 	width: 300px;

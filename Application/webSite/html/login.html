@@ -9,10 +9,14 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<!-- hashing library used below -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+		<script type="text/javascript" src="../js/login.js"></script>
     </head>
   <body>
-		<nav class="navbar navbar-expand-lg  navbar-dark">
+  		<nav class="navbar navbar-expand-lg  navbar-dark">
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
@@ -30,21 +34,35 @@
 		    </ul>
 		  </div>
 		</nav>
-		<br><br><br>
     <!-- <form method="POST" action="/login" enctype="multipart/form-data"> -->
-		<div id="container">
-			<img src="../css/images/45RS.gif" alt="tooth" style="position: fixed; margin-left: 40%; width:  300px;">
-			<form id="form" method="POST" action="/login" style="border-top-right-radius:10px; border-top-left-radius: 10px; padding: 20px; margin-left: auto; margin-right: auto; position: relative; text-align: center;">
-			  <br>
-			  <h2> Login </h2><br>
-			    <input name="username" placeholder="Username" /><br><br>
-			    <input name="password" type="password" placeholder="Password" /><br><br>
-			    <button class="btn btn-primary" type="submit">Submit</button><br>
-			    <hr>
-			    <a style="font-size: 12px;" href="forgotPassword.html"> Forgot Password?</a><br>
-			    <p style="font-size: 12px;">Don't have account?<a style="font-size: 12px;" href="signup.html"> Register Here</a></p>
-			</form>
 
-	</div>
+	    <div id="miBody">
+		    <div id="header">
+		      <p id="headerTitle">LOGIN PAGE</p>
+		    </div>
+		</div>
+		<div class="section">
+		<br><br><br><br>
+			
+			<div id="containerLogin">
+				<div id="logoContainer">
+				<img src="../css/images/tooth.png" alt="tooth" style="position: relative; margin-left: 0px; margin-right: 3px; margin-top: 0px; margin-bottom: 3px; width:  302px;">
+				<span id="logoWords">3D BINARY SYSTEM</span>
+			</div>
+				<form  style="border-top-right-radius:10px; border-top-left-radius: 10px; padding: 20px;  position: relative; text-align: center;">
+				  <br>
+				  <h2> Login </h2>
+				  	<div id="errorResponse" style="color: red; font-style: italic;"></div><br>
+						<label for="username" style="color: white;">Enter Username </label><br>
+				    <input class="form-control" name="username" placeholder="Username" id="username" /><br>
+						<label for="password" style="color: white;">Enter Password </label><br>
+				    <input class="form-control"  name="password" type="password" placeholder="Password" id="password" /><br>
+				    <button class="btn btn-primary" type="button" onclick="login()">Submit</button><br>
+				    <hr>
+				    <a style="font-size: 12px;" href="forgotPassword.html"> Forgot Password?</a><br>
+				    <p style="font-size: 12px;">Don't have account?<a style="font-size: 12px;" href="signup.html"> Register Here</a></p>
+				</form>
+			</div>
+		</div>
   </body>
 </html>

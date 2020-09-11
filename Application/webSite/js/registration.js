@@ -1,4 +1,4 @@
-//Created by:
+//Created by: Rani Arraf
 //this file is used for: 
 
 var i = 1;
@@ -238,6 +238,9 @@ function moveRightBar()
     }
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
+// Rotates the arrows for the side bar
 function rotateArrow(arrowID) 
 {  
     let arrowElement = document.getElementById(arrowID);
@@ -258,8 +261,8 @@ function rotateArrow(arrowID)
 
 var showSideBar = true;
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+// Moves the left side bar off screen
 function moveSideBar()
 {
     var bodyA = document.getElementById("sideBody");
@@ -283,8 +286,8 @@ function moveSideBar()
 }
 
 //=============================================================================================
-//Function Developed by:
-//
+//Function Developed by: Marcus Werren
+// This hides of displays the notes for the receptionists home page
 function showNote() 
 {
     let note = document.getElementById("mydiv");

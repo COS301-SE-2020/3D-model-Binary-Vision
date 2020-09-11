@@ -19,7 +19,7 @@ function createTable()
 {
 	var tableDiv = document.getElementById("dayTable");
 
-	var days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+	var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     var times=[
         "09:00","09:15","09:30","09:45",
         "10:00","10:15","10:30","10:45",
@@ -43,26 +43,27 @@ function createTable()
     //set the headings now
     var count =0;
     var dd = currentDay;
-    
     while (count<days.length)
     {
-        if(dd > days.length )
+        if(dd == days.length )
         {
-            dd =1;
+            dd =0;
         }
-        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd-1]+','+(currentDate+(count))+'</td>';
+        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd]+','+(currentDate+(count))+'</td>';
         count++;
         dd++;
     }
 
     replacement += '</thead>'
     replacement+='<tbody>';
+   
     for(var i = 0 ; i < times.length; i ++)
     {
+       
         replacement+='<tr><td id="time">'+times[i]+'</td>';
         for (var j =0 ; j < days.length; j ++)
         {
-            replacement+='<td class="selectableTimeSlot" id="'+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'" onclick="selectTime(\''+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'\')"></td>';
+            replacement+='<td class="selectableTimeSlot" id="'+(currentDate+j)+'/'+(currentMonth+1)+'/'+currentYear+'&'+times[i]+'" ></td>';
             replacement+='</td>';
         }
         replacement+='</tr>'
@@ -95,23 +96,47 @@ function populateTable()
 
 //================================================================================================
 // Function developed by:
+// Modified by: Steven Visser
 function fillData(data)
 {
+    var count=0;
 	for(var i in data)
     {
-        var date = data[i].date;
-        var time = data[i].time;
-        var searchPageId = date+"&"+time;
 
-        var element = document.getElementById(searchPageId);
-        if (element!=null)
-        {
-            //mark as red since a booking already exists
-            element.setAttribute("style","background-color:orange;");
-            element.setAttribute("onclick","");
-            element.innerHTML=data[i].reason;
-        }
+       if(data[i].status == "Pending")
+       {
+            var dataIndex = parseInt(i) ;
+            console.log(dataIndex);
+
+            var date = data[dataIndex].date;
+            var time = data[dataIndex].time;
+            var searchPageId = date+"&"+time;
+            var element = document.getElementById(searchPageId);
+            if (element!=null)
+            {
+                //mark as red since a booking already exists
+                element.setAttribute("style","background-color:orange;");
+                element.setAttribute("onclick","");
+                //call api to get patient based on id, then put the patients full name ehre
+                setName(data[dataIndex].patient,searchPageId);
+            
+
+            }
+       }
     }
+}
+
+function setName(patient, searchPageId){
+    var response = fetch("/singlePatient",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body:JSON.stringify({"patient":patient})
+    });
+    response.then(res => res.json().then(pat => 
+    {
+        console.log(pat.name);
+        document.getElementById(searchPageId).innerHTML=pat.name + " " + pat.surname;
+    }));
 }
 
 //Function developed by: Steven Visser

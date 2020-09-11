@@ -17,42 +17,69 @@ function displayDoctorOverlay()
         method:"POST",
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
-        }    
+        }
     });
 
-    response.then(res => res.json().then(data=> 
+    response.then(res => res.json().then(data=>
     {
         for(var i in data)
         {
             console.log(data[i].name+"\n "+data[i].surname+" \nid:"+data[i]._id+" \nusername: "+data[i].username+" \npassword: "+data[i].password +"\n\n");
         }
         //createDoctorslist with the data
+
         createDoctorsList(data);
     }));
 }
 
 // ==========================================================================================
 // Function developed by: Jacobus Janse Van Rensburg
+// Style development by: Rani Arraf
 // creates a list of all the doctors that the receptionist is allowed to schedule bookings for
 function createDoctorsList(data)
 {
+    var indOverlay = document.getElementById("individual");
+    indOverlay.style.display = "none";
     var overlay = document.getElementById('currentOverlay');
-    var replacement;
+    var overlayTable = document.getElementById('currentOverlayTable');
+    overlayTable.style.display = "none";
+    overlay.style.display = "block";
+    overlay.style.color= "white";
+    overlay.style.textAlign = "center";
+    overlay.style.borderRadius = "5px";
+    var replacement = "";
+    var inc = 1;
     for(var i in data)
     {
-        replacement+='<li>Dr.'+data[i].surname+' ('+data[i].name+') </li><a onclick="selectDoctor(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\')">select</a> <br>';
+      if(data != null){
+        //replacement += '<div style="display: block; float: left; background-color:#003366; color: white; width: 300px;position: relative;border-radius: 5px;box-shadow: 0px 0px 5px 0px black; margin-right: 10px; margin-left: 10px; margin-top: 20px;"><br><h2>' + data[i].name + ' ' + data[i].surname + ' ' + inc + ':</h2><hr><li> Name: '+data[i].name+'</li><li> Surname: '+data[i].surname+'</li><li>ID: '+data[i].idNumber+'</li><li>Cell: '+data[i].cellnumber+'</li><br><button class="btn btn-warning" onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</button><br><br></div>';
+
+        replacement += "<div style='display: block; float: left; background-color:#003366; color: white; width: 300px;position: relative;border-radius: 5px;box-shadow: 0px 0px 5px 0px black; margin-right: 10px; margin-left: 10px; margin-top: 20px;'>";
+        replacement +='<br><h2>Dr. ' + data[i].surname + '</h2><hr><li>Dr.'+data[i].surname+' ('+data[i].name+') </li><br><button class="btn btn-primary" onclick="selectDoctor(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\')">Select</button> <br><br>';
+        replacement += "</div>";
+      }
     }
-    overlay.innerHTML=replacement;
+    if(data != "undefined"){
+      overlay.innerHTML=replacement;
+    }
 }
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
-// 
+//Modified by: Steven Visser
+// Style development by: Rani Arraf
+//populates the booking table with all existing bookings & creates the schedule
 function displayTimeTableOverlay()
 {
+    var indOverlay = document.getElementById("individual");
+    indOverlay.style.display = "none";
+    var overlayTable = document.getElementById('currentOverlayTable');
+    overlayTable.style.display = "block";
+    overlayTable.style.boxShadow = "1px 0px 15px 0px black";
     var overlay = document.getElementById('currentOverlay');
+    overlay.style.display = "none";
 
-     createScheduler(overlay);
+     createScheduler(overlayTable);
     //still need to populate the table with bookings
 
     if(selectedDoctor!=null)
@@ -62,14 +89,14 @@ function displayTimeTableOverlay()
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
             } ,
-            body: JSON.stringify({"doctor":selectedDoctor}) 
+            body: JSON.stringify({"doctor":selectedDoctor})
         });
 
         response.then(res=> res.json().then(data=>
         {
             for(var i in data)
             {
-                console.log("Bookins already made for dr: \n"+data[i]);
+                console.log("Bookings already made for Dr: \n"+data[i]);
             }
             populateCalander(data);
 
@@ -79,25 +106,50 @@ function displayTimeTableOverlay()
 }
 // ==========================================================================================
 // Function developed by: Jacobus Janse van Rensburg
-// populate the visible timetable with the bookings that has already been created
+// populate the block timetable with the bookings that has already been created
 function populateCalander(data)
 {
+
     for(var i in data)
     {
-        var date = data[i].date;
-        var time = data[i].time;
-        var searchPageId = date+"&"+time;
-
-        var element = document.getElementById(searchPageId);
-        if (element!=null)
+        
+        if(data[i].status == "Pending")
         {
-            //mark as red since a booking already exists
-            element.setAttribute("style","background-color:red;");
-            element.setAttribute("onclick","");
-            element.innerHTML=data[i].name+" "+data[i].surname;
+            var dataIndex = parseInt(i) ;
+            console.log(dataIndex);
+            
+            var date = data[dataIndex].date;
+            var time = data[dataIndex].time;
+            var searchPageId = date+"&"+time;
+            console.log(searchPageId);
+            var element = document.getElementById(searchPageId);
+            if (element!=null)
+            {
+                //mark as red since a booking already exists
+                element.setAttribute("style","background-color:red;");
+                element.setAttribute("onclick","");
+                //call api to get patient based on id, then put the patients full name ehre
+                setName(data[dataIndex].patient,searchPageId);
+            
+                
+            }
         }
+        
     }
 
+}
+
+function setName(patient, searchPageId){
+    var response = fetch("/singlePatient",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body:JSON.stringify({"patient":patient})
+    });
+    response.then(res => res.json().then(pat => 
+    {
+        console.log(pat.name);
+        document.getElementById(searchPageId).innerHTML=pat.name + " " + pat.surname;
+    }));
 }
 
 // ===========================================================================================
@@ -106,7 +158,7 @@ function populateCalander(data)
 // Dynamically produces a schedule for the week for a doctor
 function createScheduler(overlay)
 {
-    var days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+    var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     var times = [
                "09:00","09:15","09:30","09:45",
                "10:00","10:15","10:30","10:45",
@@ -129,14 +181,15 @@ function createScheduler(overlay)
     //set the headings now
     var count =0;
     var dd = currentDay;
-    
+
     while (count<days.length)
     {
-        if(dd > days.length )
+        if(dd == days.length )
         {
-            dd =1;
+
+            dd =0;
         }
-        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd-1]+','+(currentDate+(count))+'</td>';
+        replacement+='<td style="background-color: rgb(0, 51, 102); color: white;">'+days[dd]+','+(currentDate+(count))+'</td>';
         count++;
         dd++;
     }
@@ -148,9 +201,7 @@ function createScheduler(overlay)
         replacement+='<tr><td id="time">'+times[i]+'</td>';
         for (var j =0 ; j < days.length; j ++)
         {
-            replacement += '<td class="selectableTimeSlot" id="'+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'" onclick="selectTime(\''+(currentDate+j)+'/'+currentMonth+'/'+currentYear+'&'+times[i]+'\')"></td>';
-
-            replacement += '</td>';
+            replacement += '<td class="selectableTimeSlot" id="'+(currentDate+j)+'/'+(currentMonth+1)+'/'+currentYear+'&'+times[i]+'" onclick="selectTime(\''+(currentDate+j)+'/'+(currentMonth+1)+'/'+currentYear+'&'+times[i]+'\')"></td>';
         }
         replacement += '</tr>'
     }
@@ -161,6 +212,7 @@ function createScheduler(overlay)
 
 // ===========================================================================================
 // Function developed by: Jacobus Janse van Rensburg
+// Style development by: Rani Arraf
 //function that colours the selected time slot and sets the values to make a booking
 var oldTimeSlotID;
 function selectTime(timeslot)
@@ -172,7 +224,7 @@ function selectTime(timeslot)
     }
 
     oldTimeSlotID= timeslot;
-
+    console.log(timeslot);
     element=document.getElementById(timeslot);
     element.setAttribute("style","background-color:green;");
 
@@ -192,17 +244,34 @@ function displayPatientSearchOverlay()
 
 // ===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
+// Style development by: Rani Arraf
 //
 function createPatientSearchOverlay()
 {
+    var indOverlay = document.getElementById("individual");
+    indOverlay.style.display = "none";
+    var overlayTable = document.getElementById('currentOverlayTable');
+    overlayTable.style.display = "none";
+    
+
     var overlay = document.getElementById("currentOverlay");
-    overlay.innerHTML='<div style="background-color:#003366;"><div id="doctorFormSignup"><br>';
-    overlay.innerHTML+='<h2> Search Patient</h2><br>';
-    overlay.innerHTML+='<div class="change"><input type="checkbox" id="searchByName" name="searchBy" onclick="searchByInputDisplay()"><label style="color:white;" for="searchByName"> Search By Name </label><br>';
-    overlay.innerHTML+='<input type="checkbox" id="searchBySurname" name="searchBy" onclick="searchByInputDisplay()"><label style="color:white;" for="searchBySurname"> Search By Surname </label><br>';
-    overlay.innerHTML+='<input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()"><label style="color:white;" for="searchByPatientID"> Search By Patient ID </label> <br><br></div>';
-    overlay.innerHTML+='<div id="inputBoxes"></div><input style="margin-bottom: 20px;" class="btn btn-warning" type="submit" class="btn" value="Search" onclick="createPatientsListForBooking()"></div></div>';
- 
+    overlay.style.position = "relative";
+    overlay.style.display = "inline-block";
+    overlay.style.backgroundColor= "#003366";
+    overlay.style.width= "300px";
+    overlay.style.color= "white";
+    overlay.style.textAlign = "center";
+    overlay.style.borderRadius = "5px";
+    overlay.style.boxShadow = "1px 0px 15px 0px black";
+
+
+    overlay.innerHTML ='<div style=""><div id="doctorFormSignup"><br>';
+    overlay.innerHTML+='<h2> Search Patient</h2><hr><br>';
+    overlay.innerHTML+='<div class="change" class="custom-control"><input type="checkbox"  id="searchByName" name="searchBy" onclick="searchByInputDisplay()"><label class="form-check-label" style="color:white; padding: 5px; left: 0px;" for="searchByName">  Search By Name </label><br>';
+    overlay.innerHTML+='<input type="checkbox" id="searchBySurname" name="searchBy" onclick="searchByInputDisplay()"><label class="form-check-label" style="color:white; padding: 5px; left: 0px;" for="searchBySurname">  Search By Surname </label><br>';
+    overlay.innerHTML+='<input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()"><label class="form-check-label" style="color:white; padding: 5px; left: 0px;" for="searchByPatientID">  Search By Patient ID </label> <br><br></div>';
+    overlay.innerHTML+='<div id="inputBoxes" ></div><input style="margin-bottom: 20px;" class="btn btn-danger" type="submit" class="btn" value="Search" onclick="createPatientsListForBooking()"></div></div>';
+
 }
 
 // ===========================================================================================
@@ -218,15 +287,15 @@ function createPatientsListForBooking()
     if(nameElement!=null)
     {
         name=nameElement.value;
-    } 
+    }
     if(surnameElement!=null)
     {
         surname= surnameElement.value;
-    } 
+    }
     if(idNumberElement!=null)
     {
         idNumber=idNumberElement.value;
-    } 
+    }
     var response = fetch("/searchPatient",{
         method:"POST",
         headers:{'Content-Type':'application/json; charset=UTF-8'},
@@ -245,12 +314,20 @@ function createPatientsListForBooking()
 // fillse the patients overlay list that is selectable
 function fillPatientSearchedList(data)
 {
-    var overlay = document.getElementById("currentOverlay");
-    var replacement;
+    var overlay = document.getElementById("individual");
+    var cOverlay = document.getElementById("currentOverlay");
+    var replacement = "";
+    var overlayTable = document.getElementById('currentOverlayTable');
+    overlayTable.style.display = "none";
+    cOverlay.style.display = "none";
+    overlay.style.display = "block";
+    var inc = 1;
 
     for (var i in data)
     {
-        replacement += '<li>'+data[i].name+'</li><li>'+data[i].surname+'</li><li>'+data[i].idNumber+'</li><li>'+data[i].cell+'</li><a onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</a><br>';
+        
+        replacement += '<div style="display: block; float: left; background-color:#003366; color: white; width: 300px;position: relative;border-radius: 5px;box-shadow: 0px 0px 5px 0px black; margin-right: 10px; margin-left: 10px; margin-top: 20px;"><br><h2>' + data[i].name + ' ' + data[i].surname + ' ' + inc + ':</h2><hr><li> Name: '+data[i].name+'</li><li> Surname: '+data[i].surname+'</li><li>ID: '+data[i].idNumber+'</li><li>Cell: '+data[i].cellnumber+'</li><br><button class="btn btn-warning" onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</button><br><br></div>';
+        inc++;
     }
     overlay.innerHTML = replacement;
 }
@@ -263,8 +340,9 @@ function selectDoctor(drID,name, surname)
     selectedDoctor = drID;
     console.log("Selected doctor with id: "+selectedDoctor);
 
-    document.getElementById("doctorInfoDisplay").innerHTML="("+name+") "+surname;
-    document.getElementById("currentOverlay").innerHTML="";
+    document.getElementById("doctorInfoDisplay").innerHTML = "("+name+") "+surname;
+    document.getElementById("doctorInfoDisplay").style.color = "lightgreen";
+    document.getElementById("currentOverlay").innerHTML = "";
 
 }
 
@@ -276,9 +354,13 @@ function selectTimeSlot(date, time)
     selectedDate = date;
     selectedTime = time;
     console.log("Selected Time: "+ selectedTime+"\t selected date: "+selectedDate);
-    
+
     document.getElementById("timeInfoDisplay").innerHTML = time;
+    document.getElementById("timeInfoDisplay").style.color = "lightgreen";
+
     document.getElementById("dateInfoDisplay").innerHTML = date;
+    document.getElementById("dateInfoDisplay").style.color = "lightgreen";
+
 }
 
 // ===========================================================================================
@@ -288,6 +370,8 @@ function selectPatient(patientID, name , surname, idNumber)
 {
     selectedPatient = patientID;
     document.getElementById("patientInfoDisplay").innerHTML = "("+idNumber+") " + name  +" " + surname;
+    document.getElementById("patientInfoDisplay").style.color = "lightgreen";
+
     document.getElementById("currentOverlay").innerHTML = "";
 }
 
@@ -308,6 +392,7 @@ function makeBooking()
     console.log("Making booking with details:\nDoctor: "+selectedDoctor+"\nPatient: "+selectedPatient+"\nDate: "+selectedDate+"\nTime: "+selectedTime);
     if (selectedDoctor != null && selectedPatient!= null && selectedDate != null && selectedTime!=null)
     {
+
         //booking can be created
         var reason = document.getElementById("reasonForBooking").value;
 
@@ -316,24 +401,193 @@ function makeBooking()
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
             },
-            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason})   
+            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason})
         });
 
-        response.then(res=> res.json().then(data=>
+        response.then(res=> 
         {
+            console.log(res.url+ " statusCode: "+res.status);
             if(res.status == 200)
             {
-                //everything is fine
-                //make a redirect here
+
+                window.location.href = res.url;
             }
             else
             {
                 //something is wrong
             }
-        }));
+        });
     }
-    else 
+    else
     {
         alert("Please provide all fields to make a booking");
     }
+}
+
+// ===========================================================================================
+//Function developed by: Jacobus Janse van Rensburg
+//Modified by: Steven Visser
+//sets up the booking page to make the postponement
+function prepPostponement()
+{
+    var url = window.location.href;
+    var parts = url.split("=");
+    var p = parts[1].split("&");
+
+    var patientID = p[0];
+    var doctorID = parts[2];
+    //make a call to find doctor by id and get name/surname
+    var docname; 
+    var docsurname;
+
+    var response = fetch("/getSingleDoctor",{
+        method:"POST",
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body:JSON.stringify({"id":doctorID})
+    });
+
+    response.then(res=> res.json().then(data=>
+    {
+        console.log("Doctor For Postponement");
+        console.log(data);
+        console.log(data.surname);
+        selectDoctor(doctorID,data.name, data.surname);
+        displayTimeTableOverlay();
+
+    }));
+
+    //make a call to find patient by id and get name/surname
+    var patname; var patsurname;var idnmumber;
+    var fetcher = fetch("/singlePatient",{
+        method:"POST",
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body:JSON.stringify({"patient":patientID})
+    });
+
+    fetcher.then(res=> res.json().then(data=>
+    {
+        console.log("Patient For Postponement");
+        console.log(data);
+        console.log(data.surname);
+        selectPatient(patientID, data.name, data.surname, data.idNumber);
+    }));
+    
+
+    //populate the reason
+    selectedReason = "Postponed Booking";
+    document.getElementById("reasonForBooking").value = selectedReason;
+
+    //change Make Booking! to Postpone Booking
+    document.getElementById("makeBookingButton").innerText = "Postpone Booking!";
+
+}
+
+function initPage()
+{
+    var url = window.location.href;
+    var parts = url.split("=");
+    if(parts.length > 1)
+    {
+        prepPostponement();
+    }
+
+    var response = fetch ('/getReceptionist',{
+        method: "POST",
+        headers:{'Content-Type':'Application/json ; charset=UTF-8'}
+    });
+
+    response.then(res=> res.json().then( data => {  
+        document.querySelector("#receptionistName").innerHTML = data.name +" "+ data.surname;
+    }));
+}
+
+//=============================================================================================
+//Function Developed by: Marcus Werren
+// Rotates the arrows of the side bar
+function rotateArrowBooking(arrowID) 
+{  
+    let arrowElement = document.getElementById(arrowID);
+
+    if(arrowElement.classList.contains("arrowSideBarTransform")) 
+    {
+        document.getElementById("sideBarLabel").style.display = "none";
+        arrowElement.classList.replace("arrowSideBarTransform", "arrowSideBody");
+        moveSideBar();
+    } 
+    else 
+    {
+        document.getElementById("sideBarLabel").style.display = "block";
+        arrowElement.classList.replace("arrowSideBody", "arrowSideBarTransform");
+        moveSideBar();
+    }
+}
+
+var showSideBar = true;
+//=============================================================================================
+//Function Developed by: Marcus Werren
+// This function hides the side bar 
+function moveSideBar()
+{
+    var bodyA = document.getElementById("sideBody");
+    var bookingBody = document.getElementById("bookingBody");
+
+      if(!showSideBar)
+      {
+        showSideBar = true;
+        bodyA.classList.remove("moveSideBar");
+        //bookingBody.style.width = "60%";
+        bookingBody.classList.remove("bookingBodyInceaseWidth");
+    }
+    else
+    {
+        showSideBar = false;
+        bodyA.classList.add("moveSideBar");
+        //bookingBody.style.width = "75%";
+        bookingBody.classList.add("bookingBodyInceaseWidth");
+    }
+}
+
+
+//================================================================================================
+//Function developed by: Jacobus Janse van Rensburg
+//Function Used to initialize the fuzzy logic overlay to select from the different types of procedures that are common to make a booking
+function fuzzyLogic(){
+    var location = document.querySelector("#currentOverlay"); //get the element that will be dynamically populated
+
+    var population='<select id="selectedProcedure"> <option value="">Select Option</option>';
+    population+='<option value="15">checkup</option> <option value="30">Tooth Decay</option>';
+    population+='<option value="45">Gum Disease</option>  <option value="30">Tooth Sensitivity</option>';
+    population+='<option value="45">Tooth Extraction</option> <option value="30">Tooth Erosion</option>';
+    population+='<option value="30">Moouth Sores</option> </select> <button onclick="findAvailableBookings()">Select</button>';
+
+    location.innerHTML=population;
+}
+
+//=================================================================================================
+//function developed by: Jacobus Janse van Rensburg
+//Function used for the fuzzy logic to find bookings based on the option that the receptionist chose
+function findAvailableBookings(){
+
+    //get the choice that was made's reason and time period it would take 
+    var selector = document.querySelector("#selectedProcedure");
+    var reason = selector.options[selector.selectedIndex].innerHTML;
+    var time = selector.options[selector.selectedIndex].value;
+
+    console.log(reason+"\t"+time);
+
+    //API CALL TO GET THE POSSIBLE BOOKING SLOTS
+    var response = fetch("" , {
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body: JSON.stringify({"reason":reason, "duration":time})
+    });
+
+    response.then(res=> res.json().then(data => {
+        //process the returned data from the server
+    }));
+
 }

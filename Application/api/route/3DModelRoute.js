@@ -11,6 +11,7 @@ const fs = require("fs");
 var Model = require('../controller/3DModelController');
 var Emailer = require('../controller/EmailController');
 var Receptionist = require('../controller/ReceptionistController');
+var UploadController = require('../controller/UploadController');
 
 module.exports = function (app)
 {
@@ -29,6 +30,14 @@ module.exports = function (app)
 
     app.route('/signup')
         .post(Model.signup);
+
+    app.route('/registerPractice').post(Model.practiceRegistration);
+
+    app.route('/resetPassord').post(Model.resetPassord);
+    
+    app.route('/isValidUsername').post(Model.isValidUsername);
+
+    app.route('/isValidEmail').post(Model.isValidEmail);
 
     app.route('/getDoctor')
         .post(Model.getDoctorSurname);
@@ -70,8 +79,14 @@ module.exports = function (app)
     app.route('/logout')
         .post(Model.logout);
 
-    app.route('/email')
-        .post(Emailer.passwordChangeEmail);
+    app.route('/passwordChangeEmail')
+        .post(Emailer.passwordChangeEmail)
+        .get((_res, res) => {
+            const page = fs.readFileSync("webSite/html/emailTester.html", "utf-8");
+            res.setHeader("Content-Type", "text/html");
+            res.send(page);
+        });
+    
 
     app.route('/getReceptionist')   
         .post(Receptionist.getReceptionistInfo);
@@ -109,6 +124,27 @@ module.exports = function (app)
     app.route('/removeBooking')
         .post(Model.removeBooking);
 
-    app.route('/postponeBooking')
+    app.route('/updateBooking')
         .post(Model.updateBooking);
+    
+    app.route('/getSingleBooking')
+        .post(Model.getSingleBooking);
+
+    app.route('/getSingleDoctor')
+        .post(Model.getSingleDoctor);
+
+    app.route('/activateUser')
+        .post(Model.activateUser);
+
+    app.route('/uploadImages')
+        .post (UploadController.uploadImages);
+
+    app.route('/qrCode')
+        .get(Model.generatePatientSignupQRCode);
+
+    app.route('/consultation/:id/stl')
+        .get(Model.getSTLFile);
+
+    app.route('/updateLog')
+        .post(Model.updateLog);
 }

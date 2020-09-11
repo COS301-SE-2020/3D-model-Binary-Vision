@@ -1,8 +1,17 @@
 // chrome://settings/content/camera
 
-var canvas = document.createElement('canvas'); // Create a canvas so that the video footage can be converted into images 
+var canvas = document.createElement('canvas'); // Create a canvas so that the video footage can be converted into images
+
+canvas.width = "640";
+canvas.height = "480";
+
+//canvas.width = "1280";
+//canvas.height = "960";
+
 var images = []; // The array to store the images generated 
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
 // The main function to upload an video file
 function uploadVideo(videoFile) 
 {
@@ -10,7 +19,7 @@ function uploadVideo(videoFile)
 
 	// create a new video tag
 	var uploadedVideoElement = document.getElementById("uploadedVideoElement");
-	uploadedVideoElement.innerHTML = '<video id="uploadedVideo" controls></video><br>';
+	uploadedVideoElement.innerHTML = '<video id="uploadedVideo" controls width="320" height="240"></video><br>';
 
 	var uploadedVideo = document.getElementById('uploadedVideo');
 
@@ -18,8 +27,9 @@ function uploadVideo(videoFile)
 	let videoURL = window.URL.createObjectURL(videoFile);
 	uploadedVideo.src = videoURL;
 
-	/*images = [];
-	generateImages(document.getElementById("uploadedVideo"));*/
+	images = new Array();
+	generateImages(document.getElementById("uploadedVideo"));
+	//generateImages(document.getElementById("uploadedVideo"));*/
 
 	fetchVideo(uploadedVideo.src).then(blob => 
 	{
@@ -27,18 +37,26 @@ function uploadVideo(videoFile)
 	});
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
+// Send the video blob to the submit function
 function sendBlob(blob) 
 {
   submitVideo(blob, false); // Submit the video
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
+// Fet the blob of the video
 function fetchVideo(url) 
 {
   return fetch(url).then(response => {        
-    return response.blob();
+	return response.blob();
   });
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
 // The main function to capture the video stream
 function takeVideoStream() 
 {
@@ -47,13 +65,18 @@ function takeVideoStream()
 	// Create the start, stop and video elements for the video stream
 	var videoStreamElement = document.getElementById("videoStreamElement");
 	videoStreamElement.style.display = "block";
-	videoStreamElement.innerHTML = '<br><button class="btn btn-success" id="startStream">Start recording</button><br>';
-	videoStreamElement.innerHTML += '<button class="btn btn-danger" id="stopStream">Stop recording</button><br>';
-	videoStreamElement.innerHTML += '<br><br><video></video>';
+	videoStreamElement.innerHTML = '<br><div id="recordButtonsContainer">';
+	videoStreamElement.innerHTML += '<button class="btn btn-success" id="startStream" style="position: relative; margin-left: auto;	margin-right: auto;	text-align: center;">Start recording</button>';
+	videoStreamElement.innerHTML += '<button class="btn btn-danger" id="stopStream" style="position: relative; margin-left: auto;	margin-right: auto;	text-align: center;">Stop recording</button><div>';
+	videoStreamElement.innerHTML += '<br><br><video id="liveVideoStream"></video>';
 	videoStreamElement.innerHTML += '<br><br><video id="capturedVideoStream" controls></video>';
 
 	var start = document.getElementById("startStream");
 	var stop = document.getElementById("stopStream");
+
+	stop.style.display = "none";
+
+	var liveVideoStream = document.getElementById("liveVideoStream");
 	var capturedVideoStream = document.getElementById("capturedVideoStream");
 	capturedVideoStream.style.visibility = "hidden"; // Hide the second video element (the captured video element)
 
@@ -67,7 +90,7 @@ function takeVideoStream()
 	// Handle old browsers that do not support the medie capture API
 	if (navigator.mediaDevices == undefined) 
 	{
-		/*navigator.mediaDevices = {};
+		navigator.mediaDevices = {};
 		navigator.mediaDevices.getUserMedia = function(constraintObj) {
 			let getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 			if (!getUserMedia) {
@@ -76,7 +99,7 @@ function takeVideoStream()
 			return new Promise(function(resolve, reject) {
 				getUserMedia.call(navigator, constraintObj, resolve, reject);
 			});
-		}*/
+		}
 	} 
 	else 
 	{ // List all the devices ... this is where we can implement the select video capture device
@@ -117,15 +140,24 @@ function takeVideoStream()
 
 		// Start recording
 		start.addEventListener('click', (ev) => 
-		{
+		{	
+			liveVideoStream.classList.remove("liveVideoStreamScale");
+			capturedVideoStream.classList.remove("capturedVideoStreamScale");
+			start.style.display = "none";
+			stop.style.display = "block";
 			mediaRecorder.start();
 			console.log(mediaRecorder.state);
 			capturedVideoStream.style.visibility = "hidden"; // Hide the second video element (the captured video element)
+			document.getElementById("VideoRecorder").style.height = "1000px";
 		});
 
 		// Stop recording
 		stop.addEventListener('click', (ev)=> 
-		{
+		{	
+			liveVideoStream.classList.add("liveVideoStreamScale");
+			capturedVideoStream.classList.add("capturedVideoStreamScale");
+			start.style.display = "block";
+			stop.style.display = "none";
 			mediaRecorder.stop();
 			console.log(mediaRecorder.state);
 			clearInterval(timedInterval);
@@ -148,8 +180,10 @@ function takeVideoStream()
 			capturedVideoStream.style.visibility = "visible"; // Make the captured video element visiable
 			capturedVideoStream.src = videoURL;
 
-			images = [];
+			images = new Array();
 			generateImages(document.getElementById("capturedVideoStream"));
+
+			//console.log(images);
 
 			submitVideo(blob, true); // Submit the video
 		};
@@ -159,19 +193,24 @@ function takeVideoStream()
 	});
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
+// This function is the called when the submit button is clicked and will send the captured data from the video recorder
 function submitVideo(video, videoStreamed) 
 {
-
 	if (!videoStreamed)
 	{
 		var submitVideoElement = document.getElementById('submitVideoUploadElement');
+		submitVideoElement.innerHTML = '<br><button class="btn btn-primary" id="submitVideo">Submit Video</button><br><br><br>';
 	}
 	else
 	{
 		var submitVideoElement = document.getElementById('submitVideoStreamElement');
+		submitVideoElement.innerHTML = '<br><button class="btn btn-primary" id="submitVideo" style="transform: translateY(-370px);">Submit Video</button><br><br><br>';
+		document.getElementById("VideoRecorder").style.height = "1000px";
 	}
 
-	submitVideoElement.innerHTML = '<br><button class="btn btn-dark" id="submitVideo">Submit Video</button><br><br><br>';
+	
 
 	var submitVideoButton = document.getElementById('submitVideo');
 
@@ -180,8 +219,16 @@ function submitVideo(video, videoStreamed)
 		alert("ACTION: Video sent (" + video + ")");
 		//post method
 		var VideoSending = new FormData();
-		//will need to append the patient ID / consultation ID to save it in the database "Jaco"
-		VideoSending.append("video", video);
+		//will need to append the patient ID / consultation ID to save it in the database "Jaco"	
+		//VideoSending.append("video", video); // Append the actual video to the form
+		
+
+		for (var i=0; i<images.length; i++)
+			VideoSending.append('image', images[i]); // Append the images to the form
+
+		for (var pair of VideoSending.entries()) {
+		    console.log(pair[1]); 
+		}
 
 		var response = fetch("/upload",{
 			method:"POST",
@@ -192,6 +239,8 @@ function submitVideo(video, videoStreamed)
 	});
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
 // Function to clean out all fo the elements
 function cleanElements() 
 {
@@ -208,6 +257,8 @@ function cleanElements()
 	element.innerHTML = "";
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
 // Generate the images form the videos stored in the relavent tags
 function generateImages(video) 
 {
@@ -215,34 +266,51 @@ function generateImages(video)
 
 	video.addEventListener('loadeddata', function() 
 	{
-	    this.currentTime = i;
+		this.currentTime = i;
 	});
 
 	video.addEventListener('seeked', function() 
 	{
-	    generateImage(i, video);
-	    i += 0.5; // get an image every 0.5 seconds
+		generateImage(i, video);
+		i += 0.2; // get an image every 0.5 seconds
 		if (i <= this.duration)
 		{
 			this.currentTime = i;
-		}
-	        
+		}	
 	});
 }
 
+//=============================================================================================
+//Function Developed by: Marcus Werren
 // Generate a image at that time stamp i.e. 'i'
 function generateImage(i, video) 
 { 
 	// Generate and load the image into the canvas
-    var context = canvas.getContext('2d');
-    context.drawImage(video, 0, 0, 220, 150);
-    var dataURL = canvas.toDataURL();
+	var context = canvas.getContext('2d');
 
-    // Create the src's for each image ... probably not needed
-    var img = document.createElement('img');
-    img.setAttribute('src', dataURL);
+	// Set the smotthing quality of the image
+	context.imageSmoothingEnabled = false;
+	context.imageSmoothingQuality = "low";
 
-    // Push the new image into the images array.
-    images.push(dataURL);
-    //document.getElementById('testDraw').appendChild(img);
+	//context.drawImage(video, 0, 0, 240, 150);
+	context.drawImage(video, 0, 0, 640, 480); // 323.84 KB
+	//context.drawImage(video, 0, 0, 1280, 960); // 955.347 KB
+	var dataURL = canvas.toDataURL();
+
+	// Create the src's for each image ... probably not needed
+	var img = document.createElement('img');
+	img.setAttribute('src', dataURL);
+
+	fetch(dataURL)
+	.then(function (response) {
+		return response.blob();
+	})
+	.then(function (blob) {
+		//console.log("blob.size = " + blob.size);
+		//console.log("blob.type = " + blob.type);
+		//console.log(blob);
+		images.push(blob);
+	});
+	//document.getElementById('testDraw').appendChild(img);
 }
+ 

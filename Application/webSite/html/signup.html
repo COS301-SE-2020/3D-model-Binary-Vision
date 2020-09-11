@@ -11,8 +11,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/signup.js"></script>
+        <!-- hashing library used below -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+
     </head>
-    <body>
+    <body onload="init()">
       <nav class="navbar navbar-expand-lg navbar-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
@@ -32,37 +37,86 @@
         </div>
       </nav>
 
-      <br><br><br>
+      <div id="miBody">
+        <div id="header">
+          <p id="headerTitle">SIGNUP PAGE</p>
+        </div>
+      </div>
+
+      <br><br><br><br>
 
       <div class="container" >
-              <form action="/signup" method="post" id="form" style="max-width: 300px; border-top-right-radius:10px; border-top-left-radius: 10px;">
+              <form id="form" style="max-width: 700px; border-top-right-radius:10px; border-top-left-radius: 10px; box-shadow: 1px 0px 15px 0px black;">
               <br>
-              <h2> Registration</h2>
+              <h2> Registration</h2><hr>
+              <div id="signupInputFildContrainer">
+                <div style="padding-left: 30px; padding-right: 15px; padding-bottom: 20px;">
+                  <label for="name" style="color: white;">Please enter Name</label><br>
+                  <input class="form-control" class="box" type="text" name="name" id="name" placeholder="Name"  required />
+                </div>
+
+                <div style="padding-left: 15px; padding-right: 30px; padding-bottom: 20px;">
+                  <label for="surname" style="color: white;">Please enter Surname</label><br>
+                  <input class="form-control" name="surname" placeholder="Surname" id="surname" required />
+                </div>
+
+                <div style="padding-left: 30px; padding-right: 15px; padding-top: 20px; padding-bottom: 20px;">
+                  <label for="email" style="color: white;">Please enter Email</label><br>
+                  <input class="form-control" class="box" type="email" name="email" id="email" placeholder="Email" required />
+                </div>
+
+                <!--
+                    <label for="emailCheck" style="color: white;">Please reEnter Email</label><br>
+                    <input class="form-control" class="box" type="email" name="emailCheck" id="emailCheck" placeholder="Retype Email" required />
+                    <br>
+                  -->
+
+                <div style="padding-left: 15px; padding-right: 30px; padding-top: 20px; padding-bottom: 20px;">
+                  <label for="username" style="color: white;">Please enter Username</label><br>
+                  <input class="form-control" name="username" placeholder="Username" id="username" required/>
+                </div>
+
+                <div style="padding-left: 30px; padding-right: 15px; padding-top: 20px; padding-bottom: 20px;">
+                  <label for="password" style="color: white;">Please enter Password</label><br>
+                  <input class="form-control" class="box" type="password" name="password" id="password" placeholder="Password " required/>
+                </div>
+
+                <div style="padding-left: 15px; padding-right: 30px; padding-top: 20px; padding-bottom: 20px;">
+                  <label for="passwordCheck" style="color: white;">Please Confirm Password</label><br>
+                  <input class="form-control" class="box" type="password" name="passwordCheck" id="passwordCheck" placeholder="Retype Password " required/>
+                </div>
+
+                  <!--
+                    <input type="text " name="choice" placeholder="Doctor/Receptionist" required />
+                    <br><br>
+                  -->
+
+                <div style="padding-left: 30px; padding-right: 15px; padding-top: 20px;">
+                  <label for="choice" style="color: white;">Please enter position</label><br>
+                  <select class="form-control" id = "choice" name = "choice">
+                    <option value="">Select an Option</option>
+                    <option value = "Receptionist">Receptionist</option>
+                    <option value = "Doctor">Doctor</option>
+                  </select>
+                </div>
+
+                <div style="padding-left: 15px; padding-right: 30px; padding-top: 20px;">
+                  <label for="practition" style="color: white;">Please enter Practice</label><br>
+                  <input class="form-control" type="text" name="practition" placeholder="Practice" id="practice" required />
+                </div>
+
+                <div style="padding-left: 15px; padding-right: 30px; padding-top: 20px; ">
+                  <label for="securityCode" style="color: white;">Please enter Practice Security Code</label><br>
+                  <input class="form-control" type="text" name="securityCode" placeholder="Security Code" id="securityCode" required />
+                </div>
+
+              </div>
               <br>
-              <input class="box" type="text" name="name" id="name" placeholder="Name"  required />
-              <br><br>
-              <input name="surname" placeholder="Surname" required />
-              <br><br>
-              <input class="box" type="email" name="email" id="email" placeholder="Email" required />
-              <br><br>
-              <input name="username" placeholder="Username" required/>
-              <br><br>
-              <input class="box" type="password" name="password" id="password" placeholder="Password " required/>
-              <br><br>
-              <!--
-              <input type="text " name="choice" placeholder="Doctor/Receptionist" required /> 
-              <br><br> -->
-              <select  id = "choice" name = "choice">        
-                <option value = "Receptionist">Receptionist</option>
-                <option value = "Doctor">Doctor</option>
-              </select>
-              <br><br>
-              <input type="text" name="practition" placeholder="Practice" required /> 
-              <br><br>
-              <input class="btn btn-primary" type="submit" id="submitDetails" name="submitDetails" value="Submit" />
+              <input class="btn btn-primary" type="button" id="submitDetails" name="submitDetails" value="Submit" onclick="signup()" />
               <br><hr>
               <p style="font-size: 12px;">Already have an account?<a style="font-size: 12px;" href="login.html" onclick="preview()"> Login Here</a></p>
               </form>
       </div>
+      <br><br>
     </body>
 </html>

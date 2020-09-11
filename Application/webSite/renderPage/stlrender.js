@@ -278,6 +278,10 @@ var camera, scene, renderer,
 
             function createCanvas()
             {
+                var url = window.location.href;
+	            var parts = url.split("=");
+                document.getElementById("returnbutton").setAttribute("href","../html/Consultation.html?bookingid="+parts[1]);
+
                 var canvas = document.createElement('canvas');
                 canvas.id = "gl_canvas";
                 canvas.width = RESOLUTION_WIDTH-canvas.width;

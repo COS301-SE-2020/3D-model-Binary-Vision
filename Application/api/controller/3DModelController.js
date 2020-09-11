@@ -7,17 +7,36 @@
 
 "use strict";
 //set up the database first
-var fs = require("fs");
 
+var fs = require("fs");
+const bcrypt = require('bcrypt');
 const { createModel } = require('mongoose-gridfs');
 var formidable = require("formidable");
 var mongoose = require("mongoose");
+var qrCode = require('qrcode');
 
 var Doctor = require("../model/3DModelModel.js").Doctor;
 var Patient = require("../model/3DModelModel.js").Patient;
 var Consultation = require("../model/3DModelModel.js").Consultation;
 var Receptionist = require("../model/3DModelModel.js").Receptionist;
 var Booking = require("../model/3DModelModel.js").Booking;
+var PasswordChanges = require("../model/3DModelModel.js").PasswordChanges;
+var Practice = require("../model/3DModelModel.js").Practice;
+
+//Email modules and settings to send emails
+var nodeMailer = require('nodemailer');
+const transporter = nodeMailer.createTransport({
+    host:"smtp.mailtrap.io",
+    port: 2525,
+    auth:{
+        user:"0c9f2b08034ef4",
+        pass:"c1fd4b36bbc842"
+    } 
+ });
+
+
+const frontsalt ="Lala";
+const  backSalt = "Bey";
 
 module.exports = {
 
@@ -26,40 +45,61 @@ module.exports = {
     login: function (req, res) 
     {
 
-        const { username, password } = req.body;
-        Doctor.findOne({ username, password }, function (err, doctor) 
+        var { username, password } = req.body;
+
+        password = frontsalt+password+backSalt;
+    
+        Doctor.findOne({ username , "active":true}, function (err, doctor) 
         {
             if (err) 
             {
-              res.send(err);
-              return;
+                console.log("error");
+                return;
             }
-
             if (doctor) 
             {
-              //it is a doctor logging in and we return to the doctors home page
-              res.cookie("drCookie",doctor._id,{maxAge:9000000,httpOnly:true});
-              res.redirect("/doctorSchedule.html");
-              return;
+                //check if the passwords match
+                bcrypt.compare(password , doctor.password, function(erro , result){
+                    if(result == true){
+                        //it is a doctor logging in and we return to the doctors home page
+                        res.cookie("drCookie",doctor._id,{maxAge:9000000,httpOnly:true});
+                        res.redirect("/doctorSchedule.html");
+                        return;
+                    }
+                    else{
+                        res.send(erro);
+                    }
+                })        
             }
             //there was no doctor and we will now check if it is a receptionist
         });
 
-        Receptionist.findOne({username,password}, function(err, receptionist)
-        {
+        Receptionist.findOne({username,"active":true}, function(err, receptionist){
             if (err)
             {
               res.send(err);
               return;
             }
-
+    
             if (receptionist)
             {
-              res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
-              res.redirect("/newHome.html");
-              return;
+                bcrypt.compare(password , receptionist.password, function (error, result){
+                   if (result == true){
+                        res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
+                        res.redirect("/newHome.html");
+                        return;
+                   }
+                   else{
+                       res.send(error);
+                       return;
+                   }
+                    
+                })
+
             }
         });
+        
+        return;
     },
 
     //======================================================================================
@@ -74,54 +114,194 @@ module.exports = {
     },
 
     //======================================================================================
+    //function developed by: Jacobus Janse van Rensburg
+    //Allows the registration of a new practice
+    //modified by: Steven Visser 
+    //reason: Create a qr code for the practice to add patients as well
+    practiceRegistration: function(req, res){
+        const {practice , securityCode, headReceptionist} = req.body;
+
+        Practice.findOne({"practice":practice}, function(err, prac){
+            if (prac)
+            {
+                //practition already registered;
+                res.status(400);
+                return;
+            }
+
+            var newPractice =new Practice ({practice,securityCode,headReceptionist});
+            newPractice.save(function(err, pr){
+
+                if(err)
+                {
+                    res.send(err);
+                    return;
+                }
+                else
+                {
+
+                    var today = new Date();
+                    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+                    var hours = today.getHours();
+                    var minutes = today.getMinutes();
+                    var seconds = today.getSeconds();
+                    var time = hours + ":" + minutes + ":" + seconds ;
+                    var line = date + "@" + time + "@Practice: " + practice + " Registered!\n";
+                    var fname = "./webSite/Logs/"+practice+".txt";
+                    fs.writeFile(fname,line,function(err){
+                        if(err)
+                        {
+                            console.log(err);
+                        }
+                        else
+                        {
+                            console.log("Practice Log File successfully created!");
+                        }
+                    });
+                    res.redirect('/signup.html');
+                    return;
+                }
+            })
+
+        })
+
+    },
+
+    //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg
     //This function allows a user to register to the database as either a doctor or a receptionist
     signup: function (req, res) 
     {
-        const { name, surname, email, username, password ,choice , practition} = req.body;
-        if(choice=="Doctor")
-        {
-            const doctor = new Doctor({name,surname,email,username, password,practition});
-            doctor.save(function (err, saved) 
+        var { name, surname, email, username, password ,choice , practition,securityCode} = req.body;
+       
+        //first check if the practition exists
+        Practice.findOne({"practice":practition}, function(err, practice){
+            if (err)
             {
-                if (err) 
+                res.status(400);
+                return;
+            }
+            if(practice){
+                if(practice.securityCode == securityCode)
                 {
-                    res.send(err);
+                    //valid practition code to add inactive user to database and send an email to head receptionist
+                    password = frontsalt+password+backSalt;
+                    bcrypt.hash(password,10,function(err, password1){
+                        password = password1;
+                        if(choice=="Doctor")
+                        {
+                            const doctor = new Doctor({name,surname,email,username, password,practition});
+                            doctor.save(function (err, saved) 
+                            {
+                                if (err) 
+                                {
+                                    res.status(400);
+                                    res.send(err);
+                                    return;
+                                }
+                                else 
+                                {
+                                    //email the head receptionist over here
+                                    sendsignupConfurmationEmail(practice , doctor);
+                                    res.redirect("/login.html");
+                                    return;
+                                }
+                            });
+                        }
+                        else if(choice == "Receptionist")
+                        {
+                            const receptionist = new Receptionist({name , surname , email , username, password,practition});
+                            receptionist.save(function(err, saved)
+                            {
+                                if(err)
+                                {
+                                res.send(err);
+                                }
+                                else
+                                {
+                                    //email the head receptionist over here
+                                    sendsignupConfurmationEmail(practice , receptionist);
+                                    res.redirect("/login.html");
+                                    return;
+                                }
+                            });
+                        }
+                    });
+
                 }
-                else 
-                {
-                  	const page = fs.readFileSync("webSite/html/login.html", "utf-8");
-                  	res.setHeader("Content-Type", "text/html");
-                    res.status(201)
-                      .send(page);
+                else{
+                    //practition code not valid for signup attempt
+                    res.status(401);//unauthorized
+                    return;
                 }
-            });
-        }
-        else if(choice == "Receptionist")
-        {
-            const receptionist = new Receptionist({name , surname , email , username, password,practition});
-            receptionist.save(function(err, saved)
+            }
+            else{
+                //no practice found
+                res.status(404);
+                return;
+                //register a new practice ?
+            }
+        });
+
+        return;
+    },
+
+    //======================================================================================
+    //Function developed by: Jacobus Janse van Rensburg
+    //This function is used for signup to check if the username requested has not already been used by another user
+    isValidUsername:function (req, res){
+        //no need to check for res.user since this is for signup purposes
+        var username = req.body.username;
+        Doctor.findOne({"username":username}, function(err, doctor){
+            if(doctor!=null)
             {
-                if(err)
-                {
-                  res.send(err);
-                }
-                else
-                {
-                  const page = fs.readFileSync("webSite/html/login.html","utf-8");
-                  res.setHeader("Content-Type","text/html");
-                  res.status(200)
-                    .send(page);
-                }
-            });
-        }
+                // a doctor has this username already and it cannot be used
+                res.status(422).json(doctor);//send invalid errorCode
+                return;
+            }
+        });
+
+        Receptionist.findOne({"username":username},function(err,receptionist){
+            if(receptionist){
+                //a receptionist exists with the user name and therefore cannot be used
+                res.status(422).json(receptionist);//send invalid errorCode
+                return;
+            }
+        })
+
+    },
+
+     //======================================================================================
+    //Function developed by: Jacobus Janse van Rensburg
+    //This function is used for signup to check if the email requested has not already been used by another user
+    isValidEmail:function (req, res){
+        //no need to check for res.user since this is for signup purposes
+        var email = req.body.email;
+
+        Doctor.findOne({"email":email}, function(err, doctor){
+            if(doctor)
+            {
+                // a doctor has this email already and it cannot be used
+                res.status(422).json(doctor);//send invalid errorCode
+                return;
+            }
+        });
+
+        Receptionist.findOne({"email":email},function(err,receptionist){
+            if(receptionist){
+                //a receptionist exists with the user name and therefore cannot be used
+                res.status(422).json(receptionist);//send invalid errorCode
+                return;
+            }
+        });
+
     },
 
     //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg
     //
     selectPatient: function(req,res)
-    { 
+    {
         if (!req.user)
         {
             return res.status(404);
@@ -144,7 +324,7 @@ module.exports = {
 
         const {idNumber, name , surname , email , gender, cellnumber} = req.body;
 
-        var new_Patient = new Patient({idNumber , name , surname , email , gender, cellnumber}); //set the patients info
+        var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber}); //set the patients info
 
         new_Patient.doctor = req.user; // add doctor id to the patient
 
@@ -199,7 +379,7 @@ module.exports = {
                 return;
             } 
             else 
-            { 
+            {
                 res.status(202).json(patients);
                 return;
             }
@@ -285,7 +465,7 @@ module.exports = {
 
     //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg
-    //
+    // used to set a cookie but will be replaced by other means of url encoding
     selectConsultation: function(req,res)
     {
         //set the consultation cookie id
@@ -479,6 +659,37 @@ module.exports = {
             });
         });
     },
+
+    //
+
+    getSTLFile: function (req,res){
+        if(!req.user){
+
+        }
+        else {
+
+            var consultation = req.params.id;
+
+            Consultation.findOne({"_id":mongoose.Types.ObjectId(consultation)}, function(err , cons){
+                if (err){
+
+                }
+                else if (cons) {
+                    var attachment = createModel();
+                    const stlReturn  = attachment.read({"_id":mongoose.Types.ObjectId(cons.STL)});
+
+                    res.contentType('model/stl');
+                    stlReturn.pipe(res);
+                    return;
+                }
+                else{
+                    return res.sendStatus(404);
+                }
+
+            })
+
+        }
+    },
   
     //======================================================================================
     //Function developed by: Steven Visser
@@ -654,7 +865,7 @@ module.exports = {
             return;
         }
         var date = new Date();
-        var d = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear(); 
+        var d = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear(); 
 
         Booking.find({"doctor":mongoose.Types.ObjectId(req.user), "date":d}, function(err, bookings)
         {
@@ -710,11 +921,10 @@ module.exports = {
         return;
       }
 
-      var id = mongoose.Types.ObjectId(req.body._id)
-      var date = mongoose.Types.ObjectId(req.body.date);
-      var time = mongoose.Types.ObjectId(req.body.time);
+      var id = mongoose.Types.ObjectId(req.body._id);
+      var status = req.body.status;
     
-      Booking.updateOne({"_id":id}, {$set:{"date":date,"time":time}} , function(err)
+      Booking.findOneAndUpdate({"_id":id}, {$set:{"status":status}} , function(err)
       {
           if (err)
           {
@@ -728,4 +938,281 @@ module.exports = {
       });
     },
 
+     // ======================================================================================
+    // function Developed By: Jacobus Janse van Rensburg
+    // function to return a single bookings information provided a booking id 
+    getSingleBooking : function(req ,res){
+        if(!req.user)
+        {
+            res.status(401);
+            return;
+        }
+
+        Booking.findOne({"_id":mongoose.Types.ObjectId(req.body.booking)}, function(err , booking){
+            if (err)
+            {
+                res.status(400);
+                return;
+            }
+
+            res.status(200).json(booking);
+            return;
+
+        });
+
+    },
+
+    //======================================================================================
+    //Function developed by: Steven Visser
+    //retrieves a specific doctor from the database. Search using object id
+    getSingleDoctor: function(req, res)
+    {
+        if (!req.user)
+        {
+          res.status(401)
+            .send("unauthorised");
+          return;
+        }
+      
+        Doctor.findOne({"_id":mongoose.Types.ObjectId(req.body.id)} , function (err , doctor)
+        {
+            if (err)
+            {
+                res.send("No docotor found")
+                  .status(404);
+            }
+            else
+            {
+                res.json({"surname":doctor.surname,"name":doctor.name});
+            }
+        });
+    },
+   
+    //======================================================================================
+    //Function developed by: Jacobus Janse van Rensburg and Steven Visser
+    //Function uses the users email address to find the correct user and change the password of that user
+    resetPassord: function (req , res)
+    {
+        var {email , password , code} = req.body;
+
+        password = frontsalt+password+backSalt;
+        // console.log("email: "+email +"\npassword: "+password+"\nCode: "+code);
+        var updated = false;
+        PasswordChanges.findOne({"_id":mongoose.Types.ObjectId(code)}, function (err , record){
+            if (record)
+            {
+                if (email == record.email){
+                    // valid details in order to change the password 
+                    bcrypt.hash(password,10,function(err, p1){   //hash the new password in the back end as well
+                        console.log(p1);
+                        Doctor.findOneAndUpdate ({"email":email},{$set:{"password":p1}}, function(err, doc){
+                            if(!doc)//doctor not found
+                            {
+                                Receptionist.findOneAndUpdate({"email":email}, {$set:{"password":p1}},function(err, rec){
+                                  if(!rec){
+                                      //invalid user
+                                      res.status(401).send("not ok");
+                                      return;
+                                  }
+                                  else
+                                  {
+                                      updated = true;
+                                  }
+      
+                                  if(updated)
+                                  {   //remove the record so that someone cant use the same values to change the password again
+                                      PasswordChanges.findOneAndRemove({"_id":mongoose.Types.ObjectId(code)}, function(err){
+                                          res.status(200).send("ok");
+                                          return;
+                                      })
+                                  }
+            
+                                })
+                            }
+                            else{
+                                updated = true;
+                            }
+      
+                            if(updated)
+                            {
+                                //remove the record so that someone cant use the same values to change the password again
+                                PasswordChanges.findOneAndRemove({"_id":mongoose.Types.ObjectId(code)}, function(err){
+                                    res.status(200).send("ok");
+                                    return;
+                                })
+                            }   
+                        })
+                    })
+                }
+            }
+            else{
+                //invalid password change code
+                res.status(401).send("not ok");
+                return;
+            }
+
+        });
+
+        return;
+    },
+
+    //=======================================================================================
+    //Function developed by: Jacobus Janse van Rensburg 
+    // function to accept / reject a user signing up
+    activateUser:function ( req, res)
+    {
+        const {user , choice } = req.body;
+
+        console.log(user + "\t "+ choice);
+        var setter;
+        if(choice =="accept")
+        {
+            setter = true;
+        }
+        else setter =false;
+
+        if (setter){
+            //acticate the user
+            Doctor.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)}, {$set:{"active":setter}}, function (err, doc){
+                //if doctor not look for a receptionist
+             if(!doc) {  
+                 //find and update receptionist
+                 Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)},{$set:{"active":setter}}, function(err, rec){
+
+                    });
+                }
+            });
+        }
+        else{
+            Doctor.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err,doc)
+            {
+               if (!doc){
+                   Receptionist.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err, rec)
+                   {
+                      
+                   });
+               }
+            });
+
+
+        }
+
+        res.status(200).send("ok");
+        return;
+    },
+
+    //=======================================================================================
+    //function developed by:Jacobus Janse van Rensburg
+    //function returns a qr code for patients to scan when new to a practice
+    generatePatientSignupQRCode: function(req , res){
+        if(!req.user)
+        {
+            return res.status(401);
+        }
+
+        else{
+            
+            Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)},function(err, doctor){
+                if (err){
+
+                }
+                else if(doctor){
+                    var url = "flapjacks.goodx.co.za/addPatient?practice="+doctor.practice;
+                    res.contentType('png');
+                    qrCode.toFileStream(res , url);                    //return the qr code
+                }
+                else{
+                    Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)},function(err, recep){
+                        if(err){
+
+                        }
+                        else if(recep){
+                            var url = "flapjacks.goodx.co.za/addPatient?practice="+recep.practice;
+                            res.contentType('png');
+                            qrCode.toFileStream(res , url);
+                        }
+                        else{
+                            //no user found with id 
+                            res.sendStatus(404);
+                        }
+                    })
+                }
+            })
+                //create the qr code 
+           
+
+        }
+
+    },
+
+    //======================================================================================
+    //Function Developed By: Steven Visser
+    //Updates the logfile for a specific practice
+    updateLog: function(req, res)
+    {
+        var practice = req.body.practice;
+        var line = req.body.line + "\n";
+        var fname = "./webSite/Logs/"+practice+".txt";
+        fs.appendFile(fname,line,function(err)
+        {
+            if(err)
+            {
+                console.log(err);
+            }
+            else
+            {
+                console.log("Log successfully updated!");
+            }
+        });
+
+    }
+
 };
+
+//============================================================================================
+// Function developed by: Jacobus Janse van Rensburg 
+// Function sends a email to head receptionist to confirm / reject a user signing up
+function sendsignupConfurmationEmail(practice , user){
+
+    var emailOptions={
+        from: 'flap.jacks.cs@gmail.com',
+            to:practice.headReceptionist,//send email to the head receptionist
+            subject: '3D Model Confirm User',
+            html:''
+    }
+
+    //set the emails html properties
+    emailOptions.html+='<div id="head" style="background-color: #003366; width: 500px; text-align: center; border-radius: 5px;margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;"><br>';
+    emailOptions.html+='<h2 style="color:white;">Enable Email Access</h2><hr style="background-color: white;">';
+    emailOptions.html+='<span id="words" style="color: white;"> The email: <p style="color: lightblue;"id="emailAPI" name="emailAPI">xxxxxx@gmail.com</p>USER_NAME_HERE USER_SURNAME_HERE USER_ID_HERE Would like to signup with the system. <br> Would you like to <b style="color: lightgreen;">ACCEPT</b> or <b style="color: red;">REJECT</b> the request?</span>';
+    emailOptions.html+='<br><br><a style="margin: 5px; color:white;" class="btn btn-success"  id="acceptSignup" name="acceptSignup"  href="ACCEPT_HREF" /><b>ACCEPT</b></a>';
+    emailOptions.html+='<a style="margin: 5px; color: white;" class="btn btn-danger" id="rejectSignup" name="rejectSignup" href="REJECT_HREF"><b>REJECT</b></a><br><br></div>';
+
+    //populate the email with the appropriate information 
+
+    emailOptions.html = emailOptions.html.replace('xxxxxx@gmail.com',user.email); //show the receptionist the email that wants to sign up
+    emailOptions.html = emailOptions.html.replace('USER_NAME_HERE',user.name); //show the receptionist the email that wants to sign up
+    emailOptions.html = emailOptions.html.replace('USER_SURNAME_HERE',user.surname);
+    emailOptions.html = emailOptions.html.replace('USER_ID_HERE',user.id);
+
+    //fill the information on the a click actions
+    //do href to a page with the information url encoded to be extracted on that page and take nescasary actions
+
+    var href ="localhost:3000/ValidateSignup.html";
+    //create url encoded hrefs
+    var reject = href+"?action=reject&user="+user._id;
+    var accept = href+"?action=accept&user="+user._id;
+    //place hrefs in appropriate spots
+    emailOptions.html = emailOptions.html.replace('REJECT_HREF',reject);
+    emailOptions.html = emailOptions.html.replace('ACCEPT_HREF',accept);
+
+    //send the email
+    transporter.sendMail(emailOptions, function(error, info){
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log(info);
+        }
+    });
+}
