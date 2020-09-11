@@ -1270,7 +1270,8 @@ function sendsignupConfurmationEmail(practice , user){
 
     //send the email
     transporter.sendMail(emailOptions, function(error, info){
-        if(err){
+        if(err)
+        {
             console.log(err);
         }
         else{
