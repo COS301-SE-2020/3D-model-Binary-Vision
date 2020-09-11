@@ -979,6 +979,10 @@ module.exports = {
               {
                 updateLogFile(rec.username + "@Cancelled a booking@BID:"+id,rec.practition);
               }
+              else if(status == "Completed")
+              {
+                updateLogFile(rec.username + "@Completed a booking@BID:"+id,rec.practition);
+              }
           }
       });
     
