@@ -150,13 +150,13 @@ function setDates()
 
     var months = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
 
-    document.getElementById("firstDay").innerHTML = "{"+d+"}";
-    document.getElementById("firstMonth").innerHTML = "{"+months[m]+"}";
-    document.getElementById("firstYear").innerHTML = "{"+y+"}";
+    document.getElementById("firstDay").innerHTML = d;
+    document.getElementById("firstMonth").innerHTML = months[m];
+    document.getElementById("firstYear").innerHTML = y;
 
-    document.getElementById("lastDay").innerHTML = "{"+(d+6)+"}";
-    document.getElementById("lastMonth").innerHTML = "{"+months[m]+"}";
-    document.getElementById("lastYear").innerHTML = "{"+y+"}";
+    document.getElementById("lastDay").innerHTML = (d+6);
+    document.getElementById("lastMonth").innerHTML = months[m];
+    document.getElementById("lastYear").innerHTML = y;
 }
 
 		

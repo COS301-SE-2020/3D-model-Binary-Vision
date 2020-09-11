@@ -26,16 +26,17 @@
 		  </button>
 		  <div class="collapse navbar-collapse" id="collapsibleNavbar">
 		    <ul class="navbar-nav">
-		      <li class="nav-item">
-		        <a class="nav-link" href="../html/doctorSchedule.html">Schedule</a>
-		      </li>
-					<li class="nav-item">
-		        <a class="nav-link" href="../html/timetable.html">Weekly Planner</a>
-		      </li>
-					<li class="nav-item">
-		        <a class="nav-link" onclick="logout()" href="../html/preview.html">Logout</a>
-		      </li>
-		    </ul>
+	          <li id="otherLi" class="nav-item">
+	            <a class="nav-link active" href="../html/doctorSchedule.html"><u>Schedule</u><img src="../css/images/home-run.png" width="20px" style="margin-left: 5px;"></img></a>
+	          </li>
+	          <li id="otherLi" class="nav-item">
+	            <!--i took this away because the timetable href takes you to the receptionist side of the application-->
+	            <a class="nav-link" href="../html/timetable.html">Weekly Planner<img src="../css/images/calendar.png" width="20px" style="margin-left: 5px;"></img></a>
+	          </li>
+	          <li id="logout" class="nav-item" id="logout">
+	            <a id="logoutA"class="nav-link" onclick="logout()" href="../html/preview.html">Logout<img src="../css/images/logout.png" width="20px" style="margin-left: 5px;"></img></a>
+	          </li>
+	        </ul>
 		  </div>
 		</nav>
 
