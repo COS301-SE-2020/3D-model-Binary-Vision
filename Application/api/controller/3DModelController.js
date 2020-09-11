@@ -962,6 +962,25 @@ module.exports = {
 
       var id = mongoose.Types.ObjectId(req.body._id);
       var status = req.body.status;
+
+      Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
+      {
+          if (err)
+          {
+
+          }
+          if(rec)
+          {
+              if(status=="Postponed")
+              {
+                updateLogFile(rec.username + "@Postponed a booking@BookingID:"+id,rec.practition);
+              }
+              else if(status == "Cancelled")
+              {
+                updateLogFile(rec.username + "@Cancelled a booking@BookingID:"+id,rec.practition);
+              }
+          }
+      });
     
       Booking.findOneAndUpdate({"_id":id}, {$set:{"status":status}} , function(err)
       {
