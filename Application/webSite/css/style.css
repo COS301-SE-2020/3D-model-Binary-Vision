@@ -18,7 +18,7 @@
 #logoWords{
 	font-family: Arial;
 	position: absolute;
-	left: 0px;
+	left: 3px;
 	top: 60px;
 	color: white;
 	font-size: 50px;
@@ -31,8 +31,9 @@
 }
 
 .section{
-	padding-right: 10%;
-	padding-left: 10%;
+	padding-right: 2%;
+	padding-left: 2%;
+	padding-bottom: 2%;
 }
 
 .outputModule{
@@ -876,14 +877,21 @@ input[type="file"] {
 	box-shadow: 1px 0px 15px 0px black;
 	grid-template-columns: 1fr 1fr;
 	animation: opacityForm 2s;
+
 	position: relative;
 	text-align: center;
 	background-color: #003366;
 	border-radius: 10px;
 }
 
+@media only screen and (width: 640px) {
+    #logoContainer img {
+    	width: 200px;
+    }
+}
+
 #formSignup {
-containerLogin	text-align: center;
+	text-align: center;
 	background-color: #343a40;
 	position: relative;
 	width: 300px;
