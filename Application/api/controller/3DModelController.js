@@ -106,9 +106,32 @@ module.exports = {
 
     //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg
-    //This function resets the doctor cookie and returns the user to the preview page
+    //Updated by: Steven Visser
+    //This function resets the doctor cookie and returns the user to the preview page and updates the log file
     logout:function (req, res)
     {
+        Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doctor)
+        {
+            if (err)
+            {
+
+            }
+            if(doctor)
+            {
+                updateLogFile(doctor.username + "@Logout",doctor.practition);
+            }
+        });
+        Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
+        {
+            if (err)
+            {
+
+            }
+            if(rec)
+            {
+                updateLogFile(rec.username + "@Logout",rec.practition);
+            }
+        });
         res.cookie("drCookie","",{maxAge:0,httpOnly:true});
         res.cookie("patientCookie","",{maxAge:0,httpOnly:true});
         res.cookie("consultation","",{maxAge:0});
