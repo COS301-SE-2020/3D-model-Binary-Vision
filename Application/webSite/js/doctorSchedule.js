@@ -151,8 +151,8 @@ function setDate()
     minutes = checkTime(minutes);
     seconds = checkTime(seconds);
 
-    var date = today.getDate() + ' / ' + (today.getMonth()+1) +' / '+ today.getFullYear();
-    container.innerHTML = "SCHEDULE FOR [" + date + "]" + " TIME [" + hours + ":" + minutes + ":" + seconds + "]";
+    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+    container.innerHTML = date + "  -  " + hours + ":" + minutes + ":" + seconds;
     var t = setTimeout(setDate, 500);
 }
 
