@@ -64,6 +64,7 @@ module.exports = {
                         //it is a doctor logging in and we return to the doctors home page
                         res.cookie("drCookie",doctor._id,{maxAge:9000000,httpOnly:true});
                         res.redirect("/doctorSchedule.html");
+                        updateLogFile(username+"@Logged in",doctor.practition);
                         return;
                     }
                     else{
@@ -87,6 +88,7 @@ module.exports = {
                    if (result == true){
                         res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
                         res.redirect("/newHome.html");
+                        updateLogFile(username+"@Logged in",receptionist.practition);
                         return;
                    }
                    else{
@@ -1213,6 +1215,29 @@ function sendsignupConfurmationEmail(practice , user){
         }
         else{
             console.log(info);
+        }
+    });
+}
+
+function updateLogFile(linedesc,practice)
+{
+    var today = new Date();
+    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+    var hours = today.getHours();
+    var minutes = today.getMinutes();
+    var seconds = today.getSeconds();
+    var time = hours + ":" + minutes + ":" + seconds ;
+    var line = date + "@" + time + "@" + linedesc + "\n";
+    var fname = "./webSite/Logs/"+practice+".txt";
+    fs.appendFile(fname,line,function(err)
+    {
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            console.log("Log updated.");
         }
     });
 }
