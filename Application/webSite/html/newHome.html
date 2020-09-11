@@ -97,7 +97,7 @@
 
           <!--main body form for patient-->
 
-            <form action="/addPatient" method="POST" id="patientFormSignup">
+            <form action="/addPatient" method="POST" style="padding:10px; overflow: hidden;" id="patientFormSignup">
               <br>
               <h2>Add Patient</h2><hr>
 
@@ -133,12 +133,16 @@
               <br><br>
 
             </form>
+            <hr>
+            <h2>QR CODE</h2>
+            <div id="qrCode">        
+              <p style='color: white;'>Patient Scan here to fill in first time visit form</p>
+
+              <a href="/qrCode" download="3D_Binary_Model_qrCode" ><img style="width: 200px;" src="../css/images/qrCode.png"></img></a>
+            </div>
         </div>
-        <div id="qrCode">        
-          <p style='color: black;'>Patient Scan here to fill in first time visit form</p>
-          <img src="/qrCode"></img><br>
-          <a href="/qrCode" download="3D_Binary_Model_qrCode" >download</a>
-        </div>
+        
+
       </div><br><br>
     </div>
     <script type="text/javascript" src="../js/registration.js"></script>
