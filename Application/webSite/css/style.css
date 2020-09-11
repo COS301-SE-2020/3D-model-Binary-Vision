@@ -15,6 +15,16 @@
 
 }
 
+@font-face {
+  font-family: Anton;
+  src: url(fonts/Anton-Regular.ttf);
+}
+
+@font-face {
+  font-family: Abel;
+  src: url(fonts/Abel/Abel-Regular.ttf);
+}
+
 #logoWords{
 	font-family: Arial;
 	position: absolute;
@@ -431,6 +441,8 @@ textarea{
 
 h2 {
 	color: white;
+	letter-spacing: 2px;
+	font-family: Anton;
 }
 
 nav{
@@ -449,15 +461,19 @@ ul{
 
 a:hover {
 	cursor: pointer;
+
 }
 
 p {
 	color: white;
+	font-family: Abel;
 }
 
 span{
 	color: white;
 	text-decoration: bold;
+	font-size: 20px;
+	font-family: Abel;
 }
 
 hr{
@@ -516,6 +532,8 @@ h1 {
 	text-align: center;
 	margin: 0px auto;
 	color: black;
+	letter-spacing: 2px;
+	font-family: Anton;
 }
 
 input {
@@ -524,6 +542,24 @@ input {
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
+
+}
+
+input.btn{
+	font-family: Abel;
+}
+
+#rightSideBody input.btn{
+	width: 200px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	font-family: Abel;
+}
+
+label{
+	font-family: Abel;
 }
 
 /*IDs*/
@@ -585,7 +621,9 @@ input {
 
 }
 
-
+#displayNote{
+	font-family: Abel;
+}
 
 .notify{
 	width: 50%;
@@ -868,8 +906,8 @@ input[type="file"] {
 	padding-top: 30px;
 	box-shadow: 1px 0px 15px 0px black;
 	background-color: #003366;
-	margin-left: 10%;
-	margin-right: 10%;
+	margin-left: 2%;
+	margin-right: 2%;
 	border-radius: 10px;
 }
 
