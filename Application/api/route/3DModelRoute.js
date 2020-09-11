@@ -136,9 +136,15 @@ module.exports = function (app)
     app.route('/activateUser')
         .post(Model.activateUser);
 
-    app.route('/uploadImages').post (UploadController.uploadImages);
+    app.route('/uploadImages')
+        .post (UploadController.uploadImages);
 
-    app.route('/qrCode').get(Model.generatePatientSignupQRCode);
+    app.route('/qrCode')
+        .get(Model.generatePatientSignupQRCode);
 
-    app.route('/consultation/:id/stl').get(Model.getSTLFile);
+    app.route('/consultation/:id/stl')
+        .get(Model.getSTLFile);
+
+    app.route('/updateLog')
+        .post(Model.updateLog);
 }
