@@ -211,8 +211,13 @@ module.exports ={
             res.json(bookings);
             return;
         });
-    }
+    },
 
-   //===========================================================================
-
+    //===========================================================================================================
+    //Function developed by: Jacobus Janse van Rensburg
+    //function used to retrieve possible slots that a receptionist will use to create a booking using fuzzy logic
+    fuzzyLogicBooking: function(req , res){
+        //get the reason and the duration required for this booking
+        const {reason , duration}= req.body;
+    },
 }

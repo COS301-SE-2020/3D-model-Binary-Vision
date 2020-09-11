@@ -550,3 +550,44 @@ function moveSideBar()
         bookingBody.classList.add("bookingBodyInceaseWidth");
     }
 }
+
+
+//================================================================================================
+//Function developed by: Jacobus Janse van Rensburg
+//Function Used to initialize the fuzzy logic overlay to select from the different types of procedures that are common to make a booking
+function fuzzyLogic(){
+    var location = document.querySelector("#currentOverlay"); //get the element that will be dynamically populated
+
+    var population='<select id="selectedProcedure"> <option value="">Select Option</option>';
+    population+='<option value="15">checkup</option> <option value="30">Tooth Decay</option>';
+    population+='<option value="45">Gum Disease</option>  <option value="30">Tooth Sensitivity</option>';
+    population+='<option value="45">Tooth Extraction</option> <option value="30">Tooth Erosion</option>';
+    population+='<option value="30">Moouth Sores</option> </select> <button onclick="findAvailableBookings()">Select</button>';
+
+    location.innerHTML=population;
+}
+
+//=================================================================================================
+//function developed by: Jacobus Janse van Rensburg
+//Function used for the fuzzy logic to find bookings based on the option that the receptionist chose
+function findAvailableBookings(){
+
+    //get the choice that was made's reason and time period it would take 
+    var selector = document.querySelector("#selectedProcedure");
+    var reason = selector.options[selector.selectedIndex].innerHTML;
+    var time = selector.options[selector.selectedIndex].value;
+
+    console.log(reason+"\t"+time);
+
+    //API CALL TO GET THE POSSIBLE BOOKING SLOTS
+    var response = fetch("" , {
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body: JSON.stringify({"reason":reason, "duration":time})
+    });
+
+    response.then(res=> res.json().then(data => {
+        //process the returned data from the server
+    }));
+
+}
