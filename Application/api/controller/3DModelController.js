@@ -343,30 +343,44 @@ module.exports = {
     {
         if (!req.user) 
         {
-            return res.status(401);
+            //then this is a patient adding themselves
         }
-
-
-        const {idNumber, name , surname , email , gender, cellnumber} = req.body;
-
-        var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber}); //set the patients info
-
-        new_Patient.doctor = req.user; // add doctor id to the patient
-
-        new_Patient.save(function (err) 
+        else
         {
-            if (err) 
+            //this is a receptionist adding a patient
+            const {idNumber, name , surname , email , gender, cellnumber} = req.body;
+
+            var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber}); //set the patients info
+    
+            new_Patient.doctor = req.user; // add doctor id to the patient
+    
+            new_Patient.save(function (err) 
             {
-                res.status(400).send(err);
-                return;
-            }
-            else
+                if (err) 
+                {
+                    res.status(400).send(err);
+                    return;
+                }
+                else
+                {
+                    res.status(201);
+                    res.redirect("newHome.html");
+                }
+            });
+
+            Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
             {
-                res.status(201);
-                res.redirect("newHome.html");
-                return;
-            }
-        });
+                if (err)
+                {
+
+                }
+                if(rec)
+                {
+                    updateLogFile(rec.username + "@Added a Patient@PID:" +new_Patient._id,rec.practition);
+                }
+            });
+            return;
+        }        
     },
 
     //======================================================================================

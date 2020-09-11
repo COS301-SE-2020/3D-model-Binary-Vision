@@ -65,6 +65,21 @@
 
 }
 
+#containInfoRight button{
+	width: 200px;
+}
+
+#recordPage{
+	font-family: Abel;
+	width: 200px;
+}
+
+#renderpage{
+	margin-top: 10px;
+	font-family: Abel;
+	width: 200px;
+}
+
 .nav-link1 {
 	color: white;
 }
@@ -658,7 +673,7 @@ input.btn{
 }
 
 #containInfoRight{
-	padding: 30px;
+	padding: 20px;
 
 }
 
