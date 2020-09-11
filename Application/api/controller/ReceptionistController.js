@@ -33,7 +33,7 @@ module.exports ={
                     .send(err);
                 return;
             }
-            res.json({"name":receptionist.name,"surname":receptionist.surname,"practition": receptionist.practition,"Note":receptionist.Note})
+            res.json({"name":receptionist.name,"surname":receptionist.surname,"practition": receptionist.practition,"Note":receptionist.Note,"username":receptionist.username})
                 .status(200);
             return;
         });

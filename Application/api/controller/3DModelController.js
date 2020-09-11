@@ -146,7 +146,7 @@ module.exports = {
                     var minutes = today.getMinutes();
                     var seconds = today.getSeconds();
                     var time = hours + ":" + minutes + ":" + seconds ;
-                    var line = date + "@" + time + "@Practice: " + practice + " Registered!";
+                    var line = date + "@" + time + "@Practice: " + practice + " Registered!\n";
                     var fname = "./webSite/Logs/"+practice+".txt";
                     fs.writeFile(fname,line,function(err){
                         if(err)

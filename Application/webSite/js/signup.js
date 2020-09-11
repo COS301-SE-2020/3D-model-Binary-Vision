@@ -228,7 +228,7 @@ function addUser(name , surname, email ,username,choice,practice , securityCode)
             var minutes = today.getMinutes();
             var seconds = today.getSeconds();
             var time = hours + ":" + minutes + ":" + seconds ;
-            var line = date + "@" + time + "@" + username.value + "@Registered as a " + choice.value;
+            var line = date + "@" + time + "@" + username.value + "@Registered as a " + choice;
             var resp = fetch("/updateLog",{
                 method:"POST",
                 headers:{'Content-Type':'application/json; charset=utf-8'},
