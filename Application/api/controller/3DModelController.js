@@ -973,11 +973,11 @@ module.exports = {
           {
               if(status=="Postponed")
               {
-                updateLogFile(rec.username + "@Postponed a booking@BookingID:"+id,rec.practition);
+                updateLogFile(rec.username + "@Postponed a booking@BID:"+id,rec.practition);
               }
               else if(status == "Cancelled")
               {
-                updateLogFile(rec.username + "@Cancelled a booking@BookingID:"+id,rec.practition);
+                updateLogFile(rec.username + "@Cancelled a booking@BID:"+id,rec.practition);
               }
           }
       });
