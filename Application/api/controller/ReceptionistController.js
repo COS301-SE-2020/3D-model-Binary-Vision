@@ -119,6 +119,17 @@ module.exports ={
             res.redirect("/newHome.html");
 
         });
+        Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
+        {
+            if (err)
+            {
+
+            }
+            if(rec)
+            {
+                updateLogFile(rec.username + "@Made a booking@BID:"+newBooking._id,rec.practition);
+            }
+        });
     },
 
    //===========================================================================
@@ -500,5 +511,27 @@ function incrementDate(day , dayCap){
 }
 
 //======================================================================================================
-//Function developed by: Jacobus Janse van Rensburg
-//function used to calculate the ending time that a booking will have
+//Function developed by: Steven Visser
+//writes new entries to the log file
+function updateLogFile(linedesc,practice)
+{
+    var today = new Date();
+    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+    var hours = today.getHours();
+    var minutes = today.getMinutes();
+    var seconds = today.getSeconds();
+    var time = hours + ":" + minutes + ":" + seconds ;
+    var line = date + "@" + time + "@" + linedesc + "\n";
+    var fname = "./webSite/Logs/"+practice+".txt";
+    fs.appendFile(fname,line,function(err)
+    {
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            console.log("Log updated.");
+        }
+    });
+}
