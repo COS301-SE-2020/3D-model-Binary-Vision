@@ -239,6 +239,18 @@
 	box-shadow: 1px 0px 15px 0px black;
 }
 
+#qrCodeImage {
+	background-color: white;
+	padding: 20px;
+	border-radius: 35px;
+	width: 150px;
+	transition: 0.1s;
+}
+
+#qrCodeImage:hover {
+	box-shadow: 1px 0px 15px 0px lightgray;
+}
+
 #saveDoctorNote {
 	color: white;
 }
