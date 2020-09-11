@@ -237,7 +237,7 @@ module.exports ={
         var today = new Date();     //get the current date
         var day = today.getDate() , month = today.getMonth() , year = today.getFullYear();
         var date = day+'/'+month+'/'+year;
-        var dayCap = getDayCap(month); //used to make sure that the dates are continuasly valid when checking on edge cases
+        var dayCap = getDayCap(parseInt(month)); //used to make sure that the dates are continuasly valid when checking on edge cases
         var options = [];   //create an empty array of the options that could possible be 
 
         while (options.length < 5){  //while we dont have a minumum of at least 5 options to choose from
@@ -249,15 +249,69 @@ module.exports ={
                 //loop through the doctors 
                 for(var i =0 ; i < orderedBookings.length ; i ++){
                     var possible = []; //array to hold bookings that might be a possible match for what we need for specific doctor
-                    
 
+                    //loop through the operating hours of to look for matches
+                    for (var j = 0 ; j < operationTimes.length; i ++){
+                        //loop trough the bookings that that doctor has
+                        for(var k =0 ; k < orderedBookings[i].length ; k++){
+                            if(orderedBookings[i][k].time == operationTimes[k])
+                            {
+                                continue; //ignore this time and continue with the next time 
+                            }
+                            else if (isOverlapping(orderedBookings[i][k], operationTimes[k],duration, operationTimes)){
+                                //check if the times overlap
+                                continue; //if the isOverlapping function returns true we move on to the next available time slot
+                            }
+                            var allowed = true;
 
+                            //test agaisnt the possible set that has been derived so long
+                            for(var l in possible){
+                                //test for a overlap with this 
+                                if((isOverlapping(possible[l], operationTimes[k] , duration , operationTimes)) || possible[i].start == operationTimes[k]){
+                                    //there is an overlap with a possible option 
+                                    allowed = false;
+                                    //remove the possible option
+                                    for (var m = l ; m < possible.length;m++)
+                                    {
+                                        var temp = possible[m+1]
+                                        possible[m]= temp;
+                                    }
+                                    possible.pop(); //remove the last element in the array
+                                }
+                            }
+                            if(allowed){
+                                //we can add this information as a possible
+                                var record = JSON.stringify({"doctor":orderedBookings[i].doctor,"start":operationTimes[k],"end":(operationTimes[k]+(parseInt(duration)/15))});
+                                possible.push(record);
+                            }
+                        }
+
+                    }
+                    //add the left over possibles to the options
+                    if(possible){
+                        for (var n in possible)
+                        {
+                            options.push(possible[n]);
+                        }
+                    }
                 }
             }); 
             
+            //increment the date
+            date = incrementDate(parseInt(day), dayCap);
+            if(date == 1)
+            {
+                dayCap = getDayCap(parseInt(month)+1);
+                if(parseInt(month)+1 == 13)
+                {
+                    month = 1;
+                }else{
+                    month = parseInt(month)+1;
+                }
+            }
         }
 
-
+        //return the options back to the client 
     },
 }
 
@@ -268,8 +322,9 @@ module.exports ={
 function getDayCap(month){
     var dayCap;
 
-    switch(parseInt(month)){
+    switch(month){
         case 2: dayCap = 28;break;
+        case 13: dayCap =31;break;
         case (month%2 == 1):dayCap= 31; break;
         default: dayCap = 30; break;
     }
@@ -317,4 +372,47 @@ function orderBookings(bookings){
     }
 
     return orderedBookings;
+}
+
+//=======================================================================================================================
+//Function Deceloped by: Jacobus Janse van Rensburg 
+//Helper function to determine if the times of a booking we wish to create is overlapping with another booking
+function isOverlapping(booking , startTime , duration , operationTime){
+    var durationIndexLength = parseInt(duration)/15; 
+    var bookStart, bookEnd , start, end;
+
+    //get all the index's to test for over lapping records
+    for(var i in operationTime)
+    {
+        if (operationTime[i]==bookings.time) bookStart = i;
+        if (operationTime[i]==booking.endTime) bookEnd =i;
+        if (operationTime[i] == startTime) start = i;
+    }
+    //test if the end time is not too late
+    if ((start+durationIndexLength)>= operationTime.length)
+    {
+        return true;  //booking is not allowed
+    }
+
+    //test for over lapping 
+    if ( (start > bookStart && start < bookEnd) || (end < bookEnd && end > bookStart) ){
+        //overlap
+        return true; //booking is not allowed
+    }
+
+    //if this is reached then no overlap has occured and we return false
+    return false;
+}
+
+//==========================================================================================================================
+//Function developed by: Jacobus Janse van Rensburg
+//helper function to increment the date that will be used to look up for bookngs 
+function incrementDate(day , dayCap){
+
+    if (day == dayCap)
+    {
+        return 1;
+    }
+
+    return day+1;
 }
