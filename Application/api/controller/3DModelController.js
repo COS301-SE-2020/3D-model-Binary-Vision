@@ -64,6 +64,7 @@ module.exports = {
                         //it is a doctor logging in and we return to the doctors home page
                         res.cookie("drCookie",doctor._id,{maxAge:9000000,httpOnly:true});
                         res.redirect("/doctorSchedule.html");
+                        updateLogFile(username+"@Logged in",doctor.practition);
                         return;
                     }
                     else{
@@ -87,6 +88,7 @@ module.exports = {
                    if (result == true){
                         res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
                         res.redirect("/newHome.html");
+                        updateLogFile(username+"@Logged in",receptionist.practition);
                         return;
                    }
                    else{
@@ -104,9 +106,32 @@ module.exports = {
 
     //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg
-    //This function resets the doctor cookie and returns the user to the preview page
+    //Updated by: Steven Visser
+    //This function resets the doctor cookie and returns the user to the preview page and updates the log file
     logout:function (req, res)
     {
+        Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doctor)
+        {
+            if (err)
+            {
+
+            }
+            if(doctor)
+            {
+                updateLogFile(doctor.username + "@Logout",doctor.practition);
+            }
+        });
+        Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
+        {
+            if (err)
+            {
+
+            }
+            if(rec)
+            {
+                updateLogFile(rec.username + "@Logout",rec.practition);
+            }
+        });
         res.cookie("drCookie","",{maxAge:0,httpOnly:true});
         res.cookie("patientCookie","",{maxAge:0,httpOnly:true});
         res.cookie("consultation","",{maxAge:0});
@@ -318,30 +343,44 @@ module.exports = {
     {
         if (!req.user) 
         {
-            return res.status(401);
+            //then this is a patient adding themselves
         }
-
-
-        const {idNumber, name , surname , email , gender, cellnumber} = req.body;
-
-        var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber}); //set the patients info
-
-        new_Patient.doctor = req.user; // add doctor id to the patient
-
-        new_Patient.save(function (err) 
+        else
         {
-            if (err) 
+            //this is a receptionist adding a patient
+            const {idNumber, name , surname , email , gender, cellnumber} = req.body;
+
+            var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber}); //set the patients info
+    
+            new_Patient.doctor = req.user; // add doctor id to the patient
+    
+            new_Patient.save(function (err) 
             {
-                res.status(400).send(err);
-                return;
-            }
-            else
+                if (err) 
+                {
+                    res.status(400).send(err);
+                    return;
+                }
+                else
+                {
+                    res.status(201);
+                    res.redirect("newHome.html");
+                }
+            });
+
+            Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
             {
-                res.status(201);
-                res.redirect("newHome.html");
-                return;
-            }
-        });
+                if (err)
+                {
+
+                }
+                if(rec)
+                {
+                    updateLogFile(rec.username + "@Added a Patient@PID:" +new_Patient._id,rec.practition);
+                }
+            });
+            return;
+        }        
     },
 
     //======================================================================================
@@ -1213,6 +1252,29 @@ function sendsignupConfurmationEmail(practice , user){
         }
         else{
             console.log(info);
+        }
+    });
+}
+
+function updateLogFile(linedesc,practice)
+{
+    var today = new Date();
+    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+    var hours = today.getHours();
+    var minutes = today.getMinutes();
+    var seconds = today.getSeconds();
+    var time = hours + ":" + minutes + ":" + seconds ;
+    var line = date + "@" + time + "@" + linedesc + "\n";
+    var fname = "./webSite/Logs/"+practice+".txt";
+    fs.appendFile(fname,line,function(err)
+    {
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            console.log("Log updated.");
         }
     });
 }
