@@ -116,8 +116,7 @@ var ConsultationSchema = new Schema({
         required: true
     },
     video:{
-        type: Schema.Types.ObjectId,
-        required: true
+        type: Schema.Types.ObjectId
     },
     STL:{
         type: Schema.Types.ObjectId

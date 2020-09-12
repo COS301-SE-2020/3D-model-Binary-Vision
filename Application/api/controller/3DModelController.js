@@ -1195,7 +1195,7 @@ module.exports = {
 
                 }
                 else if(doctor){
-                    var url = "flapjacks.goodx.co.za/addPatient?practice="+doctor.practice;
+                    var url = "flapjacks.goodx.co.za/QRAddPatient?practice="+doctor.practition;
                     res.contentType('png');
                     qrCode.toFileStream(res , url);                    //return the qr code
                 }
@@ -1205,7 +1205,7 @@ module.exports = {
 
                         }
                         else if(recep){
-                            var url = "flapjacks.goodx.co.za/addPatient?practice="+recep.practice;
+                            var url = "flapjacks.goodx.co.za/QRAddPatient?practice="+recep.practition;
                             res.contentType('png');
                             qrCode.toFileStream(res , url);
                         }
