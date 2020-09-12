@@ -176,7 +176,7 @@ function saveConsultation(pid)
 		var response = fetch("/saveConsultation",{
 			method:"POST",
 			headers:{'Content-Type': 'application/json; charset=UTF-8'},
-			body: JSON.stringify({"_id":pid,"note":docNote})
+			body: JSON.stringify({"_id":pid,"note":docNote.value})
 		});
 	
 		response.then(res => 
@@ -373,7 +373,7 @@ function populateBookingInformation(){
 // function to get the required patients information and populate the patient information
 function popuatePatientInfo(id){
 
-	document.getElementById("doctorsNotes").innerHTML = "<p style='font-weight: bold;'>Doctors Notes:</p><textarea id='doctorsNotes' style='width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;'></textarea><button class='btn btn-primary' id='saveDoctorNote' type='button' style='margin-top: 10px;' onclick='saveConsultation("+id+")'>Save Note</button>";
+	document.getElementById("docnotes").innerHTML = "<p style='font-weight: bold;'>Doctors Notes:</p><textarea id='doctorsNotes' style='width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;'></textarea><button class='btn btn-primary' id='saveDoctorNote' type='button' style='margin-top: 10px;' onclick='saveConsultation(\""+id+"\")'>Save Note</button>";
 
 
 	var response = fetch ("/singlePatient",{
@@ -391,7 +391,7 @@ function popuatePatientInfo(id){
 			//set the patients attributes
 			document.querySelector("#patientName").innerHTML ="Name: "+data.name;
 			document.querySelector("#patientSurname").innerHTML ="Surname: "+data.surname;
-			document.querySelector("#patientID").innerHTML ="ID: "+data.surname;
+			document.querySelector("#patientID").innerHTML ="ID: "+data.idNumber;
 			document.querySelector("#patientGender").innerHTML="Gender: "+data.gender;
 			document.querySelector("#patientEmail").innerHTML="Email: "+data.email;
 			document.querySelector("#patientContactNo").innerHTML="Contact Number: "+data.cellnumber; 

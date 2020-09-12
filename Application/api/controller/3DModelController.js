@@ -1269,7 +1269,8 @@ module.exports = {
             {
                 if (err)
                 {
-                  res.send(400);
+                  res.status(400);
+                  return;
                 }
                 res.status(201)
                   .send("Created");
