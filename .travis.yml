@@ -6,6 +6,8 @@ cache:
   directories:
     - ~/Application/node_modules
 
+service_name: travis-pro
+
 services:
   - mongodb
 
