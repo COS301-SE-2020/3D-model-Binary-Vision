@@ -1269,6 +1269,18 @@ module.exports = {
                 reason: req.body.reason
             });
 
+            Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doctor)
+            {
+                if (err)
+                {
+    
+                }
+                if(doctor)
+                {
+                    updateLogFile(doctor.username + "@Saved a consultation@CID:"+consultation._id,doctor.practition);
+                }
+            });
+
             consultation.save(function (err) 
             {
                 if (err)
