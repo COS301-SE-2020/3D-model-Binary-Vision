@@ -949,7 +949,18 @@ module.exports = {
               {
                 updateLogFile(rec.username + "@Cancelled a booking@BID:"+id,rec.practition);
               }
-              else if(status == "Completed")
+          }
+      });
+
+      Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doc)
+      {
+          if (err)
+          {
+
+          }
+          if(doc)
+          {
+              if(status == "Completed")
               {
                 updateLogFile(rec.username + "@Completed a booking@BID:"+id,rec.practition);
               }
