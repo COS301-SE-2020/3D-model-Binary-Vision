@@ -227,7 +227,7 @@ module.exports = {
                                 else 
                                 {
                                     //email the head receptionist over here
-                                    sendsignupConfurmationEmail(practice , doctor);
+                                    sendsignupConfirmationEmail(practice , doctor);
                                     res.redirect("/login.html");
                                     return;
                                 }
@@ -245,7 +245,7 @@ module.exports = {
                                 else
                                 {
                                     //email the head receptionist over here
-                                    sendsignupConfurmationEmail(practice , receptionist);
+                                    sendsignupConfirmationEmail(practice , receptionist);
                                     res.redirect("/login.html");
                                     return;
                                 }
@@ -1279,7 +1279,7 @@ module.exports = {
 //============================================================================================
 // Function developed by: Jacobus Janse van Rensburg 
 // Function sends a email to head receptionist to confirm / reject a user signing up
-function sendsignupConfurmationEmail(practice , user){
+function sendsignupConfirmationEmail(practice , user){
 
     var emailOptions={
         from: 'flap.jacks.cs@gmail.com',
