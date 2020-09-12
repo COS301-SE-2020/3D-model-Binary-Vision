@@ -47,7 +47,7 @@ module.exports = {
 
                 //connect c++ program here and send file name when done c++ deletes file
                 //using spawn as a chid-process 
-                const ls = spawn('./smfAlgorithm/Code/main ', [dir]);
+                const ls = spawn('./smfAlgorithm/Code/main', [dir]);
 
 
                 ls.on('close', code=>{

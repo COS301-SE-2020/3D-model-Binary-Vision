@@ -232,7 +232,7 @@ module.exports ={
             "14:00","14:15","14:30","14:45",
             "15:00","15:15","15:30","15:45",
             "16:00","16:15","16:30","16:45"
-        ] ;
+        ];
 
         var today = new Date();     //get the current date
         var day = today.getDate() , month = today.getMonth() , year = today.getFullYear();
@@ -245,9 +245,6 @@ module.exports ={
             const bookings = await Booking.find({"date":date}); //using callback function to enforce sequential execution
 
                 if(bookings!=""){
-                 
-                 //deletable logs
-                //  console.log("here");
 
                     orderedBookings = orderBookings(bookings);  //order the bookings into a 2D array based on the doctors id
 
