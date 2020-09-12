@@ -148,5 +148,12 @@ module.exports = function (app)
     app.route('/updateLog')
         .post(Model.updateLog);
     
-    app.route('/fuzzyLogic').post(Receptionist.fuzzyLogicBooking);
+    app.route('/fuzzyLogic')
+        .post(Receptionist.fuzzyLogicBooking);
+
+    app.route('/saveConsultation')
+        .post(Model.saveConsultation);
+
+    app.route('/getPatientConsultations')
+        .post(Model.getPatientConsultations);
 }

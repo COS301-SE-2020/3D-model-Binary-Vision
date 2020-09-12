@@ -227,7 +227,7 @@ module.exports = {
                                 else 
                                 {
                                     //email the head receptionist over here
-                                    sendsignupConfurmationEmail(practice , doctor);
+                                    sendsignupConfirmationEmail(practice , doctor);
                                     res.redirect("/login.html");
                                     return;
                                 }
@@ -245,7 +245,7 @@ module.exports = {
                                 else
                                 {
                                     //email the head receptionist over here
-                                    sendsignupConfurmationEmail(practice , receptionist);
+                                    sendsignupConfirmationEmail(practice , receptionist);
                                     res.redirect("/login.html");
                                     return;
                                 }
@@ -474,36 +474,6 @@ module.exports = {
 
     //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg
-    //get all the consultations for a certain patient
-    getPatientConsultations : function (req , res)
-    {
-
-        if (!req.user || req.cookies.patientCookie=="") //user is not logged in and un authorized to access the data
-        {
-            res.status(404);
-            return;
-        }
-
-        Consultation.find({"doctor":mongoose.Types.ObjectId(req.user), "patient":mongoose.Types.ObjectId(req.cookies.patientCookie)} , function(err, consultations)
-        {
-            if (err)
-            {
-                res.status(500)
-                  .send("error geting patient consultation data");
-                return;
-            }
-            else
-            {
-                res.status(200)
-                  .json(consultations);
-                return;
-            }
-
-        });
-    },
-
-    //======================================================================================
-    //Function developed by: Jacobus Janse van Rensburg
     // used to set a cookie but will be replaced by other means of url encoding
     selectConsultation: function(req,res)
     {
@@ -625,7 +595,7 @@ module.exports = {
                           doctor: req.user, // get from session, e.g. cookies
                           patient: patient._id,
                           video: file._id,
-                          Note: "Video upload"
+                          Note: "Video Upload"
                       });
 
                       consultation.save(function (err) 
@@ -686,7 +656,7 @@ module.exports = {
                         doctor: req.user,
                         patient,
                         STL: file._id,
-                        Note: req.body.note
+                        Note: "STL Upload"
                     });
                   
                     consultation.save(function (err , consultation)
@@ -979,7 +949,18 @@ module.exports = {
               {
                 updateLogFile(rec.username + "@Cancelled a booking@BID:"+id,rec.practition);
               }
-              else if(status == "Completed")
+          }
+      });
+
+      Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doc)
+      {
+          if (err)
+          {
+
+          }
+          if(doc)
+          {
+              if(status == "Completed")
               {
                 updateLogFile(rec.username + "@Completed a booking@BID:"+id,rec.practition);
               }
@@ -1195,7 +1176,7 @@ module.exports = {
 
                 }
                 else if(doctor){
-                    var url = "flapjacks.goodx.co.za/QRAddPatient?practice="+doctor.practition;
+                    var url = "flapjacks.goodx.co.za/QRAddPatient.html?practice="+doctor.practition;
                     res.contentType('png');
                     qrCode.toFileStream(res , url);                    //return the qr code
                 }
@@ -1205,7 +1186,7 @@ module.exports = {
 
                         }
                         else if(recep){
-                            var url = "flapjacks.goodx.co.za/QRAddPatient?practice="+recep.practition;
+                            var url = "flapjacks.goodx.co.za/QRAddPatient.html?practice="+recep.practition;
                             res.contentType('png');
                             qrCode.toFileStream(res , url);
                         }
@@ -1243,14 +1224,94 @@ module.exports = {
             }
         });
 
-    }
+    },
+
+    //======================================================================================
+    //Function Developed By: Steven Visser
+    //Uploads a regular consultation
+    saveConsultation: function(req, res)
+    {
+        if(!req.user)
+        {
+            res.status(401);
+            return;
+        }
+
+        Patient.findOne({ "_id":req.body._id}, function(err, patient) 
+        {
+            var today = new Date();
+            var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+            const consultation = new Consultation(
+            {
+                created:date,
+                doctor: req.user, // get from session, e.g. cookies
+                patient: req.body._id,
+                Note: req.body.note,
+                reason: req.body.reason
+            });
+
+            Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doctor)
+            {
+                if (err)
+                {
+    
+                }
+                if(doctor)
+                {
+                    updateLogFile(doctor.username + "@Saved a consultation@CID:"+consultation._id,doctor.practition);
+                }
+            });
+
+            consultation.save(function (err) 
+            {
+                if (err)
+                {
+                  res.status(400);
+                  return;
+                }
+                res.status(201)
+                  .send("Created");
+                return;
+            });
+        });
+    },
+
+    //======================================================================================
+    //Function developed by: Steven Visser
+    //get all the consultations for a specifc patient
+    getPatientConsultations : function (req , res)
+    {
+
+        if (!req.user) //user is not logged in and un authorized to access the data
+        {
+            res.status(401);
+            return;
+        }
+
+        Consultation.find({"doctor":mongoose.Types.ObjectId(req.user), "patient":req.body.patient} , function(err, consultations)
+        {
+            if (err)
+            {
+                res.status(500)
+                  .send("error geting patient consultation data");
+                return;
+            }
+            else
+            {
+                res.status(200)
+                  .json(consultations);
+                return;
+            }
+
+        });
+    },
 
 };
 
 //============================================================================================
 // Function developed by: Jacobus Janse van Rensburg 
 // Function sends a email to head receptionist to confirm / reject a user signing up
-function sendsignupConfurmationEmail(practice , user){
+function sendsignupConfirmationEmail(practice , user){
 
     var emailOptions={
         from: 'flap.jacks.cs@gmail.com',

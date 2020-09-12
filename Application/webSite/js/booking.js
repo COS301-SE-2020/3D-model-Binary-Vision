@@ -556,13 +556,28 @@ function moveSideBar()
 //Function developed by: Jacobus Janse van Rensburg
 //Function Used to initialize the fuzzy logic overlay to select from the different types of procedures that are common to make a booking
 function fuzzyLogic(){
+    var indOverlay = document.getElementById("individual");
+    indOverlay.style.display = "none";
+    var overlayTable = document.getElementById('currentOverlayTable');
+    overlayTable.style.display = "none";
+
+    var overlay = document.getElementById("currentOverlay");
+    overlay.style.position = "relative";
+    overlay.style.display = "inline-block";
+    overlay.style.backgroundColor= "#003366";
+    overlay.style.width= "300px";
+    overlay.style.color= "white";
+    overlay.style.textAlign = "center";
+    overlay.style.borderRadius = "5px";
+    overlay.style.boxShadow = "1px 0px 15px 0px black";
+
     var location = document.querySelector("#currentOverlay"); //get the element that will be dynamically populated
 
     var population='<select id="selectedProcedure"> <option value="">Select Option</option>';
     population+='<option value="15">checkup</option> <option value="30">Tooth Decay</option>';
     population+='<option value="45">Gum Disease</option>  <option value="30">Tooth Sensitivity</option>';
     population+='<option value="45">Tooth Extraction</option> <option value="30">Tooth Erosion</option>';
-    population+='<option value="30">Moouth Sores</option> </select> <button onclick="findAvailableBookings()">Select</button>';
+    population+='<option value="30">Moouth Sores</option> </select> <button id="btnCommonBooking" class="btn btn-primary" onclick="findAvailableBookings()">Select</button>';
 
     location.innerHTML=population;
 }

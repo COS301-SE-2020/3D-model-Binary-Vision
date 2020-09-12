@@ -97,6 +97,16 @@
 
 }
 
+#selectedProcedure {
+	margin: 10px;
+	padding-right: 7px;
+	padding-left: 7px;
+}
+
+#btnCommonBooking {
+	margin: 20px;
+}
+
 .selectDocotor{
 	margin-left: 30px;
 	width: 200px;
@@ -613,11 +623,11 @@ input.btn{
 }
 
 #rightSideBody input.btn{
+	transform: translateY(-20px);
 	width: 200px;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
-	position: relative;
 	font-family: Abel;
 }
 
@@ -630,8 +640,6 @@ input.btn{
 	padding: 30px;
 	color: white;
 }
-
-
 
 /*IDs*/
 #doctorFormSignup{
@@ -660,6 +668,7 @@ input.btn{
 }
 
 #bookingInfo{
+	transform: translateY(-35px);
 	background-color: #003366;
 	position: fixed;
 	top: 270px;
@@ -757,6 +766,16 @@ button.btn{
 	font-size: 150%;
 }
 
+/*.containerRight {
+	justify-content: space-around;
+	align-items: flex-start;
+
+
+	position: -webkit-sticky;
+	position: sticky;
+	bottom: 1rem;
+}*/
+
 #rightSideBody
 {
 	position: fixed;
@@ -768,7 +787,6 @@ button.btn{
 	transition: 1s;
 	width: 240px;
 	bottom: 0;
-
 }
 
 .noteButtonsContainer {

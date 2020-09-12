@@ -46,7 +46,7 @@
 			<!--sideBar-->
 
 			<div id="sideBody" style="background-color: white; height: 100%; position: fixed;">
-				<img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrowConsultation('arrowSideBody')" style="top: 90px;">
+				<img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrowConsultation('arrowSideBody')" style="top: 60px;">
     			<label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 73px); display: none; position: relative;" onclick="rotateArrowConsultation('arrowSideBody')">Profile Info</label>
 
 			    <div id="sideBar">
@@ -74,19 +74,19 @@
 			<!--right bar-->
 				<div class="containerRight">
 				    <div id="rightSideBody" style="width: 240px;">
-				        <div id="containInfoRight" style="position: fixed; top: 40px">
-				        	<br><br>
-				          		TIME: <hr> <p id="time2" style="color:black; font-weight: bold;"></p>  
+				        <div id="containInfoRight" style="position: fixed; top: 30px">
+				        	<br>
+				          		<!--TIME: <hr> <p id="time2" style="color:black; font-weight: bold;"></p>  
 				          		NOTES ON PATIENT: <hr><p id="patientqq" style="color:black; font-weight: bold;"></p> <br>
 							
-				          		<br><br><br>
+				          		<br>-->
 				          		3D SETTINGS<hr>
 
 								<button class="btn btn-warning" style="margin-right: 10px; margin-bottom: 10px; margin-top: 10px;" onclick=newSTL()>Model</button>
 								<button class="btn btn-success" onclick=newVideo()>Media</button>
 								<a class="btn btn-danger" href="#" id = "renderpage">Render</a>
 								
-								<br><br><br>
+								<br><br>
 								PATIENT RECORDS<hr>
 								<a class="btn btn-primary" href="recordPage.html" id = "recordPage">Records</a>
 							</div>
@@ -128,10 +128,10 @@
 							</div>
 						</div>
 
-						<div class="doctorsNotes">
+						<div class="doctorsNotes" id = "docnotes">
 							<p style="font-weight: bold;">Doctors Notes:</p>
 							<textarea id="doctorsNotes" style="width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;"></textarea>
-							<button class="btn btn-primary" id="saveDoctorNote" type="button" style="margin-top: 10px;" onclick="saveDoctorNote()">Save Note</button>
+							<button class="btn btn-primary" id="saveDoctorNote" type="button" style="margin-top: 10px;" onclick="saveConsultation()">Save & Exit Consultation</button>
 						</div>
 
 						<br><br>
