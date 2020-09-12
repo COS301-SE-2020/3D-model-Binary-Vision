@@ -1250,7 +1250,28 @@ module.exports = {
     //Uploads a regular consultation
     saveConsultation: function(req, res)
     {
-        
+        Patient.findOne({ "_id": req.cookies.patientCookie }, function(err, patient) 
+                  {
+                      // handle err
+                      // handle if patient == null (not found)
+                      const consultation = new Consultation(
+                      {
+                          doctor: req.user, // get from session, e.g. cookies
+                          patient: patient._id,
+                          Note: req.body.note
+                      });
+
+                      consultation.save(function (err) 
+                      {
+                          if (err)
+                          {
+                            res.send(400);
+                          }
+                          res.status(201)
+                            .send("Created");
+                          return;
+                      });
+                  });
     }
 
 };
