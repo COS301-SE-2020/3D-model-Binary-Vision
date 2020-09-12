@@ -95,9 +95,6 @@ var Receptionist = new Schema({
     },
     Note:{
         type:String
-    },
-    active:{
-        type: Boolean , default:false
     }
 });
 
@@ -137,9 +134,6 @@ var Booking = new Schema({
         type:String,
         required:true
     },
-    endTime:{
-        type:String
-    },
     patient:{
         type:mongoose.Types.ObjectId,
         required:true
@@ -150,10 +144,6 @@ var Booking = new Schema({
     },
     reason:{
         type:String
-    },
-    status:{
-        type:String,
-        default:'Pending'
     }
 })
 

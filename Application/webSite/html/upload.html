@@ -1,7 +1,8 @@
 <html>
   <body>
-    <form method="POST" action="/uploadImages" enctype="multipart/form-data">
-      <input type="file" name="images[]" multiple /><br>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+      <input name="idNumber" />
+      <input type="file" name="video" />
       <button type="submit">Submit</button>
     </form>
   </body>

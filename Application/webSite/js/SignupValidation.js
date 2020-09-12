@@ -12,19 +12,6 @@ window.onload= function()
     var choice = option1[1]; // value holds the accept or reject option
 
     var option2 = options[1].split("=");
-    var user = option2[1]; //variable holds the users id to use the action 
-
-    console.log("User: "+user+ "\nOption: "+choice);
-
-
-    var response = fetch("/activateUser", {
-        method: "POST",
-        headers:{'Content-Type': 'application/json; charset=UTF-8'},
-        body: JSON.stringify({user, choice})
-    });
-
-    response.then(res=> {
-
-    });
+    var userID = option2[1]; //variable holds the users id to use the action 
 
 }

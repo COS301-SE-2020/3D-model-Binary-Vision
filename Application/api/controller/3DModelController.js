@@ -7,13 +7,12 @@
 
 "use strict";
 //set up the database first
-
 var fs = require("fs");
 const bcrypt = require('bcrypt');
+
 const { createModel } = require('mongoose-gridfs');
 var formidable = require("formidable");
 var mongoose = require("mongoose");
-var qrCode = require('qrcode');
 
 var Doctor = require("../model/3DModelModel.js").Doctor;
 var Patient = require("../model/3DModelModel.js").Patient;
@@ -44,27 +43,26 @@ module.exports = {
     //This function Populates the doctor cookie with the correct credentials if the doctor logs in successfully
     login: function (req, res) 
     {
-
         var { username, password } = req.body;
 
         password = frontsalt+password+backSalt;
     
-        Doctor.findOne({ username , "active":true}, function (err, doctor) 
-        {
+        Doctor.findOne({ username }, function (err, doctor) 
+        {   
             if (err) 
             {
-                console.log("error");
+                res.send(err);
                 return;
             }
             if (doctor) 
-            {
+            {   
                 //check if the passwords match
                 bcrypt.compare(password , doctor.password, function(erro , result){
+
                     if(result == true){
                         //it is a doctor logging in and we return to the doctors home page
                         res.cookie("drCookie",doctor._id,{maxAge:9000000,httpOnly:true});
                         res.redirect("/doctorSchedule.html");
-                        updateLogFile(username+"@Logged in",doctor.practition);
                         return;
                     }
                     else{
@@ -75,7 +73,7 @@ module.exports = {
             //there was no doctor and we will now check if it is a receptionist
         });
 
-        Receptionist.findOne({username,"active":true}, function(err, receptionist){
+        Receptionist.findOne({username}, function(err, receptionist){
             if (err)
             {
               res.send(err);
@@ -88,50 +86,25 @@ module.exports = {
                    if (result == true){
                         res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
                         res.redirect("/newHome.html");
-                        updateLogFile(username+"@Logged in",receptionist.practition);
                         return;
                    }
                    else{
                        res.send(error);
-                       return;
                    }
                     
                 })
 
             }
         });
-        
+     
         return;
     },
 
     //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg
-    //Updated by: Steven Visser
-    //This function resets the doctor cookie and returns the user to the preview page and updates the log file
+    //This function resets the doctor cookie and returns the user to the preview page
     logout:function (req, res)
     {
-        Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doctor)
-        {
-            if (err)
-            {
-
-            }
-            if(doctor)
-            {
-                updateLogFile(doctor.username + "@Logout",doctor.practition);
-            }
-        });
-        Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
-        {
-            if (err)
-            {
-
-            }
-            if(rec)
-            {
-                updateLogFile(rec.username + "@Logout",rec.practition);
-            }
-        });
         res.cookie("drCookie","",{maxAge:0,httpOnly:true});
         res.cookie("patientCookie","",{maxAge:0,httpOnly:true});
         res.cookie("consultation","",{maxAge:0});
@@ -140,9 +113,7 @@ module.exports = {
 
     //======================================================================================
     //function developed by: Jacobus Janse van Rensburg
-    //Allows the registration of a new practice
-    //modified by: Steven Visser 
-    //reason: Create a qr code for the practice to add patients as well
+    // allows the registration of a new practice
     practiceRegistration: function(req, res){
         const {practice , securityCode, headReceptionist} = req.body;
 
@@ -150,7 +121,7 @@ module.exports = {
             if (prac)
             {
                 //practition already registered;
-                res.status(400);
+                res.sendStatus(400);
                 return;
             }
 
@@ -162,27 +133,7 @@ module.exports = {
                     res.send(err);
                     return;
                 }
-                else
-                {
-
-                    var today = new Date();
-                    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
-                    var hours = today.getHours();
-                    var minutes = today.getMinutes();
-                    var seconds = today.getSeconds();
-                    var time = hours + ":" + minutes + ":" + seconds ;
-                    var line = date + "@" + time + "@Practice: " + practice + " Registered!\n";
-                    var fname = "./webSite/Logs/"+practice+".txt";
-                    fs.writeFile(fname,line,function(err){
-                        if(err)
-                        {
-                            console.log(err);
-                        }
-                        else
-                        {
-                            console.log("Practice Log File successfully created!");
-                        }
-                    });
+                else{
                     res.redirect('/signup.html');
                     return;
                 }
@@ -201,18 +152,21 @@ module.exports = {
        
         //first check if the practition exists
         Practice.findOne({"practice":practition}, function(err, practice){
+
             if (err)
             {
-                res.status(400);
+                res.sendStatus(400);
                 return;
             }
             if(practice){
+
                 if(practice.securityCode == securityCode)
                 {
                     //valid practition code to add inactive user to database and send an email to head receptionist
                     password = frontsalt+password+backSalt;
                     bcrypt.hash(password,10,function(err, password1){
                         password = password1;
+
                         if(choice=="Doctor")
                         {
                             const doctor = new Doctor({name,surname,email,username, password,practition});
@@ -220,12 +174,12 @@ module.exports = {
                             {
                                 if (err) 
                                 {
-                                    res.status(400);
+                                    res.sendStatus(400);
                                     res.send(err);
                                     return;
                                 }
                                 else 
-                                {
+                                {   
                                     //email the head receptionist over here
                                     sendsignupConfurmationEmail(practice , doctor);
                                     res.redirect("/login.html");
@@ -239,8 +193,9 @@ module.exports = {
                             receptionist.save(function(err, saved)
                             {
                                 if(err)
-                                {
-                                res.send(err);
+                                {   
+                                    res.sendStatus(400);
+                                    res.send(err);
                                 }
                                 else
                                 {
@@ -256,13 +211,13 @@ module.exports = {
                 }
                 else{
                     //practition code not valid for signup attempt
-                    res.status(401);//unauthorized
+                    res.sendStatus(401);//unauthorized
                     return;
                 }
             }
             else{
                 //no practice found
-                res.status(404);
+                res.sendStatus(404);
                 return;
                 //register a new practice ?
             }
@@ -293,7 +248,6 @@ module.exports = {
                 return;
             }
         })
-
     },
 
      //======================================================================================
@@ -319,7 +273,6 @@ module.exports = {
                 return;
             }
         });
-
     },
 
     //======================================================================================
@@ -328,8 +281,8 @@ module.exports = {
     selectPatient: function(req,res)
     {
         if (!req.user)
-        {
-            return res.status(404);
+        {   
+            return res.sendStatus(404);
         }
         res.cookie("patientCookie",req.body.PatientID)
           .send("Patient Cookie is set");
@@ -343,44 +296,30 @@ module.exports = {
     {
         if (!req.user) 
         {
-            //then this is a patient adding themselves
+            return res.sendStatus(401);
         }
-        else
+
+
+        const {idNumber, name , surname , email , gender, cellnumber} = req.body;
+
+        var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber}); //set the patients info
+
+        new_Patient.doctor = req.user; // add doctor id to the patient
+
+        new_Patient.save(function (err) 
         {
-            //this is a receptionist adding a patient
-            const {idNumber, name , surname , email , gender, cellnumber} = req.body;
-
-            var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber}); //set the patients info
-    
-            new_Patient.doctor = req.user; // add doctor id to the patient
-    
-            new_Patient.save(function (err) 
+            if (err) 
             {
-                if (err) 
-                {
-                    res.status(400).send(err);
-                    return;
-                }
-                else
-                {
-                    res.status(201);
-                    res.redirect("newHome.html");
-                }
-            });
-
-            Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
+                res.status(400).send(err);
+                return;
+            }
+            else
             {
-                if (err)
-                {
-
-                }
-                if(rec)
-                {
-                    updateLogFile(rec.username + "@Added a Patient@PID:" +new_Patient._id,rec.practition);
-                }
-            });
-            return;
-        }        
+                res.status(201);
+                res.redirect("newHome.html");
+                return;
+            }
+        });
     },
 
     //======================================================================================
@@ -392,7 +331,7 @@ module.exports = {
         {
             if (err) 
             {
-                res.send(err);
+                res.send(err).status(401);
                 return;
             } 
             res.json(patient);
@@ -407,7 +346,7 @@ module.exports = {
     {
         if (!req.user)
         {
-            res.status(401).send("Unauthorized");
+            res.sendStatus(401)/*.send("Unauthorized")*/;
             return;
         }
         Patient.find({'doctor': mongoose.Types.ObjectId(req.user)}, function (err, patients)
@@ -432,7 +371,7 @@ module.exports = {
     {
         if (!req.user) //user is not logged in and un authorized to access the data
         {
-            res.status(404);
+            res.sendStatus(404);
             return;
         }
 
@@ -480,7 +419,7 @@ module.exports = {
 
         if (!req.user || req.cookies.patientCookie=="") //user is not logged in and un authorized to access the data
         {
-            res.status(404);
+            res.sendStatus(404);
             return;
         }
 
@@ -510,7 +449,7 @@ module.exports = {
         //set the consultation cookie id
         if(!req.user)
         {
-            res.send(401);
+            res.sendStatus(401);
             return;
         }
       
@@ -527,7 +466,7 @@ module.exports = {
     {
         if (!req.user || req.cookies.consultation=="")
         {
-            res.send(401);
+            res.sendStatus(401);
             return;
         }
 
@@ -698,37 +637,6 @@ module.exports = {
             });
         });
     },
-
-    //
-
-    getSTLFile: function (req,res){
-        if(!req.user){
-
-        }
-        else {
-
-            var consultation = req.params.id;
-
-            Consultation.findOne({"_id":mongoose.Types.ObjectId(consultation)}, function(err , cons){
-                if (err){
-
-                }
-                else if (cons) {
-                    var attachment = createModel();
-                    const stlReturn  = attachment.read({"_id":mongoose.Types.ObjectId(cons.STL)});
-
-                    res.contentType('model/stl');
-                    stlReturn.pipe(res);
-                    return;
-                }
-                else{
-                    return res.sendStatus(404);
-                }
-
-            })
-
-        }
-    },
   
     //======================================================================================
     //Function developed by: Steven Visser
@@ -764,9 +672,9 @@ module.exports = {
     getDoctorsBookings: function (req, res) 
     {
         if (!req.user)
-        {
-            res.status(401)
-              .send("Unauthorized");
+        {   
+            res.sendStatus(401);
+              /*.send("Unauthorized");*/
             return;
         } 
 
@@ -794,7 +702,7 @@ module.exports = {
    {
         if (!req.user)
         {
-            res.status(401);
+            res.sendStatus(401);
             return;
         }
 
@@ -805,7 +713,7 @@ module.exports = {
             Patient.find({"idNumber":idNumber}, function(err,patient)
             {
                 if(err){
-                    res.status(400);
+                    res.sendStatus(400);
                     return;
                 }
                 if(patient)
@@ -815,7 +723,7 @@ module.exports = {
                 }
                 else
                 {
-                    res.status(404);
+                    res.sendStatus(404);
                     return;
                 }
             });
@@ -826,7 +734,7 @@ module.exports = {
             {
                 if(err)
                 {
-                    res.status(400);
+                    res.sendStatus(400);
                     return;
                 }
                 if(patient)
@@ -837,7 +745,7 @@ module.exports = {
                 }
                 else
                 {
-                    res.status(404);
+                    res.sendStatus(404);
                     return;
                 }
 
@@ -849,7 +757,7 @@ module.exports = {
             {
                 if(err)
                 {
-                    res.status(400);
+                    res.sendStatus(400);
                     return;
                 }
                 if(patient)
@@ -860,7 +768,7 @@ module.exports = {
                 }
                 else
                 {
-                    res.status(404);
+                    res.sendStatus(404);
                     return;
                 }
             });
@@ -871,7 +779,7 @@ module.exports = {
             {
                 if(err)
                 {
-                    res.status(400);
+                    res.sendStatus(400);
                     return;
                 }
                 if(patient)
@@ -881,14 +789,14 @@ module.exports = {
                 }
                 else
                 {
-                    res.status(404);
+                    res.sendStatus(404);
                     return;
                 }
             });
         }
         else
         {
-            res.status(400);
+            res.sendStatus(400);
             return;
         }
     },
@@ -960,10 +868,11 @@ module.exports = {
         return;
       }
 
-      var id = mongoose.Types.ObjectId(req.body._id);
-      var status = req.body.status;
+      var id = mongoose.Types.ObjectId(req.body._id)
+      var date = mongoose.Types.ObjectId(req.body.date);
+      var time = mongoose.Types.ObjectId(req.body.time);
     
-      Booking.findOneAndUpdate({"_id":id}, {$set:{"status":status}} , function(err)
+      Booking.updateOne({"_id":id}, {$set:{"date":date,"time":time}} , function(err)
       {
           if (err)
           {
@@ -983,7 +892,7 @@ module.exports = {
     getSingleBooking : function(req ,res){
         if(!req.user)
         {
-            res.status(401);
+            res.sendStatus(401);
             return;
         }
 
@@ -1033,7 +942,7 @@ module.exports = {
     resetPassord: function (req , res)
     {
         var {email , password , code} = req.body;
-
+        
         password = frontsalt+password+backSalt;
         // console.log("email: "+email +"\npassword: "+password+"\nCode: "+code);
         var updated = false;
@@ -1093,124 +1002,11 @@ module.exports = {
         });
 
         return;
-    },
-
-    //=======================================================================================
-    //Function developed by: Jacobus Janse van Rensburg 
-    // function to accept / reject a user signing up
-    activateUser:function ( req, res)
-    {
-        const {user , choice } = req.body;
-
-        console.log(user + "\t "+ choice);
-        var setter;
-        if(choice =="accept")
-        {
-            setter = true;
-        }
-        else setter =false;
-
-        if (setter){
-            //acticate the user
-            Doctor.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)}, {$set:{"active":setter}}, function (err, doc){
-                //if doctor not look for a receptionist
-             if(!doc) {  
-                 //find and update receptionist
-                 Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)},{$set:{"active":setter}}, function(err, rec){
-
-                    });
-                }
-            });
-        }
-        else{
-            Doctor.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err,doc)
-            {
-               if (!doc){
-                   Receptionist.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err, rec)
-                   {
-                      
-                   });
-               }
-            });
-
-
-        }
-
-        res.status(200).send("ok");
-        return;
-    },
-
-    //=======================================================================================
-    //function developed by:Jacobus Janse van Rensburg
-    //function returns a qr code for patients to scan when new to a practice
-    generatePatientSignupQRCode: function(req , res){
-        if(!req.user)
-        {
-            return res.status(401);
-        }
-
-        else{
-            
-            Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)},function(err, doctor){
-                if (err){
-
-                }
-                else if(doctor){
-                    var url = "flapjacks.goodx.co.za/addPatient?practice="+doctor.practice;
-                    res.contentType('png');
-                    qrCode.toFileStream(res , url);                    //return the qr code
-                }
-                else{
-                    Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)},function(err, recep){
-                        if(err){
-
-                        }
-                        else if(recep){
-                            var url = "flapjacks.goodx.co.za/addPatient?practice="+recep.practice;
-                            res.contentType('png');
-                            qrCode.toFileStream(res , url);
-                        }
-                        else{
-                            //no user found with id 
-                            res.sendStatus(404);
-                        }
-                    })
-                }
-            })
-                //create the qr code 
-           
-
-        }
-
-    },
-
-    //======================================================================================
-    //Function Developed By: Steven Visser
-    //Updates the logfile for a specific practice
-    updateLog: function(req, res)
-    {
-        var practice = req.body.practice;
-        var line = req.body.line + "\n";
-        var fname = "./webSite/Logs/"+practice+".txt";
-        fs.appendFile(fname,line,function(err)
-        {
-            if(err)
-            {
-                console.log(err);
-            }
-            else
-            {
-                console.log("Log successfully updated!");
-            }
-        });
-
     }
 
 };
 
-//============================================================================================
-// Function developed by: Jacobus Janse van Rensburg 
-// Function sends a email to head receptionist to confirm / reject a user signing up
+
 function sendsignupConfurmationEmail(practice , user){
 
     var emailOptions={
@@ -1224,8 +1020,8 @@ function sendsignupConfurmationEmail(practice , user){
     emailOptions.html+='<div id="head" style="background-color: #003366; width: 500px; text-align: center; border-radius: 5px;margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;"><br>';
     emailOptions.html+='<h2 style="color:white;">Enable Email Access</h2><hr style="background-color: white;">';
     emailOptions.html+='<span id="words" style="color: white;"> The email: <p style="color: lightblue;"id="emailAPI" name="emailAPI">xxxxxx@gmail.com</p>USER_NAME_HERE USER_SURNAME_HERE USER_ID_HERE Would like to signup with the system. <br> Would you like to <b style="color: lightgreen;">ACCEPT</b> or <b style="color: red;">REJECT</b> the request?</span>';
-    emailOptions.html+='<br><br><a style="margin: 5px; color:white;" class="btn btn-success"  id="acceptSignup" name="acceptSignup"  href="ACCEPT_HREF" /><b>ACCEPT</b></a>';
-    emailOptions.html+='<a style="margin: 5px; color: white;" class="btn btn-danger" id="rejectSignup" name="rejectSignup" href="REJECT_HREF"><b>REJECT</b></a><br><br></div>';
+    emailOptions.html+='<br><br><button style="margin: 5px;" class="btn btn-success" type="button" id="acceptSignup" name="acceptSignup" value="Submit" href="ACCEPT_HREF" /><b>ACCEPT</b></button>';
+    emailOptions.html+='<button style="margin: 5px;" class="btn btn-danger" type="button" id="rejectSignup" name="rejectSignup" value="Submit" href="REJECT_HREF" /><b>REJECT</b></button><br><br></div>';
 
     //populate the email with the appropriate information 
 
@@ -1234,13 +1030,13 @@ function sendsignupConfurmationEmail(practice , user){
     emailOptions.html = emailOptions.html.replace('USER_SURNAME_HERE',user.surname);
     emailOptions.html = emailOptions.html.replace('USER_ID_HERE',user.id);
 
-    //fill the information on the a click actions
+    //fill the information on the button click actions
     //do href to a page with the information url encoded to be extracted on that page and take nescasary actions
 
-    var href ="localhost:3000/ValidateSignup.html";
+    var href ='localhost:3000/ValidateSignup.html';
     //create url encoded hrefs
-    var reject = href+"?action=reject&user="+user._id;
-    var accept = href+"?action=accept&user="+user._id;
+    var reject = href+'?action=reject&user='+user._id;
+    var accept = href+'?action=accept&user='+user._id;
     //place hrefs in appropriate spots
     emailOptions.html = emailOptions.html.replace('REJECT_HREF',reject);
     emailOptions.html = emailOptions.html.replace('ACCEPT_HREF',accept);
@@ -1254,27 +1050,6 @@ function sendsignupConfurmationEmail(practice , user){
             console.log(info);
         }
     });
-}
 
-function updateLogFile(linedesc,practice)
-{
-    var today = new Date();
-    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
-    var hours = today.getHours();
-    var minutes = today.getMinutes();
-    var seconds = today.getSeconds();
-    var time = hours + ":" + minutes + ":" + seconds ;
-    var line = date + "@" + time + "@" + linedesc + "\n";
-    var fname = "./webSite/Logs/"+practice+".txt";
-    fs.appendFile(fname,line,function(err)
-    {
-        if(err)
-        {
-            console.log(err);
-        }
-        else
-        {
-            console.log("Log updated.");
-        }
-    });
+
 }
