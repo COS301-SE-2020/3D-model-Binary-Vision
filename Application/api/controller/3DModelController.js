@@ -625,7 +625,7 @@ module.exports = {
                           doctor: req.user, // get from session, e.g. cookies
                           patient: patient._id,
                           video: file._id,
-                          Note: "Video upload"
+                          Note: "Video Upload"
                       });
 
                       consultation.save(function (err) 
@@ -686,7 +686,7 @@ module.exports = {
                         doctor: req.user,
                         patient,
                         STL: file._id,
-                        Note: req.body.note
+                        Note: "STL Upload"
                     });
                   
                     consultation.save(function (err , consultation)
@@ -1243,6 +1243,14 @@ module.exports = {
             }
         });
 
+    },
+
+    //======================================================================================
+    //Function Developed By: Steven Visser
+    //Uploads a regular consultation
+    saveConsultation: function(req, res)
+    {
+        
     }
 
 };
