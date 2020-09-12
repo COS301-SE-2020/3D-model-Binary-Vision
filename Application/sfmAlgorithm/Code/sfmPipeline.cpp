@@ -32,11 +32,11 @@ bool SfmPipeline::createImageListings()
 	parameter_line = "-d " + getCurrentDir() + "sensor_width_camera_database.txt ";
 
 	//Intrinsics Matrix K is specified here.
-	parameter_line = parameter_line + "-k " + to_string(f) + ";0;" + to_string(x_half) +
-		";0;" + to_string(f) + ";" + to_string(y_half) + ";0;0;1 ";
+	//parameter_line = parameter_line + "-k " + to_string(f) + ";0;" + to_string(x_half) +
+	//	";0;" + to_string(f) + ";" + to_string(y_half) + ";0;0;1 ";
 
 	//Parameter for focal length in terms of pixels.
-	//parameter_line = parameter_line + "-f 29866.66 ";
+	parameter_line = parameter_line + "-f " + f + " -c " + camera_model + " "   ;
 
 	//Specify input file that contains the images
 	parameter_line = parameter_line + "-i " + getCurrentDir() + "imageData\\" + file_name + "\\ ";
@@ -77,7 +77,11 @@ bool SfmPipeline::computeFeatures()
 	//Include the input and output files in the parameter lines.
 	string parameter_line = "-i " + input_path + " -o " + output_path 
 	//The quality of the descriptor (ULTRA takes the longest but produces the best quality)
-		+ " -p ULTRA";
+		+ " -p " + describer_quality 
+	//Force Recompile
+		+ " -f " + force_feature 
+	//The Method used for the describer
+		+ " -m " + describer_method; 
 
 	//Execute the executable with created parameters.
 	bool res = executeExternal("openMVG_main_ComputeFeatures", parameter_line);
@@ -111,7 +115,13 @@ bool SfmPipeline::computeMatches()
 	//Include the input and output files in the parameter lines.
 	string parameter_line = "-i " + input_path + " -o " + output_path 
 	// Ratio of match accuracy. Lower = less noise
-		+ " -r .4 ";
+		+ " -r " + ratio + " " 
+	// Force Recompile
+		+ " -f " + force_matches 
+	// Set Geometric Model to use
+		+ " -g " + geometric_model 
+	// Set Matching method
+		+ " -n " + nearest_matching;
 
 	//Execute the executable with created parameters.
 	bool res = executeExternal("openMVG_main_ComputeMatches", parameter_line);
@@ -151,7 +161,12 @@ bool SfmPipeline::computeIncrementalSfm()
 	match_path = getCurrentDir() + "imageMatches\\" + file_name + "\\";;
 
 	//Include the input, match and output files in the parameter lines.
-	string parameter_line = "-i " + input_path + " -m " + match_path + " -o " + output_path;
+	cout << "here" << endl;
+	cout << match_path << endl;
+	cout << "done" << endl;
+	string parameter_line = "-i " + input_path + " -m " + match_path + " -o " + output_path 
+	//Set refining intrinsic matrix settings
+		+ " -f " + refine_intrinsic;
 
 	//Execute the executable with created parameters.
 	bool res = executeExternal("openMVG_main_IncrementalSfM", parameter_line);
@@ -183,6 +198,7 @@ bool SfmPipeline::computeDataColor()
 	//Include the input and output files in the parameter lines.
 	string parameter_line = "-i " + input_path + " -o " + output_path;
 
+
 	//Execute the executable with created parameters.
 	bool res = executeExternal("openMVG_main_ComputeSfM_DataColor", parameter_line);
 	if (res == 0) {
@@ -196,6 +212,127 @@ bool SfmPipeline::computeDataColor()
 		cout << "--------------------------------------" << endl;
 	}
 	return !res;
+}
+
+bool SfmPipeline::computeGlobalSfm()
+{
+	cout << "--------------------------------------" << endl;
+	cout << "Beginning SFM Process!" << endl;
+	cout << "--------------------------------------" << endl;
+
+	// Create Directory where the final reconstruction will be stored.
+	string dir_path = getCurrentDir() + "sfmReconstruction\\" + file_name;
+	if (!CreateDirectory(dir_path.c_str(), NULL))
+		if (ERROR_ALREADY_EXISTS != GetLastError()) {
+			cerr << "ERROR: Could not create directory." << endl;
+			return false;
+		}
+
+	/* Specify input files of previous computed step and output files for
+	where the newly computed data should be stored,
+	also Specify the file where the match data is stored.*/
+	string input_path, output_path, match_path;
+	input_path = getCurrentDir() + "imageMatches\\" + file_name + "\\sfm_data.json";
+	output_path = getCurrentDir() + "sfmReconstruction\\" + file_name + "\\";
+	match_path = getCurrentDir() + "imageMatches\\" + file_name + "\\";;
+
+	//Include the input, match and output files in the parameter lines.
+	string parameter_line = "-i " + input_path + " -m " + match_path + " -o " + output_path
+	//Set refining intrinsic matrix settings
+	+ " -f " + refine_intrinsic
+	//Set rotation averaging mode
+	+" -r " + rotation_averaging
+	//Set translation averaging mode
+	+ " -t " + translation_averaging;
+
+	//Execute the executable with created parameters.
+	bool res = executeExternal("openMVG_main_GlobalSfM", parameter_line);
+	if (res == 0) {
+		cout << "--------------------------------------" << endl;
+		cout << "Global SFM Complete!" << endl;
+		cout << "--------------------------------------" << endl;
+	}
+	else {
+		cout << "--------------------------------------" << endl;
+		cout << "Global SFM Failed!" << endl;
+		cout << "--------------------------------------" << endl;
+	}
+	return !res;
+}
+
+void SfmPipeline::setFocalLength(string _f)
+{
+	f = _f;
+}
+
+void SfmPipeline::setCameraModel(string _c)
+{
+	camera_model = _c;
+}
+
+void SfmPipeline::setForceFeature(string in)
+{
+	force_feature = in;
+}
+
+void SfmPipeline::setDescriberMethod(string in)
+{
+	describer_method = in;
+}
+
+void SfmPipeline::setUpright(string in)
+{
+	upright = in;
+}
+
+void SfmPipeline::setDescriberQuality(string in)
+{
+	describer_quality = in;
+}
+
+void SfmPipeline::setForceMatchs(string in)
+{
+	force_matches = in;
+}
+
+void SfmPipeline::setRatio(string in)
+{
+	ratio = in;
+}
+
+void SfmPipeline::setGeoModel(string in)
+{
+	geometric_model = in;
+}
+
+void SfmPipeline::setNearestMatching(string in)
+{
+	nearest_matching = in;
+}
+
+void SfmPipeline::setSfmMode(string in)
+{
+	sfm_mode = in;
+}
+
+void SfmPipeline::setRefineIntrinsic(string in)
+{
+	refine_intrinsic = in;
+}
+
+void SfmPipeline::setRotationAveraging(string in)
+{
+	rotation_averaging = in;
+}
+
+void SfmPipeline::setTranslationAveraging(string in)
+{
+	translation_averaging = in;
+}
+
+std::string SfmPipeline::getMode()
+{
+	return sfm_mode;
 }
 
 //Fetch current directory the Executable is located in.
