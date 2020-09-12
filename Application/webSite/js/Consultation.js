@@ -291,7 +291,7 @@ function getRemainingTime(h, m, s)
 //=============================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 // function called when loading page to populate all the doctors information
-function init ()
+function init()
 {
 	startTime();
 	populateDoctorInformation();
@@ -356,9 +356,7 @@ function populateBookingInformation(){
 		else{
 			endTime= mins[0]+":"+newMins;
 		}
-		document.querySelector("#endTime").innerHTML = endTime;
-		document.querySelector("#time2").innerHTML = data.time;
-		
+		document.querySelector("#endTime").innerHTML = endTime;		
 		
 		//set the reason for the booking 
 
