@@ -394,8 +394,6 @@ function popuatePatientInfo(id,reason){
 			document.querySelector("#patientGender").innerHTML="Gender: "+data.gender;
 			document.querySelector("#patientEmail").innerHTML="Email: "+data.email;
 			document.querySelector("#patientContactNo").innerHTML="Contact Number: "+data.cellnumber; 
-
-			document.querySelector("#patientqq").innerHTML = data.surname+" ("+data.name+")";
 		}
 
 	}));

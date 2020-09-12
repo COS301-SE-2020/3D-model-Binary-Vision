@@ -9,7 +9,7 @@
 
 function showRecord(date, reason,consultation) 
 {
-    //going to use consultation to gdt the STL ID for renderpage
+    //going to use consultation id to gdt the STL ID for renderpage
     var rightBody = document.getElementById("rightSideBody");
     rightBody.style.width = "250px";
     document.getElementById("containInfoRight").innerHTML = "<br><br>DATE: <hr> <p id='date1' style='color:black; font-weight: bold;'>"+date+"</p>  BOOKING REASON: <hr><p id='patientqq' style='color:black; font-weight: bold;'>"+reason+"</p> <br><br><br><br>RENDER<hr><a class='btn btn-success' href='../renderPage/render.html' id = 'renderpage'>Render</a><br><br>HIDE<hr><button class='btn btn-danger' onclick=hideRecord()>Hide Info</button>";
@@ -41,7 +41,8 @@ function init()
         document.getElementById("patientTable").innerHTML =replacement;
         for(var i in data)
         {
-           replacement += "<tr><td>"+data[i].date+"</td><td>"+data[i].notes+"</td><td><button class='btn btn-success' onclick=showRecord("+data[i].date+","+data[i].reason+","+data[i]+"</td>)>View Info</button></td></tr>"
+           replacement += "<tr><td>"+data[i].created+"</td><td>"+data[i].Notes+"</td><td><button class='btn btn-success' onclick=showRecord(\""+data[i].created+"\",\""+data[i].reason+"\",\""+data[i]._id+"\")>View Info</button></td></tr>"
         }
+        document.getElementById("patientTable").innerHTML =replacement;
     }));
 }
