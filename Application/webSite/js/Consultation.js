@@ -361,6 +361,7 @@ function populateBookingInformation(){
 		//set the reason for the booking 
 
 		//set the patient information 
+		document.getElementById("recordPage").href = "recordPage.html?pid="+data.patient;
 		popuatePatientInfo(data.patient,data.reason);
 	}));
 

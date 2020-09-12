@@ -474,36 +474,6 @@ module.exports = {
 
     //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg
-    //get all the consultations for a certain patient
-    getPatientConsultations : function (req , res)
-    {
-
-        if (!req.user || req.cookies.patientCookie=="") //user is not logged in and un authorized to access the data
-        {
-            res.status(404);
-            return;
-        }
-
-        Consultation.find({"doctor":mongoose.Types.ObjectId(req.user), "patient":mongoose.Types.ObjectId(req.cookies.patientCookie)} , function(err, consultations)
-        {
-            if (err)
-            {
-                res.status(500)
-                  .send("error geting patient consultation data");
-                return;
-            }
-            else
-            {
-                res.status(200)
-                  .json(consultations);
-                return;
-            }
-
-        });
-    },
-
-    //======================================================================================
-    //Function developed by: Jacobus Janse van Rensburg
     // used to set a cookie but will be replaced by other means of url encoding
     selectConsultation: function(req,res)
     {
@@ -1293,7 +1263,37 @@ module.exports = {
                 return;
             });
         });
-    }
+    },
+
+    //======================================================================================
+    //Function developed by: Steven Visser
+    //get all the consultations for a specifc patient
+    getPatientConsultations : function (req , res)
+    {
+
+        if (!req.user) //user is not logged in and un authorized to access the data
+        {
+            res.status(401);
+            return;
+        }
+
+        Consultation.find({"doctor":mongoose.Types.ObjectId(req.user), "patient":req.patient} , function(err, consultations)
+        {
+            if (err)
+            {
+                res.status(500)
+                  .send("error geting patient consultation data");
+                return;
+            }
+            else
+            {
+                res.status(200)
+                  .json(consultations);
+                return;
+            }
+
+        });
+    },
 
 };
 
