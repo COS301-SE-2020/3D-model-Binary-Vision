@@ -164,16 +164,35 @@ function hidePatInfo()
 }
 
 //=============================================================================================
-//Function Developed by:
-// da hell is happening here , why do we need this ->
-function saveDoctorNote() 
+//Function Developed by: Steven Visser
+//Saves a regular consultation
+function saveConsultation(pid) 
 {
 	let docNote = document.getElementById("doctorsNotes");
 
 	if (docNote.value != "") 
 	{
-		alert("Note saved!");
-		console.log(docNote.value);
+		//call the api function to save a consultation
+		var response = fetch("/saveConsultation",{
+			method:"POST",
+			headers:{'Content-Type': 'application/json; charset=UTF-8'},
+			body: JSON.stringify({"_id":pid,"note":docNote})
+		});
+	
+		response.then(res => 
+		{
+			//remove the bar holding this booking and load the next one
+			//check status code
+			console.log(res.status);
+			if(res.status == 401)
+			{
+				alert("You are not authorized to do this action!");
+			}
+			else if(res.status== 201)
+			{
+				window.location.href= "/doctorSchedule.html"; 
+			}
+		});
 	} 
 	else 
 	{
@@ -275,14 +294,14 @@ function getRemainingTime(h, m, s)
 function init ()
 {
 	startTime();
-	pupulateDoctorInformation();
+	populateDoctorInformation();
 	populateBookingInformation();
 }
 
 //=============================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 //function used to get and set the information of the doctor onto this page
-function pupulateDoctorInformation()
+function populateDoctorInformation()
 {
 	var response = fetch("/getDoctor",{
         method:"POST",
@@ -353,6 +372,9 @@ function populateBookingInformation(){
 //Function Developed by: Jacobus Janse van Rensburg
 // function to get the required patients information and populate the patient information
 function popuatePatientInfo(id){
+
+	document.getElementById("doctorsNotes").innerHTML = "<p style='font-weight: bold;'>Doctors Notes:</p><textarea id='doctorsNotes' style='width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;'></textarea><button class='btn btn-primary' id='saveDoctorNote' type='button' style='margin-top: 10px;' onclick='saveConsultation("+id+")'>Save Note</button>";
+
 
 	var response = fetch ("/singlePatient",{
 		method:"POST",

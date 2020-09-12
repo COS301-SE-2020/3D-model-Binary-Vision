@@ -1195,7 +1195,7 @@ module.exports = {
 
                 }
                 else if(doctor){
-                    var url = "flapjacks.goodx.co.za/QRAddPatient?practice="+doctor.practition;
+                    var url = "flapjacks.goodx.co.za/QRAddPatient.html?practice="+doctor.practition;
                     res.contentType('png');
                     qrCode.toFileStream(res , url);                    //return the qr code
                 }
@@ -1250,28 +1250,32 @@ module.exports = {
     //Uploads a regular consultation
     saveConsultation: function(req, res)
     {
-        Patient.findOne({ "_id": req.cookies.patientCookie }, function(err, patient) 
-                  {
-                      // handle err
-                      // handle if patient == null (not found)
-                      const consultation = new Consultation(
-                      {
-                          doctor: req.user, // get from session, e.g. cookies
-                          patient: patient._id,
-                          Note: req.body.note
-                      });
+        if(!req.user)
+        {
+            res.status(401);
+            return;
+        }
 
-                      consultation.save(function (err) 
-                      {
-                          if (err)
-                          {
-                            res.send(400);
-                          }
-                          res.status(201)
-                            .send("Created");
-                          return;
-                      });
-                  });
+        Patient.findOne({ "_id":req.body._id}, function(err, patient) 
+        {
+            const consultation = new Consultation(
+            {
+                doctor: req.user, // get from session, e.g. cookies
+                patient: req.body._id,
+                Note: req.body.note
+            });
+
+            consultation.save(function (err) 
+            {
+                if (err)
+                {
+                  res.send(400);
+                }
+                res.status(201)
+                  .send("Created");
+                return;
+            });
+        });
     }
 
 };
