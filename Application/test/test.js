@@ -64,12 +64,32 @@ describe('API unit testing:', () => {
 				.send(prac1)
 				.end((error, response) => {
 					if (error) throw error;
-					response.should.have.status(200);
-					response.should.have.html;
+					//signUpRecep1.call(null, cb);
+					//signUpDoc1.call(null, cb);
+					
+					//response.should.have.status(200);
+					//response.should.have.html;
+					cb();
 				});
 		};//*/
 
 		// Signup and login Doctor 1
+		function signUpDoc1(cb) {
+			doctor1
+				.post("/signup", db.signup)
+				.send(doc1)
+				.end((error, response) => {
+					if (error) throw error;
+					response.should.have.status(200);
+					response.should.have.html;
+					
+					isValidUsernameDoc1.call(null, cb);
+					isValidEmailDoc1.call(null, cb);
+
+					loginDoc1.call(null, cb);
+				});
+		};
+
 		function isValidUsernameDoc1(cb) {
 			doctor1
 				.post("/isValidUsername", db.isValidUsername)
@@ -92,22 +112,6 @@ describe('API unit testing:', () => {
 				});
 		}
 
-		function signUpDoc1(cb) {
-			doctor1
-				.post("/signup", db.signup)
-				.send(doc1)
-				.end((error, response) => {
-					if (error) throw error;
-					response.should.have.status(200);
-					response.should.have.html;
-					
-					isValidUsernameDoc1.call(null, cb);
-					isValidEmailDoc1.call(null, cb);
-
-					loginDoc1.call(null, cb);
-				});
-		};
-
 		function loginDoc1(cb) {
 			doctor1
 				.post("/login", db.login)
@@ -124,6 +128,21 @@ describe('API unit testing:', () => {
 		};
 
 		// Signup and login Receptionist 1
+		function signUpRecep1(cb) {
+			receptionist1
+				.post("/signup", db.signup)
+				.send(recep1)
+				.end((error, response) => {
+					if (error) throw error;
+					response.should.have.status(200);
+
+					isValidUsernameRecep1.call(null, cb);
+					isValidEmailRecep1.call(null, cb);
+
+					loginRecep1.call(null, cb);
+				});
+		};
+
 		function isValidUsernameRecep1(cb) {
 			receptionist1
 				.post("/isValidUsername", db.isValidUsername)
@@ -146,21 +165,6 @@ describe('API unit testing:', () => {
 				});
 		}
 
-		function signUpRecep1(cb) {
-			receptionist1
-				.post("/signup", db.signup)
-				.send(recep1)
-				.end((error, response) => {
-					if (error) throw error;
-					response.should.have.status(200);
-
-					isValidUsernameRecep1.call(null, cb);
-					isValidEmailRecep1.call(null, cb);
-
-					loginRecep1.call(null, cb);
-				});
-		};
-
 		function loginRecep1(cb) {
 			receptionist1
 				.post("/login", db.login)
@@ -177,9 +181,9 @@ describe('API unit testing:', () => {
 		};
 
 		async.series([
-			/*function(cb) {
+			function(cb) {
 				registerPracticePrac1(cb);
-			},*/
+			},
 			function(cb) {
 				signUpDoc1(cb);
 			}, 
@@ -358,7 +362,7 @@ describe('API unit testing:', () => {
 		it('Tetsing passwordChangeEmail Feature for doctor (With invald email) - Returns 400 code', (done) => {
 			doctor1
 				.post("/passwordChangeEmail", dbE.passwordChangeEmail)
-				.send({email: "MAWerren@gmail.com"})
+				.send({email: "testtesttest@gmail.com"})
 				.end((error, response) => {
 					response.should.have.status(400);
 				done();
