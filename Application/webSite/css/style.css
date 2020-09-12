@@ -97,6 +97,16 @@
 
 }
 
+#selectedProcedure {
+	margin: 10px;
+	padding-right: 7px;
+	padding-left: 7px;
+}
+
+#btnCommonBooking {
+	margin: 20px;
+}
+
 .selectDocotor{
 	margin-left: 30px;
 	width: 200px;

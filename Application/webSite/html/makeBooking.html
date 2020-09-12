@@ -84,17 +84,16 @@
         <!-- search patient by criteria and select the correct patient and capture the selected patients id -->
         <div id="bookingBackground">
             <div id="centerBookingOverlay">
-
+                <br>
                 <div id="bookingBody">
                    <div id="searchPatientInput" style="margin-left: auto; margin-right:auto; border-radius: 5px; background-color: #003366; width:100%;">
                       <br><label for="reasonForBooking" style="color: white;">Reason for booking</label><br>
                       <input type="text" type="form-control" name="reason" id="reasonForBooking" style="margin-bottom: 20px; width: 450px; padding: 10px; border-radius: 5px; border: none;">
                     </div><br>
-                    <div id="currentOverlay"></div>
+                    <input type="button" class="btn btn-primary" onclick="fuzzyLogic()" value="Choose Common Type Booking"></input><br><br>
+                    <div id="currentOverlay"></div><br><br>
                     <div id="individual"></div>
-          
                     <div id="currentOverlayTable"></div><br>
-                    <input type="button" onclick="fuzzyLogic()" value="Choose Common Type Booking"></input>
                 </div>
 
 

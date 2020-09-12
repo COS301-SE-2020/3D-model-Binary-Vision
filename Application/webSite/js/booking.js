@@ -562,7 +562,7 @@ function fuzzyLogic(){
     population+='<option value="15">checkup</option> <option value="30">Tooth Decay</option>';
     population+='<option value="45">Gum Disease</option>  <option value="30">Tooth Sensitivity</option>';
     population+='<option value="45">Tooth Extraction</option> <option value="30">Tooth Erosion</option>';
-    population+='<option value="30">Moouth Sores</option> </select> <button onclick="findAvailableBookings()">Select</button>';
+    population+='<option value="30">Moouth Sores</option> </select> <button id="btnCommonBooking" class="btn btn-primary" onclick="findAvailableBookings()">Select</button>';
 
     location.innerHTML=population;
 }
