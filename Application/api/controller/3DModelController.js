@@ -1205,7 +1205,7 @@ module.exports = {
 
                         }
                         else if(recep){
-                            var url = "flapjacks.goodx.co.za/QRAddPatient?practice="+recep.practition;
+                            var url = "flapjacks.goodx.co.za/QRAddPatient.html?practice="+recep.practition;
                             res.contentType('png');
                             qrCode.toFileStream(res , url);
                         }
@@ -1258,11 +1258,15 @@ module.exports = {
 
         Patient.findOne({ "_id":req.body._id}, function(err, patient) 
         {
+            var today = new Date();
+            var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
             const consultation = new Consultation(
             {
+                created:date,
                 doctor: req.user, // get from session, e.g. cookies
                 patient: req.body._id,
-                Note: req.body.note
+                Note: req.body.note,
+                reason: req.body.reason
             });
 
             consultation.save(function (err) 

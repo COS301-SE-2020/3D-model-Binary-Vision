@@ -166,7 +166,7 @@ function hidePatInfo()
 //=============================================================================================
 //Function Developed by: Steven Visser
 //Saves a regular consultation
-function saveConsultation(pid) 
+function saveConsultation(pid,reason) 
 {
 	let docNote = document.getElementById("doctorsNotes");
 
@@ -176,7 +176,7 @@ function saveConsultation(pid)
 		var response = fetch("/saveConsultation",{
 			method:"POST",
 			headers:{'Content-Type': 'application/json; charset=UTF-8'},
-			body: JSON.stringify({"_id":pid,"note":docNote.value})
+			body: JSON.stringify({"_id":pid,"note":docNote.value,"reason":reason})
 		});
 	
 		response.then(res => 
@@ -363,7 +363,7 @@ function populateBookingInformation(){
 		//set the reason for the booking 
 
 		//set the patient information 
-		popuatePatientInfo(data.patient);
+		popuatePatientInfo(data.patient,data.reason);
 	}));
 
 }
@@ -371,9 +371,9 @@ function populateBookingInformation(){
 //=============================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 // function to get the required patients information and populate the patient information
-function popuatePatientInfo(id){
+function popuatePatientInfo(id,reason){
 
-	document.getElementById("docnotes").innerHTML = "<p style='font-weight: bold;'>Doctors Notes:</p><textarea id='doctorsNotes' style='width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;'></textarea><button class='btn btn-primary' id='saveDoctorNote' type='button' style='margin-top: 10px;' onclick='saveConsultation(\""+id+"\")'>Save Note</button>";
+	document.getElementById("docnotes").innerHTML = "<p style='font-weight: bold;'>Doctors Notes:</p><textarea id='doctorsNotes' style='width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;'></textarea><button class='btn btn-primary' id='saveDoctorNote' type='button' style='margin-top: 10px;' onclick='saveConsultation(\""+id+"\",\""+reason+"\")'>Save Note</button>";
 
 
 	var response = fetch ("/singlePatient",{
