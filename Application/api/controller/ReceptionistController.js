@@ -302,6 +302,7 @@ module.exports ={
 
                                 console.log("\nFor orderedBooking:\tStart:"+currentDoctorBookings[k].time +"\tend:"+ currentDoctorBookings[k].endTime+"\n")
 
+                                console.log("operation time : "+ operationTimes[j]);
 
                                 if(currentDoctorBookings[k].time == operationTimes[j])
                                 {
@@ -327,6 +328,7 @@ module.exports ={
                                 var counter = 0, position =0;
                                 if(possible != null){
                                     while(counter < possible.length){
+                                        console.log("Possible lenght: "+possible.length+"\t counter: "+counter)
                                         console.log(possible[counter]);
                                         if((isOverlapping(possible[counter], currentDoctorBookings[k].time , duration , operationTimes[j]))){
 
@@ -337,15 +339,15 @@ module.exports ={
                                                     var temp = holder[m+1];
                                                     holder[m]= temp;
                                                 }
-                                            holder.pop(); //remove the last element in the array
+                                                holder.pop(); //remove the last element in the array
+                                                position --;
                                             }
-                                            position --;
+                                            counter ++, position++;
                                         }
-                                        counter ++, position++;
                                     }  
                                 }
 
-                                // possible = [];
+                                possible = [];
                                 console.log("holder length: "+holder.length);
                                 for (var l in holder)
                                 {
@@ -364,7 +366,7 @@ module.exports ={
                                     // console.log("possible");
                                     var endTimeStamp = operationTimes[j + (parseInt(duration)/15)];
 
-                                    var record = JSON.stringify({"doctor":doctor,"start":operationTimes[j],"end":endTimeStamp, "date":date});
+                                    var record = JSON.stringify({"doctor":doctor,"start":operationTimes[j],"end":endTimeStamp, "date":date,"reason":reason});
                                     console.log("Adding record to possibles: "+ record);
 
                                     possible.push(record);
@@ -379,8 +381,10 @@ module.exports ={
                             console.log(possible[n]);
                         }
                         if(possible.length > 0){
+                            var contains = []
                             for (var n in possible)
                             {
+                                
                                 if(options.length<5)
                                     options.push(possible[n]);
                                 else {
@@ -401,7 +405,7 @@ module.exports ={
                         return;
                     } else {
                         var endTimeStamp = operationTimes[12+ (parseInt(duration)/15)];
-                        options.push(JSON.stringify({"doctor":doc._id, "start":"12:00", "end":endTimeStamp, "date": date}));
+                        options.push(JSON.stringify({"doctor":doc._id, "start":"12:00", "end":endTimeStamp, "date": date,"reason":reason}));
                         // console.log("options size: "+options.length);
                     }
                 }
@@ -521,24 +525,30 @@ function isOverlapping(booking , startTime , duration , operationTime){
 
     var durationIndexLength = parseInt(duration)/15; 
     console.log("value of duration index:"+durationIndexLength);
-    var bookStart, bookEnd , start, end;
-
+    var bookStart;
+    var bookEnd ;
+    var start;
+    var end;
+    var a,b,c;
     //get all the index's to test for over lapping records
     for(var i in operationTime)
     {
         if (operationTime[i]==booking.time) {
-            bookStart =  i;
+            a =  i ;
             console.log("found bookStart "+ i);
         }
         if (operationTime[i]==booking.endTime) {
-            bookEnd =i;
+            b =i;
             console.log("found bookEnd "+ i);
         }
         if (operationTime[i] == startTime) {
-            start = i ;
-            console.log("found start "+ start);
+            c = i;
+            console.log("found start "+ i);
         }
     }
+    bookStart = parseInt(a);
+    bookEnd = parseInt(b);
+    start = parseInt(c);
     end = parseInt(start) + durationIndexLength;
     console.log("indices: bookStart:"+bookStart+"\tbookEnd: "+bookEnd+"\nstart: "+start+"\tend: "+end);
     //test if the end time is not too late
