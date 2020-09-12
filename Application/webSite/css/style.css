@@ -641,8 +641,6 @@ input.btn{
 	color: white;
 }
 
-
-
 /*IDs*/
 #doctorFormSignup{
 	background-color: #003366;
@@ -768,6 +766,16 @@ button.btn{
 	font-size: 150%;
 }
 
+/*.containerRight {
+	justify-content: space-around;
+	align-items: flex-start;
+
+
+	position: -webkit-sticky;
+	position: sticky;
+	bottom: 1rem;
+}*/
+
 #rightSideBody
 {
 	position: fixed;
@@ -779,7 +787,6 @@ button.btn{
 	transition: 1s;
 	width: 240px;
 	bottom: 0;
-
 }
 
 .noteButtonsContainer {
