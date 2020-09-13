@@ -56,17 +56,22 @@ function searchTable()
     table = document.getElementById("addToTable");
     tr = table.getElementsByTagName("tr");
 
-    for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
+    for (i = 0; i < tr.length; i++) 
+    {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) 
+        {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) 
+            {
+                tr[i].style.display = "";
+            } 
+            else 
+            {
+                tr[i].style.display = "none";
+            }
+        }
     }
-  }
 }
 
 // =================================================================================
@@ -102,7 +107,8 @@ function populateDoctorChoices()
             }
             document.getElementById("doctors").innerHTML=replacement;
         }
-        else{
+        else
+        {
           //there was an error that needs to be handled in the front end RANI
         }
     }));
@@ -116,7 +122,6 @@ function populatePatients()
     var selectionElement = document.getElementById("doctors");
 
     var selectedDoctor = selectionElement.options[selectionElement.selectedIndex].value ;
-    console.log(selectedDoctor);
     //get the information regarding the doctor
     var response = fetch("/getDoctorsScheduleToday",{
         method: "POST",
@@ -132,7 +137,6 @@ function populatePatients()
         document.getElementById("patientTable").innerHTML =replacement;
         for(var i in data)
         {
-            console.log(data[i]);
             if(data[i].status == "Pending")
             {
                 //fetch the patients information
@@ -147,11 +151,8 @@ function populatePatients()
             
                     if(g.status ==200)
                     {
-                        console.log(patientInfo);
                         var timeIndex = parseInt(i)+count-data.length;
-                        console.log("time index: "+timeIndex);
                         replacement="<tr><td>"+patientInfo.name+"</td><td>"+count+"</td><td>"+patientInfo.idNumber+"</td><td>"+data[timeIndex].time+" : "+data[timeIndex].date+"</td><td>"+patientInfo.cellnumber+"</td><td><a class='btn btn-success'  type='button' href='makeBooking.html?patient="+data[i].patient+"&doctor="+selectedDoctor+"' onclick='postponeBooking(\""+data[i]._id+"\")'>POSTPONE</a><button class='btn btn-danger'  type='button' onclick='cancelBooking(\""+data[i]._id+"\")'>CANCEL</button></td></tr>";
-                        // count++;
                         count++;
                         document.getElementById("patientTable").innerHTML+=replacement;
                   
@@ -162,7 +163,6 @@ function populatePatients()
                     }
                 }));
             }
-
         }
     }));
 }
@@ -182,7 +182,6 @@ function cancelBooking(bookingID)
     {
         //remove the bar holding this booking and load the next one
         //check status code
-        console.log(res.status);
         if(res.status == 401)
         {
             alert("You are not authorized to do this action!");

@@ -23,7 +23,6 @@ function setDoctorInfo()
 
     response.then( res=> res.json().then( data =>
     {
-        console.log("Doctors surname: "+data.surname);
         // set the surname field
         document.getElementById("doctorsName").innerHTML=data.surname+" ("+data.name+")";
     }));
@@ -59,7 +58,6 @@ function setTodaysBookings()
 
         for(var i in data)
         {
-            console.log(data[i]);
             if(data[i].status == "Pending")
             {
                 var replacement = '<li class= "notify" id="'+data[i]._id+'">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'

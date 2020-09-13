@@ -2,8 +2,8 @@
 // file that contains checks and functions in order for a user to change
 //his/her email address
 
-function changePassword(){
-    
+function changePassword()
+{
     var p1 = document.querySelector("#password").value;
     var p2 = document.querySelector("#confirmpassword").value;
 
@@ -15,7 +15,8 @@ function changePassword(){
     {
         //the fields do not match
     }
-    else{
+    else
+    {
         //passwords match and we can store them in the database
         var frontSalt ="COS301";
         var backSalt ="FlapJacks";
@@ -32,21 +33,21 @@ function changePassword(){
         var codeparts = parts[1].split("=")
         var code = codeparts[1];
 
-        console.log("email: "+email+"\nCode: "+code);
-
-        var response = fetch("/resetPassord",{
+        var response = fetch("/resetPassord",
+        {
             method:"POST",
             headers:{'Content-Type': 'application/json; charset=UTF-8'},
             body: JSON.stringify({email , 'password':frontEndHashedPassword, 'code': code})
         });
 
-        response.then(res =>  {
+        response.then(res =>  
+        {
             if (res.status == 200)
             {
                 window.location.href = "/login.html";
             }
-
-            else{
+            else
+            {
                 // maybe redirect to a security issue page
             }
         });

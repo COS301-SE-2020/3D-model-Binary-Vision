@@ -83,13 +83,11 @@ function populateTable()
 
 	var response = fetch("/getDoctorsBookings",{
 		method:"POST",
-		headers:{'Content-Type': 'application/json; charset=UTF-8'},
-		// body: JSON.stringify({"doctor":})
+		headers:{'Content-Type': 'application/json; charset=UTF-8'}
 	});
 
     response.then(res => res.json().then(data => 
     {
-		////console.log(data)
 		fillData(data);
 	}));
 }
@@ -106,7 +104,6 @@ function fillData(data)
        if(data[i].status == "Pending")
        {
             var dataIndex = parseInt(i) ;
-            ////console.log(dataIndex);
 
             var date = data[dataIndex].date;
             var time = data[dataIndex].time;
@@ -126,15 +123,17 @@ function fillData(data)
     }
 }
 
-function setName(patient, searchPageId){
-    var response = fetch("/singlePatient",{
+function setName(patient, searchPageId)
+{
+    var response = fetch("/singlePatient",
+    {
         method:"POST",
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
         body:JSON.stringify({"patient":patient})
     });
+    
     response.then(res => res.json().then(pat => 
     {
-        ////console.log(pat.name);
         document.getElementById(searchPageId).innerHTML=pat.name + " " + pat.surname;
     }));
 }
