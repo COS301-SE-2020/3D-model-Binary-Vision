@@ -23,6 +23,9 @@ var receptionist2 = chai.request.agent(server); // This receptionist will not ge
 var loggedDoc1;
 var loggedRecep1;
 
+var recep1_ID;
+var doc1_ID;
+
 describe('Integration Testing:', () => {
 
 	// Before all of the test are executed
@@ -69,14 +72,13 @@ describe('Integration Testing:', () => {
 					
 					//response.should.have.status(200);
 					//response.should.have.html;
-					console.log("in creatation");
+					//console.log("in creatation");
 					cb();
 				});
 		};//
 
 		// Signup and login Doctor 1
 		function signUpDoc1(cb) {
-			console.log("1");
 			doctor1
 				.post("/signup", db.signup)
 				.send(doc1)
@@ -84,16 +86,11 @@ describe('Integration Testing:', () => {
 					if (error) throw error;
 					response.should.have.status(200);
 					response.should.have.html;
-					
-					isValidUsernameDoc1.call(null, cb);
-					isValidEmailDoc1.call(null, cb);
-
-					loginDoc1.call(null, cb);
+					cb();
 				});
 		};
 
 		function isValidUsernameDoc1(cb) {
-			console.log("2");
 			doctor1
 				.post("/isValidUsername", db.isValidUsername)
 				.send({username: doc1.username})
@@ -101,11 +98,12 @@ describe('Integration Testing:', () => {
 					if (error) throw error;
 					response.should.have.status(422);
 					response.should.have.json;
+
+					isValidEmailDoc1.call(null, cb);
 				});
 		};
 
 		function isValidEmailDoc1(cb) {
-			console.log("3");
 			doctor1
 				.post("/isValidEmail", db.isValidEmail)
 				.send({email: doc1.email})
@@ -113,11 +111,23 @@ describe('Integration Testing:', () => {
 					if (error) throw error;
 					response.should.have.status(422);
 					response.should.have.json;
+
+					doc1_ID = response.body._id;
+					cb();
+				});
+		}
+
+		function activateUserDoc1(cb) {
+			doctor1
+				.post("/activateUser", db.activateUser)
+				.send({user: doc1_ID, choice: "accept"})
+				.end((error, response) => {
+					if (error) throw error;
+					cb();
 				});
 		}
 
 		function loginDoc1(cb) {
-			console.log("4");
 			doctor1
 				.post("/login", db.login)
 				.send({
@@ -140,11 +150,7 @@ describe('Integration Testing:', () => {
 				.end((error, response) => {
 					if (error) throw error;
 					response.should.have.status(200);
-
-					isValidUsernameRecep1.call(null, cb);
-					isValidEmailRecep1.call(null, cb);
-
-					loginRecep1.call(null, cb);
+					cb();					
 				});
 		};
 
@@ -156,6 +162,10 @@ describe('Integration Testing:', () => {
 					if (error) throw error;
 					response.should.have.status(422);
 					response.should.have.json;
+
+					recep1_ID = response.body._id;
+
+					isValidEmailRecep1.call(null, cb);
 				});
 		};
 
@@ -167,6 +177,17 @@ describe('Integration Testing:', () => {
 					if (error) throw error;
 					response.should.have.status(422);
 					response.should.have.json;
+					cb();
+				});
+		}
+
+		function activateUserRecep1(cb) {
+			receptionist1
+				.post("/activateUser", db.activateUser)
+				.send({user: recep1_ID, choice: "accept"})
+				.end((error, response) => {
+					if (error) throw error;
+					cb();
 				});
 		}
 
@@ -190,11 +211,31 @@ describe('Integration Testing:', () => {
 				registerPracticePrac1(cb);
 			},
 			function(cb) {
-				signUpDoc1(cb);
-			}/*, 
-			function(cb) {
 				signUpRecep1(cb);
-			}*/
+			},
+			function(cb) {
+				isValidUsernameRecep1(cb);
+			},
+			function(cb) {
+				activateUserRecep1(cb);
+			},
+			function(cb) {
+				loginRecep1(cb);
+			}
+
+			,
+			function(cb) {
+				signUpDoc1(cb);
+			},
+			function(cb) {
+				isValidUsernameDoc1(cb);
+			},
+			function(cb) {
+				activateUserDoc1(cb);
+			},
+			function(cb) {
+				loginDoc1(cb);
+			}
 		], done);
 	});
 
@@ -203,13 +244,7 @@ describe('Integration Testing:', () => {
 		done();
 	});
 
-	describe('', () => {
-		it('', () => {
 
-		});
-	});
-
-/*
 	// Test case 1: practiceRegistration
 	describe('(1) practiceRegistration: ', () => {
 		it('Testing Registration for a practice (With practice that already exists) - Returns 404 code', (done) => {
@@ -228,7 +263,7 @@ describe('Integration Testing:', () => {
 				});
 		});
 	});
-
+/*
 	// Test case 2: Signup
 	describe('(2) SignUp:', () => {
 		it('Testing Signup for a Doctor (With wrong practice name) - Returns 404 code', (done) => {

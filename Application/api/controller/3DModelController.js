@@ -49,7 +49,7 @@ module.exports = {
         password = frontsalt+password+backSalt;
 
         Doctor.findOne({ username , "active":true}, function (err, doctor) 
-        {
+        {         
             if (err) 
             {
                 console.log("error");
@@ -75,6 +75,7 @@ module.exports = {
         });
 
         Receptionist.findOne({username,"active":true}, function(err, receptionist){
+
             if (err)
             {
               res.send(err);

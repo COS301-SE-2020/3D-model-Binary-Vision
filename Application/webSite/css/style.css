@@ -138,6 +138,10 @@
   transform: translateX(-240px);
 }
 
+#sideBar{
+
+}
+
 .container{
 	text-align: center;
 	transition: 0.8s;
@@ -308,7 +312,13 @@
 	background-color: white;
 	border-radius: 10px;
 	width: 90px;
+
+	font-size: 20px;
 	text-align: center;
+}
+
+label #sideBarLabel {
+	
 }
 
 #bodyContainer{
@@ -973,8 +983,8 @@ input[type="file"] {
 	background-color: #003366;
 	max-width: 240px;
 	min-width: 240px;
-	min-height: 100px;
-	max-height: 430px;
+	min-height: 130px;
+	max-height: 450px;
 	/*z-index:1;
 	display: inline-flex;*/
 	padding: 10px;
@@ -1000,6 +1010,7 @@ input[type="file"] {
 	text-align:center;
 	color: white;
 	padding-top: 10px;
+	font-size: 20px;
 }
 
 #para {
