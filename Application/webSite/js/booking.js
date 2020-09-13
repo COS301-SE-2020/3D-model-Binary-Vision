@@ -571,28 +571,7 @@ function fuzzyLogic()
 function findAvailableBookings(){
 
 
-    var bodySelector = document.getElementById("currentOverlay");
-    bodySelector.style.position = "relative";
-    bodySelector.style.display = "inline-block";
-    bodySelector.style.backgroundColor= "#003366";
-    bodySelector.style.width= "300px";
-    bodySelector.style.color= "white";
-    bodySelector.style.textAlign = "center";
-    bodySelector.style.borderRadius = "5px";
-    bodySelector.style.boxShadow = "1px 0px 15px 0px black";
-    
-
-    var location = document.querySelector("#currentOverlay");
-
-    var population = '<br><h2>Choose Options</h2><hr><label for="selectTime">Select Time of Day</label><select class="form-control" id="selectTime">';
-    population += '<option  value="1">Morning</option> <option value="2">Afternoon</option></select>';
-    population += '<br><label for="selectDay">Select Day of Week</label><select class="form-control" id="selectDay">';
-    population += '<option  value="1">Monday</option> <option value="2">Tuesday</option>';
-    population += '<option  value="3">Wednesday</option> <option value="4">Thursday</option>';
-    population += '<option  value="5">Friday</option> <option value="6">Saturday</option>';
-    population += '<option  value="7">Sunday</option></select><br>';
-    
-    location.innerHTML = population;
+  
 
 
     //get the choice that was made's reason and time period it would take 
@@ -612,6 +591,29 @@ function findAvailableBookings(){
         for( var i in data)
         {
             console.log(data[i]);
+
+            var bodySelector = document.getElementById("currentOverlay");
+            bodySelector.style.position = "relative";
+            bodySelector.style.display = "inline-block";
+            bodySelector.style.backgroundColor= "#003366";
+            bodySelector.style.width= "300px";
+            bodySelector.style.color= "white";
+            bodySelector.style.textAlign = "center";
+            bodySelector.style.borderRadius = "5px";
+            bodySelector.style.boxShadow = "1px 0px 15px 0px black";
+            
+        
+            var location = document.querySelector("#currentOverlay");
+        
+            var population = '<br><h2>Choose Options</h2><hr><label for="selectTime">Select Time of Day</label><select class="form-control" id="selectTime">';
+            population += '<option  value="1">Morning</option> <option value="2">Afternoon</option></select>';
+            population += '<br><label for="selectDay">Select Day of Week</label><select class="form-control" id="selectDay">';
+            population += '<option  value="1">Monday</option> <option value="2">Tuesday</option>';
+            population += '<option  value="3">Wednesday</option> <option value="4">Thursday</option>';
+            population += '<option  value="5">Friday</option> <option value="6">Saturday</option>';
+            population += '<option  value="7">Sunday</option></select><br>';
+            
+            location.innerHTML = population;
         }
     }));
 
