@@ -556,7 +556,7 @@ function fuzzyLogic()
 
     var location = document.querySelector("#currentOverlay"); //get the element that will be dynamically populated
 
-    var population='<select id="selectedProcedure"> <option value="">Select Option</option>';
+    var population='<br><select class="form-control" id="selectedProcedure"> <option value="">Select Option</option>';
     population+='<option value="15">checkup</option> <option value="30">Tooth Decay</option>';
     population+='<option value="45">Gum Disease</option>  <option value="30">Tooth Sensitivity</option>';
     population+='<option value="45">Tooth Extraction</option> <option value="30">Tooth Erosion</option>';
@@ -566,9 +566,34 @@ function fuzzyLogic()
 }
 
 //=================================================================================================
-//function developed by: Jacobus Janse van Rensburg
+//function developed by: Jacobus Janse van Rensburg and Rani Arraf
 //Function used for the fuzzy logic to find bookings based on the option that the receptionist chose
 function findAvailableBookings(){
+
+
+    var bodySelector = document.getElementById("currentOverlay");
+    bodySelector.style.position = "relative";
+    bodySelector.style.display = "inline-block";
+    bodySelector.style.backgroundColor= "#003366";
+    bodySelector.style.width= "300px";
+    bodySelector.style.color= "white";
+    bodySelector.style.textAlign = "center";
+    bodySelector.style.borderRadius = "5px";
+    bodySelector.style.boxShadow = "1px 0px 15px 0px black";
+    
+
+    var location = document.querySelector("#currentOverlay");
+
+    var population = '<br><h2>Choose Options</h2><hr><label for="selectTime">Select Time of Day</label><select class="form-control" id="selectTime">';
+    population += '<option  value="1">Morning</option> <option value="2">Afternoon</option></select>';
+    population += '<br><label for="selectDay">Select Day of Week</label><select class="form-control" id="selectDay">';
+    population += '<option  value="1">Monday</option> <option value="2">Tuesday</option>';
+    population += '<option  value="3">Wednesday</option> <option value="4">Thursday</option>';
+    population += '<option  value="5">Friday</option> <option value="6">Saturday</option>';
+    population += '<option  value="7">Sunday</option></select><br>';
+    
+    location.innerHTML = population;
+
 
     //get the choice that was made's reason and time period it would take 
     var selector = document.querySelector("#selectedProcedure");
