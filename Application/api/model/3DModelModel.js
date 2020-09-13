@@ -164,13 +164,25 @@ var Booking = new Schema({
 })
 
 var PasswordChanges = new Schema({
-    email:{type: String , required: true}
+    email:{
+        type: String,
+        required: true
+    }
 })
 
 var Practice = new Schema({
-    practice: {type:String , required: true},
-    securityCode:{type: String , required: true },
-    headReceptionist: {type: String , required: true}
+    practice: {
+        type:String,
+        required: true
+    },
+    securityCode:{
+        type: String,
+        required: true
+    },
+    headReceptionist: {
+        type: String,
+        required: true
+    }
 })
 
 module.exports = {

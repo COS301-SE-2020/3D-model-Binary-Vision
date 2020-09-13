@@ -557,7 +557,6 @@ module.exports = {
               } 
               else 
               {
-                  console.log(file);
                   Patient.findOne({ "_id": req.cookies.patientCookie }, function(err, patient) 
                   {
                       // handle err
@@ -616,7 +615,6 @@ module.exports = {
                     res.send(err);
                     return;
                 }
-                console.log(file);
                 Patients.findOne({"_id":req.cookies.patientCookie} , function(err , patient)
                 {
                     if (err)
@@ -1023,7 +1021,6 @@ module.exports = {
         var {email , password , code} = req.body;
 
         password = frontsalt+password+backSalt;
-        // console.log("email: "+email +"\npassword: "+password+"\nCode: "+code);
         var updated = false;
         PasswordChanges.findOne({"_id":mongoose.Types.ObjectId(code)}, function (err , record){
             if (record)
@@ -1031,7 +1028,6 @@ module.exports = {
                 if (email == record.email){
                     // valid details in order to change the password 
                     bcrypt.hash(password,10,function(err, p1){   //hash the new password in the back end as well
-                        console.log(p1);
                         Doctor.findOneAndUpdate ({"email":email},{$set:{"password":p1}}, function(err, doc){
                             if(!doc)//doctor not found
                             {
@@ -1090,7 +1086,6 @@ module.exports = {
     {
         const {user , choice } = req.body;
 
-        console.log(user + "\t "+ choice);
         var setter;
         if(choice =="accept")
         {

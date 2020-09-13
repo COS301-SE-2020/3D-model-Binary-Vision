@@ -17,7 +17,6 @@ function getDrName()
 
     response.then(res => res.json().then( data => 
     {
-        console.log(data);
         if (res.status==200)
         {
             document.getElementById("nameId").innerHTML = data.surname;
@@ -48,8 +47,6 @@ function getPatients()
           'Content-Type': 'application/json; charset=UTF-8',
         }
     });
-
-    console.log("patient data: \n\n"+ response);
 
     response.then(res => res.json().then( data => 
     {
@@ -136,7 +133,7 @@ function addPatient()
         if(res.status ==201)
         {
             //patient successfuly added and we can do something
-            console.log("patient added successfully: check database for conformation");
+            console.log("patient added successfully: check database for confirmation");
         }
         else
         {
@@ -214,7 +211,6 @@ function getSinglePatient()
 
         if (res.status == 200)
         {
-            console.log(data);
             document.getElementById("nameLog").innerHTML = data.name+" "+data.surname;
         }
         else
@@ -266,23 +262,10 @@ function selectConsultation(ConsultationID)
 //
 function getSinglePatientConsultations()
 {
-    console.log('getting single patient consultations')
-
     var response = fetch("/consultations",{
         method:"GET",
         headers:{'Content-Type':'Application/json ; charset=UTF-8'}
     });
-
-    response.then(res => res.json().then(data =>
-    {
-
-        console.log("DATA:\n");
-        for( var i in data)
-        {
-            console.log(data[i]);
-        }
-    }));
-
 }
 
 //=============================================================================================
@@ -300,7 +283,6 @@ function getReceptionistNotes()
         if(res.status == 200)
         {
             var notes = data.Notes;
-            console.log(Notes);
         }
         else if (res.status == 404)
         {
@@ -318,8 +300,6 @@ function getReceptionistNotes()
 //
 function saveReceptionistNotes(Notes)
 {
-    console.log("planning to save the note: "+Notes);
-
     var response = fetch("/saveReceptionistNotes", {
         method:"POST",
         headers:{'Content-Type':'Application/json ; charset=UTF-8'},
@@ -340,7 +320,6 @@ function saveReceptionistNotes(Notes)
         {
             //not logged in
         }
-        console.log(res);
     }));
 
 }

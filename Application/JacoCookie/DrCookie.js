@@ -6,8 +6,6 @@ var doctorCookie = document.cookie;
 //This function creates a Doctor Cookie when correct login credentials are used
 function login()
 {
-    console.log("inside login");
-
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
   
@@ -20,13 +18,9 @@ function login()
     });
 
     response.then(res => res.json().then( data => {
-
-        console.log(data);
-        console.log(data.name);
         if (data.name == "")
         {
             console.log("Not found");
-
             //RANI!!!!!! reload page with incorrect information thing
         }
         else
@@ -34,8 +28,6 @@ function login()
             //login credentials are correct so we set it to the frontend cookie
             var doctorID = data._id;
             doctorCookie = "id="+doctorID+";domain=;path=/;";
-            console.log(doctorCookie);
-            
             //RANI!!!!!   cookie is set and now send us to home page bellow here rani
         }
         alert("response: ");

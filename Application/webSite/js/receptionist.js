@@ -7,7 +7,6 @@ function initReceptionist()
 {
     //getReceptionist Info and populate visual info on page
    var info = getReceptionistInfo();
-   console.log(info);
 }
 
 window.onbeforeunload = saveNotes();
@@ -51,7 +50,6 @@ function getReceptionistInfo()
 function saveNotes()
 {
     var noteSpace = document.getElementById('receptionistNotes').value;
-    console.log("Note captured to save: "+ noteSpace);
     saveReceptionistNotes(noteSpace);
 }
 
@@ -78,7 +76,8 @@ function receptionistSearchPatient()
         idNumber=idNumberElement.value;
     } 
 
-    var response = fetch("/searchPatient",{
+    var response = fetch("/searchPatient",
+    {
         method:"POST",
         headers:{'Content-Type':'application/json; charset=UTF-8'},
         body:JSON.stringify({ name ,surname, idNumber })
@@ -86,10 +85,6 @@ function receptionistSearchPatient()
 
     response.then(res=> res.json().then(data=>
     {
-        for(var i in data)
-        {
-            console.log(data[i]);
-        }
         return data;
     }));
 }

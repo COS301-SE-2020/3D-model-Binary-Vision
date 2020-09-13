@@ -23,12 +23,7 @@ function displayDoctorOverlay()
 
     response.then(res => res.json().then(data=>
     {
-        // for(var i in data)
-        // {
-        //     //console.log(data[i].name+"\n "+data[i].surname+" \nid:"+data[i]._id+" \nusername: "+data[i].username+" \npassword: "+data[i].password +"\n\n");
-        // }
         //createDoctorslist with the data
-
         createDoctorsList(data);
     }));
 }
@@ -113,13 +108,11 @@ function populateCalander(data)
         if(data[i].status == "Pending")
         {
             var dataIndex = parseInt(i) ;
-            //console.log(dataIndex);
-            
             var date = data[dataIndex].date;
             var time = data[dataIndex].time;
             var searchPageId = date+"&"+time;
-            //console.log(searchPageId);
             var element = document.getElementById(searchPageId);
+
             if (element!=null)
             {
                 //mark as red since a booking already exists
@@ -127,8 +120,6 @@ function populateCalander(data)
                 element.setAttribute("onclick","");
                 //call api to get patient based on id, then put the patients full name ehre
                 setName(data[dataIndex].patient,searchPageId);
-            
-                
             }
         }
         
@@ -136,15 +127,16 @@ function populateCalander(data)
 
 }
 
-function setName(patient, searchPageId){
+function setName(patient, searchPageId)
+{
     var response = fetch("/singlePatient",{
         method:"POST",
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
         body:JSON.stringify({"patient":patient})
     });
+
     response.then(res => res.json().then(pat => 
     {
-        //console.log(pat.name);
         document.getElementById(searchPageId).innerHTML=pat.name + " " + pat.surname;
     }));
 }
@@ -221,7 +213,6 @@ function selectTime(timeslot)
     }
 
     oldTimeSlotID= timeslot;
-    //console.log(timeslot);
     element=document.getElementById(timeslot);
     element.setAttribute("style","background-color:green;");
 
@@ -335,7 +326,6 @@ function fillPatientSearchedList(data)
 function selectDoctor(drID,name, surname)
 {
     selectedDoctor = drID;
-    //console.log("Selected doctor with id: "+selectedDoctor);
 
     document.getElementById("doctorInfoDisplay").innerHTML = "("+name+") "+surname;
     document.getElementById("doctorInfoDisplay").style.color = "lightgreen";
@@ -350,7 +340,6 @@ function selectTimeSlot(date, time)
 {
     selectedDate = date;
     selectedTime = time;
-    //console.log("Selected Time: "+ selectedTime+"\t selected date: "+selectedDate);
 
     document.getElementById("timeInfoDisplay").innerHTML = time;
     document.getElementById("timeInfoDisplay").style.color = "lightgreen";
@@ -386,7 +375,6 @@ function providedReason()
 // Createing the booking in the database and testing if the booking is legal
 function makeBooking()
 {
-    // //console.log("Making booking with details:\nDoctor: "+selectedDoctor+"\nPatient: "+selectedPatient+"\nDate: "+selectedDate+"\nTime: "+selectedTime);
     if (selectedDoctor != null && selectedPatient!= null && selectedDate != null && selectedTime!=null)
     {
 
@@ -408,7 +396,6 @@ function makeBooking()
 
         response.then(res=> 
         {
-            // //console.log(res.url+ " statusCode: "+res.status);
             if(res.status == 200)
             {
 
@@ -452,12 +439,8 @@ function prepPostponement()
 
     response.then(res=> res.json().then(data=>
     {
-        // //console.log("Doctor For Postponement");
-        // //console.log(data);
-        // //console.log(data.surname);
         selectDoctor(doctorID,data.name, data.surname);
         displayTimeTableOverlay();
-
     }));
 
     //make a call to find patient by id and get name/surname
@@ -472,9 +455,6 @@ function prepPostponement()
 
     fetcher.then(res=> res.json().then(data=>
     {
-        // //console.log("Patient For Postponement");
-        // //console.log(data);
-        // //console.log(data.surname);
         selectPatient(patientID, data.name, data.surname, data.idNumber);
     }));
     
@@ -557,7 +537,8 @@ function moveSideBar()
 //================================================================================================
 //Function developed by: Jacobus Janse van Rensburg
 //Function Used to initialize the fuzzy logic overlay to select from the different types of procedures that are common to make a booking
-function fuzzyLogic(){
+function fuzzyLogic()
+{
     var indOverlay = document.getElementById("individual");
     indOverlay.style.display = "none";
     var overlayTable = document.getElementById('currentOverlayTable');
@@ -593,8 +574,6 @@ function findAvailableBookings(){
     var selector = document.querySelector("#selectedProcedure");
     var reason = selector.options[selector.selectedIndex].innerHTML;
     var time = selector.options[selector.selectedIndex].value;
-
-    console.log(reason+"\t"+time);
 
     //API CALL TO GET THE POSSIBLE BOOKING SLOTS
     var response = fetch("/fuzzyLogic" , {

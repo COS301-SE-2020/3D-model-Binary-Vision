@@ -15,7 +15,8 @@ function showRecord(date, reason,consultation)
     document.getElementById("containInfoRight").innerHTML = "<br><br>DATE: <hr> <p id='date1' style='color:black; font-weight: bold;'>"+date+"</p>  BOOKING REASON: <hr><p id='patientqq' style='color:black; font-weight: bold;'>"+reason+"</p> <br><br><br><br>RENDER<hr><a class='btn btn-success' href='../renderPage/render.html' id = 'renderpage'>Render</a><br><br>HIDE<hr><button class='btn btn-danger' onclick=hideRecord()>Hide Info</button>";
 }
 
-function hideRecord(){
+function hideRecord()
+{
     var rightBody = document.getElementById("rightSideBody");
     rightBody.style.width = "0px";
 }
@@ -33,7 +34,6 @@ function init()
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
         body: JSON.stringify({"patient":parts[1]})
     });
-
 
     response.then(res=> res.json().then(data=>
     {
