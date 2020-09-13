@@ -369,7 +369,16 @@ module.exports ={
                                     // console.log("possible");
                                     var endTimeStamp = operationTimes[j + (parseInt(duration)/15)];
 
-                                    var record = JSON.stringify({"doctor":doctor,"time":operationTimes[j],"endTime":endTimeStamp, "date":date,"reason":reason});
+                                    var timeOfDay;
+                                    if (ot > 12)
+                                    {
+                                        timeOfDay =0;
+                                    }
+                                    else{
+                                        timeOfDay =1;
+                                    }
+
+                                    var record = JSON.stringify({"doctor":doctor,"time":operationTimes[j],"endTime":endTimeStamp, "date":date,"reason":reason,"isMorning":timeOfDay});
                                     console.log("Adding record to possibles: "+ record);
 
                                     possible.push(record);
@@ -413,14 +422,26 @@ module.exports ={
                         for (var doctorCounter in doc){
                             console.log("Making possible day options for: "+doc[doctorCounter])
                             //loop thru the operational times as well 
-                            for ( var ot in operationTimes){
+                            for ( var ot =0 ; ot < operationTimes.length ; ot++){
                                 console.log("possible end time: "+(parseInt(ot)+parseInt(duration)/15))
                                 if ((parseInt(ot)+parseInt(duration)/15) < 31)
                                 {
                                     console.log("Adding possible");
                                     //valid time slot that can be used to make a booking 
-                                    var endTimeStamp = operationTimes[ot+ (parseInt(duration)/15)];
-                                    options.push(JSON.stringify({"doctor":doc[doctorCounter]._id, "time":operationTimes[ot], "endTime":endTimeStamp, "date": date,"reason":reason}));
+                                    var timeOfDay;
+                                    if (ot > 12)
+                                    {
+                                        timeOfDay =0;
+                                    }
+                                    else{
+                                        timeOfDay =1;
+                                    }
+                                    var endTimeStamp = operationTimes[ot + (parseInt(duration)/15)];
+                                    console.log("END TIME: "+ endTimeStamp)
+                                    var elseRecord =JSON.stringify({"doctor":doc[doctorCounter]._id, "time":operationTimes[ot], "endTime":endTimeStamp, "date": date,"reason":reason,"isMorning":timeOfDay});
+                                    
+                                    console.log(elseRecord);
+                                    options.push(elseRecord);
                                 }
                             }
 
