@@ -20,4 +20,16 @@ window.onload= function()
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
         body: JSON.stringify({user, choice})
     });
+
+    var choi;
+    if(choice == "accept")
+    {
+        choi = "ACCEPTED";
+    }
+    else
+    {
+        choi = "REJECTED";
+    }
+
+    document.getElementById("action").innerText = choi ;
 }
