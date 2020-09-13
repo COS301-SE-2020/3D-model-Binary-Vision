@@ -32,15 +32,18 @@ module.exports = {
                 res.status(200).send("ok");
                 return;
             }
-            else{
-                Receptionist.findOne({email}, function (err, receptionist){
+            else
+            {
+                Receptionist.findOne({email}, function (err, receptionist)
+                {
                     if ( receptionist )
                      {
                          sendPasswordResetEmail(req);
                          res.status(200).send("ok");
                          return; 
                      }
-                     else {
+                     else 
+                     {
                          res.status(400).send("not ok");
                          return;
                      }
@@ -53,8 +56,10 @@ module.exports = {
 
     //===================================================================================
     //function developed by Jacobus Janse van Rensburg
-    signupEmail: function (req ,res){
-        var passwordChangeOptions = {
+    signupEmail: function (req ,res)
+    {
+        var passwordChangeOptions = 
+        {
             from: 'flap.jacks.cs@gmail.com',
             to:req.body.email,
             subject: '3D Render Password Change',
@@ -68,12 +73,14 @@ module.exports = {
 //function developed by: Jacobus Jane van Rensburg 
 //Email HTML developed by rani
 //function that sends the actual email to reset the users password
-function sendPasswordResetEmail(req){
+function sendPasswordResetEmail(req)
+{
     var email = req.body.email;
     var record = new PasswordChanges({email});
     var id = record._id;
     //store a temporary record in the database with a id to mach for a valid password change 
-    record.save(function (err){
+    record.save(function (err)
+    {
         if (err){
             console.log(err);
         }
@@ -81,7 +88,8 @@ function sendPasswordResetEmail(req){
     });
 
     //setting the details of the email to be sent
-    var passwordChangeOptions = {
+    var passwordChangeOptions = 
+    {
         from: 'flap.jacks.cs@gmail.com',
         to:req.body.email,
         subject: '3D Render Password Change',
@@ -93,7 +101,8 @@ function sendPasswordResetEmail(req){
     passwordChangeOptions.html = passwordChangeOptions.html.replace('RESET_PASSWORD_URL',resetURL);
     passwordChangeOptions.html = passwordChangeOptions.html.replace('USER_EMAIL_HERE',req.body.email);
     //send the actual email
-    transporter.sendMail(passwordChangeOptions, function(error, info){
+    transporter.sendMail(passwordChangeOptions, function(error, info)
+    {
         if (error) 
         {
             console.log(error);

@@ -14,17 +14,22 @@ window.onload= function()
     var option2 = options[1].split("=");
     var user = option2[1]; //variable holds the users id to use the action 
 
-    console.log("User: "+user+ "\nOption: "+choice);
-
-
-    var response = fetch("/activateUser", {
+    var response = fetch("/activateUser", 
+    {
         method: "POST",
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
         body: JSON.stringify({user, choice})
     });
 
-    response.then(res=> {
+    var choi;
+    if(choice == "accept")
+    {
+        choi = "ACCEPTED";
+    }
+    else
+    {
+        choi = "REJECTED";
+    }
 
-    });
-
+    document.getElementById("action").innerText = choi ;
 }

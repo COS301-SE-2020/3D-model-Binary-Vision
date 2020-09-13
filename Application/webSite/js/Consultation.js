@@ -183,7 +183,6 @@ function saveConsultation(pid,reason)
 		{
 			//remove the bar holding this booking and load the next one
 			//check status code
-			console.log(res.status);
 			if(res.status == 401)
 			{
 				alert("You are not authorized to do this action!");
@@ -310,7 +309,6 @@ function populateDoctorInformation()
 
     response.then( res=> res.json().then( data => 
     {
-        // console.log("Doctors surname: "+data.surname);
         // set the surname field 
         document.getElementById("doctorName").innerHTML=data.surname+" ("+data.name+")";
     }));
@@ -319,11 +317,9 @@ function populateDoctorInformation()
 //=============================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 //Function used to get the booking id from the url and populating the requied fields using that information
-function populateBookingInformation(){
-	//first we need to parse the url to find the booking id that was used
-
+function populateBookingInformation()
+{
 	var url = window.location.href;
-	console.log(url);
 	var parts = url.split("=");
 	//parts[1] holds the booking information
 
@@ -336,16 +332,13 @@ function populateBookingInformation(){
 		body: JSON.stringify({"booking":parts[1]})
 	});
 
-	response.then(res => res.json().then(data => {
-
-		console.log(res.status +" "+data.patient);
-		
+	response.then(res => res.json().then(data =>
+	{
 		//set different times
 		document.querySelector("#startTime").innerHTML=data.time;
 		var time = data.time;
 		var mins = time.split(":");
 		var newMins = parseInt(mins[1])+15;
-		console.log(newMins);
 		var endTime;
 		if(newMins >=60)
 		{
@@ -353,7 +346,8 @@ function populateBookingInformation(){
 			newHour = mins[0]++;
 			endTime = newHour+":"+newMins;
 		}
-		else{
+		else
+		{
 			endTime= mins[0]+":"+newMins;
 		}
 		document.querySelector("#endTime").innerHTML = endTime;		
@@ -370,10 +364,9 @@ function populateBookingInformation(){
 //=============================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 // function to get the required patients information and populate the patient information
-function popuatePatientInfo(id,reason){
-
-	document.getElementById("docnotes").innerHTML = "<p style='font-weight: bold;'>Doctors Notes:</p><textarea id='doctorsNotes' style='width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;'></textarea><button class='btn btn-primary' id='saveDoctorNote' type='button' style='margin-top: 10px;' onclick='saveConsultation(\""+id+"\",\""+reason+"\")'>Save Note</button>";
-
+function popuatePatientInfo(id,reason)
+{
+	document.getElementById("docnotes").innerHTML = "<p style='font-weight: bold;'>Doctors Notes:</p><textarea id='doctorsNotes' style='width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;'></textarea><button class='btn btn-primary' id='saveDoctorNote' type='button' style='margin-top: 10px;' onclick='saveConsultation(\""+id+"\",\""+reason+"\")'>Save & Exit Consultation</button>";
 
 	var response = fetch ("/singlePatient",{
 		method:"POST",
@@ -381,12 +374,14 @@ function popuatePatientInfo(id,reason){
 		body: JSON.stringify({"patient":id})
 	});
 
-	response.then(res=> res.json().then(data=> {
-
-		if(res.status != 200){
+	response.then(res=> res.json().then(data=> 
+	{
+		if(res.status != 200)
+		{
 			//do some fix here 
 		}
-		else{
+		else
+		{
 			//set the patients attributes
 			document.querySelector("#patientName").innerHTML ="Name: "+data.name;
 			document.querySelector("#patientSurname").innerHTML ="Surname: "+data.surname;
@@ -395,6 +390,5 @@ function popuatePatientInfo(id,reason){
 			document.querySelector("#patientEmail").innerHTML="Email: "+data.email;
 			document.querySelector("#patientContactNo").innerHTML="Contact Number: "+data.cellnumber; 
 		}
-
 	}));
 }

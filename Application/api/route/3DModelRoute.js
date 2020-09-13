@@ -54,7 +54,6 @@ module.exports = function (app)
 
     app.route('/patients/:id')
         .post(Model.getSinglePatient)
-        .patch(Model.updatePatient)
         .get(Model.getPatientConsultations);
 
     app.route('/selectPatient')
@@ -156,4 +155,7 @@ module.exports = function (app)
 
     app.route('/getPatientConsultations')
         .post(Model.getPatientConsultations);
+
+    app.route('/getPracticeName')
+        .post(Model.getPracticeName);
 }

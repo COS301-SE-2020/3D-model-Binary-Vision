@@ -196,17 +196,19 @@ function checkEmail(email)
     }));
 }
 
-async function stop(){
+async function stop()
+{
     usedParamaters=true;
 }
 
 //=====================================================================================
 //Function developed by: Jacobus Janse van Rensburg
 // adding a user if its allowed
-function addUser(name , surname, email ,username,choice,practice , securityCode){
+function addUser(name , surname, email ,username,choice,practice , securityCode)
+{
     
-    console.log(choice);
-    if(usedParamaters!=true && choice!=""){
+    if(usedParamaters!=true && choice!="")
+    {
         //make the api call with the hashed password to sign up a new user 
 
         var frontSalt ="COS301";
@@ -215,13 +217,15 @@ function addUser(name , surname, email ,username,choice,practice , securityCode)
 
         var frontEndHashedPassword = CryptoJS.MD5(saltedPasword).toString();
 
-        var response = fetch("/signup",{
+        var response = fetch("/signup",
+        {
             method:"POST",
             headers:{'Content-Type': 'application/json; charset=UTF-8'},
             body: JSON.stringify({"name":name.value , "surname":surname.value , "email":email.value ,"username":username.value , "password":frontEndHashedPassword, choice,"practition":practice.value , "securityCode":securityCode})
         })
 
-        response.then(res => {
+        response.then(res => 
+        {
             var today = new Date();
             var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
             var hours = today.getHours();
