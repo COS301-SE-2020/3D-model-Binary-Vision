@@ -89,7 +89,7 @@ function populateTable()
 
     response.then(res => res.json().then(data => 
     {
-		console.log(data)
+		////console.log(data)
 		fillData(data);
 	}));
 }
@@ -106,7 +106,7 @@ function fillData(data)
        if(data[i].status == "Pending")
        {
             var dataIndex = parseInt(i) ;
-            console.log(dataIndex);
+            ////console.log(dataIndex);
 
             var date = data[dataIndex].date;
             var time = data[dataIndex].time;
@@ -134,7 +134,7 @@ function setName(patient, searchPageId){
     });
     response.then(res => res.json().then(pat => 
     {
-        console.log(pat.name);
+        ////console.log(pat.name);
         document.getElementById(searchPageId).innerHTML=pat.name + " " + pat.surname;
     }));
 }

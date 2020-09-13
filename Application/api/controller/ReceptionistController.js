@@ -9,6 +9,7 @@ var mongoose = require("mongoose");
 const { userInfo } = require("os");
 const { Console } = require("console");
 const { Consultation } = require("../model/3DModelModel.js");
+const { parse } = require("path");
 
 var Doctor = require("../model/3DModelModel.js").Doctor;
 var Receptionist = require("../model/3DModelModel.js").Receptionist;
@@ -246,15 +247,15 @@ module.exports ={
             "15:00","15:15","15:30","15:45",
             "16:00","16:15","16:30","16:45"
         ];
-
         var today = new Date();     //get the current date
-        var day = today.getDate() , month = today.getMonth() , year = today.getFullYear();
+        var day = parseInt(today.getDate())+1 , month = today.getMonth() , year = today.getFullYear();
         var date = day+'/'+(parseInt(month)+1)+'/'+year;
         var dayCap = getDayCap(parseInt(month)); //used to make sure that the dates are continuasly valid when checking on edge cases
         var options = [];   //create an empty array of the options that could possible be 
 
+        var dayCounter = 0;
         console.log(date);
-        // while (options.length < 5){  //while we dont have a minumum of at least 5 options to choose from
+        while (dayCounter < 7 ){  //while we dont have a minumum of at least 5 options to choose from
             const bookings = await Booking.find({"date":date}); //using callback function to enforce sequential execution
 
                 if(bookings!=""){
@@ -303,7 +304,7 @@ module.exports ={
                                 console.log("\nFor orderedBooking:\tStart:"+currentDoctorBookings[k].time +"\tend:"+ currentDoctorBookings[k].endTime+"\n")
 
                                 console.log("operation time : "+ operationTimes[j]);
-
+                                console.log("CHECKING OVERLAPPING BETWEEN CURRENT TIME AND CURRENT BOOKING");
                                 if(currentDoctorBookings[k].time == operationTimes[j])
                                 {
                                     allowed = false;
@@ -330,6 +331,7 @@ module.exports ={
                                     while(counter < possible.length){
                                         console.log("Possible lenght: "+possible.length+"\t counter: "+counter)
                                         console.log(possible[counter]);
+                                        console.log("CHECKING POSSIBLE OVERLAPPING WITH CURRENT BOOKING : "+ possible[counter]);
                                         if((isOverlapping(possible[counter], currentDoctorBookings[k].time , duration , operationTimes[j]))){
 
                                             allowed = false;
@@ -347,6 +349,7 @@ module.exports ={
                                     }  
                                 }
 
+                            
                                 possible = [];
                                 console.log("holder length: "+holder.length);
                                 for (var l in holder)
@@ -366,16 +369,18 @@ module.exports ={
                                     // console.log("possible");
                                     var endTimeStamp = operationTimes[j + (parseInt(duration)/15)];
 
-                                    var record = JSON.stringify({"doctor":doctor,"start":operationTimes[j],"end":endTimeStamp, "date":date,"reason":reason});
+                                    var record = JSON.stringify({"doctor":doctor,"time":operationTimes[j],"endTime":endTimeStamp, "date":date,"reason":reason});
                                     console.log("Adding record to possibles: "+ record);
 
                                     possible.push(record);
-                                    j = j +(parseInt(duration)/15);   //look for spaced out possible booking spaces.
+                                    // j = j +(parseInt(duration)/15);   //look for spaced out possible booking spaces.
                                 }
                             }
-
+                            
+                            //add the left over possibles to the options
+                          
+                           
                         }
-                        //add the left over possibles to the options
                         for(var n in possible)
                         {
                             console.log(possible[n]);
@@ -384,28 +389,44 @@ module.exports ={
                             var contains = []
                             for (var n in possible)
                             {
-                                
-                                if(options.length<5)
-                                    options.push(possible[n]);
-                                else {
-                                    break;
-                                }
+                                options.push(possible[n]);
                             }
                             
                         }
+                        
                     }
                     else{
                         console.log("in else");
                     //there was no bookings 
                     //find a doctor and use doctor to make an option
+                    
                     const rec =  await Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)});
-                    const doc = await Doctor.findOne({"practition":rec.practition});
+
+                    //get all the doctors for said practice 
+                    const doc = await Doctor.find({"practition":rec.practition});
                     if(!doc){
                         res.status(400).send("no doctor found for practice");
                         return;
                     } else {
-                        var endTimeStamp = operationTimes[12+ (parseInt(duration)/15)];
-                        options.push(JSON.stringify({"doctor":doc._id, "start":"12:00", "end":endTimeStamp, "date": date,"reason":reason}));
+
+                        //loop thru the doctors and make possible options for each of them 
+                        for (var doctorCounter in doc){
+                            console.log("Making possible day options for: "+doc[doctorCounter])
+                            //loop thru the operational times as well 
+                            for ( var ot in operationTimes){
+                                console.log("possible end time: "+(parseInt(ot)+parseInt(duration)/15))
+                                if ((parseInt(ot)+parseInt(duration)/15) < 31)
+                                {
+                                    console.log("Adding possible");
+                                    //valid time slot that can be used to make a booking 
+                                    var endTimeStamp = operationTimes[ot+ (parseInt(duration)/15)];
+                                    options.push(JSON.stringify({"doctor":doc[doctorCounter]._id, "time":operationTimes[ot], "endTime":endTimeStamp, "date": date,"reason":reason}));
+                                }
+                            }
+
+                            
+                        }
+                     
                         // console.log("options size: "+options.length);
                     }
                 }
@@ -413,7 +434,7 @@ module.exports ={
             
             //increment the date
             day = incrementDate(parseInt(day), dayCap);
-            if(date == 1)
+            if(day == 1)
             {
                 dayCap = getDayCap(parseInt(month)+1);
                 if(parseInt(month)+1 == 13)
@@ -425,7 +446,9 @@ module.exports ={
                 }
             }
             date = day+'/'+(parseInt(month)+1)+'/'+year;
-        // }
+
+            dayCounter++;
+        }
 
         //return the options back to the client 
         //concat all the options to be returned 
@@ -471,9 +494,28 @@ function orderBookings(bookings){
     var doctors =[];
     for (var i in bookings)
     {
-        if(doctors.includes(bookings[i].doctor))
-            continue;
-        doctors.push(bookings[i].doctor);
+        if (doctors == null)
+        {
+            doctors.push(bookings[i].doctor);
+        }
+        else {
+            var allowed = true;
+            console.log("=======================================\nTesting "+doctors[j]);
+            for( var j = 0 ; j < doctors.length ; j ++)
+            {
+                console.log(" against "+bookings[i].doctor);
+                if (toString(doctors[j]) == toString(bookings[i].doctor)){
+                    allowed = false;
+                    break;
+                }
+            }
+            if ( allowed )
+            {
+                doctors.push(bookings[i].doctor);
+            }
+        }
+        // if(!doctors.includes(bookings[i].doctor))
+        //     doctors.push(bookings[i].doctor);
     }
 
     console.log("doctorsLength: "+doctors.length);
@@ -490,15 +532,16 @@ function orderBookings(bookings){
     {
         //find the correct subscript to add the booking in
         for(var j in orderedBookings){
-            if(orderedBookings[j] == null){
-                //the doctor subscript was not found and therefor we create subscript j to belong to this doctor
-                orderedBookings[j].push(bookings[i]);
-            }
-            else if (orderedBookings[j].doctor == bookings.doctor)
+            if (orderedBookings[j].doctor == bookings.doctor)
             {
                 //correct place is found 
                 orderedBookings[j].push(bookings[i]);
             }
+            else if(orderedBookings[j] == null){
+                //the doctor subscript was not found and therefor we create subscript j to belong to this doctor
+                orderedBookings[j].push(bookings[i]);
+            }
+            
         }
     }
     console.log("=========================================")
@@ -520,7 +563,7 @@ function isOverlapping(booking , startTime , duration , operationTime){
 
     console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     console.log("Checking for overlap between \nbooking start: "+booking.time +"\t end:"+booking.endTime);
-    console.log("With start:"+start+"\tduration: "+duration)
+    console.log("With start:"+startTime+"\tduration: "+duration)
 
 
     var durationIndexLength = parseInt(duration)/15; 
@@ -563,7 +606,7 @@ function isOverlapping(booking , startTime , duration , operationTime){
     }
 
     //test for over lapping 
-    if ( (start > bookStart && start < bookEnd) || (end < bookEnd && end > bookStart) ){
+    if ( (start > bookStart && start < bookEnd) || (end < bookEnd && end > bookStart) || (bookStart > start && bookStart < end) || (bookEnd < end && bookEnd >start) ){
         //overlap
         console.log("Overlapping");
         console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
