@@ -24,7 +24,7 @@ module.exports ={
     {
         if(!req.user)
         {
-            res.status(401);
+            res.sendStatus(401); // Updated by Marcus from status -> sendStatus
             return;
         }
 
@@ -48,7 +48,7 @@ module.exports ={
     {
         if(!req.user)
         {
-            res.status(401);
+            res.sendStatus(401);  // Updated by Marcus from status -> sendStatus
             return;
         }
 
@@ -76,7 +76,7 @@ module.exports ={
     {
         if (!req.user)
         {
-            res.status(401);
+            res.sendStatus(401);  // Updated by Marcus from status -> sendStatus
             return;
         }
 
@@ -90,7 +90,7 @@ module.exports ={
                 res.status(400)
                 return;
             }
-            res.status(200);
+            res.sendStatus(200);  // Updated by Marcus from status -> sendStatus
             return;
         });
     },
@@ -102,7 +102,7 @@ module.exports ={
     {
         if (!req.user)
         {
-            res.status(401);
+            res.status(401).send("Unauthorised");
             return;
         }
 
@@ -254,7 +254,6 @@ module.exports ={
         var options = [];   //create an empty array of the options that could possible be 
 
         var dayCounter = 0;
-        console.log(date);
         while (dayCounter < 6 ){  //while we dont have a minumum of at least 5 options to choose from
             const bookings = await Booking.find({"date":date}); //using callback function to enforce sequential execution
 
@@ -263,7 +262,6 @@ module.exports ={
                     orderedBookings = orderBookings(bookings);  //order the bookings into a 2D array based on the doctors id
 
                     //loop through the doctors 
-                    console.log(orderedBookings.length);
                     for(var i =0 ; i < orderedBookings.length ; i ++){
                         var doctor = orderedBookings[i][0].doctor;
                         var orderedBookingsLength = orderedBookings[i].length;
@@ -283,13 +281,7 @@ module.exports ={
                             
 
                             //Removable logs
-                            if(possible!=null){
-                                for(var k in possible)
-                                {
-                                    console.log(possible[k]);
-                                }
-                            }
-                           
+                            
                             var allowed = true;
                             for(var k =0 ; k < currentDoctorBookings.length ; k++){
 
@@ -310,7 +302,6 @@ module.exports ={
                                 {
                                     holder[l] =possible[l];
                                 }
-                                console.log("holder length: "+holder.length);
                                 var counter = 0, position =0;
                                 if(possible != null){
                                     while(counter < possible.length){
@@ -338,14 +329,9 @@ module.exports ={
                                     possible.push(holder[l]);
                                 }
 
-                                for (var i in possible)
-                                {
-                                    console.log(possible[i]);
-                                }
-                                // console.log("allowed: "+ allowed);
+                             
                                 if(allowed == true){
                                     //we can add this information as a possible
-                                    // console.log("possible");
                                     var endTimeStamp = operationTimes[j + (parseInt(duration)/15)];
 
                                       var timeOfDay;
@@ -368,10 +354,7 @@ module.exports ={
                           
                            
                         }
-                        for(var n in possible)
-                        {
-                            console.log(possible[n]);
-                        }
+                       
                         if(possible.length > 0){
                             var contains = []
                             for (var n in possible)
@@ -413,7 +396,6 @@ module.exports ={
                                     var endTimeStamp = operationTimes[ot + (parseInt(duration)/15)];
                                     var elseRecord =JSON.stringify({"doctor":doc[doctorCounter]._id, "time":operationTimes[ot], "endTime":endTimeStamp, "date": date,"reason":reason,"isMorning":timeOfDay});
                                     
-                                    console.log(elseRecord);
                                     options.push(elseRecord);
                                 }
                             }
@@ -421,7 +403,6 @@ module.exports ={
                             
                         }
                      
-                        // console.log("options size: "+options.length);
                     }
                 }
              
@@ -446,17 +427,7 @@ module.exports ={
 
         //return the options back to the client 
         //concat all the options to be returned 
-        var returnObject = "";
-        for (var i in options)
-        {
-            returnObject += options[i];
-        }
-        
-        console.log("returning: \n");
-        for (var i in options)
-        {
-            console.log(options[i]);
-        }
+   
         res.status(200).json(options);
     },
 }
@@ -494,10 +465,8 @@ function orderBookings(bookings){
         }
         else {
             var allowed = true;
-            console.log("=======================================\nTesting "+doctors[j]);
             for( var j = 0 ; j < doctors.length ; j ++)
             {
-                console.log(" against "+bookings[i].doctor);
                 if (toString(doctors[j]) == toString(bookings[i].doctor)){
                     allowed = false;
                     break;
@@ -512,7 +481,6 @@ function orderBookings(bookings){
         //     doctors.push(bookings[i].doctor);
     }
 
-    console.log("doctorsLength: "+doctors.length);
     //create the 2D array using the ammount of doctors that bas bookings
     const orderedBookings = doctors.map(doctor => []);
     // var orderedBookings = new Array(doctors.length-1);
@@ -538,15 +506,7 @@ function orderBookings(bookings){
             
         }
     }
-    console.log("=========================================")
-    console.log("THE ORDERED BOOKINGS THAT WAS GENERATED: ")
-    for (var i =0 ; i < orderedBookings.length; i ++){
-        console.log("FOR DOCTOR: "+ orderedBookings[i][0].doctor+"\n++++++++++++++++++++++++++++++++++");
-        for(var j =0 ; j < orderedBookings[i].length; j ++){
-            console.log("Booking "+(j+1)+" \tstart:"+orderedBookings[i][j].time +"\tEND: "+orderedBookings[i][j].endTime);
-        }
-        
-    }
+
     return orderedBookings;
 }
 
@@ -555,13 +515,7 @@ function orderBookings(bookings){
 //Helper function to determine if the times of a booking we wish to create is overlapping with another booking
 function isOverlapping(booking , startTime , duration , operationTime){
 
-    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-    console.log("Checking for overlap between \nbooking start: "+booking.time +"\t end:"+booking.endTime);
-    console.log("With start:"+startTime+"\tduration: "+duration)
-
-
     var durationIndexLength = parseInt(duration)/15; 
-    console.log("value of duration index:"+durationIndexLength);
     var bookStart;
     var bookEnd ;
     var start;
@@ -572,42 +526,31 @@ function isOverlapping(booking , startTime , duration , operationTime){
     {
         if (operationTime[i]==booking.time) {
             a =  i ;
-            console.log("found bookStart "+ i);
         }
         if (operationTime[i]==booking.endTime) {
             b =i;
-            console.log("found bookEnd "+ i);
         }
         if (operationTime[i] == startTime) {
             c = i;
-            console.log("found start "+ i);
         }
     }
     bookStart = parseInt(a);
     bookEnd = parseInt(b);
     start = parseInt(c);
     end = parseInt(start) + durationIndexLength;
-    console.log("indices: bookStart:"+bookStart+"\tbookEnd: "+bookEnd+"\nstart: "+start+"\tend: "+end);
     //test if the end time is not too late
     if ((start+durationIndexLength)>= operationTime.length)
     {
-        console.log("indexout of bounds therefore not allowed");
-        console.log("end time: "+ (start+durationIndexLength));
-
-        console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-
+       
         return true;  //booking is not allowed
     }
 
     //test for over lapping 
     if ( (start > bookStart && start < bookEnd) || (end < bookEnd && end > bookStart) || (bookStart > start && bookStart < end) || (bookEnd < end && bookEnd >start) ){
         //overlap
-        console.log("Overlapping");
-        console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-
+        
         return true; //booking is not allowed
     }
-    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 
     //if this is reached then no overlap has occured and we return false
     return false;
