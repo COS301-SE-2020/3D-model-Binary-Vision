@@ -570,7 +570,7 @@ function fuzzyLogic()
 //Function used for the fuzzy logic to find bookings based on the option that the receptionist chose
 
 var OptionalBookings;
-function findAvailableBookings(){
+async function findAvailableBookings(){
 
     //get the choice that was made's reason and time period it would take 
     var selector = document.querySelector("#selectedProcedure");
@@ -584,42 +584,88 @@ function findAvailableBookings(){
         body: JSON.stringify({"reason":reason, "duration":time})
     });
 
-    response.then(res=> res.json().then(data => {
-        //process the returned data from the server
-        for( var i in data)
-        {
-            optionalBookings = data;
-
-
-            var bodySelector = document.getElementById("currentOverlay");
-            bodySelector.style.position = "relative";
-            bodySelector.style.display = "inline-block";
-            bodySelector.style.backgroundColor= "#003366";
-            bodySelector.style.width= "300px";
-            bodySelector.style.color= "white";
-            bodySelector.style.textAlign = "center";
-            bodySelector.style.borderRadius = "5px";
-            bodySelector.style.boxShadow = "1px 0px 15px 0px black";
-            
-        
-            var location = document.querySelector("#currentOverlay");
-        
-            var population = '<br><h2>Choose Options</h2><hr><label for="selectTime">Select Time of Day</label><select class="form-control" id="selectTime">';
-            population += '<option  value="1">Morning</option> <option value="2">Afternoon</option></select>';
-            population += '<br><label for="selectDay">Select Day of Week</label><select class="form-control" id="selectDay">';
-            population += '<option  value="1">Monday</option> <option value="2">Tuesday</option>';
-            population += '<option  value="3">Wednesday</option> <option value="4">Thursday</option>';
-            population += '<option  value="5">Friday</option> <option value="6">Saturday</option>';
-            population += '<option  value="7">Sunday</option></select><br>';
-            population += '<button id="btnCommonBooking" class="btn btn-primary" onclick="Jacoooooooooooo()">Find</button>';
-            
-            location.innerHTML = population;
-        }
+    console.log("getting data");
+    await response.then(res=>  res.json().then(data => {
+        saveData(data);
     }));
 
-    for(var i in OptionalBookings)
-    {
-        console.log(OptionalBookings[i]);
-    }
+    var bodySelector = document.getElementById("currentOverlay");
+    bodySelector.style.position = "relative";
+    bodySelector.style.display = "inline-block";
+    bodySelector.style.backgroundColor= "#003366";
+    bodySelector.style.width= "300px";
+    bodySelector.style.color= "white";
+    bodySelector.style.textAlign = "center";
+    bodySelector.style.borderRadius = "5px";
+    bodySelector.style.boxShadow = "1px 0px 15px 0px black";
+    
 
+    var location = document.querySelector("#currentOverlay");
+
+    var population = '<br><h2>Choose Options</h2><hr><label for="selectTime">Select Time of Day</label><select class="form-control" id="selectFilterTime">';
+    population += '<option  value="0">Morning</option> <option value="1">Afternoon</option></select>';
+    population += '<br><label for="selectDay">Select Day of Week</label><select class="form-control" id="selectFilterDay">';
+    population += '<option  value="1">Monday</option> <option value="2">Tuesday</option>';
+    population += '<option  value="3">Wednesday</option> <option value="4">Thursday</option>';
+    population += '<option  value="5">Friday</option> <option value="6">Saturday</option>';
+    population += '<option  value="0">Sunday</option></select><br>';
+    population += '<button id="btnCommonBooking" class="btn btn-primary" onclick="filterOptions()">Find</button>';
+    
+    location.innerHTML = population;
+
+    // for(var i in OptionalBookings)
+    // {
+    //     console.log(OptionalBookings[i]);
+    // }
+
+}
+
+//function just to save data captured from api call into a global variable
+function saveData(data){
+    OptionalBookings = data;
+}
+
+//================================================================================================
+//Function developed by: Jacobus Janse van Rensburg
+//Function is used to filter the fuzzy logic options to a set of options that is appropriate to the
+//options that the user provides 
+var filteredOptions=[];
+function filterOptions()
+{
+    var dayArray =["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    var selectedFiltetTimeElement = document.querySelector("#selectFilterTime");
+    var selectedFilterDayElement = document.querySelector("#selectFilterDay");
+
+    var time = selectedFiltetTimeElement.options[selectedFiltetTimeElement.selectedIndex].value;
+    var daySelected = selectedFilterDayElement.options[selectedFilterDayElement.selectedIndex].value;
+
+    console.log("Time selected: "+ time +"\tday selected: "+daySelected);
+    //most effitient way to find the elements ...
+    if(time!= null && daySelected != null){
+
+        //loop through the optional bookings
+        for(var i in OptionalBookings){
+            var booking = JSON.parse(OptionalBookings[i]);
+
+            var parts = booking.date.split("/");
+            var date = parts[2]+"-"+parts[1]+"-"+parts[0];
+            console.log(date);
+        
+            var day = new Date(date).getDay();
+            console.log(dayArray[day]);
+
+            if (parseInt(day) == parseInt(daySelected) || parseInt(time) == parseInt(booking.time)){
+                filteredOptions.push(booking);
+                console.log("pushing to filteredOptions");
+            }
+        }
+
+    }
+    
+    console.log("All the filtered options available: ");
+    for(var i in filteredOptions)
+    {
+        console.log(filteredOptions[i]);
+    }
+    
 }
