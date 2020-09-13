@@ -138,6 +138,10 @@
   transform: translateX(-240px);
 }
 
+#sideBar{
+
+}
+
 .container{
 	text-align: center;
 	transition: 0.8s;
@@ -979,8 +983,8 @@ input[type="file"] {
 	background-color: #003366;
 	max-width: 240px;
 	min-width: 240px;
-	min-height: 100px;
-	max-height: 430px;
+	min-height: 130px;
+	max-height: 450px;
 	/*z-index:1;
 	display: inline-flex;*/
 	padding: 10px;
