@@ -22,7 +22,7 @@ var receptionist2 = chai.request.agent(server); // This receptionist will not ge
 
 var loggedDoc1;
 var loggedRecep1;
-/*
+
 describe('Integration Testing:', () => {
 
 	// Before all of the test are executed
@@ -69,12 +69,14 @@ describe('Integration Testing:', () => {
 					
 					//response.should.have.status(200);
 					//response.should.have.html;
+					console.log("in creatation");
 					cb();
 				});
 		};//
 
 		// Signup and login Doctor 1
 		function signUpDoc1(cb) {
+			console.log("1");
 			doctor1
 				.post("/signup", db.signup)
 				.send(doc1)
@@ -91,6 +93,7 @@ describe('Integration Testing:', () => {
 		};
 
 		function isValidUsernameDoc1(cb) {
+			console.log("2");
 			doctor1
 				.post("/isValidUsername", db.isValidUsername)
 				.send({username: doc1.username})
@@ -102,6 +105,7 @@ describe('Integration Testing:', () => {
 		};
 
 		function isValidEmailDoc1(cb) {
+			console.log("3");
 			doctor1
 				.post("/isValidEmail", db.isValidEmail)
 				.send({email: doc1.email})
@@ -113,6 +117,7 @@ describe('Integration Testing:', () => {
 		}
 
 		function loginDoc1(cb) {
+			console.log("4");
 			doctor1
 				.post("/login", db.login)
 				.send({
@@ -186,10 +191,10 @@ describe('Integration Testing:', () => {
 			},
 			function(cb) {
 				signUpDoc1(cb);
-			}, 
+			}/*, 
 			function(cb) {
 				signUpRecep1(cb);
-			}
+			}*/
 		], done);
 	});
 
@@ -198,6 +203,13 @@ describe('Integration Testing:', () => {
 		done();
 	});
 
+	describe('', () => {
+		it('', () => {
+
+		});
+	});
+
+/*
 	// Test case 1: practiceRegistration
 	describe('(1) practiceRegistration: ', () => {
 		it('Testing Registration for a practice (With practice that already exists) - Returns 404 code', (done) => {
@@ -1286,6 +1298,6 @@ describe('Integration Testing:', () => {
 				done();
 				});
 		});
-	});
+	});*/
 });
-*/
+

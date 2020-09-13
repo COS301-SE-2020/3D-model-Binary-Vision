@@ -44,11 +44,10 @@ module.exports = {
     //This function Populates the doctor cookie with the correct credentials if the doctor logs in successfully
     login: function (req, res) 
     {
-
         var { username, password } = req.body;
 
         password = frontsalt+password+backSalt;
-    
+
         Doctor.findOne({ username , "active":true}, function (err, doctor) 
         {
             if (err) 
@@ -150,7 +149,7 @@ module.exports = {
             if (prac)
             {
                 //practition already registered;
-                res.status(400);
+                res.sendStatus(400);
                 return;
             }
 
