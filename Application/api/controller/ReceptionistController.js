@@ -23,7 +23,7 @@ module.exports ={
     {
         if(!req.user)
         {
-            res.status(401);
+            res.sendStatus(401); // Updated by Marcus from status -> sendStatus
             return;
         }
 
@@ -47,7 +47,7 @@ module.exports ={
     {
         if(!req.user)
         {
-            res.status(401);
+            res.sendStatus(401);  // Updated by Marcus from status -> sendStatus
             return;
         }
 
@@ -75,7 +75,7 @@ module.exports ={
     {
         if (!req.user)
         {
-            res.status(401);
+            res.sendStatus(401);  // Updated by Marcus from status -> sendStatus
             return;
         }
 
@@ -89,7 +89,7 @@ module.exports ={
                 res.status(400)
                 return;
             }
-            res.status(200);
+            res.sendStatus(200);  // Updated by Marcus from status -> sendStatus
             return;
         });
     },
@@ -101,7 +101,7 @@ module.exports ={
     {
         if (!req.user)
         {
-            res.status(401);
+            res.status(401).send("Unauthorised");
             return;
         }
 
