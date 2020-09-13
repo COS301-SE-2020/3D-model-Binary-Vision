@@ -308,7 +308,13 @@
 	background-color: white;
 	border-radius: 10px;
 	width: 90px;
+
+	font-size: 20px;
 	text-align: center;
+}
+
+label #sideBarLabel {
+	
 }
 
 #bodyContainer{
@@ -1000,6 +1006,7 @@ input[type="file"] {
 	text-align:center;
 	color: white;
 	padding-top: 10px;
+	font-size: 20px;
 }
 
 #para {
