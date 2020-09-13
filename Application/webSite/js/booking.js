@@ -6,6 +6,7 @@ var selectedDate;
 var selectedTime;
 var selectedPatient;
 var selectedReason;
+var selectedEndTime;
 
 //===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
@@ -380,12 +381,17 @@ function makeBooking()
         //booking can be created
         var reason = document.getElementById("reasonForBooking").value;
 
+        if(selectedEndTime ==null || selectedEndTime =="")
+        {
+            selectedEndTime = selectedTime;
+        }
+
         var response = fetch("/makeBooking",{
             method:"POST",
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
             },
-            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason,"endTime":selectedTime})
+            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason,"endTime":selectedEndTime})
         });
 
         response.then(res=> 
