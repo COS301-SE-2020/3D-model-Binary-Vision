@@ -150,7 +150,7 @@ module.exports = {
             if (prac)
             {
                 //practition already registered;
-                res.sendStatus(400);
+                res.status(400).send("Practice already exists"); // Marcus Changed this from status -> senStatus
                 return;
             }
 
@@ -256,13 +256,14 @@ module.exports = {
                 }
                 else{
                     //practition code not valid for signup attempt
-                    res.status(401);//unauthorized
+                    //unauthorized
+                    res.sendStatus(401); // Marcus Changed this from status -> senStatus
                     return;
                 }
             }
             else{
                 //no practice found
-                res.status(404);
+                res.sendStatus(404); // Marcus Changed this from status -> senStatus
                 return;
                 //register a new practice ?
             }
@@ -329,7 +330,7 @@ module.exports = {
     {
         if (!req.user)
         {
-            return res.status(404);
+            return res.sendStatus(404); // Changed by Marcus from status --> sendStatus
         }
         res.cookie("patientCookie",req.body.PatientID)
           .send("Patient Cookie is set");
@@ -343,7 +344,6 @@ module.exports = {
     {
         if (!req.user) 
         {
-            //then this is a patient adding themselves
             const {idNumber, name , surname , email , gender, cellnumber,practice} = req.body;
 
             var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber,practice}); //set the patients info
@@ -444,6 +444,7 @@ module.exports = {
         });
     },
 
+
     //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg
     // used to set a cookie but will be replaced by other means of url encoding
@@ -452,7 +453,7 @@ module.exports = {
         //set the consultation cookie id
         if(!req.user)
         {
-            res.send(401);
+            res.status(401).send("Unauthorized");
             return;
         }
       
@@ -469,7 +470,7 @@ module.exports = {
     {
         if (!req.user || req.cookies.consultation=="")
         {
-            res.send(401);
+            res.status(401).send("Unauthorized");
             return;
         }
 
@@ -734,7 +735,7 @@ module.exports = {
    {
         if (!req.user)
         {
-            res.status(401);
+            res.status(401).send("Unauthorized");
             return;
         }
 
@@ -841,8 +842,6 @@ module.exports = {
                 }
             }
         });
-
-        
     },
 
     // ======================================================================================
@@ -969,7 +968,7 @@ module.exports = {
     getSingleBooking : function(req ,res){
         if(!req.user)
         {
-            res.status(401);
+            res.status(401).send("Unauthorized");
             return;
         }
 
@@ -1263,7 +1262,7 @@ module.exports = {
 
         if (!req.user) //user is not logged in and un authorized to access the data
         {
-            res.status(401);
+            res.status(401).send("Unauthorized");
             return;
         }
 
