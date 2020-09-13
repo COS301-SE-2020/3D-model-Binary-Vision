@@ -153,4 +153,7 @@ module.exports = function (app)
 
     app.route('/saveConsultation')
         .post(Model.saveConsultation);
+
+    app.route('/getPatientConsultations')
+        .post(Model.getPatientConsultations);
 }
