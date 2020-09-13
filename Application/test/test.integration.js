@@ -351,41 +351,6 @@ describe('Integration Testing:', () => {
 		});*/
 //////////////////////////////////////////////////////////
 	});
-	
-	// Test case 3 : Login
-	describe('(3) Login:', () => {
-//////////////////////////////////////////////////////////
-		/*it ('Testing loging with doctor (With incorrect username) - Returns 401 code', (done) => {	
-			const loginDetailsDoctor = {
-				username: "spiderman", 
-				password: "1234"
-			};
-
-			doctor1
-				.post("/login", db.login)
-				.send(loginDetailsDoctor)
-				.end((error, response) => {
-					response.should.have.status(401);
-					done();
-				});
-		});
-
-		it ('Testing loging with doctor (With incorrect password) - Returns 401 code', (done) => {	
-			const loginDetailsDoctor = {
-				username: "DrSpiderman", 
-				password: "4321"
-			};
-
-			doctor1
-				.post("/login", db.login)
-				.send(loginDetailsDoctor)
-				.end((error, response) => {
-					response.should.have.status(401);
-					done();
-				});
-		});*/
-//////////////////////////////////////////////////////////
-	});
 
 	// Test case 4 : passwordChangeEmail
 	describe('(4) Change the password with email', () => {
@@ -515,21 +480,22 @@ describe('Integration Testing:', () => {
 				});
 		});
 
-		// Test add patient wiht failure
-		it ('Testing addPatient Feature (With no user found) - Returns 401 code', (done) => {
+		// Test add patient with success
+		it ('Testing addPatient Feature (With valid user info & entered by the patient) - Returns 200 code', (done) => {
 			const tempPatient = {
-				idNumber: "123456789",
-				name: "Mark",
-				surname: "Smith",
-				email: "MarkSmith@gmail.com",
+				idNumber: "123456798",
+				name: "Marcus",
+				surname: "Werner",
+				email: "MWerner@gmail.com",
 				gender: "male",
-				cellnumber: "0764219334"
+				cellnumber: "0764219335"
 			};
-			receptionist2	
+			receptionist1
 				.post("/addPatient", db.addPatient)
 				.send(tempPatient)
 				.end((error, response) => {
-					response.should.have.status(401);
+					response.should.have.status(200);
+					response.should.be.html;
 					done();
 				});
 		});
@@ -1073,7 +1039,7 @@ describe('Integration Testing:', () => {
 				});
 		});
 
-		it('Testing searchPatient Feature (With invalid search input) - Returns 400 code', (done) => {
+		/*it('Testing searchPatient Feature (With invalid search input) - Returns 400 code', (done) => {
 			const patientInfo = {
 				name: null,
 				surname: null,
@@ -1086,7 +1052,7 @@ describe('Integration Testing:', () => {
 					response.should.have.status(400);
 				done();
 				});
-		});
+		});*/
 ////////////////////////////////////////////////////////// 
 		/*it('Testing searchPatient Feature (With search by all invalid fields) - Returns 404 code', (done) => {
 			const patientInfo = {

@@ -257,7 +257,7 @@ module.exports = {
                 else{
                     //practition code not valid for signup attempt
                     //unauthorized
-                    res.sendStatus(401); // Marcus Changed this from status -> senStatus
+                    res.status(401).send("Unauthorized"); // Marcus Changed this from status -> senStatus
                     return;
                 }
             }
@@ -1156,7 +1156,7 @@ module.exports = {
                 else if(doctor){
                     var url = "flapjacks.goodx.co.za/QRAddPatient.html?practice="+doctor.practition;
                     res.contentType('png');
-                    qrCode.toFileStream(res , url);                    //return the qr code
+                    qrCode.toFileStream(res , url);//return the qr code
                 }
                 else{
                     Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)},function(err, recep){
@@ -1175,9 +1175,7 @@ module.exports = {
                     })
                 }
             })
-                //create the qr code 
-           
-
+            //create the qr code
         }
 
     },
