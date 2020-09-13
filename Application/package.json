@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha --exit || true"
+    "test": "nyc mocha --exit || true"
   },
   "keywords": [
     "Restful",
@@ -23,6 +23,7 @@
     "mongoose-gridfs": "^1.2.42",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.10",
+    "nyc": "^15.1.0",
     "qrcode": "^1.4.4"
   },
   "devDependencies": {

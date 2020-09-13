@@ -63,8 +63,9 @@ var PatientSchema = new Schema({
         type:String,
         required: true
     },
-    active:{
-        type: Boolean, required: true , default: false
+    practice:{
+        type: String,
+        required: true
     }
 });
 

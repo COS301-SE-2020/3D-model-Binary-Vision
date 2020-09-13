@@ -44,13 +44,12 @@ module.exports = {
     //This function Populates the doctor cookie with the correct credentials if the doctor logs in successfully
     login: function (req, res) 
     {
-
         var { username, password } = req.body;
 
         password = frontsalt+password+backSalt;
-    
+
         Doctor.findOne({ username , "active":true}, function (err, doctor) 
-        {
+        {         
             if (err) 
             {
                 console.log("error");
@@ -76,6 +75,7 @@ module.exports = {
         });
 
         Receptionist.findOne({username,"active":true}, function(err, receptionist){
+
             if (err)
             {
               res.send(err);
@@ -150,7 +150,7 @@ module.exports = {
             if (prac)
             {
                 //practition already registered;
-                res.status(400);
+                res.sendStatus(400);
                 return;
             }
 
@@ -344,16 +344,10 @@ module.exports = {
         if (!req.user) 
         {
             //then this is a patient adding themselves
-        }
-        else
-        {
-            //this is a receptionist adding a patient
-            const {idNumber, name , surname , email , gender, cellnumber} = req.body;
+            const {idNumber, name , surname , email , gender, cellnumber,practice} = req.body;
 
-            var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber}); //set the patients info
-    
-            new_Patient.doctor = req.user; // add doctor id to the patient
-    
+            var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber,practice}); //set the patients info
+
             new_Patient.save(function (err) 
             {
                 if (err) 
@@ -364,9 +358,17 @@ module.exports = {
                 else
                 {
                     res.status(201);
-                    res.redirect("newHome.html");
+                    res.redirect("preview.html");
                 }
             });
+
+            updateLogFile("Added a Patient@PID:" +new_Patient._id,practice);
+            return;
+        }
+        else
+        {
+            //this is a receptionist adding a patient
+            const {idNumber, name , surname , email , gender, cellnumber} = req.body;
 
             Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
             {
@@ -376,6 +378,23 @@ module.exports = {
                 }
                 if(rec)
                 {
+                    var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber}); //set the patients info
+
+                    new_Patient.practice = rec.practition;
+
+                    new_Patient.save(function (err) 
+                    {
+                        if (err) 
+                        {
+                            res.status(400).send(err);
+                            return;
+                        }
+                        else
+                        {
+                            res.status(201);
+                            res.redirect("newHome.html");
+                        }
+                    });
                     updateLogFile(rec.username + "@Added a Patient@PID:" +new_Patient._id,rec.practition);
                 }
             });
@@ -422,53 +441,6 @@ module.exports = {
                 res.status(202).json(patients);
                 return;
             }
-        });
-    },
-
-    //======================================================================================
-    //Function developed by: Jacobus Janse van Rensburg
-    //update patient from form data using id number
-    updatePatient: function (req, res) 
-    {
-        if (!req.user) //user is not logged in and un authorized to access the data
-        {
-            res.status(404);
-            return;
-        }
-
-        const form = formidable();
-        form.parse(req, (err, fields) => 
-        {
-            if (err)
-            {
-                return res.send(err);
-            } 
-
-            Patient.findOneAndUpdate(
-              { idNumber: req.params.id },
-              fields,
-              { new: true },
-              function (err, patient) 
-              {
-                  if (err) 
-                  {
-                      res.status(500)
-                        .send("Error updating patient");
-                  } 
-                  else 
-                  {
-                      if (patient) 
-                      {
-                          res.sendStatus(201)
-                            .json(patient);
-                      } 
-                      else 
-                      {
-                          res.send(404);
-                      }
-                  }
-                }
-            );
         });
     },
 
@@ -770,97 +742,109 @@ module.exports = {
 
         const {name , surname , idNumber} = req.body;
 
-        if(idNumber != null)
+        Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
         {
-            Patient.find({"idNumber":idNumber}, function(err,patient)
+            if (err)
             {
-                if(err){
-                    res.status(400);
-                    return;
-                }
-                if(patient)
-                {
-                    res.json(patient).status(200);
-                    return;
-                }
-                else
-                {
-                    res.status(404);
-                    return;
-                }
-            });
-        }
-        else if(name != null && surname !=null)
-        {
-            Patient.find({"name":name,"surname":surname}, function(err,patient)
-            {
-                if(err)
-                {
-                    res.status(400);
-                    return;
-                }
-                if(patient)
-                {
-                    res.json(patient)
-                      .status(200);
-                    return;
-                }
-                else
-                {
-                    res.status(404);
-                    return;
-                }
 
-            });
-        }
-        else if(name !=null)
-        {
-            Patient.find({"name":name}, function(err,patient)
+            }
+            if(rec)
             {
-                if(err)
+                if(idNumber != null)
+                {
+                    Patient.find({"idNumber":idNumber,"practice":rec.practition}, function(err,patient)
+                    {
+                        if(err){
+                            res.status(400);
+                            return;
+                        }
+                        if(patient)
+                        {
+                            res.json(patient).status(200);
+                            return;
+                        }
+                        else
+                        {
+                            res.status(404);
+                            return;
+                        }
+                    });
+                }
+                else if(name != null && surname !=null)
+                {
+                    Patient.find({"name":name,"surname":surname,"practice":rec.practition}, function(err,patient)
+                    {
+                        if(err)
+                        {
+                            res.status(400);
+                            return;
+                        }
+                        if(patient)
+                        {
+                            res.json(patient)
+                              .status(200);
+                            return;
+                        }
+                        else
+                        {
+                            res.status(404);
+                            return;
+                        }
+                    
+                    });
+                }
+                else if(name !=null)
+                {
+                    Patient.find({"name":name,"practice":rec.practition}, function(err,patient)
+                    {
+                        if(err)
+                        {
+                            res.status(400);
+                            return;
+                        }
+                        if(patient)
+                        {
+                            res.json(patient)
+                              .status(200);
+                            return;
+                        }
+                        else
+                        {
+                            res.status(404);
+                            return;
+                        }
+                    });
+                }
+                else if (surname!=null)
+                {
+                    Patient.find({"surname":surname,"practice":rec.practition}, function(err,patient)
+                    {
+                        if(err)
+                        {
+                            res.status(400);
+                            return;
+                        }
+                        if(patient)
+                        {
+                            res.json(patient).status(200);
+                            return;
+                        }
+                        else
+                        {
+                            res.status(404);
+                            return;
+                        }
+                    });
+                }
+                else
                 {
                     res.status(400);
                     return;
                 }
-                if(patient)
-                {
-                    res.json(patient)
-                      .status(200);
-                    return;
-                }
-                else
-                {
-                    res.status(404);
-                    return;
-                }
-            });
-        }
-        else if (surname!=null)
-        {
-            Patient.find({"surname":surname}, function(err,patient)
-            {
-                if(err)
-                {
-                    res.status(400);
-                    return;
-                }
-                if(patient)
-                {
-                    res.json(patient).status(200);
-                    return;
-                }
-                else
-                {
-                    res.status(404);
-                    return;
-                }
-            });
-        }
-        else
-        {
-            res.status(400);
-            return;
-        }
+            }
+        });
+
+        
     },
 
     // ======================================================================================
@@ -962,7 +946,7 @@ module.exports = {
           {
               if(status == "Completed")
               {
-                updateLogFile(rec.username + "@Completed a booking@BID:"+id,rec.practition);
+                updateLogFile(doc.username + "@Completed a booking@BID:"+id,doc.practition);
               }
           }
       });
@@ -1305,6 +1289,29 @@ module.exports = {
 
         });
     },
+
+    //======================================================================================
+    //Function developed by: Steven Visser
+    //returns the name of the practice
+    getPracticeName : function (req , res)
+    {
+        Practice.find({"_id":req.body.id} , function(err, prac)
+        {
+            if (err)
+            {
+                res.status(500)
+                  .send("error geting practice");
+                return;
+            }
+            else
+            {
+                res.status(200)
+                  .json({"practice":prac.practice});
+                return;
+            }
+
+        });
+    }
 
 };
 

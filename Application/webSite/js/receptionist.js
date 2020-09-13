@@ -93,3 +93,13 @@ function receptionistSearchPatient()
         return data;
     }));
 }
+
+//=============================================================================================
+//Function Developed by: Steven Visser
+//Initializes the QRCode add patient page
+function init()
+{
+    var url = window.location.href;
+    var parts = url.split("=");
+    document.getElementById("prac").value = parts[1];
+}
