@@ -15,8 +15,8 @@ module.exports = {
 //================================================================================================
 // Function developed by: Jacobus Janse van Rensburg
 // Function used to upload multiple images , store them in a temp directory/file and start the c++ program
-    uploadImages: function(req, res){
-
+    uploadImages: function(req, res)
+    {
         const form = formidable({ multiples: true });
 
         form.parse(req, (err, fields, files) => 
@@ -34,14 +34,16 @@ module.exports = {
                 res.status(404).send("no images");
                 return;
             }
-            else {
+            else 
+            {
                 //get image data from disk using path (use fs package)
                 //use the file paths to send the images to the c++ program to find the images
                 
                 //temp store file 
                 var dir=""+req.user+"-"+Date.now()
                 fs.mkdirSync(dir);
-                for (let image of images["images[]"] ) {
+                for (let image of images["images[]"] ) 
+                {
                     fs.copyFileSync(image.path, path.join(dir, image.name));
                 }
 
@@ -50,7 +52,8 @@ module.exports = {
                 const ls = spawn('./smfAlgorithm/Code/main', [dir]);
 
 
-                ls.on('close', code=>{
+                ls.on('close', code=>
+                {
                     if (code ==0 )
                     {
                         //every thing is fine 
@@ -75,7 +78,8 @@ module.exports = {
                         });
 
                     }
-                    else {
+                    else 
+                    {
                         res.sendStatus(500);
                     }
                 })
@@ -83,7 +87,6 @@ module.exports = {
                 res.status(200);
                 return;
             }
-        }
-        );
+        });
     }
 }

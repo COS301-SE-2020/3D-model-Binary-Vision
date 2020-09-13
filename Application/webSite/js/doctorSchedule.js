@@ -23,7 +23,6 @@ function setDoctorInfo()
 
     response.then( res=> res.json().then( data =>
     {
-        console.log("Doctors surname: "+data.surname);
         // set the surname field
         document.getElementById("doctorsName").innerHTML=data.surname+" ("+data.name+")";
     }));
@@ -59,7 +58,6 @@ function setTodaysBookings()
 
         for(var i in data)
         {
-            console.log(data[i]);
             if(data[i].status == "Pending")
             {
                 var replacement = '<li class= "notify" id="'+data[i]._id+'">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'
@@ -111,19 +109,16 @@ function populateBookings(patientId,time,reason,booking)
                 headers:{'Content-Type': 'application/json; charset=UTF-8'},
                 body: JSON.stringify({"patient":patientId})
             });
-            console.log("booking id:"+booking);
+
             response.then(res=> res.json().then(patient=>
             {
                 //do what needs to be done with the patients information
                 //populate right bar over here
-                console.log("hello "+ patient.name+" "+time+ " "+ reason);
                 document.getElementById("patientName").innerHTML = patient.name + " " + patient.surname;
                 document.getElementById("bookingTime").innerHTML = time;
                 document.getElementById("patientNotes").innerHTML = reason;
-            // onclick='openConsultation(\""+booking+"\")'
+            
                 document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' onclick='completeBooking(\""+booking+"\");' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><a class='btn btn-primary' href='/Consultation.html?bookingid="+booking+"' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</a>"
-
-                console.log(patient);
             }));
         }
         else
@@ -184,7 +179,6 @@ function completeBooking(bookingID)
         {
             //remove the bar holding this booking and load the next one
             //check status code
-            console.log(res.status);
             if(res.status == 401)
             {
                 alert("You are not authorized to do this action!");
