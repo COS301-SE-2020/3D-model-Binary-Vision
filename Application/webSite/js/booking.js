@@ -568,6 +568,8 @@ function fuzzyLogic()
 //=================================================================================================
 //function developed by: Jacobus Janse van Rensburg and Rani Arraf
 //Function used for the fuzzy logic to find bookings based on the option that the receptionist chose
+
+var OptionalBookings;
 function findAvailableBookings(){
 
     //get the choice that was made's reason and time period it would take 
@@ -586,7 +588,8 @@ function findAvailableBookings(){
         //process the returned data from the server
         for( var i in data)
         {
-            console.log(data[i]);
+            optionalBookings = data;
+
 
             var bodySelector = document.getElementById("currentOverlay");
             bodySelector.style.position = "relative";
@@ -613,5 +616,10 @@ function findAvailableBookings(){
             location.innerHTML = population;
         }
     }));
+
+    for(var i in OptionalBookings)
+    {
+        console.log(OptionalBookings[i]);
+    }
 
 }

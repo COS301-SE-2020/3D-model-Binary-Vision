@@ -254,7 +254,6 @@ module.exports ={
         var options = [];   //create an empty array of the options that could possible be 
 
         var dayCounter = 0;
-        console.log(date);
         while (dayCounter < 6 ){  //while we dont have a minumum of at least 5 options to choose from
             const bookings = await Booking.find({"date":date}); //using callback function to enforce sequential execution
 
@@ -263,7 +262,6 @@ module.exports ={
                     orderedBookings = orderBookings(bookings);  //order the bookings into a 2D array based on the doctors id
 
                     //loop through the doctors 
-                    console.log(orderedBookings.length);
                     for(var i =0 ; i < orderedBookings.length ; i ++){
                         var doctor = orderedBookings[i][0].doctor;
                         var orderedBookingsLength = orderedBookings[i].length;
@@ -283,13 +281,7 @@ module.exports ={
                             
 
                             //Removable logs
-                            if(possible!=null){
-                                for(var k in possible)
-                                {
-                                    console.log(possible[k]);
-                                }
-                            }
-                           
+                            
                             var allowed = true;
                             for(var k =0 ; k < currentDoctorBookings.length ; k++){
 
@@ -310,7 +302,6 @@ module.exports ={
                                 {
                                     holder[l] =possible[l];
                                 }
-                                console.log("holder length: "+holder.length);
                                 var counter = 0, position =0;
                                 if(possible != null){
                                     while(counter < possible.length){
@@ -338,14 +329,9 @@ module.exports ={
                                     possible.push(holder[l]);
                                 }
 
-                                for (var i in possible)
-                                {
-                                    console.log(possible[i]);
-                                }
-                                // console.log("allowed: "+ allowed);
+                             
                                 if(allowed == true){
                                     //we can add this information as a possible
-                                    // console.log("possible");
                                     var endTimeStamp = operationTimes[j + (parseInt(duration)/15)];
 
                                       var timeOfDay;
@@ -368,10 +354,7 @@ module.exports ={
                           
                            
                         }
-                        for(var n in possible)
-                        {
-                            console.log(possible[n]);
-                        }
+                       
                         if(possible.length > 0){
                             var contains = []
                             for (var n in possible)
@@ -413,7 +396,6 @@ module.exports ={
                                     var endTimeStamp = operationTimes[ot + (parseInt(duration)/15)];
                                     var elseRecord =JSON.stringify({"doctor":doc[doctorCounter]._id, "time":operationTimes[ot], "endTime":endTimeStamp, "date": date,"reason":reason,"isMorning":timeOfDay});
                                     
-                                    console.log(elseRecord);
                                     options.push(elseRecord);
                                 }
                             }
@@ -421,7 +403,6 @@ module.exports ={
                             
                         }
                      
-                        // console.log("options size: "+options.length);
                     }
                 }
              
