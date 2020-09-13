@@ -95,14 +95,16 @@ var Receptionist = new Schema({
     },
     Note:{
         type:String
+    },
+    active:{
+        type: Boolean , default:false
     }
 });
 
 var ConsultationSchema = new Schema({
     created:{
-        type: Date,
+        type: String,
         required: true,
-        default: Date.now
     },
     doctor:{
         type: Schema.Types.ObjectId,
@@ -114,14 +116,19 @@ var ConsultationSchema = new Schema({
     },
     video:{
         type: Schema.Types.ObjectId,
-        required: true
+        default:null
     },
     STL:{
-        type: Schema.Types.ObjectId
+        type: Schema.Types.ObjectId,
+        default:null
     },
     Note:{
         type:String, 
         required: true
+    },
+    reason:{
+        type:String,
+        required:true
     }
 });
 
@@ -134,6 +141,10 @@ var Booking = new Schema({
         type:String,
         required:true
     },
+    endTime:{
+        type:String,
+        default: this.time
+    },
     patient:{
         type:mongoose.Types.ObjectId,
         required:true
@@ -144,6 +155,10 @@ var Booking = new Schema({
     },
     reason:{
         type:String
+    },
+    status:{
+        type:String,
+        default:'Pending'
     }
 })
 

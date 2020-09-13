@@ -29,7 +29,7 @@ module.exports = {
             if ( doctor )
             {
                 sendPasswordResetEmail(req);
-                res.sendStatus(200)/*.send("ok")*/;
+                res.status(200).send("ok");
                 return;
             }
             else{
@@ -37,11 +37,11 @@ module.exports = {
                     if ( receptionist )
                      {
                          sendPasswordResetEmail(req);
-                         res.sendStatus(200)/*.send("ok")*/;
+                         res.status(200).send("ok");
                          return; 
                      }
                      else {
-                         res.sendStatus(400)/*.send("not ok")*/;
+                         res.status(400).send("not ok");
                          return;
                      }
                  });

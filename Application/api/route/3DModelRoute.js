@@ -11,6 +11,7 @@ const fs = require("fs");
 var Model = require('../controller/3DModelController');
 var Emailer = require('../controller/EmailController');
 var Receptionist = require('../controller/ReceptionistController');
+var UploadController = require('../controller/UploadController');
 
 module.exports = function (app)
 {
@@ -123,7 +124,7 @@ module.exports = function (app)
     app.route('/removeBooking')
         .post(Model.removeBooking);
 
-    app.route('/postponeBooking')
+    app.route('/updateBooking')
         .post(Model.updateBooking);
     
     app.route('/getSingleBooking')
@@ -131,4 +132,28 @@ module.exports = function (app)
 
     app.route('/getSingleDoctor')
         .post(Model.getSingleDoctor);
+
+    app.route('/activateUser')
+        .post(Model.activateUser);
+
+    app.route('/uploadImages')
+        .post (UploadController.uploadImages);
+
+    app.route('/qrCode')
+        .get(Model.generatePatientSignupQRCode);
+
+    app.route('/consultation/:id/stl')
+        .get(Model.getSTLFile);
+
+    app.route('/updateLog')
+        .post(Model.updateLog);
+    
+    app.route('/fuzzyLogic')
+        .post(Receptionist.fuzzyLogicBooking);
+
+    app.route('/saveConsultation')
+        .post(Model.saveConsultation);
+
+    app.route('/getPatientConsultations')
+        .post(Model.getPatientConsultations);
 }
