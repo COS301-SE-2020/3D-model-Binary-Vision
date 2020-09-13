@@ -64,9 +64,31 @@ function signup()
     var password = document.querySelector("#password");
     var passwordCheck = document.querySelector("#passwordCheck");
     var practice = document.querySelector("#practice");
+    var security = document.querySelector("#securityCode");
     var selectionElement = document.getElementById("choice");
+    var errorData = document.querySelector("#errorOutput");
+    
+    errorData.style.color = "red";
     var choice = selectionElement.options[selectionElement.selectedIndex].value ;
     var securityCode = document.querySelector("#securityCode").value;
+
+    //check that the emais match
+    if(email.value == ""){
+
+        usedParamaters=true;
+        email.style.backgroundColor="red";
+        email.placeholder="Email does not match";
+        errorData.innerHTML = "<i>Email field is empty!</i>";
+        email.style.backgroundColor="red";
+        email.style.color="white"; 
+        email.value="";
+    }
+    else if(email.value != ""){
+        email.style.backgroundColor="lightgreen";
+        email.style.color="black";
+    }
+
+
     //check that the passwords match
     if(password.value != "" && passwordCheck.value !=""){
         if(password.value != passwordCheck.value){
@@ -74,71 +96,131 @@ function signup()
             console.log(password.value +" "+passwordCheck.value);
             //indicate that they dont match
             passwordCheck.placeholder="password does not match";
+            password.placeholder = "password does not match";
             passwordCheck.value="";
+            password.value="";
             passwordCheck.style.backgroundColor="red";
+            password.style.backgroundColor="red";
+            errorData.innerHTML = "<i>Passwords do not match!</i>"
+        }
+        else{
+            passwordCheck.style.color="black";
+            passwordCheck.style.backgroundColor="lightgreen";
+            password.style.color="black";
+            password.style.backgroundColor="lightgreen";
         }
     }
-    else{//one of the passwords is null
+    else if(password.value == "" && passwordCheck.value !=""){
+        usedParamaters=true;
+        password.placeholder="password field is empty";
+        password.value="";
+        password.style.backgroundColor="red";
+        passwordCheck.style.backgroundColor="white";
+        password.style.color="white";
+        passwordCheck.style.color="black";
+        errorData.innerHTML = "<i>Password field is empty, please type password.</i>";
+    }
+    else if(password.value != "" && passwordCheck.value ==""){//one of the passwords is null
         usedParamaters=true;
         passwordCheck.placeholder="password does not match";
         passwordCheck.value="";
         passwordCheck.style.backgroundColor="red";
-    }
+        passwordCheck.style.color="white";
+        errorData.innerHTML = "<i>Confirm password field is empty, please type password.</i>";
+        password.style.backgroundColor="white";
+        password.style.color="black";
 
-    //check that the emais match
-    // if(email.value != "" && emailCheck.value !=""){
-    //     if(email.value != emailCheck.value){
-        if(email.value == ""){
-    //         if(email.value != emailCheck.value){
-    //         //indicate that they dont match 
-    //         usedParamaters=true;
-    //         email.style.backgroundColor="red";
-    //         emailCheck.placeholder="Email does not match";
-    //         emailCheck.style.backgroundColor="red";
-    //         emailCheck.value="";
-    //     }
-    // }
-    //else {
-    //one of the emails is "" 
-        usedParamaters=true;
-        email.style.backgroundColor="red";
-        emailCheck.placeholder="Email does not match";
-        emailCheck.style.backgroundColor="red";
-        emailCheck.value="";
     }
+    else if(password.value == "" && passwordCheck.value ==""){
+        usedParamaters=true;
+        passwordCheck.placeholder="Both Password fields are empty!";
+        passwordCheck.value="";
+        passwordCheck.style.backgroundColor="red";
+        passwordCheck.style.color="white";
+        password.style.color="white";
+        errorData.innerHTML = "<i>Confirm password field is empty, please type password.</i>";
+        password.style.backgroundColor="red";
+        
+    }
+   
+    
 
     //check that the choise is a valid one
     if(choice.value == ""){
         usedParamaters=true;
         //indicate that the choice is ""
         document.querySelector("#choice").backgroundColor="red";
+        choice.style.backgroundColor="red";
+    }
+    else{
+
     }
 
 
     if(practice.value == ""){
         usedParamaters=true;
         //indicate that practice is ""
+        practice.placeholder="Please enter Practice";
         practice.style.backgroundColor="red";
+        errorData.innerHTML = "<i>Please enter the Practice!</i>";
+    }
+    else{
+        practice.style.backgroundColor="lightgreen";
+        practice.style.color="black";
+        errorData.innerHTML = "<i></i>";
+    }
+
+    if(security.value == ""){
+        usedParamaters=true;
+        //indicate that practice is ""
+        security.placeholder="Please enter Security Code";
+        security.style.backgroundColor="red";
+        errorData.innerHTML = "<i>Please enter the Security Code</i>";
+    }
+    else{
+        security.style.backgroundColor="lightgreen";
+        security.style.color="black";
     }
 
     if(name.value == "")
     {
         usedParamaters=true;
+
         //indicate that it is ""
+        name.placeholder="Please enter name";
         name.style.backgroundColor="red";
+        errorData.innerHTML = "<i>Please enter your name!</i>";
+        name.style.color="white";
     }
+    else if(name.value != ""){
+        name.style.backgroundColor="lightgreen";
+        name.style.color="black";
+    }
+
     if(surname.value==""){
         usedParamaters=true;
+        surname.placeholder="Please enter surname";
         surname.style.backgroundColor="red";
+        errorData.innerHTML = "<i>Please enter your surname!</i>";
+        surname.style.color="white";
+    }
+    else if(surname.value != ""){
+        surname.style.backgroundColor="lightgreen";
+        surname.style.color="black";
     }
 
     //need to chack that the email is not used and that the user name hasnt already been used 
     if (username.value !=""){
         checkUsername(username.value);
+        username.style.backgroundColor="lightgreen";
+        username.style.color="black";
     }
     else{
         usedParamaters=true;
+        username.placeholder="Please enter username";
         username.style.backgroundColor="red";
+        errorData.innerHTML = "<i>Please enter your username!</i>";
+        username.style.color="white";
     }
 
 
