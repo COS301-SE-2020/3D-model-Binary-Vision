@@ -570,10 +570,6 @@ function fuzzyLogic()
 //Function used for the fuzzy logic to find bookings based on the option that the receptionist chose
 function findAvailableBookings(){
 
-
-  
-
-
     //get the choice that was made's reason and time period it would take 
     var selector = document.querySelector("#selectedProcedure");
     var reason = selector.options[selector.selectedIndex].innerHTML;
@@ -612,6 +608,7 @@ function findAvailableBookings(){
             population += '<option  value="3">Wednesday</option> <option value="4">Thursday</option>';
             population += '<option  value="5">Friday</option> <option value="6">Saturday</option>';
             population += '<option  value="7">Sunday</option></select><br>';
+            population += '<button id="btnCommonBooking" class="btn btn-primary" onclick="Jacoooooooooooo()">Find</button>';
             
             location.innerHTML = population;
         }
