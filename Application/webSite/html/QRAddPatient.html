@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Registration Form</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../js/apiCalls.js"></script>
+  <script type="text/javascript" src="../js/receptionist.js"></script>
+</head>
+
+<body >
+  <!--<div id="mydiv" style="display: none;">
+      <div id="mydivheader">Notes (Drag) </div>
+      <textarea id="receptionistNotes"></textarea>
+      <div class="noteButtonsContainer">
+        <input type="button" class="btn btn-primary" style="margin:5px;" value="Save Notes" onclick="saveNotes()">
+        <button class="btn btn-danger" style="margin:5px;" onclick="showNote()">Hide Note</button>
+      </div>
+  </div>
+<div class="body">
+  <nav class="navbar navbar-expand-md  navbar-dark">
+    <a class="navbar-brand" href="newHome.html">
+        <img src="../css/images/tooth.png" alt="Profile Picture" width="30px" height="30px">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li id="otherLi" class="nav-item">
+          <a class="nav-link active" href="newHome.html"><u>Home</u></a>
+        </li>
+        <li id="otherLi" class="nav-item">
+          <a class="nav-link" href="displayPatients.html">Logs</a>
+        </li>
+        <li id="otherLi" class="nav-item" >
+          <a class="nav-link" href="makeBooking.html">Booking</a>
+        </li>
+        <li id="logout" class="nav-item" id="logout">
+          <a id="logoutA"class="nav-link" onclick="logout()" href="preview.html">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>-->
+
+  <!--main body options-->
+      <div id="miBody">
+        <div id="header" style="padding-right: 10px; padding-left: 10px;">
+          <img src="../css/images/tooth.png" alt="Profile Picture" width="40px" height="40px" style="float: left; margin-top: 5px; position: absolute; background-color: #007BFF; border-radius: 20px; padding: 7px;">
+          <p id="headerRegPatTitle" style="margin-left: auto; margin-right: auto;">Registration Form</p>
+        </div>
+      </div>
+      <div class="conatinerRegPatMain" id="conatinerHome">
+        <form action="/addPatient" method="POST" id="patientFormSignup">
+          <br>
+          <h3>Enter Info</h3><hr>
+
+          <label for="name" style="color: white;">Patients name</label><br>
+          <input class="form-control"  type="text" name="name" id="name" placeholder="Name"  required />
+          <br>
+
+          <label for="surname" style="color: white;">Patients surname</label><br>
+          <input class="form-control" id="surname" name="surname" placeholder="Surname" required/>
+          <br>
+
+          <label for="idNumber" style="color: white;">Patients ID number</label><br>
+          <input class="form-control" id="idNumber" name="idNumber" placeholder="ID Number" required/>
+          <br>
+
+          <label for="gender" style="color: white;">Gender</label><br>
+          <select  class="form-control" id = "gender" name = "gender">
+            <option value = "Male">Male</option>
+            <option value = "Female">Female</option>
+            <option value = "Other">Other</option>
+          </select>
+          <br>
+
+          <label for="email" style="color: white;">Patients Email</label><br>
+          <input class="form-control" class="box" type="email" name="email" id="email" placeholder="Email" required />
+          <br>
+
+          <label for="cell" style="color: white;">Patients cell phone number</label><br>
+          <input class="form-control" id="cell" name="cellnumber" placeholder="Cellphone Number" required/>
+          <br>
+
+          <input class="btn btn-primary" type="submit"  name="submitDetails" value="Submit" />
+          <br><br>
+
+        </form>
+      </div>
+      <br><br>
+    </div>
+    <script type="text/javascript" src="../js/registration.js"></script>
+  </body>
+</html>

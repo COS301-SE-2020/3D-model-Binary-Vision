@@ -3,11 +3,48 @@
 	color: white;
 }
 
+#logoContainer{
+	opacity: 0.8;
+	position: relative;
+ 
+	padding: 9px;
+	margin-top: 15px;
+
+	display: inline-block;
+
+
+}
+
+@font-face {
+  font-family: Anton;
+  src: url(fonts/Anton-Regular.ttf);
+}
+
+@font-face {
+  font-family: Abel;
+  src: url(fonts/Abel/Abel-Regular.ttf);
+}
+
+#logoWords{
+	font-family: Arial;
+	position: absolute;
+	left: 3px;
+	top: 60px;
+	color: white;
+	font-size: 50px;
+	text-shadow: 0 0 8px #888888, 0 0 9px #222222;
+
+}
 .renderButton {
 	position: relative;
 	text-align: center;
 }
 
+.section{
+	padding-right: 2%;
+	padding-left: 2%;
+	padding-bottom: 2%;
+}
 
 .outputModule{
 	position: relative;
@@ -20,10 +57,27 @@
 	position: relative;
 	margin-bottom: 0px;
 	margin-top: 0px;
-	margin-left: 0px;
-	margin-right: 0px;
+	margin-left: 5px;
+	margin-right: 5px;
 	padding: 0px;
+	font-family: Abel;
+	font-size: 20px;
 
+}
+
+#containInfoRight button{
+	width: 200px;
+}
+
+#recordPage{
+	font-family: Abel;
+	width: 200px;
+}
+
+#renderpage{
+	margin-top: 10px;
+	font-family: Abel;
+	width: 200px;
 }
 
 .nav-link1 {
@@ -41,6 +95,16 @@
 	text-align: center;
 	margin-top: 10px;
 
+}
+
+#selectedProcedure {
+	margin: 10px;
+	padding-right: 7px;
+	padding-left: 7px;
+}
+
+#btnCommonBooking {
+	margin: 20px;
 }
 
 .selectDocotor{
@@ -105,6 +169,25 @@
 	box-shadow: 1px 0px 15px 0px black;
 }
 
+.conatinerRegPatMain {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	display: block;
+	background-color: #003366;
+	text-align: center;
+	margin-top:70px;
+	margin-left: 7px;
+	margin-right: 7px;
+	border-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	box-shadow: 1px 0px 15px 0px black;
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
 .form-control{
 	text-align: center;
 	margin-left: auto;
@@ -123,16 +206,7 @@
 	margin: 0 auto;
 }
 
-body{
-	background-color: white;
-	background-image: url("../css/images/doodle(OO).jpg");
-	background-attachment: fixed;
-	background-repeat: repeat;
-	width: 100%;
-	height: 100%;
-	z-index: 3;
 
-}
 
 .consultaionBody {
 	position: relative;
@@ -188,6 +262,18 @@ body{
 	min-width: 420px;
 	max-height: 400px;
 	box-shadow: 1px 0px 15px 0px black;
+}
+
+#qrCodeImage {
+	background-color: white;
+	padding: 20px;
+	border-radius: 35px;
+	width: 150px;
+	transition: 0.1s;
+}
+
+#qrCodeImage:hover {
+	box-shadow: 1px 0px 15px 0px lightgray;
 }
 
 #saveDoctorNote {
@@ -394,10 +480,10 @@ body{
 
 /*elements*/
 body{
-	background-color: white;
-	background-image: url("../css/images/doodle(OO).jpg");
+	background-color: #333333;
+	/*background-image: url("../css/images/doodle(OO).jpg");
 	background-size:auto;
-	background-attachment: scroll;
+	background-attachment: scroll;*/
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -413,6 +499,14 @@ textarea{
 
 h2 {
 	color: white;
+	letter-spacing: 2px;
+	font-family: Anton;
+}
+
+h3 {
+	color: white;
+	letter-spacing: 2px;
+	font-family: Anton;
 }
 
 nav{
@@ -431,15 +525,19 @@ ul{
 
 a:hover {
 	cursor: pointer;
+
 }
 
 p {
 	color: white;
+	font-family: Abel;
 }
 
 span{
 	color: white;
 	text-decoration: bold;
+	font-size: 20px;
+	font-family: Abel;
 }
 
 hr{
@@ -498,14 +596,49 @@ h1 {
 	text-align: center;
 	margin: 0px auto;
 	color: black;
+	letter-spacing: 2px;
+	font-family: Anton;
 }
 
-input {
-	max-width: 300px;
+#patientFormSignup input {
+	max-width: 700px;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
+
+}
+
+#patientFormSignup select {
+	max-width: 700px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+
+}
+
+input.btn{
+	font-family: Abel;
+}
+
+#rightSideBody input.btn{
+	transform: translateY(-20px);
+	width: 200px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: Abel;
+}
+
+#patientFormSignup label{
+	font-family: Abel;
+	font-size: 26px;
+}
+
+#qrCode{
+	padding: 30px;
+	color: white;
 }
 
 /*IDs*/
@@ -527,6 +660,7 @@ input {
 
 #bookingBody {
 	transition: 0.8s;
+	margin-right: 40px;
 }
 
 .bookingBodyInceaseWidth {
@@ -534,9 +668,11 @@ input {
 }
 
 #bookingInfo{
+	transform: translateY(-35px);
 	background-color: #003366;
 	position: fixed;
 	top: 270px;
+	width: 240px;
 	padding: 20px;
 
 }
@@ -546,7 +682,7 @@ input {
 }
 
 #containInfoRight{
-	padding: 30px;
+	padding: 20px;
 
 }
 
@@ -565,7 +701,13 @@ input {
 
 }
 
+#displayNote{
+	font-family: Abel;
+}
 
+button.btn{
+	font-family: Abel;
+}
 
 .notify{
 	width: 50%;
@@ -614,7 +756,25 @@ input {
 	text-align: center;
 	color: black;
 	margin: auto;
+	font-size: 26px;
 }
+
+#headerRegPatTitle{
+	text-align: center;
+	color: black;
+	margin: auto;
+	font-size: 150%;
+}
+
+/*.containerRight {
+	justify-content: space-around;
+	align-items: flex-start;
+
+
+	position: -webkit-sticky;
+	position: sticky;
+	bottom: 1rem;
+}*/
 
 #rightSideBody
 {
@@ -625,9 +785,8 @@ input {
 	background-color: white;
 	box-shadow: 1px 0px 15px 0px black;
 	transition: 1s;
-	width: 200px;
+	width: 240px;
 	bottom: 0;
-
 }
 
 .noteButtonsContainer {
@@ -848,26 +1007,26 @@ input[type="file"] {
 	padding-top: 30px;
 	box-shadow: 1px 0px 15px 0px black;
 	background-color: #003366;
-	margin-left: 10%;
-	margin-right: 10%;
+	margin-left: 2%;
+	margin-right: 2%;
 	border-radius: 10px;
 }
 
 #containerLogin {
 	box-shadow: 1px 0px 15px 0px black;
-
-	display: grid;
 	grid-template-columns: 1fr 1fr;
-
 	animation: opacityForm 2s;
+
 	position: relative;
 	text-align: center;
-
 	background-color: #003366;
-	margin-left: 20%;
-	margin-right: 20%;
-
 	border-radius: 10px;
+}
+
+@media only screen and (width: 640px) {
+    #logoContainer img {
+    	width: 200px;
+    }
 }
 
 #formSignup {

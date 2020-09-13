@@ -205,7 +205,8 @@ async function stop(){
 // adding a user if its allowed
 function addUser(name , surname, email ,username,choice,practice , securityCode){
     
-    if(usedParamaters==false && choice!=""){
+    console.log(choice);
+    if(usedParamaters!=true && choice!=""){
         //make the api call with the hashed password to sign up a new user 
 
         var frontSalt ="COS301";
@@ -221,10 +222,23 @@ function addUser(name , surname, email ,username,choice,practice , securityCode)
         })
 
         response.then(res => {
+            var today = new Date();
+            var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+            var hours = today.getHours();
+            var minutes = today.getMinutes();
+            var seconds = today.getSeconds();
+            var time = hours + ":" + minutes + ":" + seconds ;
+            var line = date + "@" + time + "@" + username.value + "@Registered as a " + choice;
+            var resp = fetch("/updateLog",{
+                method:"POST",
+                headers:{'Content-Type':'application/json; charset=utf-8'},
+                body:JSON.stringify({"practice":practice.value,"line":line})
+            });
             window.location.href = res.url;
         });
     }
-    else{
+    else
+    {
         console.log("Could not make a new doctor");
     }
 }

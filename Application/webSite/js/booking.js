@@ -113,9 +113,11 @@ function populateCalander(data)
     for(var i in data)
     {
         
+        if(data[i].status == "Pending")
+        {
             var dataIndex = parseInt(i) ;
             console.log(dataIndex);
-    
+            
             var date = data[dataIndex].date;
             var time = data[dataIndex].time;
             var searchPageId = date+"&"+time;
@@ -128,9 +130,10 @@ function populateCalander(data)
                 element.setAttribute("onclick","");
                 //call api to get patient based on id, then put the patients full name ehre
                 setName(data[dataIndex].patient,searchPageId);
-               
+            
                 
             }
+        }
         
     }
 
@@ -398,7 +401,7 @@ function makeBooking()
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
             },
-            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason})
+            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason,"endTime":selectedTime})
         });
 
         response.then(res=> 
@@ -546,4 +549,64 @@ function moveSideBar()
         //bookingBody.style.width = "75%";
         bookingBody.classList.add("bookingBodyInceaseWidth");
     }
+}
+
+
+//================================================================================================
+//Function developed by: Jacobus Janse van Rensburg
+//Function Used to initialize the fuzzy logic overlay to select from the different types of procedures that are common to make a booking
+function fuzzyLogic(){
+    var indOverlay = document.getElementById("individual");
+    indOverlay.style.display = "none";
+    var overlayTable = document.getElementById('currentOverlayTable');
+    overlayTable.style.display = "none";
+
+    var overlay = document.getElementById("currentOverlay");
+    overlay.style.position = "relative";
+    overlay.style.display = "inline-block";
+    overlay.style.backgroundColor= "#003366";
+    overlay.style.width= "300px";
+    overlay.style.color= "white";
+    overlay.style.textAlign = "center";
+    overlay.style.borderRadius = "5px";
+    overlay.style.boxShadow = "1px 0px 15px 0px black";
+
+    var location = document.querySelector("#currentOverlay"); //get the element that will be dynamically populated
+
+    var population='<select id="selectedProcedure"> <option value="">Select Option</option>';
+    population+='<option value="15">checkup</option> <option value="30">Tooth Decay</option>';
+    population+='<option value="45">Gum Disease</option>  <option value="30">Tooth Sensitivity</option>';
+    population+='<option value="45">Tooth Extraction</option> <option value="30">Tooth Erosion</option>';
+    population+='<option value="30">Moouth Sores</option> </select> <button id="btnCommonBooking" class="btn btn-primary" onclick="findAvailableBookings()">Select</button>';
+
+    location.innerHTML=population;
+}
+
+//=================================================================================================
+//function developed by: Jacobus Janse van Rensburg
+//Function used for the fuzzy logic to find bookings based on the option that the receptionist chose
+function findAvailableBookings(){
+
+    //get the choice that was made's reason and time period it would take 
+    var selector = document.querySelector("#selectedProcedure");
+    var reason = selector.options[selector.selectedIndex].innerHTML;
+    var time = selector.options[selector.selectedIndex].value;
+
+    console.log(reason+"\t"+time);
+
+    //API CALL TO GET THE POSSIBLE BOOKING SLOTS
+    var response = fetch("/fuzzyLogic" , {
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body: JSON.stringify({"reason":reason, "duration":time})
+    });
+
+    response.then(res=> res.json().then(data => {
+        //process the returned data from the server
+        for( var i in data)
+        {
+            console.log(data[i]);
+        }
+    }));
+
 }

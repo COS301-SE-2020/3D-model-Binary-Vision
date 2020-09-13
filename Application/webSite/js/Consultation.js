@@ -164,16 +164,35 @@ function hidePatInfo()
 }
 
 //=============================================================================================
-//Function Developed by:
-// da hell is happening here , why do we need this ->
-function saveDoctorNote() 
+//Function Developed by: Steven Visser
+//Saves a regular consultation
+function saveConsultation(pid,reason) 
 {
 	let docNote = document.getElementById("doctorsNotes");
 
 	if (docNote.value != "") 
 	{
-		alert("Note saved!");
-		console.log(docNote.value);
+		//call the api function to save a consultation
+		var response = fetch("/saveConsultation",{
+			method:"POST",
+			headers:{'Content-Type': 'application/json; charset=UTF-8'},
+			body: JSON.stringify({"_id":pid,"note":docNote.value,"reason":reason})
+		});
+	
+		response.then(res => 
+		{
+			//remove the bar holding this booking and load the next one
+			//check status code
+			console.log(res.status);
+			if(res.status == 401)
+			{
+				alert("You are not authorized to do this action!");
+			}
+			else if(res.status== 201)
+			{
+				window.location.href= "/doctorSchedule.html"; 
+			}
+		});
 	} 
 	else 
 	{
@@ -272,17 +291,17 @@ function getRemainingTime(h, m, s)
 //=============================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 // function called when loading page to populate all the doctors information
-function init ()
+function init()
 {
 	startTime();
-	pupulateDoctorInformation();
+	populateDoctorInformation();
 	populateBookingInformation();
 }
 
 //=============================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 //function used to get and set the information of the doctor onto this page
-function pupulateDoctorInformation()
+function populateDoctorInformation()
 {
 	var response = fetch("/getDoctor",{
         method:"POST",
@@ -337,14 +356,13 @@ function populateBookingInformation(){
 		else{
 			endTime= mins[0]+":"+newMins;
 		}
-		document.querySelector("#endTime").innerHTML = endTime;
-		document.querySelector("#time2").innerHTML = data.time;
-		
+		document.querySelector("#endTime").innerHTML = endTime;		
 		
 		//set the reason for the booking 
 
 		//set the patient information 
-		popuatePatientInfo(data.patient);
+		document.getElementById("recordPage").href = "recordPage.html?pid="+data.patient;
+		popuatePatientInfo(data.patient,data.reason);
 	}));
 
 }
@@ -352,7 +370,10 @@ function populateBookingInformation(){
 //=============================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 // function to get the required patients information and populate the patient information
-function popuatePatientInfo(id){
+function popuatePatientInfo(id,reason){
+
+	document.getElementById("docnotes").innerHTML = "<p style='font-weight: bold;'>Doctors Notes:</p><textarea id='doctorsNotes' style='width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;'></textarea><button class='btn btn-primary' id='saveDoctorNote' type='button' style='margin-top: 10px;' onclick='saveConsultation(\""+id+"\",\""+reason+"\")'>Save Note</button>";
+
 
 	var response = fetch ("/singlePatient",{
 		method:"POST",
@@ -369,12 +390,10 @@ function popuatePatientInfo(id){
 			//set the patients attributes
 			document.querySelector("#patientName").innerHTML ="Name: "+data.name;
 			document.querySelector("#patientSurname").innerHTML ="Surname: "+data.surname;
-			document.querySelector("#patientID").innerHTML ="ID: "+data.surname;
+			document.querySelector("#patientID").innerHTML ="ID: "+data.idNumber;
 			document.querySelector("#patientGender").innerHTML="Gender: "+data.gender;
 			document.querySelector("#patientEmail").innerHTML="Email: "+data.email;
 			document.querySelector("#patientContactNo").innerHTML="Contact Number: "+data.cellnumber; 
-
-			document.querySelector("#patientqq").innerHTML = data.surname+" ("+data.name+")";
 		}
 
 	}));
