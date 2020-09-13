@@ -6,6 +6,7 @@ var selectedDate;
 var selectedTime;
 var selectedPatient;
 var selectedReason;
+var selectedEndTime;
 
 //===========================================================================================
 //Function developed by: Jacobus Janse van Rensburg
@@ -380,12 +381,17 @@ function makeBooking()
         //booking can be created
         var reason = document.getElementById("reasonForBooking").value;
 
+        if(selectedEndTime ==null || selectedEndTime =="")
+        {
+            selectedEndTime = selectedTime;
+        }
+
         var response = fetch("/makeBooking",{
             method:"POST",
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
             },
-            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason,"endTime":selectedTime})
+            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason,"endTime":selectedEndTime})
         });
 
         response.then(res=> 
@@ -550,7 +556,7 @@ function fuzzyLogic()
 
     var location = document.querySelector("#currentOverlay"); //get the element that will be dynamically populated
 
-    var population='<select id="selectedProcedure"> <option value="">Select Option</option>';
+    var population='<br><h3>Choose Common Type</h3><hr><select class="form-control" id="selectedProcedure"> <option value="">Select Option</option>';
     population+='<option value="15">checkup</option> <option value="30">Tooth Decay</option>';
     population+='<option value="45">Gum Disease</option>  <option value="30">Tooth Sensitivity</option>';
     population+='<option value="45">Tooth Extraction</option> <option value="30">Tooth Erosion</option>';
@@ -560,8 +566,10 @@ function fuzzyLogic()
 }
 
 //=================================================================================================
-//function developed by: Jacobus Janse van Rensburg
+//function developed by: Jacobus Janse van Rensburg and Rani Arraf
 //Function used for the fuzzy logic to find bookings based on the option that the receptionist chose
+
+var OptionalBookings;
 function findAvailableBookings(){
 
     //get the choice that was made's reason and time period it would take 
@@ -580,8 +588,38 @@ function findAvailableBookings(){
         //process the returned data from the server
         for( var i in data)
         {
-            console.log(data[i]);
+            optionalBookings = data;
+
+
+            var bodySelector = document.getElementById("currentOverlay");
+            bodySelector.style.position = "relative";
+            bodySelector.style.display = "inline-block";
+            bodySelector.style.backgroundColor= "#003366";
+            bodySelector.style.width= "300px";
+            bodySelector.style.color= "white";
+            bodySelector.style.textAlign = "center";
+            bodySelector.style.borderRadius = "5px";
+            bodySelector.style.boxShadow = "1px 0px 15px 0px black";
+            
+        
+            var location = document.querySelector("#currentOverlay");
+        
+            var population = '<br><h2>Choose Options</h2><hr><label for="selectTime">Select Time of Day</label><select class="form-control" id="selectTime">';
+            population += '<option  value="1">Morning</option> <option value="2">Afternoon</option></select>';
+            population += '<br><label for="selectDay">Select Day of Week</label><select class="form-control" id="selectDay">';
+            population += '<option  value="1">Monday</option> <option value="2">Tuesday</option>';
+            population += '<option  value="3">Wednesday</option> <option value="4">Thursday</option>';
+            population += '<option  value="5">Friday</option> <option value="6">Saturday</option>';
+            population += '<option  value="7">Sunday</option></select><br>';
+            population += '<button id="btnCommonBooking" class="btn btn-primary" onclick="Jacoooooooooooo()">Find</button>';
+            
+            location.innerHTML = population;
         }
     }));
+
+    for(var i in OptionalBookings)
+    {
+        console.log(OptionalBookings[i]);
+    }
 
 }
