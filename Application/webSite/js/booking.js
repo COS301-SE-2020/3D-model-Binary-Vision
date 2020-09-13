@@ -591,6 +591,7 @@ function findAvailableBookings(){
     population += '<option  value="3">Wednesday</option> <option value="4">Thursday</option>';
     population += '<option  value="5">Friday</option> <option value="6">Saturday</option>';
     population += '<option  value="7">Sunday</option></select><br>';
+    population += '<button id="btnCommonBooking" class="btn btn-primary" onclick="Jacoooooooooooo()">Find</button>';
     
     location.innerHTML = population;
 
