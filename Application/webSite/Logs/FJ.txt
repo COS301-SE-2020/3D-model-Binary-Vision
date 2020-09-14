@@ -1,1 +1,10 @@
 14/9/2020@0:4:11@admin@Logged in
+14/9/2020@3:33:38@admin@Logged in
+14/9/2020@4:26:23@admin@Added a Patient@PID:5f5ed4cffd0f7bad1338b6ec
+14/9/2020@4:27:14@admin@Made a booking@BID:5f5ed502fd0f7bad1338b6ed
+14/9/2020@4:32:12@admin@Made a booking@BID:5f5ed62c98136fadff18befc
+14/9/2020@5:5:54@admin@Made a booking@BID:5f5ede113ea139bc78b57bb4
+14/9/2020@5:9:34@admin@Made a booking@BID:5f5edeee71c39abd822339bf
+14/9/2020@5:13:23@admin@Made a booking@BID:5f5edfd32466efbe17a0c594
+14/9/2020@5:13:24@admin@Logout
+14/9/2020@5:13:33@Dr@Logged in

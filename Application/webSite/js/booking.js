@@ -102,25 +102,85 @@ function displayTimeTableOverlay()
 function populateCalander(data)
 {
 
+    var times = [
+        "09:00","09:15","09:30","09:45",
+        "10:00","10:15","10:30","10:45",
+        "11:00","11:15","11:30","11:45",
+        "12:00","12:15","12:30","12:45",
+        "13:00","13:15","13:30","13:45",
+        "14:00","14:15","14:30","14:45",
+        "15:00","15:15","15:30","15:45",
+        "16:00","16:15","16:30","16:45"
+       ];
+
     for(var i in data)
     {
         
         if(data[i].status == "Pending")
         {
-            var dataIndex = parseInt(i) ;
-            var date = data[dataIndex].date;
-            var time = data[dataIndex].time;
-            var searchPageId = date+"&"+time;
-            var element = document.getElementById(searchPageId);
-
-            if (element!=null)
-            {
-                //mark as red since a booking already exists
-                element.setAttribute("style","background-color:red;");
-                element.setAttribute("onclick","");
-                //call api to get patient based on id, then put the patients full name ehre
-                setName(data[dataIndex].patient,searchPageId);
+            if(data[i].time == data[i].endTime){
+                var dataIndex = parseInt(i) ;
+                var date = data[dataIndex].date;
+                var time = data[dataIndex].time;
+                var searchPageId = date+"&"+time;
+                var element = document.getElementById(searchPageId);
+    
+                if (element!=null)
+                {
+                    //mark as red since a booking already exists
+                    element.setAttribute("style","background-color:red;");
+                    element.setAttribute("onclick","");
+                    //call api to get patient based on id, then put the patients full name ehre
+                    setName(data[dataIndex].patient,searchPageId);
+                }
             }
+            else{
+                console.log(data[i]);
+                console.log("Multi slot booking")
+                var dataIndex = parseInt(i) ;
+                var date = data[dataIndex].date;
+                console.log("date: "+ date);
+                var numOfSlots;
+                var timeIndex;
+                for(var j = 0 ; j < times.length; j ++)
+                {
+                    if (times[j] == data[i].time) timeIndex = j;
+                    if (times[j] == data[i].endTime) numOfSlots = j-timeIndex;
+
+                    if(numOfSlots!=null && timeIndex !=null) break;
+                }
+                console.log("Start time: "+ times[timeIndex]+" \tEnd: "+times[timeIndex+numOfSlots])
+                for (var j =0 ; j < numOfSlots ; j++){
+                    var searchPageId = date+"&"+times[timeIndex+j];
+                    console.log("Searching page for "+searchPageId);
+                    var element = document.getElementById(searchPageId);
+                    if (element!=null)
+                    {
+                        var colorWheel=["red","yellow","orange","blue","purple"]
+                        var colorIndex;
+                        switch(data[i].reason)
+                        {
+                            case "": {colorIndex=0; break;}
+                            case "checkup": {colorIndex=3; break;}
+                            case "Tooth Decay": {colorIndex=0; break;}
+                            case "Gum Disease": {colorIndex=2; break;}
+                            case "Tooth Sensitivity": {colorIndex=4; break;}
+                            case "Tooth Extraction": {colorIndex=2; break;}
+                            case "Tooth Erosion": {colorIndex=4; break;}
+                            case "Moouth Sores": {colorIndex=4; break;}
+                            default: colorIndex=0; break;
+
+                        }
+                        console.log("Reason: "+data[i].reason+"\tColor: "+colorWheel[colorIndex]);
+                        //mark as red since a booking already exists
+                        element.setAttribute("style","background-color:"+colorWheel[colorIndex]+";");
+                        element.setAttribute("onclick","");
+                        //call api to get patient based on id, then put the patients full name ehre
+                        setName(data[dataIndex].patient,searchPageId);
+                    }
+                }
+            }
+            
         }
         
     }
@@ -284,6 +344,7 @@ function createPatientsListForBooking()
     {
         idNumber=idNumberElement.value;
     }
+    console.log("Searching db for patients ");
     var response = fetch("/searchPatient",{
         method:"POST",
         headers:{'Content-Type':'application/json; charset=UTF-8'},
@@ -302,18 +363,18 @@ function createPatientsListForBooking()
 // fillse the patients overlay list that is selectable
 function fillPatientSearchedList(data)
 {
-    var overlay = document.getElementById("individual");
-    var cOverlay = document.getElementById("currentOverlay");
+    // var overlay = document.getElementById("individual");
+    var overlay = document.getElementById("currentOverlay");
     var replacement = "";
     var overlayTable = document.getElementById('currentOverlayTable');
     overlayTable.style.display = "none";
-    cOverlay.style.display = "none";
+    overlay.style.display = "none";
     overlay.style.display = "block";
     var inc = 1;
 
     for (var i in data)
     {
-        
+        console.log("found patient "+data[i].name+"  "+data[i].surname);
         replacement += '<div style="display: block; float: left; background-color:#003366; color: white; width: 300px;position: relative;border-radius: 5px;box-shadow: 0px 0px 5px 0px black; margin-right: 10px; margin-left: 10px; margin-top: 20px;"><br><h2>' + data[i].name + ' ' + data[i].surname + ' ' + inc + ':</h2><hr><li> Name: '+data[i].name+'</li><li> Surname: '+data[i].surname+'</li><li>ID: '+data[i].idNumber+'</li><li>Cell: '+data[i].cellnumber+'</li><br><button class="btn btn-warning" onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</button><br><br></div>';
         inc++;
     }
@@ -380,6 +441,10 @@ function makeBooking()
 
         //booking can be created
         var reason = document.getElementById("reasonForBooking").value;
+        if(selectedReason == null)
+        {
+            selectedReason = reason;
+        }
 
         if(selectedEndTime ==null || selectedEndTime =="")
         {
@@ -391,7 +456,7 @@ function makeBooking()
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
             },
-            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":reason,"endTime":selectedEndTime})
+            body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":selectedReason,"endTime":selectedEndTime})
         });
 
         response.then(res=> 
@@ -629,7 +694,8 @@ function saveData(data){
 //Function developed by: Jacobus Janse van Rensburg
 //Function is used to filter the fuzzy logic options to a set of options that is appropriate to the
 //options that the user provides 
-var filteredOptions=[];
+var sameDayFilteredOptions=[];
+var sameTimeFilteredOptions=[];
 function filterOptions()
 {
     var dayArray =["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -654,20 +720,84 @@ function filterOptions()
             var day = new Date(date).getDay();
             console.log(dayArray[day]);
 
-            if (parseInt(day) == parseInt(daySelected) || parseInt(time) == parseInt(booking.time)){
-                filteredOptions.push(booking);
+            if (parseInt(day) == parseInt(daySelected) ){
+                
+                sameDayFilteredOptions.push(booking);
                 console.log("pushing to filteredOptions");
+            }
+
+            if(parseInt(time) == parseInt(booking.isMorning)){
+                sameTimeFilteredOptions.push(booking);
             }
         }
 
     }
     
-    console.log("All the filtered options available: ");
-    for(var i in filteredOptions)
-    {
-        console.log(filteredOptions[i]);
-    }
+ 
     
+    var count=0;
 
-    console.log("Lenght of filtered options found: "+filteredOptions.length);
+    var bodySelector = document.getElementById("currentOverlay");
+    var innerHTML= "<p style='color:black;'>Booking options for selected day:</p><br>";
+    for(var i in sameDayFilteredOptions )
+    {
+
+        var inner ="<div><p>Time: "+sameDayFilteredOptions[i].time+"</p>";
+        inner+="<p>End: "+sameDayFilteredOptions[i].endTime+"</p>";
+        inner+="<p>Day:"+dayArray[daySelected]+"</p>";
+        inner+="<p>Date: "+sameDayFilteredOptions[i].date+"</p>";
+        inner+="<p>Doctor: "+sameDayFilteredOptions[i].doctor+"</p>";
+        inner+="<input type='button' value='select' onclick='selectFilteredBooking(\""+sameDayFilteredOptions[i].time+"\",\""+sameDayFilteredOptions[i].endTime+"\",\""+sameDayFilteredOptions[i].date+"\",\""+sameDayFilteredOptions[i].doctor+"\",\""+sameDayFilteredOptions[i].reason+"\")'>";
+        inner+="</div>";
+        innerHTML+=inner;
+        count ++;
+        if(count >= 5) break;
+    }
+
+    count =0;
+    innerHTML+="<p>Booking options of matching time</p>";
+
+    for(var i in sameTimeFilteredOptions)
+    {
+        var inner ="<div><p>Time: "+sameTimeFilteredOptions[i].time+"</p>";
+        inner+="<p>End: "+sameTimeFilteredOptions[i].endTime+"</p>";
+        inner+="<p>Day:"+dayArray[daySelected]+"</p>";
+        inner+="<p>Date: "+sameTimeFilteredOptions[i].date+"</p>";
+        inner+="<p>Doctor: "+sameTimeFilteredOptions[i].doctor+"</p>";
+        inner+="<input type='button' value='select' onclick='selectFilteredBooking(\""+sameTimeFilteredOptions[i].time+"\",\""+sameTimeFilteredOptions[i].endTime+"\",\""+sameTimeFilteredOptions[i].date+"\",\""+sameTimeFilteredOptions[i].doctor+"\",\""+sameTimeFilteredOptions[i].reason+"\")'>";
+        inner+="</div>";
+        innerHTML+=inner;
+        count++;
+        if (count >=5) break;
+    }
+
+    bodySelector.innerHTML = innerHTML;
+    /*
+    <div id="someIdToDistinguish">
+      <p>Time: time_goes_here</p>
+      <p>Date: dd/mm/yyyy</p>
+      <p>Day: Monday->Sunday</p>
+      <p>Doctor: Doctor_Name_Here</p>
+      <input type="button" value="select" onclick="selectFilteredBooking(time , end , date , doctorID)">
+    </div>
+    */
+}
+
+function selectFilteredBooking(time , endTime , date, doctor,reason)
+{
+    selectedDoctor = doctor; 
+    selectedDate = date;
+    selectedTime = time;
+    selectedEndTime = endTime;
+    selectedReason = reason;
+
+    document.getElementById("timeInfoDisplay").innerHTML = time;
+    document.getElementById("timeInfoDisplay").style.color = "lightgreen";
+    
+    document.getElementById("dateInfoDisplay").innerHTML = date;
+    document.getElementById("dateInfoDisplay").style.color = "lightgreen";
+
+    document.getElementById("doctorInfoDisplay").innerHTML = date;
+    document.getElementById("doctorInfoDisplay").style.color = "lightgreen";
+
 }

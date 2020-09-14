@@ -188,7 +188,7 @@ module.exports ={
                 .send("Unauthorized access to doctors scheduling info");
         }
 
-        Booking.find({"doctor":mongoose.Types.ObjectId(req.body.doctor)},"-reason",function(err,bookings)
+        Booking.find({"doctor":mongoose.Types.ObjectId(req.body.doctor)},function(err,bookings)
         {
             if(err)
             {

@@ -733,6 +733,7 @@ module.exports = {
     //Returns all patients that match certain criteria from the database
    searchPatient: function(req, res)
    {
+       console.log("search for a patient")
         if (!req.user)
         {
             res.status(401).send("Unauthorized");
@@ -741,6 +742,7 @@ module.exports = {
 
         const {name , surname , idNumber} = req.body;
 
+        console.log(name+"  "+surname+"  "+idNumber);
         Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
         {
             if (err)
@@ -751,6 +753,7 @@ module.exports = {
             {
                 if(idNumber != null)
                 {
+                    console.log("Searching by ID");
                     Patient.find({"idNumber":idNumber,"practice":rec.practition}, function(err,patient)
                     {
                         if(err){
@@ -801,10 +804,9 @@ module.exports = {
                             res.status(400);
                             return;
                         }
-                        if(patient)
+                        if(patient!="")
                         {
-                            res.json(patient)
-                              .status(200);
+                            res.json(patient);
                             return;
                         }
                         else
