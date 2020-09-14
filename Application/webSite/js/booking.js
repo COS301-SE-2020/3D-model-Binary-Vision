@@ -539,6 +539,7 @@ function prepPostponement()
 
 function initPage()
 {
+    displayPatientSearchOverlay();
     var url = window.location.href;
     var parts = url.split("=");
     if(parts.length > 1)
@@ -552,8 +553,10 @@ function initPage()
     });
 
     response.then(res=> res.json().then( data => {  
-        document.querySelector("#receptionistName").innerHTML = data.name +" "+ data.surname;
+        document.querySelector("#receptionistName").innerHTML = data.name +" "+ data.surname;        
+        
     }));
+    
 }
 
 //=============================================================================================
