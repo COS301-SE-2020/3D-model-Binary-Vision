@@ -320,11 +320,11 @@ function createPatientSearchOverlay()
 
     overlay.innerHTML ='<div style=""><div id="doctorFormSignup"><br>';
     overlay.innerHTML+='<h2> Search Patient</h2><hr><br>';
-    overlay.innerHTML+='<div class="change" class="custom-control"><input type="checkbox"  id="searchByName" name="searchBy" onclick="searchByInputDisplay()"><label class="form-check-label" style="color:white; padding: 5px; left: 0px;" for="searchByName">  Search By Name </label><br>';
+    overlay.innerHTML+='<div class="change" class="custom-control"><input type="checkbox"  id="searchByName" name="searchBy" onclick="searchByInputDisplay()" checked><label class="form-check-label" style="color:white; padding: 5px; left: 0px;" for="searchByName">  Search By Name </label><br>';
     overlay.innerHTML+='<input type="checkbox" id="searchBySurname" name="searchBy" onclick="searchByInputDisplay()"><label class="form-check-label" style="color:white; padding: 5px; left: 0px;" for="searchBySurname">  Search By Surname </label><br>';
     overlay.innerHTML+='<input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()"><label class="form-check-label" style="color:white; padding: 5px; left: 0px;" for="searchByPatientID">  Search By Patient ID </label> <br><br></div>';
     overlay.innerHTML+='<div id="inputBoxes" ></div><input style="margin-bottom: 20px;" class="btn btn-danger" type="submit" class="btn" value="Search" onclick="createPatientsListForBooking()"></div></div>';
-
+    searchByInputDisplay();
 }
 
 // ===========================================================================================
@@ -527,6 +527,7 @@ function prepPostponement()
     fetcher.then(res=> res.json().then(data=>
     {
         selectPatient(patientID, data.name, data.surname, data.idNumber);
+        displayTimeTableOverlay();
     }));
     
 
@@ -536,7 +537,6 @@ function prepPostponement()
 
     //change Make Booking! to Postpone Booking
     document.getElementById("makeBookingButton").innerText = "Postpone Booking!";
-
 }
 
 function initPage()
@@ -565,12 +565,12 @@ function initPage()
     }
     
 
-   var response = fetch("/getAvatarChoice",{
+   var res = fetch("/getAvatarChoice",{
         method:"POST",
         headers:{'Content-Type':'Application/json ; charset=UTF-8'}
     });
 
-    response.then(res=> res.json().then(data=> 
+    res.then(res=> res.json().then(data=> 
     {
         //data.choice is the avatar option
         var index = parseInt(data.avatar,10);
