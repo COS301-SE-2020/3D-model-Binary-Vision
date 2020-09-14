@@ -254,7 +254,7 @@ module.exports ={
         var options = [];   //create an empty array of the options that could possible be 
 
         var dayCounter = 0;
-        while (dayCounter < 6 ){  //while we dont have a minumum of at least 5 options to choose from
+        while (dayCounter < 7 ){  //while we dont have a minumum of at least 5 options to choose from
             const bookings = await Booking.find({"date":date}); //using callback function to enforce sequential execution
 
                 if(bookings!=""){

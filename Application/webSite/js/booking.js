@@ -668,4 +668,6 @@ function filterOptions()
         console.log(filteredOptions[i]);
     }
     
+
+    console.log("Lenght of filtered options found: "+filteredOptions.length);
 }
