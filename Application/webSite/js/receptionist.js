@@ -25,7 +25,7 @@ function initReceptionist()
         //data.choice is the avatar option
         var index = parseInt(data.avatar,10);
         checkDoc[index] = true;
-        confirmPicture();
+        confirmPic();
     }));
 }
 
@@ -343,7 +343,7 @@ function resetDoc()
     }
 }
 
-function confirmPicture(){
+function confirmPic(){
     var pictureFrame1 = document.querySelector(".profile");
     if(checkDoc[0] == true){
         
@@ -378,4 +378,56 @@ function confirmPicture(){
         var population = "<img id='profilePic' src='../css/images/Avatars/doc_w_female.png' alt='Profile Picture' width='200px' height='200px'>";
         pictureFrame1.innerHTML = population;
     }
+}
+
+function confirmPicture(){
+    var avatar = "0";
+    var pictureFrame1 = document.querySelector(".profile");
+    if(checkDoc[0] == true){
+        
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_a_male.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "0";
+    }
+    if(checkDoc[1] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_b_male.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "1";
+    }
+    if(checkDoc[2] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_i_male.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "2";
+    }
+    if(checkDoc[3] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_w_male.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "3";
+    }
+    if(checkDoc[4] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_a_female.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "4";
+    }
+    if(checkDoc[5] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_b_female.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "5";
+    }
+    if(checkDoc[6] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_i_female.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "6";
+    }
+    if(checkDoc[7] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_w_female.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "7";
+    }
+
+    var response = fetch("/setAvatarChoice",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body: JSON.stringify({"avatar":avatar})
+    });
 }

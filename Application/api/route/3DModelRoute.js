@@ -161,4 +161,7 @@ module.exports = function (app)
 
     app.route('/getAvatarChoice')
         .post(Model.getAvatarChoice);
+
+    app.route('/setAvatarChoice')
+        .post(Model.setAvatarChoice);
 }
