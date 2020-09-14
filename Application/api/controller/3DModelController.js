@@ -686,8 +686,7 @@ module.exports = {
       {
           if (err) 
           {
-              res.status(404)
-                .send("Error looking up doctor");
+              res.status(404).send("Error looking up doctor");
               return;
           } 
           else 
@@ -1203,10 +1202,12 @@ module.exports = {
             if(err)
             {
                 console.log(err);
+                res.status(401).send(err);
             }
             else
             {
                 console.log("Log successfully updated!");
+                res.status(200).send("Log successfully updated!");
             }
         });
         
@@ -1219,7 +1220,7 @@ module.exports = {
     {
         if(!req.user)
         {
-            res.status(401);
+            res.status(401).send("Unauthorized");
             return;
         }
 
@@ -1252,7 +1253,7 @@ module.exports = {
             {
                 if (err)
                 {
-                  res.status(400);
+                  res.status(400).send("Not created");
                   return;
                 }
                 res.status(201)

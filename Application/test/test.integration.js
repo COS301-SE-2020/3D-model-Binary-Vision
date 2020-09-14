@@ -26,6 +26,24 @@ var loggedRecep1;
 var recep1_ID;
 var doc1_ID;
 
+/*
+	Lines that still need to be reached:
+	
+		- ModelController
+			347-366 (19)
+			479-498 (19)
+			535-666 (131)
+			1003-1082 (79)
+			1122-1136 (14)
+
+		- ReceptionistController
+			237-571
+
+		- UploadController
+			21-92
+
+*/
+
 describe('Integration Testing:', () => {
 
 	// Before all of the test are executed
@@ -264,8 +282,22 @@ describe('Integration Testing:', () => {
 		});
 	});
 
-	// Test case 2: Signup
-	describe('(2) SignUp:', () => {
+	// Test case 2: getPracticeName
+	describe('(2) getPracticeName: ', () => {
+		it('Testing getPracticeName Feature (with valid user input) - Returns 200 code', (done) => {
+			receptionist1
+				.post('/getPracticeName', db.getPracticeName)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					response.should.be.json;
+					done();
+				});
+		});
+	});
+
+	// Test case 3: Signup
+	describe('(3) SignUp:', () => {
 		it('Testing Signup for a Doctor (With wrong practice name) - Returns 404 code', (done) => {
 			const tempDoctor = {
 				name: "Otto",
@@ -1184,7 +1216,7 @@ describe('Integration Testing:', () => {
 
 	// Test case  : generatePatientSignupQRCode
 	describe('() Generate a patient signup QRCode', () => {
-		it('Testing generatePatientSignupQRCode Feature (With valid user input)', (done) => {
+		it('Testing generatePatientSignupQRCode Feature (With valid receptionist input) - Returns 200 code', (done) => {
 			receptionist1
 				.get('/qrCode', db.generatePatientSignupQRCode)
 				.end((error, response) => {
@@ -1193,7 +1225,7 @@ describe('Integration Testing:', () => {
 				});
 		});
 
-		it('Testing generatePatientSignupQRCode Feature (With valid user input)', (done) => {
+		it('Testing generatePatientSignupQRCode Feature (With valid doctor input) - Returns 200 code', (done) => {
 			doctor1
 				.get('/qrCode', db.generatePatientSignupQRCode)
 				.end((error, response) => {
@@ -1202,7 +1234,7 @@ describe('Integration Testing:', () => {
 				});
 		});
 
-		it('Testing generatePatientSignupQRCode Feature (With invalid user)', (done) => {
+		it('Testing generatePatientSignupQRCode Feature (With invalid user) - Returns 401 code', (done) => {
 			receptionist2
 				.get('/qrCode', db.generatePatientSignupQRCode)
 				.end((error, response) => {
@@ -1210,6 +1242,54 @@ describe('Integration Testing:', () => {
 					done();
 				});
 		});
+	});
+
+	// Test case : updateLog
+	describe('() Update the Log file', () => {
+		it('Testing updateLog Feature (With valid user input) - Returns 200 code', (done) => {
+			receptionist1
+				.post('/updateLog', db.updateLog)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
+				});
+		});
+	});
+
+	// Test case : saveConsultation
+	describe('() Save a consultation', () => {
+		/*it('Testing saveConsultation Feature (With valid user input) - Returns 200 code', (done) => {
+			//doctor1.body._id = doc1_ID;
+
+			doctor1
+				.post('/saveConsultation', db.saveConsultation)
+				.send(doc1_ID)
+				.end((error, response) => {
+					response.should.have.status(201);
+					done()
+				})
+		}) */
+
+		it('Testing saveConsultation Feature (With valid user but not valid input) - Returns 400 code', (done) => {
+			doctor1
+				.post('/saveConsultation', db.saveConsultation)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(400);
+					done();
+				});
+		})
+
+		it('Testing saveConsultation Feature (With invalid user) - Returns 401 code', (done) => {
+			doctor2
+				.post('/saveConsultation', db.saveConsultation)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(401);
+					done();
+				});
+		})
 	});
 
 	// Test case 33 : Logout
