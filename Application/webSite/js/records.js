@@ -44,7 +44,7 @@ function init()
         document.getElementById("patientTable").innerHTML =replacement;
         for(var i in data)
         {
-           replacement += "<tr><td>"+data[i].created+"</td><td>"+data[i].Notes+"</td><td><button class='btn btn-success' onclick=showRecord(\""+data[i].created+"\",\""+data[i].reason+"\",\""+data[i]._id+"\")>View Info</button></td></tr>"
+           replacement += "<tr><td>"+data[i].created+"</td><td>"+data[i].Note+"</td><td><button class='btn btn-success' onclick=\"showRecord('"+data[i].created+"','"+data[i].reason+"','"+data[i]._id+"')\">View Info</button></td></tr>";
         }
         document.getElementById("patientTable").innerHTML =replacement;
     }));
