@@ -160,9 +160,6 @@
   transform: translateX(-240px);
 }
 
-#sideBar{
-
-}
 
 .container{
 	text-align: center;
@@ -339,9 +336,6 @@
 	text-align: center;
 }
 
-label #sideBarLabel {
-	
-}
 
 #bodyContainer{
 	position: relative;
@@ -1007,7 +1001,7 @@ input[type="file"] {
 	max-width: 240px;
 	min-width: 240px;
 	min-height: 130px;
-	max-height: 490px;
+	max-height: 500px;
 	/*z-index:1;
 	display: inline-flex;*/
 	padding: 10px;
