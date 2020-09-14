@@ -1090,12 +1090,12 @@ module.exports = {
         if(choice =="accept")
         {
              //acticate the user
-             Doctor.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)}, {$set:{"active":setter}}, function (err, doc){
+             Doctor.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)}, {$set:{"active":true}}, function (err, doc){
                 //if doctor not look for a receptionist
              if(!doc) 
              {  
                  //find and update receptionist
-                 Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)},{$set:{"active":setter}}, function(err, rec){
+                 Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)},{$set:{"active":true}}, function(err, rec){
                     if(rec)
                     {
                         updateLogFile("PracticeHead@Accepted Receptionist Application@ID:"+rec._id,rec.practition);
