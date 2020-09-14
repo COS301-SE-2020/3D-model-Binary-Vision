@@ -1,89 +1,19 @@
-14/9/2020@14:42:8@Practice: Dentists For Hire Registered!
-14/9/2020@14:42:8@PracticeHead@Accepted Receptionist Application@ID:5f5f65208b849bfe6bdc0455
-14/9/2020@14:42:8@lindaS@Logged in
-14/9/2020@14:42:8@PracticeHead@Accepted Doctor Application@ID:5f5f65208b849bfe6bdc0456
-14/9/2020@14:42:8@DrSpiderman@Logged in
-14/9/2020@14:42:8@lindaS@Added a Patient@PID:5f5f65208b849bfe6bdc0459
-14/9/2020@14:42:8@lindaS@Added a Patient@PID:5f5f65208b849bfe6bdc045a
-14/9/2020@14:42:8@lindaS@Made a booking@BID:5f5f65208b849bfe6bdc045c
-14/9/2020@14:42:8@DrSpiderman@Logout
-14/9/2020@14:42:15@PracticeHead@Accepted Receptionist Application@ID:5f5f65208b849bfe6bdc0455
-14/9/2020@14:42:15@lindaS@Logged in
-14/9/2020@14:42:16@PracticeHead@Accepted Doctor Application@ID:5f5f65208b849bfe6bdc0456
-14/9/2020@14:42:16@DrSpiderman@Logged in
-14/9/2020@14:42:16@lindaS@Added a Patient@PID:5f5f652866f8dffe95014a95
-14/9/2020@14:42:16@lindaS@Added a Patient@PID:5f5f652866f8dffe95014a96
-14/9/2020@14:42:16@lindaS@Made a booking@BID:5f5f652866f8dffe95014a98
-14/9/2020@14:42:16@DrSpiderman@Logout
-14/9/2020@14:48:53@PracticeHead@Accepted Receptionist Application@ID:5f5f65208b849bfe6bdc0455
-14/9/2020@14:48:53@lindaS@Logged in
-14/9/2020@14:48:53@PracticeHead@Accepted Doctor Application@ID:5f5f65208b849bfe6bdc0456
-14/9/2020@14:48:53@DrSpiderman@Logged in
-14/9/2020@14:48:53@lindaS@Added a Patient@PID:5f5f66b561fbf1ff486ed100
-14/9/2020@14:48:53@lindaS@Added a Patient@PID:5f5f66b561fbf1ff486ed101
-14/9/2020@14:48:53@lindaS@Made a booking@BID:5f5f66b561fbf1ff486ed103
-14/9/2020@14:48:54@DrSpiderman@Logout
-14/9/2020@14:49:32@PracticeHead@Accepted Receptionist Application@ID:5f5f65208b849bfe6bdc0455
-14/9/2020@14:49:32@lindaS@Logged in
-14/9/2020@14:49:33@PracticeHead@Accepted Doctor Application@ID:5f5f65208b849bfe6bdc0456
-14/9/2020@14:49:33@DrSpiderman@Logged in
-14/9/2020@14:49:33@lindaS@Added a Patient@PID:5f5f66dd0d6588ff76aa6049
-14/9/2020@14:49:33@lindaS@Added a Patient@PID:5f5f66dd0d6588ff76aa604a
-14/9/2020@14:49:33@lindaS@Made a booking@BID:5f5f66dd0d6588ff76aa604c
-14/9/2020@14:49:33@DrSpiderman@Logout
-14/9/2020@14:50:39@PracticeHead@Accepted Receptionist Application@ID:5f5f65208b849bfe6bdc0455
-14/9/2020@14:50:39@lindaS@Logged in
-14/9/2020@14:50:39@PracticeHead@Accepted Doctor Application@ID:5f5f65208b849bfe6bdc0456
-14/9/2020@14:50:39@DrSpiderman@Logged in
-14/9/2020@14:50:39@lindaS@Added a Patient@PID:5f5f671fe7dafeffad37235b
-14/9/2020@14:50:39@lindaS@Added a Patient@PID:5f5f671fe7dafeffad37235c
-14/9/2020@14:50:39@lindaS@Made a booking@BID:5f5f671fe7dafeffad37235e
-14/9/2020@14:50:39@DrSpiderman@Logout
-14/9/2020@14:51:39@PracticeHead@Accepted Receptionist Application@ID:5f5f65208b849bfe6bdc0455
-14/9/2020@14:51:40@lindaS@Logged in
-14/9/2020@14:51:40@PracticeHead@Accepted Doctor Application@ID:5f5f65208b849bfe6bdc0456
-14/9/2020@14:51:40@DrSpiderman@Logged in
-14/9/2020@14:51:40@lindaS@Added a Patient@PID:5f5f675ca849edffe51e4a73
-14/9/2020@14:51:40@lindaS@Added a Patient@PID:5f5f675ca849edffe51e4a74
-14/9/2020@14:51:40@lindaS@Made a booking@BID:5f5f675ca849edffe51e4a76
-14/9/2020@14:51:40@DrSpiderman@Logout
-14/9/2020@14:51:58@PracticeHead@Accepted Receptionist Application@ID:5f5f65208b849bfe6bdc0455
-14/9/2020@14:51:59@lindaS@Logged in
-14/9/2020@14:51:59@PracticeHead@Accepted Doctor Application@ID:5f5f65208b849bfe6bdc0456
-14/9/2020@14:51:59@DrSpiderman@Logged in
-14/9/2020@14:51:59@lindaS@Added a Patient@PID:5f5f676fc0500200112a601a
-14/9/2020@14:51:59@lindaS@Added a Patient@PID:5f5f676fc0500200112a601b
-14/9/2020@14:51:59@lindaS@Made a booking@BID:5f5f676fc0500200112a601d
-14/9/2020@14:51:59@DrSpiderman@Logout
-14/9/2020@14:52:47@PracticeHead@Accepted Receptionist Application@ID:5f5f65208b849bfe6bdc0455
-14/9/2020@14:52:47@lindaS@Logged in
-14/9/2020@14:52:47@PracticeHead@Accepted Doctor Application@ID:5f5f65208b849bfe6bdc0456
-14/9/2020@14:52:47@DrSpiderman@Logged in
-14/9/2020@14:52:47@lindaS@Added a Patient@PID:5f5f679f899e3500679f9aa6
-14/9/2020@14:52:47@lindaS@Added a Patient@PID:5f5f679f899e3500679f9aa7
-14/9/2020@14:52:47@lindaS@Made a booking@BID:5f5f679f899e3500679f9aa9
-14/9/2020@14:52:47@DrSpiderman@Logout
-14/9/2020@14:53:19@PracticeHead@Accepted Receptionist Application@ID:5f5f65208b849bfe6bdc0455
-14/9/2020@14:53:19@lindaS@Logged in
-14/9/2020@14:53:19@PracticeHead@Accepted Doctor Application@ID:5f5f65208b849bfe6bdc0456
-14/9/2020@14:53:19@DrSpiderman@Logged in
-14/9/2020@14:53:19@lindaS@Added a Patient@PID:5f5f67bfa3f1b300975f7c20
-14/9/2020@14:53:19@lindaS@Added a Patient@PID:5f5f67bfa3f1b300975f7c21
-14/9/2020@14:53:19@lindaS@Made a booking@BID:5f5f67bfa3f1b300975f7c23
-14/9/2020@14:53:19@DrSpiderman@Logout
-14/9/2020@14:54:25@PracticeHead@Accepted Receptionist Application@ID:5f5f65208b849bfe6bdc0455
-14/9/2020@14:54:25@lindaS@Logged in
-14/9/2020@14:54:26@PracticeHead@Accepted Doctor Application@ID:5f5f65208b849bfe6bdc0456
-14/9/2020@14:54:26@DrSpiderman@Logged in
-14/9/2020@14:54:26@lindaS@Added a Patient@PID:5f5f680289a10900d0819d8d
-14/9/2020@14:54:26@lindaS@Added a Patient@PID:5f5f680289a10900d0819d8e
-14/9/2020@14:54:26@lindaS@Made a booking@BID:5f5f680289a10900d0819d90
-14/9/2020@14:54:26@DrSpiderman@Logout
-14/9/2020@14:54:56@PracticeHead@Accepted Receptionist Application@ID:5f5f65208b849bfe6bdc0455
-14/9/2020@14:54:56@lindaS@Logged in
-14/9/2020@14:54:56@PracticeHead@Accepted Doctor Application@ID:5f5f65208b849bfe6bdc0456
-14/9/2020@14:54:56@DrSpiderman@Logged in
-14/9/2020@14:54:56@lindaS@Added a Patient@PID:5f5f682057ba9700fd0d8a1d
-14/9/2020@14:54:56@lindaS@Added a Patient@PID:5f5f682057ba9700fd0d8a1e
-14/9/2020@14:54:56@lindaS@Made a booking@BID:5f5f682057ba9700fd0d8a20
-14/9/2020@14:54:56@DrSpiderman@Logout
+14/9/2020@19:37:17@Practice: Dentists For Hire Registered!
+14/9/2020@19:37:17@PracticeHead@Accepted Receptionist Application@ID:5f5faa4d4737ef24f8fe9082
+14/9/2020@19:37:17@lindaS@Logged in
+14/9/2020@19:37:17@PracticeHead@Accepted Doctor Application@ID:5f5faa4d4737ef24f8fe9083
+14/9/2020@19:37:18@DrSpiderman@Logged in
+14/9/2020@19:37:18@lindaS@Added a Patient@PID:5f5faa4e4737ef24f8fe9086
+14/9/2020@19:37:18@lindaS@Added a Patient@PID:5f5faa4e4737ef24f8fe9087
+14/9/2020@19:37:18@lindaS@Made a booking@BID:5f5faa4e4737ef24f8fe908b
+14/9/2020@19:37:18@DrSpiderman@Saved a consultation@CID:5f5faa4e4737ef24f8fe9091
+14/9/2020@19:37:18@DrSpiderman@Logout
+14/9/2020@19:38:14@PracticeHead@Accepted Receptionist Application@ID:5f5faa8565ffde25339ba4fb
+14/9/2020@19:38:14@lindaS@Logged in
+14/9/2020@19:38:14@PracticeHead@Accepted Doctor Application@ID:5f5faa8665ffde25339ba4fc
+14/9/2020@19:38:14@DrSpiderman@Logged in
+14/9/2020@19:38:14@lindaS@Added a Patient@PID:5f5faa8665ffde25339ba4ff
+14/9/2020@19:38:14@lindaS@Added a Patient@PID:5f5faa8665ffde25339ba500
+14/9/2020@19:38:14@lindaS@Made a booking@BID:5f5faa8665ffde25339ba504
+14/9/2020@19:38:14@DrSpiderman@Saved a consultation@CID:5f5faa8665ffde25339ba50a
+14/9/2020@19:38:14@DrSpiderman@Logout

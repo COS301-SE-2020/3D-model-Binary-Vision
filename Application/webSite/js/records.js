@@ -25,6 +25,8 @@ function init()
 {
     var url = window.location.href;
     var parts = url.split("=");
+
+    document.getElementById("consultlink").href = "Consultation.html/bookingid="+parts[2];
     //parts[1] = patient id
     //call getpatientsconsultations using pid
     //populate this page with all the different consultations that are there
@@ -34,6 +36,7 @@ function init()
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
         body: JSON.stringify({"patient":parts[1]})
     });
+
 
     response.then(res=> res.json().then(data=>
     {
