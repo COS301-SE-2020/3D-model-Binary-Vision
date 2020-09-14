@@ -737,66 +737,66 @@ function filterOptions()
 
     }
     
-    displayTimeTableOverlay();
-
-    for(var i in sameTimeFilteredOptions)
-    {
-        var x = sameTimeFilteredOptions[i].date;
-        var y = sameTimeFilteredOptions[i].time;
-        var date = x+"&"+y;
-        var element = document.getElementById(date);
-
-        element.setAttribute("style","background-color:lime;");
-        element.setAttribute("onclick","selectFilteredBooking(\""+sameTimeFilteredOptions[i].time+"\",\""+sameTimeFilteredOptions[i].endTime+"\",\""+sameTimeFilteredOptions[i].date+"\",\""+sameTimeFilteredOptions[i].doctor+"\",\""+sameTimeFilteredOptions[i].reason+"\")")
-    }
-    
-    for(var i in sameDayFilteredOptions)
-    {
-        var x = sameDayFilteredOptions[i].date;
-        var y = sameDayFilteredOptions[i].time;
-        var date = x+"&"+y;
-        var element = document.getElementById(date);
-
-        element.setAttribute("style","background-color:lime;");
-        element.setAttribute("onclick","selectFilteredBooking(\""+sameDayFilteredOptions[i].time+"\",\""+sameDayFilteredOptions[i].endTime+"\",\""+sameDayFilteredOptions[i].date+"\",\""+sameDayFilteredOptions[i].doctor+"\",\""+sameDayFilteredOptions[i].reason+"\")")
-    }
-    // var count=0;
-// 
-    // var bodySelector = document.getElementById("currentOverlay");
-    // var innerHTML= "<p style='color:black;'>Booking options for selected day:</p><br>";
-    // for(var i in sameDayFilteredOptions )
-    // {
-
-    //     var inner ="<div><p>Time: "+sameDayFilteredOptions[i].time+"</p>";
-    //     inner+="<p>End: "+sameDayFilteredOptions[i].endTime+"</p>";
-    //     inner+="<p>Day:"+dayArray[daySelected]+"</p>";
-    //     inner+="<p>Date: "+sameDayFilteredOptions[i].date+"</p>";
-    //     inner+="<p>Doctor: "+sameDayFilteredOptions[i].doctor+"</p>";
-    //     inner+="<input type='button' value='select' onclick='selectFilteredBooking(\""+sameDayFilteredOptions[i].time+"\",\""+sameDayFilteredOptions[i].endTime+"\",\""+sameDayFilteredOptions[i].date+"\",\""+sameDayFilteredOptions[i].doctor+"\",\""+sameDayFilteredOptions[i].reason+"\")'>";
-    //     inner+="</div>";
-    //     innerHTML+=inner;
-    //     count ++;
-    //     if(count >= 5) break;
-    // }
-
-    // count =0;
-    // innerHTML+="<p>Booking options of matching time</p>";
+    // displayTimeTableOverlay();
 
     // for(var i in sameTimeFilteredOptions)
     // {
-    //     var inner ="<div><p>Time: "+sameTimeFilteredOptions[i].time+"</p>";
-    //     inner+="<p>End: "+sameTimeFilteredOptions[i].endTime+"</p>";
-    //     inner+="<p>Day:"+dayArray[daySelected]+"</p>";
-    //     inner+="<p>Date: "+sameTimeFilteredOptions[i].date+"</p>";
-    //     inner+="<p>Doctor: "+sameTimeFilteredOptions[i].doctor+"</p>";
-    //     inner+="<input type='button' value='select' onclick='selectFilteredBooking(\""+sameTimeFilteredOptions[i].time+"\",\""+sameTimeFilteredOptions[i].endTime+"\",\""+sameTimeFilteredOptions[i].date+"\",\""+sameTimeFilteredOptions[i].doctor+"\",\""+sameTimeFilteredOptions[i].reason+"\")'>";
-    //     inner+="</div>";
-    //     innerHTML+=inner;
-    //     count++;
-    //     if (count >=5) break;
-    // }
+    //     var x = sameTimeFilteredOptions[i].date;
+    //     var y = sameTimeFilteredOptions[i].time;
+    //     var date = x+"&"+y;
+    //     var element = document.getElementById(date);
 
-    // bodySelector.innerHTML = innerHTML;
+    //     element.setAttribute("style","background-color:lime;");
+    //     element.setAttribute("onclick","selectFilteredBooking(\""+sameTimeFilteredOptions[i].time+"\",\""+sameTimeFilteredOptions[i].endTime+"\",\""+sameTimeFilteredOptions[i].date+"\",\""+sameTimeFilteredOptions[i].doctor+"\",\""+sameTimeFilteredOptions[i].reason+"\")")
+    // }
+    
+    // for(var i in sameDayFilteredOptions)
+    // {
+    //     var x = sameDayFilteredOptions[i].date;
+    //     var y = sameDayFilteredOptions[i].time;
+    //     var date = x+"&"+y;
+    //     var element = document.getElementById(date);
+
+    //     element.setAttribute("style","background-color:lime;");
+    //     element.setAttribute("onclick","selectFilteredBooking(\""+sameDayFilteredOptions[i].time+"\",\""+sameDayFilteredOptions[i].endTime+"\",\""+sameDayFilteredOptions[i].date+"\",\""+sameDayFilteredOptions[i].doctor+"\",\""+sameDayFilteredOptions[i].reason+"\")")
+    // }
+    var count=0;
+
+    var bodySelector = document.getElementById("currentOverlay");
+    var innerHTML= "<p style='color:black;'>Booking options for selected day:</p><br>";
+    for(var i in sameDayFilteredOptions )
+    {
+
+        var inner ="<div><p>Time: "+sameDayFilteredOptions[i].time+"</p>";
+        inner+="<p>End: "+sameDayFilteredOptions[i].endTime+"</p>";
+        inner+="<p>Day:"+dayArray[daySelected]+"</p>";
+        inner+="<p>Date: "+sameDayFilteredOptions[i].date+"</p>";
+        inner+="<p>Doctor: "+sameDayFilteredOptions[i].doctor+"</p>";
+        inner+="<input type='button' value='select' onclick='selectFilteredBooking(\""+sameDayFilteredOptions[i].time+"\",\""+sameDayFilteredOptions[i].endTime+"\",\""+sameDayFilteredOptions[i].date+"\",\""+sameDayFilteredOptions[i].doctor+"\",\""+sameDayFilteredOptions[i].reason+"\")'>";
+        inner+="</div>";
+        innerHTML+=inner;
+        count ++;
+        if(count >= 5) break;
+    }
+
+    count =0;
+    innerHTML+="<p>Booking options of matching time</p>";
+
+    for(var i in sameTimeFilteredOptions)
+    {
+        var inner ="<div><p>Time: "+sameTimeFilteredOptions[i].time+"</p>";
+        inner+="<p>End: "+sameTimeFilteredOptions[i].endTime+"</p>";
+        inner+="<p>Day:"+dayArray[daySelected]+"</p>";
+        inner+="<p>Date: "+sameTimeFilteredOptions[i].date+"</p>";
+        inner+="<p>Doctor: "+sameTimeFilteredOptions[i].doctor+"</p>";
+        inner+="<input type='button' value='select' onclick='selectFilteredBooking(\""+sameTimeFilteredOptions[i].time+"\",\""+sameTimeFilteredOptions[i].endTime+"\",\""+sameTimeFilteredOptions[i].date+"\",\""+sameTimeFilteredOptions[i].doctor+"\",\""+sameTimeFilteredOptions[i].reason+"\")'>";
+        inner+="</div>";
+        innerHTML+=inner;
+        count++;
+        if (count >=5) break;
+    }
+
+    bodySelector.innerHTML = innerHTML;
     /*
     <div id="someIdToDistinguish">
       <p>Time: time_goes_here</p>
