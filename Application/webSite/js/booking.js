@@ -113,7 +113,7 @@ function populateCalander(data)
         "16:00","16:15","16:30","16:45"
        ];
 
-    for(var i in data)
+    for(var i =0 ; i < data.length; i ++)
     {
         
         if(data[i].status == "Pending")
@@ -137,17 +137,21 @@ function populateCalander(data)
             else{
                 console.log(data[i]);
                 console.log("Multi slot booking")
-                var dataIndex = parseInt(i) ;
-                var date = data[dataIndex].date;
+                var date = data[i].date;
                 console.log("date: "+ date);
                 var numOfSlots;
                 var timeIndex;
                 for(var j = 0 ; j < times.length; j ++)
                 {
-                    if (times[j] == data[i].time) timeIndex = j;
-                    if (times[j] == data[i].endTime) numOfSlots = j-timeIndex;
+                    if (times[j] == data[i].time) {
+                        timeIndex = j;
+                        console.log("found that start time "+data[i].time+" = "+times[j]);
+                    }
+                    if (times[j] == data[i].endTime){ 
+                        numOfSlots = j-timeIndex;
+                        console.log("found that end time "+data[i].time+" = "+times[j]);
+                    }
 
-                    if(numOfSlots!=null && timeIndex !=null) break;
                 }
                 console.log("Start time: "+ times[timeIndex]+" \tEnd: "+times[timeIndex+numOfSlots])
                 for (var j =0 ; j < numOfSlots ; j++){
@@ -176,7 +180,7 @@ function populateCalander(data)
                         element.setAttribute("style","background-color:"+colorWheel[colorIndex]+";");
                         element.setAttribute("onclick","");
                         //call api to get patient based on id, then put the patients full name ehre
-                        setName(data[dataIndex].patient,searchPageId);
+                        setName(data[i].patient,searchPageId);
                     }
                 }
             }

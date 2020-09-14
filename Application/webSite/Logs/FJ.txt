@@ -8,3 +8,8 @@
 14/9/2020@5:13:23@admin@Made a booking@BID:5f5edfd32466efbe17a0c594
 14/9/2020@5:13:24@admin@Logout
 14/9/2020@5:13:33@Dr@Logged in
+14/9/2020@6:9:28@Dr@Logout
+14/9/2020@6:9:41@admin@Logged in
+14/9/2020@6:18:19@admin@Made a booking@BID:5f5eef0b602189c9db6aafe6
+14/9/2020@6:21:9@admin@Made a booking@BID:5f5eefb568f4f9cb3ecfb305
+14/9/2020@6:25:22@admin@Made a booking@BID:5f5ef0b24a89c3cc736c202e
