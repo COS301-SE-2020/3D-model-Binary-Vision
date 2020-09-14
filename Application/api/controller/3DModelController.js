@@ -760,7 +760,7 @@ module.exports = {
                             res.status(400);
                             return;
                         }
-                        if(patient)
+                        if(patient!="")
                         {
                             res.json(patient).status(200);
                             return;
