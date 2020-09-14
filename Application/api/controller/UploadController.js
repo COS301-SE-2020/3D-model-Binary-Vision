@@ -7,9 +7,8 @@ const mongoose = require("mongoose");
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
-const { spawn } = require('child_process');
+const { exec } = require('child_process');
 const { Console } = require("console");
-
 
 module.exports = {
     
@@ -51,46 +50,82 @@ module.exports = {
 
                 //connect c++ program here and send file name when done c++ deletes file
                 //using spawn as a chid-process 
+
+                const workingDirectory = "sfmAlgorithm_linux/Executable";
+                console.log(workingDirectory);
                 var d = req.user+"-"+f;
-                const ls = spawn('sfmAlgorithm_linux/Executable/main',[d]);
-
-
-                ls.on('exit', code=>
-                {
-                    if (code ==0 )
-                    {
-                        //every thing is fine 
-
-                        //check that stl exists and store it in the db
-                        //write to the db 
-                        //read from disk with directory
-                        console.log("Check if file is there ");
-                        // var stlFile = fs.createReadStream(dir+"/stlFile.stl");
-                        // const options = ({ filename: req.body.consID , contentType: 'model/stl' });
-
-                        // var attachment = createModel();
-                        // attachment.write(options , stlFile , function(err, saved){
-
-                        //     if( err)
+                
+                exec(`./main ${d}`,{ cwd: workingDirectory, shell: true }, (error, stdout, stderr) => {
+                    // console.log(stdout);
+                    // console.log(stderr);
+                    if (error) {
+                        console.log(`Process exited with error: ${error.code}`);
+                        return res.sendStatus(500);
+                    } else {
+                        //get stl file and save it to a consultations ID
+                        // const stlStream = fs.createReadStream(path.join(dir,"stlFile.stl"));
+                        // const Files = createModel();
+                        // const options = {
+                        //     filename: video.name,
+                        //     contentType: video.type
+                        //   }
+                        // Files.write(options, readStream, (err, file) => {
+                        //     if (err) 
                         //     {
-                        //         res.status(500).send("error saving stl file: "+ err);
+                        //         res.send(err);
                         //     }
                         //     else{
-                        //         res.status(200);
+                        // 
+                        //         const consultation = new Consultation(
+                        //         {
+                        //             doctor: req.user, // get from session, e.g. cookies
+                        //             patient: patient._id,
+                        //             STL: file._id,
+                        //             Note: "Video Upload"
+                        //         });
+                        //         consultation.save(function (err) 
+                        //         {
+                        //             if (err)
+                        //             {
+                        //               res.send(400);
+                        //             }
+                        //             res.status(201);
+                        //         });
                         //     }
                         // });
-
+                        //remove
+                         res.status(200).send("Success");
+                         rimraf(dir);
                     }
-                    else 
-                    {
-                        console.log("Code: "+code);
-                        res.sendStatus(500);
-                    }
-                })
+                });
 
-                res.status(200);
-                return;
+                
             }
         });
+        
+        //remove directory to save space
+        return;
+
+    }
+}
+
+
+//remove a directory of images to savespace on the server 
+/**
+ * Remove directory recursively
+ * @param {string} dir_path
+ * @see https://stackoverflow.com/a/42505874/3027390
+ */
+function rimraf(dir_path) {
+    if (fs.existsSync(dir_path)) {
+        fs.readdirSync(dir_path).forEach(function(entry) {
+            var entry_path = path.join(dir_path, entry);
+            if (fs.lstatSync(entry_path).isDirectory()) {
+                rimraf(entry_path);
+            } else {
+                fs.unlinkSync(entry_path);
+            }
+        });
+        fs.rmdirSync(dir_path);
     }
 }
