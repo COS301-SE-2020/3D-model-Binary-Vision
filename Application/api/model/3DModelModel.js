@@ -36,6 +36,11 @@ var DoctorSchema = new Schema({
     },
     active:{
         type: Boolean, required: true , default: false
+    },
+    avatar:
+    {
+        type:String,
+        default:"1"
     }
 });
 
@@ -99,6 +104,11 @@ var Receptionist = new Schema({
     },
     active:{
         type: Boolean , default:false
+    },
+    avatar:
+    {
+        type:String,
+        default:"1"
     }
 });
 
