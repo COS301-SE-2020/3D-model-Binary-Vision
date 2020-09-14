@@ -644,7 +644,8 @@ module.exports = {
 
     getSTLFile: function (req,res){
         if(!req.user){
-
+            res.status(401).send("Unauthorized");
+            return;
         }
         else {
 

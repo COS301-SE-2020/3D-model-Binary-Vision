@@ -30,8 +30,6 @@ var doc1_ID;
 	Lines that still need to be reached:
 	
 		- ModelController
-			347-366 (19)
-			479-498 (19)
 			535-666 (131)
 			1003-1082 (79)
 			1122-1136 (14)
@@ -262,7 +260,6 @@ describe('Integration Testing:', () => {
 		done();
 	});
 
-
 	// Test case 1: practiceRegistration
 	describe('(1) practiceRegistration: ', () => {
 		it('Testing Registration for a practice (With practice that already exists) - Returns 404 code', (done) => {
@@ -449,7 +446,6 @@ describe('Integration Testing:', () => {
 
 	// Test case 8 : addPatient
 	describe('(8) Add a patient', () => {
-		// Test add patient with success
 		it ('Testing addPatient Feature (With valid user info) - Returns 200 code', (done) => {
 			const tempPatient = {
 				idNumber: "123456789",
@@ -469,8 +465,44 @@ describe('Integration Testing:', () => {
 				});
 		});
 
-		// Test add patient with success
-		it ('Testing addPatient Feature (With valid user info & entered by the patient) - Returns 200 code', (done) => {
+		it ('Testing addPatient Feature (With invalid user info) - Returns 400 code', (done) => {
+			const tempPatient = {
+				idNumber: "123456789",
+				name: "Mark",
+				surname: "Smith",
+				email: "MarkSmith@gmail.com",
+				gender: "male"
+			};
+			receptionist1
+				.post("/addPatient", db.addPatient)
+				.send(tempPatient)
+				.end((error, response) => {
+					response.should.have.status(400);
+					done();
+				});
+		});
+
+		it ('Testing addPatient Feature (With invalid user info & entered by the patient) - Returns 200 code', (done) => {
+			const tempPatient = {
+				idNumber: "123456798",
+				name: "Marcus",
+				surname: "Werner",
+				email: "MWerner@gmail.com",
+				gender: "male",
+				cellnumber: "0764219335",
+				practice: "12345"
+			};
+			chai.request(server)
+				.post("/addPatient", db.addPatient)
+				.send(tempPatient)
+				.end((error, response) => {
+					response.should.have.status(200);
+					response.should.be.html;
+					done();
+				});
+		});
+
+		it ('Testing addPatient Feature (With invalid user info & entered by the patient) - Returns 200 code', (done) => {
 			const tempPatient = {
 				idNumber: "123456798",
 				name: "Marcus",
@@ -479,12 +511,11 @@ describe('Integration Testing:', () => {
 				gender: "male",
 				cellnumber: "0764219335"
 			};
-			receptionist1
+			chai.request(server)
 				.post("/addPatient", db.addPatient)
 				.send(tempPatient)
 				.end((error, response) => {
-					response.should.have.status(200);
-					response.should.be.html;
+					response.should.have.status(400);
 					done();
 				});
 		});
@@ -738,6 +769,31 @@ describe('Integration Testing:', () => {
 				});
 		});*/
 //////////////////////////////////////////////////////////
+	});
+
+	// Test case : getSTLFile
+	describe('() Get the STL file', () => {
+		it('Testing getSTLFile Feature (with invalid consultation id user input)  Returns 500 code', (done) => {
+			const consultationID = "j%3A%225f5faa4d4737ef24f8fe9083%22";
+
+			doctor1
+				.get('/consultation/'+ consultationID +'/stl', db.getSTLFile)
+				.end((error, response) => {
+					response.should.have.status(500);
+					done();
+				});
+		});
+
+		it('Testing getSTLFile Feature (with invalid user)  Returns 401 code', (done) => {
+			const consultationID = "j%3A%225f5faa4d4737ef24f8fe9083%22";
+
+			doctor2
+				.get('/consultation/'+ consultationID +'/stl', db.getSTLFile)
+				.end((error, response) => {
+					response.should.have.status(401);
+					done();
+				});
+		});
 	});
 
 	// Test case 20 : getAllDoctors
@@ -1313,6 +1369,29 @@ describe('Integration Testing:', () => {
 					response.should.have.status(200);
 					response.should.be.html;
 				done();
+				});
+		});
+	});
+
+	// Test case  : activateUser
+	describe('() Activate a user', () => {
+		it('Testing activateUser Feature (Denying a Doctor) - Returns 200 code', (done) => {
+			doctor1
+				.post("/activateUser", db.activateUser)
+				.send({user: doc1_ID, choice: "reject"})
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
+				});
+		});
+
+		it('Testing activateUser Feature (Denying a Receptionist) - Returns 200 code', (done) => {
+			receptionist1
+				.post("/activateUser", db.activateUser)
+				.send({user: recep1_ID, choice: "reject"})
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
 				});
 		});
 	});
