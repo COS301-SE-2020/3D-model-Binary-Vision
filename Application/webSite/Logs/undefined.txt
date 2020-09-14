@@ -140,3 +140,23 @@ undefined
 14/9/2020@19:38:14@PracticeHead@Denied Receptionist Application@ID:undefined
 14/9/2020@19:38:14@PracticeHead@Denied Receptionist Application@ID:undefined
 14/9/2020@19:38:14@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:15@Added a Patient@PID:5f5fba3b3c501c2ee89d31fb
+undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:31@Added a Patient@PID:5f5fbd57f602e63248d47191
+undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined

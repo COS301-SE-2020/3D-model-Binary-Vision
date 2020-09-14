@@ -1,19 +1,13 @@
-14/9/2020@19:37:17@Practice: Dentists For Hire Registered!
-14/9/2020@19:37:17@PracticeHead@Accepted Receptionist Application@ID:5f5faa4d4737ef24f8fe9082
-14/9/2020@19:37:17@lindaS@Logged in
-14/9/2020@19:37:17@PracticeHead@Accepted Doctor Application@ID:5f5faa4d4737ef24f8fe9083
-14/9/2020@19:37:18@DrSpiderman@Logged in
-14/9/2020@19:37:18@lindaS@Added a Patient@PID:5f5faa4e4737ef24f8fe9086
-14/9/2020@19:37:18@lindaS@Added a Patient@PID:5f5faa4e4737ef24f8fe9087
-14/9/2020@19:37:18@lindaS@Made a booking@BID:5f5faa4e4737ef24f8fe908b
-14/9/2020@19:37:18@DrSpiderman@Saved a consultation@CID:5f5faa4e4737ef24f8fe9091
-14/9/2020@19:37:18@DrSpiderman@Logout
-14/9/2020@19:38:14@PracticeHead@Accepted Receptionist Application@ID:5f5faa8565ffde25339ba4fb
-14/9/2020@19:38:14@lindaS@Logged in
-14/9/2020@19:38:14@PracticeHead@Accepted Doctor Application@ID:5f5faa8665ffde25339ba4fc
-14/9/2020@19:38:14@DrSpiderman@Logged in
-14/9/2020@19:38:14@lindaS@Added a Patient@PID:5f5faa8665ffde25339ba4ff
-14/9/2020@19:38:14@lindaS@Added a Patient@PID:5f5faa8665ffde25339ba500
-14/9/2020@19:38:14@lindaS@Made a booking@BID:5f5faa8665ffde25339ba504
-14/9/2020@19:38:14@DrSpiderman@Saved a consultation@CID:5f5faa8665ffde25339ba50a
-14/9/2020@19:38:14@DrSpiderman@Logout
+14/9/2020@23:34:36@Practice: Dentists For Hire Registered!
+14/9/2020@23:34:37@PracticeHead@Accepted Receptionist Application@ID:5f5fe1ed9077205825c0e8f0
+14/9/2020@23:34:37@lindaS@Logged in
+14/9/2020@23:34:37@PracticeHead@Accepted Doctor Application@ID:5f5fe1ed9077205825c0e8f1
+14/9/2020@23:34:37@DrSpiderman@Logged in
+14/9/2020@23:35:55@PracticeHead@Accepted Receptionist Application@ID:5f5fe1ed9077205825c0e8f0
+14/9/2020@23:35:55@lindaS@Logged in
+14/9/2020@23:35:55@PracticeHead@Accepted Doctor Application@ID:5f5fe1ed9077205825c0e8f1
+14/9/2020@23:35:56@DrSpiderman@Logged in
+14/9/2020@23:38:31@PracticeHead@Accepted Receptionist Application@ID:5f5fe1ed9077205825c0e8f0
+14/9/2020@23:38:31@lindaS@Logged in
+14/9/2020@23:38:31@PracticeHead@Accepted Doctor Application@ID:5f5fe1ed9077205825c0e8f1
+14/9/2020@23:38:31@DrSpiderman@Logged in

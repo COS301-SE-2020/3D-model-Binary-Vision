@@ -278,7 +278,7 @@ describe('Integration Testing:', () => {
 				});
 		});
 	});
-
+/*
 	// Test case 2: getPracticeName
 	describe('(2) getPracticeName: ', () => {
 		it('Testing getPracticeName Feature (with valid user input) - Returns 200 code', (done) => {
@@ -591,7 +591,7 @@ describe('Integration Testing:', () => {
 	// Test case 13: makeBooking
 	describe('(13) Make a booking for a patient', () => {
 //////////////////////////////////////////////////////////
-		/*it('Testing makeBooking Feature (With valid user input) - Returns 200 code', (done) => {
+		it('Testing makeBooking Feature (With valid user input) - Returns 200 code', (done) => {
 			const bookingInfo = {
 				patient: "Mark",
 				doctor: "Peter",
@@ -607,7 +607,7 @@ describe('Integration Testing:', () => {
 					response.should.be.json;
 				done();
 				});
-		});*/
+		});
 //////////////////////////////////////////////////////////
 
 		it('Testing makeBooking Feature (With invalid user input) - Returns 400 code', (done) => {
@@ -743,7 +743,7 @@ describe('Integration Testing:', () => {
 	describe('(18) Upload a video', () => {
 		// Test to upload video footage for the backend
 //////////////////////////////////////////////////////////
-		/*it('Testing upload Feature (With no data) - Returns 400 code', (done) => {
+		it('Testing upload Feature (With no data) - Returns 400 code', (done) => {
 			doctor1
 				.post('/upload', db.upload)
 				.send()
@@ -751,7 +751,7 @@ describe('Integration Testing:', () => {
 					response.should.have.status(400);
 				done();
 				});
-		});*/
+		});
 //////////////////////////////////////////////////////////
 	});
 
@@ -759,7 +759,7 @@ describe('Integration Testing:', () => {
 	describe('(19) Upload an STL file', () => {
 		// Test to upload STL file to be rendered
 //////////////////////////////////////////////////////////
-		/*it('Testing STLConsultationUpload Feature (With valid user input) - Returns 200 code', (done) => {
+		it('Testing STLConsultationUpload Feature (With valid user input) - Returns 200 code', (done) => {
 			doctor1
 				.post('/stlConsultation', db.STLConsultationUpload)
 				.send()
@@ -767,7 +767,7 @@ describe('Integration Testing:', () => {
 					response.should.have.status(200);
 				done();
 				});
-		});*/
+		});
 //////////////////////////////////////////////////////////
 	});
 
@@ -917,7 +917,7 @@ describe('Integration Testing:', () => {
 	// Test case 25 : getSingleDoctor
 	describe('(25) Get a single doctor', () => {
 //////////////////////////////////////////////////////////
-		/*it('Testing getSingleDoctor Feature (With valid user input) - Returns 200 code', (done) => {
+		it('Testing getSingleDoctor Feature (With valid user input) - Returns 200 code', (done) => {
 			receptionist1
 				.post('/getSingleDoctor', db.getSingleDoctor)
 				.send()
@@ -926,7 +926,7 @@ describe('Integration Testing:', () => {
 					response.should.have.json;
 					done();
 				});
-		});*/
+		});
 //////////////////////////////////////////////////////////
 
 		it('Testing getSingleDoctor Feature (With no user found) - Returns 401 code', (done) => {
@@ -1252,7 +1252,7 @@ describe('Integration Testing:', () => {
 	// Test case 32 : resetPassord
 	describe('(32) Reset Passord', () => {
 //////////////////////////////////////////////////////////
-		/*it('Testing resetPassord Feature (With valid user input) - Return 200 code', (done) => {
+		it('Testing resetPassord Feature (With valid user input) - Return 200 code', (done) => {
 			const logingDetails = {
 				email: "LindaSmith@gmail.com",
 				password: "4321",
@@ -1266,7 +1266,7 @@ describe('Integration Testing:', () => {
 					response.should.have.status(200);
 				done();
 				});
-		});*/
+		});
 //////////////////////////////////////////////////////////
 	});
 
@@ -1315,7 +1315,8 @@ describe('Integration Testing:', () => {
 
 	// Test case : saveConsultation
 	describe('() Save a consultation', () => {
-		/*it('Testing saveConsultation Feature (With valid user input) - Returns 200 code', (done) => {
+//////////////////////////////////////////////////////////
+		it('Testing saveConsultation Feature (With valid user input) - Returns 200 code', (done) => {
 			//doctor1.body._id = doc1_ID;
 
 			doctor1
@@ -1325,8 +1326,8 @@ describe('Integration Testing:', () => {
 					response.should.have.status(201);
 					done()
 				})
-		}) */
-
+		}) 
+//////////////////////////////////////////////////////////
 		it('Testing saveConsultation Feature (With valid user but not valid input) - Returns 400 code', (done) => {
 			doctor1
 				.post('/saveConsultation', db.saveConsultation)
@@ -1395,5 +1396,6 @@ describe('Integration Testing:', () => {
 				});
 		});
 	});
+*/
 });
 

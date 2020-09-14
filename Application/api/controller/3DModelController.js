@@ -154,7 +154,7 @@ module.exports = {
                 return;
             }
 
-            var newPractice =new Practice ({practice,securityCode,headReceptionist});
+            var newPractice = new Practice ({practice,securityCode,headReceptionist});
             newPractice.save(function(err, pr){
 
                 if(err)
