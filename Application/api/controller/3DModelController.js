@@ -1088,29 +1088,20 @@ module.exports = {
     activateUser:function ( req, res)
     {
         const {user , choice } = req.body;
-
-        var setter;
         if(choice =="accept")
         {
-            setter = true;
-        }
-        else
-        {
-            setter =false;
-        } 
-        if (setter){
-            //acticate the user
-            Doctor.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)}, {$set:{"active":setter}}, function (err, doc){
+             //acticate the user
+             Doctor.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)}, {$set:{"active":setter}}, function (err, doc){
                 //if doctor not look for a receptionist
              if(!doc) 
              {  
                  //find and update receptionist
                  Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)},{$set:{"active":setter}}, function(err, rec){
-                        if(rec)
-                        {
-                            updateLogFile("PracticeHead@Accepted Receptionist Application@ID:"+rec._id,rec.practition);
-                        }
-                    });
+                    if(rec)
+                    {
+                        updateLogFile("PracticeHead@Accepted Receptionist Application@ID:"+rec._id,rec.practition);
+                    }
+                });
             }
             else
             {
@@ -1118,26 +1109,40 @@ module.exports = {
             }
             });
         }
-        else{
-            Doctor.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err,doc)
+        else
+        {
+            Doctor.find({"_id":mongoose.Types.ObjectId(user)}, function(err,doc)
             {
-                if (!doc)
+                if(doc)
                 {
-                    Receptionist.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err, rec)
-                    {
-                         if(rec)
-                         {
-                             updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+rec._id,rec.practition);
-                         }
-                    });
-                }
-                else
-                {
-                    updateLogFile("PracticeHead@Declined Doctor Application@ID:"+doc._id,doc.practition);
+                   updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+doc._id,doc.practition);
+                   Doctor.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err, doct)
+                   {
+                        if(doct)
+                        {
+                            updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+doct._id,doct.practition);
+                        }
+                   });
+                   return;
                 }
             });
-        }
-
+            
+            Receptionist.find({"_id":mongoose.Types.ObjectId(user)}, function(err, rec)
+            {
+                 if(rec)
+                 {
+                    updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+rec._id,rec.practition);
+                    Receptionist.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err, rect)
+                    {
+                         if(rect)
+                         {
+                             updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+rect._id,rect.practition);
+                         }
+                    });
+                    return;
+                 }
+            });
+        } 
         res.status(200).send("ok");
         return;
     },
