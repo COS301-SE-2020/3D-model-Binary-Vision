@@ -1396,6 +1396,54 @@ describe('Integration Testing:', () => {
 				});
 		});
 	});
+
+	// Test case  : getAvatarChoice
+	describe('() Get the avatar choice', () => {
+		it ('Testing getAvatarChoice Feature (With a valid doctor) - Returns 200 code', (done) => {
+			doctor1
+				.post('/getAvatarChoice', db.getAvatarChoice)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					response.should.be.json;
+					done();
+				})
+		});
+
+		it ('Testing getAvatarChoice Feature (With a valid receptionist1) - Returns 200 code', (done) => {
+			receptionist1
+				.post('/getAvatarChoice', db.getAvatarChoice)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					response.should.be.json;
+					done();
+				})
+		}); 
+	});
+
+	// Test case : setAvatarChoice
+	describe('() Set a avatar choice', () => {
+		it('Testing setAvatarChoice Feature (With a valid doctor)', (done) => {
+			doctor1
+				.post('/setAvatarChoice', db.setAvatarChoice)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
+				});
+		});
+
+		it('Testing setAvatarChoice Feature (With a valid receptionist1)', (done) => {
+			receptionist1
+				.post('/setAvatarChoice', db.setAvatarChoice)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
+				});
+		});	
+	})
 */
 });
 
