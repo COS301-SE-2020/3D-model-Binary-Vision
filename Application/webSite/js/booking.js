@@ -396,7 +396,7 @@ function selectDoctor(drID,name, surname)
     document.getElementById("doctorInfoDisplay").innerHTML = "("+name+") "+surname;
     document.getElementById("doctorInfoDisplay").style.color = "lightgreen";
     document.getElementById("currentOverlay").innerHTML = "";
-
+    displayTimeTableOverlay();
 }
 
 // ===========================================================================================
@@ -425,6 +425,7 @@ function selectPatient(patientID, name , surname, idNumber)
     document.getElementById("patientInfoDisplay").style.color = "lightgreen";
 
     document.getElementById("currentOverlay").innerHTML = "";
+    displayDoctorOverlay();
 }
 
 // ===========================================================================================
