@@ -167,6 +167,7 @@ function signup()
     }
     else{
         practice.style.backgroundColor="lightgreen";
+        practice.focus();
         practice.style.color="black";
         errorData.innerHTML = "<i></i>";
     }
