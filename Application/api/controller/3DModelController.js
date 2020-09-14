@@ -1315,6 +1315,82 @@ module.exports = {
             }
 
         });
+    },
+
+    //======================================================================================
+    //Function developed by: Steven Visser
+    //returns the avatar choice of a doctor or receptionist
+    getAvatarChoice : function (req , res)
+    {
+        Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function(err, doc)
+        {
+            if (err)
+            {
+                res.status(500)
+                  .send("error getting doctor");
+                return;
+            }
+            if(doc != "" && doc != null)
+            {
+                res.status(200)
+                  .json({"avatar":doc.avatar});
+                return;
+            }
+        });
+
+        Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function(err, rec)
+        {
+            if (err)
+            {
+                res.status(500)
+                  .send("error getting doctor");
+                return;
+            }
+            if(rec != "" && rec != null)
+            {
+                res.status(200)
+                  .json({"avatar":rec.avatar});
+                return;
+            }
+        });
+    },
+
+    //======================================================================================
+    //Function developed by: Steven Visser
+    //sets the avatar choice of a doctor or receptionist
+    setAvatarChoice : function (req , res)
+    {
+        Doctor.findOneAndUpdate({"_id":mongoose.Types.ObjectId(req.user)}, {$set:{"avatar":req.body.avatar}} , function(err,doc)
+        {
+            if (err)
+            {
+              res.status(400)
+                .send("Error Finding doctor");
+              return;
+            }
+            if(doc != "" && doc != null)
+            {
+                res.status(200)
+                .send("Doctor Updated!!");
+              return;
+            }
+        });
+
+        Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(req.user)}, {$set:{"avatar":req.body.avatar}} , function(err,rec)
+        {
+            if (err)
+            {
+              res.status(400)
+                .send("Error Finding receptionist");
+              return;
+            }
+            if(rec != "" && rec != null)
+            {
+                res.status(200)
+                    .send("Receptionist Updated!");
+                return;
+            }
+        });
     }
 
 };

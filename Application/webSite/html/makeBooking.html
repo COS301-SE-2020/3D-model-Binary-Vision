@@ -50,7 +50,38 @@
               <div id="header">
                 <p id="headerTitle" style="z-index: 1;">BOOKING PAGE</p>
               </div>
+              
           </div>
+          <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Choose Profile Avatar</h4>
+                <button type="button" id="quiteButton" class="close" data-dismiss="modal">&times;</button>
+                
+              </div>
+              <div class="modal-body">
+                <a id="avatar" onclick="selectDoc1();"><img id="avatar1" src="../css/images/Avatars/doc_a_male.png" alt="Profile Picture" width="200px" height="200px"></a>
+                <a id="avatar" onclick="selectDoc5();"><img id="avatar5" src="../css/images/Avatars/doc_a_female.png" alt="Profile Picture" width="200px" height="200px"></a>
+                <a id="avatar" onclick="selectDoc2();"><img id="avatar2" src="../css/images/Avatars/doc_b_male.png" alt="Profile Picture" width="200px" height="200px"></a>
+                <a id="avatar" onclick="selectDoc6();"><img id="avatar6" src="../css/images/Avatars/doc_b_female.png" alt="Profile Picture" width="200px" height="200px"></a>
+                <a id="avatar" onclick="selectDoc3();"><img id="avatar3" src="../css/images/Avatars/doc_i_male.png" alt="Profile Picture" width="200px" height="200px"></a>
+                <a id="avatar" onclick="selectDoc7();"><img id="avatar7" src="../css/images/Avatars/doc_i_female.png" alt="Profile Picture" width="200px" height="200px"></a>
+                <a id="avatar" onclick="selectDoc4();"><img id="avatar4" src="../css/images/Avatars/doc_w_male.png" alt="Profile Picture" width="200px" height="200px"></a>
+                <a id="avatar" onclick="selectDoc8();"><img id="avatar8" src="../css/images/Avatars/doc_w_female.png" alt="Profile Picture" width="200px" height="200px"></a>
+              </div>
+              <div class="modal-footer">
+                <button type="button" onclick="confirmPicture();" class="btn btn-success" data-dismiss="modal">Confirm</button>
+                <button type="button" id="closeButton" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+          
           <!--sideBar-->
           <!--<button style="position:fixed; margin-left:60px; display:none; top: 10px;
           z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>-->
@@ -61,8 +92,10 @@
             <div id="sideBar" >
               <div id="containInfo">
                 <div class="profile">
-                  <img id="profilePic" src="../css/images/res.jpg" alt="Profile Picture" width="200px" height="200px">
+                  <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="200px" height="200px">
                 </div>
+                <br>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Change Profile Picture</button>
                 <br>
                 <p id="containInfo">Welcome back <b id="receptionistName"> asdasdasX</b></p>
                 <hr>
@@ -82,6 +115,8 @@
         <!-- doctor button , display an overlay of doctors to choose from  , capture the id of the selected doctor-->
         <!-- time/date button , display a timetable that displays the selectable available slots for selected doctor -->
         <!-- search patient by criteria and select the correct patient and capture the selected patients id -->
+        
+        
         <div id="bookingBackground">
             <div id="centerBookingOverlay">
                 <br>
@@ -90,14 +125,15 @@
                       <br><label for="reasonForBooking" style="color: white;">Reason for booking</label><br>
                       <input type="text" type="form-control" name="reason" id="reasonForBooking" style="margin-bottom: 20px; width: 450px; padding: 10px; border-radius: 5px; border: none;">
                     </div><br>
-                    <input type="button" class="btn btn-primary" onclick="fuzzyLogic()" value="Choose Common Type Booking"></input><br><br>
+                    <input type="button" class="btn btn-info btn-lg" onclick="fuzzyLogic()" value="Choose Common Type of Booking"></input><br><br>
                     <div id="currentOverlay"></div>
+                    
                     <div id="individual"></div>
                     <div id="currentOverlayTable"></div>
                     <div id="searchOverlay"></div>
                     <br><br><br>
                 </div>
-
+                
 
                 <!--right Nav-->
                 <div class="containerRight">
@@ -118,6 +154,7 @@
 
             </div>
         </div>
+        
 
     </body>
 </html>

@@ -95,6 +95,22 @@
 	width: 200px;
 }
 
+#profileFrame:hover{
+
+
+	
+	z-index: inherit;
+
+	text-decoration: white;
+	position: relative;
+
+
+}
+
+
+
+
+
 #renderpage{
 	margin-top: 10px;
 	font-family: Abel;
@@ -144,9 +160,6 @@
   transform: translateX(-240px);
 }
 
-#sideBar{
-
-}
 
 .container{
 	text-align: center;
@@ -323,9 +336,6 @@
 	text-align: center;
 }
 
-label #sideBarLabel {
-	
-}
 
 #bodyContainer{
 	position: relative;
@@ -902,7 +912,7 @@ input[type="file"] {
   background-color: white;
   text-align: center;
   left: 0;
-  top:590px;
+  top:630px;
   box-shadow: 1px 0px 15px 0px black;
 }
 
@@ -943,6 +953,7 @@ input[type="file"] {
 #profilePic{
 	border: solid 5px white;
 	border-radius: 360px;
+	background-color: lightblue;
 }
 #logout:hover{
 
@@ -981,6 +992,33 @@ input[type="file"] {
 	position: absolute;
 }
 
+#searchByName{
+	position: relative;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	border: none;
+}
+
+#searchBySurname{
+	position: relative;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	border: none;
+
+}
+
+#searchByPatientID{
+	position: relative;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	border: none;
+}
+
+
+
 #sideBar{
 
 	width:25%;
@@ -990,7 +1028,7 @@ input[type="file"] {
 	max-width: 240px;
 	min-width: 240px;
 	min-height: 130px;
-	max-height: 450px;
+	max-height: 480px;
 	/*z-index:1;
 	display: inline-flex;*/
 	padding: 10px;
@@ -1012,10 +1050,10 @@ input[type="file"] {
 }
 
 #containInfo{
-	margin-top: 5px;
+	margin-top: 0px;
 	text-align:center;
 	color: white;
-	padding-top: 10px;
+	padding-top: 0px;
 	font-size: 20px;
 }
 
@@ -1228,3 +1266,114 @@ input[type="file"] {
 	box-shadow: 0px 0px 15px 0px black;
 
 }
+
+.modal{
+
+}
+
+.close{
+	color: white;
+}
+
+#quiteButton{
+	
+	color: white;
+}
+
+.modal-header{
+	background-color: #003366;
+	color: white;
+}
+
+.modal-footer{
+	background-color: #003366;
+	color: white;
+}
+
+#closeButton{
+	color: white;
+	background-color: tomato;
+}
+
+#closeButton:hover{
+	color: white;
+	background-color: red;
+}
+
+#avatar1:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar2:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar3:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar4:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar5:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar6:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar7:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar8:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar1, #avatar2, #avatar3, #avatar4,
+#avatar5, #avatar6, #avatar7, #avatar8{
+	border-radius: 360px;
+	border: 5px solid white;
+	background-color: lightblue;
+}
+
+.modal-body{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
