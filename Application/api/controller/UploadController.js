@@ -8,6 +8,7 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
+const { Console } = require("console");
 
 
 module.exports = {
@@ -40,7 +41,8 @@ module.exports = {
                 //use the file paths to send the images to the c++ program to find the images
                 
                 //temp store file 
-                var dir=""+req.user+"-"+Date.now()
+                var f = Date.now();
+                var dir="sfmAlgorithm_linux/Executable/imageData/"+req.user+"-"+f;
                 fs.mkdirSync(dir);
                 for (let image of images["images[]"] ) 
                 {
@@ -49,10 +51,11 @@ module.exports = {
 
                 //connect c++ program here and send file name when done c++ deletes file
                 //using spawn as a chid-process 
-                const ls = spawn('./smfAlgorithm/Code/main', [dir]);
+                var d = req.user+"-"+f;
+                const ls = spawn('sfmAlgorithm_linux/Executable/main',[d]);
 
 
-                ls.on('close', code=>
+                ls.on('exit', code=>
                 {
                     if (code ==0 )
                     {
@@ -61,25 +64,26 @@ module.exports = {
                         //check that stl exists and store it in the db
                         //write to the db 
                         //read from disk with directory
+                        console.log("Check if file is there ");
+                        // var stlFile = fs.createReadStream(dir+"/stlFile.stl");
+                        // const options = ({ filename: req.body.consID , contentType: 'model/stl' });
 
-                        var stlFile = fs.createReadStream(dir+"/stlFile.stl");
-                        const options = ({ filename: req.body.consID , contentType: 'model/stl' });
+                        // var attachment = createModel();
+                        // attachment.write(options , stlFile , function(err, saved){
 
-                        var attachment = createModel();
-                        attachment.write(options , stlFile , function(err, saved){
-
-                            if( err)
-                            {
-                                res.status(500).send("error saving stl file: "+ err);
-                            }
-                            else{
-                                res.status(200);
-                            }
-                        });
+                        //     if( err)
+                        //     {
+                        //         res.status(500).send("error saving stl file: "+ err);
+                        //     }
+                        //     else{
+                        //         res.status(200);
+                        //     }
+                        // });
 
                     }
                     else 
                     {
+                        console.log("Code: "+code);
                         res.sendStatus(500);
                     }
                 })

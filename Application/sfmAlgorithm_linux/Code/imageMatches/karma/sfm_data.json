@@ -1,0 +1,269 @@
+{
+    "sfm_data_version": "0.3",
+    "root_path": "imageData/karma/",
+    "views": [
+        {
+            "key": 0,
+            "value": {
+                "polymorphic_id": 1073741824,
+                "ptr_wrapper": {
+                    "id": 2147483649,
+                    "data": {
+                        "local_path": "",
+                        "filename": "temple0001.png",
+                        "width": 640,
+                        "height": 480,
+                        "id_view": 0,
+                        "id_intrinsic": 0,
+                        "id_pose": 0
+                    }
+                }
+            }
+        },
+        {
+            "key": 1,
+            "value": {
+                "polymorphic_id": 1073741824,
+                "ptr_wrapper": {
+                    "id": 2147483650,
+                    "data": {
+                        "local_path": "",
+                        "filename": "temple0002.png",
+                        "width": 640,
+                        "height": 480,
+                        "id_view": 1,
+                        "id_intrinsic": 0,
+                        "id_pose": 1
+                    }
+                }
+            }
+        },
+        {
+            "key": 2,
+            "value": {
+                "polymorphic_id": 1073741824,
+                "ptr_wrapper": {
+                    "id": 2147483651,
+                    "data": {
+                        "local_path": "",
+                        "filename": "temple0003.png",
+                        "width": 640,
+                        "height": 480,
+                        "id_view": 2,
+                        "id_intrinsic": 0,
+                        "id_pose": 2
+                    }
+                }
+            }
+        },
+        {
+            "key": 3,
+            "value": {
+                "polymorphic_id": 1073741824,
+                "ptr_wrapper": {
+                    "id": 2147483652,
+                    "data": {
+                        "local_path": "",
+                        "filename": "temple0004.png",
+                        "width": 640,
+                        "height": 480,
+                        "id_view": 3,
+                        "id_intrinsic": 0,
+                        "id_pose": 3
+                    }
+                }
+            }
+        },
+        {
+            "key": 4,
+            "value": {
+                "polymorphic_id": 1073741824,
+                "ptr_wrapper": {
+                    "id": 2147483653,
+                    "data": {
+                        "local_path": "",
+                        "filename": "temple0005.png",
+                        "width": 640,
+                        "height": 480,
+                        "id_view": 4,
+                        "id_intrinsic": 0,
+                        "id_pose": 4
+                    }
+                }
+            }
+        },
+        {
+            "key": 5,
+            "value": {
+                "polymorphic_id": 1073741824,
+                "ptr_wrapper": {
+                    "id": 2147483654,
+                    "data": {
+                        "local_path": "",
+                        "filename": "temple0006.png",
+                        "width": 640,
+                        "height": 480,
+                        "id_view": 5,
+                        "id_intrinsic": 0,
+                        "id_pose": 5
+                    }
+                }
+            }
+        },
+        {
+            "key": 6,
+            "value": {
+                "polymorphic_id": 1073741824,
+                "ptr_wrapper": {
+                    "id": 2147483655,
+                    "data": {
+                        "local_path": "",
+                        "filename": "temple0007.png",
+                        "width": 640,
+                        "height": 480,
+                        "id_view": 6,
+                        "id_intrinsic": 0,
+                        "id_pose": 6
+                    }
+                }
+            }
+        },
+        {
+            "key": 7,
+            "value": {
+                "polymorphic_id": 1073741824,
+                "ptr_wrapper": {
+                    "id": 2147483656,
+                    "data": {
+                        "local_path": "",
+                        "filename": "temple0008.png",
+                        "width": 640,
+                        "height": 480,
+                        "id_view": 7,
+                        "id_intrinsic": 0,
+                        "id_pose": 7
+                    }
+                }
+            }
+        },
+        {
+            "key": 8,
+            "value": {
+                "polymorphic_id": 1073741824,
+                "ptr_wrapper": {
+                    "id": 2147483657,
+                    "data": {
+                        "local_path": "",
+                        "filename": "temple0009.png",
+                        "width": 640,
+                        "height": 480,
+                        "id_view": 8,
+                        "id_intrinsic": 0,
+                        "id_pose": 8
+                    }
+                }
+            }
+        },
+        {
+            "key": 9,
+            "value": {
+                "polymorphic_id": 1073741824,
+                "ptr_wrapper": {
+                    "id": 2147483658,
+                    "data": {
+                        "local_path": "",
+                        "filename": "temple0010.png",
+                        "width": 640,
+                        "height": 480,
+                        "id_view": 9,
+                        "id_intrinsic": 0,
+                        "id_pose": 9
+                    }
+                }
+            }
+        },
+        {
+            "key": 10,
+            "value": {
+                "polymorphic_id": 1073741824,
+                "ptr_wrapper": {
+                    "id": 2147483659,
+                    "data": {
+                        "local_path": "",
+                        "filename": "temple0011.png",
+                        "width": 640,
+                        "height": 480,
+                        "id_view": 10,
+                        "id_intrinsic": 0,
+                        "id_pose": 10
+                    }
+                }
+            }
+        },
+        {
+            "key": 11,
+            "value": {
+                "polymorphic_id": 1073741824,
+                "ptr_wrapper": {
+                    "id": 2147483660,
+                    "data": {
+                        "local_path": "",
+                        "filename": "temple0012.png",
+                        "width": 640,
+                        "height": 480,
+                        "id_view": 11,
+                        "id_intrinsic": 0,
+                        "id_pose": 11
+                    }
+                }
+            }
+        },
+        {
+            "key": 12,
+            "value": {
+                "polymorphic_id": 1073741824,
+                "ptr_wrapper": {
+                    "id": 2147483661,
+                    "data": {
+                        "local_path": "",
+                        "filename": "temple0013.png",
+                        "width": 640,
+                        "height": 480,
+                        "id_view": 12,
+                        "id_intrinsic": 0,
+                        "id_pose": 12
+                    }
+                }
+            }
+        }
+    ],
+    "intrinsics": [
+        {
+            "key": 0,
+            "value": {
+                "polymorphic_id": 2147483649,
+                "polymorphic_name": "pinhole_radial_k3",
+                "ptr_wrapper": {
+                    "id": 2147483662,
+                    "data": {
+                        "width": 640,
+                        "height": 480,
+                        "focal_length": 800.0,
+                        "principal_point": [
+                            320.0,
+                            240.0
+                        ],
+                        "disto_k3": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                }
+            }
+        }
+    ],
+    "extrinsics": [],
+    "structure": [],
+    "control_points": []
+}
