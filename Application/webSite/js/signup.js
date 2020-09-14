@@ -57,6 +57,7 @@ function init()
 
 function signup()
 {
+    usedParamaters = false;
     var name = document.querySelector("#name");
     var surname = document.querySelector("#surname");
     var email = document.querySelector("#email");
