@@ -376,7 +376,7 @@ function populateBookingInformation()
 
 		//set the patient information 
 		document.getElementById("recordPage").href = "recordPage.html?pid="+data.patient+"="+parts[1];
-		popuatePatientInfo(data.patient,data.reason);
+		populatePatientInfo(data.patient,data.reason);
 	}));
 
 }
@@ -384,9 +384,9 @@ function populateBookingInformation()
 //=============================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 // function to get the required patients information and populate the patient information
-function popuatePatientInfo(id,reason)
+function populatePatientInfo(id,reason)
 {
-	document.getElementById("docnotes").innerHTML = "<p style='font-weight: bold;'>Doctors Notes:</p><textarea id='doctorsNotes' style='width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;'></textarea><button class='btn btn-primary' id='saveDoctorNote' type='button' style='margin-top: 10px;' onclick='saveConsultation(\""+id+"\",\""+reason+"\")'>Save & Exit Consultation</button>";
+	document.getElementById("docnotes").innerHTML = "<p style='font-weight: bold;'>Doctors Notes:</p><textarea id='doctorsNotes' style='width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;'></textarea><button class='btn btn-primary' id='saveDoctorNote' type='button' style='margin-top: 10px;' onclick=\"saveConsultation('"+id+"','"+reason+"')\">Save & Exit Consultation</button>";
 
 	var response = fetch ("/singlePatient",{
 		method:"POST",

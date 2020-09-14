@@ -447,8 +447,12 @@ function makeBooking()
 
         //booking can be created
         var reason = document.getElementById("reasonForBooking").value;
-        if(selectedReason == null)
+        if(selectedReason == null || selectedReason == "")
         {
+            if(reason == "" || reason == null)
+            {
+                reason = "General Appointment";
+            }
             selectedReason = reason;
         }
 
