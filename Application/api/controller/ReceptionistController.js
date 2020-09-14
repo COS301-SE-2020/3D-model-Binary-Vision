@@ -186,6 +186,7 @@ module.exports ={
         {
             res.status(401)
                 .send("Unauthorized access to doctors scheduling info");
+            return; // Not sure if this is not supposed to be here but I added this - Marcus :)
         }
 
         Booking.find({"doctor":mongoose.Types.ObjectId(req.body.doctor)},function(err,bookings)
@@ -196,7 +197,7 @@ module.exports ={
                     .send("error finding doctors bookings");
                 return;
             }
-            res.json(bookings);
+            res.status(200).json(bookings);
             return;
         });
     },
@@ -210,6 +211,7 @@ module.exports ={
         {
             res.status(401)
                 .send("Unauthorized access to doctors scheduling info");
+            return; // Not sure if this is not supposed to be here but I added this - Marcus :)
         }
         var date = new Date();    
         var d = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear();
