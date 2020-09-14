@@ -56,8 +56,10 @@
   z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>-->
 
   <div id="sideBody" style="background-color: white; height: 100%; position: fixed;">
+    
     <img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrow('arrowSideBody')" style="top: 60px;">
     <label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 73px); display: none; position: relative;" onclick="rotateArrow('arrowSideBody')">Profile Info</label>
+    
     <div id="sideBar" >
       <div id="containInfo">
         <div class="profile">
@@ -72,8 +74,9 @@
         <!--<p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>-->
         <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
         <!--<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>-->
+      <button id="displayNote" class="btn btn-primary" style="transform: translateY(0px);" onclick="showNote()">Show Note</button>
 
-        <button id="displayNote" class="btn btn-primary" style="transform: translateY(55px);" onclick="showNote()">Show Note</button>
+        
 
         <br><br><br><hr>
       </div>

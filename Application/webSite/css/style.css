@@ -912,7 +912,7 @@ input[type="file"] {
   background-color: white;
   text-align: center;
   left: 0;
-  top:660px;
+  top:630px;
   box-shadow: 1px 0px 15px 0px black;
 }
 
@@ -1028,7 +1028,7 @@ input[type="file"] {
 	max-width: 240px;
 	min-width: 240px;
 	min-height: 130px;
-	max-height: 500px;
+	max-height: 480px;
 	/*z-index:1;
 	display: inline-flex;*/
 	padding: 10px;
@@ -1050,10 +1050,10 @@ input[type="file"] {
 }
 
 #containInfo{
-	margin-top: 5px;
+	margin-top: 0px;
 	text-align:center;
 	color: white;
-	padding-top: 10px;
+	padding-top: 0px;
 	font-size: 20px;
 }
 
