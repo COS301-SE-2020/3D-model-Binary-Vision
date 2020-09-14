@@ -1315,6 +1315,44 @@ module.exports = {
             }
 
         });
+    },
+
+    //======================================================================================
+    //Function developed by: Steven Visser
+    //returns the avatar choice of a doctor or receptionist
+    getAvatarChoice : function (req , res)
+    {
+        Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function(err, doc)
+        {
+            if (err)
+            {
+                res.status(500)
+                  .send("error getting doctor");
+                return;
+            }
+            if(doc != "")
+            {
+                res.status(200)
+                  .json({"avatar":doc.avatar});
+                return;
+            }
+        });
+
+        Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function(err, rec)
+        {
+            if (err)
+            {
+                res.status(500)
+                  .send("error getting doctor");
+                return;
+            }
+            if(rec != "")
+            {
+                res.status(200)
+                  .json({"avatar":rec.avatar});
+                return;
+            }
+        });
     }
 
 };

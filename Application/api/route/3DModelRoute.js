@@ -158,4 +158,7 @@ module.exports = function (app)
 
     app.route('/getPracticeName')
         .post(Model.getPracticeName);
+
+    app.route('/getAvatarChoice')
+        .post(Model.getAvatarChoice);
 }
