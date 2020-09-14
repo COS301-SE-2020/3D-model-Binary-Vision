@@ -26,7 +26,7 @@ function init()
     var url = window.location.href;
     var parts = url.split("=");
 
-    document.getElementById("consultlink").href = "Consultation.html/bookingid="+parts[2];
+    document.getElementById("consultlink").href = "Consultation.html?bookingid="+parts[2];
     //parts[1] = patient id
     //call getpatientsconsultations using pid
     //populate this page with all the different consultations that are there
