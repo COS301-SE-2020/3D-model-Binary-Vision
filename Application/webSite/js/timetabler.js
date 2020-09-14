@@ -142,7 +142,6 @@ function fillData(data)
                     if (times[j] == data[i].time) timeIndex = j;
                     if (times[j] == data[i].endTime) numOfSlots = j-timeIndex;
 
-                    if(numOfSlots!=null && timeIndex !=null) break;
                 }
                 console.log("Start time: "+ times[timeIndex]+" \tEnd: "+times[timeIndex+numOfSlots])
                 for (var j =0 ; j < numOfSlots ; j++){
