@@ -992,6 +992,33 @@ input[type="file"] {
 	position: absolute;
 }
 
+#searchByName{
+	position: relative;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	border: none;
+}
+
+#searchBySurname{
+	position: relative;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	border: none;
+
+}
+
+#searchByPatientID{
+	position: relative;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	border: none;
+}
+
+
+
 #sideBar{
 
 	width:25%;
