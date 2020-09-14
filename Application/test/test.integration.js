@@ -307,49 +307,6 @@ describe('Integration Testing:', () => {
 					done();
 				});
 		});
-//////////////////////////////////////////////////////////
-		/*it('Testing Signup for a Doctor (With no input) - Returns 401 code', (done) => {
-			const tempDoctor = {
-				name: "Otto",
-				surname: "Octavius",
-				email: "DoctorOctopus",
-				username: "DocOc", 
-				password: "1234",
-				choice: "Doctor",
-				practition: "Dentists For Hire",
-				securityCode: "12345"
-			};
-
-			chai.request(server)
-				.post("/signup", db.signup)
-				.send(tempDoctor)
-				.then((response, body) => {
-					response.should.have.status(400);
-					done();
-				});
-		});
-
-		it('Testing Signup for a Receptionist (With no input) - Returns 401 code', (done) => {
-			const tempDoctor = {
-				name: "Carolyn",
-				surname: "Trainer",
-				email: "CarolynTrainer",
-				username: "CarolT", 
-				password: "1234",
-				choice: "Receptionist",
-				practition: "Dentists For Hire",
-				securityCode: "12345"
-			};
-
-			chai.request(server)
-				.post("/signup", db.signup)
-				.send(tempDoctor)
-				.then((response, body) => {
-					response.should.have.status(400);
-					done();
-				});
-		});*/
-//////////////////////////////////////////////////////////
 	});
 
 	// Test case 4 : passwordChangeEmail
@@ -568,40 +525,6 @@ describe('Integration Testing:', () => {
 		});
 	});
 
-	// Test case 12 : updatePatient
-	describe('(12) Update Patient', () => {
-		// Test update a patient success
-//////////////////////////////////////////////////////////
-		/*it ('Testing updatePatient Feature (With valid user input) - Returns 201 code', (done) => {
-			const tempPatientID = {
-				idNumber: "123456789"
-			};
-			receptionist1
-				.patch("/patients/:" + 123456789, db.updatePatient)
-				.send(tempPatientID)
-				.end((error, response) => {
-					response.should.have.status(201);
-					response.should.have.json;
-					done();
-				});
-		});*/
-//////////////////////////////////////////////////////////
-
-		// Test update a patient failure
-		it ('Testing updatePatient Feature (With invalid user input) - Returns 404 code', (done) => {
-			const tempPatientID = {
-				idNumber: "123456789"
-			};
-			receptionist2
-				.patch("/patients/:" + 123456789, db.updatePatient)
-				.send(tempPatientID)
-				.end((error, response) => {
-					response.should.have.status(404);
-					done();
-				});
-		}); 
-	});
-
 	// Test case 13: makeBooking
 	describe('(13) Make a booking for a patient', () => {
 //////////////////////////////////////////////////////////
@@ -618,7 +541,7 @@ describe('Integration Testing:', () => {
 				.send(bookingInfo)
 				.end((error, response) => {
 					response.should.have.status(400);
-					response.should.be.html;
+					response.should.be.json;
 				done();
 				});
 		});*/
@@ -832,9 +755,8 @@ describe('Integration Testing:', () => {
 				});
 		});
 	});
-//////////////////////////////////////////////////////////
 	// Test case 22 : getDoctorsSchedule
-	/*describe('(22) Get a doctors schedule', () => {
+	describe('(22) Get a doctors schedule', () => {
 		it('Tesing getDoctorsSchedule Feature (With valid user input) - Returns 200', (done) => {
 			receptionist1
 				.post('/getDoctorsTimetable', dbR.getDoctorsSchedule)
@@ -878,8 +800,7 @@ describe('Integration Testing:', () => {
 				done();
 				});
 		});
-	});*/
-//////////////////////////////////////////////////////////
+	});
 	// Test case 24 : getAllDoctors
 	describe('(24) Get all the doctors', () => {
 		// Test to get all of the doctors at the practition
@@ -1038,27 +959,12 @@ describe('Integration Testing:', () => {
 				done();
 				});
 		});
-
-		/*it('Testing searchPatient Feature (With invalid search input) - Returns 400 code', (done) => {
+ 
+		it('Testing searchPatient Feature (With search by all invalid fields) - Returns 404 code', (done) => {
 			const patientInfo = {
-				name: null,
-				surname: null,
-				idNumber: null
-			};
-			receptionist1
-				.post('/searchPatient', db.searchPatient)
-				.send(patientInfo)
-				.end((error, response) => {
-					response.should.have.status(400);
-				done();
-				});
-		});*/
-////////////////////////////////////////////////////////// 
-		/*it('Testing searchPatient Feature (With search by all invalid fields) - Returns 404 code', (done) => {
-			const patientInfo = {
-				name: "Marcus",
-				surname: "Werren",
-				idNumber: "12345678"
+				name: "Richard",
+				surname: "Fisher",
+				idNumber: "12542234"
 			};
 			receptionist1
 				.post('/searchPatient', db.searchPatient)
@@ -1073,7 +979,7 @@ describe('Integration Testing:', () => {
 			const patientInfo = {
 				name: null,
 				surname: null,
-				idNumber: "12345678"
+				idNumber: "12542234"
 			};
 			receptionist1
 				.post('/searchPatient', db.searchPatient)
@@ -1086,7 +992,7 @@ describe('Integration Testing:', () => {
 
 		it('Testing searchPatient Feature (With search by invalid first name and surname only) - Returns 404 code', (done) => {
 			const patientInfo = {
-				name: "Marcus",
+				name: "Richard",
 				surname: "Smith",
 				idNumber: null
 			};
@@ -1102,7 +1008,7 @@ describe('Integration Testing:', () => {
 		it('Testing searchPatient Feature (With search by first name and invalid surname only) - Returns 404 code', (done) => {
 			const patientInfo = {
 				name: "Mark",
-				surname: "Werren",
+				surname: "Fisher",
 				idNumber: null
 			};
 			receptionist1
@@ -1116,7 +1022,7 @@ describe('Integration Testing:', () => {
 
 		it('Testing searchPatient Feature (With search by invalid first name only) - Returns 404 code', (done) => {
 			const patientInfo = {
-				name: "Marcus",
+				name: "Richard",
 				surname: null,
 				idNumber: null
 			};
@@ -1132,7 +1038,7 @@ describe('Integration Testing:', () => {
 		it('Testing searchPatient Feature (With search by invalid surname only) - Returns 404 code', (done) => {
 			const patientInfo = {
 				name: null,
-				surname: "Werren",
+				surname: "Fisher",
 				idNumber: null
 			};
 			receptionist1
@@ -1142,8 +1048,8 @@ describe('Integration Testing:', () => {
 					response.should.have.status(404);
 				done();
 				});
-		});*/
-////////////////////////////////////////////////////////// 
+		});
+ 
 		it('Testing searchPatient Feature (With no user found) - Returns 401 code', (done) => {
 			const patientInfo = {
 				name: "Mark",
@@ -1274,6 +1180,36 @@ describe('Integration Testing:', () => {
 				});
 		});*/
 //////////////////////////////////////////////////////////
+	});
+
+	// Test case  : generatePatientSignupQRCode
+	describe('() Generate a patient signup QRCode', () => {
+		it('Testing generatePatientSignupQRCode Feature (With valid user input)', (done) => {
+			receptionist1
+				.get('/qrCode', db.generatePatientSignupQRCode)
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
+				});
+		});
+
+		it('Testing generatePatientSignupQRCode Feature (With valid user input)', (done) => {
+			doctor1
+				.get('/qrCode', db.generatePatientSignupQRCode)
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
+				});
+		});
+
+		it('Testing generatePatientSignupQRCode Feature (With invalid user)', (done) => {
+			receptionist2
+				.get('/qrCode', db.generatePatientSignupQRCode)
+				.end((error, response) => {
+					response.should.have.status(401);
+					done();
+				});
+		});
 	});
 
 	// Test case 33 : Logout
