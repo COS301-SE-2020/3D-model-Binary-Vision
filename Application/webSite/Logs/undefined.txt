@@ -2,3 +2,566 @@
 13/9/2020@23:13:14@Added a Patient@PID:5f5e8b6aeba79597bd05d6c1
 13/9/2020@23:18:33@Added a Patient@PID:5f5e8ca9baa1c0989f350926
 13/9/2020@23:20:18@Added a Patient@PID:5f5e8d123fcd289910ca9ca6
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+14/9/2020@18:34:25@Added a Patient@PID:5f5f9b91b1be51188572ddb4
+undefined
+14/9/2020@18:34:53@Added a Patient@PID:5f5f9bad2e8c5918b2c5da20
+undefined
+14/9/2020@18:37:28@Added a Patient@PID:5f5f9c48cf3e26190171308e
+14/9/2020@18:37:28@Added a Patient@PID:5f5f9c48cf3e26190171308f
+undefined
+14/9/2020@18:38:33@Added a Patient@PID:5f5f9c89d999d819387eed2a
+undefined
+14/9/2020@18:39:28@Added a Patient@PID:5f5f9cc0c6b78b19d2e44908
+undefined
+14/9/2020@18:39:47@Added a Patient@PID:5f5f9cd37dd55219fc23e9b2
+undefined
+14/9/2020@18:40:29@Added a Patient@PID:5f5f9cfd41b0c71a3b9f8011
+undefined
+14/9/2020@18:41:48@Added a Patient@PID:5f5f9d4c8fdcb81a807f016f
+undefined
+14/9/2020@18:42:11@Added a Patient@PID:5f5f9d63d65e041aae5a8433
+undefined
+14/9/2020@18:43:14@Added a Patient@PID:5f5f9da262e8831ae7f5947f
+undefined
+14/9/2020@18:46:5@Added a Patient@PID:5f5f9e4de653d81b42689ea0
+undefined
+14/9/2020@18:47:33@Added a Patient@PID:5f5f9ea5f1e8991b7cc5c560
+undefined
+14/9/2020@18:50:56@Added a Patient@PID:5f5f9f70b42bda1bd16e379d
+undefined
+14/9/2020@18:52:27@Added a Patient@PID:5f5f9fcb6699681c0f004f86
+undefined
+14/9/2020@19:3:9@Added a Patient@PID:5f5fa24de09e7d1cda8b09e0
+undefined
+14/9/2020@19:4:41@Added a Patient@PID:5f5fa2a979a0b81d1862b95d
+undefined
+14/9/2020@19:5:13@Added a Patient@PID:5f5fa2c95595141d4890b5af
+undefined
+14/9/2020@19:6:58@Added a Patient@PID:5f5fa33261df7c1d8981ee71
+undefined
+14/9/2020@19:7:39@Added a Patient@PID:5f5fa35b2d9fbd1db945612c
+undefined
+14/9/2020@19:8:3@Added a Patient@PID:5f5fa373df5ca51de6ba253d
+undefined
+14/9/2020@19:8:27@Added a Patient@PID:5f5fa38beff6ca1e19384e89
+undefined
+14/9/2020@19:9:14@Added a Patient@PID:5f5fa3ba7b19761e4fe6d193
+undefined
+14/9/2020@19:9:44@Added a Patient@PID:5f5fa3d8f339fe1ee54ea42c
+undefined
+14/9/2020@19:10:1@Added a Patient@PID:5f5fa3e92c695f1f11c383f7
+undefined
+14/9/2020@19:10:24@Added a Patient@PID:5f5fa4003db6c21f3e8cf357
+undefined
+14/9/2020@19:13:55@Added a Patient@PID:5f5fa4d34aec0d1f91a88ebf
+undefined
+14/9/2020@19:14:14@Added a Patient@PID:5f5fa4e6feee7f1fcb6b2c33
+undefined
+14/9/2020@19:14:41@Added a Patient@PID:5f5fa50111d6f51ffb721e45
+undefined
+14/9/2020@19:15:42@Added a Patient@PID:5f5fa53ec25360205056a7eb
+undefined
+14/9/2020@19:15:58@Added a Patient@PID:5f5fa54ec4970a207bf211d3
+undefined
+14/9/2020@19:16:17@Added a Patient@PID:5f5fa56162cdc320acb86c35
+undefined
+14/9/2020@19:16:42@Added a Patient@PID:5f5fa57a937d7a21a6c8129f
+undefined
+14/9/2020@19:18:55@Added a Patient@PID:5f5fa5ffab134221f032d2e7
+undefined
+14/9/2020@19:19:24@Added a Patient@PID:5f5fa61cec91e3221f0ab490
+undefined
+14/9/2020@19:20:3@Added a Patient@PID:5f5fa6433d4022225fe68759
+undefined
+14/9/2020@19:21:47@Added a Patient@PID:5f5fa6abe50fd222a087fc2f
+undefined
+14/9/2020@19:22:20@Added a Patient@PID:5f5fa6ccb7ec3122d01c946c
+undefined
+14/9/2020@19:22:43@Added a Patient@PID:5f5fa6e31dd95f230055a63a
+undefined
+14/9/2020@19:24:0@Added a Patient@PID:5f5fa7309679e4233ff77003
+undefined
+14/9/2020@19:25:16@Added a Patient@PID:5f5fa77ca949c2237f77bfc5
+undefined
+14/9/2020@19:32:30@Added a Patient@PID:5f5fa92e6bbe6e243c65580f
+undefined
+14/9/2020@19:32:30@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:32:30@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:32:30@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:32:30@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:33:40@Added a Patient@PID:5f5fa974ccad17247f98d0e5
+undefined
+14/9/2020@19:33:40@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:33:40@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:33:40@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:33:40@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:33:40@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:33:40@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:33:40@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:33:40@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:37:18@Added a Patient@PID:5f5faa4e4737ef24f8fe9089
+undefined
+14/9/2020@19:37:18@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:37:18@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:37:18@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:37:18@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:37:18@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:37:18@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:37:18@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:37:18@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:38:14@Added a Patient@PID:5f5faa8665ffde25339ba502
+undefined
+14/9/2020@19:38:14@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:38:14@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:38:14@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:38:14@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:38:14@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:38:14@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:38:14@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@19:38:14@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:15@Added a Patient@PID:5f5fba3b3c501c2ee89d31fb
+undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:45:16@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:31@Added a Patient@PID:5f5fbd57f602e63248d47191
+undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+14/9/2020@20:58:32@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@10:54:54@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:54:54@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:54:54@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:54:54@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:54:54@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:54:54@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:54:54@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:54:54@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@10:55:37@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:55:37@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:55:37@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:55:37@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:55:37@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:55:37@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:55:37@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@10:55:37@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@11:16:14@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:16:14@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:16:14@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:16:14@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:16:14@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:16:14@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:16:14@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:16:14@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@11:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@11:21:20@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:21:20@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:21:20@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:21:20@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:21:20@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:21:20@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:21:20@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:21:20@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@11:24:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:24:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:24:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:24:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:24:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:24:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:24:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:24:50@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@11:27:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:27:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:27:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:27:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:27:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:27:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:27:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:27:7@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@11:29:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:29:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:29:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:29:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:29:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:29:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:29:7@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:29:7@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@11:31:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:31:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:31:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:31:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:31:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:31:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:31:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:31:3@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@11:32:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:32:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:32:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:32:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:32:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:32:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:32:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:32:48@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@11:37:16@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:37:16@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:37:16@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:37:16@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:37:16@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:37:16@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:37:16@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:37:16@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@11:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@11:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@13:19:29@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@13:19:29@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@13:19:29@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@13:19:29@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@13:19:29@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@13:19:29@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@13:19:29@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@13:19:29@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:19:50@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:24:58@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:24:58@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:24:58@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:24:58@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:24:58@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:24:58@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:24:58@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:24:58@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:26:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:26:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:26:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:26:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:26:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:26:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:26:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:26:53@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:29:44@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:29:44@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:29:44@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:29:44@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:29:44@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:29:44@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:29:44@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:29:44@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:30:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:30:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:30:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:30:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:30:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:30:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:30:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:30:48@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:31:35@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:31:35@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:31:35@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:31:35@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:31:35@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:31:35@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:31:35@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:31:35@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:32:8@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:8@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:8@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:8@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:8@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:8@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:8@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:8@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:32:38@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:38@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:38@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:38@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:38@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:38@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:38@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:32:38@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:33:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:1@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:33:25@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:25@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:25@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:25@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:25@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:25@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:25@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:33:25@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:34:23@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:34:23@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:34:23@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:34:23@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:34:23@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:34:23@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:34:23@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:34:23@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:38:9@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:39:33@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:33@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:33@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:33@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:33@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:33@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:33@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:33@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:39:59@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:59@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:59@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:59@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:59@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:59@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:59@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:39:59@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:41:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:41:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:41:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:41:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:41:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:41:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:41:53@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:41:53@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:42:6@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:42:6@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:42:6@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:42:6@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:42:6@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:42:6@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:42:6@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:42:6@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:43:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:43:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:43:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:43:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:43:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:43:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:43:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:43:2@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:44:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:44:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:44:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:44:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:44:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:44:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:44:3@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:44:3@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:56:17@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:17@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:17@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:17@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:17@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:17@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:17@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:17@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:56:45@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:45@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:45@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:45@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:45@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:45@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:45@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:56:45@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:57:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:2@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@15:57:18@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:18@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:18@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:18@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:18@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:18@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:18@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@15:57:18@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@16:8:40@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:8:40@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:8:40@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:8:40@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:8:40@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:8:40@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:8:40@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:8:40@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@16:33:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:33:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:33:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:33:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:33:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:33:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:33:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:33:36@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@16:34:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:34:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:34:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:34:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:34:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:34:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:34:2@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:34:2@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@16:40:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:40:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:40:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:40:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:40:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:40:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:40:9@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:40:9@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@16:41:31@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:31@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:31@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:31@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:31@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:31@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:31@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:31@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@16:41:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:48@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:41:48@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@16:42:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:42:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:42:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:42:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:42:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:42:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:42:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:42:41@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@16:43:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:43:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:43:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:43:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:43:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:43:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:43:1@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@16:43:1@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@19:52:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:52:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:52:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:52:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:52:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:52:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:52:36@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:52:36@PracticeHead@Denied Receptionist Application@ID:undefined
+undefined
+15/9/2020@19:54:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:54:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:54:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:54:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:54:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:54:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:54:41@PracticeHead@Denied Receptionist Application@ID:undefined
+15/9/2020@19:54:41@PracticeHead@Denied Receptionist Application@ID:undefined

@@ -7,6 +7,7 @@ let server = require("../server");
 let db = require("../api/controller/3DModelController");
 let dbR = require("../api/controller/ReceptionistController");
 let dbE = require("../api/controller/EmailController");
+let dbU = require("../api/controller/UploadController");
 
 var async = require('async');
 
@@ -25,6 +26,22 @@ var loggedRecep1;
 
 var recep1_ID;
 var doc1_ID;
+
+/*
+	Lines that still need to be reached:
+	
+		- ModelController
+			535-666 (131)
+			1003-1082 (79)
+			1122-1136 (14)
+
+		- ReceptionistController
+			237-571
+
+		- UploadController
+			21-92
+
+*/
 
 describe('Integration Testing:', () => {
 
@@ -67,12 +84,6 @@ describe('Integration Testing:', () => {
 				.send(prac1)
 				.end((error, response) => {
 					if (error) throw error;
-					//signUpRecep1.call(null, cb);
-					//signUpDoc1.call(null, cb);
-					
-					//response.should.have.status(200);
-					//response.should.have.html;
-					//console.log("in creatation");
 					cb();
 				});
 		};//
@@ -84,8 +95,8 @@ describe('Integration Testing:', () => {
 				.send(doc1)
 				.end((error, response) => {
 					if (error) throw error;
-					response.should.have.status(200);
-					response.should.have.html;
+					//response.should.have.status(200);
+					//response.should.have.html;
 					cb();
 				});
 		};
@@ -98,7 +109,6 @@ describe('Integration Testing:', () => {
 					if (error) throw error;
 					response.should.have.status(422);
 					response.should.have.json;
-
 					isValidEmailDoc1.call(null, cb);
 				});
 		};
@@ -111,7 +121,6 @@ describe('Integration Testing:', () => {
 					if (error) throw error;
 					response.should.have.status(422);
 					response.should.have.json;
-
 					doc1_ID = response.body._id;
 					cb();
 				});
@@ -149,7 +158,7 @@ describe('Integration Testing:', () => {
 				.send(recep1)
 				.end((error, response) => {
 					if (error) throw error;
-					response.should.have.status(200);
+					//response.should.have.status(200);
 					cb();					
 				});
 		};
@@ -162,9 +171,6 @@ describe('Integration Testing:', () => {
 					if (error) throw error;
 					response.should.have.status(422);
 					response.should.have.json;
-
-					recep1_ID = response.body._id;
-
 					isValidEmailRecep1.call(null, cb);
 				});
 		};
@@ -177,6 +183,7 @@ describe('Integration Testing:', () => {
 					if (error) throw error;
 					response.should.have.status(422);
 					response.should.have.json;
+					recep1_ID = response.body._id;
 					cb();
 				});
 		}
@@ -221,9 +228,7 @@ describe('Integration Testing:', () => {
 			},
 			function(cb) {
 				loginRecep1(cb);
-			}
-
-			,
+			},
 			function(cb) {
 				signUpDoc1(cb);
 			},
@@ -244,7 +249,6 @@ describe('Integration Testing:', () => {
 		done();
 	});
 
-
 	// Test case 1: practiceRegistration
 	describe('(1) practiceRegistration: ', () => {
 		it('Testing Registration for a practice (With practice that already exists) - Returns 404 code', (done) => {
@@ -264,8 +268,22 @@ describe('Integration Testing:', () => {
 		});
 	});
 
-	// Test case 2: Signup
-	describe('(2) SignUp:', () => {
+	// Test case 2: getPracticeName
+	describe('(2) getPracticeName: ', () => {
+		it('Testing getPracticeName Feature (with valid user input) - Returns 200 code', (done) => {
+			receptionist1
+				.post('/getPracticeName', db.getPracticeName)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					response.should.be.json;
+					done();
+				});
+		});
+	});
+
+	// Test case 3: Signup
+	describe('(3) SignUp:', () => {
 		it('Testing Signup for a Doctor (With wrong practice name) - Returns 404 code', (done) => {
 			const tempDoctor = {
 				name: "Otto",
@@ -417,7 +435,6 @@ describe('Integration Testing:', () => {
 
 	// Test case 8 : addPatient
 	describe('(8) Add a patient', () => {
-		// Test add patient with success
 		it ('Testing addPatient Feature (With valid user info) - Returns 200 code', (done) => {
 			const tempPatient = {
 				idNumber: "123456789",
@@ -437,8 +454,62 @@ describe('Integration Testing:', () => {
 				});
 		});
 
-		// Test add patient with success
-		it ('Testing addPatient Feature (With valid user info & entered by the patient) - Returns 200 code', (done) => {
+		it ('Testing addPatient Feature (With a patient that has aready been added) - Returns 400 code', (done) => {
+			const tempPatient = {
+				idNumber: "123456789",
+				name: "Mark",
+				surname: "Smith",
+				email: "MarkSmith@gmail.com",
+				gender: "male",
+				cellnumber: "0764219334"
+			};
+			receptionist1
+				.post("/addPatient", db.addPatient)
+				.send(tempPatient)
+				.end((error, response) => {
+					response.should.have.status(400);
+					done();
+				});
+		});
+
+		it ('Testing addPatient Feature (With invalid user info) - Returns 400 code', (done) => {
+			const tempPatient = {
+				idNumber: "123456789",
+				name: "Mark",
+				surname: "Smith",
+				email: "MarkSmith@gmail.com",
+				gender: "male"
+			};
+			receptionist1
+				.post("/addPatient", db.addPatient)
+				.send(tempPatient)
+				.end((error, response) => {
+					response.should.have.status(400);
+					done();
+				});
+		});
+
+		it ('Testing addPatient Feature (With invalid user info & entered by the patient) - Returns 200 code', (done) => {
+			const tempPatient = {
+				idNumber: "123456798",
+				name: "Marcus",
+				surname: "Werner",
+				email: "MWerner@gmail.com",
+				gender: "male",
+				cellnumber: "0764219335",
+				practice: "12345"
+			};
+			chai.request(server)
+				.post("/addPatient", db.addPatient)
+				.send(tempPatient)
+				.end((error, response) => {
+					response.should.have.status(200);
+					response.should.be.html;
+					done();
+				});
+		});
+
+		it ('Testing addPatient Feature (With invalid user info & entered by the patient) - Returns 200 code', (done) => {
 			const tempPatient = {
 				idNumber: "123456798",
 				name: "Marcus",
@@ -447,12 +518,11 @@ describe('Integration Testing:', () => {
 				gender: "male",
 				cellnumber: "0764219335"
 			};
-			receptionist1
+			chai.request(server)
 				.post("/addPatient", db.addPatient)
 				.send(tempPatient)
 				.end((error, response) => {
-					response.should.have.status(200);
-					response.should.be.html;
+					response.should.have.status(400);
 					done();
 				});
 		});
@@ -527,14 +597,14 @@ describe('Integration Testing:', () => {
 
 	// Test case 13: makeBooking
 	describe('(13) Make a booking for a patient', () => {
-//////////////////////////////////////////////////////////
-		/*it('Testing makeBooking Feature (With valid user input) - Returns 200 code', (done) => {
+		it('Testing makeBooking Feature (With valid user input) - Returns 200 code', (done) => {
 			const bookingInfo = {
 				patient: "Mark",
 				doctor: "Peter",
 				time: "12:30",
 				date: "12/12/2020",
-				reason: "Checkup"
+				reason: "checkup",
+				endTime: "12:45"
 			};
 			receptionist1
 				.post('/makeBooking', dbR.makeBooking)
@@ -544,8 +614,7 @@ describe('Integration Testing:', () => {
 					response.should.be.json;
 				done();
 				});
-		});*/
-//////////////////////////////////////////////////////////
+		});
 
 		it('Testing makeBooking Feature (With invalid user input) - Returns 400 code', (done) => {
 			const bookingInfo = {
@@ -706,6 +775,33 @@ describe('Integration Testing:', () => {
 				});
 		});*/
 //////////////////////////////////////////////////////////
+	});
+
+	// Test case : getSTLFile
+	describe('() Get the STL file', () => {
+//////////////////////////////////////////////////////////
+		/*it('Testing getSTLFile Feature (with invalid consultation id user input)  Returns 500 code', (done) => {
+			const consultationID = "j%3A%225f5faa4d4737ef24f8fe9083%22";
+
+			doctor1
+				.get('/consultation/'+ consultationID +'/stl', db.getSTLFile)
+				.end((error, response) => {
+					response.should.have.status(500);
+					done();
+				});
+		});*/
+//////////////////////////////////////////////////////////
+
+		it('Testing getSTLFile Feature (with invalid user)  Returns 401 code', (done) => {
+			const consultationID = "j%3A%225f5faa4d4737ef24f8fe9083%22";
+
+			doctor2
+				.get('/consultation/'+ consultationID +'/stl', db.getSTLFile)
+				.end((error, response) => {
+					response.should.have.status(401);
+					done();
+				});
+		});
 	});
 
 	// Test case 20 : getAllDoctors
@@ -1113,7 +1209,7 @@ describe('Integration Testing:', () => {
 					done();
 				});
 		});
-	})
+	});
 
 	// Test case 30 : updateBooking
 	describe('(30) Update a booking', () => {
@@ -1184,7 +1280,7 @@ describe('Integration Testing:', () => {
 
 	// Test case  : generatePatientSignupQRCode
 	describe('() Generate a patient signup QRCode', () => {
-		it('Testing generatePatientSignupQRCode Feature (With valid user input)', (done) => {
+		it('Testing generatePatientSignupQRCode Feature (With valid receptionist input) - Returns 200 code', (done) => {
 			receptionist1
 				.get('/qrCode', db.generatePatientSignupQRCode)
 				.end((error, response) => {
@@ -1193,7 +1289,7 @@ describe('Integration Testing:', () => {
 				});
 		});
 
-		it('Testing generatePatientSignupQRCode Feature (With valid user input)', (done) => {
+		it('Testing generatePatientSignupQRCode Feature (With valid doctor input) - Returns 200 code', (done) => {
 			doctor1
 				.get('/qrCode', db.generatePatientSignupQRCode)
 				.end((error, response) => {
@@ -1202,7 +1298,7 @@ describe('Integration Testing:', () => {
 				});
 		});
 
-		it('Testing generatePatientSignupQRCode Feature (With invalid user)', (done) => {
+		it('Testing generatePatientSignupQRCode Feature (With invalid user) - Returns 401 code', (done) => {
 			receptionist2
 				.get('/qrCode', db.generatePatientSignupQRCode)
 				.end((error, response) => {
@@ -1210,6 +1306,55 @@ describe('Integration Testing:', () => {
 					done();
 				});
 		});
+	});
+
+	// Test case : updateLog
+	describe('() Update the Log file', () => {
+		it('Testing updateLog Feature (With valid user input) - Returns 200 code', (done) => {
+			receptionist1
+				.post('/updateLog', db.updateLog)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
+				});
+		});
+	});
+
+	// Test case : saveConsultation
+	describe('() Save a consultation', () => {
+//////////////////////////////////////////////////////////
+		/*it('Testing saveConsultation Feature (With valid user input) - Returns 200 code', (done) => {
+			//doctor1.body._id = doc1_ID;
+
+			doctor1
+				.post('/saveConsultation', db.saveConsultation)
+				.send(doc1_ID)
+				.end((error, response) => {
+					response.should.have.status(201);
+					done()
+				})
+		}) */
+//////////////////////////////////////////////////////////
+		it('Testing saveConsultation Feature (With valid user but not valid input) - Returns 400 code', (done) => {
+			doctor1
+				.post('/saveConsultation', db.saveConsultation)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(400);
+					done();
+				});
+		})
+
+		it('Testing saveConsultation Feature (With invalid user) - Returns 401 code', (done) => {
+			doctor2
+				.post('/saveConsultation', db.saveConsultation)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(401);
+					done();
+				});
+		})
 	});
 
 	// Test case 33 : Logout
@@ -1236,5 +1381,148 @@ describe('Integration Testing:', () => {
 				});
 		});
 	});
+
+	// Test case  : getAvatarChoice
+	describe('() Get the avatar choice', () => {
+//////////////////////////////////////////////////////////
+		/*it ('Testing getAvatarChoice Feature (With a valid doctor) - Returns 200 code', (done) => {
+			doctor1
+				.post('/getAvatarChoice', db.getAvatarChoice)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					response.should.be.json;
+					done();
+				})
+		});*/
+//////////////////////////////////////////////////////////
+
+		it ('Testing getAvatarChoice Feature (With a valid receptionist1) - Returns 200 code', (done) => {
+			receptionist1
+				.post('/getAvatarChoice', db.getAvatarChoice)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					response.should.be.json;
+					done();
+				})
+		}); 
+	});
+
+	// Test case : setAvatarChoice
+	describe('() Set a avatar choice', () => {
+//////////////////////////////////////////////////////////
+		/*it('Testing setAvatarChoice Feature (With a valid doctor)', (done) => {
+			doctor1
+				.post('/setAvatarChoice', db.setAvatarChoice)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
+				});
+		});*/
+//////////////////////////////////////////////////////////
+
+		it('Testing setAvatarChoice Feature (With a valid receptionist1)', (done) => {
+			receptionist1
+				.post('/setAvatarChoice', db.setAvatarChoice)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
+				});
+		});	
+	})
+
+	// Test case : getPatientAndBooking
+	describe('() Get a patient and their booking', () => {
+//////////////////////////////////////////////////////////
+		/*it('Testing getPatientAndBooking Feature (With valid user) - Returns 200 code', (done) => {
+			receptionist1
+				.post('/getPatientAndBooking', db.getPatientAndBooking)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					response.should.be.json;
+					done();
+				});
+		});
+
+		it('Testing getPatientAndBooking Feature (With invalid user) - Returns 401 code', (done) => {
+			receptionist1
+				.post('/getPatientAndBooking', db.getPatientAndBooking)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(401);
+					done();
+				});
+		});*/
+//////////////////////////////////////////////////////////
+	});
+
+	// Test case : 
+	describe('() Upload the images from the video footage', () => {
+		it('Testing uploadImages Feature (With no images) - Returns 404 code', (done) => {
+			doctor1
+				.post('/uploadImages', dbU.uploadImages)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(404);
+					done();
+				});
+		});
+	});
+
+	// Test case :
+	describe('() The fuzzy logic booking', () => {
+		it('Testing fuzzyLogicBooking Feature (With valid user input) - Returns 200 code', (done) => {
+			const details = {
+				reason: "checkup",
+				duration: "15"
+			}
+
+			receptionist1
+				.post('/fuzzyLogic', db.fuzzyLogicBooking)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
+				});
+		});
+
+		it('Testing fuzzyLogicBooking Feature (With invalid user input) - Returns 401 code', (done) => {
+			receptionist2
+				.post('/fuzzyLogic', db.fuzzyLogicBooking)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(401);
+					done();
+				});
+		});
+	});
+
+	// Test case  : activateUser
+	describe('() Activate a user', () => {
+		it('Testing activateUser Feature (Denying a Doctor) - Returns 200 code', (done) => {
+			doctor1
+				.post("/activateUser", db.activateUser)
+				.send({user: doc1_ID, choice: "reject"})
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
+				});
+		});
+
+		it('Testing activateUser Feature (Denying a Receptionist) - Returns 200 code', (done) => {
+			receptionist1
+				.post("/activateUser", db.activateUser)
+				.send({user: recep1_ID, choice: "reject"})
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
+				});
+		});
+	});
+
 });
 

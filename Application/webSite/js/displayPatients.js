@@ -140,10 +140,10 @@ function populatePatients()
             if(data[i].status == "Pending")
             {
                 //fetch the patients information
-                var get = fetch("/singlePatient",{
+                var get = fetch("/getPatientAndBooking",{
                     method:"POST",
                     headers:{'Content-Type': 'application/json; charset=UTF-8'},
-                    body: JSON.stringify({"patient":data[i].patient})
+                    body: JSON.stringify({"bid":data[i]._id})
                 });
               
                 get.then(g => g.json().then(patientInfo=>
@@ -151,8 +151,7 @@ function populatePatients()
             
                     if(g.status ==200)
                     {
-                        var timeIndex = parseInt(i)+count-data.length;
-                        replacement="<tr><td>"+patientInfo.name+"</td><td>"+count+"</td><td>"+patientInfo.idNumber+"</td><td>"+data[i].time+" : "+data[i].date+"</td><td>"+patientInfo.cellnumber+"</td><td><a class='btn btn-success'  type='button' href='makeBooking.html?patient="+data[i].patient+"&doctor="+selectedDoctor+"' onclick='postponeBooking(\""+data[i]._id+"\")'>POSTPONE</a><button class='btn btn-danger'  type='button' onclick='cancelBooking(\""+data[i]._id+"\")'>CANCEL</button></td></tr>";
+                        replacement="<tr><td>"+patientInfo.name+"</td><td>"+count+"</td><td>"+patientInfo.idNumber+"</td><td>"+patientInfo.time+" : "+patientInfo.date+"</td><td>"+patientInfo.cellnumber+"</td><td><a class='btn btn-success'  type='button' href='makeBooking.html?patient="+patientInfo.patient+"&doctor="+selectedDoctor+"' onclick='postponeBooking(\""+patientInfo.bid+"\")'>POSTPONE</a><button class='btn btn-danger'  type='button' onclick='cancelBooking(\""+patientInfo.bid+"\")'>CANCEL</button></td></tr>";
                         count++;
                         document.getElementById("patientTable").innerHTML+=replacement;
                   

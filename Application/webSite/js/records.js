@@ -25,6 +25,8 @@ function init()
 {
     var url = window.location.href;
     var parts = url.split("=");
+
+    document.getElementById("consultlink").href = "Consultation.html?bookingid="+parts[2];
     //parts[1] = patient id
     //call getpatientsconsultations using pid
     //populate this page with all the different consultations that are there
@@ -35,13 +37,14 @@ function init()
         body: JSON.stringify({"patient":parts[1]})
     });
 
+
     response.then(res=> res.json().then(data=>
     {
         var replacement ="";
         document.getElementById("patientTable").innerHTML =replacement;
         for(var i in data)
         {
-           replacement += "<tr><td>"+data[i].created+"</td><td>"+data[i].Notes+"</td><td><button class='btn btn-success' onclick=showRecord(\""+data[i].created+"\",\""+data[i].reason+"\",\""+data[i]._id+"\")>View Info</button></td></tr>"
+           replacement += "<tr><td>"+data[i].created+"</td><td>"+data[i].Note+"</td><td><button class='btn btn-success' onclick=\"showRecord('"+data[i].created+"','"+data[i].reason+"','"+data[i]._id+"')\">View Info</button></td></tr>";
         }
         document.getElementById("patientTable").innerHTML =replacement;
     }));

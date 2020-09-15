@@ -28,7 +28,7 @@ module.exports = {
             }
             const images = files;
 
-            if (!images)
+            if (!images || isEmpty(images))
             {
                 //if no images was sent we handle this by returning a error status 404
                 res.status(404).send("no images");
@@ -128,4 +128,16 @@ function rimraf(dir_path) {
         });
         fs.rmdirSync(dir_path);
     }
+}
+
+//================================================================================================
+// Function developed by: Marcus Werren
+// Function used to check if images object is empty
+function isEmpty(obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop)) {
+            return false;
+        }
+    }
+  return JSON.stringify(obj) === JSON.stringify({});
 }

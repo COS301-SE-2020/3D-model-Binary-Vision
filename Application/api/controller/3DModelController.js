@@ -68,6 +68,7 @@ module.exports = {
                     }
                     else{
                         res.send(erro);
+                        return;
                     }
                 })        
             }
@@ -100,7 +101,7 @@ module.exports = {
 
             }
         });
-        
+        res.status(404);
         return;
     },
 
@@ -147,48 +148,51 @@ module.exports = {
         const {practice , securityCode, headReceptionist} = req.body;
 
         Practice.findOne({"practice":practice}, function(err, prac){
-            if (prac)
-            {
+
+            if (prac != null /*|| prac != ""*/)
+            {   
                 //practition already registered;
-                res.status(400).send("Practice already exists"); // Marcus Changed this from status -> senStatus
+                res.status(400).send("Practice already exists");
                 return;
             }
-
-            var newPractice =new Practice ({practice,securityCode,headReceptionist});
-            newPractice.save(function(err, pr){
-
-                if(err)
-                {
-                    res.send(err);
-                    return;
-                }
-                else
+            else
+            {   
+                var newPractice = new Practice ({practice,securityCode,headReceptionist});
+                newPractice.save(function(err, pr)
                 {
 
-                    var today = new Date();
-                    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
-                    var hours = today.getHours();
-                    var minutes = today.getMinutes();
-                    var seconds = today.getSeconds();
-                    var time = hours + ":" + minutes + ":" + seconds ;
-                    var line = date + "@" + time + "@Practice: " + practice + " Registered!\n";
-                    var fname = "./webSite/Logs/"+practice+".txt";
-                    fs.writeFile(fname,line,function(err){
-                        if(err)
-                        {
-                            console.log(err);
-                        }
-                        else
-                        {
-                            console.log("Practice Log File successfully created!");
-                        }
-                    });
-                    res.redirect('/signup.html');
-                    return;
-                }
-            })
+                    if(err)
+                    {
+                        res.send(err);
+                        return;
+                    }
+                    else
+                    {
 
-        })
+                        var today = new Date();
+                        var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+                        var hours = today.getHours();
+                        var minutes = today.getMinutes();
+                        var seconds = today.getSeconds();
+                        var time = hours + ":" + minutes + ":" + seconds ;
+                        var line = date + "@" + time + "@Practice: " + practice + " Registered!\n";
+                        var fname = "./webSite/Logs/"+practice+".txt";
+                        fs.writeFile(fname,line,function(err){
+                            if(err)
+                            {
+                                console.log(err);
+                            }
+                            else
+                            {
+                                //console.log("Practice Log File successfully created!");
+                            }
+                        });
+                        res.redirect('/signup.html');
+                        return;
+                    }
+                });
+            }
+        });
 
     },
 
@@ -200,21 +204,59 @@ module.exports = {
         var { name, surname, email, username, password ,choice , practition,securityCode} = req.body;
        
         //first check if the practition exists
-        Practice.findOne({"practice":practition}, function(err, practice){
+        Practice.findOne({"practice":practition}, function(err, practice)
+        {
             if (err)
             {
                 res.status(400);
                 return;
             }
-            if(practice){
+            if(practice != null)
+            {
                 if(practice.securityCode == securityCode)
                 {
                     //valid practition code to add inactive user to database and send an email to head receptionist
                     password = frontsalt+password+backSalt;
                     bcrypt.hash(password,10,function(err, password1){
                         password = password1;
-                        if(choice=="Doctor")
+                        //before these ifs, check the the username exists already as either a doctor or a receptionist
+                        //then check if the emails exists asa either a doctor or a receptionist
+                        var bool = false;
+                        Doctor.findOne({"email":email},function(err,doc){
+                            if(doc != null)
+                            {
+                                bool = true;
+                                res.status(403);
+                                return;
+                            }
+                        });
+                        Doctor.findOne({"username":username},function(err,doc){
+                            if(doc != null)
+                            {
+                                bool = true;
+                                res.status(402);
+                                return;
+                            }
+                        });
+                        Receptionist.findOne({"email":email},function(err,rec){
+                            if(rec != null)
+                            {
+                                bool = true;
+                                res.status(403);
+                                return;
+                            }
+                        });
+                        Receptionist.findOne({"username":username},function(err,rec){
+                            if(rec != null)
+                            {
+                                bool = true;
+                                res.status(402);
+                                return;
+                            }
+                        });
+                        if(choice=="Doctor" && bool == false)
                         {
+                            
                             const doctor = new Doctor({name,surname,email,username, password,practition});
                             doctor.save(function (err, saved) 
                             {
@@ -233,7 +275,7 @@ module.exports = {
                                 }
                             });
                         }
-                        else if(choice == "Receptionist")
+                        else if(choice == "Receptionist" && bool == false)
                         {
                             const receptionist = new Receptionist({name , surname , email , username, password,practition});
                             receptionist.save(function(err, saved)
@@ -257,7 +299,7 @@ module.exports = {
                 else{
                     //practition code not valid for signup attempt
                     //unauthorized
-                    res.status(401).send("Unauthorized"); // Marcus Changed this from status -> senStatus
+                    res.sendStatus(401); // Marcus Changed this from status -> senStatus
                     return;
                 }
             }
@@ -342,46 +384,21 @@ module.exports = {
     //This function takes in all the details on a new patient and adds it to the database
     addPatient: function (req, res) 
     {
-        if (!req.user) 
+        const {idNumber, name , surname , email , gender, cellnumber,practice} = req.body;
+        Patient.findOne({"idNumber":idNumber},function(err,pat)
         {
-            const {idNumber, name , surname , email , gender, cellnumber,practice} = req.body;
-
-            var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber,practice}); //set the patients info
-
-            new_Patient.save(function (err) 
+            if(pat != null)
             {
-                if (err) 
-                {
-                    res.status(400).send(err);
-                    return;
-                }
-                else
-                {
-                    res.status(201);
-                    res.redirect("preview.html");
-                }
-            });
-
-            updateLogFile("Added a Patient@PID:" +new_Patient._id,practice);
-            return;
-        }
-        else
-        {
-            //this is a receptionist adding a patient
-            const {idNumber, name , surname , email , gender, cellnumber} = req.body;
-
-            Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
+                res.status(400).send("Patient with that ID number already exists on the system");
+                return;
+            }
+            else
             {
-                if (err)
+                if (!req.user) 
                 {
-
-                }
-                if(rec)
-                {
-                    var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber}); //set the patients info
-
-                    new_Patient.practice = rec.practition;
-
+                
+                    var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber,practice}); //set the patients info
+                
                     new_Patient.save(function (err) 
                     {
                         if (err) 
@@ -392,14 +409,50 @@ module.exports = {
                         else
                         {
                             res.status(201);
-                            res.redirect("newHome.html");
+                            res.redirect("preview.html");
                         }
                     });
-                    updateLogFile(rec.username + "@Added a Patient@PID:" +new_Patient._id,rec.practition);
+                
+                    updateLogFile("Added a Patient@PID:" +new_Patient._id,practice);
+                    return;
                 }
-            });
-            return;
-        }        
+                else
+                {
+                    //this is a receptionist adding a patient
+                    const {idNumber, name , surname , email , gender, cellnumber} = req.body;
+                
+                    Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
+                    {
+                        if (err)
+                        {
+                        
+                        }
+                        if(rec)
+                        {
+                            var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber}); //set the patients info
+                        
+                            new_Patient.practice = rec.practition;
+                        
+                            new_Patient.save(function (err) 
+                            {
+                                if (err) 
+                                {
+                                    res.status(400).send(err);
+                                    return;
+                                }
+                                else
+                                {
+                                    res.status(201);
+                                    res.redirect("newHome.html");
+                                }
+                            });
+                            updateLogFile(rec.username + "@Added a Patient@PID:" +new_Patient._id,rec.practition);
+                        }
+                    });
+                    return;
+                }        
+            }
+        });
     },
 
     //======================================================================================
@@ -474,7 +527,7 @@ module.exports = {
             return;
         }
 
-        Consultation.findOne({"_id":mongoose.Types.ObjectId(req.cookies.consultation)},function(err , consultation)
+        Consultation.findOne({"_id":req.cookies.consultation},function(err , consultation)
         {
             if(err)
             {
@@ -644,19 +697,20 @@ module.exports = {
 
     getSTLFile: function (req,res){
         if(!req.user){
-
+            res.status(401).send("Unauthorized");
+            return;
         }
         else {
 
             var consultation = req.params.id;
 
-            Consultation.findOne({"_id":mongoose.Types.ObjectId(consultation)}, function(err , cons){
+            Consultation.findOne({"_id":consultation}, function(err , cons){
                 if (err){
 
                 }
                 else if (cons) {
                     var attachment = createModel();
-                    const stlReturn  = attachment.read({"_id":mongoose.Types.ObjectId(cons.STL)});
+                    const stlReturn  = attachment.read({"_id":cons.STL});
 
                     res.contentType('model/stl');
                     stlReturn.pipe(res);
@@ -686,8 +740,7 @@ module.exports = {
       {
           if (err) 
           {
-              res.status(404)
-                .send("Error looking up doctor");
+              res.status(404).send("Error looking up doctor");
               return;
           } 
           else 
@@ -731,9 +784,8 @@ module.exports = {
     //======================================================================================
     //Function developed by: Steven Visser
     //Returns all patients that match certain criteria from the database
-   searchPatient: function(req, res)
-   {
-       console.log("search for a patient")
+    searchPatient: function(req, res)
+    {
         if (!req.user)
         {
             res.status(401).send("Unauthorized");
@@ -742,7 +794,6 @@ module.exports = {
 
         const {name , surname , idNumber} = req.body;
 
-        console.log(name+"  "+surname+"  "+idNumber);
         Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
         {
             if (err)
@@ -753,7 +804,6 @@ module.exports = {
             {
                 if(idNumber != null)
                 {
-                    console.log("Searching by ID");
                     Patient.find({"idNumber":idNumber,"practice":rec.practition}, function(err,patient)
                     {
                         if(err){
@@ -1088,29 +1138,20 @@ module.exports = {
     activateUser:function ( req, res)
     {
         const {user , choice } = req.body;
-
-        var setter;
         if(choice =="accept")
         {
-            setter = true;
-        }
-        else
-        {
-            setter =false;
-        } 
-        if (setter){
-            //acticate the user
-            Doctor.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)}, {$set:{"active":setter}}, function (err, doc){
+             //acticate the user
+             Doctor.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)}, {$set:{"active":true}}, function (err, doc){
                 //if doctor not look for a receptionist
              if(!doc) 
              {  
                  //find and update receptionist
-                 Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)},{$set:{"active":setter}}, function(err, rec){
-                        if(rec)
-                        {
-                            updateLogFile("PracticeHead@Accepted Receptionist Application@ID:"+rec._id,rec.practition);
-                        }
-                    });
+                 Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)},{$set:{"active":true}}, function(err, rec){
+                    if(rec)
+                    {
+                        updateLogFile("PracticeHead@Accepted Receptionist Application@ID:"+rec._id,rec.practition);
+                    }
+                });
             }
             else
             {
@@ -1118,26 +1159,40 @@ module.exports = {
             }
             });
         }
-        else{
-            Doctor.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err,doc)
+        else
+        {
+            Doctor.find({"_id":mongoose.Types.ObjectId(user)}, function(err,doc)
             {
-                if (!doc)
+                if(doc)
                 {
-                    Receptionist.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err, rec)
-                    {
-                         if(rec)
-                         {
-                             updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+rec._id,rec.practition);
-                         }
-                    });
-                }
-                else
-                {
-                    updateLogFile("PracticeHead@Declined Doctor Application@ID:"+doc._id,doc.practition);
+                   updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+doc._id,doc.practition);
+                   Doctor.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err, doct)
+                   {
+                        if(doct)
+                        {
+                            updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+doct._id,doct.practition);
+                        }
+                   });
+                   return;
                 }
             });
-        }
-
+            
+            Receptionist.find({"_id":mongoose.Types.ObjectId(user)}, function(err, rec)
+            {
+                 if(rec)
+                 {
+                    updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+rec._id,rec.practition);
+                    Receptionist.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err, rect)
+                    {
+                         if(rect)
+                         {
+                             updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+rect._id,rect.practition);
+                         }
+                    });
+                    return;
+                 }
+            });
+        } 
         res.status(200).send("ok");
         return;
     },
@@ -1159,7 +1214,7 @@ module.exports = {
 
                 }
                 else if(doctor){
-                    var url = "flapjacks.goodx.co.za/QRAddPatient.html?practice="+doctor.practition;
+                    var url = "http://flapjacks.goodx.co.za/QRAddPatient.html?practice="+doctor.practition;
                     res.contentType('png');
                     qrCode.toFileStream(res , url);//return the qr code
                 }
@@ -1169,7 +1224,7 @@ module.exports = {
 
                         }
                         else if(recep){
-                            var url = "flapjacks.goodx.co.za/QRAddPatient.html?practice="+recep.practition;
+                            var url = "http://flapjacks.goodx.co.za/QRAddPatient.html?practice="+recep.practition;
                             res.contentType('png');
                             qrCode.toFileStream(res , url);
                         }
@@ -1198,10 +1253,12 @@ module.exports = {
             if(err)
             {
                 console.log(err);
+                res.status(401).send(err);
             }
             else
             {
                 console.log("Log successfully updated!");
+                res.status(200).send("Log successfully updated!");
             }
         });
         
@@ -1214,7 +1271,7 @@ module.exports = {
     {
         if(!req.user)
         {
-            res.status(401);
+            res.status(401).send("Unauthorized");
             return;
         }
 
@@ -1247,7 +1304,7 @@ module.exports = {
             {
                 if (err)
                 {
-                  res.status(400);
+                  res.status(400).send("Not created");
                   return;
                 }
                 res.status(201)
@@ -1269,7 +1326,7 @@ module.exports = {
             return;
         }
 
-        Consultation.find({"doctor":mongoose.Types.ObjectId(req.user), "patient":req.body.patient} , function(err, consultations)
+        Consultation.find({"doctor":req.user, "patient":req.body.patient} , function(err, consultations)
         {
             if (err)
             {
@@ -1307,6 +1364,116 @@ module.exports = {
                 return;
             }
 
+        });
+    },
+
+    //======================================================================================
+    //Function developed by: Steven Visser
+    //returns the avatar choice of a doctor or receptionist
+    getAvatarChoice : function (req , res)
+    {
+        Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function(err, doc)
+        {
+            if (err)
+            {
+                res.status(500)
+                  .send("error getting doctor");
+                return;
+            }
+            if(doc != "" && doc != null)
+            {
+                res.status(200)
+                  .json({"avatar":doc.avatar});
+                return;
+            }
+        });
+
+        Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function(err, rec)
+        {
+            if (err)
+            {
+                res.status(500)
+                  .send("error getting doctor");
+                return;
+            }
+            if(rec != "" && rec != null)
+            {
+                res.status(200)
+                  .json({"avatar":rec.avatar});
+                return;
+            }
+        });
+    },
+
+    //======================================================================================
+    //Function developed by: Steven Visser
+    //sets the avatar choice of a doctor or receptionist
+    setAvatarChoice : function (req , res)
+    {
+        Doctor.findOneAndUpdate({"_id":mongoose.Types.ObjectId(req.user)}, {$set:{"avatar":req.body.avatar}} , function(err,doc)
+        {
+            if (err)
+            {
+              res.status(400)
+                .send("Error Finding doctor");
+              return;
+            }
+            if(doc != "" && doc != null)
+            {
+                res.status(200)
+                .send("Doctor Updated!!");
+              return;
+            }
+        });
+
+        Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(req.user)}, {$set:{"avatar":req.body.avatar}} , function(err,rec)
+        {
+            if (err)
+            {
+              res.status(400)
+                .send("Error Finding receptionist");
+              return;
+            }
+            if(rec != "" && rec != null)
+            {
+                res.status(200)
+                    .send("Receptionist Updated!");
+                return;
+            }
+        });
+    },
+
+    //======================================================================================
+    //Function developed by: Steven Visser
+    //returns a patient and the booking
+    getPatientAndBooking: function (req, res) 
+    {
+        if (!req.user)
+        {
+            res.status(401)
+                .send("Unauthorized access to doctors scheduling info");
+            return;
+        }
+
+        Booking.findOne({"_id":mongoose.Types.ObjectId(req.body.bid)},function(err,bookings)
+        {
+            if(err)
+            {
+                res.status(400)
+                    .send("error finding doctors bookings");
+                return;
+            }
+            Patient.findOne({ '_id' : mongoose.Types.ObjectId(bookings.patient) }, function (err, patient)
+            {
+                if (err) 
+                {
+                    res.send(err);
+                    return;
+                } 
+                res.json({"name":patient.name,"idNumber":patient.idNumber,"time":bookings.time,"date":bookings.date,"cellnumber":patient.cellnumber,"patient":bookings.patient,"bid":bookings._id});
+                return;  
+            });
+            
         });
     }
 
@@ -1379,7 +1546,7 @@ function updateLogFile(linedesc,practice)
         }
         else
         {
-            console.log("Log updated.");
+            //console.log("Log updated.");
         }
     });
 }
