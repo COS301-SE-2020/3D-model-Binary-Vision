@@ -1220,7 +1220,7 @@ module.exports = {
 
                 }
                 else if(doctor){
-                    var url = "flapjacks.goodx.co.za/QRAddPatient.html?practice="+doctor.practition;
+                    var url = "http://flapjacks.goodx.co.za/QRAddPatient.html?practice="+doctor.practition;
                     res.contentType('png');
                     qrCode.toFileStream(res , url);//return the qr code
                 }
@@ -1230,7 +1230,7 @@ module.exports = {
 
                         }
                         else if(recep){
-                            var url = "flapjacks.goodx.co.za/QRAddPatient.html?practice="+recep.practition;
+                            var url = "http://flapjacks.goodx.co.za/QRAddPatient.html?practice="+recep.practition;
                             res.contentType('png');
                             qrCode.toFileStream(res , url);
                         }
