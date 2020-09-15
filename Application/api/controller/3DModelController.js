@@ -1464,7 +1464,7 @@ module.exports = {
                     .send("error finding doctors bookings");
                 return;
             }
-            Patient.findOne({ '_id' : mongoose.Types.ObjectId(bookings.pateint) }, function (err, patient)
+            Patient.findOne({ '_id' : mongoose.Types.ObjectId(bookings.patient) }, function (err, patient)
             {
                 if (err) 
                 {
