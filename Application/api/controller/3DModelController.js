@@ -579,6 +579,26 @@ module.exports = {
         });
     },
 
+    getDoctorBasedOnID: function (req, res){
+
+        if ( ! req.user)
+        {
+            return res.sendStatus(401);
+        }
+
+        Doctor.findOne({"_id":mongoose.Types.ObjectId(req.body.id)},function(err, doc){
+            if(doc!="")
+            {
+                res.status(200).json({"surname":doc.surname,"name":doc.name});
+                return;
+            }
+            else{
+                res.status(404);
+                return;
+            }
+        })
+    },
+
     //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg
     //
