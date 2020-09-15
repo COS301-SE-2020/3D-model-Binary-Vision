@@ -303,7 +303,7 @@ module.exports = {
                 else{
                     //practition code not valid for signup attempt
                     //unauthorized
-                    res.status(401); // Marcus Changed this from status -> senStatus
+                    res.sendStatus(401); // Marcus Changed this from status -> senStatus
                     return;
                 }
             }
