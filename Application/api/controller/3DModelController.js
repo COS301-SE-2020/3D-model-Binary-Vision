@@ -147,10 +147,6 @@ module.exports = {
     practiceRegistration: function(req, res){
         const {practice , securityCode, headReceptionist} = req.body;
 
-        console.log(practice);
-        console.log(securityCode);
-        console.log(headReceptionist);
-
         Practice.findOne({"practice":practice}, function(err, prac){
 
             if (prac != null /*|| prac != ""*/)
@@ -790,7 +786,6 @@ module.exports = {
     //Returns all patients that match certain criteria from the database
     searchPatient: function(req, res)
     {
-       console.log("search for a patient")
         if (!req.user)
         {
             res.status(401).send("Unauthorized");
@@ -809,7 +804,6 @@ module.exports = {
             {
                 if(idNumber != null)
                 {
-                    console.log("Searching by ID");
                     Patient.find({"idNumber":idNumber,"practice":rec.practition}, function(err,patient)
                     {
                         if(err){
