@@ -344,46 +344,21 @@ module.exports = {
     //This function takes in all the details on a new patient and adds it to the database
     addPatient: function (req, res) 
     {
-        if (!req.user) 
+        const {idNumber, name , surname , email , gender, cellnumber,practice} = req.body;
+        Patient.findOne({"idNumber":idNumber},function(err,pat)
         {
-            const {idNumber, name , surname , email , gender, cellnumber,practice} = req.body;
-
-            var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber,practice}); //set the patients info
-
-            new_Patient.save(function (err) 
+            if(pat != null || pat != "")
             {
-                if (err) 
-                {
-                    res.status(400).send(err);
-                    return;
-                }
-                else
-                {
-                    res.status(201);
-                    res.redirect("preview.html");
-                }
-            });
-
-            updateLogFile("Added a Patient@PID:" +new_Patient._id,practice);
-            return;
-        }
-        else
-        {
-            //this is a receptionist adding a patient
-            const {idNumber, name , surname , email , gender, cellnumber} = req.body;
-
-            Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
+                res.status(400).send("Patient with that ID number already exists on the system");
+                return;
+            }
+            else
             {
-                if (err)
+                if (!req.user) 
                 {
-
-                }
-                if(rec)
-                {
-                    var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber}); //set the patients info
-
-                    new_Patient.practice = rec.practition;
-
+                
+                    var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber,practice}); //set the patients info
+                
                     new_Patient.save(function (err) 
                     {
                         if (err) 
@@ -394,14 +369,50 @@ module.exports = {
                         else
                         {
                             res.status(201);
-                            res.redirect("newHome.html");
+                            res.redirect("preview.html");
                         }
                     });
-                    updateLogFile(rec.username + "@Added a Patient@PID:" +new_Patient._id,rec.practition);
+                
+                    updateLogFile("Added a Patient@PID:" +new_Patient._id,practice);
+                    return;
                 }
-            });
-            return;
-        }        
+                else
+                {
+                    //this is a receptionist adding a patient
+                    const {idNumber, name , surname , email , gender, cellnumber} = req.body;
+                
+                    Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
+                    {
+                        if (err)
+                        {
+                        
+                        }
+                        if(rec)
+                        {
+                            var new_Patient = new Patient({idNumber , name , surname , email ,gender, cellnumber}); //set the patients info
+                        
+                            new_Patient.practice = rec.practition;
+                        
+                            new_Patient.save(function (err) 
+                            {
+                                if (err) 
+                                {
+                                    res.status(400).send(err);
+                                    return;
+                                }
+                                else
+                                {
+                                    res.status(201);
+                                    res.redirect("newHome.html");
+                                }
+                            });
+                            updateLogFile(rec.username + "@Added a Patient@PID:" +new_Patient._id,rec.practition);
+                        }
+                    });
+                    return;
+                }        
+            }
+        });
     },
 
     //======================================================================================
