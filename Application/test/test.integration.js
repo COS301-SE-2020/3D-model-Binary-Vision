@@ -7,6 +7,7 @@ let server = require("../server");
 let db = require("../api/controller/3DModelController");
 let dbR = require("../api/controller/ReceptionistController");
 let dbE = require("../api/controller/EmailController");
+let dbU = require("../api/controller/UploadController");
 
 var async = require('async');
 
@@ -596,14 +597,14 @@ describe('Integration Testing:', () => {
 
 	// Test case 13: makeBooking
 	describe('(13) Make a booking for a patient', () => {
-//////////////////////////////////////////////////////////
-		/*it('Testing makeBooking Feature (With valid user input) - Returns 200 code', (done) => {
+		it('Testing makeBooking Feature (With valid user input) - Returns 200 code', (done) => {
 			const bookingInfo = {
 				patient: "Mark",
 				doctor: "Peter",
 				time: "12:30",
 				date: "12/12/2020",
-				reason: "Checkup"
+				reason: "checkup",
+				endTime: "12:45"
 			};
 			receptionist1
 				.post('/makeBooking', dbR.makeBooking)
@@ -613,8 +614,7 @@ describe('Integration Testing:', () => {
 					response.should.be.json;
 				done();
 				});
-		});*/
-//////////////////////////////////////////////////////////
+		});
 
 		it('Testing makeBooking Feature (With invalid user input) - Returns 400 code', (done) => {
 			const bookingInfo = {
@@ -779,7 +779,8 @@ describe('Integration Testing:', () => {
 
 	// Test case : getSTLFile
 	describe('() Get the STL file', () => {
-		it('Testing getSTLFile Feature (with invalid consultation id user input)  Returns 500 code', (done) => {
+//////////////////////////////////////////////////////////
+		/*it('Testing getSTLFile Feature (with invalid consultation id user input)  Returns 500 code', (done) => {
 			const consultationID = "j%3A%225f5faa4d4737ef24f8fe9083%22";
 
 			doctor1
@@ -788,7 +789,8 @@ describe('Integration Testing:', () => {
 					response.should.have.status(500);
 					done();
 				});
-		});
+		});*/
+//////////////////////////////////////////////////////////
 
 		it('Testing getSTLFile Feature (with invalid user)  Returns 401 code', (done) => {
 			const consultationID = "j%3A%225f5faa4d4737ef24f8fe9083%22";
@@ -1207,7 +1209,7 @@ describe('Integration Testing:', () => {
 					done();
 				});
 		});
-	})
+	});
 
 	// Test case 30 : updateBooking
 	describe('(30) Update a booking', () => {
@@ -1456,6 +1458,47 @@ describe('Integration Testing:', () => {
 				});
 		});*/
 //////////////////////////////////////////////////////////
+	});
+
+	// Test case : 
+	describe('() Upload the images from the video footage', () => {
+		it('Testing uploadImages Feature (With no images) - Returns 404 code', (done) => {
+			doctor1
+				.post('/uploadImages', dbU.uploadImages)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(404);
+					done();
+				});
+		});
+	});
+
+	// Test case :
+	describe('() The fuzzy logic booking', () => {
+		it('Testing fuzzyLogicBooking Feature (With valid user input) - Returns 200 code', (done) => {
+			const details = {
+				reason: "checkup",
+				duration: "15"
+			}
+
+			receptionist1
+				.post('/fuzzyLogic', db.fuzzyLogicBooking)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(200);
+					done();
+				});
+		});
+
+		it('Testing fuzzyLogicBooking Feature (With invalid user input) - Returns 401 code', (done) => {
+			receptionist2
+				.post('/fuzzyLogic', db.fuzzyLogicBooking)
+				.send()
+				.end((error, response) => {
+					response.should.have.status(401);
+					done();
+				});
+		});
 	});
 
 	// Test case  : activateUser
