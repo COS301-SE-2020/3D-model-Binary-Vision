@@ -531,7 +531,7 @@ module.exports = {
             return;
         }
 
-        Consultation.findOne({"_id":mongoose.Types.ObjectId(req.cookies.consultation)},function(err , consultation)
+        Consultation.findOne({"_id":req.cookies.consultation},function(err , consultation)
         {
             if(err)
             {
