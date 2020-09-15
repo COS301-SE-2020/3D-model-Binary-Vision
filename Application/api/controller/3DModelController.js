@@ -708,13 +708,13 @@ module.exports = {
 
             var consultation = req.params.id;
 
-            Consultation.findOne({"_id":mongoose.Types.ObjectId(consultation)}, function(err , cons){
+            Consultation.findOne({"_id":consultation}, function(err , cons){
                 if (err){
 
                 }
                 else if (cons) {
                     var attachment = createModel();
-                    const stlReturn  = attachment.read({"_id":mongoose.Types.ObjectId(cons.STL)});
+                    const stlReturn  = attachment.read({"_id":cons.STL});
 
                     res.contentType('model/stl');
                     stlReturn.pipe(res);
