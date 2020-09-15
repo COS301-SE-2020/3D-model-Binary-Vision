@@ -195,7 +195,7 @@ function signup()
                             password.style.backgroundColor="red";
                             password.focus();
                         }
-                        if(usedParameters != true)
+                        if(usedParamaters != true)
                         {
                             errorData.innerHTML = "<i></i>";
                             if(practice.value == "")
@@ -308,6 +308,12 @@ function addUser(name , surname, email ,username,choice,practice , securityCode)
         var backSalt ="FlapJacks";
         var saltedPasword = frontSalt+ password.value+backSalt;
 
+        var e = document.querySelector("#email");
+        var u = document.querySelector("#username");
+        var p = document.querySelector("#practice");
+        var s = document.querySelector("#securityCode");
+        var errorData = document.querySelector("#errorOutput");
+
         var frontEndHashedPassword = CryptoJS.MD5(saltedPasword).toString();
 
         var response = fetch("/signup",
@@ -319,19 +325,54 @@ function addUser(name , surname, email ,username,choice,practice , securityCode)
 
         response.then(res => 
         {
-            var today = new Date();
-            var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
-            var hours = today.getHours();
-            var minutes = today.getMinutes();
-            var seconds = today.getSeconds();
-            var time = hours + ":" + minutes + ":" + seconds ;
-            var line = date + "@" + time + "@" + username.value + "@Registered as a " + choice;
-            var resp = fetch("/updateLog",{
-                method:"POST",
-                headers:{'Content-Type':'application/json; charset=utf-8'},
-                body:JSON.stringify({"practice":practice.value,"line":line})
-            });
-            window.location.href = res.url;
+            if(res.status == 402)
+            {
+                e.value = "";
+                e.placeholder="Email already exists";
+                e.style.backgroundColor="red";
+                errorData.innerHTML = "<i>Email already exists!</i>";
+                e.focus();
+            }
+            else if(res.status == 402)
+            {
+                u.value = "";
+                u.placeholder="Username already exists";
+                u.style.backgroundColor="red";
+                errorData.innerHTML = "<i>Username already exists!</i>";
+                u.focus();
+            }
+            else if(res.status == 404)
+            {
+                p.value = "";
+                p.placeholder="Practice Invalid";
+                p.style.backgroundColor="red";
+                errorData.innerHTML = "<i>Practice does not exist!</i>";
+                p.focus();
+            }
+            else if(res.status == 403)
+            {
+                s.value = "";
+                s.placeholder="try again";
+                s.style.backgroundColor="red";
+                errorData.innerHTML = "<i>Security code is incorrect!</i>";
+                s.focus();
+            }
+            else
+            {
+                var today = new Date();
+                var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+                var hours = today.getHours();
+                var minutes = today.getMinutes();
+                var seconds = today.getSeconds();
+                var time = hours + ":" + minutes + ":" + seconds ;
+                var line = date + "@" + time + "@" + username.value + "@Registered as a " + choice;
+                var resp = fetch("/updateLog",{
+                    method:"POST",
+                    headers:{'Content-Type':'application/json; charset=utf-8'},
+                    body:JSON.stringify({"practice":practice.value,"line":line})
+                });
+                window.location.href = res.url;
+            }
         });
     }
     else
