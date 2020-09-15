@@ -709,6 +709,10 @@ function filterOptions()
     var time = selectedFiltetTimeElement.options[selectedFiltetTimeElement.selectedIndex].value;
     var daySelected = selectedFilterDayElement.options[selectedFilterDayElement.selectedIndex].value;
 
+    
+
+
+
     console.log("Time selected: "+ time +"\tday selected: "+daySelected);
     //most effitient way to find the elements ...
     if(time!= null && daySelected != null){
@@ -718,11 +722,15 @@ function filterOptions()
             var booking = JSON.parse(OptionalBookings[i]);
 
             var parts = booking.date.split("/");
-            var date = parts[2]+"-"+parts[1]+"-"+parts[0];
-            console.log(date);
+            var checkingDate = parts[2]+"-"+parts[1]+"-"+parts[0];
+            console.log(checkingDate);
         
-            var day = new Date(date).getDay();
+
+            
+
+            var day = new Date(checkingDate).getDay();
             console.log(dayArray[day]);
+
 
             if (parseInt(day) == parseInt(daySelected) ){
                 
@@ -731,6 +739,7 @@ function filterOptions()
             }
 
             if(parseInt(time) != parseInt(booking.isMorning)){
+
                 sameTimeFilteredOptions.push(booking);
             }
         }
@@ -780,13 +789,15 @@ function filterOptions()
     }
 
     count =0;
-    innerHTML+="<p>Booking options of matching time</p>";
+    innerHTML+="<h1 style='color:white;'>Booking options of matching time</h1>";
 
+    var day = new Date().getDay();
+    
     for(var i in sameTimeFilteredOptions)
     {
         var inner ="<div><p>Time: "+sameTimeFilteredOptions[i].time+"</p>";
         inner+="<p>End: "+sameTimeFilteredOptions[i].endTime+"</p>";
-        inner+="<p>Day:"+dayArray[daySelected]+"</p>";
+        inner+="<p>Day:"+dayArray[day]+"</p>";
         inner+="<p>Date: "+sameTimeFilteredOptions[i].date+"</p>";
         inner+="<p>Doctor: "+sameTimeFilteredOptions[i].doctor+"</p>";
         inner+="<input type='button' value='select' onclick='selectFilteredBooking(\""+sameTimeFilteredOptions[i].time+"\",\""+sameTimeFilteredOptions[i].endTime+"\",\""+sameTimeFilteredOptions[i].date+"\",\""+sameTimeFilteredOptions[i].doctor+"\",\""+sameTimeFilteredOptions[i].reason+"\")'>";
