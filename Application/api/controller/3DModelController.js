@@ -208,21 +208,59 @@ module.exports = {
         var { name, surname, email, username, password ,choice , practition,securityCode} = req.body;
        
         //first check if the practition exists
-        Practice.findOne({"practice":practition}, function(err, practice){
+        Practice.findOne({"practice":practition}, function(err, practice)
+        {
             if (err)
             {
                 res.status(400);
                 return;
             }
-            if(practice){
+            if(practice != null)
+            {
                 if(practice.securityCode == securityCode)
                 {
                     //valid practition code to add inactive user to database and send an email to head receptionist
                     password = frontsalt+password+backSalt;
                     bcrypt.hash(password,10,function(err, password1){
                         password = password1;
-                        if(choice=="Doctor")
+                        //before these ifs, check the the username exists already as either a doctor or a receptionist
+                        //then check if the emails exists asa either a doctor or a receptionist
+                        var bool = false;
+                        Doctor.findOne({"email":email},function(err,doc){
+                            if(doc != null)
+                            {
+                                bool = true;
+                                res.status(403);
+                                return;
+                            }
+                        });
+                        Doctor.findOne({"username":username},function(err,doc){
+                            if(doc != null)
+                            {
+                                bool = true;
+                                res.status(402);
+                                return;
+                            }
+                        });
+                        Receptionist.findOne({"email":email},function(err,rec){
+                            if(rec != null)
+                            {
+                                bool = true;
+                                res.status(403);
+                                return;
+                            }
+                        });
+                        Receptionist.findOne({"username":username},function(err,rec){
+                            if(rec != null)
+                            {
+                                bool = true;
+                                res.status(402);
+                                return;
+                            }
+                        });
+                        if(choice=="Doctor" && bool == false)
                         {
+                            
                             const doctor = new Doctor({name,surname,email,username, password,practition});
                             doctor.save(function (err, saved) 
                             {
@@ -241,7 +279,7 @@ module.exports = {
                                 }
                             });
                         }
-                        else if(choice == "Receptionist")
+                        else if(choice == "Receptionist" && bool == false)
                         {
                             const receptionist = new Receptionist({name , surname , email , username, password,practition});
                             receptionist.save(function(err, saved)
@@ -265,7 +303,7 @@ module.exports = {
                 else{
                     //practition code not valid for signup attempt
                     //unauthorized
-                    res.status(401).send("Unauthorized"); // Marcus Changed this from status -> senStatus
+                    res.status(401); // Marcus Changed this from status -> senStatus
                     return;
                 }
             }
@@ -353,7 +391,7 @@ module.exports = {
         const {idNumber, name , surname , email , gender, cellnumber,practice} = req.body;
         Patient.findOne({"idNumber":idNumber},function(err,pat)
         {
-            if(pat != null /*|| pat != ""*/)
+            if(pat != null)
             {
                 res.status(400).send("Patient with that ID number already exists on the system");
                 return;
