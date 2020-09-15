@@ -728,7 +728,7 @@ function saveData(data){
 //options that the user provides 
 var sameDayFilteredOptions=[];
 var sameTimeFilteredOptions=[];
-function filterOptions()
+async function filterOptions()
 {
     var dayArray =["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     var selectedFiltetTimeElement = document.querySelector("#selectFilterTime");
@@ -800,38 +800,66 @@ function filterOptions()
     var count=0;
 
     var bodySelector = document.getElementById("currentOverlay");
-    var innerHTML= "<p style='color:black;'>Booking options for selected day:</p><br>";
+    var innerHTML= "<h1 style='color:white;'>Booking options for selected day:</h1><br><br>";
     for(var i in sameDayFilteredOptions )
     {
-
-        var inner ="<div><p>Time: "+sameDayFilteredOptions[i].time+"</p>";
+        
+        var inner ="<div><hr><br><p>Time: "+sameDayFilteredOptions[i].time+"</p>";
         inner+="<p>End: "+sameDayFilteredOptions[i].endTime+"</p>";
         inner+="<p>Day:"+dayArray[daySelected]+"</p>";
         inner+="<p>Date: "+sameDayFilteredOptions[i].date+"</p>";
-        inner+="<p>Doctor: "+sameDayFilteredOptions[i].doctor+"</p>";
+
+        const response = await fetch ( "/getDoctorBasedOnID",{
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: JSON.stringify({ id: sameDayFilteredOptions[i].doctor })
+        });
+
+        const data = await response.json();
+
+        inner+="<p>Doctor: "+data.name+"  "+data.surname+"</p>";
+
         inner+="<input type='button' value='select' onclick='selectFilteredBooking(\""+sameDayFilteredOptions[i].time+"\",\""+sameDayFilteredOptions[i].endTime+"\",\""+sameDayFilteredOptions[i].date+"\",\""+sameDayFilteredOptions[i].doctor+"\",\""+sameDayFilteredOptions[i].reason+"\")'>";
-        inner+="</div>";
+        inner+="<hr></div>";
         innerHTML+=inner;
         count ++;
         if(count >= 5) break;
     }
 
     count =0;
-    innerHTML+="<h1 style='color:white;'>Booking options of matching time</h1>";
+    innerHTML+="<h1 style='color:white;'>Booking options of matching time</h1><br><br>";
 
-    var day = new Date().getDay();
-    
+    console.log("day"+ day);
     for(var i in sameTimeFilteredOptions)
     {
-        var inner ="<div><p>Time: "+sameTimeFilteredOptions[i].time+"</p>";
+        var ffs = sameTimeFilteredOptions[i].date.split("/");
+        var ffsThisDate = ffs[2]+"-"+ffs[1]+"-"+ffs[0];
+        var day = parseInt(new Date(ffsThisDate).getDay());
+    
+        
+        var inner ="<div><hr><br><p>Time: "+sameTimeFilteredOptions[i].time+"</p>";
         inner+="<p>End: "+sameTimeFilteredOptions[i].endTime+"</p>";
         inner+="<p>Day:"+dayArray[day]+"</p>";
         inner+="<p>Date: "+sameTimeFilteredOptions[i].date+"</p>";
-        inner+="<p>Doctor: "+sameTimeFilteredOptions[i].doctor+"</p>";
+
+        const response = await fetch ( "/getDoctorBasedOnID",{
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: JSON.stringify({ id: sameTimeFilteredOptions[i].doctor })
+        });
+
+        const data = await response.json();
+
+        inner+="<p>Doctor: "+data.name+"  "+data.surname+"</p>";
         inner+="<input type='button' value='select' onclick='selectFilteredBooking(\""+sameTimeFilteredOptions[i].time+"\",\""+sameTimeFilteredOptions[i].endTime+"\",\""+sameTimeFilteredOptions[i].date+"\",\""+sameTimeFilteredOptions[i].doctor+"\",\""+sameTimeFilteredOptions[i].reason+"\")'>";
-        inner+="</div>";
+        inner+="<hr></div>";
         innerHTML+=inner;
         count++;
+      
         if (count >=5) break;
     }
 
@@ -861,316 +889,17 @@ function selectFilteredBooking(time , endTime , date, doctor,reason)
     document.getElementById("dateInfoDisplay").innerHTML = date;
     document.getElementById("dateInfoDisplay").style.color = "lightgreen";
 
-    document.getElementById("doctorInfoDisplay").innerHTML = date;
-    document.getElementById("doctorInfoDisplay").style.color = "lightgreen";
 
-}
-
-//=============================================================================================
-//Function Developed by: Rani Arraf
-//Initializes Profile Pictures
-function selectDoc1(){
-    resetDoc();
-    checkDoc[0] = true;
-
-    var doc4 = document.getElementById("avatar4");
-    var doc3 = document.getElementById("avatar3");
-    var doc2 = document.getElementById("avatar2");
-    var doc1 = document.getElementById("avatar1");
-
-    var doc5 = document.getElementById("avatar5");
-    var doc6 = document.getElementById("avatar6");
-    var doc7 = document.getElementById("avatar7");
-    var doc8 = document.getElementById("avatar8");
-
-    doc1.style.backgroundColor = "green";
-    doc4.style.backgroundColor = "lightblue";
-    doc3.style.backgroundColor = "lightblue";
-    doc2.style.backgroundColor = "lightblue";
-
-    doc5.style.backgroundColor = "lightblue";
-    doc6.style.backgroundColor = "lightblue";
-    doc7.style.backgroundColor = "lightblue";
-    doc8.style.backgroundColor = "lightblue";
-    
-}
-
-function selectDoc2(){
-    resetDoc();
-    checkDoc[1] = true;
-
-
-    var doc4 = document.getElementById("avatar4");
-    var doc1 = document.getElementById("avatar1");
-    var doc3 = document.getElementById("avatar3");
-    var doc2 = document.getElementById("avatar2");
-
-    var doc5 = document.getElementById("avatar5");
-    var doc6 = document.getElementById("avatar6");
-    var doc7 = document.getElementById("avatar7");
-    var doc8 = document.getElementById("avatar8");
-
-    doc2.style.backgroundColor = "green";
-    doc4.style.backgroundColor = "lightblue";
-    doc3.style.backgroundColor = "lightblue";
-    doc1.style.backgroundColor = "lightblue";
-
-    doc5.style.backgroundColor = "lightblue";
-    doc6.style.backgroundColor = "lightblue";
-    doc7.style.backgroundColor = "lightblue";
-    doc8.style.backgroundColor = "lightblue";
-}
-
-function selectDoc3(){
-    resetDoc();
-    checkDoc[2] = true;
-
-    
-    var doc4 = document.getElementById("avatar4");
-    var doc2 = document.getElementById("avatar2");
-    var doc1 = document.getElementById("avatar1");
-    var doc3 = document.getElementById("avatar3");
-
-    var doc5 = document.getElementById("avatar5");
-    var doc6 = document.getElementById("avatar6");
-    var doc7 = document.getElementById("avatar7");
-    var doc8 = document.getElementById("avatar8");
-
-    doc3.style.backgroundColor = "green";
-    doc4.style.backgroundColor = "lightblue";
-    doc2.style.backgroundColor = "lightblue";
-    doc1.style.backgroundColor = "lightblue";
-
-    doc5.style.backgroundColor = "lightblue";
-    doc6.style.backgroundColor = "lightblue";
-    doc7.style.backgroundColor = "lightblue";
-    doc8.style.backgroundColor = "lightblue";
-}
-
-function selectDoc4(){
-    resetDoc();
-    checkDoc[3] = true;
-
-
-    var doc4 = document.getElementById("avatar4");
-    var doc3 = document.getElementById("avatar3");
-    var doc2 = document.getElementById("avatar2");
-    var doc1 = document.getElementById("avatar1");
-
-    var doc5 = document.getElementById("avatar5");
-    var doc6 = document.getElementById("avatar6");
-    var doc7 = document.getElementById("avatar7");
-    var doc8 = document.getElementById("avatar8");
-
-    doc4.style.backgroundColor = "green";
-    doc3.style.backgroundColor = "lightblue";
-    doc2.style.backgroundColor = "lightblue";
-    doc1.style.backgroundColor = "lightblue";
-
-    doc5.style.backgroundColor = "lightblue";
-    doc6.style.backgroundColor = "lightblue";
-    doc7.style.backgroundColor = "lightblue";
-    doc8.style.backgroundColor = "lightblue";
-}
-
-function selectDoc5(){
-    resetDoc();
-    checkDoc[4] = true;
-
-    var doc4 = document.getElementById("avatar4");
-    var doc3 = document.getElementById("avatar3");
-    var doc2 = document.getElementById("avatar2");
-    var doc1 = document.getElementById("avatar1");
-
-    var doc5 = document.getElementById("avatar5");
-    var doc6 = document.getElementById("avatar6");
-    var doc7 = document.getElementById("avatar7");
-    var doc8 = document.getElementById("avatar8");
-
-    doc1.style.backgroundColor = "lightblue";
-    doc4.style.backgroundColor = "lightblue";
-    doc3.style.backgroundColor = "lightblue";
-    doc2.style.backgroundColor = "lightblue";
-
-    doc5.style.backgroundColor = "green";
-    doc6.style.backgroundColor = "lightblue";
-    doc7.style.backgroundColor = "lightblue";
-    doc8.style.backgroundColor = "lightblue";
-    
-}
-
-function selectDoc6(){
-    resetDoc();
-    checkDoc[5] = true;
-
-
-    var doc4 = document.getElementById("avatar4");
-    var doc1 = document.getElementById("avatar1");
-    var doc3 = document.getElementById("avatar3");
-    var doc2 = document.getElementById("avatar2");
-
-    var doc5 = document.getElementById("avatar5");
-    var doc6 = document.getElementById("avatar6");
-    var doc7 = document.getElementById("avatar7");
-    var doc8 = document.getElementById("avatar8");
-
-    doc2.style.backgroundColor = "lightblue";
-    doc4.style.backgroundColor = "lightblue";
-    doc3.style.backgroundColor = "lightblue";
-    doc1.style.backgroundColor = "lightblue";
-
-    doc5.style.backgroundColor = "lightblue";
-    doc6.style.backgroundColor = "green";
-    doc7.style.backgroundColor = "lightblue";
-    doc8.style.backgroundColor = "lightblue";
-}
-
-function selectDoc7(){
-
-    resetDoc();
-    checkDoc[6] = true;
-
-    
-    var doc4 = document.getElementById("avatar4");
-    var doc2 = document.getElementById("avatar2");
-    var doc1 = document.getElementById("avatar1");
-    var doc3 = document.getElementById("avatar3");
-
-    var doc5 = document.getElementById("avatar5");
-    var doc6 = document.getElementById("avatar6");
-    var doc7 = document.getElementById("avatar7");
-    var doc8 = document.getElementById("avatar8");
-
-    doc3.style.backgroundColor = "lightblue";
-    doc4.style.backgroundColor = "lightblue";
-    doc2.style.backgroundColor = "lightblue";
-    doc1.style.backgroundColor = "lightblue";
-
-    doc5.style.backgroundColor = "lightblue";
-    doc6.style.backgroundColor = "lightblue";
-    doc7.style.backgroundColor = "green";
-    doc8.style.backgroundColor = "lightblue";
-}
-
-function selectDoc8(){
-    resetDoc();
-    checkDoc[7] = true;
-
-
-    var doc4 = document.getElementById("avatar4");
-    var doc3 = document.getElementById("avatar3");
-    var doc2 = document.getElementById("avatar2");
-    var doc1 = document.getElementById("avatar1");
-
-    var doc5 = document.getElementById("avatar5");
-    var doc6 = document.getElementById("avatar6");
-    var doc7 = document.getElementById("avatar7");
-    var doc8 = document.getElementById("avatar8");
-
-    doc4.style.backgroundColor = "lightblue";
-    doc3.style.backgroundColor = "lightblue";
-    doc2.style.backgroundColor = "lightblue";
-    doc1.style.backgroundColor = "lightblue";
-
-    doc5.style.backgroundColor = "lightblue";
-    doc6.style.backgroundColor = "lightblue";
-    doc7.style.backgroundColor = "lightblue";
-    doc8.style.backgroundColor = "green";
-}
-
-function resetDoc()
-{
-    for(var i = 0; i < 8; i++)
-    {
-        checkDoc[i] = false;
-    }
-}
-
-function confirmPic(){
-    var pictureFrame1 = document.querySelector(".profile");
-    if(checkDoc[0] == true){
-        
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_a_male.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-    }
-    if(checkDoc[1] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_b_male.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-    }
-    if(checkDoc[2] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_i_male.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-    }
-    if(checkDoc[3] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_w_male.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-    }
-    if(checkDoc[4] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_a_female.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-    }
-    if(checkDoc[5] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_b_female.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-    }
-    if(checkDoc[6] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_i_female.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-    }
-    if(checkDoc[7] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_w_female.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-    }
-}
-
-function confirmPicture(){
-    var avatar = "0";
-    var pictureFrame1 = document.querySelector(".profile");
-    if(checkDoc[0] == true){
-        
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_a_male.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-        avatar = "0";
-    }
-    if(checkDoc[1] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_b_male.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-        avatar = "1";
-    }
-    if(checkDoc[2] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_i_male.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-        avatar = "2";
-    }
-    if(checkDoc[3] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_w_male.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-        avatar = "3";
-    }
-    if(checkDoc[4] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_a_female.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-        avatar = "4";
-    }
-    if(checkDoc[5] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_b_female.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-        avatar = "5";
-    }
-    if(checkDoc[6] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_i_female.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-        avatar = "6";
-    }
-    if(checkDoc[7] == true){
-        var population = "<img id='profilePic' src='../css/images/Avatars/doc_w_female.png' alt='Profile Picture' width='200px' height='200px'>";
-        pictureFrame1.innerHTML = population;
-        avatar = "7";
-    }
-
-    var response = fetch("/setAvatarChoice",{
+    var response = fetch("/getDoctorBasedOnID" , {
         method:"POST",
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
-        body: JSON.stringify({"avatar":avatar})
+        body:JSON.stringify({"id":doctor})
     });
+
+    response.then(res => res.json().then(data=> {
+        document.getElementById("doctorInfoDisplay").innerHTML = data.name+ " "+ data.surname;
+        document.getElementById("doctorInfoDisplay").style.color = "lightgreen";
+    }))
+   
+
 }
