@@ -32,7 +32,7 @@ function login()
 
             if(res.status == 404)
             {
-                document.querySelector("#errorResponse").innerHTML="User information not matched";
+                document.querySelector("#errorResponse").innerHTML="Invalid login credentials";
             }
             else
             {

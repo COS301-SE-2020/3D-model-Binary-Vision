@@ -68,6 +68,7 @@ module.exports = {
                     }
                     else{
                         res.send(erro);
+                        return;
                     }
                 })        
             }
@@ -100,7 +101,7 @@ module.exports = {
 
             }
         });
-        
+        res.status(404);
         return;
     },
 
