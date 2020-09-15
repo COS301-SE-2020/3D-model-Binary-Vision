@@ -1332,7 +1332,7 @@ module.exports = {
             return;
         }
 
-        Consultation.find({"doctor":mongoose.Types.ObjectId(req.user), "patient":req.body.patient} , function(err, consultations)
+        Consultation.find({"doctor":req.user, "patient":req.body.patient} , function(err, consultations)
         {
             if (err)
             {
