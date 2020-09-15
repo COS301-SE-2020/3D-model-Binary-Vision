@@ -188,7 +188,7 @@ module.exports = {
                             }
                             else
                             {
-                                console.log("Practice Log File successfully created!");
+                                //console.log("Practice Log File successfully created!");
                             }
                         });
                         res.redirect('/signup.html');
@@ -1552,7 +1552,7 @@ function updateLogFile(linedesc,practice)
         }
         else
         {
-            console.log("Log updated.");
+            //console.log("Log updated.");
         }
     });
 }
