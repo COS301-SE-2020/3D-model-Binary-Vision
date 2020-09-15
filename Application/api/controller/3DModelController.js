@@ -147,15 +147,20 @@ module.exports = {
     practiceRegistration: function(req, res){
         const {practice , securityCode, headReceptionist} = req.body;
 
+        console.log(practice);
+        console.log(securityCode);
+        console.log(headReceptionist);
+
         Practice.findOne({"practice":practice}, function(err, prac){
-            if (prac != null || prac != "")
-            {
+
+            if (prac != null /*|| prac != ""*/)
+            {   
                 //practition already registered;
-                res.status(400).send("Practice already exists"); // Marcus Changed this from status -> senStatus
+                res.status(400).send("Practice already exists");
                 return;
             }
             else
-            {
+            {   
                 var newPractice = new Practice ({practice,securityCode,headReceptionist});
                 newPractice.save(function(err, pr)
                 {
@@ -783,8 +788,8 @@ module.exports = {
     //======================================================================================
     //Function developed by: Steven Visser
     //Returns all patients that match certain criteria from the database
-   searchPatient: function(req, res)
-   {
+    searchPatient: function(req, res)
+    {
        console.log("search for a patient")
         if (!req.user)
         {
