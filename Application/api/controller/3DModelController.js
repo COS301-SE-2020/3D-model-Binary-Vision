@@ -147,48 +147,50 @@ module.exports = {
         const {practice , securityCode, headReceptionist} = req.body;
 
         Practice.findOne({"practice":practice}, function(err, prac){
-            if (prac)
+            if (prac != null || prac != "")
             {
                 //practition already registered;
                 res.status(400).send("Practice already exists"); // Marcus Changed this from status -> senStatus
                 return;
             }
-
-            var newPractice = new Practice ({practice,securityCode,headReceptionist});
-            newPractice.save(function(err, pr){
-
-                if(err)
-                {
-                    res.send(err);
-                    return;
-                }
-                else
+            else
+            {
+                var newPractice = new Practice ({practice,securityCode,headReceptionist});
+                newPractice.save(function(err, pr)
                 {
 
-                    var today = new Date();
-                    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
-                    var hours = today.getHours();
-                    var minutes = today.getMinutes();
-                    var seconds = today.getSeconds();
-                    var time = hours + ":" + minutes + ":" + seconds ;
-                    var line = date + "@" + time + "@Practice: " + practice + " Registered!\n";
-                    var fname = "./webSite/Logs/"+practice+".txt";
-                    fs.writeFile(fname,line,function(err){
-                        if(err)
-                        {
-                            console.log(err);
-                        }
-                        else
-                        {
-                            console.log("Practice Log File successfully created!");
-                        }
-                    });
-                    res.redirect('/signup.html');
-                    return;
-                }
-            })
+                    if(err)
+                    {
+                        res.send(err);
+                        return;
+                    }
+                    else
+                    {
 
-        })
+                        var today = new Date();
+                        var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+                        var hours = today.getHours();
+                        var minutes = today.getMinutes();
+                        var seconds = today.getSeconds();
+                        var time = hours + ":" + minutes + ":" + seconds ;
+                        var line = date + "@" + time + "@Practice: " + practice + " Registered!\n";
+                        var fname = "./webSite/Logs/"+practice+".txt";
+                        fs.writeFile(fname,line,function(err){
+                            if(err)
+                            {
+                                console.log(err);
+                            }
+                            else
+                            {
+                                console.log("Practice Log File successfully created!");
+                            }
+                        });
+                        res.redirect('/signup.html');
+                        return;
+                    }
+                });
+            }
+        });
 
     },
 
