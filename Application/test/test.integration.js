@@ -3,7 +3,9 @@
 
 let chai = require("chai");
 let chaiHttp = require("chai-http");
+let Benchmark = require('benchmark');
 let server = require("../server");
+
 let db = require("../api/controller/3DModelController");
 let dbR = require("../api/controller/ReceptionistController");
 let dbE = require("../api/controller/EmailController");
@@ -242,11 +244,6 @@ describe('Integration Testing:', () => {
 				loginDoc1(cb);
 			}
 		], done);
-	});
-
-	// After all of the tests are executed
-	after(function(done) {
-		done();
 	});
 
 	// Test case 1: practiceRegistration
