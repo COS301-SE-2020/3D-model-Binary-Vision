@@ -147,15 +147,20 @@ module.exports = {
     practiceRegistration: function(req, res){
         const {practice , securityCode, headReceptionist} = req.body;
 
+        console.log(practice);
+        console.log(securityCode);
+        console.log(headReceptionist);
+
         Practice.findOne({"practice":practice}, function(err, prac){
-            if (prac != null || prac != "")
-            {
+
+            if (prac != null /*|| prac != ""*/)
+            {   
                 //practition already registered;
-                res.status(400).send("Practice already exists"); // Marcus Changed this from status -> senStatus
+                res.status(400).send("Practice already exists");
                 return;
             }
             else
-            {
+            {   
                 var newPractice = new Practice ({practice,securityCode,headReceptionist});
                 newPractice.save(function(err, pr)
                 {
@@ -348,7 +353,7 @@ module.exports = {
         const {idNumber, name , surname , email , gender, cellnumber,practice} = req.body;
         Patient.findOne({"idNumber":idNumber},function(err,pat)
         {
-            if(pat != null || pat != "")
+            if(pat != null /*|| pat != ""*/)
             {
                 res.status(400).send("Patient with that ID number already exists on the system");
                 return;
@@ -745,8 +750,8 @@ module.exports = {
     //======================================================================================
     //Function developed by: Steven Visser
     //Returns all patients that match certain criteria from the database
-   searchPatient: function(req, res)
-   {
+    searchPatient: function(req, res)
+    {
        console.log("search for a patient")
         if (!req.user)
         {
@@ -1426,7 +1431,7 @@ module.exports = {
                     .send("error finding doctors bookings");
                 return;
             }
-            Patient.findOne({ '_id' : mongoose.Types.ObjectId(bookings.pateint) }, function (err, patient)
+            Patient.findOne({ '_id' : mongoose.Types.ObjectId(bookings.patient) }, function (err, patient)
             {
                 if (err) 
                 {
