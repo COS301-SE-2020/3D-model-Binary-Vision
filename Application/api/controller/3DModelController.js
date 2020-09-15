@@ -742,7 +742,6 @@ module.exports = {
 
         const {name , surname , idNumber} = req.body;
 
-        console.log(name+"  "+surname+"  "+idNumber);
         Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
         {
             if (err)
@@ -1390,6 +1389,40 @@ module.exports = {
                     .send("Receptionist Updated!");
                 return;
             }
+        });
+    },
+
+    //======================================================================================
+    //Function developed by: Steven Visser
+    //returns a patient and the booking
+    getPatientAndBooking: function (req, res) 
+    {
+        if (!req.user)
+        {
+            res.status(401)
+                .send("Unauthorized access to doctors scheduling info");
+            return;
+        }
+
+        Booking.findOne({"_id":mongoose.Types.ObjectId(req.body.bid)},function(err,bookings)
+        {
+            if(err)
+            {
+                res.status(400)
+                    .send("error finding doctors bookings");
+                return;
+            }
+            Patient.findOne({ '_id' : mongoose.Types.ObjectId(bookings.pateint) }, function (err, patient)
+            {
+                if (err) 
+                {
+                    res.send(err);
+                    return;
+                } 
+                res.json({"name":patient.name,"idNumber":patient.idNumber,"time":bookings.time,"date":bookings.date,"cellnumber":patient.cellnumber,"patient":bookings.patient,"bid":bookings._id});
+                return;  
+            });
+            
         });
     }
 

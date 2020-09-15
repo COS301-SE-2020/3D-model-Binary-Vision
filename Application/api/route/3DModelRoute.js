@@ -164,4 +164,7 @@ module.exports = function (app)
 
     app.route('/setAvatarChoice')
         .post(Model.setAvatarChoice);
+
+    app.route('/getPatientAndBooking')
+        .post(Model.getPatientAndBooking);    
 }
