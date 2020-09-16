@@ -221,7 +221,7 @@ function submitVideo(video, videoStreamed)
 		var VideoSending = new FormData();
 		//will need to append the patient ID / consultation ID to save it in the database "Jaco"	
 		//VideoSending.append("video", video); // Append the actual video to the form
-		
+		VideoSending.append('patientID', getPatientID());
 
 		for (var i=0; i<images.length; i++)
 			VideoSending.append('image', images[i]); // Append the images to the form
@@ -313,4 +313,7 @@ function generateImage(i, video)
 	});
 	//document.getElementById('testDraw').appendChild(img);
 }
- 
+
+function getPatientID() {
+	return "123456789";
+}
