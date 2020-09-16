@@ -230,12 +230,12 @@ function submitVideo(video, videoStreamed)
 		    console.log(pair[1]); 
 		}
 
-		var response = fetch("/upload",{
+		var response = fetch("/uploadImages",{
 			method:"POST",
 			body: VideoSending
 		});
 		
-		response.then(res=> {console.log("uploaded")});
+		response.then(res=> {console.log("uploadImages")});
 	});
 }
 
