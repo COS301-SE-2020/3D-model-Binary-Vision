@@ -16,3 +16,11 @@
 16/9/2020@16:12:3@lindaS@Made a booking@BID:5f621d336943d0548af6d538
 16/9/2020@16:12:3@DrSpiderman@Saved a consultation@CID:5f621d336943d0548af6d53e
 16/9/2020@16:12:3@DrSpiderman@Logout
+16/9/2020@19:44:38@PracticeHead@Accepted Receptionist Application@ID:5f624f06a52f2d6d3497c688
+16/9/2020@19:44:38@lindaS@Logged in
+16/9/2020@19:44:38@PracticeHead@Accepted Doctor Application@ID:5f624f06a52f2d6d3497c689
+16/9/2020@19:44:38@DrSpiderman@Logged in
+16/9/2020@19:44:38@lindaS@Made a booking@BID:5f624f06a52f2d6d3497c68d
+16/9/2020@19:44:38@lindaS@Made a booking@BID:5f624f06a52f2d6d3497c68e
+16/9/2020@19:44:38@DrSpiderman@Saved a consultation@CID:5f624f06a52f2d6d3497c694
+16/9/2020@19:44:38@DrSpiderman@Logout
