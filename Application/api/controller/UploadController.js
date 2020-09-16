@@ -21,17 +21,20 @@ module.exports = {
 
         form.parse(req, (err, fields, files) => 
         {
+            console.log(fields);
+
             if(err)
             {
                 console.log(err);
                 return;
             }
-            const images = files;
+            const images = files.images;
 
             if (!images || isEmpty(images))
             {
                 //if no images was sent we handle this by returning a error status 404
-                res.status(404).send("no images");
+                console.log("No photos found");
+                res.status(404).send(images);
                 return;
             }
             else 
@@ -81,11 +84,10 @@ module.exports = {
                                 res.send(err);
                             }
                             else{
-                        
                                 const consultation = new Consultation(
                                 {
                                     doctor: req.user, // get from session, e.g. cookies
-                                    patient: patient._id,
+                                    patient: fields.id,
                                     STL: file._id,
                                     Note: "Video Upload"
                                 });

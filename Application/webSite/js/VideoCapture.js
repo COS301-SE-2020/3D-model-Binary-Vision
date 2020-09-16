@@ -210,33 +210,48 @@ function submitVideo(video, videoStreamed)
 		document.getElementById("VideoRecorder").style.height = "1000px";
 	}
 
+	var url = window.location.href;
+	var parts = url.split("=");
+	var bookingID = parts[1];
+
+	const booking = fetch ("/getSingleBooking",{
+		method:"POST",
+		headers:{'Content-Type': 'application/json; charset=UTF-8'},
+		body:JSON.stringify({"booking":bookingID})
+	})	
+
+	booking.then(book=>book.json().then(data =>{
+
+		var submitVideoButton = document.getElementById('submitVideo');
+
+		submitVideoButton.addEventListener('click', (ev) => 
+		{
+			alert("ACTION: Video sent (" + video + ")");
+			//post method
+			var VideoSending = new FormData();
+			//will need to append the patient ID / consultation ID to save it in the database "Jaco"	
+			//VideoSending.append("video", video); // Append the actual video to the form
+			
 	
+			for (var i=0; i<images.length; i++)
+				VideoSending.append('image', images[i]); // Append the images to the form
+	
+			for (var pair of VideoSending.entries()) {
+				console.log(pair[1]); 
+			}
 
-	var submitVideoButton = document.getElementById('submitVideo');
-
-	submitVideoButton.addEventListener('click', (ev) => 
-	{
-		alert("ACTION: Video sent (" + video + ")");
-		//post method
-		var VideoSending = new FormData();
-		//will need to append the patient ID / consultation ID to save it in the database "Jaco"	
-		//VideoSending.append("video", video); // Append the actual video to the form
-		
-
-		for (var i=0; i<images.length; i++)
-			VideoSending.append('image', images[i]); // Append the images to the form
-
-		for (var pair of VideoSending.entries()) {
-		    console.log(pair[1]); 
-		}
-
-		var response = fetch("/uploadImages",{
-			method:"POST",
-			body: VideoSending
+			VideoSending.append("id",data.patient);
+	
+			var response = fetch("/uploadImages",{
+				method:"POST",
+				body: VideoSending
+			});
+			
+			response.then(res=> {console.log("uploadImages")});
 		});
-		
-		response.then(res=> {console.log("uploadImages")});
-	});
+
+	}));
+
 }
 
 //=============================================================================================
