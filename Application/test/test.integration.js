@@ -14,8 +14,12 @@ let dbU = require("../api/controller/UploadController");
 var async = require('async');
 
 const benchtest = require("benchtest");
+benchtest(null,{log:"json"});
 beforeEach(benchtest.test);
-after(function(done){ benchtest.report; done(); });
+after(function(done){ 
+	benchtest.report;
+	done(); 
+});
 
 //Assertion sytle
 chai.should();
