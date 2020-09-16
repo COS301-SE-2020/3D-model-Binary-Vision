@@ -100,12 +100,7 @@ module.exports = {
                             contentType: "text/plain"
                         } 
 
-                        const consultation = new Consultation(
-                        {
-                                doctor: req.user, // get from session, e.g. cookies
-                                patient: fields.id,
-                                Note: "Video Upload"
-                        });
+                       
 
                         Files.write(OBJoptions, objStream, (err, file) => {
                             if (err) 
@@ -114,7 +109,6 @@ module.exports = {
                             }
                             
                             console.log("Saving OBJ file");
-                            consultation.OBJ = file._id;
                             
 
                             Files.write(TEXoptions,textureStrem,(texErr, texfile) => {
@@ -123,7 +117,6 @@ module.exports = {
                                 }
 
                                 console.log("Saving texture file");
-                                consultation.TEX = texfile._id;
                                 
 
                                 Files.write(MTLoptions, mtlStream , (mtlErr , mtlfile)=>{
@@ -132,15 +125,29 @@ module.exports = {
                                     }
 
                                     console.log("Saving mtl file");
-                                    consultation.MTL = mtlfile._id;
 
-                                    consultation.save(function (err) 
+                                    const consultation = new Consultation(
                                     {
-                                        if (err)
+                                        doctor: req.user, // get from session, e.g. cookies
+                                        patient: fields.id,
+                                        Note: "Video Upload",
+                                        OBJ:file._id,
+                                        TEX: texfile._id,
+                                        MTL:mtlfile._id
+                                    });
+
+                                    consultation.save(function (consErr,cons) 
+                                    {
+                                        if (consErr)
                                         {
                                           res.status(400);
+                                          console.log("Error saving the consultation: "+ consErr);
                                         }
-                                        res.status(201);
+                                        else{
+                                            console.log("saved consultation "+ cons);
+                                            res.status(201);
+
+                                        }
                                     });
 
                                 });
