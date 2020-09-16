@@ -4,9 +4,8 @@
   "description": "RestApi ",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "performance": "node --allow-natives-syntax ./node_modules/mocha/bin/_mocha --reporter mocha-performance ./test/*.js",
     "test": "nyc mocha --exit || true",
+    "start": "node server.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov"
   },
