@@ -63,7 +63,7 @@ module.exports = {
 
                 const workingDirectory = "sfmAlgorithm_linux/Executable/";
                 console.log(workingDirectory);
-                var d = "sample_test";//req.user+"-"+f;
+                var d = req.user+"-"+f;
                 
                 exec(`./main ${d}`,{ cwd: workingDirectory, shell: true }, (error, stdout, stderr) => {
                     console.log(stdout);
@@ -72,8 +72,8 @@ module.exports = {
                         console.log(`Process exited with error: ${error.code}`);
                         
                         //remove created directories
-                        // console.log("Deleting directory "+ dir);
-                        // rimraf(dir);
+                        console.log("Deleting directory "+ dir);
+                        rimraf(dir);
 
 
                         return res.sendStatus(500);
@@ -112,8 +112,8 @@ module.exports = {
                         });
                         
                         //remove created directories 
-                        // console.log("Deleting directory "+ dir);
-                        // rimraf(dir);
+                        console.log("Deleting directory "+ dir);
+                        rimraf(dir);
                         res.status(200).send("Success");
                     }
                 });
