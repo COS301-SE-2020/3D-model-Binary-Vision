@@ -145,7 +145,13 @@ Manual and I updated the User Manual to work for our new system redesign.
 Went through the system and documented all bugs & fixes that needed to be
 made and then fixed alot of them too.
 
-Demo 4: pending
+Demo 4:  I kept the project management tool up to date. I updated most of
+documentation to match the latest system. Updated the booking system to remove
+the deletion of data and change the bookings that can be viewed. I implemented
+the consultation record page and the saving of consultations. I created the
+Log System, which keeps track of all user interactions with the system. I set up
+the SSL certificate in the configuration of the server and changed the  rendering 
+page to render OBJ files instead of STL files.
 
 -----------------------------------------------------------------------------------------------------------------
 
