@@ -82,8 +82,8 @@ module.exports = {
                         const objStream = fs.createReadStream(path.join(fileLocation, d+".obj" ));
                         const Files = createModel();
                         const options = {
-                            filename: video.name,
-                            contentType: video.type
+                            filename: d+".obj",
+                            contentType: objStream.type
                           }
                         Files.write(options, objStream, (err, file) => {
                             if (err) 
