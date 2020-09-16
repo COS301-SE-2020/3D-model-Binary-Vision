@@ -10,4 +10,4 @@ services:
   - mongodb
 
 script: 
-  - cd Application &&  npm install -g mocha && npm test
+  - cd Application &&  npm install -g mocha && npm test && nyc report --reporter=text-lcov | coveralls
