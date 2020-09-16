@@ -264,7 +264,7 @@ describe('Integration Testing:', () => {
 				});
 		});
 	});
-/*
+
 	// Test case 2: getPracticeName
 	describe('(2) getPracticeName: ', () => {
 		it('Testing getPracticeName Feature (with valid user input) - Returns 200 code', (done) => {
@@ -1520,6 +1520,5 @@ describe('Integration Testing:', () => {
 				});
 		});
 	});
-*/
 });
 
