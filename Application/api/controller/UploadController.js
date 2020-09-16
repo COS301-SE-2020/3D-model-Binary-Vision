@@ -83,7 +83,7 @@ module.exports = {
                         const Files = createModel();
                         const options = {
                             filename: d+".obj",
-                            contentType: objStream.type
+                            contentType: "text/plain" 
                           }
                         Files.write(options, objStream, (err, file) => {
                             if (err) 
