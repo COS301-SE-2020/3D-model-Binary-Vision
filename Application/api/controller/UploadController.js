@@ -1,6 +1,7 @@
 //file creates by: Jacobus Janse van Rensburg
 //controller for all the uploads and retrievals as well as the integrating of the c++ program 
 
+const Consultation = require("../model/3DModelModel.js").Consultation;
 const formidable = require("formidable");
 const { createModel } = require('mongoose-gridfs');
 const mongoose = require("mongoose");
@@ -62,7 +63,7 @@ module.exports = {
 
                 const workingDirectory = "sfmAlgorithm_linux/Executable/";
                 console.log(workingDirectory);
-                var d = "sample_test";//req.user+"-"+f;
+                var d = req.user+"-"+f;
                 
                 exec(`./main ${d}`,{ cwd: workingDirectory, shell: true }, (error, stdout, stderr) => {
                     console.log(stdout);
@@ -71,14 +72,14 @@ module.exports = {
                         console.log(`Process exited with error: ${error.code}`);
                         
                         //remove created directories
-                        // console.log("Deleting directory "+ dir);
-                        // rimraf(dir);
+                        console.log("Deleting directory "+ dir);
+                        rimraf(dir);
 
 
                         return res.sendStatus(500);
                     } else {
                         //get stl file and save it to a consultations ID
-                        var fileLocation = "smfAlgorithm_linux/Executable/output_obj/"+d+"/";
+                        var fileLocation = "sfmAlgorithm_linux/Executable/output_obj/"+d+"/";
                         const objStream = fs.createReadStream(path.join(fileLocation, d+".obj" ));
                         const Files = createModel();
                         const options = {
@@ -89,6 +90,7 @@ module.exports = {
                             if (err) 
                             {
                                 res.send(err);
+                                return;
                             }
                             else{
                                 const consultation = new Consultation(
@@ -102,7 +104,7 @@ module.exports = {
                                 {
                                     if (err)
                                     {
-                                      res.send(400);
+                                      res.status(400);
                                     }
                                     res.status(201);
                                 });
@@ -110,8 +112,8 @@ module.exports = {
                         });
                         
                         //remove created directories 
-                        // console.log("Deleting directory "+ dir);
-                        // rimraf(dir);
+                        console.log("Deleting directory "+ dir);
+                        rimraf(dir);
                         res.status(200).send("Success");
                     }
                 });

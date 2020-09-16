@@ -69,7 +69,7 @@ via front-end contribution in javascript (functionality that helped make informa
 Furthermore, ensured that all data is applicable to modern day dentists.
 For this demo I further ensured that the project had an entirely new look that overhauled from the previous demo. I ensured that it would be easier, visually, for both the doctor and the receptionist to use the software.
 
-Demo 4: pending
+Demo 4: I worked on the front end integration system that allows for an eye appealing and easy to use software system. I have also worked on adding new features such as the mobile platform visualisation that allows users to view the program on mobile. To do these functionalities I used HTML5, javascript, and nodejs. I have also added a profile picture selection program that allows users to select a new profile picture. I have helped with research on the Integration testing and currently working on fixing the quality testing.
 
 -----------------------------------------------------------------------------------------------------------------
 Quinn du Piesanie
@@ -162,11 +162,11 @@ integration tool we are using) to our Github repository so that when a commit is
 sent the repository it will be built and then run the unit tests to see that meaningful
 code was uploaded. I also edited the demo video.
 
-Demo 3: I contributed to the new user interface, by adding/updating the html, CSS and 
-JavaScript. I also updated the video capture page, the page now sends the blob images 
-to the back end, instead of the full video. Lastly I was in control of the unit testing, 
-I had to update all the tests in accordance to the new API calls made, Travis CI code 
-was also updated. 
+Demo 3: I contributed to the new user interface, by adding/updating the html, CSS and
+JavaScript. I also updated the video capture page, the page now sends the blob images
+to the back end, instead of the full video. Lastly I was in control of the unit testing,
+I had to update all the tests in accordance to the new API calls made, Travis CI code
+was also updated.
 
 Demo 4: pending
 
