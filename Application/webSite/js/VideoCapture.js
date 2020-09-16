@@ -328,4 +328,7 @@ function generateImage(i, video)
 	});
 	//document.getElementById('testDraw').appendChild(img);
 }
- 
+
+function getPatientID() {
+	return "123456789";
+}

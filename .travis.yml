@@ -12,12 +12,24 @@ services:
 script: 
   - cd Application &&  npm install -g mocha && npm test
 
-after_script:  
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+env:
+  global:
+    - COVERALLS_PARALLEL=true
 
-after_success:
-  - npm run coverage
-  - npm run coveralls
+jobs:
+  include:
+    - script: COVERALLS_FLAG_NAME=test-1 make test-coveralls-1
+    - script: COVERALLS_FLAG_NAME=test-2 make test-coveralls-2
+    
+notifications:
+  webhooks: https://coveralls.io/webhook
+
+#after_script:  
+#  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+#after_success:
+#  - npm run coverage
+#  - npm run coveralls
 
 notifications:
   email: false
