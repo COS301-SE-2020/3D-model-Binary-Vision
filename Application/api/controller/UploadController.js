@@ -1,6 +1,7 @@
 //file creates by: Jacobus Janse van Rensburg
 //controller for all the uploads and retrievals as well as the integrating of the c++ program 
 
+const Consultation = require("../model/3DModelModel.js").Consultation;
 const formidable = require("formidable");
 const { createModel } = require('mongoose-gridfs');
 const mongoose = require("mongoose");
