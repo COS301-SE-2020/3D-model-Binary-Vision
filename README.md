@@ -24,6 +24,8 @@ Demo 2: https://drive.google.com/file/d/1a6tvSa4dhbSURALP31Q9EbFMByTVWWvP/view?u
 
 Demo 3: https://drive.google.com/file/d/1VfmeiANV4ApCIPXjxeQu1LsL8j8on6E-/view?usp=sharing
 
+Demo 4: https://drive.google.com/file/d/1gvdl9_cOCZDT10tN7zqtIOTMi15_MZhO/view?usp=sharing
+
 -----------------------------------------------------------------------------------------------------------------
 
 Documentation Download:
@@ -36,6 +38,8 @@ User Manual     : https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/
 Coding Standards : https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/Coding%20Standards%20Document.pdf
 
 Technical Installation Manual : https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/User%20Manual.pdf
+
+Testing Policy: https://github.com/COS301-SE-2020/3D-model-Binary-Vision/blob/master/Documentation/Test%20Policy.pdf
 
 -----------------------------------------------------------------------------------------------------------------
 
