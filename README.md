@@ -1,6 +1,8 @@
 \# 3D Model Binary Vision Project
 =================================
 
+[![Build Status](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision.svg?branch=master)](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision)
+
 https://vanillav.github.io/FlapJacks.github.io/
 
 A mobile web application that will allow a user to scan a physical
