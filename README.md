@@ -1,7 +1,7 @@
 \# 3D Model Binary Vision Project
 =================================
 
-https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision.svg?branch=Feature%2FImprovements
+[![Build Status](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision.svg?branch=Feature%2FImprovements)](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision)
 
 https://vanillav.github.io/FlapJacks.github.io/
 
