@@ -78,7 +78,7 @@ module.exports = {
                         return res.sendStatus(500);
                     } else {
                         //get stl file and save it to a consultations ID
-                        var fileLocation = "smfAlgorith_linux/Executable/output_obj/"+d+"/";
+                        var fileLocation = "smfAlgorithm_linux/Executable/output_obj/"+d+"/";
                         const objStream = fs.createReadStream(path.join(fileLocation, d+".obj" ));
                         const Files = createModel();
                         const options = {
