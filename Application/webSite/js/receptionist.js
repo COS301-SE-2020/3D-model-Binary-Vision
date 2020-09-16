@@ -1,13 +1,32 @@
 //Made by : Jacobus Janse van Rensburg
 //This file contains all functions implemented to send data to the backend API
 
+var checkDoc = [];
 
-//Function developed by : Jacobus Janse van Rensburg
+//Function developed by : Steven Visser
 function initReceptionist()
 {
     //getReceptionist Info and populate visual info on page
-   var info = getReceptionistInfo();
-   console.log(info);
+    var info = getReceptionistInfo();
+
+    for(var i = 0; i < 8; i++)
+    {
+        checkDoc[i] = false;
+    }
+    
+
+   var response = fetch("/getAvatarChoice",{
+        method:"POST",
+        headers:{'Content-Type':'Application/json ; charset=UTF-8'}
+    });
+
+    response.then(res=> res.json().then(data=> 
+    {
+        //data.choice is the avatar option
+        var index = parseInt(data.avatar,10);
+        checkDoc[index] = true;
+        confirmPic();
+    }));
 }
 
 window.onbeforeunload = saveNotes();
@@ -51,7 +70,6 @@ function getReceptionistInfo()
 function saveNotes()
 {
     var noteSpace = document.getElementById('receptionistNotes').value;
-    console.log("Note captured to save: "+ noteSpace);
     saveReceptionistNotes(noteSpace);
 }
 
@@ -78,7 +96,8 @@ function receptionistSearchPatient()
         idNumber=idNumberElement.value;
     } 
 
-    var response = fetch("/searchPatient",{
+    var response = fetch("/searchPatient",
+    {
         method:"POST",
         headers:{'Content-Type':'application/json; charset=UTF-8'},
         body:JSON.stringify({ name ,surname, idNumber })
@@ -86,10 +105,17 @@ function receptionistSearchPatient()
 
     response.then(res=> res.json().then(data=>
     {
-        for(var i in data)
-        {
-            console.log(data[i]);
-        }
         return data;
     }));
 }
+
+//=============================================================================================
+//Function Developed by: Steven Visser
+//Initializes the QRCode add patient page
+function init()
+{
+    var url = window.location.href;
+    var parts = url.split("=");
+    document.getElementById("prac").value = parts[1];
+}
+

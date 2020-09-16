@@ -3,11 +3,69 @@
 	color: white;
 }
 
+#logoContainer{
+	opacity: 0.8;
+	position: relative;
+ 
+	padding: 9px;
+	margin-top: 15px;
+
+	display: inline-block;
+
+
+}
+
+@font-face {
+  font-family: Anton;
+  src: url(fonts/Anton-Regular.ttf);
+}
+
+@font-face {
+  font-family: Abel;
+  src: url(fonts/Abel/Abel-Regular.ttf);
+}
+
+#centerLogs{
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	text-align: center;
+	margin-top: 100px;
+}
+
+#centerLogs textarea{
+	height: 60vh;
+	width: 60vw;
+	border: 2px solid black;
+}
+
+#logoWords{
+	font-family: Arial;
+	position: absolute;
+	left: 3px;
+	top: 60px;
+	color: white;
+	font-size: 50px;
+	text-shadow: 0 0 8px #888888, 0 0 9px #222222;
+
+}
+
+#selectTime, #selectDay{
+	width: 200px;
+}
 .renderButton {
 	position: relative;
 	text-align: center;
 }
 
+.section{
+	max-width: 1240px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-right: 2%;
+	padding-left: 2%;
+	padding-bottom: 2%;
+}
 
 .outputModule{
 	position: relative;
@@ -20,10 +78,43 @@
 	position: relative;
 	margin-bottom: 0px;
 	margin-top: 0px;
-	margin-left: 0px;
-	margin-right: 0px;
+	margin-left: 5px;
+	margin-right: 5px;
 	padding: 0px;
+	font-family: Abel;
+	font-size: 20px;
 
+}
+
+#containInfoRight button{
+	width: 200px;
+}
+
+#recordPage{
+	font-family: Abel;
+	width: 200px;
+}
+
+#profileFrame:hover{
+
+
+	
+	z-index: inherit;
+
+	text-decoration: white;
+	position: relative;
+
+
+}
+
+
+
+
+
+#renderpage{
+	margin-top: 10px;
+	font-family: Abel;
+	width: 200px;
 }
 
 .nav-link1 {
@@ -43,6 +134,18 @@
 
 }
 
+#selectedProcedure {
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-right: 7px;
+	padding-left: 7px;
+}
+
+#btnCommonBooking {
+	margin: 20px;
+}
+
 .selectDocotor{
 	margin-left: 30px;
 	width: 200px;
@@ -56,6 +159,7 @@
 .moveSideBar {
   transform: translateX(-240px);
 }
+
 
 .container{
 	text-align: center;
@@ -105,6 +209,25 @@
 	box-shadow: 1px 0px 15px 0px black;
 }
 
+.conatinerRegPatMain {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	display: block;
+	background-color: #003366;
+	text-align: center;
+	margin-top:70px;
+	margin-left: 7px;
+	margin-right: 7px;
+	border-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	box-shadow: 1px 0px 15px 0px black;
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
 .form-control{
 	text-align: center;
 	margin-left: auto;
@@ -123,16 +246,7 @@
 	margin: 0 auto;
 }
 
-body{
-	background-color: white;
-	background-image: url("../css/images/doodle(OO).jpg");
-	background-attachment: fixed;
-	background-repeat: repeat;
-	width: 100%;
-	height: 100%;
-	z-index: 3;
 
-}
 
 .consultaionBody {
 	position: relative;
@@ -190,6 +304,18 @@ body{
 	box-shadow: 1px 0px 15px 0px black;
 }
 
+#qrCodeImage {
+	background-color: white;
+	padding: 20px;
+	border-radius: 35px;
+	width: 150px;
+	transition: 0.1s;
+}
+
+#qrCodeImage:hover {
+	box-shadow: 1px 0px 15px 0px lightgray;
+}
+
 #saveDoctorNote {
 	color: white;
 }
@@ -205,8 +331,11 @@ body{
 	background-color: white;
 	border-radius: 10px;
 	width: 90px;
+
+	font-size: 20px;
 	text-align: center;
 }
+
 
 #bodyContainer{
 	position: relative;
@@ -266,8 +395,8 @@ body{
 #outputModule1 {
 	background-color: lightgray;
 	padding: 10px;
-	margin-left: 200px;
-	margin-right: 200px;
+	margin-left: 100px;
+	margin-right: 100px;
 	border-radius: 20px;
 }
 
@@ -394,10 +523,10 @@ body{
 
 /*elements*/
 body{
-	background-color: white;
-	background-image: url("../css/images/doodle(OO).jpg");
+	background-color: #333333;
+	/*background-image: url("../css/images/doodle(OO).jpg");
 	background-size:auto;
-	background-attachment: scroll;
+	background-attachment: scroll;*/
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -413,6 +542,14 @@ textarea{
 
 h2 {
 	color: white;
+	letter-spacing: 2px;
+	font-family: Anton;
+}
+
+h3 {
+	color: white;
+	letter-spacing: 2px;
+	font-family: Anton;
 }
 
 nav{
@@ -431,15 +568,19 @@ ul{
 
 a:hover {
 	cursor: pointer;
+
 }
 
 p {
 	color: white;
+	font-family: Abel;
 }
 
 span{
 	color: white;
 	text-decoration: bold;
+	font-size: 20px;
+	font-family: Abel;
 }
 
 hr{
@@ -455,6 +596,7 @@ hr{
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: auto;
+	max-width: 1240px;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	border-bottom: solid 20px lightblue;
@@ -498,14 +640,49 @@ h1 {
 	text-align: center;
 	margin: 0px auto;
 	color: black;
+	letter-spacing: 2px;
+	font-family: Anton;
 }
 
-input {
-	max-width: 300px;
+#patientFormSignup input {
+	max-width: 700px;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
+
+}
+
+#patientFormSignup select {
+	max-width: 700px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+
+}
+
+input.btn{
+	font-family: Abel;
+}
+
+#rightSideBody input.btn{
+	transform: translateY(-20px);
+	width: 200px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: Abel;
+}
+
+label{
+	font-family: Abel;
+	font-size: 26px;
+}
+
+#qrCode{
+	padding: 30px;
+	color: white;
 }
 
 /*IDs*/
@@ -527,6 +704,7 @@ input {
 
 #bookingBody {
 	transition: 0.8s;
+	margin-right: 40px;
 }
 
 .bookingBodyInceaseWidth {
@@ -534,9 +712,11 @@ input {
 }
 
 #bookingInfo{
+	transform: translateY(-35px);
 	background-color: #003366;
 	position: fixed;
 	top: 270px;
+	width: 240px;
 	padding: 20px;
 
 }
@@ -546,7 +726,7 @@ input {
 }
 
 #containInfoRight{
-	padding: 30px;
+	padding: 20px;
 
 }
 
@@ -565,7 +745,13 @@ input {
 
 }
 
+#displayNote{
+	font-family: Abel;
+}
 
+button.btn{
+	font-family: Abel;
+}
 
 .notify{
 	width: 50%;
@@ -614,7 +800,25 @@ input {
 	text-align: center;
 	color: black;
 	margin: auto;
+	font-size: 26px;
 }
+
+#headerRegPatTitle{
+	text-align: center;
+	color: black;
+	margin: auto;
+	font-size: 150%;
+}
+
+/*.containerRight {
+	justify-content: space-around;
+	align-items: flex-start;
+
+
+	position: -webkit-sticky;
+	position: sticky;
+	bottom: 1rem;
+}*/
 
 #rightSideBody
 {
@@ -625,9 +829,8 @@ input {
 	background-color: white;
 	box-shadow: 1px 0px 15px 0px black;
 	transition: 1s;
-	width: 200px;
+	width: 240px;
 	bottom: 0;
-
 }
 
 .noteButtonsContainer {
@@ -709,7 +912,7 @@ input[type="file"] {
   background-color: white;
   text-align: center;
   left: 0;
-  top:590px;
+  top:630px;
   box-shadow: 1px 0px 15px 0px black;
 }
 
@@ -750,6 +953,7 @@ input[type="file"] {
 #profilePic{
 	border: solid 5px white;
 	border-radius: 360px;
+	background-color: lightblue;
 }
 #logout:hover{
 
@@ -788,6 +992,33 @@ input[type="file"] {
 	position: absolute;
 }
 
+#searchByName{
+	position: relative;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	border: none;
+}
+
+#searchBySurname{
+	position: relative;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	border: none;
+
+}
+
+#searchByPatientID{
+	position: relative;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	border: none;
+}
+
+
+
 #sideBar{
 
 	width:25%;
@@ -796,8 +1027,8 @@ input[type="file"] {
 	background-color: #003366;
 	max-width: 240px;
 	min-width: 240px;
-	min-height: 100px;
-	max-height: 430px;
+	min-height: 130px;
+	max-height: 480px;
 	/*z-index:1;
 	display: inline-flex;*/
 	padding: 10px;
@@ -813,20 +1044,43 @@ input[type="file"] {
 	padding: 20px;
 }
 
+canvas{
+	width: 40%;
+	height: 40%;
+}
 
 #carouselExampleIndicators{
 	border: 1px solid;
 }
 
 #containInfo{
-	margin-top: 5px;
+	margin-top: 0px;
 	text-align:center;
 	color: white;
-	padding-top: 10px;
+	padding-top: 0px;
+	font-size: 20px;
 }
 
 #para {
 	color: white;
+	font-size: 20px;
+	text-align: left;
+	font-stretch: extra-condensed;
+}
+
+.firstCard{
+	position: relative;
+	display: inline-block;
+	width: 300px;
+	text-align: center;
+	background-color: #003366;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 5px;
+	margin-right: 5px;
+	border-radius: 10px;
+	padding: 15px;
+	box-shadow: 1px 0px 15px 0px black;
 }
 
 #viewLogin{
@@ -842,32 +1096,40 @@ input[type="file"] {
 	animation: opacityForm 2s;
 	position: relative;
 	text-align: center;
-
 	margin-top: 20px;
 	padding: 20px;
 	padding-top: 30px;
 	box-shadow: 1px 0px 15px 0px black;
 	background-color: #003366;
-	margin-left: 10%;
-	margin-right: 10%;
-	border-radius: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1240px;
+	
+}
+
+.containerBlock{
+	animation: opacityForm 2s;
+	position: relative;
+	text-align: center;
+	padding: 20px;
+	
 }
 
 #containerLogin {
 	box-shadow: 1px 0px 15px 0px black;
-
-	display: grid;
 	grid-template-columns: 1fr 1fr;
-
 	animation: opacityForm 2s;
+
 	position: relative;
 	text-align: center;
-
 	background-color: #003366;
-	margin-left: 20%;
-	margin-right: 20%;
-
 	border-radius: 10px;
+}
+
+@media only screen and (width: 640px) {
+    #logoContainer img {
+    	width: 200px;
+    }
 }
 
 #formSignup {
@@ -1008,3 +1270,114 @@ input[type="file"] {
 	box-shadow: 0px 0px 15px 0px black;
 
 }
+
+.modal{
+
+}
+
+.close{
+	color: white;
+}
+
+#quiteButton{
+	
+	color: white;
+}
+
+.modal-header{
+	background-color: #003366;
+	color: white;
+}
+
+.modal-footer{
+	background-color: #003366;
+	color: white;
+}
+
+#closeButton{
+	color: white;
+	background-color: tomato;
+}
+
+#closeButton:hover{
+	color: white;
+	background-color: red;
+}
+
+#avatar1:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar2:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar3:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar4:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar5:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar6:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar7:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar8:hover{
+	opacity: 0.9;
+	background-color: #003366;
+	border-radius: 360px;
+	border: 5px solid white;
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#avatar1, #avatar2, #avatar3, #avatar4,
+#avatar5, #avatar6, #avatar7, #avatar8{
+	border-radius: 360px;
+	border: 5px solid white;
+	background-color: lightblue;
+}
+
+.modal-body{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+

@@ -28,14 +28,14 @@
 		    <div class="collapse navbar-collapse" id="collapsibleNavbar">
 		      <ul class="navbar-nav">
 		        <li id="otherLi" class="nav-item">
-		          <a class="nav-link" href="doctorSchedule.html">Schedule</a>
+		          <a class="nav-link" href="doctorSchedule.html">Schedule<img src="../css/images/home-run.png" width="20px" style="margin-left: 5px;"></img></a>
 		        </li>
 		        <li id="otherLi" class="nav-item">
-          			<a class="nav-link active" href="timetable.html"><u>Weekly Planner</u></a>
+          			<a class="nav-link active" href="timetable.html"><u>Weekly Planner</u><img src="../css/images/calendar.png" width="20px" style="margin-left: 5px;"></img></a>
         		</li>
 		        <li id="logout" class="nav-item" id="logout">
-					<a id="logoutA"class="nav-link" onclick="logout()" href="preview.html">Logout</a>
-		        </li>
+		            <a id="logoutA"class="nav-link" onclick="logout()" href="preview.html">Logout<img src="../css/images/logout.png" width="20px" style="margin-left: 5px;"></img></a>
+		          </li>
 		      </ul>
 		    </div>
 		  </nav>
@@ -51,12 +51,12 @@
 			<br><br>
 			<div id="header" style="z-index: 11;">
 		      <p id="headerTitle" style="background-color: lightblue;">
-		      	<span id="firstDay">{day}</span> 
-		      	<b id="firstMonth">Month</b> 
-		      	<span id="firstYear">{year}</span> - 
-		      	<span id="lastDay">{day}</span>
-		      	<b id="lastMonth">Month</b>
-		      	<span id="lastYear">{year}</span>
+		      	<b id="firstDay">{day}</b> 
+		      	<span id="firstMonth" style="color: black;">Month</span> 
+		      	<span id="firstYear" style="color: black;">{year}</span> - 
+		      	<b id="lastDay">{day}</b>
+		      	<span id="lastMonth" style="color: black;">Month</span>
+		      	<span id="lastYear" style="color: black;">{year}</span>
 		      </p>     
 			</div><br><br>
 			<table class="table table-bordered" id="dayTable">

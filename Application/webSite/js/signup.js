@@ -57,100 +57,193 @@ function init()
 
 function signup()
 {
+    usedParamaters = false;
     var name = document.querySelector("#name");
     var surname = document.querySelector("#surname");
     var email = document.querySelector("#email");
-    var emailCheck = document.querySelector("#emailCheck");
     var username = document.querySelector("#username");
     var password = document.querySelector("#password");
     var passwordCheck = document.querySelector("#passwordCheck");
     var practice = document.querySelector("#practice");
+    var security = document.querySelector("#securityCode");
     var selectionElement = document.getElementById("choice");
+    var errorData = document.querySelector("#errorOutput");
+    
+    errorData.style.color = "red";
     var choice = selectionElement.options[selectionElement.selectedIndex].value ;
-    //check that the passwords match
-    if(password.value != "" && passwordCheck.value !=""){
-        if(password.value != passwordCheck.value){
-            usedParamaters=true;
-            console.log(password.value +" "+passwordCheck.value);
-            //indicate that they dont match
-            passwordCheck.placeholder="password does not match";
-            passwordCheck.value="";
-            passwordCheck.style.backgroundColor="red";
-        }
-    }
-    else{//one of the passwords is null
-        usedParamaters=true;
-        passwordCheck.placeholder="password does not match";
-        passwordCheck.value="";
-        passwordCheck.style.backgroundColor="red";
-    }
-
-    //check that the emais match
-    // if(email.value != "" && emailCheck.value !=""){
-    //     if(email.value != emailCheck.value){
-        if(email.value == ""){
-    //         if(email.value != emailCheck.value){
-    //         //indicate that they dont match 
-    //         usedParamaters=true;
-    //         email.style.backgroundColor="red";
-    //         emailCheck.placeholder="Email does not match";
-    //         emailCheck.style.backgroundColor="red";
-    //         emailCheck.value="";
-    //     }
-    // }
-    //else {
-    //one of the emails is "" 
-        usedParamaters=true;
-        email.style.backgroundColor="red";
-        emailCheck.placeholder="Email does not match";
-        emailCheck.style.backgroundColor="red";
-        emailCheck.value="";
-    }
-
-    //check that the choise is a valid one
-    if(choice.value == ""){
-        usedParamaters=true;
-        //indicate that the choice is ""
-        document.querySelector("#choice").backgroundColor="red";
-    }
-
-
-    if(practice.value == ""){
-        usedParamaters=true;
-        //indicate that practice is ""
-        practice.style.backgroundColor="red";
-    }
+    var securityCode = document.querySelector("#securityCode").value;
 
     if(name.value == "")
     {
         usedParamaters=true;
+
         //indicate that it is ""
+        name.placeholder="Please enter name";
         name.style.backgroundColor="red";
+        errorData.innerHTML = "<i>Please enter your name!</i>";
+        name.style.color="white";
+        name.focus();
     }
-    if(surname.value==""){
-        usedParamaters=true;
-        surname.style.backgroundColor="red";
-    }
+    else if(name.value != "")
+    {
+        name.style.backgroundColor="lightgreen";
+        name.style.color="black";
 
-    //need to chack that the email is not used and that the user name hasnt already been used 
-    if (username.value !=""){
-        checkUsername(username.value);
-    }
-    else{
-        usedParamaters=true;
-        username.style.backgroundColor="red";
-    }
+        if(surname.value=="")
+        {
+            usedParamaters=true;
+            surname.placeholder="Please enter surname";
+            surname.style.backgroundColor="red";
+            errorData.innerHTML = "<i>Please enter your surname!</i>";
+            surname.style.color="white";
+            surname.focus();
+        }
+        else if(surname.value != "")
+        {
+            surname.style.backgroundColor="lightgreen";
+            surname.style.color="black";
 
+            if(email.value == "")
+            {
 
-    if (email.value != ""){
-        checkEmail(email.value);
-    }
-    else{
-        usedParamaters=true;
-        email.style.backgroundColor="red";
-    }
+                usedParamaters=true;
+                email.style.backgroundColor="red";
+                email.placeholder="please enter a valid email";
+                errorData.innerHTML = "<i>Email field is empty!</i>";
+                email.style.backgroundColor="red";
+                email.style.color="white"; 
+                email.value="";
+                email.focus();
+            }
+            else if(email.value != "")
+            {
+                checkEmail(email.value);
+                if(usedParamaters == true)
+                {
+                    email.style.backgroundColor="red";
+                    email.placeholder="please enter a valid email";
+                    errorData.innerHTML = "<i>Email field is empty!</i>";
+                    email.style.backgroundColor="red";
+                    email.style.color="white"; 
+                    email.value="";
+                }
+                else
+                {
+                    email.style.backgroundColor="lightgreen";
+                    email.style.color="black";
+                    if (username.value !="")
+                    {
+                        checkUsername(username.value);
+                        username.style.backgroundColor="lightgreen";
+                        username.style.color="black";
 
-    addUser(name , surname, email ,username,choice,practice);    
+                        if(password.value != "" && passwordCheck.value !="")
+                        {
+                            if(password.value != passwordCheck.value)
+                            {
+                                usedParamaters=true;
+                                //indicate that they dont match
+                                passwordCheck.placeholder="password does not match";
+                                password.placeholder = "password does not match";
+                                passwordCheck.value="";
+                                password.value="";
+                                passwordCheck.style.backgroundColor="red";
+                                password.style.backgroundColor="red";
+                                errorData.innerHTML = "<i>Passwords do not match!</i>"
+                            }
+                            else
+                            {
+                                passwordCheck.style.color="black";
+                                passwordCheck.style.backgroundColor="lightgreen";
+                                password.style.color="black";
+                                password.style.backgroundColor="lightgreen";
+                            }
+                        }
+                        else if(password.value == "" && passwordCheck.value !="")
+                        {
+                            usedParamaters=true;
+                            password.placeholder="password field is empty";
+                            password.value="";
+                            password.style.backgroundColor="red";
+                            passwordCheck.style.backgroundColor="white";
+                            password.style.color="white";
+                            passwordCheck.style.color="black";
+                            errorData.innerHTML = "<i>Password field is empty, please type password.</i>";
+                            passwordCheck.focus();
+                        }
+                        else if(password.value != "" && passwordCheck.value =="")//one of the passwords is null
+                        {
+                            usedParamaters=true;
+                            passwordCheck.placeholder="password does not match";
+                            passwordCheck.value="";
+                            passwordCheck.style.backgroundColor="red";
+                            passwordCheck.style.color="white";
+                            errorData.innerHTML = "<i>Confirm password field is empty, please type password.</i>";
+                            password.style.backgroundColor="white";
+                            password.style.color="black";
+                            password.focus();
+                        }
+                        else if(password.value == "" && passwordCheck.value =="")
+                        {
+                            usedParamaters=true;
+                            passwordCheck.placeholder="Both Password fields are empty!";
+                            passwordCheck.value="";
+                            passwordCheck.style.backgroundColor="red";
+                            passwordCheck.style.color="white";
+                            password.style.color="white";
+                            errorData.innerHTML = "<i>Confirm password field is empty, please type password.</i>";
+                            password.style.backgroundColor="red";
+                            password.focus();
+                        }
+                        if(usedParamaters != true)
+                        {
+                            errorData.innerHTML = "<i></i>";
+                            if(practice.value == "")
+                            {
+                                usedParamaters=true;
+                                //indicate that practice is ""
+                                practice.placeholder="Please enter Practice";
+                                practice.style.backgroundColor="red";
+                                errorData.innerHTML = "<i>Please enter the Practice!</i>";
+                                practice.focus();
+                            }
+                            else
+                            {
+                                practice.style.backgroundColor="lightgreen";
+                                practice.style.color="black";
+                                errorData.innerHTML = "<i></i>";
+                                if(security.value == "")
+                                {
+                                    usedParamaters=true;
+                                    //indicate that practice is ""
+                                    security.placeholder="Please enter Security Code";
+                                    security.style.backgroundColor="red";
+                                    errorData.innerHTML = "<i>Please enter the Security Code</i>";
+                                    security.focus();
+                                }
+                                else
+                                {
+                                    security.style.backgroundColor="lightgreen";
+                                    security.style.color="black";
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        usedParamaters=true;
+                        username.placeholder="Please enter username";
+                        username.style.backgroundColor="red";
+                        errorData.innerHTML = "<i>Please enter your username!</i>";
+                        username.style.color="white";
+                        username.focus();
+                    }
+                }
+            }
+        }
+    }
+    
+    addUser(name , surname, email ,username,choice,practice , securityCode);    
 }
 
 //===============================================================================================
@@ -196,35 +289,94 @@ function checkEmail(email)
     }));
 }
 
-async function stop(){
+async function stop()
+{
     usedParamaters=true;
 }
 
 //=====================================================================================
 //Function developed by: Jacobus Janse van Rensburg
 // adding a user if its allowed
-function addUser(name , surname, email ,username,choice,practice){
+function addUser(name , surname, email ,username,choice,practice , securityCode)
+{
     
-    if(usedParamaters==false && choice!=""){
+    if(usedParamaters!=true && choice!="")
+    {
         //make the api call with the hashed password to sign up a new user 
 
         var frontSalt ="COS301";
         var backSalt ="FlapJacks";
         var saltedPasword = frontSalt+ password.value+backSalt;
 
+        var e = document.querySelector("#email");
+        var u = document.querySelector("#username");
+        var p = document.querySelector("#practice");
+        var s = document.querySelector("#securityCode");
+        var errorData = document.querySelector("#errorOutput");
+
         var frontEndHashedPassword = CryptoJS.MD5(saltedPasword).toString();
 
-        var response = fetch("/signup",{
+        var response = fetch("/signup",
+        {
             method:"POST",
             headers:{'Content-Type': 'application/json; charset=UTF-8'},
-            body: JSON.stringify({"name":name.value , "surname":surname.value , "email":email.value ,"username":username.value , "password":frontEndHashedPassword, choice,"practition":practice.value})
+            body: JSON.stringify({"name":name.value , "surname":surname.value , "email":email.value ,"username":username.value , "password":frontEndHashedPassword, choice,"practition":practice.value , "securityCode":securityCode})
         })
 
-        response.then(res => {
-            window.location.href = res.url;
+        response.then(res => 
+        {
+            if(res.status == 402)
+            {
+                e.value = "";
+                e.placeholder="Email already exists";
+                e.style.backgroundColor="red";
+                errorData.innerHTML = "<i>Email already exists!</i>";
+                e.focus();
+            }
+            else if(res.status == 402)
+            {
+                u.value = "";
+                u.placeholder="Username already exists";
+                u.style.backgroundColor="red";
+                errorData.innerHTML = "<i>Username already exists!</i>";
+                u.focus();
+            }
+            else if(res.status == 404)
+            {
+                p.value = "";
+                p.placeholder="Practice Invalid";
+                p.style.backgroundColor="red";
+                errorData.innerHTML = "<i>Practice does not exist!</i>";
+                p.focus();
+            }
+            else if(res.status == 403)
+            {
+                s.value = "";
+                s.placeholder="try again";
+                s.style.backgroundColor="red";
+                errorData.innerHTML = "<i>Security code is incorrect!</i>";
+                s.focus();
+            }
+            else
+            {
+                var today = new Date();
+                var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+                var hours = today.getHours();
+                var minutes = today.getMinutes();
+                var seconds = today.getSeconds();
+                var time = hours + ":" + minutes + ":" + seconds ;
+                var line = date + "@" + time + "@" + username.value + "@Registered as a " + choice;
+                var resp = fetch("/updateLog",{
+                    method:"POST",
+                    headers:{'Content-Type':'application/json; charset=utf-8'},
+                    body:JSON.stringify({"practice":practice.value,"line":line})
+                });
+                window.location.href = res.url;
+            }
         });
     }
-    else{
+    else
+    {
         console.log("Could not make a new doctor");
     }
 }

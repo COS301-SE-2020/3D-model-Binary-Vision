@@ -1,0 +1,24 @@
+14/9/2020@0:4:11@admin@Logged in
+14/9/2020@3:33:38@admin@Logged in
+14/9/2020@4:26:23@admin@Added a Patient@PID:5f5ed4cffd0f7bad1338b6ec
+14/9/2020@4:27:14@admin@Made a booking@BID:5f5ed502fd0f7bad1338b6ed
+14/9/2020@4:32:12@admin@Made a booking@BID:5f5ed62c98136fadff18befc
+14/9/2020@5:5:54@admin@Made a booking@BID:5f5ede113ea139bc78b57bb4
+14/9/2020@5:9:34@admin@Made a booking@BID:5f5edeee71c39abd822339bf
+14/9/2020@5:13:23@admin@Made a booking@BID:5f5edfd32466efbe17a0c594
+14/9/2020@5:13:24@admin@Logout
+14/9/2020@5:13:33@Dr@Logged in
+14/9/2020@6:9:28@Dr@Logout
+14/9/2020@6:9:41@admin@Logged in
+14/9/2020@6:18:19@admin@Made a booking@BID:5f5eef0b602189c9db6aafe6
+14/9/2020@6:21:9@admin@Made a booking@BID:5f5eefb568f4f9cb3ecfb305
+14/9/2020@6:25:22@admin@Made a booking@BID:5f5ef0b24a89c3cc736c202e
+14/9/2020@7:4:1@admin@Made a booking@BID:5f5ef9c16f47cbd8dcfddd13
+14/9/2020@7:6:49@admin@Made a booking@BID:5f5efa6956ff84d9cd2493e4
+14/9/2020@7:11:52@admin@Made a booking@BID:5f5efb9810aa11dc696c5ff2
+15/9/2020@23:59:22@admin@Logged in
+16/9/2020@0:32:36@admin@Logout
+16/9/2020@0:32:46@Dr@Logged in
+16/9/2020@0:33:10@admin@Logged in
+16/9/2020@18:32:17@Dr@Logged in
+16/9/2020@21:16:36@Dr@Logged in

@@ -12,6 +12,7 @@
   <script type="text/javascript" src="../js/apiCalls.js"></script>
   <script type="text/javascript" src="../js/registration.js"></script>
   <script type="text/javascript" src="../js/doctorSchedule.js"></script>
+  <script type="text/javascript" src="../js/provileAvatar.js"></script>
 </head>
 
 <body onload="initPage()">
@@ -28,14 +29,14 @@
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
           <li id="otherLi" class="nav-item">
-            <a class="nav-link active" href="doctorSchedule.html"><u>Schedule</u></a>
+            <a class="nav-link active" href="doctorSchedule.html"><u>Schedule</u><img src="../css/images/home-run.png" width="20px" style="margin-left: 5px;"></img></a>
           </li>
           <li id="otherLi" class="nav-item">
             <!--i took this away because the timetable href takes you to the receptionist side of the application-->
-            <a class="nav-link" href="timetable.html">Weekly Planner</a>
+            <a class="nav-link" href="timetable.html">Weekly Planner<img src="../css/images/calendar.png" width="20px" style="margin-left: 5px;"></img></a>
           </li>
-          <li id="logout" class="nav-item">
-            <a id="logoutA"class="nav-link" onclick="logout()" href="preview.html">Logout</a>
+          <li id="logout" class="nav-item" id="logout">
+            <a id="logoutA"class="nav-link" onclick="logout()" href="preview.html">Logout<img src="../css/images/logout.png" width="20px" style="margin-left: 5px;"></img></a>
           </li>
         </ul>
       </div>
@@ -51,8 +52,10 @@
 
       <div id="containInfo">
         <div class="profile">
-          <img id="profilePic" src="../css/images/doc1.jpg" alt="Profile Picture" width="200px" height="200px">
+          <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="200px" height="200px">
         </div>
+        <br>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Change Profile Picture</button>
         <br>
         <p id="containInfo">Welcome back <i onload="getGender();">Doctor: </i><b id="doctorsName"> asdasdasX</b></p>
         <hr>
@@ -68,10 +71,39 @@
       <p id="headerTitle">SCHEDULE FOR [DATE]</p>
     </div>
   </div>
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Choose Profile Avatar</h4>
+          <button type="button" id="quiteButton" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <a id="avatar" onclick="selectDoc1();"><img id="avatar1" src="../css/images/Avatars/doc_a_male.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc5();"><img id="avatar5" src="../css/images/Avatars/doc_a_female.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc2();"><img id="avatar2" src="../css/images/Avatars/doc_b_male.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc6();"><img id="avatar6" src="../css/images/Avatars/doc_b_female.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc3();"><img id="avatar3" src="../css/images/Avatars/doc_i_male.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc7();"><img id="avatar7" src="../css/images/Avatars/doc_i_female.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc4();"><img id="avatar4" src="../css/images/Avatars/doc_w_male.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc8();"><img id="avatar8" src="../css/images/Avatars/doc_w_female.png" alt="Profile Picture" width="200px" height="200px"></a>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="confirmPicture();" class="btn btn-success" data-dismiss="modal">Confirm</button>
+          <button type="button" id="closeButton" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <!--right Nav-->
   <div class="containerRight">
     <div id="rightSideBody" >
-        <div id="containInfoRight" style="position: fixed; top: 40px;">
+        <div id="containInfoRight" style="position: fixed; top: 90px;">
           TIME: <p id="bookingTime" style="color: black;" >N/A</p> 
           PATIENT: <p id="patientName" style="color: black;">N/A</p><hr>
           REASON: <p id="patientNotes" style="color: black;"></p><br>

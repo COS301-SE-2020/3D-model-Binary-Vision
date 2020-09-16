@@ -33,6 +33,9 @@
             <li class="nav-item">
               <a id="viewLogin" class="nav-link" href="login.html">Login</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="practiceRegister.html">Register Practice</a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -46,7 +49,7 @@
       <br><br><br><br>
 
       <div class="container" >
-              <form id="form" style="max-width: 700px; border-top-right-radius:10px; border-top-left-radius: 10px; box-shadow: 1px 0px 15px 0px black;">
+              <form id="form" style="border-top-right-radius:10px; border-top-left-radius: 10px; box-shadow: 1px 0px 15px 0px black;">
               <br>
               <h2> Registration</h2><hr>
               <div id="signupInputFildContrainer">
@@ -85,13 +88,7 @@
                   <label for="passwordCheck" style="color: white;">Please Confirm Password</label><br>
                   <input class="form-control" class="box" type="password" name="passwordCheck" id="passwordCheck" placeholder="Retype Password " required/>
                 </div>
-
-                  <!--
-                    <input type="text " name="choice" placeholder="Doctor/Receptionist" required />
-                    <br><br>
-                  -->
-
-                <div style="padding-left: 30px; padding-right: 15px; padding-top: 20px;">
+                <div style="padding-left: 30px; padding-right: 15px; padding-top: 20px; padding-bottom: 20px;">
                   <label for="choice" style="color: white;">Please enter position</label><br>
                   <select class="form-control" id = "choice" name = "choice">
                     <option value="">Select an Option</option>
@@ -100,15 +97,22 @@
                   </select>
                 </div>
 
-                <div style="padding-left: 15px; padding-right: 30px; padding-top: 20px;">
+                <div style="padding-left: 15px; padding-right: 30px; padding-top: 20px; padding-bottom: 20px;">
                   <label for="practition" style="color: white;">Please enter Practice</label><br>
                   <input class="form-control" type="text" name="practition" placeholder="Practice" id="practice" required />
                 </div>
+
+                <div style="padding-left: 30px; padding-right: 15px; padding-top: 20px; padding-bottom: 20px;">
+                  <label for="securityCode" style="color: white;">Please enter Practice Security Code</label><br>
+                  <input class="form-control" type="text" name="securityCode" placeholder="Security Code" id="securityCode" required />
+                </div>
+
               </div>
+              <div id="errorOutput"></div>
               <br>
               <input class="btn btn-primary" type="button" id="submitDetails" name="submitDetails" value="Submit" onclick="signup()" />
               <br><hr>
-              <p style="font-size: 12px;">Already have an account?<a style="font-size: 12px;" href="login.html" onclick="preview()"> Login Here</a></p>
+              <p style="font-size: 16px;">Already have an account?<a style="font-size: 16px;" href="login.html" onclick="preview()"> Login Here</a></p>
               </form>
       </div>
       <br><br>

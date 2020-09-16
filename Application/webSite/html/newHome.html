@@ -11,6 +11,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../js/apiCalls.js"></script>
   <script type="text/javascript" src="../js/receptionist.js"></script>
+  <script type="text/javascript" src="../js/provileAvatar.js"></script>
 </head>
 
 <body onload="initReceptionist()" onunload="saveNotes()">
@@ -36,16 +37,16 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li id="otherLi" class="nav-item">
-          <a class="nav-link active" href="newHome.html"><u>Home</u></a>
+          <a class="nav-link active" href="newHome.html"><u>Home</u><img src="../css/images/home-run.png" width="20px" style="margin-left: 5px;"></img></a>
         </li>
         <li id="otherLi" class="nav-item">
-          <a class="nav-link" href="displayPatients.html">Logs</a>
+          <a class="nav-link" href="displayPatients.html">Logs<img src="../css/images/logs.png" width="20px" style="margin-left: 5px;"></img></a>
         </li>
         <li id="otherLi" class="nav-item" >
-          <a class="nav-link" href="makeBooking.html">Booking</a>
+          <a class="nav-link" href="makeBooking.html">Booking<img src="../css/images/booking.png" width="20px" style="margin-left: 5px;"></img></a>
         </li>
         <li id="logout" class="nav-item" id="logout">
-          <a id="logoutA"class="nav-link" onclick="logout()" href="preview.html">Logout</a>
+          <a id="logoutA"class="nav-link" onclick="logout()" href="preview.html">Logout<img src="../css/images/logout.png" width="20px" style="margin-left: 5px;"></img></a>
         </li>
       </ul>
     </div>
@@ -56,13 +57,17 @@
   z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>-->
 
   <div id="sideBody" style="background-color: white; height: 100%; position: fixed;">
+    
     <img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrow('arrowSideBody')" style="top: 60px;">
     <label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 73px); display: none; position: relative;" onclick="rotateArrow('arrowSideBody')">Profile Info</label>
+    
     <div id="sideBar" >
       <div id="containInfo">
         <div class="profile">
-          <img id="profilePic" src="../css/images/res.jpg" alt="Profile Picture" width="200px" height="200px">
+          <img id="profilePic" src="../css/images/profile.png" alt="Profile Picture" width="200px" height="200px">
         </div>
+        <br>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Change Profile Picture</button>
         <br>
         <p id="containInfo">Welcome back <b id="receptionistName"> asdasdasX</b></p>
         <hr>
@@ -70,8 +75,9 @@
         <!--<p id="containInfo">Employee ID: <b onload="getID();">xxxxxxxxxx </b></p>-->
         <!--<p>Email: <b onload="getEmail();">xxxxx@xxxxx.com </b></p>-->
         <!--<button class="btn" id="buttonSee" type="button" onclick="moveSideBar();" style="margin-top: 15px">Hide</button>-->
+      <button id="displayNote" class="btn btn-primary" style="transform: translateY(0px);" onclick="showNote()">Show Note</button>
 
-        <button id="displayNote" class="btn btn-primary" style="transform: translateY(55px);" onclick="showNote()">Show Note</button>
+        
 
         <br><br><br><hr>
       </div>
@@ -86,6 +92,36 @@
   <div id="conatinerHomeOuter">
   <div class="conatinerHomeMain" id="conatinerHome">
 
+
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Choose Profile Avatar</h4>
+          <button type="button" id="quiteButton" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <a id="avatar" onclick="selectDoc1();"><img id="avatar1" src="../css/images/Avatars/doc_a_male.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc5();"><img id="avatar5" src="../css/images/Avatars/doc_a_female.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc2();"><img id="avatar2" src="../css/images/Avatars/doc_b_male.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc6();"><img id="avatar6" src="../css/images/Avatars/doc_b_female.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc3();"><img id="avatar3" src="../css/images/Avatars/doc_i_male.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc7();"><img id="avatar7" src="../css/images/Avatars/doc_i_female.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc4();"><img id="avatar4" src="../css/images/Avatars/doc_w_male.png" alt="Profile Picture" width="200px" height="200px"></a>
+          <a id="avatar" onclick="selectDoc8();"><img id="avatar8" src="../css/images/Avatars/doc_w_female.png" alt="Profile Picture" width="200px" height="200px"></a>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="confirmPicture();" class="btn btn-success" data-dismiss="modal">Confirm</button>
+          <button type="button" id="closeButton" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
     <!--main body form for doctor-->
     <!-- form modifications made by Jacobus Janse van Rensburg -->
 
@@ -97,7 +133,7 @@
 
           <!--main body form for patient-->
 
-            <form action="/addPatient" method="POST" id="patientFormSignup">
+            <form action="/addPatient" method="POST" style="padding:10px; overflow: hidden;" id="patientFormSignup">
               <br>
               <h2>Add Patient</h2><hr>
 
@@ -110,7 +146,7 @@
               <br><br>
 
               <label for="idNumber" style="color: white;">Patients ID number</label><br>
-              <input class="form-control" id="idNumber" name="idNumber" placeholder="ID Number" required/>
+              <input class="form-control" id="idNumber" name="idNumber" maxlength="13" placeholder="ID Number" required/>
               <br><br>
 
               <label for="gender" style="color: white;">Gender</label><br>
@@ -126,14 +162,22 @@
               <br><br>
 
               <label for="cell" style="color: white;">Patients cell phone number</label><br>
-              <input class="form-control" id="cell" name="cellnumber" placeholder="Cellphone Number" required/>
+              <input class="form-control" id="cell" maxlength="10" name="cellnumber" placeholder="Cellphone Number" required/>
               <br><br>
 
               <input class="btn btn-primary" type="submit"  name="submitDetails" value="Submit" />
               <br><br>
 
             </form>
+            <hr>
+            <h2>QR CODE</h2>
+            <div id="qrCode">        
+              <p style='color: white;'>Generate QR Code for patient registration form</p>
+              <a href="/qrCode" download="3D_Binary_Model_qrCode" ><img src="../css/images/qrCode.png" id="qrCodeImage" ></img></a>
+            </div>
         </div>
+        
+
       </div><br><br>
     </div>
     <script type="text/javascript" src="../js/registration.js"></script>

@@ -6,6 +6,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
+const { passwordChange } = require('../controller/3DModelController');
 var Schema = mongoose.Schema;
 
 var DoctorSchema = new Schema({
@@ -32,6 +33,13 @@ var DoctorSchema = new Schema({
     practition:{
         type:String,
         required: true
+    },
+    active:{
+        type: Boolean, required: true , default: false
+    },
+    avatar:{
+        type:String,
+        default:"0"
     }
 });
 
@@ -57,6 +65,10 @@ var PatientSchema = new Schema({
     },
     cellnumber:{
         type:String,
+        required: true
+    },
+    practice:{
+        type: String,
         required: true
     }
 });
@@ -88,14 +100,20 @@ var Receptionist = new Schema({
     },
     Note:{
         type:String
+    },
+    active:{
+        type: Boolean , default:false
+    },
+    avatar:{
+        type:String,
+        default:"0"
     }
 });
 
 var ConsultationSchema = new Schema({
     created:{
-        type: Date,
+        type: String,
         required: true,
-        default: Date.now
     },
     doctor:{
         type: Schema.Types.ObjectId,
@@ -107,14 +125,19 @@ var ConsultationSchema = new Schema({
     },
     video:{
         type: Schema.Types.ObjectId,
-        required: true
+        default:null
     },
     STL:{
-        type: Schema.Types.ObjectId
+        type: Schema.Types.ObjectId,
+        default:null
     },
     Note:{
         type:String, 
         required: true
+    },
+    reason:{
+        type:String,
+        required:true
     }
 });
 
@@ -127,6 +150,10 @@ var Booking = new Schema({
         type:String,
         required:true
     },
+    endTime:{
+        type:String,
+        default: this.time
+    },
     patient:{
         type:mongoose.Types.ObjectId,
         required:true
@@ -137,6 +164,32 @@ var Booking = new Schema({
     },
     reason:{
         type:String
+    },
+    status:{
+        type:String,
+        default:'Pending'
+    }
+})
+
+var PasswordChanges = new Schema({
+    email:{
+        type: String,
+        required: true
+    }
+})
+
+var Practice = new Schema({
+    practice: {
+        type:String,
+        required: true
+    },
+    securityCode:{
+        type: String,
+        required: true
+    },
+    headReceptionist: {
+        type: String,
+        required: true
     }
 })
 
@@ -145,5 +198,7 @@ module.exports = {
     Patient: mongoose.model("Patient", PatientSchema),
     Consultation: mongoose.model("Consultation", ConsultationSchema),
     Receptionist: mongoose.model("Receptionist", Receptionist),
-    Booking:mongoose.model("Booking", Booking)
+    Booking:mongoose.model("Booking", Booking),
+    PasswordChanges: mongoose.model("PasswordChanges",PasswordChanges),
+    Practice: mongoose.model("Practice",Practice)
 }

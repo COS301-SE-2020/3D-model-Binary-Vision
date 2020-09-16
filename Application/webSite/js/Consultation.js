@@ -2,6 +2,7 @@
 //This file contains functions for the consultations page
 
 var currentTime = "";
+var checkDoc = [];
 
 //=============================================================================================
 //Function Developed by: Marcus Werren
@@ -164,16 +165,34 @@ function hidePatInfo()
 }
 
 //=============================================================================================
-//Function Developed by:
-// da hell is happening here , why do we need this ->
-function saveDoctorNote() 
+//Function Developed by: Steven Visser
+//Saves a regular consultation
+function saveConsultation(pid,reason) 
 {
 	let docNote = document.getElementById("doctorsNotes");
 
 	if (docNote.value != "") 
 	{
-		alert("Note saved!");
-		console.log(docNote.value);
+		//call the api function to save a consultation
+		var response = fetch("/saveConsultation",{
+			method:"POST",
+			headers:{'Content-Type': 'application/json; charset=UTF-8'},
+			body: JSON.stringify({"_id":pid,"note":docNote.value,"reason":reason})
+		});
+	
+		response.then(res => 
+		{
+			//remove the bar holding this booking and load the next one
+			//check status code
+			if(res.status == 401)
+			{
+				alert("You are not authorized to do this action!");
+			}
+			else if(res.status== 201)
+			{
+				window.location.href= "/doctorSchedule.html"; 
+			}
+		});
 	} 
 	else 
 	{
@@ -272,17 +291,36 @@ function getRemainingTime(h, m, s)
 //=============================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 // function called when loading page to populate all the doctors information
-function init ()
+function init()
 {
 	startTime();
-	pupulateDoctorInformation();
+	populateDoctorInformation();
 	populateBookingInformation();
+
+	for(var i = 0; i < 8; i++)
+    {
+        checkDoc[i] = false;
+    }
+    
+
+   var response = fetch("/getAvatarChoice",{
+        method:"POST",
+        headers:{'Content-Type':'Application/json ; charset=UTF-8'}
+    });
+
+    response.then(res=> res.json().then(data=> 
+    {
+        //data.choice is the avatar option
+        var index = parseInt(data.avatar,10);
+        checkDoc[index] = true;
+        confirmPic();
+    }));
 }
 
 //=============================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 //function used to get and set the information of the doctor onto this page
-function pupulateDoctorInformation()
+function populateDoctorInformation()
 {
 	var response = fetch("/getDoctor",{
         method:"POST",
@@ -291,7 +329,6 @@ function pupulateDoctorInformation()
 
     response.then( res=> res.json().then( data => 
     {
-        // console.log("Doctors surname: "+data.surname);
         // set the surname field 
         document.getElementById("doctorName").innerHTML=data.surname+" ("+data.name+")";
     }));
@@ -300,11 +337,9 @@ function pupulateDoctorInformation()
 //=============================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 //Function used to get the booking id from the url and populating the requied fields using that information
-function populateBookingInformation(){
-	//first we need to parse the url to find the booking id that was used
-
+function populateBookingInformation()
+{
 	var url = window.location.href;
-	console.log(url);
 	var parts = url.split("=");
 	//parts[1] holds the booking information
 
@@ -317,16 +352,13 @@ function populateBookingInformation(){
 		body: JSON.stringify({"booking":parts[1]})
 	});
 
-	response.then(res => res.json().then(data => {
-
-		console.log(res.status +" "+data.patient);
-		
+	response.then(res => res.json().then(data =>
+	{
 		//set different times
 		document.querySelector("#startTime").innerHTML=data.time;
 		var time = data.time;
 		var mins = time.split(":");
 		var newMins = parseInt(mins[1])+15;
-		console.log(newMins);
 		var endTime;
 		if(newMins >=60)
 		{
@@ -334,17 +366,17 @@ function populateBookingInformation(){
 			newHour = mins[0]++;
 			endTime = newHour+":"+newMins;
 		}
-		else{
+		else
+		{
 			endTime= mins[0]+":"+newMins;
 		}
-		document.querySelector("#endTime").innerHTML = endTime;
-		document.querySelector("#time2").innerHTML = data.time;
-		
+		document.querySelector("#endTime").innerHTML = endTime;		
 		
 		//set the reason for the booking 
 
 		//set the patient information 
-		popuatePatientInfo(data.patient);
+		document.getElementById("recordPage").href = "recordPage.html?pid="+data.patient+"="+parts[1];
+		populatePatientInfo(data.patient,data.reason);
 	}));
 
 }
@@ -352,7 +384,9 @@ function populateBookingInformation(){
 //=============================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 // function to get the required patients information and populate the patient information
-function popuatePatientInfo(id){
+function populatePatientInfo(id,reason)
+{
+	document.getElementById("docnotes").innerHTML = "<p style='font-weight: bold;'>Doctors Notes:</p><textarea id='doctorsNotes' style='width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;'></textarea><button class='btn btn-primary' id='saveDoctorNote' type='button' style='margin-top: 10px;' onclick=\"saveConsultation('"+id+"','"+reason+"')\">Save & Exit Consultation</button>";
 
 	var response = fetch ("/singlePatient",{
 		method:"POST",
@@ -360,22 +394,330 @@ function popuatePatientInfo(id){
 		body: JSON.stringify({"patient":id})
 	});
 
-	response.then(res=> res.json().then(data=> {
-
-		if(res.status != 200){
+	response.then(res=> res.json().then(data=> 
+	{
+		if(res.status != 200)
+		{
 			//do some fix here 
 		}
-		else{
+		else
+		{
 			//set the patients attributes
 			document.querySelector("#patientName").innerHTML ="Name: "+data.name;
 			document.querySelector("#patientSurname").innerHTML ="Surname: "+data.surname;
-			document.querySelector("#patientID").innerHTML ="ID: "+data.surname;
+			document.querySelector("#patientID").innerHTML ="ID: "+data.idNumber;
 			document.querySelector("#patientGender").innerHTML="Gender: "+data.gender;
 			document.querySelector("#patientEmail").innerHTML="Email: "+data.email;
 			document.querySelector("#patientContactNo").innerHTML="Contact Number: "+data.cellnumber; 
-
-			document.querySelector("#patientqq").innerHTML = data.surname+" ("+data.name+")";
 		}
-
 	}));
+}
+
+//=============================================================================================
+//Function Developed by: Rani Arraf
+//Initializes Profile Pictures
+function selectDoc1(){
+    resetDoc();
+    checkDoc[0] = true;
+
+    var doc4 = document.getElementById("avatar4");
+    var doc3 = document.getElementById("avatar3");
+    var doc2 = document.getElementById("avatar2");
+    var doc1 = document.getElementById("avatar1");
+
+    var doc5 = document.getElementById("avatar5");
+    var doc6 = document.getElementById("avatar6");
+    var doc7 = document.getElementById("avatar7");
+    var doc8 = document.getElementById("avatar8");
+
+    doc1.style.backgroundColor = "green";
+    doc4.style.backgroundColor = "lightblue";
+    doc3.style.backgroundColor = "lightblue";
+    doc2.style.backgroundColor = "lightblue";
+
+    doc5.style.backgroundColor = "lightblue";
+    doc6.style.backgroundColor = "lightblue";
+    doc7.style.backgroundColor = "lightblue";
+    doc8.style.backgroundColor = "lightblue";
+    
+}
+
+function selectDoc2(){
+    resetDoc();
+    checkDoc[1] = true;
+
+
+    var doc4 = document.getElementById("avatar4");
+    var doc1 = document.getElementById("avatar1");
+    var doc3 = document.getElementById("avatar3");
+    var doc2 = document.getElementById("avatar2");
+
+    var doc5 = document.getElementById("avatar5");
+    var doc6 = document.getElementById("avatar6");
+    var doc7 = document.getElementById("avatar7");
+    var doc8 = document.getElementById("avatar8");
+
+    doc2.style.backgroundColor = "green";
+    doc4.style.backgroundColor = "lightblue";
+    doc3.style.backgroundColor = "lightblue";
+    doc1.style.backgroundColor = "lightblue";
+
+    doc5.style.backgroundColor = "lightblue";
+    doc6.style.backgroundColor = "lightblue";
+    doc7.style.backgroundColor = "lightblue";
+    doc8.style.backgroundColor = "lightblue";
+}
+
+function selectDoc3(){
+    resetDoc();
+    checkDoc[2] = true;
+
+    
+    var doc4 = document.getElementById("avatar4");
+    var doc2 = document.getElementById("avatar2");
+    var doc1 = document.getElementById("avatar1");
+    var doc3 = document.getElementById("avatar3");
+
+    var doc5 = document.getElementById("avatar5");
+    var doc6 = document.getElementById("avatar6");
+    var doc7 = document.getElementById("avatar7");
+    var doc8 = document.getElementById("avatar8");
+
+    doc3.style.backgroundColor = "green";
+    doc4.style.backgroundColor = "lightblue";
+    doc2.style.backgroundColor = "lightblue";
+    doc1.style.backgroundColor = "lightblue";
+
+    doc5.style.backgroundColor = "lightblue";
+    doc6.style.backgroundColor = "lightblue";
+    doc7.style.backgroundColor = "lightblue";
+    doc8.style.backgroundColor = "lightblue";
+}
+
+function selectDoc4(){
+    resetDoc();
+    checkDoc[3] = true;
+
+
+    var doc4 = document.getElementById("avatar4");
+    var doc3 = document.getElementById("avatar3");
+    var doc2 = document.getElementById("avatar2");
+    var doc1 = document.getElementById("avatar1");
+
+    var doc5 = document.getElementById("avatar5");
+    var doc6 = document.getElementById("avatar6");
+    var doc7 = document.getElementById("avatar7");
+    var doc8 = document.getElementById("avatar8");
+
+    doc4.style.backgroundColor = "green";
+    doc3.style.backgroundColor = "lightblue";
+    doc2.style.backgroundColor = "lightblue";
+    doc1.style.backgroundColor = "lightblue";
+
+    doc5.style.backgroundColor = "lightblue";
+    doc6.style.backgroundColor = "lightblue";
+    doc7.style.backgroundColor = "lightblue";
+    doc8.style.backgroundColor = "lightblue";
+}
+
+function selectDoc5(){
+    resetDoc();
+    checkDoc[4] = true;
+
+    var doc4 = document.getElementById("avatar4");
+    var doc3 = document.getElementById("avatar3");
+    var doc2 = document.getElementById("avatar2");
+    var doc1 = document.getElementById("avatar1");
+
+    var doc5 = document.getElementById("avatar5");
+    var doc6 = document.getElementById("avatar6");
+    var doc7 = document.getElementById("avatar7");
+    var doc8 = document.getElementById("avatar8");
+
+    doc1.style.backgroundColor = "lightblue";
+    doc4.style.backgroundColor = "lightblue";
+    doc3.style.backgroundColor = "lightblue";
+    doc2.style.backgroundColor = "lightblue";
+
+    doc5.style.backgroundColor = "green";
+    doc6.style.backgroundColor = "lightblue";
+    doc7.style.backgroundColor = "lightblue";
+    doc8.style.backgroundColor = "lightblue";
+    
+}
+
+function selectDoc6(){
+    resetDoc();
+    checkDoc[5] = true;
+
+
+    var doc4 = document.getElementById("avatar4");
+    var doc1 = document.getElementById("avatar1");
+    var doc3 = document.getElementById("avatar3");
+    var doc2 = document.getElementById("avatar2");
+
+    var doc5 = document.getElementById("avatar5");
+    var doc6 = document.getElementById("avatar6");
+    var doc7 = document.getElementById("avatar7");
+    var doc8 = document.getElementById("avatar8");
+
+    doc2.style.backgroundColor = "lightblue";
+    doc4.style.backgroundColor = "lightblue";
+    doc3.style.backgroundColor = "lightblue";
+    doc1.style.backgroundColor = "lightblue";
+
+    doc5.style.backgroundColor = "lightblue";
+    doc6.style.backgroundColor = "green";
+    doc7.style.backgroundColor = "lightblue";
+    doc8.style.backgroundColor = "lightblue";
+}
+
+function selectDoc7(){
+
+    resetDoc();
+    checkDoc[6] = true;
+
+    
+    var doc4 = document.getElementById("avatar4");
+    var doc2 = document.getElementById("avatar2");
+    var doc1 = document.getElementById("avatar1");
+    var doc3 = document.getElementById("avatar3");
+
+    var doc5 = document.getElementById("avatar5");
+    var doc6 = document.getElementById("avatar6");
+    var doc7 = document.getElementById("avatar7");
+    var doc8 = document.getElementById("avatar8");
+
+    doc3.style.backgroundColor = "lightblue";
+    doc4.style.backgroundColor = "lightblue";
+    doc2.style.backgroundColor = "lightblue";
+    doc1.style.backgroundColor = "lightblue";
+
+    doc5.style.backgroundColor = "lightblue";
+    doc6.style.backgroundColor = "lightblue";
+    doc7.style.backgroundColor = "green";
+    doc8.style.backgroundColor = "lightblue";
+}
+
+function selectDoc8(){
+    resetDoc();
+    checkDoc[7] = true;
+
+
+    var doc4 = document.getElementById("avatar4");
+    var doc3 = document.getElementById("avatar3");
+    var doc2 = document.getElementById("avatar2");
+    var doc1 = document.getElementById("avatar1");
+
+    var doc5 = document.getElementById("avatar5");
+    var doc6 = document.getElementById("avatar6");
+    var doc7 = document.getElementById("avatar7");
+    var doc8 = document.getElementById("avatar8");
+
+    doc4.style.backgroundColor = "lightblue";
+    doc3.style.backgroundColor = "lightblue";
+    doc2.style.backgroundColor = "lightblue";
+    doc1.style.backgroundColor = "lightblue";
+
+    doc5.style.backgroundColor = "lightblue";
+    doc6.style.backgroundColor = "lightblue";
+    doc7.style.backgroundColor = "lightblue";
+    doc8.style.backgroundColor = "green";
+}
+
+function resetDoc()
+{
+    for(var i = 0; i < 8; i++)
+    {
+        checkDoc[i] = false;
+    }
+}
+
+function confirmPic(){
+    var pictureFrame1 = document.querySelector(".profile");
+    if(checkDoc[0] == true){
+        
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_a_male.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+    }
+    if(checkDoc[1] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_b_male.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+    }
+    if(checkDoc[2] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_i_male.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+    }
+    if(checkDoc[3] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_w_male.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+    }
+    if(checkDoc[4] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_a_female.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+    }
+    if(checkDoc[5] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_b_female.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+    }
+    if(checkDoc[6] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_i_female.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+    }
+    if(checkDoc[7] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_w_female.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+    }
+}
+
+function confirmPicture(){
+    var avatar = "0";
+    var pictureFrame1 = document.querySelector(".profile");
+    if(checkDoc[0] == true){
+        
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_a_male.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "0";
+    }
+    if(checkDoc[1] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_b_male.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "1";
+    }
+    if(checkDoc[2] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_i_male.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "2";
+    }
+    if(checkDoc[3] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_w_male.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "3";
+    }
+    if(checkDoc[4] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_a_female.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "4";
+    }
+    if(checkDoc[5] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_b_female.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "5";
+    }
+    if(checkDoc[6] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_i_female.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "6";
+    }
+    if(checkDoc[7] == true){
+        var population = "<img id='profilePic' src='../css/images/Avatars/doc_w_female.png' alt='Profile Picture' width='200px' height='200px'>";
+        pictureFrame1.innerHTML = population;
+        avatar = "7";
+    }
+
+    var response = fetch("/setAvatarChoice",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body: JSON.stringify({"avatar":avatar})
+    });
 }

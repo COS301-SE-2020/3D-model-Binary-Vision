@@ -1,8 +1,8 @@
 \# 3D Model Binary Vision Project
 =================================
 
-[![Build Status](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision.svg?branch=master)](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision)
-[![Coverage Status](https://coveralls.io/repos/github/COS301-SE-2020/3D-model-Binary-Vision/badge.svg?branch=master)](https://coveralls.io/github/COS301-SE-2020/3D-model-Binary-Vision?branch=master)
+[![Build Status](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision.svg?branch=Feature%2FImprovements)](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision)
+[![Coverage Status](https://coveralls.io/repos/github/COS301-SE-2020/3D-model-Binary-Vision/badge.svg?branch=Feature%2FImprovements)](https://coveralls.io/github/COS301-SE-2020/3D-model-Binary-Vision?branch=master)
 
 https://vanillav.github.io/FlapJacks.github.io/
 

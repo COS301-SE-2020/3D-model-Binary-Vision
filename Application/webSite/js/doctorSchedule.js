@@ -1,6 +1,8 @@
 //Created by Jacobus Janse van Rensburg
 //file intended to handel all the dynamic allocations and api calls done on the doctorSchedule.html page
 
+var checkDoc = [];
+
 //================================================================================================
 //Function Developed by: Jacobus Janse van Rensburg
 //function that sets all the various aspects of the page bassed on the doctor that logged in
@@ -9,6 +11,25 @@ function initPage()
     setDoctorInfo();
     setTodaysBookings();
     setDate();
+
+    for(var i = 0; i < 8; i++)
+    {
+        checkDoc[i] = false;
+    }
+    
+
+   var response = fetch("/getAvatarChoice",{
+        method:"POST",
+        headers:{'Content-Type':'Application/json ; charset=UTF-8'}
+    });
+
+    response.then(res=> res.json().then(data=> 
+    {
+        //data.choice is the avatar option
+        var index = parseInt(data.avatar,10);
+        checkDoc[index] = true;
+        confirmPic();
+    }));
 }
 
 //================================================================================================
@@ -23,7 +44,6 @@ function setDoctorInfo()
 
     response.then( res=> res.json().then( data =>
     {
-        console.log("Doctors surname: "+data.surname);
         // set the surname field
         document.getElementById("doctorsName").innerHTML=data.surname+" ("+data.name+")";
     }));
@@ -59,9 +79,11 @@ function setTodaysBookings()
 
         for(var i in data)
         {
-            console.log(data[i]);
-            var replacement = '<li class= "notify" id="'+data[i]._id+'">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'
-            document.getElementById("notifyContainer").innerHTML += replacement;
+            if(data[i].status == "Pending")
+            {
+                var replacement = '<li class= "notify" id="'+data[i]._id+'">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'
+                document.getElementById("notifyContainer").innerHTML += replacement;
+            }
         }
     }));
 }
@@ -108,19 +130,16 @@ function populateBookings(patientId,time,reason,booking)
                 headers:{'Content-Type': 'application/json; charset=UTF-8'},
                 body: JSON.stringify({"patient":patientId})
             });
-            console.log("booking id:"+booking);
+
             response.then(res=> res.json().then(patient=>
             {
                 //do what needs to be done with the patients information
                 //populate right bar over here
-                console.log("hello "+ patient.name+" "+time+ " "+ reason);
                 document.getElementById("patientName").innerHTML = patient.name + " " + patient.surname;
                 document.getElementById("bookingTime").innerHTML = time;
                 document.getElementById("patientNotes").innerHTML = reason;
-            // onclick='openConsultation(\""+booking+"\")'
+            
                 document.getElementById("manageBookingForm").innerHTML = " <button class='btn btn-success' type='button' onclick='completeBooking(\""+booking+"\");' style='margin-right: 10px; margin-bottom: 10px;'>Complete</button><a class='btn btn-primary' href='/Consultation.html?bookingid="+booking+"' style='margin-right: 10px; margin-bottom: 10px;'>Consultation</a>"
-
-                console.log(patient);
             }));
         }
         else
@@ -148,8 +167,8 @@ function setDate()
     minutes = checkTime(minutes);
     seconds = checkTime(seconds);
 
-    var date = today.getDate() + ' / ' + (today.getMonth()+1) +' / '+ today.getFullYear();
-    container.innerHTML = "SCHEDULE FOR [" + date + "]" + " TIME [" + hours + ":" + minutes + ":" + seconds + "]";
+    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+    container.innerHTML = date + "  -  " + hours + ":" + minutes + ":" + seconds;
     var t = setTimeout(setDate, 500);
 }
 
@@ -171,17 +190,16 @@ function checkTime(i)
 // Completes a Booking and removes it from the databse
 function completeBooking(bookingID)
 {
-        var response = fetch("/removeBooking",{
+        var response = fetch("/updateBooking",{
             method:"POST",
             headers:{'Content-Type': 'application/json; charset=UTF-8'},
-            body: JSON.stringify({"_id":bookingID})
+            body: JSON.stringify({"_id":bookingID,"status":"Completed"})
         });
 
         response.then(res =>
         {
             //remove the bar holding this booking and load the next one
             //check status code
-            console.log(res.status);
             if(res.status == 401)
             {
                 alert("You are not authorized to do this action!");

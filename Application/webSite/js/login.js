@@ -16,37 +16,44 @@ function login()
         //salt and hash the password
         var frontSalt ="COS301";
         var backSalt ="FlapJacks";
+
         var saltedPasword = frontSalt+ password.value+backSalt;
-
         var frontEndHashedPassword = CryptoJS.MD5(saltedPasword).toString();
-        console.log(frontEndHashedPassword);
 
-        var response = fetch("/login",{
+        var response = fetch("/login",
+        {
             method:"POST",
             headers:{'Content-Type':'application/json; charset=utf-8'},
             body:JSON.stringify({"username":username.value,"password":frontEndHashedPassword})
         });
 
-        response.then(res =>  {
+        response.then(res => 
+        {
 
-            if(res.status == 404){
-                document.querySelector("#errorResponse").innerHTML="User information not matched";
+            if(res.status == 404)
+            {
+                document.querySelector("#errorResponse").innerHTML="Invalid login credentials";
             }
-            else{
-                console.log(res);
-                // var parts= res.
+            else
+            {
                 window.location.href= res.url;
             }
         });
 
     }
-    else{
+    else
+    {
         //indicate that some fields are missing
-        if (username.value == "" && password.value == "") {
+        if (username.value == "" && password.value == "") 
+        {
             document.querySelector("#errorResponse").innerHTML="Please enter username and password";
-        } else if (username.value == "") {
+        } 
+        else if (username.value == "") 
+        {
             document.querySelector("#errorResponse").innerHTML="Please enter username";
-        } else if (password.value == "") {
+        } 
+        else if (password.value == "") 
+        {
             document.querySelector("#errorResponse").innerHTML="Please enter password";
         }
     }
