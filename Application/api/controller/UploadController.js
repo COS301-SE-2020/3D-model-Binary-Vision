@@ -81,34 +81,79 @@ module.exports = {
                         //get stl file and save it to a consultations ID
                         var fileLocation = "sfmAlgorithm_linux/Executable/output_obj/"+d+"/";
                         const objStream = fs.createReadStream(path.join(fileLocation, d+".obj" ));
+                        const textureStrem = fs.createReadStream(path.join(fileLocation, d+"_material_0_map_Kd.jpg"));
+                        const mtlStream = fs.createReadStream(path.join(fileLocation, d+".mtl" ));
                         const Files = createModel();
-                        const options = {
+                        
+                        const OBJoptions = {
                             filename: d+".obj",
                             contentType: "text/plain" 
                           }
-                        Files.write(options, objStream, (err, file) => {
+
+                        const TEXoptions ={
+                            filename: d+"_material_0_map_Kd.jpg",
+                            contentType: "image/jpg"
+                        }
+
+                        const MTLoptions={
+                            filename:d+"mtl",
+                            contentType: "text/plain"
+                        } 
+
+                       
+
+                        Files.write(OBJoptions, objStream, (err, file) => {
                             if (err) 
                             {
-                                res.send(err);
-                                return;
+                                console.log("error finding or saving obj file")
                             }
-                            else{
-                                const consultation = new Consultation(
-                                {
-                                    doctor: req.user, // get from session, e.g. cookies
-                                    patient: fields.id,
-                                    STL: file._id,
-                                    Note: "Video Upload"
-                                });
-                                consultation.save(function (err) 
-                                {
-                                    if (err)
-                                    {
-                                      res.status(400);
+                            
+                            console.log("Saving OBJ file");
+                            
+
+                            Files.write(TEXoptions,textureStrem,(texErr, texfile) => {
+                                if (texErr){
+                                    console.log("error finding or saving tex file");
+                                }
+
+                                console.log("Saving texture file");
+                                
+
+                                Files.write(MTLoptions, mtlStream , (mtlErr , mtlfile)=>{
+                                    if (mtlErr){
+                                        console.log("Error finding or saving mtl file");
                                     }
-                                    res.status(201);
+
+                                    console.log("Saving mtl file");
+
+                                    const consultation = new Consultation(
+                                    {
+                                        doctor: req.user, // get from session, e.g. cookies
+                                        patient: fields.id,
+                                        Note: "Video Upload",
+                                        OBJ:file._id,
+                                        TEX: texfile._id,
+                                        MTL:mtlfile._id
+                                    });
+
+                                    consultation.save(function (consErr,cons) 
+                                    {
+                                        if (consErr)
+                                        {
+                                          res.status(400);
+                                          console.log("Error saving the consultation: "+ consErr);
+                                        }
+                                        else{
+                                            console.log("saved consultation "+ cons);
+                                            res.status(201);
+
+                                        }
+                                    });
+
                                 });
-                            }
+
+                            });
+                            
                         });
                         
                         //remove created directories 

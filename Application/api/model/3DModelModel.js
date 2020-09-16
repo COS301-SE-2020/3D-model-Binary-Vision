@@ -112,8 +112,8 @@ var Receptionist = new Schema({
 
 var ConsultationSchema = new Schema({
     created:{
-        type: String,
-        required: true,
+        type: Date,
+        defualt: new Date()
     },
     doctor:{
         type: Schema.Types.ObjectId,
@@ -127,17 +127,23 @@ var ConsultationSchema = new Schema({
         type: Schema.Types.ObjectId,
         default:null
     },
-    STL:{
+    OBJ:{
+        type: Schema.Types.ObjectId,
+        default:null
+    },
+    MTL:{
+        type: Schema.Types.ObjectId,
+        default:null
+    },
+    TEX:{
         type: Schema.Types.ObjectId,
         default:null
     },
     Note:{
         type:String, 
-        required: true
     },
     reason:{
         type:String,
-        required:true
     }
 });
 
