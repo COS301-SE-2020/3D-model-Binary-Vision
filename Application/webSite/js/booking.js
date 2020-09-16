@@ -728,7 +728,7 @@ function saveData(data){
 //options that the user provides 
 var sameDayFilteredOptions=[];
 var sameTimeFilteredOptions=[];
-function filterOptions()
+async function filterOptions()
 {
     var dayArray =["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     var selectedFiltetTimeElement = document.querySelector("#selectFilterTime");
@@ -800,29 +800,36 @@ function filterOptions()
     var count=0;
 
     var bodySelector = document.getElementById("currentOverlay");
-    var innerHTML= "<p style='color:black;'>Booking options for selected day:</p><br>";
+    var innerHTML= "<h1 style='color:white;'>Booking options for selected day:</h1><br><br>";
     for(var i in sameDayFilteredOptions )
     {
-
-        var inner ="<div><p>Time: "+sameDayFilteredOptions[i].time+"</p>";
+        
+        var inner ="<div><hr><br><p>Time: "+sameDayFilteredOptions[i].time+"</p>";
         inner+="<p>End: "+sameDayFilteredOptions[i].endTime+"</p>";
         inner+="<p>Day:"+dayArray[daySelected]+"</p>";
         inner+="<p>Date: "+sameDayFilteredOptions[i].date+"</p>";
-        inner+="<p>Doctor: "+sameDayFilteredOptions[i].doctor+"</p>";
+
+        const response = await fetch ( "/getDoctorBasedOnID",{
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: JSON.stringify({ id: sameDayFilteredOptions[i].doctor })
+        });
+
+        const data = await response.json();
+
+        inner+="<p>Doctor: "+data.name+"  "+data.surname+"</p>";
+
         inner+="<input type='button' value='select' onclick='selectFilteredBooking(\""+sameDayFilteredOptions[i].time+"\",\""+sameDayFilteredOptions[i].endTime+"\",\""+sameDayFilteredOptions[i].date+"\",\""+sameDayFilteredOptions[i].doctor+"\",\""+sameDayFilteredOptions[i].reason+"\")'>";
-        inner+="</div>";
+        inner+="<hr></div>";
         innerHTML+=inner;
         count ++;
         if(count >= 5) break;
     }
 
     count =0;
-    innerHTML+="<h1 style='color:white;'>Booking options of matching time</h1>";
-
-    
-
-
-  
+    innerHTML+="<h1 style='color:white;'>Booking options of matching time</h1><br><br>";
 
     console.log("day"+ day);
     for(var i in sameTimeFilteredOptions)
@@ -832,15 +839,27 @@ function filterOptions()
         var day = parseInt(new Date(ffsThisDate).getDay());
     
         
-        var inner ="<div><p>Time: "+sameTimeFilteredOptions[i].time+"</p>";
+        var inner ="<div><hr><br><p>Time: "+sameTimeFilteredOptions[i].time+"</p>";
         inner+="<p>End: "+sameTimeFilteredOptions[i].endTime+"</p>";
         inner+="<p>Day:"+dayArray[day]+"</p>";
         inner+="<p>Date: "+sameTimeFilteredOptions[i].date+"</p>";
-        inner+="<p>Doctor: "+sameTimeFilteredOptions[i].doctor+"</p>";
+
+        const response = await fetch ( "/getDoctorBasedOnID",{
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: JSON.stringify({ id: sameTimeFilteredOptions[i].doctor })
+        });
+
+        const data = await response.json();
+
+        inner+="<p>Doctor: "+data.name+"  "+data.surname+"</p>";
         inner+="<input type='button' value='select' onclick='selectFilteredBooking(\""+sameTimeFilteredOptions[i].time+"\",\""+sameTimeFilteredOptions[i].endTime+"\",\""+sameTimeFilteredOptions[i].date+"\",\""+sameTimeFilteredOptions[i].doctor+"\",\""+sameTimeFilteredOptions[i].reason+"\")'>";
-        inner+="</div>";
+        inner+="<hr></div>";
         innerHTML+=inner;
         count++;
+      
         if (count >=5) break;
     }
 
@@ -870,7 +889,17 @@ function selectFilteredBooking(time , endTime , date, doctor,reason)
     document.getElementById("dateInfoDisplay").innerHTML = date;
     document.getElementById("dateInfoDisplay").style.color = "lightgreen";
 
-    document.getElementById("doctorInfoDisplay").innerHTML = date;
-    document.getElementById("doctorInfoDisplay").style.color = "lightgreen";
+
+    var response = fetch("/getDoctorBasedOnID" , {
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body:JSON.stringify({"id":doctor})
+    });
+
+    response.then(res => res.json().then(data=> {
+        document.getElementById("doctorInfoDisplay").innerHTML = data.name+ " "+ data.surname;
+        document.getElementById("doctorInfoDisplay").style.color = "lightgreen";
+    }))
+   
 
 }
