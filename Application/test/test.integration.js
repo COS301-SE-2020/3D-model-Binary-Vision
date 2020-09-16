@@ -3,7 +3,7 @@
 
 let chai = require("chai");
 let chaiHttp = require("chai-http");
-let Benchmark = require('benchmark');
+let Benchmark = require('benchtest');
 let server = require("../server");
 
 let db = require("../api/controller/3DModelController");
@@ -12,6 +12,10 @@ let dbE = require("../api/controller/EmailController");
 let dbU = require("../api/controller/UploadController");
 
 var async = require('async');
+
+const benchtest = require("benchtest");
+beforeEach(benchtest.test);
+after(function(done){ benchtest.report; done(); });
 
 //Assertion sytle
 chai.should();
@@ -28,22 +32,6 @@ var loggedRecep1;
 
 var recep1_ID;
 var doc1_ID;
-
-/*
-	Lines that still need to be reached:
-	
-		- ModelController
-			535-666 (131)
-			1003-1082 (79)
-			1122-1136 (14)
-
-		- ReceptionistController
-			237-571
-
-		- UploadController
-			21-92
-
-*/
 
 describe('Integration Testing:', () => {
 
@@ -322,6 +310,46 @@ describe('Integration Testing:', () => {
 					done();
 				});
 		});
+
+		it('Testing Signup for a Doctor (With no email) - Returns 400 code', (done) => {
+			const tempDoctor = {
+				name: "Otto",
+				surname: "Octavius",
+				username: "DocOc", 
+				password: "1234",
+				choice: "Doctor",
+				practition: "Dentists For Hire",
+				securityCode: "12345"
+			};
+
+			chai.request(server)
+				.post("/signup", db.signup)
+				.send(tempDoctor)
+				.end((error, response) => {
+					response.should.have.status(400);
+					done();
+				});
+		});
+
+		it('Testing Signup for a Receptionist (With no email) - Returns 400 code', (done) => {
+			const tempRecep = {
+				name: "Otto",
+				surname: "Octavius",
+				username: "DocOc", 
+				password: "1234",
+				choice: "Receptionist",
+				practition: "Dentists For Hire",
+				securityCode: "12345"
+			};
+
+			chai.request(server)
+				.post("/signup", db.signup)
+				.send(tempRecep)
+				.end((error, response) => {
+					response.should.have.status(400);
+					done();
+				});
+		});
 	});
 
 	// Test case 4 : passwordChangeEmail
@@ -592,8 +620,8 @@ describe('Integration Testing:', () => {
 		});
 	});
 
-	// Test case 13: makeBooking
-	describe('(13) Make a booking for a patient', () => {
+	// Test case 12: makeBooking
+	describe('(12) Make a booking for a patient', () => {
 		it('Testing makeBooking Feature (With valid user input) - Returns 200 code', (done) => {
 			const bookingInfo = {
 				patient: "Mark",
@@ -648,8 +676,8 @@ describe('Integration Testing:', () => {
 		});
 	});
 
-	// Test case 14 : getPatientConsultations
-	describe('(14) Get Patient Consoltation', () => {
+	// Test case 13 : getPatientConsultations
+	describe('(13) Get Patient Consoltation', () => {
 		it ('Testing getPatientConsultations Feature (With vaild user input) - Returns 200 code', (done) => {
 			doctor1
 				.get("/consultations", db.getPatientConsultations)
@@ -670,8 +698,8 @@ describe('Integration Testing:', () => {
 		});
 	});
 
-	// Test case 15 : selectConsultation
-	describe('(15) Select a consultation', () => {
+	// Test case 14 : selectConsultation
+	describe('(14) Select a consultation', () => {
 
 		it ('Testing selectConsultation Feature (With valid user input) - Returns 200 code', (done) => {
 			doctor1
@@ -694,8 +722,8 @@ describe('Integration Testing:', () => {
 		});
 	});
 
-	// Test case 16 : retrieveConsultationFiles
-	describe('(16) Retrieve a consultation', () => {
+	// Test case 15 : retrieveConsultationFiles
+	describe('(15) Retrieve a consultation', () => {
 		
 		it('Testing retrieveConsultationFiles Feature (With no consultation found) - Returns 404 code', (done) => {
 			doctor1
@@ -717,8 +745,8 @@ describe('Integration Testing:', () => {
 		})
 	});
 
-	// Test case 17 : getDoctorSurname
-	describe('(17) Get the doctors surname', () => {
+	// Test case 16 : getDoctorSurname
+	describe('(16) Get the doctors surname', () => {
 		// Test get the doctors surname success
 		it ('Testing getDoctorSurname Feature (With valid user) - Returns Json response', (done) => {
 			doctor1
@@ -742,8 +770,8 @@ describe('Integration Testing:', () => {
 		});
 	});
 
-	// Test case 18 : upload
-	describe('(18) Upload a video', () => {
+	// Test case 17 : upload
+	describe('(17) Upload a video', () => {
 		// Test to upload video footage for the backend
 //////////////////////////////////////////////////////////
 	//	it('Testing upload Feature (With no data) - Returns 400 code', (done) => {
@@ -758,8 +786,8 @@ describe('Integration Testing:', () => {
 //////////////////////////////////////////////////////////
 	});
 
-	// Test case 19 : STLConsultationUpload
-	describe('(19) Upload an STL file', () => {
+	// Test case 18 : STLConsultationUpload
+	describe('(18) Upload an STL file', () => {
 		// Test to upload STL file to be rendered
 //////////////////////////////////////////////////////////
 	//	it('Testing STLConsultationUpload Feature (With valid user input) - Returns 200 code', (done) => {
@@ -774,8 +802,8 @@ describe('Integration Testing:', () => {
 //////////////////////////////////////////////////////////
 	});
 
-	// Test case : getSTLFile
-	describe('() Get the STL file', () => {
+	// Test case 19 : getSTLFile
+	describe('(19) Get the STL file', () => {
 //////////////////////////////////////////////////////////
 	//	it('Testing getSTLFile Feature (with invalid consultation id user input)  Returns 500 code', (done) => {
 	//		const consultationID = "j%3A%225f5faa4d4737ef24f8fe9083%22";
@@ -928,7 +956,6 @@ describe('Integration Testing:', () => {
 	//			.send()
 	//			.end((error, response) => {
 	//				response.should.have.status(200);
-	//				response.should.have.json;
 	//				done();
 	//			});
 	//	});
@@ -1275,8 +1302,8 @@ describe('Integration Testing:', () => {
 //////////////////////////////////////////////////////////
 	});
 
-	// Test case  : generatePatientSignupQRCode
-	describe('() Generate a patient signup QRCode', () => {
+	// Test case 33 : generatePatientSignupQRCode
+	describe('(33) Generate a patient signup QRCode', () => {
 		it('Testing generatePatientSignupQRCode Feature (With valid receptionist input) - Returns 200 code', (done) => {
 			receptionist1
 				.get('/qrCode', db.generatePatientSignupQRCode)
@@ -1305,8 +1332,8 @@ describe('Integration Testing:', () => {
 		});
 	});
 
-	// Test case : updateLog
-	describe('() Update the Log file', () => {
+	// Test case 34 : updateLog
+	describe('(34) Update the Log file', () => {
 		it('Testing updateLog Feature (With valid user input) - Returns 200 code', (done) => {
 			receptionist1
 				.post('/updateLog', db.updateLog)
@@ -1318,20 +1345,20 @@ describe('Integration Testing:', () => {
 		});
 	});
 
-	// Test case : saveConsultation
-	describe('() Save a consultation', () => {
+	// Test case 35 : saveConsultation
+	describe('(35) Save a consultation', () => {
 //////////////////////////////////////////////////////////
 	//	it('Testing saveConsultation Feature (With valid user input) - Returns 200 code', (done) => {
 	//		//doctor1.body._id = doc1_ID;
 	//
-	//		doctor1
-	//			.post('/saveConsultation', db.saveConsultation)
-	//			.send(doc1_ID)
-	//			.end((error, response) => {
-	//				response.should.have.status(201);
-	//				done()
-	//			})
-	//	}) 
+		//	doctor1
+		//		.post('/saveConsultation', db.saveConsultation)
+		//		.send()
+		//		.end((error, response) => {
+		//			response.should.have.status(201);
+		//			done()
+		//		})
+		//}) 
 //////////////////////////////////////////////////////////
 		it('Testing saveConsultation Feature (With valid user but not valid input) - Returns 400 code', (done) => {
 			doctor1
@@ -1354,8 +1381,8 @@ describe('Integration Testing:', () => {
 		})
 	});
 
-	// Test case 33 : Logout
-	describe('(33) Logout', () => {
+	// Test case 36 : Logout
+	describe('(36) Logout', () => {
 		// Test a logout
 		it('Testing Logout doctor Feature (From home page) - Returns the preview page', (done) => {
 			doctor1
@@ -1379,8 +1406,8 @@ describe('Integration Testing:', () => {
 		});
 	});
 
-	// Test case  : getAvatarChoice
-	describe('() Get the avatar choice', () => {
+	// Test case 37 : getAvatarChoice
+	describe('(37) Get the avatar choice', () => {
 //////////////////////////////////////////////////////////
 	//	it ('Testing getAvatarChoice Feature (With a valid doctor) - Returns 200 code', (done) => {
 	//		doctor1
@@ -1406,8 +1433,8 @@ describe('Integration Testing:', () => {
 		}); 
 	});
 
-	// Test case : setAvatarChoice
-	describe('() Set a avatar choice', () => {
+	// Test case 38 : setAvatarChoice
+	describe('(38) Set a avatar choice', () => {
 //////////////////////////////////////////////////////////
 	//	it('Testing setAvatarChoice Feature (With a valid doctor)', (done) => {
 	//		doctor1
@@ -1431,8 +1458,8 @@ describe('Integration Testing:', () => {
 		});	
 	})
 
-	// Test case : getPatientAndBooking
-	describe('() Get a patient and their booking', () => {
+	// Test case 39 : getPatientAndBooking
+	describe('(39) Get a patient and their booking', () => {
 //////////////////////////////////////////////////////////
 	//	it('Testing getPatientAndBooking Feature (With valid user) - Returns 200 code', (done) => {
 	//		receptionist1
@@ -1457,8 +1484,8 @@ describe('Integration Testing:', () => {
 //////////////////////////////////////////////////////////
 	});
 
-	// Test case : 
-	describe('() Upload the images from the video footage', () => {
+	// Test case 40 : uploadImages
+	describe('(40) Upload the images from the video footage', () => {
 		it('Testing uploadImages Feature (With no images) - Returns 404 code', (done) => {
 			doctor1
 				.post('/uploadImages', dbU.uploadImages)
@@ -1470,8 +1497,8 @@ describe('Integration Testing:', () => {
 		});
 	});
 
-	// Test case :
-	describe('() The fuzzy logic booking', () => {
+	// Test case 41 : fuzzyLogicBooking
+	describe('(41) The fuzzy logic booking', () => {
 		it('Testing fuzzyLogicBooking Feature (With valid user input) - Returns 200 code', (done) => {
 			const details = {
 				reason: "checkup",
@@ -1479,7 +1506,7 @@ describe('Integration Testing:', () => {
 			}
 
 			receptionist1
-				.post('/fuzzyLogic', db.fuzzyLogicBooking)
+				.post('/fuzzyLogic', dbR.fuzzyLogicBooking)
 				.send()
 				.end((error, response) => {
 					response.should.have.status(200);
@@ -1489,7 +1516,7 @@ describe('Integration Testing:', () => {
 
 		it('Testing fuzzyLogicBooking Feature (With invalid user input) - Returns 401 code', (done) => {
 			receptionist2
-				.post('/fuzzyLogic', db.fuzzyLogicBooking)
+				.post('/fuzzyLogic', dbR.fuzzyLogicBooking)
 				.send()
 				.end((error, response) => {
 					response.should.have.status(401);
@@ -1498,8 +1525,8 @@ describe('Integration Testing:', () => {
 		});
 	});
 
-	// Test case  : activateUser
-	describe('() Activate a user', () => {
+	// Test case 42 : activateUser
+	describe('(42) Activate a user', () => {
 		it('Testing activateUser Feature (Denying a Doctor) - Returns 200 code', (done) => {
 			doctor1
 				.post("/activateUser", db.activateUser)

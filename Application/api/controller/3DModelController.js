@@ -281,8 +281,10 @@ module.exports = {
                             receptionist.save(function(err, saved)
                             {
                                 if(err)
-                                {
-                                res.send(err);
+                                {   
+                                    res.status(400);
+                                    res.send(err);
+                                    return;
                                 }
                                 else
                                 {
@@ -464,10 +466,10 @@ module.exports = {
         {
             if (err) 
             {
-                res.send(err);
+                res.status(400).send(err);
                 return;
             } 
-            res.json(patient);
+            res.status(200).json(patient);
             return;  
         });
     },
@@ -1071,8 +1073,8 @@ module.exports = {
         }
       
         Doctor.findOne({"_id":mongoose.Types.ObjectId(req.body.id)} , function (err , doctor)
-        {
-            if (err)
+        {   
+            if (err /*|| doctor == null*/)
             {
                 res.send("No docotor found")
                   .status(404);
@@ -1489,7 +1491,7 @@ module.exports = {
                 {
                     res.send(err);
                     return;
-                } 
+                }
                 res.json({"name":patient.name,"idNumber":patient.idNumber,"time":bookings.time,"date":bookings.date,"cellnumber":patient.cellnumber,"patient":bookings.patient,"bid":bookings._id});
                 return;  
             });
