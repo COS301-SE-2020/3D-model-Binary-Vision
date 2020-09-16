@@ -28,7 +28,8 @@ module.exports = {
                 console.log(err);
                 return;
             }
-            const images = files.images;
+            // console.log(files);
+            const images = files;
 
             if (!images || isEmpty(images))
             {
@@ -44,19 +45,24 @@ module.exports = {
                 
                 //temp store file 
                 var f = Date.now();
-                var dir="sfmAlgorithm_linux_final/Executable/imageData/"+req.user+"-"+f;
+                var dir="sfmAlgorithm_linux/Executable/imageData/"+req.user+"-"+f+"/";
+                // console.log("making directory : "+ dir);
                 fs.mkdirSync(dir);
+                var  count =0;
                 for (let image of images["images[]"] ) 
                 {
-                    fs.copyFileSync(image.path, path.join(dir, image.name));
+                    // console.log("Saving image: "+image.name);
+                    fs.copyFileSync(image.path, path.join(dir, image.name+"-"+count+".png"));
+                    count++;
                 }
 
+                console.log("\n\n\n");
                 //connect c++ program here and send file name when done c++ deletes file
                 //using spawn as a chid-process 
 
-                const workingDirectory = "sfmAlgorithm_linux_final/Executable";
+                const workingDirectory = "sfmAlgorithm_linux/Executable/";
                 console.log(workingDirectory);
-                var d = req.user+"-"+f;
+                var d = "sample_test";//req.user+"-"+f;
                 
                 exec(`./main ${d}`,{ cwd: workingDirectory, shell: true }, (error, stdout, stderr) => {
                     console.log(stdout);
@@ -65,14 +71,15 @@ module.exports = {
                         console.log(`Process exited with error: ${error.code}`);
                         
                         //remove created directories
-                        rimraf(dir);
+                        // console.log("Deleting directory "+ dir);
+                        // rimraf(dir);
 
 
                         return res.sendStatus(500);
                     } else {
                         //get stl file and save it to a consultations ID
-                        var fileLocation = "smfAlgorith,_linux_final/Executable/output/"+d+"/MVS_output/";
-                        const objStream = fs.createReadStream(path.join(fileLocation,"scene_dense_mesh.obj"));
+                        var fileLocation = "smfAlgorith,_linux/Executable/output_obj/"+d+"/";
+                        const objStream = fs.createReadStream(path.join(fileLocation, d+".obj" ));
                         const Files = createModel();
                         const options = {
                             filename: video.name,
@@ -103,7 +110,8 @@ module.exports = {
                         });
                         
                         //remove created directories 
-                        rimraf(dir);
+                        // console.log("Deleting directory "+ dir);
+                        // rimraf(dir);
                         res.status(200).send("Success");
                     }
                 });
