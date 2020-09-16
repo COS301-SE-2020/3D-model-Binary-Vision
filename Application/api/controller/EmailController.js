@@ -106,8 +106,9 @@ function sendPasswordResetEmail(req)
         html:'<div style="background-color: #343a40; width: 400px; padding: 10px; border-radius: 10px; position:relative;margin:0 auto; margin-top: 100px;"><h1 style="color:white;text-align: center;">Password Reset</h1><hr><h2 style="color:lightblue;text-align: center;" id="emailLink">USER_EMAIL_HERE</h2><p style="text-align: center; color:white;">You have requested to change your password. <br>Click on the link below to reset your password.</p><div style="text-align:center;"><a style="color:lightblue;" href="RESET_PASSWORD_URL">Reset Password</a></div><hr><p style="text-align: center; color:white; font-size: 13px;">If this was not you, please ignore this email.<br>Your passowrd will remain the same.</p></div>'
     };
 
-    //setting the variants in the email that is dependent on certain users
-    var resetURL="https://flapjacks.goodx.co.za/ResetPassword.html?email="+req.body.email+"&code="+id;
+    // setting the variants in the email that is dependent on certain users
+    var resetURL="lacalhost:3000/ResetPassword.html?email="+req.body.email+"&code="+id;
+    // var resetURL="https://flapjacks.goodx.co.za/ResetPassword.html?email="+req.body.email+"&code="+id;
     passwordChangeOptions.html = passwordChangeOptions.html.replace('RESET_PASSWORD_URL',resetURL);
     passwordChangeOptions.html = passwordChangeOptions.html.replace('USER_EMAIL_HERE',req.body.email);
     //send the actual email

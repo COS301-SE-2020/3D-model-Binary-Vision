@@ -38,3 +38,12 @@
 17/9/2020@1:19:11@dianna@Registered as a Receptionist
 17/9/2020@1:25:46@dianna@Registered as a Receptionist
 17/9/2020@1:26:55@dianna@Registered as a Receptionist
+17/9/2020@2:55:30@admin@Registered as a Receptionist
+17/9/2020@2:58:11@admin@Registered as a Receptionist
+17/9/2020@2:58:18@PracticeHead@Accepted Receptionist Application@ID:5f62b4a38de524d485a63ca9
+17/9/2020@2:59:11@admin@Registered as a Receptionist
+17/9/2020@2:59:19@PracticeHead@Accepted Receptionist Application@ID:5f62b4df8de524d485a63caa
+17/9/2020@2:59:29@admin@Logged in
+17/9/2020@2:59:41@admin@Made a booking@BID:5f62b4fd8de524d485a63cab
+17/9/2020@2:59:45@admin@Logout
+17/9/2020@2:59:54@Dr@Logged in
