@@ -79,7 +79,7 @@ module.exports = {
                         return res.sendStatus(500);
                     } else {
                         //get stl file and save it to a consultations ID
-                        var fileLocation = "smfAlgorithm_linux/Executable/output_obj/"+d+"/";
+                        var fileLocation = "sfmAlgorithm_linux/Executable/output_obj/"+d+"/";
                         const objStream = fs.createReadStream(path.join(fileLocation, d+".obj" ));
                         const Files = createModel();
                         const options = {
@@ -90,6 +90,7 @@ module.exports = {
                             if (err) 
                             {
                                 res.send(err);
+                                return;
                             }
                             else{
                                 const consultation = new Consultation(
@@ -103,7 +104,7 @@ module.exports = {
                                 {
                                     if (err)
                                     {
-                                      res.send(400);
+                                      res.status(400);
                                     }
                                     res.status(201);
                                 });
