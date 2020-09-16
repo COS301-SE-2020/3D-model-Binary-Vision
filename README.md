@@ -2,6 +2,7 @@
 =================================
 
 [![Build Status](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision.svg?branch=master)](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision)
+[![Coverage Status](https://coveralls.io/repos/github/COS301-SE-2020/3D-model-Binary-Vision/badge.svg?branch=master)](https://coveralls.io/github/COS301-SE-2020/3D-model-Binary-Vision?branch=master)
 
 https://vanillav.github.io/FlapJacks.github.io/
 
