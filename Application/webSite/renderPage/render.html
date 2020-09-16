@@ -1,76 +1,80 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title> Model Render Test </title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link rel="stylesheet" href="../css/style.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-		<script type="text/javascript" src="../js/VideoCapture.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../js/apiCalls.js"></script>
-		<script src="three.js"></script>
-		<script src="detector.js"></script>
-		<script src="stlrender.js"></script>
-		<script src="Function.js"></script>
-	</head>
-	<body onload=createCanvas()>
-		<nav class="navbar navbar-expand-md  navbar-dark">
-		  <a class="navbar-brand" href="../html/doctorSchedule.html">
-		      <img src="../css/images/tooth.png" alt="Profile Picture" width="30px" height="30px">
-		  </a>
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
-		  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-		    <ul class="navbar-nav">
-	          <li id="otherLi" class="nav-item">
-	            <a class="nav-link" href="../html/doctorSchedule.html">Schedule<img src="../css/images/home-run.png" width="20px" style="margin-left: 5px;"></img></a>
-	          </li>
-	          <li id="otherLi" class="nav-item">
-	            <!--i took this away because the timetable href takes you to the receptionist side of the application-->
-	            <a class="nav-link" href="../html/timetable.html">Weekly Planner<img src="../css/images/calendar.png" width="20px" style="margin-left: 5px;"></img></a>
-	          </li>
-	          <li id="logout" class="nav-item" id="logout">
-	            <a id="logoutA"class="nav-link" onclick="logout()" href="../html/preview.html">Logout<img src="../css/images/logout.png" width="20px" style="margin-left: 5px;"></img></a>
-	          </li>
-	        </ul>
-		  </div>
-		</nav>
+<head>
 
-		  <div id="miBody">
-		    <div id="header">
-		      <p id="headerTitle">RENDER MODEL PAGE</p>
-		    </div>
-		  </div>
+    <title>WebGL 3D Model Viewer Using three.js</title>
 
-		<br><br><br><br>
+    <meta charset="utf-8">
+    <title> Model Render Test </title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<script type="text/javascript" src="../js/VideoCapture.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/apiCalls.js"></script>
+    <script src="three.js"></script>
+    <script src="Detector.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script src="OBJLoader.js"></script>
+    <script src="MTLLoader.js"></script>
+    <script src="render.js"></script>
 
-		<div id="renderContainer"> 
-			<div class="renderCenter">
-				<h2 id="renderHeader">Tooth Render</h2><br>
-				
-				<button class="btn btn-danger" onclick=begin()>Render Model</button>
-			</div><br>
+    <style>
+        a {
+            color: #f58231;
+        }
+    </style>
 
-			<div id = "outputModule1" class="outputModule"></div>
-			<a id = "returnbutton" style="display: block; margin-top: 50px; position: relative; text-align: center; 
-			margin-left: auto; margin-right: auto; width: 300px;" class="btn btn-primary" href="#">Return</a>
-		</div>
+</head>
+<body>
 
-		<br>
-		<!--
-		<div  class="renderCenter">
-			<button class="btn btn-dark" style="left:0px;" onclick=newSTL()>New Model</button>
-			<button class="btn btn-dark" onclick=newVideo()>New Media</button>
-		</div>
-		<br>
-		<div id = 'videoRec' class='renderCenter'>
+    <nav class="navbar navbar-expand-md  navbar-dark">
+        <a class="navbar-brand" href="../html/doctorSchedule.html">
+            <img src="../css/images/tooth.png" alt="Profile Picture" width="30px" height="30px">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li id="otherLi" class="nav-item">
+              <a class="nav-link" href="../html/doctorSchedule.html">Schedule<img src="../css/images/home-run.png" width="20px" style="margin-left: 5px;"></img></a>
+            </li>
+            <li id="otherLi" class="nav-item">
+              <!--i took this away because the timetable href takes you to the receptionist side of the application-->
+              <a class="nav-link" href="../html/timetable.html">Weekly Planner<img src="../css/images/calendar.png" width="20px" style="margin-left: 5px;"></img></a>
+            </li>
+            <li id="logout" class="nav-item" id="logout">
+              <a id="logoutA"class="nav-link" onclick="logout()" href="../html/preview.html">Logout<img src="../css/images/logout.png" width="20px" style="margin-left: 5px;"></img></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-		</div>
-		-->
-		</body>
-		
+        <div id="miBody">
+          <div id="header">
+            <p id="headerTitle">RENDER MODEL PAGE</p>
+          </div>
+        </div>
+
+      <br><br><br><br>
+
+      <div id="renderContainer"> 
+          <div class="renderCenter">
+              <h2 id="renderHeader">Tooth Render</h2><br>
+              
+              <button class="btn btn-danger" onclick=run()>Render Model</button>
+          </div><br>
+
+          <div id = "outputModule1" class="outputModule"></div>
+          <a id = "returnbutton" style="display: block; margin-top: 50px; position: relative; text-align: center; 
+          margin-left: auto; margin-right: auto; width: 300px;" class="btn btn-primary" href="#">Return</a>
+      </div>
+
+      <br>
+
+</body>
 </html>
