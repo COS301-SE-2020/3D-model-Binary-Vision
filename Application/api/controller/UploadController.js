@@ -41,7 +41,7 @@ module.exports = {
                 
                 //temp store file 
                 var f = Date.now();
-                var dir="sfmAlgorithm_linux/Executable/imageData/"+req.user+"-"+f;
+                var dir="sfmAlgorithm_linux_final/Executable/imageData/"+req.user+"-"+f;
                 fs.mkdirSync(dir);
                 for (let image of images["images[]"] ) 
                 {
@@ -51,51 +51,58 @@ module.exports = {
                 //connect c++ program here and send file name when done c++ deletes file
                 //using spawn as a chid-process 
 
-                const workingDirectory = "sfmAlgorithm_linux/Executable";
+                const workingDirectory = "sfmAlgorithm_linux_final/Executable";
                 console.log(workingDirectory);
                 var d = req.user+"-"+f;
                 
                 exec(`./main ${d}`,{ cwd: workingDirectory, shell: true }, (error, stdout, stderr) => {
-                    // console.log(stdout);
-                    // console.log(stderr);
+                    console.log(stdout);
+                    console.log(stderr);
                     if (error) {
                         console.log(`Process exited with error: ${error.code}`);
+                        
+                        //remove created directories
+                        rimraf(dir);
+
+
                         return res.sendStatus(500);
                     } else {
                         //get stl file and save it to a consultations ID
-                        // const stlStream = fs.createReadStream(path.join(dir,"stlFile.stl"));
-                        // const Files = createModel();
-                        // const options = {
-                        //     filename: video.name,
-                        //     contentType: video.type
-                        //   }
-                        // Files.write(options, readStream, (err, file) => {
-                        //     if (err) 
-                        //     {
-                        //         res.send(err);
-                        //     }
-                        //     else{
-                        // 
-                        //         const consultation = new Consultation(
-                        //         {
-                        //             doctor: req.user, // get from session, e.g. cookies
-                        //             patient: patient._id,
-                        //             STL: file._id,
-                        //             Note: "Video Upload"
-                        //         });
-                        //         consultation.save(function (err) 
-                        //         {
-                        //             if (err)
-                        //             {
-                        //               res.send(400);
-                        //             }
-                        //             res.status(201);
-                        //         });
-                        //     }
-                        // });
-                        //remove
-                         res.status(200).send("Success");
-                         rimraf(dir);
+                        var fileLocation = "smfAlgorith,_linux_final/Executable/output/"+d+"/MVS_output/";
+                        const objStream = fs.createReadStream(path.join(fileLocation,"scene_dense_mesh.obj"));
+                        const Files = createModel();
+                        const options = {
+                            filename: video.name,
+                            contentType: video.type
+                          }
+                        Files.write(options, objStream, (err, file) => {
+                            if (err) 
+                            {
+                                res.send(err);
+                            }
+                            else{
+                        
+                                const consultation = new Consultation(
+                                {
+                                    doctor: req.user, // get from session, e.g. cookies
+                                    patient: patient._id,
+                                    STL: file._id,
+                                    Note: "Video Upload"
+                                });
+                                consultation.save(function (err) 
+                                {
+                                    if (err)
+                                    {
+                                      res.send(400);
+                                    }
+                                    res.status(201);
+                                });
+                            }
+                        });
+                        
+                        //remove created directories 
+                        rimraf(dir);
+                        res.status(200).send("Success");
                     }
                 });
 
