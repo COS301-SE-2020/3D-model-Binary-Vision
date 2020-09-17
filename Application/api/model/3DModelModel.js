@@ -112,8 +112,8 @@ var Receptionist = new Schema({
 
 var ConsultationSchema = new Schema({
     created:{
-        type: String,
-        required: true,
+        type: Date,
+        defualt: new Date()
     },
     doctor:{
         type: Schema.Types.ObjectId,
@@ -141,11 +141,9 @@ var ConsultationSchema = new Schema({
     },
     Note:{
         type:String, 
-        required: true
     },
     reason:{
         type:String,
-        required:true
     }
 });
 
