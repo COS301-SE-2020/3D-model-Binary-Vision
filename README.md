@@ -92,7 +92,7 @@ Created the deployment model diagram.
 
 Demo 3: Implemented SFM algorithm to generate a point cloud from given images.
 
-Demo 4: pending
+Demo 4: Completion of SFM algorithm pipeline to render textured model files.
 
 -----------------------------------------------------------------------------------------------------------------
 Jacobus Janse van Rensburg
