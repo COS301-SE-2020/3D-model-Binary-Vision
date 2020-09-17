@@ -25,6 +25,7 @@ var Practice = require("../model/3DModelModel.js").Practice;
 
 //Email modules and settings to send emails
 var nodeMailer = require('nodemailer');
+
 const transporter = nodeMailer.createTransport({
     host:"smtp.mailtrap.io",
     port: 2525,
@@ -33,6 +34,15 @@ const transporter = nodeMailer.createTransport({
         pass:"c1fd4b36bbc842"
     } 
  });
+
+
+// var transporter = nodeMailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//            user: 'xxxxxxxx@gmail.com',
+//            pass: 'xxxxxxx'
+//        }
+//    });
 
 
 const frontsalt ="Lala";
@@ -1504,6 +1514,7 @@ module.exports = {
 // Function sends a email to head receptionist to confirm / reject a user signing up
 function sendsignupConfirmationEmail(practice , user){
 
+    console.log("HeadReceptionistEmail: "+ practice.headReceptionist);
     var emailOptions={
         from: 'flap.jacks.cs@gmail.com',
             to:practice.headReceptionist,//send email to the head receptionist
@@ -1515,7 +1526,7 @@ function sendsignupConfirmationEmail(practice , user){
     emailOptions.html+='<div id="head" style="background-color: #003366; width: 500px; text-align: center; border-radius: 5px;margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;"><br>';
     emailOptions.html+='<h2 style="color:white;">Enable Email Access</h2><hr style="background-color: white;">';
     emailOptions.html+='<span id="words" style="color: white;"> The email: <p style="color: lightblue;"id="emailAPI" name="emailAPI">xxxxxx@gmail.com</p>USER_NAME_HERE USER_SURNAME_HERE USER_ID_HERE Would like to signup with the system. <br> Would you like to <b style="color: lightgreen;">ACCEPT</b> or <b style="color: red;">REJECT</b> the request?</span>';
-    emailOptions.html+='<br><br><a style="margin: 5px; color:white;" class="btn btn-success"  id="acceptSignup" name="acceptSignup"  href="ACCEPT_HREF" /><b>ACCEPT</b></a>';
+    emailOptions.html+='<br><br><a style="margin: 5px; color:white;" class="btn btn-success"  id="acceptSignup" name="acceptSignup"  href="ACCEPT_HREF" >ACCEPT</a>';
     emailOptions.html+='<a style="margin: 5px; color: white;" class="btn btn-danger" id="rejectSignup" name="rejectSignup" href="REJECT_HREF"><b>REJECT</b></a><br><br></div>';
 
     //populate the email with the appropriate information 
@@ -1528,7 +1539,7 @@ function sendsignupConfirmationEmail(practice , user){
     //fill the information on the a click actions
     //do href to a page with the information url encoded to be extracted on that page and take nescasary actions
 
-    var href ="localhost:3000/ValidateSignup.html";
+    var href ="https://flapjacks.goodx.co.za/ValidateSignup.html";
     //create url encoded hrefs
     var reject = href+"?action=reject&user="+user._id;
     var accept = href+"?action=accept&user="+user._id;
@@ -1538,9 +1549,9 @@ function sendsignupConfirmationEmail(practice , user){
 
     //send the email
     transporter.sendMail(emailOptions, function(error, info){
-        if(err)
+        if(error)
         {
-            console.log(err);
+            console.log(error);
         }
         else{
             console.log(info);
