@@ -61,9 +61,6 @@ module.exports = {
                 //connect c++ program here and send file name when done c++ deletes file
                 //using spawn as a chid-process
 
-                const savingDirectory = "webSite/webSite/renderPage/assets/"+req.body.id+"/";
-                fs.makedirSync(savingDirectory);
-
                 const workingDirectory = "sfmAlgorithm_linux/Executable/";
                 console.log(workingDirectory);
                 var d = req.user+"-"+f;
@@ -88,9 +85,7 @@ module.exports = {
                         const mtlStream = fs.createReadStream(path.join(fileLocation, d+".mtl" ));
                         const Files = createModel();
                         
-                        fs.copyFileSync(fileLocationd+d+".obj", path.join(savingDirectory, req.body.id+".obj"));
-                        fs.copyFileSync(fileLocationd+d+"_material_0_map_Kd.jpg", path.join(savingDirectory, req.body.id+"_material_0_map_Kd.jpg"));
-                        fs.copyFileSync(fileLocationd+d+".mtl", path.join(savingDirectory, req.body.id+".mtl"));
+                     
 
                         const OBJoptions = {
                             filename: d+".obj",
@@ -152,14 +147,21 @@ module.exports = {
                                         }
                                         else{
                                             console.log("saved consultation "+ cons);
-                                            res.status(201);
 
+                                            const savingDirectory = "webSite/webSite/renderPage/assets/"+cons._id+"/";
+                                            fs.makedirSync(savingDirectory);
+
+                                            fs.copyFileSync(fileLocationd+d+".obj", path.join(savingDirectory, cons._id+".obj"));
+                                            fs.copyFileSync(fileLocationd+d+"_material_0_map_Kd.jpg", path.join(savingDirectory, cons._id+"_material_0_map_Kd.jpg"));
+                                            fs.copyFileSync(fileLocationd+d+".mtl", path.join(savingDirectory, cons._id+".mtl"));
+                                            res.status(201);
                                         }
                                     });
 
                                 });
 
                             });
+                            
                             
                         });
                         
