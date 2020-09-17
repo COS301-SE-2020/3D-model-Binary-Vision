@@ -173,7 +173,9 @@ to the back end, instead of the full video. Lastly I was in control of the unit 
 I had to update all the tests in accordance to the new API calls made, Travis CI code
 was also updated.
 
-Demo 4: pending
+Demo 4: I did most of the testing for the project. I finished the integration and 
+unit testing with the latest updates to the API. I also made a few updates towards 
+the front end. 
 
 -----------------------------------------------------------------------------------------------------------------
 
