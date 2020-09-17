@@ -136,12 +136,12 @@ module.exports = {
                                         MTL:mtlfile._id
                                     });
 
-                                    consultation.save(function (err,cons) 
+                                    consultation.save(function (consErr,cons) 
                                     {
-                                        if (err)
+                                        if (consErr)
                                         {
                                           res.status(400);
-                                          console.log("Error saving the consultation");
+                                          console.log("Error saving the consultation: "+ consErr);
                                         }
                                         else{
                                             console.log("saved consultation "+ cons);
