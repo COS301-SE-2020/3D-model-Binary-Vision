@@ -127,7 +127,15 @@ var ConsultationSchema = new Schema({
         type: Schema.Types.ObjectId,
         default:null
     },
-    STL:{
+    OBJ:{
+        type: Schema.Types.ObjectId,
+        default:null
+    },
+    MTL:{
+        type: Schema.Types.ObjectId,
+        default:null
+    },
+    TEX:{
         type: Schema.Types.ObjectId,
         default:null
     },
