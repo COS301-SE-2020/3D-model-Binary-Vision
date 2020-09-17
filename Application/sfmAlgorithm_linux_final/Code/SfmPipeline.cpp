@@ -42,10 +42,13 @@ bool SfmPipeline::createImageListings()
 	cout << "Could not find database file sensor_width_camera_database.txt, skipping inclusion..." << endl;
 
 	//Intrinsics Matrix K is specified here.
-	//parameter_line = parameter_line + "-k " +	f + ";0;" +  "320" + ";0;" + f + ";" +  "240" + ";0;0;1 ";
+	parameter_line = parameter_line + "-k " +
+	"\"" + f_x + ";0;" +
+	 c_x + ";0;" + f_y + ";" +
+	 c_y + ";0;0;1\" ";
 
 	//Parameter for focal length in terms of pixels.
-	parameter_line = parameter_line + "-f " + f + " -c " + camera_model + " "   ;
+	parameter_line = parameter_line +" -c " + camera_model + " "   ;
 
 	//Specify input file that contains the images
 	parameter_line = parameter_line + " -i " +  "../../imageData/" + file_name;
@@ -53,7 +56,6 @@ bool SfmPipeline::createImageListings()
 	//Specify the output file to store computed data
 	parameter_line = parameter_line + " -o " +  "imageMatches";
 
-//	parameter_line = parameter_line + " -k 800"+';'+"0"+';'+"320"+';'+"0"+';'+"800"+';'+"240"+';'+"0"+';'+"0"+';'+"1";
 
 	//Execute the executable with created parameters.
 	bool res = executeExternal("openMVG_main_SfMInit_ImageListing", parameter_line);
@@ -469,8 +471,14 @@ void SfmPipeline::applyConfiguration(std::ifstream* _file)
     std::string line;
     std::getline(*_file, line);
     std::getline(*_file, line);
-		f = Helper::readProperty(line);
+		f_x = Helper::readProperty(line);
     std::getline(*_file, line);
+		f_y = Helper::readProperty(line);
+		std::getline(*_file, line);
+		c_x = Helper::readProperty(line);
+		std::getline(*_file, line);
+		c_y = Helper::readProperty(line);
+		std::getline(*_file, line);
 		camera_model = Helper::readProperty(line);
     std::getline(*_file, line);
     std::getline(*_file, line);

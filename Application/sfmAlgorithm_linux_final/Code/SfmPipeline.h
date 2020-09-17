@@ -33,7 +33,6 @@ private:
 	bool executeExternal(string name, string parameters);
 
 	// Configuration variables
-	string f = "800";
 	string camera_model = "3";
 	string force_feature = "0";
 	string describer_method = "SIFT";
@@ -49,7 +48,10 @@ private:
 	string translation_averaging = "3";
 	string bundler_use = "ON";
 	string residual_threshold = "4.0";
-
+	string f_x = "800";
+	string f_y = "800";
+	string c_x = "800";
+	string c_y = "800";
 };
 
 #endif
