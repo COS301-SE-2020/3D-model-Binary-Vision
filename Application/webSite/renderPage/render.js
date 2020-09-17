@@ -1,8 +1,21 @@
 //make API calls in there scripts to get the names of the object files, texturews and the mtl file
 var objectFile = 'sample_test.obj';
 var mtlFile = 'sample_test.mtl';
+var assetPath = 'assets/';
+//assets/bookingid 
 
 var done = false;
+
+function getUrls()
+{
+    //this is used to set the paths and object names from the URL    
+    var url = window.location.href;
+    var parts = url.split("=");
+    var consID = parts[1];
+    assetPath = 'assets/' + consID + '/';
+    objectFile = consID + '.obj';
+    mtlFile = consID + '.mtl';
+}
 
 function run()
 {
@@ -51,8 +64,8 @@ function run()
         /* Model */
     
         var mtlLoader = new THREE.MTLLoader();
-        mtlLoader.setBaseUrl('assets/');
-        mtlLoader.setPath('assets/');
+        mtlLoader.setBaseUrl(assetPath);
+        mtlLoader.setPath(assetPath);
         mtlLoader.load(mtlFile, function (materials) {
     
             materials.side = THREE.DoubleSide;
@@ -63,7 +76,7 @@ function run()
     
             var objLoader = new THREE.OBJLoader();
             objLoader.setMaterials(materials);
-            objLoader.setPath('assets/');
+            objLoader.setPath(assetPath);
             objLoader.load(objectFile, function (object) {
                 scene.add(object);
             });
