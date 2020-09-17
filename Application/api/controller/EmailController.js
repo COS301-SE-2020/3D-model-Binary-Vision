@@ -107,8 +107,8 @@ function sendPasswordResetEmail(req)
     };
 
     // setting the variants in the email that is dependent on certain users
-    var resetURL="lacalhost:3000/ResetPassword.html?email="+req.body.email+"&code="+id;
-    // var resetURL="https://flapjacks.goodx.co.za/ResetPassword.html?email="+req.body.email+"&code="+id;
+    // var resetURL="lacalhost:3000/ResetPassword.html?email="+req.body.email+"&code="+id;
+    var resetURL="https://flapjacks.goodx.co.za/ResetPassword.html?email="+req.body.email+"&code="+id;
     passwordChangeOptions.html = passwordChangeOptions.html.replace('RESET_PASSWORD_URL',resetURL);
     passwordChangeOptions.html = passwordChangeOptions.html.replace('USER_EMAIL_HERE',req.body.email);
     //send the actual email
