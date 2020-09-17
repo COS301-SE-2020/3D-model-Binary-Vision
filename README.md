@@ -112,7 +112,11 @@ Demo 3: Developed API Functions for the receptionist and the doctor to manage th
 developed as well as front end javascript files with functions to improve our signup system along with dynamic
 page api calls and populations of information that the api returns. Developed the dynamic booking page and the weekly pladder page that shows all the doctors bookings for the comming week.
 
-Demo 4: pending
+Demo 4: Developed the fuzzy logic algorithm to find open booking slots for the receptionist. 
+Created the qr code generator used for a practice too have a unique place where the patients can enter their information.
+Integration of the generic algorithm with the API and front end.
+Emailing System that is used to change passwords and ensure that a head receptionist accepts a signup before they can access records.
+
 
 -----------------------------------------------------------------------------------------------------------------
 Steven Visser
