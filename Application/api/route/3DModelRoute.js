@@ -145,12 +145,6 @@ module.exports = function (app)
     app.route('/consultation/:id/obj')
         .get(Model.getOBJFile);
 
-    app.route('/consultation/:id/tex')
-    .get(Model.getTEXFile);
-
-    app.route('/consultation/:id/mtl')
-    .get(Model.getMTLFile);
-
     app.route('/updateLog')
         .post(Model.updateLog);
     
