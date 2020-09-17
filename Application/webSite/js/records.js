@@ -12,7 +12,7 @@ function showRecord(date, reason,consultation)
     //going to use consultation id to gdt the STL ID for renderpage
     var rightBody = document.getElementById("rightSideBody");
     rightBody.style.width = "250px";
-    document.getElementById("containInfoRight").innerHTML = "<br><br>DATE: <hr> <p id='date1' style='color:black; font-weight: bold;'>"+date+"</p>  BOOKING REASON: <hr><p id='patientqq' style='color:black; font-weight: bold;'>"+reason+"</p> <br><br><br><br>RENDER<hr><a class='btn btn-success' href='../renderPage/render.html?"+ consultation +"' id = 'renderpage'>Render</a><br><br>HIDE<hr><button class='btn btn-danger' onclick=hideRecord()>Hide Info</button>";
+    document.getElementById("containInfoRight").innerHTML = "<br><br>DATE: <hr> <p id='date1' style='color:black; font-weight: bold;'>"+date+"</p>  BOOKING REASON: <hr><p id='patientqq' style='color:black; font-weight: bold;'>"+reason+"</p> <br><br><br><br>RENDER<hr><a class='btn btn-success' href='../renderPage/render.html?cid="+ consultation +"' id = 'renderpage'>Render</a><br><br>HIDE<hr><button class='btn btn-danger' onclick=hideRecord()>Hide Info</button>";
 }
 
 function hideRecord()
