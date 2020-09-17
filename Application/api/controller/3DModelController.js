@@ -725,9 +725,11 @@ module.exports = {
         });
     },
 
-    //
+    //=============================================================================================
+    //Function developed by: Jacobus Janse van Rensburg 
+    //Function used to return a .obj file to be used in a render
 
-    getSTLFile: function (req,res){
+    getOBJFile: function (req,res){
         if(!req.user){
             res.status(401).send("Unauthorized");
             return;
@@ -742,10 +744,76 @@ module.exports = {
                 }
                 else if (cons) {
                     var attachment = createModel();
-                    const stlReturn  = attachment.read({"_id":cons.STL});
+                    const objReturn  = attachment.read({"_id":cons.OBJ});
 
-                    res.contentType('model/stl');
-                    stlReturn.pipe(res);
+                    res.contentType('text/plain');
+                    objReturn.pipe(res);
+                    return;
+                }
+                else{
+                    return res.sendStatus(404);
+                }
+
+            })
+
+        }
+    },
+
+    //=============================================================================================
+    //Function developed by: Jacobus Janse van Rensburg 
+    //Function used to return a .jpeg file to be used in a render
+    getTEXFile: function (req,res){
+        if(!req.user){
+            res.status(401).send("Unauthorized");
+            return;
+        }
+        else {
+
+            var consultation = req.params.id;
+
+            Consultation.findOne({"_id":consultation}, function(err , cons){
+                if (err){
+
+                }
+                else if (cons) {
+                    var attachment = createModel();
+                    const objReturn  = attachment.read({"_id":cons.TEX});
+
+                    res.contentType('image/jpg');
+                    objReturn.pipe(res);
+                    return;
+                }
+                else{
+                    return res.sendStatus(404);
+                }
+
+            })
+
+        }
+    },
+
+    //=============================================================================================
+    //Function developed by: Jacobus Janse van Rensburg 
+    //Function used to return a .mtl file to be used in a render
+    getMTLFile: function (req,res){
+        if(!req.user){
+            res.status(401).send("Unauthorized");
+            return;
+        }
+        else {
+
+            var consultation = req.params.id;
+
+            Consultation.findOne({"_id":consultation}, function(err , cons){
+                if (err){
+
+                }
+                else if (cons) {
+                    var attachment = createModel();
+                    const objReturn  = attachment.read({"_id":cons.MTL});
+
+                    res.contentType('text/plain');
+                    objReturn.pipe(res);
                     return;
                 }
                 else{

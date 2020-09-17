@@ -1,0 +1,50 @@
+//File used to retrieve files from api to be used in the render
+//File Made By Jaco && Steven && Marcus
+var fs = require('fs');
+
+function getMyShit() 
+{
+    var objResponse = fetch("/consultation/"+id+"/stl");
+
+
+
+    objResponse.then(res=> res.blob().then(blob => {
+
+        // work with blob to do render as the stl file 
+
+    }));
+    
+    var texresponse = fetch("/consultation/"+id+"/tex");
+
+    texresponse.then(res => res.blob().then(texFile =>{
+
+    }));
+
+    var mtlresponse = fetch("/consultation/"+id+"/mtl");
+
+    mtlresponse.then(res => res.blob().then(mtlFile =>{
+
+    }));
+}
+
+
+
+//remove a directory of images to savespace on the server 
+/**
+ * Remove directory recursively
+ * @param {string} dir_path
+ * @see https://stackoverflow.com/a/42505874/3027390
+ */
+function rimraf(dir_path) {
+    if (fs.existsSync(dir_path)) {
+        fs.readdirSync(dir_path).forEach(function(entry) {
+            var entry_path = path.join(dir_path, entry);
+            if (fs.lstatSync(entry_path).isDirectory()) {
+                rimraf(entry_path);
+            } else {
+                fs.unlinkSync(entry_path);
+            }
+        });
+        fs.rmdirSync(dir_path);
+    }
+}
