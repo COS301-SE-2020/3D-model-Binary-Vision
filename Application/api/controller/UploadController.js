@@ -153,7 +153,7 @@ module.exports = {
                                             console.log("saved consultation "+ cons);
 
                                             const savingDirectory = "webSite/webSite/renderPage/assets/"+cons._id+"/";
-                                            fs.makedirSync(savingDirectory);
+                                            fs.mkdirSync(savingDirectory);
 
                                             fs.copyFileSync(fileLocationd+d+".obj", path.join(savingDirectory, cons._id+".obj"));
                                             fs.copyFileSync(fileLocationd+d+"_material_0_map_Kd.jpg", path.join(savingDirectory, cons._id+"_material_0_map_Kd.jpg"));
