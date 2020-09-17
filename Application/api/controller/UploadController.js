@@ -128,6 +128,9 @@ module.exports = {
 
                                     console.log("Saving mtl file");
 
+                                    var today = new Date();
+                                    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+
                                     const consultation = new Consultation(
                                     {
                                         doctor: req.user, // get from session, e.g. cookies
@@ -135,7 +138,8 @@ module.exports = {
                                         Note: "Video Upload",
                                         OBJ:file._id,
                                         TEX: texfile._id,
-                                        MTL:mtlfile._id
+                                        MTL:mtlfile._id,
+                                        created: date
                                     });
 
                                     consultation.save(function (consErr,cons) 

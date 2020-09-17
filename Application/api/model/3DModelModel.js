@@ -112,8 +112,7 @@ var Receptionist = new Schema({
 
 var ConsultationSchema = new Schema({
     created:{
-        type: Date,
-        defualt: new Date()
+        type: String
     },
     doctor:{
         type: Schema.Types.ObjectId,
