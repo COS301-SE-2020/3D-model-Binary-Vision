@@ -1,6 +1,6 @@
 //make API calls in there scripts to get the names of the object files, texturews and the mtl file
-var objectFile = "sample_test.obj";
-var mtlFile = "sample_test.mtl";
+var objectFile = 'sample_test.obj';
+var mtlFile = 'sample_test.mtl';
 
 var done = false;
 
@@ -53,7 +53,7 @@ function run()
         var mtlLoader = new THREE.MTLLoader();
         mtlLoader.setBaseUrl('assets/');
         mtlLoader.setPath('assets/');
-        mtlLoader.load('sample_test.mtl', function (materials) {
+        mtlLoader.load(mtlFile, function (materials) {
     
             materials.side = THREE.DoubleSide;
             materials.preload();
@@ -64,7 +64,7 @@ function run()
             var objLoader = new THREE.OBJLoader();
             objLoader.setMaterials(materials);
             objLoader.setPath('assets/');
-            objLoader.load('sample_test.obj', function (object) {
+            objLoader.load(objectFile, function (object) {
                 scene.add(object);
             });
     
@@ -75,7 +75,7 @@ function run()
         renderer = new THREE.WebGLRenderer();
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(450, 450);
-        renderer.setClearColor(new THREE.Color("hsl(0, 50%, 10%)"));
+        renderer.setClearColor(new THREE.Color("lightgray"));
         //renderer.setFaceCulling();
     
         container.appendChild(renderer.domElement);
