@@ -2,7 +2,7 @@
 =================================
 
 [![Build Status](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision.svg?branch=Feature%2FImprovements)](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision)
-[![Coverage Status](https://coveralls.io/repos/github/COS301-SE-2020/3D-model-Binary-Vision/badge.svg?branch=Feature%2FImprovements)](https://coveralls.io/github/COS301-SE-2020/3D-model-Binary-Vision?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/COS301-SE-2020/3D-model-Binary-Vision/badge.svg?branch=Feature/Improvements)](https://coveralls.io/github/COS301-SE-2020/3D-model-Binary-Vision?branch=Feature/Improvements)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/633d60ca4ab54b6d9405531e01ec3862)](https://app.codacy.com/manual/github/COS301-SE-2020/3D-model-Binary-Vision?utm_source=github.com&utm_medium=referral&utm_content=github/COS301-SE-2020/3D-model-Binary-Vision&utm_campaign=Badge_Grade_Dashboard)
 
 https://vanillav.github.io/FlapJacks.github.io/
@@ -116,7 +116,11 @@ Demo 3: Developed API Functions for the receptionist and the doctor to manage th
 developed as well as front end javascript files with functions to improve our signup system along with dynamic
 page api calls and populations of information that the api returns. Developed the dynamic booking page and the weekly pladder page that shows all the doctors bookings for the comming week.
 
-Demo 4: pending
+Demo 4: Developed the fuzzy logic algorithm to find open booking slots for the receptionist. 
+Created the qr code generator used for a practice too have a unique place where the patients can enter their information.
+Integration of the generic algorithm with the API and front end.
+Emailing System that is used to change passwords and ensure that a head receptionist accepts a signup before they can access records.
+
 
 -----------------------------------------------------------------------------------------------------------------
 Steven Visser
@@ -179,7 +183,9 @@ to the back end, instead of the full video. Lastly I was in control of the unit 
 I had to update all the tests in accordance to the new API calls made, Travis CI code
 was also updated.
 
-Demo 4: pending
+Demo 4: I did most of the testing for the project. I finished the integration and 
+unit testing with the latest updates to the API. I also made a few updates towards 
+the front end. 
 
 -----------------------------------------------------------------------------------------------------------------
 

@@ -725,9 +725,11 @@ module.exports = {
         });
     },
 
-    //
+    //=============================================================================================
+    //Function developed by: Jacobus Janse van Rensburg 
+    //Function used to return a .obj file to be used in a render
 
-    getSTLFile: function (req,res){
+    getOBJFile: function (req,res){
         if(!req.user){
             res.status(401).send("Unauthorized");
             return;
@@ -742,10 +744,10 @@ module.exports = {
                 }
                 else if (cons) {
                     var attachment = createModel();
-                    const stlReturn  = attachment.read({"_id":cons.STL});
+                    const objReturn  = attachment.read({"_id":cons.OBJ});
 
-                    res.contentType('model/stl');
-                    stlReturn.pipe(res);
+                    res.contentType('text/plain');
+                    objReturn.pipe(res);
                     return;
                 }
                 else{
@@ -1540,9 +1542,9 @@ function sendsignupConfirmationEmail(practice , user){
 
     //fill the information on the a click actions
     //do href to a page with the information url encoded to be extracted on that page and take nescasary actions
-    var href ="localhost:3000/ValidateSignup.html";
+    // var href ="localhost:3000/ValidateSignup.html";
 
-    // var href ="https://flapjacks.goodx.co.za/ValidateSignup.html";
+    var href ="https://flapjacks.goodx.co.za/ValidateSignup.html";
     //create url encoded hrefs
     var reject = href+"?action=reject&user="+user._id;
     var accept = href+"?action=accept&user="+user._id;

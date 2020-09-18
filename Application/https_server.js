@@ -9,6 +9,13 @@ var express = require('express'),
 
 const https = require('https');
 const fs = require('fs');
+const http = require('http');
+
+http.createServer(function(req,res){
+	res.writeHead(301,{"Location": "https://flapjacks.goodx.co.za"});
+	res.end();
+}).listen(80);
+
 
 var MONGO_OPTIONS = {
   useNewUrlParser: true,

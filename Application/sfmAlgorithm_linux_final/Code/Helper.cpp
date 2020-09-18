@@ -17,7 +17,10 @@ void Helper::createPropertyTemplate(std::string file_name)
 {
     std::ofstream f(file_name.c_str());
     f << "<-- Image Listing Settings -->\n";
-    f << "Focal Length in Pixels: 800 \n";
+    f << "Intrinsic Matrix F_x: 800 \n";
+    f << "Intrinsic Matrix F_y: 800 \n";
+    f << "Intrinsic Matrix C_x: 800 \n";
+    f << "Intrinsic Matrix C_y: 800 \n";
     f << "Camera Model Type: 3 (1: Pinhole, 2: Pinhole radial 1, 3: Pinhole radial 3) \n \n";
     f << "<-- Compute Feature Settings -->\n";
     f << "Force Recompile: 0 (1: Force Regeneration, 0: Don't Regenerate)\n";

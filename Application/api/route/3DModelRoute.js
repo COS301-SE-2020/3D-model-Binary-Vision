@@ -142,8 +142,8 @@ module.exports = function (app)
     app.route('/qrCode')
         .get(Model.generatePatientSignupQRCode);
 
-    app.route('/consultation/:id/stl')
-        .get(Model.getSTLFile);
+    app.route('/consultation/:id/obj')
+        .get(Model.getOBJFile);
 
     app.route('/updateLog')
         .post(Model.updateLog);

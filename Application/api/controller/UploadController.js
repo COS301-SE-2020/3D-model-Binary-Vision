@@ -59,7 +59,7 @@ module.exports = {
 
                 console.log("\n\n\n");
                 //connect c++ program here and send file name when done c++ deletes file
-                //using spawn as a chid-process 
+                //using spawn as a chid-process
 
                 const workingDirectory = "sfmAlgorithm_linux/Executable/";
                 console.log(workingDirectory);
@@ -85,6 +85,8 @@ module.exports = {
                         const mtlStream = fs.createReadStream(path.join(fileLocation, d+".mtl" ));
                         const Files = createModel();
                         
+                     
+
                         const OBJoptions = {
                             filename: d+".obj",
                             contentType: "text/plain" 
@@ -126,6 +128,9 @@ module.exports = {
 
                                     console.log("Saving mtl file");
 
+                                    var today = new Date();
+                                    var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+
                                     const consultation = new Consultation(
                                     {
                                         doctor: req.user, // get from session, e.g. cookies
@@ -133,7 +138,8 @@ module.exports = {
                                         Note: "Video Upload",
                                         OBJ:file._id,
                                         TEX: texfile._id,
-                                        MTL:mtlfile._id
+                                        MTL:mtlfile._id,
+                                        created: date
                                     });
 
                                     consultation.save(function (consErr,cons) 
@@ -145,14 +151,21 @@ module.exports = {
                                         }
                                         else{
                                             console.log("saved consultation "+ cons);
-                                            res.status(201);
 
+                                            const savingDirectory = "webSite/renderPage/assets/"+cons._id+"/";
+                                            fs.mkdirSync(savingDirectory);
+
+                                            fs.copyFileSync(fileLocation+d+".obj", path.join(savingDirectory, cons._id+".obj"));
+                                            fs.copyFileSync(fileLocation+d+"_material_0_map_Kd.jpg", path.join(savingDirectory, cons._id+"_material_0_map_Kd.jpg"));
+                                            fs.copyFileSync(fileLocation+d+".mtl", path.join(savingDirectory, cons._id+".mtl"));
+                                            res.status(201);
                                         }
                                     });
 
                                 });
 
                             });
+                            
                             
                         });
                         

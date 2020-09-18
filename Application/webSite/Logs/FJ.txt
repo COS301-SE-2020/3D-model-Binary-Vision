@@ -47,3 +47,5 @@
 17/9/2020@2:59:41@admin@Made a booking@BID:5f62b4fd8de524d485a63cab
 17/9/2020@2:59:45@admin@Logout
 17/9/2020@2:59:54@Dr@Logged in
+17/9/2020@6:15:7@Dr@Logged in
+17/9/2020@6:15:24@Dr@Saved a consultation@CID:5f62e2dc39302e06d3a76283
