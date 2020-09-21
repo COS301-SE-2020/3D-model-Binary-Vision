@@ -26,23 +26,26 @@ var Practice = require("../model/3DModelModel.js").Practice;
 //Email modules and settings to send emails
 var nodeMailer = require('nodemailer');
 
-const transporter = nodeMailer.createTransport({
-    host:"smtp.mailtrap.io",
-    port: 2525,
-    auth:{
-        user:"0c9f2b08034ef4",
-        pass:"c1fd4b36bbc842"
-    } 
- });
+// const transporter = nodeMailer.createTransport({
+//     host:"smtp.mailtrap.io",
+//     port: 2525,
+//     auth:{
+//         user:"0c9f2b08034ef4",
+//         pass:"c1fd4b36bbc842"
+//     } 
+//  });
 
 
-// var transporter = nodeMailer.createTransport({
-//     service: 'gmail',
-//     auth: {
-//            user: 'xxxxxxxx@gmail.com',
-//            pass: 'xxxxxxx'
-//        }
-//    });
+var transporter = nodeMailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+           user: 'flap.jacks.cs@gmail.com',
+           pass: 'Sneezer2'
+       }
+   });
 
 
 const frontsalt ="Lala";

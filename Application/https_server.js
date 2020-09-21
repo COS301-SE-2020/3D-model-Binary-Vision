@@ -50,6 +50,8 @@ app.use(serveStatic('JacoCookie/'));
 var routes = require('./api/route/3DModelRoute');
 routes(app);
 
+
+
 https.createServer({	
     key: fs.readFileSync('/etc/letsencrypt/live/flapjacks.goodx.co.za/privkey.pem'),
     cert: fs.readFileSync('/etc/letsencrypt/live/flapjacks.goodx.co.za/cert.pem')
