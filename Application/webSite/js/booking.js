@@ -473,8 +473,7 @@ function makeBooking()
         {
             if(res.status == 200)
             {
-
-                window.location.href = res.url;
+                //Make an overlay to the user to say that the booking was successfully created
             }
             else
             {

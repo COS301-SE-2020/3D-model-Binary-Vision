@@ -132,7 +132,7 @@ module.exports ={
                 return;
             }
             madeBookingEmail(newBooking);
-            res.redirect("/newHome.html");
+            res.status(200);
 
         });
         Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
