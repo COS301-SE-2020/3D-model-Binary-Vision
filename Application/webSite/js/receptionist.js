@@ -119,3 +119,60 @@ function init()
     document.getElementById("prac").value = parts[1];
 }
 
+function checkRegFields() {
+    var name = document.getElementById("name").value;
+    var surname = document.getElementById("surname").value;
+    var idNumber = document.getElementById("idNumber").value;
+    var email = document.getElementById("email").value;
+    var cell = document.getElementById("cell").value;
+
+    var patientInfo = document.getElementById("submitPatientInfo");
+
+    var trueSubmit = true;
+
+    if (name == "") {
+        trueSubmit = false;
+    }
+
+    if (surname == "") {
+        trueSubmit = false;
+    }
+
+    if (idNumber == "") {
+        trueSubmit = false;
+    }
+
+    if (email == "") {
+        trueSubmit = false;
+    }
+
+    if (cell == "") {
+        trueSubmit = false;
+    }
+
+    if (trueSubmit == true) {
+        patientInfo.style.display = "block";
+    } else {
+        patientInfo.style.display = "none";
+    }
+} 
+
+function checkId() {
+    var idNumber = document.getElementById("idNumber").value;
+
+    if (checkIdNumber(idNumber) == false) {
+        document.getElementById("errorForID").style.display = "block";
+    } else {
+        document.getElementById("errorForID").style.display = "none";
+    }
+}
+
+function checkCell() {
+    var cell = document.getElementById("cell").value;
+
+    if (checkCellNumber(cell) == false) {
+        document.getElementById("errorForCell").style.display = "block";
+    } else {
+        document.getElementById("errorForCell").style.display = "none";
+    }
+}
