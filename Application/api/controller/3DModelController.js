@@ -1665,7 +1665,9 @@ async function updateBookingEmail(booking){
     });    
 }
 
-
+//===============================================================================================
+//Function developed by: Jacobus Janse van Rensburg && Steven Viser
+//function to send teminder emails to the patients that have bookings comming up in the near future
 setInterval(reminder,86400000);
 
 function reminder()
