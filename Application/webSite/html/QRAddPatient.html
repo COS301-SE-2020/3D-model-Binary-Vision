@@ -48,8 +48,9 @@
           </select>
           <br>
 
-          <label for="email" style="color: white;">Patients Email</label><br>
-          <input class="form-control" class="box" type="email" name="email" onchange="checkRegFields()" id="email" placeholder="Email" required />
+          <label for="email" style="color: white;">Patients Email</label>
+          <p id="errorForEmail" style="color: red; display: none;"> Invlaid email!</p>
+          <input class="form-control" class="box" type="email" name="email" onchange="checkRegFields(); checkEmail();" id="email" placeholder="Email" required />
           <br>
 
           <label for="cell" style="color: white;">Patients cell phone number</label>
@@ -62,9 +63,13 @@
           <br>
 
           <input class="btn btn-primary" type="submit" name="submitDetails" value="Submit" id="submitPatientInfo" style="display: none;" />
-          <br><br>
+          
 
         </form>
+
+        <button class="btn btn-secondary" id="noSubmitButton" style="display: block;">Submit</button>
+        
+        <br><br>
       </div>
       <br><br>
     </div>

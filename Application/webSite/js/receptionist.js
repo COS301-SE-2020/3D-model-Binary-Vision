@@ -127,6 +127,7 @@ function checkRegFields() {
     var cell = document.getElementById("cell").value;
 
     var patientInfo = document.getElementById("submitPatientInfo");
+    var noSubmit = document.getElementById("noSubmitButton");
 
     var trueSubmit = true;
 
@@ -138,22 +139,24 @@ function checkRegFields() {
         trueSubmit = false;
     }
 
-    if (idNumber == "") {
+    if (checkIdNumber(idNumber) == false) {
         trueSubmit = false;
     }
 
-    if (email == "") {
+    if (checkEmailReg(email) == false) {
         trueSubmit = false;
     }
 
-    if (cell == "") {
+    if (checkCellNumber(cell) == false) {
         trueSubmit = false;
     }
 
     if (trueSubmit == true) {
         patientInfo.style.display = "block";
+        noSubmit.style.display = "none";
     } else {
         patientInfo.style.display = "none";
+        noSubmit.style.display = "block";
     }
 } 
 
@@ -174,5 +177,15 @@ function checkCell() {
         document.getElementById("errorForCell").style.display = "block";
     } else {
         document.getElementById("errorForCell").style.display = "none";
+    }
+}
+
+function checkEmail() {
+    var email = document.getElementById("email").value;
+
+    if (checkEmailReg(email) == false) {
+        document.getElementById("errorForEmail").style.display = "block";
+    } else {
+        document.getElementById("errorForEmail").style.display = "none";
     }
 }

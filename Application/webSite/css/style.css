@@ -108,7 +108,11 @@
 }
 
 
-
+#noSubmitButton {
+	position: relative;
+	margin: 0px auto;
+	text-align: center;
+}
 
 
 #renderpage{

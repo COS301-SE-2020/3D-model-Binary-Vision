@@ -20,3 +20,9 @@ function checkCellNumber(cellNumber) {
     else
     	return false;
 }
+
+function checkEmailReg(email) {
+	var re = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/g;
+
+	return re.test(email);
+}
