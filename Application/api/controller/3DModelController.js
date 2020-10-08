@@ -1516,7 +1516,7 @@ module.exports = {
             });
             
         });
-    }
+    },
 
 };
 
@@ -1663,4 +1663,13 @@ async function updateBookingEmail(booking){
             console.log(info);
         }
     });    
+}
+
+
+setInterval(reminder,86400000);
+
+function reminder()
+{
+    console.log("reminder");
+    
 }
