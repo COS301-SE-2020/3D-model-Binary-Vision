@@ -1670,8 +1670,28 @@ async function updateBookingEmail(booking){
 //function to send teminder emails to the patients that have bookings comming up in the near future
 setInterval(reminder,86400000);
 
-function reminder()
+async function reminder()
 {
-    console.log("reminder");
+    var bookings = await Booking.find();
+
+    for (var i in bookings)
+    {
+        var sendEmail= determineIfSendEmail(booking[i].date);
+
+        //if sendEmail is true send an email for this booking
+        if(sendEmail)
+        sendReminderEmail(booking[i]);
+    }
+
     
+}
+
+
+function determineIfSendEmail(date){
+    //node that date is a string "dd/mm/yyyy"
+}
+
+function sendReminderEmail(booking)
+{
+
 }
