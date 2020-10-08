@@ -1679,26 +1679,48 @@ async function reminder()
         var sendEmail= determineIfSendEmail(booking[i].date);
 
         //if sendEmail is true send an email for this booking
-        if(sendEmail)
-            sendReminderEmail(booking[i]);
+        if(sendEmail.send)
+        {
+            sendReminderEmail(booking[i],sendEmail.days);
+        }
+            
     }
 
     
 }
 
 
-function determineIfSendEmail(date){
+function determineIfSendEmail(date)
+{
     //node that date is a string "dd/mm/yyyy"
     var today = new Date();
     var d1 = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
 
-    if(date == d1)
+    //format yyy/mm/dd
+    var newformat =  today.getFullYear() + '/' + (today.getMonth()+1) +'/'+ today.getDate();
+    var todayDate = new Date(newformat);
+    //add 3 days to the date
+    var nextWeek = new Date(todayDate.getTime() + 3 * 24 * 60 * 60 * 1000);
+    //construct the new date string
+    var d2 =  nextWeek.getDate() + '/' + (nextWeek.getMonth()+1) +'/'+ nextWeek.getFullYear();
+
+    if(date == d1 || date == d2)
     {
-        return true;
+        var ret = 
+        {
+            send = true,
+            days = 0    
+        }
+        return ret;
     }
     else
     {
-        return false;
+        var ret = 
+        {
+            send = false,
+            days = 3    
+        }
+        return ret;
     }
 }
 
@@ -1708,11 +1730,12 @@ async function sendReminderEmail(booking)
     var doctor = await Doctor.findOne({'_id':mongoose.Types.ObjectId(booking.doctor)});
 
 
-    var emailOptions={
+    var emailOptions=
+    {
         from: 'flap.jacks.cs@gmail.com',
-            to:patient.email,//send email to the head receptionist
-            subject: 'Reminder: Dental Appointment Today',
-            html:''
+        to:patient.email,//send email to the head receptionist
+        subject: 'Reminder: Dental Appointment Today',
+        html:''
     }
 
     var htmlreplace = "<body><div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px; margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br><h2 style='color:white;'>Reminder for Appointment</h2><hr style='background-color: white;'>";
@@ -1724,7 +1747,8 @@ async function sendReminderEmail(booking)
 
     emailOptions.html = htmlreplace;
 
-    transporter.sendMail(emailOptions, function(error, info){
+    transporter.sendMail(emailOptions, function(error, info)
+    {
         if(error)
         {
             console.log(error);
