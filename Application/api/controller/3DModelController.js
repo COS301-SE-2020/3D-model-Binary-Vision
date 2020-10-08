@@ -1724,7 +1724,7 @@ function determineIfSendEmail(date)
     }
 }
 
-async function sendReminderEmail(booking)
+async function sendReminderEmail(booking,days)
 {
     var patient = await Patient.findOne({'_id':mongoose.Types.ObjectId(booking.patient)});
     var doctor = await Doctor.findOne({'_id':mongoose.Types.ObjectId(booking.doctor)});
