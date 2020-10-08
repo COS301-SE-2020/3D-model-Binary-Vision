@@ -473,6 +473,8 @@ function makeBooking()
         {
             if(res.status == 200)
             {
+                var modal = document.getElementById("statusModal");
+                modal.style.display = "block";
                 //Make an overlay to the user to say that the booking was successfully created
             }
             else
