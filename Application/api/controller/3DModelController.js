@@ -971,7 +971,7 @@ module.exports = {
 
         var id = mongoose.Types.ObjectId(req.body._id)
 
-        Booking.deleteOne({"_id":id}, function(err)
+        Booking.deleteOne({"_id":id}, function(err,booking)
         {
             if (err)
             {
@@ -979,6 +979,8 @@ module.exports = {
                   .send("Error Removing Booking");
                 return;
             }
+
+            deletedBookingEmail(booking);
             res.status(200)
               .send("Booking successfully removed!");
             return;
@@ -1034,7 +1036,7 @@ module.exports = {
           }
       });
     
-      Booking.findOneAndUpdate({"_id":id}, {$set:{"status":status}} , function(err)
+      Booking.findOneAndUpdate({"_id":id}, {$set:{"status":status}} , function(err,booking)
       {
           if (err)
           {
@@ -1042,6 +1044,8 @@ module.exports = {
               .send("Error Finding Booking");
             return;
           }
+
+          updateBookingEmail(booking);
           res.status(200)
             .send("Booking successfully updated!");
           return;
@@ -1585,4 +1589,75 @@ function updateLogFile(linedesc,practice)
             //console.log("Log updated.");
         }
     });
+}
+
+//==============================================================================================
+//Function developed by: Jacobus Janse van Rensburg
+//Function used to send a booking delete email
+async function deletedBookingEmail(booking){
+
+    var patient = await Patient.findOne({'_id': mongoose.Types.ObjectId(booking.patient)})
+    var doctor = await Doctor.findOne({'_id':mongoose.Types.ObjectId(booking.doctor)})
+    var emailOptions={
+        from: 'flap.jacks.cs@gmail.com',
+            to:patient.email,//send email to the head receptionist
+            subject: '3D Model Confirm User',
+            html:''
+    }
+    
+    var htmlreplace ="<div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px;margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br>";
+    htmlreplace+="<h2 style='color:white;'>Canceled Appointment</h2><hr style='background-color: white;'><span id='words' style='color: white;'>";
+    htmlreplace+="For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>xxxxxx@gmail.com</p> <p style='color: red; font-size: 20px;'>Alert!</p>Your appointment has been successfully canceled at date <p id='newDate' style='color: lightgreen;'>DATE_HERE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_NAME_HERE</p></span><br><br></div>";
+
+    htmlreplace =htmlreplace.replace("xxxxxx@gmail.com",patient.email);
+    htmlreplace = htmlreplace.replace("DATE_HERE",booking.date);
+    htmlreplace =htmlreplace.replace("DOC_NAME_HERE","("+doctor.name+") "+doctor.surname);
+
+    emailOptions.html = htmlreplace;
+
+    transporter.sendMail(emailOptions, function(error, info){
+        if(error)
+        {
+            console.log(error);
+        }
+        else{
+            console.log(info);
+        }
+    });
+}
+
+//===============================================================================================
+//Function developed by: Jacobus Janse van Rensburg
+//function used to send email to patient about changes to the booking 
+async function updateBookingEmail(booking){
+
+    var patient = await Patient.findOne({'_id':mongoose.Types.ObjectId(booking.patient)});
+    var doctor  = await Doctor.findOne({'_id':mongoose.Types.ObjectId(booking.doctor)});
+
+    var emailOptions={
+        from: 'flap.jacks.cs@gmail.com',
+            to:patient.email,//send email to the head receptionist
+            subject: '3D Model Confirm User',
+            html:''
+    }
+
+    var htmlreplace="<body><div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px; margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br><h2 style='color:white;'>Postponed Appointment</h2><hr style='background-color: white;'>";
+    htmlreplace="<span id='words' style='color: white;'> For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>EMAIL_REPlACE</p> Your booking has successfully been postponed!<br>";
+    htmlreplace="<p>Your new booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACE</p><p></p></span><br><br></div></body>";
+
+    htmlreplace=htmlreplace.replace("EMAIL_REPLACE",patient.email);
+    htmlreplace=htmlreplace.replace("DATE_REPLACE",booking.date);
+    htmlreplace=htmlreplace.replace("DOC_REPLACE","("+doctor.name+") "+doctor.surname);
+    
+    emailOptions.html = htmlreplace;
+
+    transporter.sendMail(emailOptions, function(error, info){
+        if(error)
+        {
+            console.log(error);
+        }
+        else{
+            console.log(info);
+        }
+    });    
 }
