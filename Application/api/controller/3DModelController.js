@@ -1711,7 +1711,7 @@ async function sendReminderEmail(booking)
     var emailOptions={
         from: 'flap.jacks.cs@gmail.com',
             to:patient.email,//send email to the head receptionist
-            subject: '3D Model Confirm User',
+            subject: 'Reminder: Dental Appointment Today',
             html:''
     }
 
@@ -1720,7 +1720,7 @@ async function sendReminderEmail(booking)
 
     htmlreplace = htmlreplace.replace("EMAIL_REPLACEMENT",patient.email);
     htmlreplace = htmlreplace.replace("DATE_REPLACEMENT",booking.date);
-    htmlreplace = htmlreplace.replace("DOC_REPLACEMENT","("+doc.name+") " + doc.surname);
+    htmlreplace = htmlreplace.replace("DOC_REPLACEMENT","("+doctor.name+") " + doctor.surname);
 
     emailOptions.html = htmlreplace;
 
