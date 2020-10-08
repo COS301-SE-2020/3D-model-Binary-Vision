@@ -11,9 +11,22 @@ const { Console } = require("console");
 const { Consultation, Patient } = require("../model/3DModelModel.js");
 const { parse } = require("path");
 
+var nodeMailer = require('nodemailer');
+
 var Doctor = require("../model/3DModelModel.js").Doctor;
 var Receptionist = require("../model/3DModelModel.js").Receptionist;
 var Booking = require("../model/3DModelModel.js").Booking;
+
+var transporter = nodeMailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+           user: 'flap.jacks.cs@gmail.com',
+           pass: 'ampjiedsvncvukaz'
+       }
+   });
 
 module.exports ={
 
@@ -607,7 +620,7 @@ function updateLogFile(linedesc,practice)
 async function madeBookingEmail(booking){
 
     var patient = await Patient.findOne({'_id':mongoose.Types.ObjectId(booking.patient)});
-    var doctor = await doctor.findOne({'_id':mongoose.Types.ObjectId(booking.doctor)});
+    var doctor = await Doctor.findOne({'_id':mongoose.Types.ObjectId(booking.doctor)});
 
     var emailOptions={
         from: 'flap.jacks.cs@gmail.com',
@@ -617,7 +630,7 @@ async function madeBookingEmail(booking){
     }
 
     var htmlreplace="<body><div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px;margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br></br><h2 style='color:white;'>Booking Appointment</h2><hr style='background-color: white;'><span id='words' style='color: white;'> For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>EMAIL_REPLACE</p> Your booking has been made successfully!<br>";
-    htmlreplace="<p>Your booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACE</p><p></p></span><br><br></div></body>";
+    htmlreplace += "<p>Your booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACE</p><p></p></span><br><br></div></body>";
 
     htmlreplace=htmlreplace.replace("EMAIL_REPLACE",patient.email);
     htmlreplace=htmlreplace.replace("DATE_REPLACE", booking.date);

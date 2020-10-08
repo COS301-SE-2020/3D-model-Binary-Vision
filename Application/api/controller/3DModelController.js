@@ -1644,9 +1644,9 @@ async function updateBookingEmail(booking){
             html:''
     }
 
-    var htmlreplace="<body><div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px; margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br><h2 style='color:white;'>Postponed Appointment</h2><hr style='background-color: white;'>";
-    htmlreplace="<span id='words' style='color: white;'> For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>EMAIL_REPlACE</p> Your booking has successfully been postponed!<br>";
-    htmlreplace="<p>Your new booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACE</p><p></p></span><br><br></div></body>";
+    var htmlreplace = "<body><div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px; margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br><h2 style='color:white;'>Postponed Appointment</h2><hr style='background-color: white;'>";
+    htmlreplace += "<span id='words' style='color: white;'> For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>EMAIL_REPlACE</p> Your booking has successfully been postponed!<br>";
+    htmlreplace += "<p>Your new booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACE</p><p></p></span><br><br></div></body>";
 
     htmlreplace=htmlreplace.replace("EMAIL_REPLACE",patient.email);
     htmlreplace=htmlreplace.replace("DATE_REPLACE",booking.date);
