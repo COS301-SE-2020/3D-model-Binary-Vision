@@ -1689,6 +1689,17 @@ async function reminder()
 
 function determineIfSendEmail(date){
     //node that date is a string "dd/mm/yyyy"
+    var today = new Date();
+    var d1 = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
+
+    if(date == d1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 async function sendReminderEmail(booking)
