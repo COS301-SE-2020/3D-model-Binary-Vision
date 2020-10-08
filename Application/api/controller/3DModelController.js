@@ -1708,8 +1708,8 @@ function determineIfSendEmail(date)
     {
         var ret = 
         {
-            send = true,
-            days = 0    
+            send: true,
+            days: 0    
         }
         return ret;
     }
@@ -1717,8 +1717,8 @@ function determineIfSendEmail(date)
     {
         var ret = 
         {
-            send = false,
-            days = 3    
+            send: false,
+            days: 3    
         }
         return ret;
     }
