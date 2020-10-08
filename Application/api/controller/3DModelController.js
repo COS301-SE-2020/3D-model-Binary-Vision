@@ -1729,7 +1729,8 @@ async function sendReminderEmail(booking)
         {
             console.log(error);
         }
-        else{
+        else
+        {
             console.log(info);
         }
     }); 
