@@ -1680,7 +1680,7 @@ async function reminder()
 
         //if sendEmail is true send an email for this booking
         if(sendEmail)
-        sendReminderEmail(booking[i]);
+            sendReminderEmail(booking[i]);
     }
 
     
@@ -1691,7 +1691,35 @@ function determineIfSendEmail(date){
     //node that date is a string "dd/mm/yyyy"
 }
 
-function sendReminderEmail(booking)
+async function sendReminderEmail(booking)
 {
+    var patient = await Patient.findOne({'_id':mongoose.Types.ObjectId(booking.patient)});
+    var doctor = await Doctor.findOne({'_id':mongoose.Types.ObjectId(booking.doctor)});
 
+
+    var emailOptions={
+        from: 'flap.jacks.cs@gmail.com',
+            to:patient.email,//send email to the head receptionist
+            subject: '3D Model Confirm User',
+            html:''
+    }
+
+    var htmlreplace = "<body><div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px; margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br><h2 style='color:white;'>Reminder for Appointment</h2><hr style='background-color: white;'>";
+    htmlreplace+="<span id='words' style='color: white;'> For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>EMAIL_REPLACE</p> <p style='color: red; font-size: 20px;'>Reminder!</p><br><p>Your booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACENT</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACEMENT</p><p></p></span><br><br></div></body>";
+
+    htmlreplace = htmlreplace.replace("EMAIL_REPLACEMENT",patient.email);
+    htmlreplace = htmlreplace.replace("DATE_REPLACEMENT",booking.date);
+    htmlreplace = htmlreplace.replace("DOC_REPLACEMENT","("+doc.name+") " + doc.surname);
+
+    emailOptions.html = htmlreplace;
+
+    transporter.sendMail(emailOptions, function(error, info){
+        if(error)
+        {
+            console.log(error);
+        }
+        else{
+            console.log(info);
+        }
+    }); 
 }
