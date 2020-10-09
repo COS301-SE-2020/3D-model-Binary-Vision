@@ -7,7 +7,7 @@
 //Function Developed by: Rani Arraf
 //This function moves the side bar left
 
-function showRecord(date, reason,consultation) 
+function showRecord(date, reason,consultation,pid) 
 {
     //going to use consultation id to gdt the STL ID for renderpage
     var rightBody = document.getElementById("rightSideBody");
