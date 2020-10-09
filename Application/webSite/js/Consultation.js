@@ -190,7 +190,7 @@ function saveConsultation(pid,reason)
 			}
 			else if(res.status== 201)
 			{
-				window.location.href= "/doctorSchedule.html"; 
+				//do the modal here RANI
 			}
 		});
 	} 
