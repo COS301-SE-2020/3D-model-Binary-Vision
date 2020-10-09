@@ -1,0 +1,33 @@
+<-- Image Listing Settings -->
+Intrinsic Matrix F_x: 1300
+Intrinsic Matrix F_y: 1291
+Intrinsic Matrix C_x: 612
+Intrinsic Matrix C_y: 316
+Camera Model Type: 3 (1: Pinhole, 2: Pinhole radial 1, 3: Pinhole radial 3)
+
+<-- Compute Feature Settings -->
+Force Recompile: 0 (1: Force Regeneration, 0: Don't Regenerate)
+Describer Method: AKAZE_FLOAT (SIFT, AKAZE_FLOAT, AKAZE_MLDB)
+Upright Camera: 0 (0: rotation invariance, 1: Extract upright feature)
+Describer Preset: ULTRA (NORMAL, HIGH, ULTRA)
+
+<-- Compute Feature Matching Settings -->
+Force Recompile: 0 (1: Force Regeneration, 0: Don't Regenerate)
+Ratio: 0.8 (Nearest Neighbour distance ratio)
+Geometric Model: f (Matrix filtering-- f: Fundamental, e: Essential, h: Homography)
+Nearest Matching Method: FASTCASCADEHASHINGL2 (AUTO, BRUTEFORCEL2, ANNL2, CASCADEHASHINGL2, FASTCASCADEHASHINGL2, BRUTEFORCEHAMMING)
+
+<-- SFM METHOD -->
+Mode: Incrimental (Incrimental, Global)
+
+<-- Triangulation Settings -->
+Use bundler: ON
+Residual Threshold: 4.0
+
+<-- Incrimental Settings -->
+Refined Intrinsics: ADJUST_ALL (ADJUST_ALL, NONE, ADJUST_FOCAL_LENGTH, ADJUST_PRINCIPAL_POINT -- NOTE can be combined with '|')
+
+<-- Global Settings -->
+Rotation Averaging: 2 (1 Method by Chatterjee, 2 Method by Martinec)
+Translation Averaging: 3 (1: averaging, 2: averaging L2, 3: minimization)
+Refined Intrinsics: ADJUST_ALL (ADJUST_ALL, NONE, ADJUST_FOCAL_LENGTH, ADJUST_PRINCIPAL_POINT -- NOTE can be combined with '|')
