@@ -262,7 +262,7 @@ function submitVideo(video, videoStreamed)
 					modalHeader.innerHTML = "Model failed to be generated!";
 				}
 				document.getElementById("closeRenderModal").style.display = "block";
-			});
+			}));
 		});
 
 	}));
