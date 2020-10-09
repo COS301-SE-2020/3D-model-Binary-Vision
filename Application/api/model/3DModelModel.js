@@ -119,8 +119,7 @@ var ConsultationSchema = new Schema({
         required: true
     },
     patient:{
-        type: Schema.Types.ObjectId,
-        required: true
+        type: Schema.Types.ObjectId
     },
     video:{
         type: Schema.Types.ObjectId,
