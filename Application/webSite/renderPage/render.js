@@ -18,6 +18,8 @@ function getUrls()
         objectFile = consID + '.obj';
         mtlFile = consID + '.mtl';
     }
+    document.getElementById("returnbutton").href = "../recordPage.html?pid=" + parts[3] + "=" + parts[2];
+    run();
 }
 
 function run()

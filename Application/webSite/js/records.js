@@ -16,7 +16,9 @@ function showRecord(date, reason,consultation)
     {
         reason = "Model Generation from Video Upload";
     }
-    document.getElementById("containInfoRight").innerHTML = "<br><br>DATE: <hr> <p id='date1' style='color:black; font-weight: bold;'>"+date+"</p>  BOOKING REASON: <hr><p id='patientqq' style='color:black; font-weight: bold;'>"+reason+"</p> <br><br><br><br>RENDER<hr><a class='btn btn-success' href='../renderPage/render.html?cid="+ consultation +"' id = 'renderpage'>Render</a><br><br>HIDE<hr><button class='btn btn-danger' onclick=hideRecord()>Hide Info</button>";
+    var url = window.location.href;
+    var parts = url.split("=");
+    document.getElementById("containInfoRight").innerHTML = "<br><br>DATE: <hr> <p id='date1' style='color:black; font-weight: bold;'>"+date+"</p>  BOOKING REASON: <hr><p id='patientqq' style='color:black; font-weight: bold;'>"+reason+"</p> <br><br><br><br>RENDER<hr><a class='btn btn-success' href='../renderPage/render.html?cid="+ consultation +"="+ parts[2] + "=" + pid +"' id = 'renderpage'>Render</a><br><br>HIDE<hr><button class='btn btn-danger' onclick=hideRecord()>Hide Info</button>";
 }
 
 function hideRecord()
@@ -29,7 +31,7 @@ function init()
 {
     var url = window.location.href;
     var parts = url.split("=");
-
+    //parts[2] has the booking id
     document.getElementById("consultlink").href = "Consultation.html?bookingid="+parts[2];
     //parts[1] = patient id
     //call getpatientsconsultations using pid
@@ -48,7 +50,7 @@ function init()
         document.getElementById("patientTable").innerHTML =replacement;
         for(var i in data)
         {
-           replacement += "<tr><td>"+data[i].created+"</td><td>"+data[i].Note+"</td><td><button class='btn btn-success' onclick=\"showRecord('"+data[i].created+"','"+data[i].reason+"','"+data[i]._id+"')\">View Info</button></td></tr>";
+           replacement += "<tr><td>"+data[i].created+"</td><td>"+data[i].Note+"</td><td><button class='btn btn-success' onclick=\"showRecord('"+data[i].created+"','"+data[i].reason+"','"+data[i]._id+ "','" + parts[1] + "')\">View Info</button></td></tr>";
         }
         document.getElementById("patientTable").innerHTML =replacement;
     }));
