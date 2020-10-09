@@ -11,17 +11,20 @@ function getUrls()
     //this is used to set the paths and object names from the URL    
     var url = window.location.href;
     var parts = url.split("=");
-    var consID = parts[1];
-    assetPath = 'assets/' + consID + '/';
-    objectFile = consID + '.obj';
-    mtlFile = consID + '.mtl';
+    if(parts.length > 1)
+    {
+        var consID = parts[1];
+        assetPath = 'assets/' + consID + '/';
+        objectFile = consID + '.obj';
+        mtlFile = consID + '.mtl';
+    }
 }
 
 function run()
 {
-    if (!Detector.webgl) {
-        Detector.addGetWebGLMessage();
-    }
+    //if (!Detector.webgl) {
+    //    Detector.addGetWebGLMessage();
+    //}
     
     var container;
     
