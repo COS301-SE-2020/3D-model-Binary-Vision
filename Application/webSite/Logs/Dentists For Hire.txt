@@ -30,3 +30,13 @@
 9/10/2020@13:46:50@admin@Logout
 9/10/2020@13:48:52@admin@Logged in
 9/10/2020@13:49:8@admin@Logout
+9/10/2020@14:59:7@doc@Registered as a Doctor
+9/10/2020@14:59:38@doc@Logged in
+9/10/2020@14:59:45@doc@Logout
+9/10/2020@15:0:0@admin@Logged in
+9/10/2020@15:0:48@admin@Made a booking@BID:5f805f00c72151b6312cf125
+9/10/2020@15:1:7@admin@Postponed a booking@BID:5f805f00c72151b6312cf125
+9/10/2020@15:1:14@admin@Made a booking@BID:5f805f1ac72151b6312cf126
+9/10/2020@15:1:28@admin@Logout
+9/10/2020@15:1:37@doc@Logged in
+9/10/2020@15:6:20@doc@Logged in

@@ -249,7 +249,19 @@ function submitVideo(video, videoStreamed)
 				body: VideoSending
 			});
 			
-			response.then(res=> {console.log("uploadImages")});
+			response.then(res=> {
+				
+				var modalHeader = document.getElementById("renderModalHeader");
+				document.getElementById("loadingGif").style.display = "loadingGif";
+
+				if (res.status == 200) {
+					modalHeader.style.color = "green"; 
+					modalHeader.innerHTML = "Model generated successfully!";
+				} else {
+					modalHeader.style.color = "red";
+					modalHeader.innerHTML = "Model failed to be generated!";
+				}
+			});
 		});
 
 	}));
@@ -338,4 +350,12 @@ function getPatientID() {
 function displayModal(){
 	var modal = document.getElementById("renderModal");
 	modal.style.display = "block";
+}
+
+function shrinkModal() {
+	var modal = document.getElementById("renderModal");
+	modal.style.width = "240px";
+
+	var butt = document.getElementById("closeButtonRender");
+	butt.style.display = "none";
 }
