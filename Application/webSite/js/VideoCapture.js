@@ -198,6 +198,8 @@ function takeVideoStream()
 // This function is the called when the submit button is clicked and will send the captured data from the video recorder
 function submitVideo(video, videoStreamed) 
 {
+	
+	
 	if (!videoStreamed)
 	{
 		var submitVideoElement = document.getElementById('submitVideoUploadElement');
