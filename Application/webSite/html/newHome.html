@@ -166,14 +166,20 @@
                 <input class="form-control" class="box" type="email" name="email" onchange="checkRegFields(); checkEmail();" id="email" placeholder="Email" required />
                 <br><br>
 
+<<<<<<< HEAD
                 <label for="cell" style="color: white;">Patients cell phone number</label><br>
                 <p id="errorForCell" style="color: red; display: none;">Invalid cellphone number!</p>
                 <input class="form-control" id="cell" maxlength="10" name="cellnumber" onchange="checkRegFields(); checkCell();" placeholder="Cellphone Number" required/>
                 <br><br>
+=======
+              <input class="btn btn-primary" type="submit" name="submitDetails" value="Submit" id="submitPatientInfo" onclick="sendAlert" style="display: none;" />
+            </form>
+>>>>>>> 96a963a459ac5e0010746023ce8a150a9f2ab3b1
 
                 <input class="btn btn-primary" type="submit" name="submitDetails" value="Submit" id="submitPatientInfo" style="display: none;" />
               </form>
 
+<<<<<<< HEAD
               <button class="btn btn-secondary" id="noSubmitButton" style="display: block; transform: translateY(-10px);">Submit</button>
 
               <br><br>
@@ -186,6 +192,17 @@
           </div>
         </div><br><br>
       </div>
+=======
+            <br><br>
+            <hr>
+            <h2>QR CODE</h2>
+            <div id="qrCode">        
+              <p style='color: white;'>Generate QR Code for patient registration form</p>
+              <a href="/qrCode" download="3D_Binary_Model_qrCode" ><img src="../css/images/qrCode.png" id="qrCodeImage" ></img></a>
+            </div>
+        </div>
+      </div><br><br>
+>>>>>>> 96a963a459ac5e0010746023ce8a150a9f2ab3b1
     </div>
     <script type="text/javascript" src="../js/registration.js"></script>
     <!--<script>

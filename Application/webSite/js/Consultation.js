@@ -190,7 +190,7 @@ function saveConsultation(pid,reason)
 			}
 			else if(res.status== 201)
 			{
-				window.location.href= "/doctorSchedule.html"; 
+				//do the modal here RANI
 			}
 		});
 	} 
@@ -342,8 +342,6 @@ function populateBookingInformation()
 	var url = window.location.href;
 	var parts = url.split("=");
 	//parts[1] holds the booking information
-
-	document.getElementById("renderpage").setAttribute("href","../renderPage/render.html?bookingid="+parts[1]);
 
 	//get the booking details 
 	var response = fetch("/getSingleBooking",{
