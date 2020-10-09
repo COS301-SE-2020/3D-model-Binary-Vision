@@ -1,11 +1,32 @@
-8/10/2020@19:50:36@Practice: Dentists For Hire Registered!
-8/10/2020@19:50:38@PracticeHead@Accepted Receptionist Application@ID:5f7f516d8f988d4cfdf5b164
-8/10/2020@19:52:7@PracticeHead@Accepted Receptionist Application@ID:5f7f516d8f988d4cfdf5b164
-8/10/2020@19:52:7@lindaS@Logged in
-8/10/2020@19:52:7@PracticeHead@Accepted Doctor Application@ID:5f7f51c7deec1e4d87346ae6
-8/10/2020@19:52:7@DrSpiderman@Logged in
-8/10/2020@19:52:8@lindaS@Added a Patient@PID:5f7f51c8deec1e4d87346aeb
-8/10/2020@19:52:8@lindaS@Made a booking@BID:5f7f51c8deec1e4d87346aee
-8/10/2020@19:52:8@lindaS@Made a booking@BID:5f7f51c8deec1e4d87346aef
-8/10/2020@19:52:8@DrSpiderman@Saved a consultation@CID:5f7f51c8deec1e4d87346af7
-8/10/2020@19:52:8@DrSpiderman@Logout
+9/10/2020@12:7:1@Practice: Dentists For Hire Registered!
+9/10/2020@12:7:2@PracticeHead@Accepted Receptionist Application@ID:5f803645a0630cb20c0798cd
+9/10/2020@12:7:2@lindaS@Logged in
+9/10/2020@12:7:2@PracticeHead@Accepted Doctor Application@ID:5f803646a0630cb20c0798ce
+9/10/2020@12:7:2@DrSpiderman@Logged in
+9/10/2020@12:7:2@lindaS@Added a Patient@PID:5f803646a0630cb20c0798d3
+9/10/2020@12:7:3@lindaS@Made a booking@BID:5f803647a0630cb20c0798d6
+9/10/2020@12:7:3@lindaS@Made a booking@BID:5f803647a0630cb20c0798d7
+9/10/2020@12:7:3@DrSpiderman@Saved a consultation@CID:5f803647a0630cb20c0798df
+9/10/2020@12:7:4@DrSpiderman@Logout
+9/10/2020@12:14:22@PracticeHead@Accepted Receptionist Application@ID:5f8037fdbda871b33b53b053
+9/10/2020@12:14:22@lindaS@Logged in
+9/10/2020@12:14:22@PracticeHead@Accepted Doctor Application@ID:5f8037febda871b33b53b054
+9/10/2020@12:14:22@DrSpiderman@Logged in
+9/10/2020@12:14:22@lindaS@Made a booking@BID:5f8037febda871b33b53b05a
+9/10/2020@12:14:22@lindaS@Made a booking@BID:5f8037febda871b33b53b05b
+9/10/2020@12:14:23@DrSpiderman@Saved a consultation@CID:5f8037ffbda871b33b53b063
+9/10/2020@12:14:23@DrSpiderman@Logout
+9/10/2020@12:18:0@admin@Registered as a Receptionist
+9/10/2020@12:18:33@admin@Logged in
+9/10/2020@12:32:3@admin@Logged in
+9/10/2020@12:33:27@admin@Logged in
+9/10/2020@12:33:51@admin@Logged in
+9/10/2020@12:35:31@admin@Logged in
+9/10/2020@12:35:50@admin@Logged in
+9/10/2020@12:37:27@admin@Logged in
+9/10/2020@12:45:26@admin@Logged in
+9/10/2020@13:29:11@admin@Logout
+9/10/2020@13:44:30@admin@Logged in
+9/10/2020@13:46:50@admin@Logout
+9/10/2020@13:48:52@admin@Logged in
+9/10/2020@13:49:8@admin@Logout
