@@ -158,7 +158,7 @@ module.exports = {
                                             fs.copyFileSync(fileLocation+d+".obj", path.join(savingDirectory, cons._id+".obj"));
                                             fs.copyFileSync(fileLocation+d+"_material_0_map_Kd.jpg", path.join(savingDirectory, d+"_material_0_map_Kd.jpg"));
                                             fs.copyFileSync(fileLocation+d+".mtl", path.join(savingDirectory, cons._id+".mtl"));
-                                            res.status(201);
+                                            res.status(200);
                                         }
                                     });
 
