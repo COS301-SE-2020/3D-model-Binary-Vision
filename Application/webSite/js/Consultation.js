@@ -190,7 +190,7 @@ function saveConsultation(pid,reason)
 			}
 			else if(res.status== 201)
 			{
-				//do the modal here RANI
+				alert("Consultation Saved!");
 			}
 		});
 	} 
