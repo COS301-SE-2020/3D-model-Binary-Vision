@@ -169,7 +169,7 @@
               <input class="form-control" id="cell" maxlength="10" name="cellnumber" onchange="checkRegFields(); checkCell();" placeholder="Cellphone Number" required/>
               <br><br>
 
-              <input class="btn btn-primary" type="submit" name="submitDetails" value="Submit" id="submitPatientInfo" style="display: none;" />
+              <input class="btn btn-primary" type="submit" name="submitDetails" value="Submit" id="submitPatientInfo" onclick="sendAlert" style="display: none;" />
             </form>
 
             <button class="btn btn-secondary" id="noSubmitButton" style="display: block; transform: translateY(-10px);">Submit</button>
@@ -182,8 +182,6 @@
               <a href="/qrCode" download="3D_Binary_Model_qrCode" ><img src="../css/images/qrCode.png" id="qrCodeImage" ></img></a>
             </div>
         </div>
-        
-
       </div><br><br>
     </div>
     <script type="text/javascript" src="../js/registration.js"></script>

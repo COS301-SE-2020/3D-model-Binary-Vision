@@ -444,9 +444,13 @@ function makeBooking()
 {
     if (selectedDoctor != null && selectedPatient!= null && selectedDate != null && selectedTime!=null)
     {
-
+        //alert("Booking made successfully");
+        var modal = document.getElementById("statusModal");
+        modal.style.display = "block";
         //booking can be created
         var reason = document.getElementById("reasonForBooking").value;
+        //alert("Booking made successfully");
+        var successfull = false;
         if(selectedReason == null || selectedReason == "")
         {
             if(reason == "" || reason == null)
@@ -469,24 +473,33 @@ function makeBooking()
             body:JSON.stringify({"doctor":selectedDoctor, "patient":selectedPatient,"date":selectedDate,"time":selectedTime,"reason":selectedReason,"endTime":selectedEndTime})
         });
 
+
         response.then(res=> 
         {
             if(res.status == 200)
             {
-                var modal = document.getElementById("stpatusModal");
-                modal.style.display = "block";
+                //
+                
                 //Make an overlay to the user to say that the booking was successfully created
+                successfull = true;
+                alert("Booking made successfully");
+
             }
             else
             {
                 //something is wrong
+                alert("Please enter the correct information.");
             }
         });
+
+
     }
     else
     {
         alert("Please provide all fields to make a booking");
     }
+
+
 }
 
 // ===========================================================================================
@@ -903,4 +916,8 @@ function selectFilteredBooking(time , endTime , date, doctor,reason)
     }))
    
 
+}
+
+function closeModal(){
+    location.href = "../html/makeBooking.html";
 }
