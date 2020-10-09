@@ -114,6 +114,7 @@
 		              </div>
 		              <div class="modal-footer">
 		                <button type="button" id="closeButtonRender" onclick="shrinkModal();" class="btn btn-primary" data-dismiss="modal">Shrink</button>
+		                <button type="button" id="closeRenderModal" onclick="closeModel();" class="btn btn-primary" data-dismiss="modal" style="display: none;">Close</button>
 		              </div>
 		          </div>
 		        </div>
@@ -184,10 +185,9 @@
 							<h2 id="videoRecoderHeader">Video Recorder</h2><br>
 						    <div id="VideoRecorderCenter">
 						        <label for="file-upload" class="btn btn-primary" id="UploadVideo">Select Video</label>
-								<input id="file-upload" type="file" accept='video/mp4'/>
+								<input id="file-upload" type="file" accept='video/mp4' onchange='uploadVideo(document.getElementById("file-upload").files[0])' />
+						        <!--<input class='btn btn-primary' type='submit' value='Upload Video' onclick='uploadVideo(document.getElementById("file-upload").files[0])'>-->
 
-						        <input class='btn btn-primary' type='submit' value='Upload Video' onclick='uploadVideo(document.getElementById("file-upload").files[0])'>
-						        
 						        <br><br>
 						        
 						        <div id='uploadedVideoElement'></div>
