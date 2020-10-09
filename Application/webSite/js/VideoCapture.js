@@ -249,7 +249,7 @@ function submitVideo(video, videoStreamed)
 				body: VideoSending
 			});
 			
-			response.then(res=> {
+			response.then(res = res.json().then(data=>{
 				
 				var modalHeader = document.getElementById("renderModalHeader");
 				document.getElementById("loadingGif").style.display = "loadingGif";
@@ -261,7 +261,7 @@ function submitVideo(video, videoStreamed)
 					modalHeader.style.color = "red";
 					modalHeader.innerHTML = "Model failed to be generated!";
 				}
-			});
+			}));
 		});
 
 	}));
