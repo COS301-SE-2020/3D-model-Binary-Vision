@@ -1385,3 +1385,8 @@ canvas{
 	text-align: center;
 }
 
+#renderModal{
+	position: fixed;
+
+	top: 80%;
+}

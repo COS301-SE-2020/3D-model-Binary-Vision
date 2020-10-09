@@ -198,6 +198,7 @@ function takeVideoStream()
 // This function is the called when the submit button is clicked and will send the captured data from the video recorder
 function submitVideo(video, videoStreamed) 
 {
+
 	if (!videoStreamed)
 	{
 		var submitVideoElement = document.getElementById('submitVideoUploadElement');
@@ -226,7 +227,8 @@ function submitVideo(video, videoStreamed)
 
 		submitVideoButton.addEventListener('click', (ev) => 
 		{
-			alert("ACTION: Video sent (" + video + ")");
+			displayModal();
+			//alert("ACTION: Video sent (" + video + ")");
 			//post method
 			var VideoSending = new FormData();
 			//will need to append the patient ID / consultation ID to save it in the database "Jaco"	
@@ -331,4 +333,9 @@ function generateImage(i, video)
 
 function getPatientID() {
 	return "123456789";
+}
+
+function displayModal(){
+	var modal = document.getElementById("renderModal");
+	modal.style.display = "block";
 }

@@ -76,3 +76,20 @@
 9/10/2020@13:35:9@rec1@Made a booking@BID:5f804aed9d8360179e82fe47
 9/10/2020@13:35:43@rec1@Logout
 9/10/2020@13:35:49@doc1@Logged in
+9/10/2020@13:45:46@rec1@Logged in
+9/10/2020@13:46:10@rec1@Made a booking@BID:5f804d8282ccce1c948cc319
+9/10/2020@13:46:53@rec1@Made a booking@BID:5f804dad82ccce1c948cc31a
+9/10/2020@14:38:41@doc1@Logged in
+9/10/2020@14:46:27@doc1@Logged in
+9/10/2020@14:47:19@doc1@Logged in
+9/10/2020@14:48:11@doc1@Logout
+9/10/2020@14:48:17@doc1@Logged in
+9/10/2020@14:50:4@doc1@Logout
+9/10/2020@14:50:10@rec1@Logged in
+9/10/2020@14:50:12@rec1@Logout
+9/10/2020@14:50:17@doc1@Logged in
+9/10/2020@14:51:45@doc1@Logged in
+9/10/2020@14:52:34@doc1@Logged in
+9/10/2020@14:53:35@doc1@Logged in
+9/10/2020@14:54:19@doc1@Logged in
+9/10/2020@14:55:7@doc1@Logged in
