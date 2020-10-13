@@ -221,7 +221,6 @@ module.exports = {
        surname = surname.trim();
        email = email.trim();
        username = username.trim();
-       password = password.trim();
        practition = practition.trim();
        securityCode = securityCode.trim();
         //first check if the practition exists
