@@ -1015,10 +1015,12 @@ module.exports = {
           {
               if(status=="Postponed")
               {
+
                 updateLogFile(rec.username + "@Postponed a booking@BID:"+id,rec.practition);
               }
               else if(status == "Cancelled")
               {
+                
                 updateLogFile(rec.username + "@Cancelled a booking@BID:"+id,rec.practition);
               }
           }
@@ -1041,17 +1043,22 @@ module.exports = {
     
       Booking.findOneAndUpdate({"_id":id}, {$set:{"status":status}} , function(err,booking)
       {
-          if (err)
-          {
+        if (err)
+        {
             res.status(400)
-              .send("Error Finding Booking");
+            .send("Error Finding Booking");
             return;
-          }
-
-          updateBookingEmail(booking);
-          res.status(200)
+        }
+        if (status =="Canceled")
+        { 
+            deletedBookingEmail(booking);
+        }
+        else if (status =="Postponed"){
+            updateBookingEmail(booking);
+        }
+        res.status(200)
             .send("Booking successfully updated!");
-          return;
+        return;
       });
     },
 
