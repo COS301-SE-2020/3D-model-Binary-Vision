@@ -356,17 +356,32 @@ function populateBookingInformation()
 		document.querySelector("#startTime").innerHTML=data.time;
 		var time = data.time;
 		var mins = time.split(":");
-		var newMins = parseInt(mins[1])+15;
+        var newMins = parseInt(mins[1])+15;
+        if(newMins == 0)
+        {
+            newMins = '00'
+        }
 		var endTime;
 		if(newMins >=60)
 		{
-			newMins = 00;
-			newHour = mins[0]++;
+			newMins = '00';
+            newHour = parseInt(mins[0])+1;
+            if(newHour.length == 1)
+            {
+                newHour = '0' + newHour;
+            }
 			endTime = newHour+":"+newMins;
 		}
 		else
 		{
-			endTime= mins[0]+":"+newMins;
+            if(mins[0].length == 1)
+            {
+                endTime= '0' + mins[0]+":"+newMins;
+            }
+            else
+            {
+                endTime= mins[0]+":"+newMins;
+            }
 		}
 		document.querySelector("#endTime").innerHTML = endTime;		
 		

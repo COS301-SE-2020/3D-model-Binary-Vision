@@ -172,7 +172,7 @@ module.exports = {
                         //remove created directories 
                         console.log("Deleting directory "+ dir);
                         rimraf(dir);
-                        res.status(200).send("Success");
+                        res.status(200);
                     }
                 });
 
