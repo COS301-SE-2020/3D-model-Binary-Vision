@@ -399,7 +399,34 @@ module.exports = {
     //This function takes in all the details on a new patient and adds it to the database
     addPatient: function (req, res) 
     {
-        const {idNumber, name , surname , email , gender, cellnumber,practice} = req.body;
+        var idNumber = req.body.idNumber;
+        var name = req.body.name;
+        var surname = req.body.surname;
+        var email = req.body.email;
+        var gender = req.body.gender;
+        var cellnumber = req.body.cellnumber;
+        var practice = req.body.practice;
+
+        idNumber= idNumber.trim();
+        cellnumber = cellnumber.trim();
+        email = email.trim();
+        name = name.trim();
+        name = name.toLowerCase();
+        surname = surname.trim();
+        surname = surname.toLowerCase();
+        var nname = name[0].toUpperCase();
+        var sname = surname[0].toUpperCase();
+        for(var i = 1; i < name.length;i++)
+        {
+            nname = nname + name[i]; 
+        }
+        for(var i = 1; i < surname.length;i++)
+        {
+            sname = sname + surname[i]; 
+        }
+        name = nname;
+        surname = sname;
+        
         Patient.findOne({"idNumber":idNumber},function(err,pat)
         {
             if(pat != null)
@@ -434,8 +461,6 @@ module.exports = {
                 else
                 {
                     //this is a receptionist adding a patient
-                    const {idNumber, name , surname , email , gender, cellnumber} = req.body;
-                
                     Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
                     {
                         if (err)
@@ -469,7 +494,6 @@ module.exports = {
             }
         });
     },
-
     //======================================================================================
     //Function developed by: Jacobus Janse van Rensburg
     //Gets a single patient from the databse. Search is done by ID number
