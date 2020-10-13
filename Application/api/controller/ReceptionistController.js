@@ -312,6 +312,7 @@ module.exports ={
                             {
                                 holder[l] =possible[l];
                             }
+                            
                             var counter = 0, position =0;
                             if(possible != null)
                             {
