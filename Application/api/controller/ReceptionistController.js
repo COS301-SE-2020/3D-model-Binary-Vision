@@ -626,17 +626,17 @@ async function madeBookingEmail(booking){
     var emailOptions={
         from: 'flap.jacks.cs@gmail.com',
             to:patient.email,//send email to the head receptionist
-            subject: '3D Model Confirm User',
+            subject: '3D Model Booking Made',
             html:''
     }
 
     var htmlreplace="<body><div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px;margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br></br><h2 style='color:white;'>Booking Appointment</h2><hr style='background-color: white;'><span id='words' style='color: white;'> For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>EMAIL_REPLACE</p> Your booking has been made successfully!<br>";
-    htmlreplace += "<p>Your booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACE</p><p></p></span><br><br></div></body>";
+    htmlreplace += "<p>Your booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACE</p> At <p style='color: lightgreen;'>TIME_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACE</p><p></p></span><br><br></div></body>";
 
     htmlreplace=htmlreplace.replace("EMAIL_REPLACE",patient.email);
     htmlreplace=htmlreplace.replace("DATE_REPLACE", booking.date);
     htmlreplace = htmlreplace.replace("DOC_REPLACE","("+doctor.name+") "+doctor.surname);
-
+    htmlreplace = htmlreplace.replace("TIME_REPLACE",booking.time);
     emailOptions.html=htmlreplace;
 
     transporter.sendMail(emailOptions, function(error, info){

@@ -399,34 +399,7 @@ module.exports = {
     //This function takes in all the details on a new patient and adds it to the database
     addPatient: function (req, res) 
     {
-        var idNumber = req.body.idNumber;
-        var name = req.body.name;
-        var surname = req.body.surname;
-        var email = req.body.email;
-        var gender = req.body.gender;
-        var cellnumber = req.body.cellnumber;
-        var practice = req.body.practice;
-
-        idNumber= idNumber.trim();
-        cellnumber = cellnumber.trim();
-        email = email.trim();
-        name = name.trim();
-        name = name.toLowerCase();
-        surname = surname.trim();
-        surname = surname.toLowerCase();
-        var nname = name[0].toUpperCase();
-        var sname = surname[0].toUpperCase();
-        for(var i = 1; i < name.length;i++)
-        {
-            nname = nname + name[i]; 
-        }
-        for(var i = 1; i < surname.length;i++)
-        {
-            sname = sname + surname[i]; 
-        }
-        name = nname;
-        surname = sname;
-        
+        const {idNumber, name , surname , email , gender, cellnumber,practice} = req.body;
         Patient.findOne({"idNumber":idNumber},function(err,pat)
         {
             if(pat != null)
@@ -461,6 +434,8 @@ module.exports = {
                 else
                 {
                     //this is a receptionist adding a patient
+                    const {idNumber, name , surname , email , gender, cellnumber} = req.body;
+                
                     Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
                     {
                         if (err)
@@ -1040,10 +1015,12 @@ module.exports = {
           {
               if(status=="Postponed")
               {
+
                 updateLogFile(rec.username + "@Postponed a booking@BID:"+id,rec.practition);
               }
               else if(status == "Cancelled")
               {
+                
                 updateLogFile(rec.username + "@Cancelled a booking@BID:"+id,rec.practition);
               }
           }
@@ -1066,17 +1043,22 @@ module.exports = {
     
       Booking.findOneAndUpdate({"_id":id}, {$set:{"status":status}} , function(err,booking)
       {
-          if (err)
-          {
+        if (err)
+        {
             res.status(400)
-              .send("Error Finding Booking");
+            .send("Error Finding Booking");
             return;
-          }
-
-          updateBookingEmail(booking);
-          res.status(200)
+        }
+        if (status =="Canceled")
+        { 
+            deletedBookingEmail(booking);
+        }
+        else if (status =="Postponed"){
+            updateBookingEmail(booking);
+        }
+        res.status(200)
             .send("Booking successfully updated!");
-          return;
+        return;
       });
     },
 
@@ -1629,17 +1611,18 @@ async function deletedBookingEmail(booking){
     var emailOptions={
         from: 'flap.jacks.cs@gmail.com',
             to:patient.email,//send email to the head receptionist
-            subject: '3D Model Confirm User',
+            subject: '3D Model Booking Canceled',
             html:''
     }
     
     var htmlreplace ="<div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px;margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br>";
     htmlreplace+="<h2 style='color:white;'>Canceled Appointment</h2><hr style='background-color: white;'><span id='words' style='color: white;'>";
-    htmlreplace+="For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>xxxxxx@gmail.com</p> <p style='color: red; font-size: 20px;'>Alert!</p>Your appointment has been successfully canceled at date <p id='newDate' style='color: lightgreen;'>DATE_HERE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_NAME_HERE</p></span><br><br></div>";
+    htmlreplace+="For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>xxxxxx@gmail.com</p> <p style='color: red; font-size: 20px;'>Alert!</p>Your appointment has been successfully canceled at date <p id='newDate' style='color: lightgreen;'>DATE_HERE</p> at <p >TIME_HERE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_NAME_HERE</p></span><br><br></div>";
 
     htmlreplace =htmlreplace.replace("xxxxxx@gmail.com",patient.email);
     htmlreplace = htmlreplace.replace("DATE_HERE",booking.date);
     htmlreplace =htmlreplace.replace("DOC_NAME_HERE","("+doctor.name+") "+doctor.surname);
+    httmlreplace= httmlreplace.replace("TIME_HERE",booking.time);
 
     emailOptions.html = htmlreplace;
 
@@ -1665,17 +1648,18 @@ async function updateBookingEmail(booking){
     var emailOptions={
         from: 'flap.jacks.cs@gmail.com',
             to:patient.email,//send email to the head receptionist
-            subject: '3D Model Confirm User',
+            subject: '3D Model Booking Changed',
             html:''
     }
 
     var htmlreplace = "<body><div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px; margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br><h2 style='color:white;'>Postponed Appointment</h2><hr style='background-color: white;'>";
     htmlreplace += "<span id='words' style='color: white;'> For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>EMAIL_REPlACE</p> Your booking has successfully been postponed!<br>";
-    htmlreplace += "<p>Your new booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACE</p><p></p></span><br><br></div></body>";
+    htmlreplace += "<p>Your new booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACE</p> At <p style='color: lightgreen;'>TIME_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACE</p><p></p></span><br><br></div></body>";
 
     htmlreplace=htmlreplace.replace("EMAIL_REPLACE",patient.email);
     htmlreplace=htmlreplace.replace("DATE_REPLACE",booking.date);
     htmlreplace=htmlreplace.replace("DOC_REPLACE","("+doctor.name+") "+doctor.surname);
+    htmlreplace=htmlreplace.replace("TIME_REPLACE",booking.time);
     
     emailOptions.html = htmlreplace;
 
@@ -1764,11 +1748,12 @@ async function sendReminderEmail(booking,days)
     }
 
     var htmlreplace = "<body><div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px; margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br><h2 style='color:white;'>Reminder for Appointment</h2><hr style='background-color: white;'>";
-    htmlreplace+="<span id='words' style='color: white;'> For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>EMAIL_REPLACE</p> <p style='color: red; font-size: 20px;'>Reminder!</p><br><p>Your booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACENT</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACEMENT</p><p></p></span><br><br></div></body>";
+    htmlreplace+="<span id='words' style='color: white;'> For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>EMAIL_REPLACE</p> <p style='color: red; font-size: 20px;'>Reminder!</p><br><p>Your booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACENT</p> at <p style='color: lightgreen;'>TIME_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACEMENT</p><p></p></span><br><br></div></body>";
 
     htmlreplace = htmlreplace.replace("EMAIL_REPLACEMENT",patient.email);
     htmlreplace = htmlreplace.replace("DATE_REPLACEMENT",booking.date);
     htmlreplace = htmlreplace.replace("DOC_REPLACEMENT","("+doctor.name+") " + doctor.surname);
+    htmlreplace = htmlreplace.replace("TIME_REPLACE",booking.time);
 
     emailOptions.html = htmlreplace;
 
