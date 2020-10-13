@@ -626,7 +626,7 @@ async function madeBookingEmail(booking){
     var emailOptions={
         from: 'flap.jacks.cs@gmail.com',
             to:patient.email,//send email to the head receptionist
-            subject: '3D Model Confirm User',
+            subject: '3D Model Booking Made',
             html:''
     }
 
