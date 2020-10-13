@@ -122,9 +122,9 @@ function init()
 function checkRegFields() {
     var name = document.getElementById("name").value;
     var surname = document.getElementById("surname").value;
-    var idNumber = document.getElementById("idNumber").value;
-    var email = document.getElementById("email").value;
-    var cell = document.getElementById("cell").value;
+    var idNumber = document.getElementById("idNumber");
+    var email = document.getElementById("email");
+    var cell = document.getElementById("cell");
 
     var patientInfo = document.getElementById("submitPatientInfo");
     var noSubmit = document.getElementById("noSubmitButton");
@@ -139,16 +139,25 @@ function checkRegFields() {
         trueSubmit = false;
     }
 
-    if (checkIdNumber(idNumber) == false) {
+    if (checkIdNumber(idNumber.value) == false) {
         trueSubmit = false;
+    } else if (checkIdNumber(idNumber.value) == true && document.getElementById("errorForID").style.display == "block") {
+        document.getElementById("errorForID").style.display = "none";
+        idNumber.style.color = "black";
     }
 
-    if (checkEmailReg(email) == false) {
+    if (checkEmailReg(email.value) == false) {
         trueSubmit = false;
+    } else if (checkEmailReg(email.value) == true && document.getElementById("errorForEmail").style.display == "block") {
+        document.getElementById("errorForEmail").style.display = "none";
+        email.style.color = "black";
     }
 
-    if (checkCellNumber(cell) == false) {
+    if (checkCellNumber(cell.value) == false) {
         trueSubmit = false;
+    } else if (checkCellNumber(cell.value) == true && document.getElementById("errorForCell").style.display == "block") {
+        document.getElementById("errorForCell").style.display = "none";
+        cell.style.color = "black";
     }
 
     if (trueSubmit == true) {
@@ -161,30 +170,33 @@ function checkRegFields() {
 } 
 
 function checkId() {
-    var idNumber = document.getElementById("idNumber").value;
+    var idNumber = document.getElementById("idNumber");
 
-    if (checkIdNumber(idNumber) == false) {
+    if (checkIdNumber(idNumber.value) == false) {
         document.getElementById("errorForID").style.display = "block";
+        idNumber.style.color = "#ff5050";
     } else {
         document.getElementById("errorForID").style.display = "none";
     }
 }
 
 function checkCell() {
-    var cell = document.getElementById("cell").value;
+    var cell = document.getElementById("cell");
 
-    if (checkCellNumber(cell) == false) {
+    if (checkCellNumber(cell.value) == false) {
         document.getElementById("errorForCell").style.display = "block";
+        cell.style.color = "#ff5050";
     } else {
         document.getElementById("errorForCell").style.display = "none";
     }
 }
 
 function checkEmail() {
-    var email = document.getElementById("email").value;
+    var email = document.getElementById("email");
 
-    if (checkEmailReg(email) == false) {
+    if (checkEmailReg(email.value) == false) {
         document.getElementById("errorForEmail").style.display = "block";
+        email.style.color = "#ff5050";
     } else {
         document.getElementById("errorForEmail").style.display = "none";
     }

@@ -28,16 +28,16 @@
           <h3>Enter Info</h3><hr>
 
           <label for="name" style="color: white;">Patients name</label><br>
-          <input class="form-control"  type="text" name="name" id="name" onchange="checkRegFields()" placeholder="Name"  required/>
+          <input class="form-control"  type="text" name="name" id="name" oninput="checkRegFields()" placeholder="Name"  required/>
           <br>
 
           <label for="surname" style="color: white;">Patients surname</label><br>
-          <input class="form-control" id="surname" name="surname" onchange="checkRegFields()" placeholder="Surname" required/>
+          <input class="form-control" id="surname" name="surname" oninput="checkRegFields()" placeholder="Surname" required/>
           <br>
 
           <label for="idNumber" style="color: white;">Patients ID number</label>
           <p id="errorForID" style="color: red; display: none;"> Invlaid ID number!</p>
-          <input class="form-control" id="idNumber" name="idNumber" onchange="checkRegFields(); checkId();" placeholder="ID Number" required/>
+          <input class="form-control" id="idNumber" name="idNumber" oninput="checkRegFields();" onchange="checkId()" placeholder="ID Number" required/>
           <br>
 
           <label for="gender" style="color: white;">Gender</label><br>
@@ -50,12 +50,12 @@
 
           <label for="email" style="color: white;">Patients Email</label>
           <p id="errorForEmail" style="color: red; display: none;"> Invlaid email!</p>
-          <input class="form-control" class="box" type="email" name="email" onchange="checkRegFields(); checkEmail();" id="email" placeholder="Email" required />
+          <input class="form-control" class="box" type="email" name="email" oninput="checkRegFields()" onchange="checkEmail()" id="email" placeholder="Email" required />
           <br>
 
           <label for="cell" style="color: white;">Patients cell phone number</label>
           <p id="errorForCell" style="color: red; display: none;">Invalid cellphone number!</p>
-          <input class="form-control" id="cell" name="cellnumber" onchange="checkRegFields(); checkCell();" placeholder="Cellphone Number" required/>
+          <input class="form-control" id="cell" type="tel" name="cellnumber" oninput="checkRegFields()" onchange="checkCell()" placeholder="Cellphone Number" required/>
           <br>
 
           <label for="prac" style="color: white;">Practice</label><br>

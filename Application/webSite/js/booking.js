@@ -340,16 +340,35 @@ function createPatientsListForBooking()
     if(nameElement!=null)
     {
         name=nameElement.value;
+        name = name.trim();
+        name = name.toLowerCase();
+        var nname = name[0].toUpperCase();
+        for(var i = 1; i < name.length;i++)
+        {
+            nname = nname + name[i]; 
+        }
+        name = nname;
     }
     if(surnameElement!=null)
     {
         surname= surnameElement.value;
+        surname = surname.trim();
+        surname = surname.toLowerCase();
+        var sname = surname[0].toUpperCase();
+        
+        for(var i = 1; i < surname.length;i++)
+        {
+            sname = sname + surname[i]; 
+        }
+        surname = sname;
     }
     if(idNumberElement!=null)
     {
         idNumber=idNumberElement.value;
+        idNumber = idNumber.trim();
     }
     console.log("Searching db for patients ");
+
     var response = fetch("/searchPatient",{
         method:"POST",
         headers:{'Content-Type':'application/json; charset=UTF-8'},
