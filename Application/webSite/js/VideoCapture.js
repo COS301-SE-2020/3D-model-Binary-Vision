@@ -15,7 +15,7 @@ var images = []; // The array to store the images generated
 // The main function to upload an video file
 function uploadVideo(videoFile) 
 {
-	cleanElements(); // CLean all the elements
+	cleanElements(); // CLean all the elements 
 
 	// create a new video tag
 	var uploadedVideoElement = document.getElementById("uploadedVideoElement");
@@ -252,7 +252,7 @@ function submitVideo(video, videoStreamed)
 			response.then(res = res.json().then(data=>{
 				
 				var modalHeader = document.getElementById("renderModalHeader");
-				document.getElementById("loadingGif").style.display = "loadingGif";
+				document.getElementById("loadingGif").style.display = "none";
 
 				if (res.status == 200) {
 					modalHeader.style.color = "green"; 
@@ -261,6 +261,7 @@ function submitVideo(video, videoStreamed)
 					modalHeader.style.color = "red";
 					modalHeader.innerHTML = "Model failed to be generated!";
 				}
+				document.getElementById("closeRenderModal").style.display = "block";
 			}));
 		});
 
@@ -358,4 +359,20 @@ function shrinkModal() {
 
 	var butt = document.getElementById("closeButtonRender");
 	butt.style.display = "none";
+}
+
+function closeModel() {
+	var modalHeader = document.getElementById("renderModalHeader");
+	document.getElementById("loadingGif").style.display = "block";
+
+	modalHeader.style.color = "white"; 
+	modalHeader.innerHTML = "Generating Teeth Model";
+
+	document.getElementById("renderModal").style.display = "none";
+
+	var modal = document.getElementById("renderModal");
+	modal.style.width = "100%";
+
+	var butt = document.getElementById("closeButtonRender");
+	butt.style.display = "block";
 }

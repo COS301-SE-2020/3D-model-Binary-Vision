@@ -6,27 +6,27 @@ var nodeMailer = require('nodemailer');
 const { Doctor, Receptionist, PasswordChanges } = require('../model/3DModelModel');
 
 
-var transporter = nodeMailer.createTransport({
-    host:"smtp.mailtrap.io",
-    port: 2525,
-    auth:{
-        user:"0c9f2b08034ef4",
-        pass:"c1fd4b36bbc842"
-    } 
-});
-
-
-
 //var transporter = nodeMailer.createTransport({
-//   service: 'gmail',
-//   host: 'smtp.gmail.com',
-//   port: 465,
-//   secure: true,
-//   auth: {
-//          user: 'flap.jacks.cs@gmail.com',
-//          pass: 'Replace me with the app password'
-//      }
-//  });
+//    host:"smtp.mailtrap.io",
+//    port: 2525,
+//    auth:{
+//        user:"0c9f2b08034ef4",
+//        pass:"c1fd4b36bbc842"
+//    } 
+//});
+
+
+
+var transporter = nodeMailer.createTransport({
+   service: 'gmail',
+   host: 'smtp.gmail.com',
+   port: 465,
+   secure: true,
+   auth: {
+          user: 'flap.jacks.cs@gmail.com',
+          pass: 'ampjiedsvncvukaz'
+      }
+  });
 
 module.exports = {
 
