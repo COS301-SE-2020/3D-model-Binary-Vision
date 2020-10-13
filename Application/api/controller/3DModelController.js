@@ -158,8 +158,10 @@ module.exports = {
     //modified by: Steven Visser 
     //reason: Create a qr code for the practice to add patients as well
     practiceRegistration: function(req, res){
-        const {practice , securityCode, headReceptionist} = req.body;
-
+        var {practice , securityCode, headReceptionist} = req.body;
+        practice = practice.trim();
+        securityCode = securityCode.trim();
+        headReceptionist = headReceptionist.trim()
         Practice.findOne({"practice":practice}, function(err, prac){
 
             if (prac != null /*|| prac != ""*/)
@@ -215,7 +217,13 @@ module.exports = {
     signup: function (req, res) 
     {
         var { name, surname, email, username, password ,choice , practition,securityCode} = req.body;
-       
+       name = name.trim();
+       surname = surname.trim();
+       email = email.trim();
+       username = username.trim();
+       password = password.trim();
+       practition = practition.trim();
+       securityCode = securityCode.trim();
         //first check if the practition exists
         Practice.findOne({"practice":practition}, function(err, practice)
         {
