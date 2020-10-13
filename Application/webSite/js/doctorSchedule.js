@@ -81,11 +81,38 @@ function setTodaysBookings()
         {
             if(data[i].status == "Pending")
             {
-                var replacement = '<li class= "notify" id="'+data[i]._id+'">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'
+                var replacement = '<li class= "notify" id="'+data[i]._id+'">Time: '+data[i].time+'<button type="button" class="btn btn-primary" id="buttonSchedule" onclick="fixPositionConsultation(\''+data[i]._id+'\'); dynamicBarMoveAndPopulate(\''+data[i].patient+'\',\''+data[i].time+'\',\''+data[i].reason+'\',\''+data[i]._id+'\');" >Check</button></li>'
                 document.getElementById("notifyContainer").innerHTML += replacement;
             }
         }
     }));
+}
+
+var lastID = null;
+
+function fixPositionConsultation(elementId, idList) {
+    var element = document.getElementById(elementId);
+
+    console.log(lastID);
+
+    if (lastID == elementId) {
+        document.getElementById(lastID).classList.remove("notifyFixed");
+        lastID = null;
+        
+    }else if (lastID != null) {
+        document.getElementById(lastID).classList.remove("notifyFixed");
+        lastID = elementId;
+        element.classList.add("notifyFixed");
+
+    } else {
+        lastID = elementId;
+        element.classList.add("notifyFixed");
+    }
+
+    /*arrowElement.classList.contains("arrowSideBarTransform");
+    arrowElement.classList.replace("arrowSideBody", "arrowSideBarTransform");
+    document.getElementById("conatinerHome").classList.remove("moveContainerHome");
+    document.getElementById("conatinerHome").classList.add("moveContainerHome");*/
 }
 
 //================================================================================================

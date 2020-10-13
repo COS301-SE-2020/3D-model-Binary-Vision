@@ -795,6 +795,17 @@ button.btn{
 	-ms-transform: translate(5em,0);
 }
 
+.notifyFixed {
+	background-color: lightgreen;
+	box-shadow: 0px 0px 5px 0px black;
+	color: black;
+	transform: translate(5em,0);
+	-webkit-transform: translate(5em,0);
+	-moz-transform: translate(5em,0);
+	-o-transform: translate(5em,0);
+	-ms-transform: translate(5em,0);
+}
+
 #notify:active {
 	background-color: lightgreen;
 }
