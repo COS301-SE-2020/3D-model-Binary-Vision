@@ -1610,11 +1610,12 @@ async function deletedBookingEmail(booking){
     
     var htmlreplace ="<div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px;margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br>";
     htmlreplace+="<h2 style='color:white;'>Canceled Appointment</h2><hr style='background-color: white;'><span id='words' style='color: white;'>";
-    htmlreplace+="For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>xxxxxx@gmail.com</p> <p style='color: red; font-size: 20px;'>Alert!</p>Your appointment has been successfully canceled at date <p id='newDate' style='color: lightgreen;'>DATE_HERE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_NAME_HERE</p></span><br><br></div>";
+    htmlreplace+="For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>xxxxxx@gmail.com</p> <p style='color: red; font-size: 20px;'>Alert!</p>Your appointment has been successfully canceled at date <p id='newDate' style='color: lightgreen;'>DATE_HERE</p> at <p >TIME_HERE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_NAME_HERE</p></span><br><br></div>";
 
     htmlreplace =htmlreplace.replace("xxxxxx@gmail.com",patient.email);
     htmlreplace = htmlreplace.replace("DATE_HERE",booking.date);
     htmlreplace =htmlreplace.replace("DOC_NAME_HERE","("+doctor.name+") "+doctor.surname);
+    httmlreplace= httmlreplace.replace("TIME_HERE",booking.time);
 
     emailOptions.html = htmlreplace;
 
@@ -1646,11 +1647,12 @@ async function updateBookingEmail(booking){
 
     var htmlreplace = "<body><div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px; margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br><h2 style='color:white;'>Postponed Appointment</h2><hr style='background-color: white;'>";
     htmlreplace += "<span id='words' style='color: white;'> For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>EMAIL_REPlACE</p> Your booking has successfully been postponed!<br>";
-    htmlreplace += "<p>Your new booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACE</p><p></p></span><br><br></div></body>";
+    htmlreplace += "<p>Your new booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACE</p> At <p style='color: lightgreen;'>TIME_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACE</p><p></p></span><br><br></div></body>";
 
     htmlreplace=htmlreplace.replace("EMAIL_REPLACE",patient.email);
     htmlreplace=htmlreplace.replace("DATE_REPLACE",booking.date);
     htmlreplace=htmlreplace.replace("DOC_REPLACE","("+doctor.name+") "+doctor.surname);
+    htmlreplace=htmlreplace.replace("TIME_REPLACE",booking.time);
     
     emailOptions.html = htmlreplace;
 
@@ -1739,11 +1741,12 @@ async function sendReminderEmail(booking,days)
     }
 
     var htmlreplace = "<body><div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px; margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br><h2 style='color:white;'>Reminder for Appointment</h2><hr style='background-color: white;'>";
-    htmlreplace+="<span id='words' style='color: white;'> For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>EMAIL_REPLACE</p> <p style='color: red; font-size: 20px;'>Reminder!</p><br><p>Your booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACENT</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACEMENT</p><p></p></span><br><br></div></body>";
+    htmlreplace+="<span id='words' style='color: white;'> For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>EMAIL_REPLACE</p> <p style='color: red; font-size: 20px;'>Reminder!</p><br><p>Your booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACENT</p> at <p style='color: lightgreen;'>TIME_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACEMENT</p><p></p></span><br><br></div></body>";
 
     htmlreplace = htmlreplace.replace("EMAIL_REPLACEMENT",patient.email);
     htmlreplace = htmlreplace.replace("DATE_REPLACEMENT",booking.date);
     htmlreplace = htmlreplace.replace("DOC_REPLACEMENT","("+doctor.name+") " + doctor.surname);
+    htmlreplace = htmlreplace.replace("TIME_REPLACE",booking.time);
 
     emailOptions.html = htmlreplace;
 
