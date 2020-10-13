@@ -11,6 +11,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../js/apiCalls.js"></script>
   <script type="text/javascript" src="../js/receptionist.js"></script>
+  <script type="text/javascript" src="../js/regexChecks.js"></script>
 </head>
 
 <body onload=init()>
@@ -27,15 +28,16 @@
           <h3>Enter Info</h3><hr>
 
           <label for="name" style="color: white;">Patients name</label><br>
-          <input class="form-control"  type="text" name="name" id="name" placeholder="Name"  required />
+          <input class="form-control"  type="text" name="name" id="name" onchange="checkRegFields()" placeholder="Name"  required/>
           <br>
 
           <label for="surname" style="color: white;">Patients surname</label><br>
-          <input class="form-control" id="surname" name="surname" placeholder="Surname" required/>
+          <input class="form-control" id="surname" name="surname" onchange="checkRegFields()" placeholder="Surname" required/>
           <br>
 
-          <label for="idNumber" style="color: white;">Patients ID number</label><br>
-          <input class="form-control" id="idNumber" name="idNumber" placeholder="ID Number" required/>
+          <label for="idNumber" style="color: white;">Patients ID number</label>
+          <p id="errorForID" style="color: red; display: none;"> Invlaid ID number!</p>
+          <input class="form-control" id="idNumber" name="idNumber" onchange="checkRegFields(); checkId();" placeholder="ID Number" required/>
           <br>
 
           <label for="gender" style="color: white;">Gender</label><br>
@@ -46,22 +48,28 @@
           </select>
           <br>
 
-          <label for="email" style="color: white;">Patients Email</label><br>
-          <input class="form-control" class="box" type="email" name="email" id="email" placeholder="Email" required />
+          <label for="email" style="color: white;">Patients Email</label>
+          <p id="errorForEmail" style="color: red; display: none;"> Invlaid email!</p>
+          <input class="form-control" class="box" type="email" name="email" onchange="checkRegFields(); checkEmail();" id="email" placeholder="Email" required />
           <br>
 
-          <label for="cell" style="color: white;">Patients cell phone number</label><br>
-          <input class="form-control" id="cell" name="cellnumber" placeholder="Cellphone Number" required/>
+          <label for="cell" style="color: white;">Patients cell phone number</label>
+          <p id="errorForCell" style="color: red; display: none;">Invalid cellphone number!</p>
+          <input class="form-control" id="cell" name="cellnumber" onchange="checkRegFields(); checkCell();" placeholder="Cellphone Number" required/>
           <br>
 
           <label for="prac" style="color: white;">Practice</label><br>
           <input class="form-control" id="prac" name="practice" placeholder="Practice" required readonly/>
           <br>
 
-          <input class="btn btn-primary" type="submit"  name="submitDetails" value="Submit" />
-          <br><br>
+          <input class="btn btn-primary" type="submit" name="submitDetails" value="Submit" id="submitPatientInfo" style="display: none;" />
+          
 
         </form>
+
+        <button class="btn btn-secondary" id="noSubmitButton" style="display: block;">Submit</button>
+        
+        <br><br>
       </div>
       <br><br>
     </div>

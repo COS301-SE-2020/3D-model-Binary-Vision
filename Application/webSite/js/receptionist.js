@@ -119,3 +119,73 @@ function init()
     document.getElementById("prac").value = parts[1];
 }
 
+function checkRegFields() {
+    var name = document.getElementById("name").value;
+    var surname = document.getElementById("surname").value;
+    var idNumber = document.getElementById("idNumber").value;
+    var email = document.getElementById("email").value;
+    var cell = document.getElementById("cell").value;
+
+    var patientInfo = document.getElementById("submitPatientInfo");
+    var noSubmit = document.getElementById("noSubmitButton");
+
+    var trueSubmit = true;
+
+    if (name == "") {
+        trueSubmit = false;
+    }
+
+    if (surname == "") {
+        trueSubmit = false;
+    }
+
+    if (checkIdNumber(idNumber) == false) {
+        trueSubmit = false;
+    }
+
+    if (checkEmailReg(email) == false) {
+        trueSubmit = false;
+    }
+
+    if (checkCellNumber(cell) == false) {
+        trueSubmit = false;
+    }
+
+    if (trueSubmit == true) {
+        patientInfo.style.display = "block";
+        noSubmit.style.display = "none";
+    } else {
+        patientInfo.style.display = "none";
+        noSubmit.style.display = "block";
+    }
+} 
+
+function checkId() {
+    var idNumber = document.getElementById("idNumber").value;
+
+    if (checkIdNumber(idNumber) == false) {
+        document.getElementById("errorForID").style.display = "block";
+    } else {
+        document.getElementById("errorForID").style.display = "none";
+    }
+}
+
+function checkCell() {
+    var cell = document.getElementById("cell").value;
+
+    if (checkCellNumber(cell) == false) {
+        document.getElementById("errorForCell").style.display = "block";
+    } else {
+        document.getElementById("errorForCell").style.display = "none";
+    }
+}
+
+function checkEmail() {
+    var email = document.getElementById("email").value;
+
+    if (checkEmailReg(email) == false) {
+        document.getElementById("errorForEmail").style.display = "block";
+    } else {
+        document.getElementById("errorForEmail").style.display = "none";
+    }
+}

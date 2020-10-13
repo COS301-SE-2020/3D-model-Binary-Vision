@@ -82,6 +82,8 @@
 
           </div>
         </div>
+
+        
           
           <!--sideBar-->
           <!--<button style="position:fixed; margin-left:60px; display:none; top: 10px;
@@ -147,7 +149,7 @@
                             <span>With Dr: <p id="doctorInfoDisplay"></p></span>
                             <span>Date: <p id="dateInfoDisplay"></p></span>
                             <span>Time: <p id="timeInfoDisplay"></p></span>
-                            <button id="makeBookingButton"class="btn btn-success" onclick="makeBooking()" >Make Booking!</button>
+                            <button id="makeBookingButton"class="btn btn-success" data-toggle="modal" onclick="makeBooking()">Make Booking!</button>
 
                       </div>
                     </div>
@@ -156,6 +158,21 @@
             </div>
         </div>
         
-
+        <!-- The Status Modal -->
+        <div id="statusModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Booking Successfull</h4>
+                <button type="button" id="quiteButton" onclick="closeModal();" class="close" data-dismiss="modal">&times;</button>                
+              </div>
+              <div class="modal-body">
+                <p>Booking was made successfully!</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="closeButton" onclick="closeModal();" class="btn btn-default" data-dismiss="modal">Ok</button>
+              </div>
+          </div>
+        </div>
     </body>
 </html>

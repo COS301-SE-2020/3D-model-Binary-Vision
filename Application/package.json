@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "nyc mocha --exit || true"
+    "test": "nyc mocha --exit || true",
+    "performance": "node --allow-natives-syntax --harmony ./node_modules/mocha/bin/_mocha --reporter mocha-performance ./test/test.js"
   },
   "keywords": [
     "Restful",

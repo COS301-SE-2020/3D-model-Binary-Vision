@@ -15,7 +15,7 @@ var images = []; // The array to store the images generated
 // The main function to upload an video file
 function uploadVideo(videoFile) 
 {
-	cleanElements(); // CLean all the elements
+	cleanElements(); // CLean all the elements 
 
 	// create a new video tag
 	var uploadedVideoElement = document.getElementById("uploadedVideoElement");
@@ -198,6 +198,7 @@ function takeVideoStream()
 // This function is the called when the submit button is clicked and will send the captured data from the video recorder
 function submitVideo(video, videoStreamed) 
 {
+
 	if (!videoStreamed)
 	{
 		var submitVideoElement = document.getElementById('submitVideoUploadElement');
@@ -226,7 +227,8 @@ function submitVideo(video, videoStreamed)
 
 		submitVideoButton.addEventListener('click', (ev) => 
 		{
-			alert("ACTION: Video sent (" + video + ")");
+			displayModal();
+			//alert("ACTION: Video sent (" + video + ")");
 			//post method
 			var VideoSending = new FormData();
 			//will need to append the patient ID / consultation ID to save it in the database "Jaco"	
@@ -247,7 +249,20 @@ function submitVideo(video, videoStreamed)
 				body: VideoSending
 			});
 			
-			response.then(res=> {console.log("uploadImages")});
+			response.then(res = res.json().then(data=>{
+				
+				var modalHeader = document.getElementById("renderModalHeader");
+				document.getElementById("loadingGif").style.display = "none";
+
+				if (res.status == 200) {
+					modalHeader.style.color = "green"; 
+					modalHeader.innerHTML = "Model generated successfully!";
+				} else {
+					modalHeader.style.color = "red";
+					modalHeader.innerHTML = "Model failed to be generated!";
+				}
+				document.getElementById("closeRenderModal").style.display = "block";
+			}));
 		});
 
 	}));
@@ -331,4 +346,33 @@ function generateImage(i, video)
 
 function getPatientID() {
 	return "123456789";
+}
+
+function displayModal(){
+	var modal = document.getElementById("renderModal");
+	modal.style.display = "block";
+}
+
+function shrinkModal() {
+	var modal = document.getElementById("renderModal");
+	modal.style.width = "240px";
+
+	var butt = document.getElementById("closeButtonRender");
+	butt.style.display = "none";
+}
+
+function closeModel() {
+	var modalHeader = document.getElementById("renderModalHeader");
+	document.getElementById("loadingGif").style.display = "block";
+
+	modalHeader.style.color = "white"; 
+	modalHeader.innerHTML = "Generating Teeth Model";
+
+	document.getElementById("renderModal").style.display = "none";
+
+	var modal = document.getElementById("renderModal");
+	modal.style.width = "100%";
+
+	var butt = document.getElementById("closeButtonRender");
+	butt.style.display = "block";
 }

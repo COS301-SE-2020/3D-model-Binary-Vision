@@ -13,6 +13,7 @@
 		<!-- hashing library used below -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+		<script type="text/javascript" src="../js/regexChecks.js"></script>
     </head>
   <body>
   		<nav class="navbar navbar-expand-lg  navbar-dark">
@@ -53,14 +54,60 @@
 				  <h2> REGISTER PRACTICE </h2>
 				  	<div id="errorResponse" style="color: red; font-style: italic;"></div><br>
 						<label for="practice" style="color: white;">Enter Practice Name </label><br>
-				    <input class="form-control" name="practice" placeholder="practice" id="practice" /><br>
+				    <input class="form-control" name="practice" placeholder="practice" id="practice" onchange="checkRegFields();"/><br>
 						<label for="securityCode" style="color: white;">Enter security Code </label><br>
-	                <input class="form-control"  name="securityCode" type="securityCode" placeholder="security code" id="securityCode" /><br>
-	                <label for="headReceptionist" style="color: white;">Enter Head receptionist Email </label><br>
-				    <input class="form-control"  name="headReceptionist" type="headReceptionist" placeholder="head receptionist email" id="headReceptionist" /><br>
-				    <button class="btn btn-primary" type="submit" >Submit</button><br> 
+	                <input class="form-control"  name="securityCode" type="securityCode" placeholder="security code" id="securityCode" onchange="checkRegFields();"/><br>
+	                <label for="headReceptionist" style="color: white;">Enter Head receptionist Email </label>
+	                <p id="errorForEmail" style="color: red; display: none;"> Invlaid email!</p>
+				    <input class="form-control"  name="headReceptionist" type="headReceptionist" placeholder="head receptionist email" id="headReceptionist" onchange="checkRegFields(); checkEmail();"/><br>
+				    <button class="btn btn-primary" type="submit" id="submitPatientInfo" style="display: none; position: relative; margin: 0px auto; text-align: center;" >Submit</button> 
 				</form>
+				<button class="btn btn-secondary" id="noSubmitButton" style="display: block; transform: translateY(-20px);">Submit</button><br>
 			</div>
 		</div>
+
+		<script>
+			function checkRegFields() {
+			    var practice = document.getElementById("practice").value;
+			    var securityCode = document.getElementById("securityCode").value;
+			    var email = document.getElementById("headReceptionist").value;
+
+			    var patientInfo = document.getElementById("submitPatientInfo");
+			    var noSubmit = document.getElementById("noSubmitButton");
+
+			    var trueSubmit = true;
+
+			    if (practice == "") {
+			        trueSubmit = false;
+			    }
+
+			    if (securityCode == "") {
+			        trueSubmit = false;
+			    }
+
+			    if (checkEmailReg(email) == false) {
+			        trueSubmit = false;
+			    }
+
+			    if (trueSubmit == true) {
+			        patientInfo.style.display = "block";
+			        noSubmit.style.display = "none";
+			    } else {
+			        patientInfo.style.display = "none";
+			        noSubmit.style.display = "block";
+			    }
+			} 
+
+			function checkEmail() {
+			    var email = document.getElementById("headReceptionist").value;
+
+			    if (checkEmailReg(email) == false) {
+			        document.getElementById("errorForEmail").style.display = "block";
+			    } else {
+			        document.getElementById("errorForEmail").style.display = "none";
+			    }
+			}
+		</script>
+
   </body>
 </html>

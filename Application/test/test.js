@@ -29,6 +29,12 @@ var Booking = require("../api/model/3DModelModel.js").Booking;
 var PasswordChanges = require("../api/model/3DModelModel.js").PasswordChanges;
 var Practice = require("../api/model/3DModelModel.js").Practice;
 
+
+const benchtest = require("benchtest");
+benchtest(null,{all:true});
+beforeEach(benchtest.test);
+after(benchtest.report);
+
 //Email modules and settings to send emails
 var nodeMailer = require('nodemailer');
 const transporter = nodeMailer.createTransport({

@@ -133,6 +133,7 @@ function addPatient()
         if(res.status ==201)
         {
             //patient successfuly added and we can do something
+            alert("Patient added successfully");
             console.log("patient added successfully: check database for confirmation");
         }
         else

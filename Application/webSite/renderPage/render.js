@@ -11,17 +11,22 @@ function getUrls()
     //this is used to set the paths and object names from the URL    
     var url = window.location.href;
     var parts = url.split("=");
-    var consID = parts[1];
-    assetPath = 'assets/' + consID + '/';
-    objectFile = consID + '.obj';
-    mtlFile = consID + '.mtl';
+    if(parts.length > 1)
+    {
+        var consID = parts[1];
+        assetPath = 'assets/' + consID + '/';
+        objectFile = consID + '.obj';
+        mtlFile = consID + '.mtl';
+    }
+    document.getElementById("returnbutton").href = "../recordPage.html?pid=" + parts[3] + "=" + parts[2];
+    run();
 }
 
 function run()
 {
-    if (!Detector.webgl) {
-        Detector.addGetWebGLMessage();
-    }
+    //if (!Detector.webgl) {
+    //    Detector.addGetWebGLMessage();
+    //}
     
     var container;
     
@@ -41,8 +46,9 @@ function run()
     
         /* Camera */
     
-        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-        camera.position.z = 3;
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 1000);
+        camera.position.z = 6;
+        camera.projectionMatrix.scale(new THREE.Vector3(1, -1, 1));
     
         /* Scene */
     
@@ -96,9 +102,10 @@ function run()
         /* Controls */
     
         controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.25;
-        controls.enableZoom = false;
+        controls.target.set( -0.2, -0.6, 1.4 );
+        controls.enableDamping = false;
+        controls.dampingFactor = 0.01;
+        controls.enableZoom = true;
     
         /* Events */
     

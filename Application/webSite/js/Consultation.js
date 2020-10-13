@@ -190,7 +190,7 @@ function saveConsultation(pid,reason)
 			}
 			else if(res.status== 201)
 			{
-				window.location.href= "/doctorSchedule.html"; 
+				alert("Consultation Saved!");
 			}
 		});
 	} 
@@ -343,8 +343,6 @@ function populateBookingInformation()
 	var parts = url.split("=");
 	//parts[1] holds the booking information
 
-	document.getElementById("renderpage").setAttribute("href","../renderPage/render.html?bookingid="+parts[1]);
-
 	//get the booking details 
 	var response = fetch("/getSingleBooking",{
 		method:"POST",
@@ -386,7 +384,7 @@ function populateBookingInformation()
 // function to get the required patients information and populate the patient information
 function populatePatientInfo(id,reason)
 {
-	document.getElementById("docnotes").innerHTML = "<p style='font-weight: bold;'>Doctors Notes:</p><textarea id='doctorsNotes' style='width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;'></textarea><button class='btn btn-primary' id='saveDoctorNote' type='button' style='margin-top: 10px;' onclick=\"saveConsultation('"+id+"','"+reason+"')\">Save & Exit Consultation</button>";
+	document.getElementById("docnotes").innerHTML = "<p style='font-weight: bold;'>Doctors Notes:</p><textarea id='doctorsNotes' style='width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;'></textarea><button class='btn btn-primary' id='saveDoctorNote' type='button' style='margin-top: 10px;' onclick=\"saveConsultation('"+id+"','"+reason+"')\">Save Consultation</button>";
 
 	var response = fetch ("/singlePatient",{
 		method:"POST",

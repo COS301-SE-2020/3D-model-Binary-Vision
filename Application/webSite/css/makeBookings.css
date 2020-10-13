@@ -18,3 +18,30 @@
 {
     background-color: black;
 }
+
+#statusModal .modal-header
+{
+	background-color: green;
+}
+
+#statusModal .modal-footer
+{
+	background-color: green;
+}
+
+#statusModal .modal-content
+{
+	box-shadow: 1px 0px 15px 0px black;
+}
+
+#statusModal
+{
+	width: 400px;
+ 
+    position: absolute;
+    left: 47%;
+    top: 20%; 
+    margin-left: -150px;
+    margin-top: -150px;
+    
+}

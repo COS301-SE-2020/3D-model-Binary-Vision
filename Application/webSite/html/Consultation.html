@@ -101,6 +101,23 @@
 
 					</div>
 				</div>
+
+
+				<!-- The Status Modal -->
+		        <div id="renderModal" class="modal">
+		          <!-- Modal content -->
+		          <div class="modal-content">
+		              <div class="modal-header">
+		                <h4 id="renderModalHeader" class="modal-title">Generating Teeth Model</h4>
+		                <img id="loadingGif" src="../css/images/ZZ5H.gif" width="50px" height="50px">
+		                <!--<button type="button" id="quiteButton" onclick="closeModal();" class="close" data-dismiss="modal">&times;</button>-->                
+		              </div>
+		              <div class="modal-footer">
+		                <button type="button" id="closeButtonRender" onclick="shrinkModal();" class="btn btn-primary" data-dismiss="modal">Shrink</button>
+		                <button type="button" id="closeRenderModal" onclick="closeModel();" class="btn btn-primary" data-dismiss="modal" style="display: none;">Close</button>
+		              </div>
+		          </div>
+		        </div>
 			<!--right bar-->
 				<div class="containerRight">
 				    <div id="rightSideBody" style="width: 240px;">
@@ -114,8 +131,6 @@
 
 								<button class="btn btn-warning" style="margin-right: 10px; margin-bottom: 10px; margin-top: 10px;" onclick=newSTL()>Model</button>
 								<button class="btn btn-success" onclick="newVideo()">Media</button>
-								<a class="btn btn-danger" href="#" id = "renderpage">Render</a>
-								
 								<br><br>
 								PATIENT RECORDS<hr>
 								<a class="btn btn-primary" href="recordPage.html" id = "recordPage">Records</a>
@@ -170,10 +185,9 @@
 							<h2 id="videoRecoderHeader">Video Recorder</h2><br>
 						    <div id="VideoRecorderCenter">
 						        <label for="file-upload" class="btn btn-primary" id="UploadVideo">Select Video</label>
-								<input id="file-upload" type="file" accept='video/mp4'/>
+								<input id="file-upload" type="file" accept='video/mp4' onchange='uploadVideo(document.getElementById("file-upload").files[0])' />
+						        <!--<input class='btn btn-primary' type='submit' value='Upload Video' onclick='uploadVideo(document.getElementById("file-upload").files[0])'>-->
 
-						        <input class='btn btn-primary' type='submit' value='Upload Video' onclick='uploadVideo(document.getElementById("file-upload").files[0])'>
-						        
 						        <br><br>
 						        
 						        <div id='uploadedVideoElement'></div>

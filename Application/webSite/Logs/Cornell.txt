@@ -1,0 +1,95 @@
+9/10/2020@11:15:27@Practice: Cornell Registered!
+9/10/2020@11:23:7@rec1@Logged in
+9/10/2020@11:25:35@rec1@Added a Patient@PID:5f802c8fa0cce10badaa2c53
+9/10/2020@11:26:51@rec1@Logout
+9/10/2020@11:28:8@rec1@Logged in
+9/10/2020@11:28:23@rec1@Made a booking@BID:5f802d37067c4f109c416944
+9/10/2020@11:28:40@rec1@Made a booking@BID:5f802d48067c4f109c416945
+9/10/2020@11:29:18@rec1@Logout
+9/10/2020@11:29:38@rec1@Logged in
+9/10/2020@11:29:50@rec1@Made a booking@BID:5f802d8eb4ff33110b8836c2
+9/10/2020@11:30:58@rec1@Logout
+9/10/2020@11:31:19@rec1@Logged in
+9/10/2020@11:31:30@rec1@Made a booking@BID:5f802df2157fe6116b6a1be9
+9/10/2020@11:34:12@rec1@Made a booking@BID:5f802e94157fe6116b6a1bea
+9/10/2020@11:37:1@rec1@Logout
+9/10/2020@11:37:21@rec1@Logged in
+9/10/2020@11:37:48@rec1@Made a booking@BID:5f802f6c473272120afd0300
+9/10/2020@11:38:35@rec1@Logged in
+9/10/2020@11:38:45@rec1@Made a booking@BID:5f802fa5579ef71279cf737d
+9/10/2020@11:39:5@rec1@Made a booking@BID:5f802fb9579ef71279cf737e
+9/10/2020@11:39:34@rec1@Logout
+9/10/2020@11:39:51@rec1@Logged in
+9/10/2020@11:40:18@rec1@Made a booking@BID:5f803002eba69212dfbf390d
+9/10/2020@11:41:12@rec1@Made a booking@BID:5f803038eba69212dfbf390e
+9/10/2020@11:41:27@rec1@Made a booking@BID:5f803047eba69212dfbf390f
+9/10/2020@11:41:29@rec1@Logout
+9/10/2020@11:41:34@doc1@Logged in
+9/10/2020@11:42:22@doc1@Saved a consultation@CID:5f80307eeba69212dfbf3910
+9/10/2020@11:43:15@doc1@Completed a booking@BID:5f802d8eb4ff33110b8836c2
+9/10/2020@11:43:34@rec1@Logged in
+9/10/2020@12:53:19@rec1@Made a booking@BID:5f80411feba69212dfbf3911
+9/10/2020@12:56:41@rec1@Logged in
+9/10/2020@12:57:50@rec1@Made a booking@BID:5f80422e2a106f167f1103cc
+9/10/2020@13:1:56@rec1@Logged in
+9/10/2020@13:2:5@rec1@Made a booking@BID:5f80432d9d8360179e82fe1e
+9/10/2020@13:6:52@rec1@Made a booking@BID:5f80444c9d8360179e82fe1f
+9/10/2020@13:7:24@rec1@Made a booking@BID:5f80446c9d8360179e82fe20
+9/10/2020@13:8:38@rec1@Made a booking@BID:5f8044b69d8360179e82fe21
+9/10/2020@13:11:57@rec1@Made a booking@BID:5f80457d9d8360179e82fe22
+9/10/2020@13:12:59@rec1@Made a booking@BID:5f8045bb9d8360179e82fe23
+9/10/2020@13:13:31@rec1@Made a booking@BID:5f8045db9d8360179e82fe24
+9/10/2020@13:17:4@rec1@Made a booking@BID:5f8046b09d8360179e82fe25
+9/10/2020@13:18:17@rec1@Made a booking@BID:5f8046f99d8360179e82fe26
+9/10/2020@13:20:13@rec1@Made a booking@BID:5f80476d9d8360179e82fe27
+9/10/2020@13:20:32@rec1@Made a booking@BID:5f8047809d8360179e82fe28
+9/10/2020@13:21:5@rec1@Made a booking@BID:5f8047a19d8360179e82fe29
+9/10/2020@13:21:47@rec1@Made a booking@BID:5f8047cb9d8360179e82fe2a
+9/10/2020@13:22:44@rec1@Made a booking@BID:5f8048049d8360179e82fe2b
+9/10/2020@13:23:21@rec1@Made a booking@BID:5f8048299d8360179e82fe2c
+9/10/2020@13:23:59@rec1@Made a booking@BID:5f80484f9d8360179e82fe2d
+9/10/2020@13:24:55@rec1@Made a booking@BID:5f8048879d8360179e82fe2e
+9/10/2020@13:25:22@rec1@Made a booking@BID:5f8048a29d8360179e82fe2f
+9/10/2020@13:25:37@rec1@Made a booking@BID:5f8048b19d8360179e82fe30
+9/10/2020@13:25:41@rec1@Made a booking@BID:5f8048b59d8360179e82fe31
+9/10/2020@13:25:43@rec1@Made a booking@BID:5f8048b79d8360179e82fe32
+9/10/2020@13:25:43@rec1@Made a booking@BID:5f8048b79d8360179e82fe33
+9/10/2020@13:25:44@rec1@Made a booking@BID:5f8048b89d8360179e82fe34
+9/10/2020@13:25:44@rec1@Made a booking@BID:5f8048b89d8360179e82fe35
+9/10/2020@13:25:57@rec1@Made a booking@BID:5f8048c59d8360179e82fe36
+9/10/2020@13:26:21@rec1@Made a booking@BID:5f8048dd9d8360179e82fe37
+9/10/2020@13:27:14@rec1@Made a booking@BID:5f8049129d8360179e82fe38
+9/10/2020@13:27:32@rec1@Made a booking@BID:5f8049249d8360179e82fe39
+9/10/2020@13:27:33@rec1@Made a booking@BID:5f8049259d8360179e82fe3a
+9/10/2020@13:28:9@rec1@Made a booking@BID:5f8049499d8360179e82fe3b
+9/10/2020@13:29:14@rec1@Made a booking@BID:5f80498a9d8360179e82fe3c
+9/10/2020@13:29:40@rec1@Made a booking@BID:5f8049a49d8360179e82fe3d
+9/10/2020@13:31:11@rec1@Made a booking@BID:5f8049ff9d8360179e82fe3e
+9/10/2020@13:31:52@rec1@Made a booking@BID:5f804a289d8360179e82fe3f
+9/10/2020@13:32:4@rec1@Made a booking@BID:5f804a349d8360179e82fe40
+9/10/2020@13:32:28@rec1@Made a booking@BID:5f804a4c9d8360179e82fe41
+9/10/2020@13:33:5@rec1@Made a booking@BID:5f804a719d8360179e82fe42
+9/10/2020@13:33:29@rec1@Made a booking@BID:5f804a899d8360179e82fe43
+9/10/2020@13:33:49@rec1@Made a booking@BID:5f804a9d9d8360179e82fe44
+9/10/2020@13:34:2@rec1@Made a booking@BID:5f804aaa9d8360179e82fe45
+9/10/2020@13:34:33@rec1@Made a booking@BID:5f804ac99d8360179e82fe46
+9/10/2020@13:35:9@rec1@Made a booking@BID:5f804aed9d8360179e82fe47
+9/10/2020@13:35:43@rec1@Logout
+9/10/2020@13:35:49@doc1@Logged in
+9/10/2020@13:45:46@rec1@Logged in
+9/10/2020@13:46:10@rec1@Made a booking@BID:5f804d8282ccce1c948cc319
+9/10/2020@13:46:53@rec1@Made a booking@BID:5f804dad82ccce1c948cc31a
+9/10/2020@14:38:41@doc1@Logged in
+9/10/2020@14:46:27@doc1@Logged in
+9/10/2020@14:47:19@doc1@Logged in
+9/10/2020@14:48:11@doc1@Logout
+9/10/2020@14:48:17@doc1@Logged in
+9/10/2020@14:50:4@doc1@Logout
+9/10/2020@14:50:10@rec1@Logged in
+9/10/2020@14:50:12@rec1@Logout
+9/10/2020@14:50:17@doc1@Logged in
+9/10/2020@14:51:45@doc1@Logged in
+9/10/2020@14:52:34@doc1@Logged in
+9/10/2020@14:53:35@doc1@Logged in
+9/10/2020@14:54:19@doc1@Logged in
+9/10/2020@14:55:7@doc1@Logged in

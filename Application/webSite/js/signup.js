@@ -122,10 +122,10 @@ function signup()
                 {
                     email.style.backgroundColor="red";
                     email.placeholder="please enter a valid email";
-                    errorData.innerHTML = "<i>Email field is empty!</i>";
+                    //errorData.innerHTML = "<i>Email field is empty!</i>";
                     email.style.backgroundColor="red";
                     email.style.color="white"; 
-                    email.value="";
+                    //email.value="";
                 }
                 else
                 {
@@ -273,6 +273,8 @@ function checkUsername(username)
 //function used to check if there is someone that has the same email in use already
 function checkEmail(email)
 {
+    var errorData = document.querySelector("#errorOutput");
+
     var response = fetch('/isValidEmail',{
         method:"POST",
         headers:{'Content-Type': 'application/json; charset=UTF-8'},
@@ -285,8 +287,16 @@ function checkEmail(email)
             this.usedParamaters=true;
             document.querySelector("#email").style.backgroundColor="red";
             stop();
+            errorData.innerHTML = "<i>Email field is empty!</i>";
         }
     }));
+
+    if (checkEmailReg(email) == false) {
+        this.usedParamaters = true;
+        document.querySelector("#email").style.backgroundColor="red";
+        stop();
+        errorData.innerHTML = "<i>Invalid Email!</i>";
+    }
 }
 
 async function stop()
