@@ -474,6 +474,7 @@ function makeBooking()
         //alert("Booking made successfully");
         var modal = document.getElementById("statusModal");
         modal.style.display = "block";
+        document.getElementById("makeBookingButton").disabled = true;
         //booking can be created
         var reason = document.getElementById("reasonForBooking").value;
         //alert("Booking made successfully");
