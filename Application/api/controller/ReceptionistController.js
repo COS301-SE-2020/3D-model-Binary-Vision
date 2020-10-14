@@ -162,7 +162,7 @@ module.exports ={
             return;
         }
 
-        Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)}, function(err, receptionist)
+        Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user),"active":true}, function(err, receptionist)
         {
             if(err)
             {
@@ -203,7 +203,7 @@ module.exports ={
             return; // Not sure if this is not supposed to be here but I added this - Marcus :)
         }
 
-        Booking.find({"doctor":mongoose.Types.ObjectId(req.body.doctor)},function(err,bookings)
+        Booking.find({"doctor":mongoose.Types.ObjectId(req.body.doctor),"active":true},function(err,bookings)
         {
             if(err)
             {
