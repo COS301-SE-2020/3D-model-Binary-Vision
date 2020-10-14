@@ -38,12 +38,12 @@
 		  </div>
 		</nav>
     <!-- <form method="POST" action="/login" enctype="multipart/form-data"> -->
-
+<!-- 
 	    <div id="miBody">
 		    <div id="header">
 		      <p id="headerTitle">LOGIN PAGE</p>
 		    </div>
-		</div>
+		</div> -->
 		<div class="section">
 		<br><br><br><br>
 			
@@ -54,18 +54,20 @@
 				</div>
 				<form  style="border-top-right-radius:10px; border-top-left-radius: 10px; padding: 10px;  position: relative; text-align: center;">
 				  <br>
-				  <h2> Login </h2>
+				  <!-- <h2> Login </h2> -->
 				  	<div id="errorResponse" style="color: red; font-style: italic;"></div><br>
 						<label for="username" style="color: white;">Enter Username </label><br>
 				    <input class="form-control" name="username" placeholder="Username" id="username" /><br>
 						<label for="password" style="color: white;">Enter Password </label><br>
 				    <input class="form-control"  name="password" type="password" placeholder="Password" id="password" /><br>
-				    <button class="btn btn-primary" type="button" onclick="login()">Submit</button><br>
+				    <button class="btn btn-primary" type="button" onclick="login()">Login</button><br>
 				    <hr>
 				    <a style="font-size: 12px;" href="forgotPassword.html"> Forgot Password?</a><br>
 				    <p style="font-size: 12px;">Don't have account?<a style="font-size: 12px;" href="signup.html"> Register Here</a></p>
 				</form>
 			</div>
 		</div>
+
+		<img id="loadingGIF" src="../css/images/ZZ5H.gif" alt="" style="position:fixed; left:40%; top:45%; visibility: hidden; z-index: 5; ">
   </body>
 </html>
