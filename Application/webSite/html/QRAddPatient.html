@@ -36,7 +36,15 @@
           <br>
 
           <label for="idNumber" style="color: white;">Patients ID number</label>
+          
+          <br>
+          <input type="radio" id="idNoChoice" name="identificationNo" value="idNoChoice" onchange="testID(); checkRegFields(); checkId();" checked>
+          <label for="idNoChoice" style="color: white; font-size: 15px;">ID Number</label>
+          <input type="radio" id="passChoice" name="identificationNo" value="passChoice" onchange="testPass(); checkRegFields(); checkId();">
+          <label for="passChoice" style="color: white; font-size: 15px;">Passport Number</label><br>
+
           <p id="errorForID" style="color: red; display: none;"> Invlaid ID number!</p>
+          <p id="errorForPass" style="color: red; display: none;"> Invlaid Passport number!</p>
           <input class="form-control" id="idNumber" name="idNumber" oninput="checkRegFields();" onchange="checkId()" placeholder="ID Number" required/>
           <br>
 
