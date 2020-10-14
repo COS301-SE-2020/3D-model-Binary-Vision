@@ -144,9 +144,6 @@ module.exports = function (app)
 
     app.route('/consultation/:id/obj')
         .get(Model.getOBJFile);
-
-    app.route('/updateLog')
-        .post(Model.updateLog);
     
     app.route('/fuzzyLogic')
         .post(Receptionist.fuzzyLogicBooking);

@@ -33,13 +33,20 @@ function login()
             });
 
             response.then(res => 
-            {
-
+            {   
+                console.log("status" + res.status);
                 if(res.status == 404)
                 {
-                    var loadingscreen = document.querySelector("#loadingGIF").style.visibility = hidden;
+
+                    document.querySelector("#loadingGIF").style.visibility = "hidden";
                     clicked = false;
                     document.querySelector("#errorResponse").innerHTML="Invalid login credentials";
+                }
+                else if(res.status == 402)
+                {
+                    document.querySelector("#loadingGIF").style.visibility = "hidden";
+                    clicked = false;
+                    document.querySelector("#errorResponse").innerHTML="Your account is not yet active. Please ask the head of your practice to check their email.";
                 }
                 else
                 {
@@ -63,6 +70,8 @@ function login()
             {
                 document.querySelector("#errorResponse").innerHTML="Please enter password";
             }
+            document.querySelector("#loadingGIF").style.visibility = "hidden";
+
         }
     }
 }
