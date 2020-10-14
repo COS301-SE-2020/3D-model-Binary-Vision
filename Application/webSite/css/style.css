@@ -1323,12 +1323,12 @@ canvas{
 
 #closeButton{
 	color: white;
-	background-color: tomato;
+	background-color: #0275d8;
 }
 
 #closeButton:hover{
 	color: white;
-	background-color: red;
+	background-color: lightblue;
 }
 
 #avatar1:hover{
