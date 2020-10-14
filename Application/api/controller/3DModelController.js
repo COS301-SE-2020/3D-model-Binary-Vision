@@ -230,7 +230,7 @@ module.exports = {
         {
             if (err)
             {
-                res.sendStatus(400);
+                res.status(400);
                 return;
             }
             if(practice != null)
@@ -248,7 +248,7 @@ module.exports = {
                             if(doc != null)
                             {
                                 bool = true;
-                                res.sendStatus(403);
+                                res.status(403);
                                 return;
                             }
                         });
@@ -256,17 +256,15 @@ module.exports = {
                             if(doc != null)
                             {
                                 bool = true;
-                                res.sendStatus(402);
+                                res.status(402);
                                 return;
                             }
                         });
                         Receptionist.findOne({"email":email},function(err,rec){
-                            console.log("Receptionist check: ");
-                            console.log(rec)
                             if(rec != null)
                             {
                                 bool = true;
-                                res.sendStatus(403);
+                                res.status(403);
                                 return;
                             }
                         });
@@ -274,7 +272,7 @@ module.exports = {
                             if(rec != null)
                             {
                                 bool = true;
-                                res.sendStatus(402);
+                                res.status(402);
                                 return;
                             }
                         });
