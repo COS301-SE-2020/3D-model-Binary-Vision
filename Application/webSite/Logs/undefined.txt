@@ -35,3 +35,14 @@ Marc@Completed a booking@BID:5f8756d96d017390903b0634 - Prac1[14/10/2020:21:52:5
 Marc@Completed a booking@BID:5f8756f46d017390903b0636 - Prac1[14/10/2020:21:54:52 -120] undefined undefined undefined
 Marc@Completed a booking@BID:5f8756e66d017390903b0635 - Prac1[14/10/2020:21:57:37 -120] undefined undefined undefined
 Marc@Completed a booking@BID:5f8757016d017390903b0637 - Prac1[14/10/2020:21:57:51 -120] undefined undefined undefined
+Marc@Logout - Prac1[14/10/2020:21:58:42 -120] undefined undefined undefined
+admin@Logged in - Prac1[14/10/2020:21:58:53 -120] undefined undefined undefined
+admin@Logout - Prac1[14/10/2020:21:59:25 -120] undefined undefined undefined
+Marc@Logged in - Prac1[14/10/2020:21:59:36 -120] undefined undefined undefined
+Marc@Completed a booking@BID:5f87588a6d017390903b0638 - Prac1[14/10/2020:21:59:42 -120] undefined undefined undefined
+Marc@Logout - Prac1[14/10/2020:22:4:23 -120] undefined undefined undefined
+admin@Logged in - Prac1[14/10/2020:22:10:11 -120] undefined undefined undefined
+Marc@Logged in - Prac1[14/10/2020:22:35:0 -120] undefined undefined undefined
+Marc@Completed a booking@BID:5f8758956d017390903b0639 - Prac1[14/10/2020:22:35:28 -120] undefined undefined undefined
+Marc@Completed a booking@BID:5f87536d9dc9eb8bb18193e3 - Prac1[14/10/2020:22:35:37 -120] undefined undefined undefined
+Marc@Logout - Prac1[14/10/2020:22:36:6 -120] undefined undefined undefined
