@@ -1117,7 +1117,7 @@ module.exports = {
               if(status == "Completed")
               {
                 var request = "(POST /updateBooking HTTP/1.0)";
-                updateLogFile(getUserIP(req),rec.username,request,200,0,rec.practition);
+                updateLogFile(getUserIP(req),doc.username,request,200,0,doc.practition);
               }
           }
       });
