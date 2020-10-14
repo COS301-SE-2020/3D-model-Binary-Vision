@@ -246,77 +246,90 @@ module.exports = {
                             if(doc != null)
                             {
                                 bool = true;
-                                res.status(403);
+                                res.sendStatus(403);
                                 return;
                             }
-                        });
-                        Doctor.findOne({"username":username},function(err,doc){
-                            if(doc != null)
+                            else
                             {
-                                bool = true;
-                                res.status(402);
-                                return;
+                                Doctor.findOne({"username":username},function(err,doc1){
+                                    if(doc1 != null)
+                                    {
+                                        bool = true;
+                                        res.sendStatus(402);
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        Receptionist.findOne({"email":email},function(err,rec){
+                                            if(rec != null)
+                                            {
+                                                console.log("I should not appear. Receptionist check: ");
+                                                console.log(rec)
+                                                bool = true;
+                                                res.sendStatus(403);
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                Receptionist.findOne({"username":username},function(err,rec1){
+                                                    if(rec1 != null)
+                                                    {
+                                                        bool = true;
+                                                        res.sendStatus(402);
+                                                        return;
+                                                    }
+                                                    else
+                                                    {
+                                                        if(choice=="Doctor" && bool == false)
+                                                        {
+                                                            
+                                                            const doctor = new Doctor({name,surname,email,username, password,practition});
+                                                            doctor.save(function (err, saved) 
+                                                            {
+                                                                if (err) 
+                                                                {
+                                                                    res.status(400);
+                                                                    res.send(err);
+                                                                    return;
+                                                                }
+                                                                else 
+                                                                {
+                                                                    //email the head receptionist over here
+                                                                    sendsignupConfirmationEmail(practice , doctor);
+                                                                    res.redirect("/login.html");
+                                                                    return;
+                                                                }
+                                                            });
+                                                        }
+                                                        else if(choice == "Receptionist" && bool == false)
+                                                        {
+                                                            const receptionist = new Receptionist({name , surname , email , username, password,practition});
+                                                            receptionist.save(function(err, saved)
+                                                            {
+                                                                if(err)
+                                                                {   
+                                                                    res.status(400);
+                                                                    res.send(err);
+                                                                    return;
+                                                                }
+                                                                else
+                                                                {
+                                                                    //email the head receptionist over here
+                                                                    sendsignupConfirmationEmail(practice , receptionist);
+                                                                    res.redirect("/login.html");
+                                                                    return;
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
                             }
-                        });
-                        Receptionist.findOne({"email":email},function(err,rec){
-                            if(rec != null)
-                            {
-                                bool = true;
-                                res.status(403);
-                                return;
-                            }
-                        });
-                        Receptionist.findOne({"username":username},function(err,rec){
-                            if(rec != null)
-                            {
-                                bool = true;
-                                res.status(402);
-                                return;
-                            }
-                        });
-                        if(choice=="Doctor" && bool == false)
-                        {
-                            
-                            const doctor = new Doctor({name,surname,email,username, password,practition});
-                            doctor.save(function (err, saved) 
-                            {
-                                if (err) 
-                                {
-                                    res.status(400);
-                                    res.send(err);
-                                    return;
-                                }
-                                else 
-                                {
-                                    //email the head receptionist over here
-                                    sendsignupConfirmationEmail(practice , doctor);
-                                    res.redirect("/login.html");
-                                    return;
-                                }
-                            });
-                        }
-                        else if(choice == "Receptionist" && bool == false)
-                        {
-                            const receptionist = new Receptionist({name , surname , email , username, password,practition});
-                            receptionist.save(function(err, saved)
-                            {
-                                if(err)
-                                {   
-                                    res.status(400);
-                                    res.send(err);
-                                    return;
-                                }
-                                else
-                                {
-                                    //email the head receptionist over here
-                                    sendsignupConfirmationEmail(practice , receptionist);
-                                    res.redirect("/login.html");
-                                    return;
-                                }
-                            });
-                        }
+                        });                       
                     });
-
                 }
                 else{
                     //practition code not valid for signup attempt
@@ -1799,4 +1812,13 @@ async function sendReminderEmail(booking,days)
             console.log(info);
         }
     }); 
+}
+
+function getUserIP(req)
+{
+    const ip = req.connection.remoteAddress ||
+                req.headers['x-forwarded-for'] || 
+                req.socket.remoteAddress || 
+                (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    return ip;
 }
