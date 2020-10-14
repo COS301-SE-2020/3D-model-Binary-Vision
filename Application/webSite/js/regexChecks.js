@@ -42,3 +42,9 @@ function checkEmailReg(email) {
 
 	return re.test(email);
 }
+
+function checkPassword(password) {
+    var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/g;
+
+    return re.test(password);
+}

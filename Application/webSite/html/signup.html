@@ -82,7 +82,7 @@
 
                 <div style="padding-left: 30px; padding-right: 15px; padding-top: 20px; padding-bottom: 20px;">
                   <label for="password" style="color: white;">Please enter Password</label><br>
-                  <input class="form-control" class="box" type="password" name="password" id="password" placeholder="Password " required/>
+                  <input class="form-control" class="box" type="password" onchange="testPassword(this.value)" oninput="contTestPassword(this.value)" name="password" id="password" placeholder="Password " required/>
                 </div>
 
                 <div style="padding-left: 15px; padding-right: 30px; padding-top: 20px; padding-bottom: 20px;">
