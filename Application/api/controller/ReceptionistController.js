@@ -604,7 +604,7 @@ function updateLogFile(ip,username,request,status,objsize,practice)
     var seconds = today.getSeconds();
     var timezone = today.getTimezoneOffset();
     var time = hours + ":" + minutes + ":" + seconds ;
-    var line = ip + " - " + username +"["+ date + ":" + time + " " + timezone + "] " + request + " " + status + " " + objsize + "\n";
+    var line = ip + " - " + username +" ["+ date + ":" + time + " " + timezone + "] " + request + " " + status + " " + objsize + "\n";
     var fname = "./webSite/Logs/"+practice+".txt";
     fs.appendFile(fname,line,function(err)
     {

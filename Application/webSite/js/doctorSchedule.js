@@ -77,6 +77,10 @@ function setTodaysBookings()
             }
         }
 
+        /*for (var i in data) {
+            console.log(data[i]._id);
+        }*/
+
         for(var i in data)
         {
             if(data[i].status == "Pending")
@@ -89,6 +93,11 @@ function setTodaysBookings()
 }
 
 var lastID = null;
+
+function resetLastID() {
+
+    lastID = null;
+}
 
 function fixPositionConsultation(elementId, idList) {
     var element = document.getElementById(elementId);
@@ -217,6 +226,7 @@ function checkTime(i)
 // Completes a Booking and removes it from the databse
 function completeBooking(bookingID)
 {
+    lastID = null;
         var response = fetch("/updateBooking",{
             method:"POST",
             headers:{'Content-Type': 'application/json; charset=UTF-8'},
