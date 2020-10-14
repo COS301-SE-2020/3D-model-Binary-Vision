@@ -202,12 +202,12 @@ function submitVideo(video, videoStreamed)
 	if (!videoStreamed)
 	{
 		var submitVideoElement = document.getElementById('submitVideoUploadElement');
-		submitVideoElement.innerHTML = '<br><button class="btn btn-primary" id="submitVideo">Submit Video</button><br><br><br>';
+		submitVideoElement.innerHTML = '<br><button class="btn btn-info" id="submitVideo">Submit Video</button><br><br><br>';
 	}
 	else
 	{
 		var submitVideoElement = document.getElementById('submitVideoStreamElement');
-		submitVideoElement.innerHTML = '<br><button class="btn btn-primary" id="submitVideo" style="transform: translateY(-370px);">Submit Video</button><br><br><br>';
+		submitVideoElement.innerHTML = '<br><button class="btn btn-info" id="submitVideo" style="transform: translateY(-370px);">Submit Video</button><br><br><br>';
 		document.getElementById("VideoRecorder").style.height = "1000px";
 	}
 

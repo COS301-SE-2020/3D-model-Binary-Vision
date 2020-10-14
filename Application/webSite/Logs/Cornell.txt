@@ -68,3 +68,40 @@
 14/10/2020@15:40:38@rec1@Logout
 14/10/2020@15:42:13@doc1@Logged in
 14/10/2020@15:42:32@doc1@Saved a consultation@CID:5f8700481ee5c340fc9d162c
+14/10/2020@16:2:47@rec1@Logged in
+14/10/2020@16:3:14@rec1@Cancelled a booking@BID:5f86ef948661d52f8d435dfa
+14/10/2020@16:3:15@rec1@Cancelled a booking@BID:5f8046f99d8360179e82fe26
+14/10/2020@16:3:16@rec1@Cancelled a booking@BID:5f80444c9d8360179e82fe1f
+14/10/2020@16:3:16@rec1@Cancelled a booking@BID:5f80446c9d8360179e82fe20
+14/10/2020@16:3:17@rec1@Cancelled a booking@BID:5f8044b69d8360179e82fe21
+14/10/2020@16:3:19@rec1@Cancelled a booking@BID:5f8049ff9d8360179e82fe3e
+14/10/2020@16:3:20@rec1@Cancelled a booking@BID:5f804dad82ccce1c948cc31a
+14/10/2020@16:3:38@rec1@Made a booking@BID:5f87053acad90143a17a8be3
+14/10/2020@16:4:22@rec1@Logout
+14/10/2020@16:6:25@rec1@Logged in
+14/10/2020@16:6:28@rec1@Logout
+14/10/2020@16:6:43@doc1@Logged in
+14/10/2020@16:7:13@rec1@Logged in
+14/10/2020@16:7:56@rec1@Made a booking@BID:5f87063ce1a4754407b382e9
+::ffff:127.0.0.1 - rec1[14/10/2020:19:9:29 -120] (POST /login HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:17:30 -120] (POST /searchPatient HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:17:55 -120] (GET /makeBooking HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:27:14 -120] (POST /searchPatient HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:27:47 -120] (GET /makeBooking HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:29:57 -120] (POST /searchPatient HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:30:1 -120] (GET /makeBooking HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:30:51 -120] (POST /searchPatient HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:30:55 -120] (GET /makeBooking HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:31:50 -120] (POST /searchPatient HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:31:55 -120] (GET /makeBooking HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:32:35 -120] (POST /searchPatient HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:32:39 -120] (GET /makeBooking HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:32:48 -120] (POST /searchPatient HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:32:51 -120] (GET /makeBooking HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:48:32 -120] (POST /searchPatient HTTP/1.0) 404 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:49:23 -120] (POST /searchPatient HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:51:18 -120] (POST /searchPatient HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:52:53 -120] (GET /makeBooking HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:53:43 -120] (POST /searchPatient HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:55:34 -120] (GET /logout HTTP/1.0) 200 0
+::ffff:127.0.0.1 - doc1[14/10/2020:19:55:41 -120] (POST /login HTTP/1.0) 200 0
