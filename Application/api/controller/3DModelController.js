@@ -1621,8 +1621,6 @@ module.exports = {
 // Function developed by: Jacobus Janse van Rensburg 
 // Function sends a email to head receptionist to confirm / reject a user signing up
 function sendsignupConfirmationEmail(practice , user){
-
-    console.log("HeadReceptionistEmail: "+ practice.headReceptionist);
     var emailOptions={
         from: 'flap.jacks.cs@gmail.com',
             to:practice.headReceptionist,//send email to the head receptionist
@@ -1661,9 +1659,6 @@ function sendsignupConfirmationEmail(practice , user){
         if(error)
         {
             console.log(error);
-        }
-        else{
-            console.log(info);
         }
     });
 }
