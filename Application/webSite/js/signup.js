@@ -335,7 +335,7 @@ function addUser(name , surname, email ,username,choice,practice , securityCode)
 
         response.then(res => 
         {
-            if(res.status == 402)
+            if(res.status == 403)
             {
                 e.value = "";
                 e.placeholder="Email already exists";
@@ -359,7 +359,7 @@ function addUser(name , surname, email ,username,choice,practice , securityCode)
                 errorData.innerHTML = "<i>Practice does not exist!</i>";
                 p.focus();
             }
-            else if(res.status == 403)
+            else if(res.status == 401)
             {
                 s.value = "";
                 s.placeholder="try again";
