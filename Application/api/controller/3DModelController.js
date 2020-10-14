@@ -83,7 +83,7 @@ module.exports = {
                     }
                     else
                     {
-                        res.send(erro);
+                        res.status(404).send(erro);
                         return;
                     }
                 })        
