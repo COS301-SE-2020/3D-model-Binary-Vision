@@ -103,3 +103,5 @@
 ::ffff:127.0.0.1 - rec1[14/10/2020:19:51:18 -120] (POST /searchPatient HTTP/1.0) 200 0
 ::ffff:127.0.0.1 - rec1[14/10/2020:19:52:53 -120] (GET /makeBooking HTTP/1.0) 200 0
 ::ffff:127.0.0.1 - rec1[14/10/2020:19:53:43 -120] (POST /searchPatient HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:19:55:34 -120] (GET /logout HTTP/1.0) 200 0
+::ffff:127.0.0.1 - doc1[14/10/2020:19:55:41 -120] (POST /login HTTP/1.0) 200 0
