@@ -1226,7 +1226,7 @@ module.exports = {
     {
         var {email , password , code} = req.body;
 
-        console.log("here");
+        //console.log("here");
 
         password = frontsalt+password+backSalt;
         var updated = false;
@@ -1717,9 +1717,9 @@ async function deletedBookingEmail(booking){
         {
             console.log(error);
         }
-        else{
-            console.log(info);
-        }
+        //else{
+        //    console.log(info);
+        //}
     });
 }
 
@@ -1754,9 +1754,9 @@ async function updateBookingEmail(booking){
         {
             console.log(error);
         }
-        else{
-            console.log(info);
-        }
+        //else{
+        //    console.log(info);
+        //}
     });    
 }
 
@@ -1778,10 +1778,7 @@ async function reminder()
         {
             sendReminderEmail(booking[i],sendEmail.days);
         }
-            
-    }
-
-    
+    } 
 }
 
 
@@ -1849,10 +1846,10 @@ async function sendReminderEmail(booking,days)
         {
             console.log(error);
         }
-        else
-        {
-            console.log(info);
-        }
+        //else
+        //{
+        //    console.log(info);
+        //}
     }); 
 }
 
