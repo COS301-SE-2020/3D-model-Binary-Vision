@@ -45,3 +45,29 @@
     margin-top: -150px;
     
 }
+
+#currentOverlay h2{
+	padding: 30px;
+}
+
+#timeSlots p{
+	font-size: 18px;
+	color: black;
+}
+
+#timeSlots{
+	margin: 3%; 
+
+	position: relative;
+	background-color: lightblue;
+	border-radius: 10px;
+	display: block;
+	float: left;
+	width: 27%;
+
+}
+
+#timeSlots:hover{
+	box-shadow: 0px 0px 15px 0px gray;
+
+}

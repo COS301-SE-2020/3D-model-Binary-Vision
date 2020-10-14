@@ -1411,5 +1411,14 @@ canvas{
 #renderModal{
 	position: fixed;
 
-	top: 80%;
+	top: 40%;
+}
+
+#statusModal{
+	position: fixed;
+	top: 40%;
+}
+
+#statusModal .modal-body p{
+	color: black;
 }
