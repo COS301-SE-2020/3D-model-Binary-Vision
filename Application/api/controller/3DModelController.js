@@ -57,6 +57,8 @@ module.exports = {
     //This function Populates the doctor cookie with the correct credentials if the doctor logs in successfully
     login: function (req, res) 
     {
+        console.log("User IP: ");
+        console.log(getUserIP(req));
         var { username, password } = req.body;
 
         password = frontsalt+password+backSalt;
@@ -1799,4 +1801,13 @@ async function sendReminderEmail(booking,days)
             console.log(info);
         }
     }); 
+}
+
+function getUserIP(req)
+{
+    const ip = req.connection.remoteAddress ||
+                req.headers['x-forwarded-for'] || 
+                req.socket.remoteAddress || 
+                (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    return ip;
 }
