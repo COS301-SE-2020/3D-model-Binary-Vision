@@ -14,6 +14,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
 		<script type="text/javascript" src="../js/regexChecks.js"></script>
+		<script type="text/javascript" src="../js/signup.js"></script>
     </head>
   <body>
   		<nav class="navbar navbar-expand-lg  navbar-dark">
@@ -49,7 +50,7 @@
 
 			<div id="containerLogin">
 				<img src="../css/images/tooth.png" alt="tooth" style="position: relative; margin-left: auto; margin-right: auto; width:  300px;">
-				<form  action="/registerPractice" method="POST" style="border-top-right-radius:10px; border-top-left-radius: 10px; padding: 20px; margin-left: auto; margin-right: auto; position: relative; text-align: center;">
+				<form  style="border-top-right-radius:10px; border-top-left-radius: 10px; padding: 20px; margin-left: auto; margin-right: auto; position: relative; text-align: center;">
 				  <br>
 				  	<div id="errorResponse" style="color: red; font-style: italic;"></div><br>
 						<label for="practice" style="color: white;">Practice</label><br>
@@ -59,9 +60,9 @@
 	                <label for="headReceptionist" style="color: white;">Head Receptionist Email</label>
 	                <p id="errorForEmail" style="color: red; display: none;"> Invlaid email!</p>
 				    <input class="form-control"  name="headReceptionist" type="email" placeholder="Enter Head receptionist Email" id="headReceptionist" onchange="checkRegFields(); checkEmail();"/><br>
-				    <button class="btn btn-primary" type="submit" id="submitPatientInfo" style="display: none; position: relative; margin: 0px auto; text-align: center;" >Submit</button> 
+				    <button class="btn btn-primary" type="button" id="submitPatientInfo" style="display: none; position: relative; margin: 0px auto; text-align: center;" onclick="registerPractice()">Register</button> 
 				</form>
-				<button class="btn btn-secondary" id="noSubmitButton" style="display: block; transform: translateY(-20px);">Submit</button><br>
+				<button class="btn btn-secondary" id="noSubmitButton" style="display: block; transform: translateY(-20px);" onclick="registerPractice()">Register</button><br>
 			</div>
 		</div>
 
