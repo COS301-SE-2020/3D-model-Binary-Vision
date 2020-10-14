@@ -64,6 +64,8 @@ function login()
             {
                 document.querySelector("#errorResponse").innerHTML="Please enter password";
             }
+            document.querySelector("#loadingGIF").style.visibility = "hidden";
+
         }
     }
 }
