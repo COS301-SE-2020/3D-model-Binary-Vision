@@ -254,9 +254,9 @@ function addpatient()
     var e = document.getElementById("email").value;
     var c = document.getElementById("cell").value;
     var p = '';
-    if(document.getElementById("practice"))
+    if(document.getElementById("prac"))
     {
-        p = document.getElementById("practice").value;
+        p = document.getElementById("prac").value;
     }
  
     var response = fetch("/addPatient",
@@ -272,7 +272,7 @@ function addpatient()
             document.getElementById("errorForID").style.display = "block";
             document.getElementById("errorForID").innerText= "ID Number Already Exists!";
         }
-        else 
+        else if(res.status == 200)
         {
             alert("Patient Added Successfully!");
             window.location.href = res.url;
