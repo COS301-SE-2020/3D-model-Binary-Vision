@@ -1146,6 +1146,11 @@ canvas{
 	text-align: center;
 	background-color: #003366;
 	border-radius: 10px;
+
+	margin-left: auto;
+	margin-right: auto;
+
+	width: 700px;
 }
 
 @media only screen and (width: 640px) {
@@ -1406,5 +1411,14 @@ canvas{
 #renderModal{
 	position: fixed;
 
-	top: 80%;
+	top: 40%;
+}
+
+#statusModal{
+	position: fixed;
+	top: 40%;
+}
+
+#statusModal .modal-body p{
+	color: black;
 }

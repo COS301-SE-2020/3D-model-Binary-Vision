@@ -283,6 +283,7 @@ function selectTime(timeslot)
 
     var parts = timeslot.split("&");
     selectTimeSlot(parts[0],parts[1]);
+    document.getElementById('makeBookingButton').disabled = false;
 }
 
 // ===========================================================================================
@@ -391,6 +392,7 @@ function fillPatientSearchedList(data)
     var overlay = document.getElementById("currentOverlay");
     var replacement = "";
     var overlayTable = document.getElementById('currentOverlayTable');
+
     overlayTable.style.display = "none";
     overlay.style.display = "none";
     overlay.style.display = "block";
@@ -399,9 +401,12 @@ function fillPatientSearchedList(data)
     for (var i in data)
     {
         console.log("found patient "+data[i].name+"  "+data[i].surname);
-        replacement += '<div style="display: block; float: left; background-color:#003366; color: white; width: 300px;position: relative;border-radius: 5px;box-shadow: 0px 0px 5px 0px black; margin-right: 10px; margin-left: 10px; margin-top: 20px;"><br><h2>' + data[i].name + ' ' + data[i].surname + ' ' + inc + ':</h2><hr><li> Name: '+data[i].name+'</li><li> Surname: '+data[i].surname+'</li><li>ID: '+data[i].idNumber+'</li><li>Cell: '+data[i].cellnumber+'</li><br><button class="btn btn-warning" onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</button><br><br></div>';
+        replacement += '<div style="display: block; float: left; background-color:#003366; color: white; width: 300px;position: relative;border-radius: 5px;box-shadow: 0px 0px 5px 0px black; margin-right: 10px; margin-left: 10px; margin-top: 20px;"><br><h2>' + data[i].name + ' ' + data[i].surname + '</h2><hr><li> Name: '+data[i].name+'</li><li> Surname: '+data[i].surname+'</li><li>ID: '+data[i].idNumber+'</li><li>Cell: '+data[i].cellnumber+'</li><br><button class="btn btn-warning" onclick="selectPatient(\''+data[i]._id+'\',\''+data[i].name+'\',\''+data[i].surname+'\',\''+data[i].idNumber+'\')">Select</button><br><br></div>';
         inc++;
+
     }
+    //var button = document.querySelector('docButton');
+        //button.disabled = false;
     overlay.innerHTML = replacement;
 }
 
@@ -416,6 +421,7 @@ function selectDoctor(drID,name, surname)
     document.getElementById("doctorInfoDisplay").style.color = "lightgreen";
     document.getElementById("currentOverlay").innerHTML = "";
     displayTimeTableOverlay();
+    document.getElementById("dateButton").disabled = false;
 }
 
 // ===========================================================================================
@@ -445,6 +451,8 @@ function selectPatient(patientID, name , surname, idNumber)
 
     document.getElementById("currentOverlay").innerHTML = "";
     displayDoctorOverlay();
+    document.getElementById("docButton").disabled = false;
+    document.getElementById("commonButton").disabled = false;
 }
 
 // ===========================================================================================
@@ -693,6 +701,7 @@ function fuzzyLogic()
     population+='<option value="30">Mouth Sores</option> </select> <button id="btnCommonBooking" class="btn btn-primary" onclick="findAvailableBookings()">Select</button>';
 
     location.innerHTML=population;
+    document.getElementById("makeBookingButton").disabled = false;
 }
 
 //=================================================================================================
@@ -723,7 +732,7 @@ async function findAvailableBookings(){
     bodySelector.style.position = "relative";
     bodySelector.style.display = "inline-block";
     bodySelector.style.backgroundColor= "#003366";
-    bodySelector.style.width= "300px";
+    bodySelector.style.width= "90%";
     bodySelector.style.color= "white";
     bodySelector.style.textAlign = "center";
     bodySelector.style.borderRadius = "5px";
@@ -833,11 +842,11 @@ async function filterOptions()
     var count=0;
 
     var bodySelector = document.getElementById("currentOverlay");
-    var innerHTML= "<h1 style='color:white;'>Booking options for selected day:</h1><br><br>";
+    var innerHTML= "<h2 style='color:white;'>Booking options for selected day: </h2><br><br>";
     for(var i in sameDayFilteredOptions )
     {
         
-        var inner ="<div><hr><br><p>Time: "+sameDayFilteredOptions[i].time+"</p>";
+        var inner ="<div id = 'timeSlots'><hr><br><p>Time: "+sameDayFilteredOptions[i].time+"</p>";
         inner+="<p>End: "+sameDayFilteredOptions[i].endTime+"</p>";
         inner+="<p>Day:"+dayArray[daySelected]+"</p>";
         inner+="<p>Date: "+sameDayFilteredOptions[i].date+"</p>";
@@ -862,7 +871,7 @@ async function filterOptions()
     }
 
     count =0;
-    innerHTML+="<h1 style='color:white;'>Booking options of matching time</h1><br><br>";
+    //innerHTML+="<br><h2 style='color:white;'>Booking options of matching time</h2><br><br>";
 
     console.log("day"+ day);
     for(var i in sameTimeFilteredOptions)
@@ -872,7 +881,7 @@ async function filterOptions()
         var day = parseInt(new Date(ffsThisDate).getDay());
     
         
-        var inner ="<div><hr><br><p>Time: "+sameTimeFilteredOptions[i].time+"</p>";
+        var inner ="<div id = 'timeSlots'><hr><br><p>Time: "+sameTimeFilteredOptions[i].time+"</p>";
         inner+="<p>End: "+sameTimeFilteredOptions[i].endTime+"</p>";
         inner+="<p>Day:"+dayArray[day]+"</p>";
         inner+="<p>Date: "+sameTimeFilteredOptions[i].date+"</p>";
