@@ -369,18 +369,6 @@ function addUser(name , surname, email ,username,choice,practice , securityCode)
             }
             else
             {
-                var today = new Date();
-                var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
-                var hours = today.getHours();
-                var minutes = today.getMinutes();
-                var seconds = today.getSeconds();
-                var time = hours + ":" + minutes + ":" + seconds ;
-                var line = date + "@" + time + "@" + username.value + "@Registered as a " + choice;
-                var resp = fetch("/updateLog",{
-                    method:"POST",
-                    headers:{'Content-Type':'application/json; charset=utf-8'},
-                    body:JSON.stringify({"practice":practice.value,"line":line})
-                });
                 window.location.href = res.url;
             }
         });

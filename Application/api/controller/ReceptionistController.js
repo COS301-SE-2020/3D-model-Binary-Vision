@@ -143,7 +143,8 @@ module.exports ={
             }
             if(rec)
             {
-                updateLogFile(rec.username + "@Made a booking@BID:"+newBooking._id,rec.practition);
+                var request = "(GET /makeBooking HTTP/1.0)";
+                updateLogFile(getUserIP(req),rec.username,request,200,0,rec.practition);
             }
         });
     },
@@ -594,15 +595,16 @@ function incrementDate(day , dayCap)
 //======================================================================================================
 //Function developed by: Steven Visser
 //writes new entries to the log file
-function updateLogFile(linedesc,practice)
+function updateLogFile(ip,username,request,status,objsize,practice)
 {
     var today = new Date();
     var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
     var hours = today.getHours();
     var minutes = today.getMinutes();
     var seconds = today.getSeconds();
+    var timezone = today.getTimezoneOffset();
     var time = hours + ":" + minutes + ":" + seconds ;
-    var line = date + "@" + time + "@" + linedesc + "\n";
+    var line = ip + " - " + username +"["+ date + ":" + time + " " + timezone + "] " + request + " " + status + " " + objsize + "\n";
     var fname = "./webSite/Logs/"+practice+".txt";
     fs.appendFile(fname,line,function(err)
     {
@@ -612,9 +614,18 @@ function updateLogFile(linedesc,practice)
         }
         else
         {
-            console.log("Log updated.");
+            //console.log("Log updated.");
         }
     });
+}
+
+function getUserIP(req)
+{
+    const ip = req.connection.remoteAddress ||
+                req.headers['x-forwarded-for'] || 
+                req.socket.remoteAddress || 
+                (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    return ip;
 }
 
 

@@ -72,14 +72,17 @@ module.exports = {
             {
                 //check if the passwords match
                 bcrypt.compare(password , doctor.password, function(erro , result){
-                    if(result == true){
+                    if(result == true)
+                    {
                         //it is a doctor logging in and we return to the doctors home page
                         res.cookie("drCookie",doctor._id,{maxAge:9000000,httpOnly:true});
                         res.redirect("/doctorSchedule.html");
-                        updateLogFile(username+"@Logged in",doctor.practition);
+                        var request = "(POST /login HTTP/1.0)";
+                        updateLogFile(getUserIP(req),username,request,200,0,doctor.practition);
                         return;
                     }
-                    else{
+                    else
+                    {
                         res.send(erro);
                         return;
                     }
@@ -99,13 +102,16 @@ module.exports = {
             if (receptionist)
             {
                 bcrypt.compare(password , receptionist.password, function (error, result){
-                   if (result == true){
+                   if (result == true)
+                   {
                         res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
                         res.redirect("/newHome.html");
-                        updateLogFile(username+"@Logged in",receptionist.practition);
+                        var request = "(POST /login HTTP/1.0)";
+                        updateLogFile(getUserIP(req),username,request,200,0,receptionist.practition);
                         return;
                    }
-                   else{
+                   else
+                   {
                        res.send(error);
                        return;
                    }
@@ -114,7 +120,6 @@ module.exports = {
 
             }
         });
-        res.sendStatus(404);
         return;
     },
 
@@ -132,7 +137,8 @@ module.exports = {
             }
             if(doctor)
             {
-                updateLogFile(doctor.username + "@Logout",doctor.practition);
+                var request = "(GET /logout HTTP/1.0)";
+                updateLogFile(getUserIP(req),doctor.username,request,200,0,doctor.practition);
             }
         });
         Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
@@ -143,7 +149,8 @@ module.exports = {
             }
             if(rec)
             {
-                updateLogFile(rec.username + "@Logout",rec.practition);
+                var request = "(GET /logout HTTP/1.0)";
+                updateLogFile(getUserIP(req),rec.username,request,200,0,rec.practition);
             }
         });
         res.cookie("drCookie","",{maxAge:0,httpOnly:true});
@@ -168,6 +175,8 @@ module.exports = {
             {   
                 //practition already registered;
                 res.status(400).send("Practice already exists");
+                var request = "(GET /practiceRegistration HTTP/1.0)";
+                updateLogFile(getUserIP(req),"-",request,400,0,practice);
                 return;
             }
             else
@@ -183,25 +192,8 @@ module.exports = {
                     }
                     else
                     {
-
-                        var today = new Date();
-                        var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
-                        var hours = today.getHours();
-                        var minutes = today.getMinutes();
-                        var seconds = today.getSeconds();
-                        var time = hours + ":" + minutes + ":" + seconds ;
-                        var line = date + "@" + time + "@Practice: " + practice + " Registered!\n";
-                        var fname = "./webSite/Logs/"+practice+".txt";
-                        fs.writeFile(fname,line,function(err){
-                            if(err)
-                            {
-                                console.log(err);
-                            }
-                            else
-                            {
-                                //console.log("Practice Log File successfully created!");
-                            }
-                        });
+                        var request = "(GET /practiceRegistration HTTP/1.0)";
+                        updateLogFile(getUserIP(req),"-",request,200,0,practice);
                         res.redirect('/signup.html');
                         return;
                     }
@@ -247,6 +239,8 @@ module.exports = {
                             {
                                 bool = true;
                                 res.sendStatus(403);
+                                var request = "(POST /signup HTTP/1.0)";
+                                updateLogFile(getUserIP(req),username,request,403,0,practition);
                                 return;
                             }
                             else
@@ -256,6 +250,8 @@ module.exports = {
                                     {
                                         bool = true;
                                         res.sendStatus(402);
+                                        var request = "(POST /signup HTTP/1.0)";
+                                        updateLogFile(getUserIP(req),username,request,402,0,practition);
                                         return;
                                     }
                                     else
@@ -263,10 +259,10 @@ module.exports = {
                                         Receptionist.findOne({"email":email},function(err,rec){
                                             if(rec != null)
                                             {
-                                                console.log("I should not appear. Receptionist check: ");
-                                                console.log(rec)
                                                 bool = true;
                                                 res.sendStatus(403);
+                                                var request = "(POST /signup HTTP/1.0)";
+                                                updateLogFile(getUserIP(req),username,request,403,0,practition);
                                                 return;
                                             }
                                             else
@@ -276,6 +272,8 @@ module.exports = {
                                                     {
                                                         bool = true;
                                                         res.sendStatus(402);
+                                                        var request = "(POST /signup HTTP/1.0)";
+                                                        updateLogFile(getUserIP(req),username,request,402,0,practition);
                                                         return;
                                                     }
                                                     else
@@ -290,6 +288,8 @@ module.exports = {
                                                                 {
                                                                     res.status(400);
                                                                     res.send(err);
+                                                                    var request = "(POST /signup HTTP/1.0)";
+                                                                    updateLogFile(getUserIP(req),username,request,400,0,practition);
                                                                     return;
                                                                 }
                                                                 else 
@@ -297,6 +297,8 @@ module.exports = {
                                                                     //email the head receptionist over here
                                                                     sendsignupConfirmationEmail(practice , doctor);
                                                                     res.redirect("/login.html");
+                                                                    var request = "(POST /signup HTTP/1.0)";
+                                                                    updateLogFile(getUserIP(req),username,request,200,0,practition);
                                                                     return;
                                                                 }
                                                             });
@@ -310,6 +312,8 @@ module.exports = {
                                                                 {   
                                                                     res.status(400);
                                                                     res.send(err);
+                                                                    var request = "(POST /signup HTTP/1.0)";
+                                                                    updateLogFile(getUserIP(req),username,request,200,0,practition);
                                                                     return;
                                                                 }
                                                                 else
@@ -317,6 +321,8 @@ module.exports = {
                                                                     //email the head receptionist over here
                                                                     sendsignupConfirmationEmail(practice , receptionist);
                                                                     res.redirect("/login.html");
+                                                                    var request = "(POST /signup HTTP/1.0)";
+                                                                    updateLogFile(getUserIP(req),username,request,200,0,practition);
                                                                     return;
                                                                 }
                                                             });
@@ -331,16 +337,22 @@ module.exports = {
                         });                       
                     });
                 }
-                else{
+                else
+                {
                     //practition code not valid for signup attempt
                     //unauthorized
                     res.sendStatus(401); // Marcus Changed this from status -> senStatus
+                    var request = "(POST /signup HTTP/1.0)";
+                    updateLogFile(getUserIP(req),username,request,401,0,practition);
                     return;
                 }
             }
-            else{
+            else
+            {
                 //no practice found
                 res.sendStatus(404); // Marcus Changed this from status -> senStatus
+                var request = "(POST /signup HTTP/1.0)";
+                updateLogFile(getUserIP(req),username,request,404,0,practition);
                 return;
                 //register a new practice ?
             }
@@ -452,6 +464,8 @@ module.exports = {
             if(pat != null)
             {
                 res.status(400).send("Patient with that ID number already exists on the system");
+                var request = "(POST /addPatient HTTP/1.0)";
+                updateLogFile(getUserIP(req),"-",request,400,0,practice);
                 return;
             }
             else
@@ -466,6 +480,8 @@ module.exports = {
                         if (err) 
                         {
                             res.status(400).send(err);
+                            var request = "(POST /addPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),"-",request,400,0,practice);
                             return;
                         }
                         else
@@ -475,7 +491,8 @@ module.exports = {
                         }
                     });
                 
-                    updateLogFile("Added a Patient@PID:" +new_Patient._id,practice);
+                    var request = "(POST /addPatient HTTP/1.0)";
+                    updateLogFile(getUserIP(req),"-",request,201,0,practice);
                     return;
                 }
                 else
@@ -506,7 +523,8 @@ module.exports = {
                                     res.redirect("newHome.html");
                                 }
                             });
-                            updateLogFile(rec.username + "@Added a Patient@PID:" +new_Patient._id,rec.practition);
+                            var request = "(POST /addPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rec.username,request,201,0,practice);
                         }
                     });
                     return;
@@ -889,16 +907,22 @@ module.exports = {
                     {
                         if(err){
                             res.status(400);
+                            var request = "(POST /searchPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rec.username,request,400,0,rec.practition);
                             return;
                         }
                         if(patient!="")
                         {
                             res.json(patient).status(200);
+                            var request = "(POST /searchPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rec.username,request,200,0,rec.practition);
                             return;
                         }
                         else
                         {
                             res.status(404).send("No patient found");
+                            var request = "(POST /searchPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rec.username,request,404,0,rec.practition);
                             return;
                         }
                     });
@@ -910,17 +934,23 @@ module.exports = {
                         if(err)
                         {
                             res.status(400);
+                            var request = "(POST /searchPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rec.username,request,400,0,rec.practition);
                             return;
                         }
                         if(patient!="")
                         {
                             res.json(patient)
                               .status(200);
+                            var request = "(POST /searchPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rec.username,request,200,0,rec.practition);
                             return;
                         }
                         else
                         {
                             res.status(404).send("No patient found");
+                            var request = "(POST /searchPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rec.username,request,404,0,rec.practition);
                             return;
                         }
                     
@@ -933,16 +963,22 @@ module.exports = {
                         if(err)
                         {
                             res.status(400);
+                            var request = "(POST /searchPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rec.username,request,400,0,rec.practition);
                             return;
                         }
                         if(patient!="")
                         {
                             res.json(patient);
+                            var request = "(POST /searchPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rec.username,request,200,0,rec.practition);
                             return;
                         }
                         else
                         {
                             res.status(404).send("No patient found");
+                            var request = "(POST /searchPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rec.username,request,200,0,rec.practition);
                             return;
                         }
                     });
@@ -954,16 +990,22 @@ module.exports = {
                         if(err)
                         {
                             res.status(400);
+                            var request = "(POST /searchPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rec.username,request,400,0,rec.practition);
                             return;
                         }
                         if(patient!="")
                         {
                             res.json(patient).status(200);
+                            var request = "(POST /searchPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rec.username,request,200,0,rec.practition);
                             return;
                         }
                         else
                         {
                             res.status(404).send("No patient found");
+                            var request = "(POST /searchPatient HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rec.username,request,404,0,rec.practition);
                             return;
                         }
                     });
@@ -971,6 +1013,8 @@ module.exports = {
                 else
                 {
                     res.status(400);
+                    var request = "(POST /searchPatient HTTP/1.0)";
+                    updateLogFile(getUserIP(req),rec.username,request,400,0,rec.practition);
                     return;
                 }
             }
@@ -1048,7 +1092,8 @@ module.exports = {
 
       var id = mongoose.Types.ObjectId(req.body._id);
       var status = req.body.status;
-
+      var username = "-";
+      var practice = "";
       Receptionist.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , rec)
       {
           if (err)
@@ -1057,52 +1102,47 @@ module.exports = {
           }
           if(rec)
           {
-              if(status=="Postponed")
-              {
-
-                updateLogFile(rec.username + "@Postponed a booking@BID:"+id,rec.practition);
-              }
-              else if(status == "Cancelled")
-              {
+            username = rec.username;
+            practice = rec.practition;
+          }
+          else
+          {
+            Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doc)
+            {
+                if (err)
+                {
                 
-                updateLogFile(rec.username + "@Cancelled a booking@BID:"+id,rec.practition);
-              }
+                }
+                if(doc)
+                {
+                  username = doc.username;
+                  practice = doc.practition;
+                }
+            });
           }
-      });
-
-      Doctor.findOne({"_id":mongoose.Types.ObjectId(req.user)} , function (err , doc)
-      {
-          if (err)
-          {
-
-          }
-          if(doc)
-          {
-              if(status == "Completed")
+          Booking.findOneAndUpdate({"_id":id}, {$set:{"status":status}} , function(err,booking)
+            {
+              if (err)
               {
-                updateLogFile(doc.username + "@Completed a booking@BID:"+id,doc.practition);
+                  res.status(400)
+                  .send("Error Finding Booking");
+                  var request = "(POST /updateBooking HTTP/1.0)";
+                  updateLogFile(getUserIP(req),username,request,400,0,practice);
+                  return;
               }
-          }
-      });
-    
-      Booking.findOneAndUpdate({"_id":id}, {$set:{"status":status}} , function(err,booking)
-      {
-        if (err)
-        {
-            res.status(400)
-            .send("Error Finding Booking");
-            return;
-        }
-        if (status =="Canceled")
-        { 
-            deletedBookingEmail(booking);
-        }
-        else if (status =="Postponed"){
-            updateBookingEmail(booking);
-        }
-        res.status(200)
-            .send("Booking successfully updated!");
-        return;
+              if (status =="Canceled")
+              { 
+                  deletedBookingEmail(booking);
+              }
+              else if (status =="Postponed"){
+                  updateBookingEmail(booking);
+              }
+              res.status(200)
+                  .send("Booking successfully updated!");
+              var request = "(POST /updateBooking HTTP/1.0)";
+              updateLogFile(getUserIP(req),username,request,200,0,practice);
+              return;
+            });
       });
     },
 
@@ -1241,13 +1281,15 @@ module.exports = {
                  Receptionist.findOneAndUpdate({"_id":mongoose.Types.ObjectId(user)},{$set:{"active":true}}, function(err, rec){
                     if(rec)
                     {
-                        updateLogFile("PracticeHead@Accepted Receptionist Application@ID:"+rec._id,rec.practition);
+                        var request = "(GET /activateUser HTTP/1.0)";
+                        updateLogFile(getUserIP(req),rec.username,request,200,0,rec.practition);
                     }
                 });
             }
             else
             {
-                updateLogFile("PracticeHead@Accepted Doctor Application@ID:"+doc._id,doc.practition);
+                var request = "(GET /activateUser HTTP/1.0)";
+                updateLogFile(getUserIP(req),doc.username,request,200,0,doc.practition);
             }
             });
         }
@@ -1257,12 +1299,14 @@ module.exports = {
             {
                 if(doc)
                 {
-                   updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+doc._id,doc.practition);
+                   var request = "(GET /activateUser HTTP/1.0)";
+                   updateLogFile(getUserIP(req),doc.username,request,200,0,doc.practition);
                    Doctor.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err, doct)
                    {
                         if(doct)
                         {
-                            updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+doct._id,doct.practition);
+                            var request = "(GET /activateUser HTTP/1.0)";
+                            updateLogFile(getUserIP(req),doct.username,request,200,0,doct.practition);
                         }
                    });
                    return;
@@ -1273,12 +1317,14 @@ module.exports = {
             {
                  if(rec)
                  {
-                    updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+rec._id,rec.practition);
+                    var request = "(GET /activateUser HTTP/1.0)";
+                    updateLogFile(getUserIP(req),rec.username,request,200,0,rec.practition);
                     Receptionist.deleteOne({"_id":mongoose.Types.ObjectId(user)}, function(err, rect)
                     {
                          if(rect)
                          {
-                             updateLogFile("PracticeHead@Denied Receptionist Application@ID:"+rect._id,rect.practition);
+                            var request = "(GET /activateUser HTTP/1.0)";
+                            updateLogFile(getUserIP(req),rect.username,request,200,0,rect.practition);
                          }
                     });
                     return;
@@ -1334,30 +1380,6 @@ module.exports = {
 
     //======================================================================================
     //Function Developed By: Steven Visser
-    //Updates the logfile for a specific practice
-    updateLog: function(req, res)
-    {
-        var practice = req.body.practice;
-        var line = req.body.line + "\n";
-        var fname = "./webSite/Logs/"+practice+".txt";
-        fs.appendFile(fname,line,function(err)
-        {
-            if(err)
-            {
-                console.log(err);
-                res.status(401).send(err);
-            }
-            else
-            {
-                console.log("Log successfully updated!");
-                res.status(200).send("Log successfully updated!");
-            }
-        });
-        
-    },
-
-    //======================================================================================
-    //Function Developed By: Steven Visser
     //Uploads a regular consultation
     saveConsultation: function(req, res)
     {
@@ -1388,7 +1410,8 @@ module.exports = {
                 }
                 if(doctor)
                 {
-                    updateLogFile(doctor.username + "@Saved a consultation@CID:"+consultation._id,doctor.practition);
+                    var request = "(GET /saveConsultation HTTP/1.0)";
+                    updateLogFile(getUserIP(req),doctor.username,request,200,0,doctor.practition);
                 }
             });
 
@@ -1622,15 +1645,16 @@ function sendsignupConfirmationEmail(practice , user){
     });
 }
 
-function updateLogFile(linedesc,practice)
+function updateLogFile(ip,username,request,status,objsize,practice)
 {
     var today = new Date();
     var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
     var hours = today.getHours();
     var minutes = today.getMinutes();
     var seconds = today.getSeconds();
+    var timezone = today.getTimezoneOffset();
     var time = hours + ":" + minutes + ":" + seconds ;
-    var line = date + "@" + time + "@" + linedesc + "\n";
+    var line = ip + " - " + username +"["+ date + ":" + time + " " + timezone + "] " + request + " " + status + " " + objsize + "\n";
     var fname = "./webSite/Logs/"+practice+".txt";
     fs.appendFile(fname,line,function(err)
     {
