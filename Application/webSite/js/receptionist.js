@@ -139,11 +139,23 @@ function checkRegFields() {
         trueSubmit = false;
     }
 
-    if (checkIdNumber(idNumber.value) == false) {
-        trueSubmit = false;
-    } else if (checkIdNumber(idNumber.value) == true && document.getElementById("errorForID").style.display == "block") {
-        document.getElementById("errorForID").style.display = "none";
-        idNumber.style.color = "black";
+    if (document.getElementById("idNoChoice").checked == true)
+        idChecked = true;
+
+    if (idChecked == true) {
+        if (checkIdNumber(idNumber.value) == false) {
+            trueSubmit = false;
+        } else if (checkIdNumber(idNumber.value) == true && document.getElementById("errorForID").style.display == "block") {
+            document.getElementById("errorForID").style.display = "none";
+            idNumber.style.color = "black";
+        }
+    } else { 
+        if (checkPassport(idNumber.value) == false) {
+            trueSubmit = false;
+        } else if (checkPassport(idNumber.value) == true && document.getElementById("errorForPass").style.display == "block") {
+            document.getElementById("errorForPass").style.display = "none";
+            idNumber.style.color = "black";
+        }
     }
 
     if (checkEmailReg(email.value) == false) {
@@ -172,11 +184,22 @@ function checkRegFields() {
 function checkId() {
     var idNumber = document.getElementById("idNumber");
 
-    if (checkIdNumber(idNumber.value) == false) {
-        document.getElementById("errorForID").style.display = "block";
-        idNumber.style.color = "#ff5050";
-    } else {
-        document.getElementById("errorForID").style.display = "none";
+    if (idNumber.value != "") {
+        if (idChecked == true) {
+            if (checkIdNumber(idNumber.value) == false) {
+                document.getElementById("errorForID").style.display = "block";
+                idNumber.style.color = "#ff5050";
+            } else {
+                document.getElementById("errorForID").style.display = "none";
+            }
+        } else {
+            if (checkPassport(idNumber.value) == false) {
+                document.getElementById("errorForPass").style.display = "block";
+                idNumber.style.color = "#ff5050";
+            } else {
+                document.getElementById("errorForID").style.display = "none";
+            }
+        }
     }
 }
 
@@ -200,4 +223,22 @@ function checkEmail() {
     } else {
         document.getElementById("errorForEmail").style.display = "none";
     }
+}
+
+var idChecked = true;
+
+function testPass() {
+    idChecked = false;
+    document.getElementById("idNumber").placeholder = "Passport Number";
+
+    document.getElementById("errorForID").style.display = "none";
+    document.getElementById("idNumber").style.color = "black";
+}
+
+function testID() {
+    idChecked = true;
+    document.getElementById("idNumber").placeholder = "ID Number";
+
+    document.getElementById("errorForPass").style.display = "none";
+    document.getElementById("idNumber").style.color = "black";
 }
