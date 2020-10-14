@@ -105,3 +105,13 @@
 ::ffff:127.0.0.1 - rec1[14/10/2020:19:53:43 -120] (POST /searchPatient HTTP/1.0) 200 0
 ::ffff:127.0.0.1 - rec1[14/10/2020:19:55:34 -120] (GET /logout HTTP/1.0) 200 0
 ::ffff:127.0.0.1 - doc1[14/10/2020:19:55:41 -120] (POST /login HTTP/1.0) 200 0
+::ffff:127.0.0.1 - doc1[14/10/2020:20:16:3 -120] (GET /logout HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:20:16:9 -120] (POST /login HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:20:19:27 -120] (GET /logout HTTP/1.0) 200 0
+::ffff:127.0.0.1 - doc1[14/10/2020:20:19:32 -120] (POST /login HTTP/1.0) 200 0
+::ffff:127.0.0.1 - doc1[14/10/2020:20:21:17 -120] (GET /saveConsultation HTTP/1.0) 200 0
+::ffff:127.0.0.1 - doc1[14/10/2020:20:22:0 -120] (GET /logout HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:20:22:6 -120] (POST /login HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:20:24:56 -120] (POST /searchPatient HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:20:24:59 -120] (GET /makeBooking HTTP/1.0) 200 0
+::ffff:127.0.0.1 - rec1[14/10/2020:20:25:8 -120] (GET /logout HTTP/1.0) 200 0
