@@ -296,6 +296,7 @@ function init()
 	startTime();
 	populateDoctorInformation();
 	populateBookingInformation();
+    setLink();
 
 	for(var i = 0; i < 8; i++)
     {
@@ -315,6 +316,19 @@ function init()
         checkDoc[index] = true;
         confirmPic();
     }));
+}
+
+
+function setLink()
+{
+    console.log("SetHref");
+    var url = window.location.href;
+    console.log(url);
+    var parts = url.split("=");
+    console.log(parts);
+    var replace = "Consultation.html?bookingid="+parts[1];
+
+    document.querySelector("#consLink").href=replace;
 }
 
 //=============================================================================================

@@ -3,3 +3,13 @@
 ::1 - Dr[14/10/2020:19:36:23 -120] (POST /login HTTP/1.0) 200 0
 ::1 - Dr[14/10/2020:19:38:30 -120] (POST /login HTTP/1.0) 200 0
 ::1 - admin[14/10/2020:19:38:47 -120] (POST /login HTTP/1.0) 200 0
+14/10/2020@22:8:27@admin@Logged in
+::1 - admin[14/10/2020:22:9:46 -120] (GET /makeBooking HTTP/1.0) 200 0
+14/10/2020@22:9:51@admin@Logout
+14/10/2020@22:10:1@Dr@Logged in
+14/10/2020@22:10:4@Dr@Completed a booking@BID:5f875b0af49c9322d3023cca
+14/10/2020@22:10:9@Dr@Logout
+14/10/2020@22:10:19@admin@Logged in
+::1 - admin[14/10/2020:22:10:36 -120] (GET /makeBooking HTTP/1.0) 200 0
+14/10/2020@22:10:39@admin@Logout
+14/10/2020@22:10:49@Dr@Logged in
