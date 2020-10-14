@@ -485,10 +485,10 @@ module.exports = {
                         }
                         else
                         {
-                            res.status(201);
+                            res.status(200);
                             res.redirect("preview.html");
                             var request = "(POST /addpatient HTTP/1.0)";
-                            updateLogFile(getUserIP(req),"-",request,201,0,practice);
+                            updateLogFile(getUserIP(req),"-",request,200,0,practice);
                         }
                     });
                     return;
@@ -517,12 +517,12 @@ module.exports = {
                                 }
                                 else
                                 {
-                                    res.status(201);
+                                    res.status(200);
                                     res.redirect("newHome.html");
                                 }
                             });
                             var request = "(POST /addpatient HTTP/1.0)";
-                            updateLogFile(getUserIP(req),rec.username,request,201,0,practice);
+                            updateLogFile(getUserIP(req),rec.username,request,200,0,practice);
                         }
                     });
                     return;
