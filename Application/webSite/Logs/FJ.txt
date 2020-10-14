@@ -13,3 +13,4 @@
 ::1 - admin[14/10/2020:22:10:36 -120] (GET /makeBooking HTTP/1.0) 200 0
 14/10/2020@22:10:39@admin@Logout
 14/10/2020@22:10:49@Dr@Logged in
+14/10/2020@22:19:17@Dr@Logged in
