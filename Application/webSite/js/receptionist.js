@@ -241,4 +241,41 @@ function testID() {
 
     document.getElementById("errorForPass").style.display = "none";
     document.getElementById("idNumber").style.color = "black";
+    document.getElementById("errorForID").innerText= "Invalid ID!";
+}
+
+function addpatient()
+{
+
+    var n = document.getElementBy("name").value;
+    var s = document.getElementBy("surname").value;
+    var id= document.getElementBy("idNumber").value;
+    var g = document.getElementBy("gender").value;
+    var e = document.getElementBy("email").value;
+    var c = document.getElementBy("cell").value;
+    var p = '';
+    if(document.getElementById("practice"))
+    {
+        p = document.getElementById("practice").value;
+    }
+ 
+    var response = fetch("/addPatient",
+    {
+        method:"POST",
+        headers:{'Content-Type': 'application/json; charset=UTF-8'},
+        body: JSON.stringify({"name":n,"surname":s,"idNumber":id,"gender":g,"email":e,"cellnumber":c,"practice":p})
+    })
+    response.then(res => 
+    {
+        if(res.status == 402)
+        {
+            document.getElementById("errorForID").style.display = "block";
+            document.getElementById("errorForID").innerText= "ID Number Already Exists!";
+        }
+        else 
+        {
+            alert("Patient Added Successfully!");
+            window.location.href = res.url;
+        }
+    });
 }

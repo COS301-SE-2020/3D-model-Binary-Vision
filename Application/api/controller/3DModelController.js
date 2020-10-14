@@ -459,7 +459,7 @@ module.exports = {
         {
             if(pat != null)
             {
-                res.status(400).send("Patient with that ID number already exists on the system");
+                res.sendStatus(402);
                 return;
             }
             else
