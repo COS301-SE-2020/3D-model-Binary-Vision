@@ -369,13 +369,14 @@ function addUser(name , surname, email ,username,choice,practice , securityCode)
             }
             else
             {
+                alert("Please view your email to make verify your account");
                 window.location.href = res.url;
             }
         });
     }
     else
     {
-        console.log("Could not make a new doctor");
+        alert("Please check that you have entered the right details");
     }
 }
 
