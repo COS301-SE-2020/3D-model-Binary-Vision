@@ -261,6 +261,8 @@ module.exports = {
                             }
                         });
                         Receptionist.findOne({"email":email},function(err,rec){
+                            console.log("Receptionist check: ");
+                            console.log(rec)
                             if(rec != null)
                             {
                                 bool = true;
