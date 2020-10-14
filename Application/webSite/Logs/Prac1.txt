@@ -3,3 +3,30 @@
 14/10/2020@13:51:58@admin@Registered as a Doctor
 14/10/2020@15:37:31@Marc@Registered as a Doctor
 14/10/2020@15:38:21@Marc@Registered as a Doctor
+14/10/2020@21:3:33@Marc@Logged in
+14/10/2020@21:4:6@Marc@Logout
+14/10/2020@21:4:22@admin@Logged in
+14/10/2020@21:5:20@admin@Added a Patient@PID:5f874bf0650a43346c5781f0
+14/10/2020@21:6:44@admin@Made a booking@BID:5f874c44650a43346c5781f1
+14/10/2020@21:7:42@admin@Logout
+14/10/2020@21:8:7@Marc@Logged in
+14/10/2020@21:8:16@Marc@Logout
+14/10/2020@21:8:28@admin@Logged in
+14/10/2020@21:8:47@admin@Made a booking@BID:5f874cbf650a43346c5781f2
+14/10/2020@21:9:19@admin@Made a booking@BID:5f874cdf650a43346c5781f3
+14/10/2020@21:10:57@admin@Logout
+14/10/2020@21:11:14@admin@Logged in
+::1 - admin[14/10/2020:21:12:44 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:14:55 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:25:43 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:25:59 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:26:11 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:26:26 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:36:36 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:36:49 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:37:0 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:37:17 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:51:53 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:52:6 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:52:20 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:52:33 -120] (GET /makeBooking HTTP/1.0) 200 0
