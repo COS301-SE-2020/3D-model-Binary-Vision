@@ -151,7 +151,7 @@ function populatePatients()
             
                     if(g.status ==200)
                     {
-                        replacement="<tr><td>"+patientInfo.name+"</td><td>"+count+"</td><td>"+patientInfo.idNumber+"</td><td>"+patientInfo.time+" : "+patientInfo.date+"</td><td>"+patientInfo.cellnumber+"</td><td><a class='btn btn-success'  type='button' href='makeBooking.html?patient="+patientInfo.patient+"&doctor="+selectedDoctor+"' onclick='postponeBooking(\""+patientInfo.bid+"\")'>POSTPONE</a><button class='btn btn-danger'  type='button' onclick='cancelBooking(\""+patientInfo.bid+"\")'>CANCEL</button></td></tr>";
+                        replacement="<tr><td>"+patientInfo.name+"</td><td>"+count+"</td><td>"+patientInfo.idNumber+"</td><td>"+patientInfo.time+" : "+patientInfo.date+"</td><td>"+patientInfo.cellnumber+"</td><td><a class='btn btn-success' style='margin-right: 10px;' type='button' href='makeBooking.html?patient="+patientInfo.patient+"&doctor="+selectedDoctor+"' onclick='postponeBooking(\""+patientInfo.bid+"\")'>POSTPONE</a><button class='btn btn-danger'  type='button' onclick='cancelBooking(\""+patientInfo.bid+"\")'>CANCEL</button></td></tr>";
                         count++;
                         document.getElementById("patientTable").innerHTML+=replacement;
                   

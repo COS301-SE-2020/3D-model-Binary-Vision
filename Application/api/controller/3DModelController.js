@@ -65,7 +65,7 @@ module.exports = {
         {         
             if (err) 
             {
-                console.log("error");
+                console.status(404).log("error");
                 return;
             }
             if (doctor) 
@@ -88,36 +88,41 @@ module.exports = {
                     }
                 })        
             }
-            //there was no doctor and we will now check if it is a receptionist
-        });
+            else
+            {        //there was no doctor and we will now check if it is a receptionist
 
-        Receptionist.findOne({username,"active":true}, function(err, receptionist){
+                Receptionist.findOne({username,"active":true}, function(err, receptionist){
+                
+                    if (err)
+                    {
+                      res.status(404).send(err);
+                      return;
+                    }
+                
+                    if (receptionist)
+                    {
+                        bcrypt.compare(password , receptionist.password, function (error, result){
+                           if (result == true)
+                           {
+                                res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
+                                res.redirect("/newHome.html");
+                                var request = "(POST /login HTTP/1.0)";
+                                updateLogFile(getUserIP(req),username,request,200,0,receptionist.practition);
+                                return;
+                           }
+                           else
+                           {
+                               res.status(404).send(error);
+                               return;
+                           }
+                        });
 
-            if (err)
-            {
-              res.send(err);
-              return;
-            }
-    
-            if (receptionist)
-            {
-                bcrypt.compare(password , receptionist.password, function (error, result){
-                   if (result == true)
-                   {
-                        res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
-                        res.redirect("/newHome.html");
-                        var request = "(POST /login HTTP/1.0)";
-                        updateLogFile(getUserIP(req),username,request,200,0,receptionist.practition);
-                        return;
-                   }
-                   else
-                   {
-                       res.send(error);
-                       return;
-                   }
-                    
-                })
-
+                    }
+                    else
+                    {
+                        res.sendStatus(404);
+                    }         
+                });
             }
         });
         return;
@@ -1721,8 +1726,8 @@ async function updateBookingEmail(booking){
     }
 
     var htmlreplace = "<body><div id='head' style='background-color: #003366; width: 500px; text-align: center; border-radius: 5px; margin: 0 auto; margin-top: 100px; box-shadow: 1px 0px 15px 0px black;'><br><h2 style='color:white;'>Postponed Appointment</h2><hr style='background-color: white;'>";
-    htmlreplace += "<span id='words' style='color: white;'> For email: <p style='color: lightblue;' id='emailAPI' name='emailAPI'>EMAIL_REPlACE</p> Your booking has successfully been postponed!<br>";
-    htmlreplace += "<p>Your new booking date is on </p><p id='newDate' style='color: lightgreen;'>DATE_REPLACE</p> At <p style='color: lightgreen;'>TIME_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACE</p><p></p></span><br><br></div></body>";
+    htmlreplace += "<span id='words' style='color: white; font-size: 20px;'> For email: <p style='color: lightblue; font-size: 20px;' id='emailAPI' name='emailAPI'>EMAIL_REPlACE</p> Your booking has successfully been postponed!<br>";
+    htmlreplace += "<p>Your new booking date is on </p><p id='newDate' style='color: lightgreen; font-size: 20px;'>DATE_REPLACE</p> At <p style='color: lightgreen;'>TIME_REPLACE</p> With Doctor <p id='docName' style='color: lightgreen;'>DOC_REPLACE</p><p></p></span><br><br></div></body>";
 
     htmlreplace=htmlreplace.replace("EMAIL_REPLACE",patient.email);
     htmlreplace=htmlreplace.replace("DATE_REPLACE",booking.date);

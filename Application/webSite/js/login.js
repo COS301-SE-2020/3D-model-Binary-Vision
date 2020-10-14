@@ -33,11 +33,12 @@ function login()
             });
 
             response.then(res => 
-            {
-
+            {   
+                console.log("status" + res.status);
                 if(res.status == 404)
                 {
-                    var loadingscreen = document.querySelector("#loadingGIF").style.visibility = hidden;
+
+                    document.querySelector("#loadingGIF").style.visibility = "hidden";
                     clicked = false;
                     document.querySelector("#errorResponse").innerHTML="Invalid login credentials";
                 }

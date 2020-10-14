@@ -378,3 +378,35 @@ function addUser(name , surname, email ,username,choice,practice , securityCode)
         console.log("Could not make a new doctor");
     }
 }
+
+function testPassword(pass) {
+    var errorData = document.querySelector("#errorOutput");
+    var password = document.querySelector("#password");
+
+    if (checkPassword(pass) == false) {
+        errorData.style.color = "red";
+        
+        usedParamaters=true;
+
+        password.style.color="white";
+        errorData.innerHTML = "<i>Ensure a minimum of eight characters, at least one uppercase letter, one lowercase letter, one number and one special character are used</i>";
+        password.style.backgroundColor="red";
+        password.focus();
+
+    } else if (password.style.backgroundColor == "red"){
+        password.style.color="black";
+        password.style.backgroundColor="lightgreen";
+        errorData.innerHTML = "<i></i>";
+    }
+}  
+
+function contTestPassword(pass) {
+    var errorData = document.querySelector("#errorOutput");
+    var password = document.querySelector("#password");
+
+    if (checkPassword(pass) == true && password.style.backgroundColor == "red"){
+        password.style.color="black";
+        password.style.backgroundColor="lightgreen";
+        errorData.innerHTML = "<i></i>";
+    }
+}

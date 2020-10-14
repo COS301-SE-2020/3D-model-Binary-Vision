@@ -25,3 +25,46 @@
 14/10/2020@14:31:35@rec1@Made a booking@BID:5f86efa78661d52f8d435e02
 14/10/2020@14:31:35@rec1@Made a booking@BID:5f86efa78661d52f8d435e03
 14/10/2020@14:32:26@rec1@Made a booking@BID:5f86efda8661d52f8d435e04
+14/10/2020@14:34:43@rec1@Logout
+14/10/2020@14:34:50@rec1@Logged in
+14/10/2020@14:52:22@rec1@Logged in
+14/10/2020@14:52:28@rec1@Logout
+14/10/2020@14:55:32@rec1@Logged in
+14/10/2020@14:55:48@doc1@Logged in
+14/10/2020@14:56:45@doc1@Logout
+14/10/2020@14:57:42@rec1@Logged in
+14/10/2020@14:58:29@rec1@Made a booking@BID:5f86f5f464d0e13bcaf550ac
+14/10/2020@14:58:40@rec1@Logout
+14/10/2020@14:58:45@doc1@Logged in
+14/10/2020@14:58:51@doc1@Saved a consultation@CID:5f86f60b64d0e13bcaf550ad
+14/10/2020@14:59:21@doc1@Logout
+14/10/2020@14:59:28@rec1@Logged in
+14/10/2020@15:0:30@rec1@Made a booking@BID:5f86f66e64d0e13bcaf550ae
+14/10/2020@15:0:53@rec1@Logout
+14/10/2020@15:1:0@doc1@Logged in
+14/10/2020@15:1:40@doc1@Logout
+14/10/2020@15:4:17@rec1@Logged in
+14/10/2020@15:7:41@rec1@Added a Patient@PID:5f86f81d64d0e13bcaf550af
+14/10/2020@15:7:57@rec1@Made a booking@BID:5f86f82d64d0e13bcaf550b0
+14/10/2020@15:8:19@rec1@Made a booking@BID:5f86f84364d0e13bcaf550b1
+14/10/2020@15:9:22@rec1@Made a booking@BID:5f86f88264d0e13bcaf550b2
+14/10/2020@15:10:37@rec1@Added a Patient@PID:5f86f8cd64d0e13bcaf550b3
+14/10/2020@15:10:58@rec1@Made a booking@BID:5f86f8e264d0e13bcaf550b4
+14/10/2020@15:12:30@rec1@Cancelled a booking@BID:5f86f8e264d0e13bcaf550b4
+14/10/2020@15:13:12@rec1@Made a booking@BID:5f86f96864d0e13bcaf550b5
+14/10/2020@15:13:35@rec1@Made a booking@BID:5f86f97f64d0e13bcaf550b6
+14/10/2020@15:24:40@rec1@Logged in
+14/10/2020@15:24:49@doc1@Logged in
+14/10/2020@15:26:21@doc1@Completed a booking@BID:5f804aaa9d8360179e82fe45
+14/10/2020@15:27:0@doc1@Completed a booking@BID:5f80457d9d8360179e82fe22
+14/10/2020@15:27:32@doc1@Logout
+14/10/2020@15:27:37@rec1@Logged in
+14/10/2020@15:33:27@rec1@Logout
+14/10/2020@15:33:36@rec1@Logged in
+14/10/2020@15:34:25@rec1@Made a booking@BID:5f86fe611ee5c340fc9d1628
+14/10/2020@15:35:39@rec1@Made a booking@BID:5f86feab1ee5c340fc9d1629
+14/10/2020@15:37:27@rec1@Made a booking@BID:5f86ff171ee5c340fc9d162a
+14/10/2020@15:38:7@rec1@Made a booking@BID:5f86ff3f1ee5c340fc9d162b
+14/10/2020@15:40:38@rec1@Logout
+14/10/2020@15:42:13@doc1@Logged in
+14/10/2020@15:42:32@doc1@Saved a consultation@CID:5f8700481ee5c340fc9d162c
