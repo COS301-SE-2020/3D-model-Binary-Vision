@@ -48,3 +48,9 @@ function checkPassword(password) {
 
     return re.test(password);
 }
+
+function checkPassport(passportNo) {
+    var re = /^(?!^0+$)[a-zA-Z0-9]{9,20}$/g;
+
+    return re.test(passportNo);
+}

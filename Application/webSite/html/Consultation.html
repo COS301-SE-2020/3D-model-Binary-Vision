@@ -128,10 +128,10 @@
 							
 				          		<br>-->
 				          		UPLOAD<hr>
-								<button class="btn btn-success" onclick="newVideo()">Media</button>
+								<button class="btn btn-info" onclick="newVideo()">Media</button>
 								<br><br>
 								PAST RECORDS<hr>
-								<a class="btn btn-primary" href="recordPage.html" id = "recordPage">Records</a>
+								<a class="btn btn-info" href="recordPage.html" id = "recordPage">Records</a>
 							</div>
 						<br>
 		  		</div>
@@ -174,15 +174,15 @@
 						<div class="doctorsNotes" id = "docnotes">
 							<p style="font-weight: bold;">Doctors Notes:</p>
 							<textarea id="doctorsNotes" style="width: 100%; height: 100%; border-width: 2px; border-color: #003366; border-radius: 5px; max-height: 280px;"></textarea>
-							<button class="btn btn-primary" id="saveDoctorNote" type="button" style="margin-top: 10px;" onclick="saveConsultation()">Save & Exit Consultation</button>
+							<button class="btn btn-info" id="saveDoctorNote" type="button" style="margin-top: 10px;" onclick="saveConsultation()">Save Notes</button>
 						</div>
 
 						<br><br>
 
 						<div id="VideoRecorder">
-							<h2 id="videoRecoderHeader">Video Recorder</h2><br>
+							<h2 id="videoRecoderHeader">Upload Video</h2><br>
 						    <div id="VideoRecorderCenter">
-						        <label for="file-upload" class="btn btn-primary" id="UploadVideo">Select Video</label>
+						        <label for="file-upload" class="btn btn-info" id="UploadVideo">Select Video</label>
 								<input id="file-upload" type="file" accept='video/mp4' onchange='uploadVideo(document.getElementById("file-upload").files[0])' />
 						        <!--<input class='btn btn-primary' type='submit' value='Upload Video' onclick='uploadVideo(document.getElementById("file-upload").files[0])'>-->
 
@@ -191,7 +191,7 @@
 						        <div id='uploadedVideoElement'></div>
 						        <div id='submitVideoUploadElement'></div>
 						        
-						        <input class='btn btn-primary' type='submit' name='takeVideoStream' value='Stream Video' onclick='takeVideoStream()'/>
+						        <input class='btn btn-info' type='submit' name='takeVideoStream' value='Stream Video' onclick='takeVideoStream()'/>
 						        
 						        <div id='videoStreamElement' style="display: none;">
 						        	<!--<br>
@@ -224,5 +224,7 @@
 					</div>
 				</div>
 		</div>
+
+	
 	</body>
 </html>

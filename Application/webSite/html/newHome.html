@@ -89,7 +89,7 @@
     <!--main body options-->
     <div id="miBody">
       <div id="header">
-        <p id="headerTitle">ADMIN HOME PAGE</p>
+        <p id="headerTitle">HOME PAGE</p>
       </div>
     </div>
     <div id="conatinerHomeOuter">
@@ -148,8 +148,17 @@
                 <input class="form-control" id="surname" name="surname" oninput="checkRegFields();" placeholder="Surname" required/>
                 <br><br>
 
-                <label for="idNumber" style="color: white;">Patients ID number</label><br>
+                <label for="idNumber" style="color: white;">Patients ID number</label>
+
+                <br>
+                <input type="radio" id="idNoChoice" name="identificationNo" value="idNoChoice" onchange="testID(); checkRegFields(); checkId();" checked>
+                <label for="idNoChoice" style="color: white; font-size: 15px;">ID Number</label>
+                <input type="radio" id="passChoice" name="identificationNo" value="passChoice" onchange="testPass(); checkRegFields(); checkId();">
+                <label for="passChoice" style="color: white; font-size: 15px;">Passport Number</label><br>
+
                 <p id="errorForID" style="color: red; display: none;"> Invlaid ID number!</p>
+                <p id="errorForPass" style="color: red; display: none;"> Invlaid Passport number!</p>
+                
                 <input class="form-control" id="idNumber" name="idNumber" oninput="checkRegFields();" onchange="checkId();" placeholder="ID Number" required/>
                 <br><br>
 
@@ -174,7 +183,7 @@
               <input class="btn btn-primary" type="submit" name="submitDetails" value="Submit" id="submitPatientInfo" onclick="sendAlert" style="display: none;" />
             </form>
 
-              <button class="btn btn-secondary" id="noSubmitButton" style="display: block; transform: translateY(-10px);">Submit</button>
+              <button class="btn btn-secondary" id="noSubmitButton" style="display: block; transform: translateY(-10px);">Add</button>
 
               <br><br>
               <hr>

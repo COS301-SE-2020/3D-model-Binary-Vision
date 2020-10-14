@@ -900,7 +900,7 @@ button.btn{
 }
 
 #videoRecoderHeader {
-	background-color: #28A745;
+	background-color: #003366;
 	color: white;
 	margin: 0 -20px;
 	margin-top: -30px;
@@ -1323,12 +1323,12 @@ canvas{
 
 #closeButton{
 	color: white;
-	background-color: tomato;
+	background-color: #0275d8;
 }
 
 #closeButton:hover{
 	color: white;
-	background-color: red;
+	background-color: lightblue;
 }
 
 #avatar1:hover{
