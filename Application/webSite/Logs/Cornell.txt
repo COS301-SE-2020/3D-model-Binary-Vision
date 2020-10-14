@@ -59,3 +59,12 @@
 14/10/2020@15:27:0@doc1@Completed a booking@BID:5f80457d9d8360179e82fe22
 14/10/2020@15:27:32@doc1@Logout
 14/10/2020@15:27:37@rec1@Logged in
+14/10/2020@15:33:27@rec1@Logout
+14/10/2020@15:33:36@rec1@Logged in
+14/10/2020@15:34:25@rec1@Made a booking@BID:5f86fe611ee5c340fc9d1628
+14/10/2020@15:35:39@rec1@Made a booking@BID:5f86feab1ee5c340fc9d1629
+14/10/2020@15:37:27@rec1@Made a booking@BID:5f86ff171ee5c340fc9d162a
+14/10/2020@15:38:7@rec1@Made a booking@BID:5f86ff3f1ee5c340fc9d162b
+14/10/2020@15:40:38@rec1@Logout
+14/10/2020@15:42:13@doc1@Logged in
+14/10/2020@15:42:32@doc1@Saved a consultation@CID:5f8700481ee5c340fc9d162c
