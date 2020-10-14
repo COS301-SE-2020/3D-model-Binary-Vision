@@ -173,7 +173,7 @@ module.exports ={
  
             var practition= receptionist.practition;
         
-            Doctor.find({"practition":practition},'-password -username',function(err, doctors)
+            Doctor.find({"practition":practition,"active":true},'-password -username',function(err, doctors)
             {
                 if(err)
                 {
