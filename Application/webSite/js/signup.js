@@ -304,6 +304,34 @@ async function stop()
     usedParamaters=true;
 }
 
+function registerPractice()
+{
+
+    var p = document.getElementById("practice").value;
+    var s = document.getElementById("securityCode").value;
+    var h = document.getElementById("headReceptionist").value;
+    var err = document.getElementById("errorResponse");
+
+    var response = fetch("/registerPractice",
+        {
+            method:"POST",
+            headers:{'Content-Type': 'application/json; charset=UTF-8'},
+            body: JSON.stringify({"practice":p , "securityCode":s , "headReceptionist":h })
+        })
+
+        response.then(res => 
+        {
+            if(res.status == 400)
+            {
+                err.innerText = "A practice with this name already exists!";
+            }
+            else 
+            {
+                window.location.href = res.url;
+            }
+        });
+}
+
 //=====================================================================================
 //Function developed by: Jacobus Janse van Rensburg
 // adding a user if its allowed

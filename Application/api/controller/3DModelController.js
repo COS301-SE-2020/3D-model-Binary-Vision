@@ -173,7 +173,9 @@ module.exports = {
             if (prac != null /*|| prac != ""*/)
             {   
                 //practition already registered;
-                res.status(400).send("Practice already exists");
+                res.sendStatus(400);
+                var request = "(GET /practiceRegistration HTTP/1.0)";
+                updateLogFile(getUserIP(req),"-",request,400,0,practice);
                 return;
             }
             else
