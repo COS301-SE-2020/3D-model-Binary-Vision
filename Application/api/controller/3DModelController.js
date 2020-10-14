@@ -84,40 +84,43 @@ module.exports = {
                         return;
                     }
                 })        
+            }            //there was no doctor and we will now check if it is a receptionist
+
+            else{
+                Receptionist.findOne({username,"active":true}, function(err, receptionist){
+
+                    if (err)
+                    {
+                      res.status(404).send(err);
+                      return;
+                    }
+            
+                    if (receptionist)
+                    {
+                        bcrypt.compare(password , receptionist.password, function (error, result){
+                           if (result == true){
+                                res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
+                                res.redirect("/newHome.html");
+                                updateLogFile(username+"@Logged in",receptionist.practition);
+                                return;
+                           }
+                           else{
+                               res.status(404).send(error);
+                               
+                               return;
+                           }
+                            
+                        })
+        
+                    }
+                    else {
+                        res.sendStatus(404);
+                    }
+                });
             }
-            //there was no doctor and we will now check if it is a receptionist
         });
 
-        Receptionist.findOne({username,"active":true}, function(err, receptionist){
-
-            if (err)
-            {
-              res.status(404).send(err);
-              return;
-            }
-    
-            if (receptionist)
-            {
-                bcrypt.compare(password , receptionist.password, function (error, result){
-                   if (result == true){
-                        res.cookie("drCookie",receptionist._id,{maxAge:9000000,httpOnly:true});
-                        res.redirect("/newHome.html");
-                        updateLogFile(username+"@Logged in",receptionist.practition);
-                        return;
-                   }
-                   else{
-                       res.status(404).send(error);
-                       
-                       return;
-                   }
-                    
-                })
-
-            }
-            else {
-                res.sendStatus(404);
-            }
-        });
+        
         return;
     },
 
