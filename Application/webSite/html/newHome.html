@@ -136,7 +136,7 @@
 
             <!--main body form for patient-->
 
-              <form action="/addPatient" method="POST" style="padding:10px; overflow: hidden;" id="patientFormSignup">
+              <form style="padding:10px; overflow: hidden;" id="patientFormSignup">
                 <br>
                 <h2>Add Patient</h2><hr>
 
@@ -156,13 +156,13 @@
                 <input type="radio" id="passChoice" name="identificationNo" value="passChoice" onchange="testPass(); checkRegFields(); checkId();">
                 <label for="passChoice" style="color: white; font-size: 15px;">Passport Number</label><br>
 
-                <p id="errorForID" style="color: red; display: none;"> Invlaid ID number!</p>
-                <p id="errorForPass" style="color: red; display: none;"> Invlaid Passport number!</p>
+                <p id="errorForID" style="color: red; display: none;"> Invalid ID number!</p>
+                <p id="errorForPass" style="color: red; display: none;"> Invalid Passport number!</p>
                 
                 <input class="form-control" id="idNumber" name="idNumber" oninput="checkRegFields();" onchange="checkId();" placeholder="ID Number" required/>
                 <br><br>
 
-                <label for="gender" style="color: white;">Gender</label><br>
+                <label for="gender" id="gender" style="color: white;">Gender</label><br>
                 <select  class="form-control" id = "gender" name = "gender">
                   <option value = "Male">Male</option>
                   <option value = "Female">Female</option>
@@ -171,7 +171,7 @@
                 <br><br>
 
                 <label for="email" style="color: white;">Patients Email</label><br>
-                <p id="errorForEmail" style="color: red; display: none;"> Invlaid email!</p>
+                <p id="errorForEmail" style="color: red; display: none;"> Invalid email!</p>
                 <input class="form-control" class="box" type="email" name="email" oninput="checkRegFields();" onchange="checkEmail();" id="email" placeholder="Email" required />
                 <br><br>
 
@@ -180,7 +180,7 @@
                 <input class="form-control" id="cell" maxlength="10" name="cellnumber" oninput="checkRegFields();" onchange="checkCell();" placeholder="Cellphone Number" required/>
                 <br><br>
 
-              <input class="btn btn-primary" type="submit" name="submitDetails" value="Submit" id="submitPatientInfo" onclick="sendAlert" style="display: none;" />
+              <input class="btn btn-primary" type="button" name="submitDetails" value="Submit" id="submitPatientInfo" onclick="addpatient()" style="display: none;" />
             </form>
 
               <button class="btn btn-secondary" id="noSubmitButton" style="display: block; transform: translateY(-10px);">Add</button>
