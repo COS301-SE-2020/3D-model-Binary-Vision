@@ -53,3 +53,9 @@
 14/10/2020@15:12:30@rec1@Cancelled a booking@BID:5f86f8e264d0e13bcaf550b4
 14/10/2020@15:13:12@rec1@Made a booking@BID:5f86f96864d0e13bcaf550b5
 14/10/2020@15:13:35@rec1@Made a booking@BID:5f86f97f64d0e13bcaf550b6
+14/10/2020@15:24:40@rec1@Logged in
+14/10/2020@15:24:49@doc1@Logged in
+14/10/2020@15:26:21@doc1@Completed a booking@BID:5f804aaa9d8360179e82fe45
+14/10/2020@15:27:0@doc1@Completed a booking@BID:5f80457d9d8360179e82fe22
+14/10/2020@15:27:32@doc1@Logout
+14/10/2020@15:27:37@rec1@Logged in
