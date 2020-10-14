@@ -5,7 +5,8 @@ var express = require('express'),
     port =process.env.PORT || 3000,
     mongoose =require('mongoose'),
     bodyParser = require('body-parser'),
-    serveStatic= require('serve-static');
+    serveStatic= require('serve-static'),
+    http = require("http");
 
 var MONGO_OPTIONS = {
   useNewUrlParser: true,
@@ -33,6 +34,9 @@ app.use((req, res, next) => {
   
   next();
 })
+
+var server = http.createServer(app);
+server.setTimeout(10*60*1000);
 
 app.use(serveStatic('webSite/'));
 app.use(serveStatic('webSite/html/'))
