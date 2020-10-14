@@ -54,16 +54,21 @@
 				<form  style="border-top-right-radius:10px; border-top-left-radius: 10px; padding: 20px; margin-left: auto; margin-right: auto; position: relative; text-align: center;">
 				  <br>
 				  	<div id="errorResponse" style="color: red; font-style: italic;"></div><br>
-						<label for="practice" style="color: white;">Practice</label><br>
-				    <input class="form-control" name="practice" placeholder="Enter Practice Name" id="practice" onchange="checkRegFields();"/><br>
-						<label for="securityCode" style="color: white;">Security Code</label><br>
-	                <input class="form-control"  name="securityCode" type="securityCode" placeholder="Enter Security Code" id="securityCode" onchange="checkRegFields();"/><br>
+				  	
+					<label for="practice" style="color: white;">Practice</label><br>
+				    <input class="form-control" name="practice" placeholder="Enter Practice Name" id="practice" oninput="checkRegFields();"/><br>
+					
+					<label for="securityCode" style="color: white;">Security Code</label><br>					
+					<p id="errorForSecCode" style="color: red; display: none;"> Please make sure the security code  longer than 4 characters</p>
+	                <input class="form-control"  name="securityCode" type="securityCode" placeholder="Enter security code" id="securityCode" oninput="checkRegFields();" onchange="chechSecCode();" /><br>
+	                
 	                <label for="headReceptionist" style="color: white;">Head Receptionist Email</label>
 	                <p id="errorForEmail" style="color: red; display: none;"> Invlaid email!</p>
-				    <input class="form-control"  name="headReceptionist" type="email" placeholder="Enter Head receptionist Email" id="headReceptionist" onchange="checkRegFields(); checkEmail();"/><br>
+				    <input class="form-control"  name="headReceptionist" type="email" placeholder="Enter Head receptionist Email" id="headReceptionist" oninput="checkRegFields();" onchange="checkEmail();" /><br>
+				    
 				    <button class="btn btn-primary" type="button" id="submitPatientInfo" style="display: none; position: relative; margin: 0px auto; text-align: center;" onclick="registerPractice()">Register</button> 
 				</form>
-				<button class="btn btn-secondary" id="noSubmitButton" style="display: block; transform: translateY(-20px);" onclick="registerPractice()">Register</button><br>
+				<button class="btn btn-secondary" id="noSubmitButton" style="display: block; transform: translateY(-20px);" >Register</button><br>
 			</div>
 		</div>
 
@@ -82,8 +87,11 @@
 			        trueSubmit = false;
 			    }
 
-			    if (securityCode == "") {
+			   	if (checkSecurityCode(securityCode) == false) {
 			        trueSubmit = false;
+			    } else if (checkSecurityCode(securityCode) == true && document.getElementById("errorForSecCode").style.display == "block") {
+			    	document.getElementById("errorForSecCode").style.display = "none";
+			    	document.getElementById("securityCode").style.color = "black";
 			    }
 
 			    if (checkEmailReg(email) == false) {
@@ -98,6 +106,16 @@
 			        noSubmit.style.display = "block";
 			    }
 			} 
+
+			function chechSecCode() {
+			    var secCode = document.getElementById("securityCode").value;
+
+			    if (checkEmailReg(secCode) == false) {
+			        document.getElementById("errorForSecCode").style.display = "block";
+			    } else {
+			        document.getElementById("errorForSecCode").style.display = "none";
+			    }
+			}
 
 			function checkEmail() {
 			    var email = document.getElementById("headReceptionist").value;

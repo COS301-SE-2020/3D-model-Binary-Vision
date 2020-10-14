@@ -54,3 +54,10 @@ function checkPassport(passportNo) {
 
     return re.test(passportNo);
 }
+
+function checkSecurityCode(securityCode) {
+    if (securityCode.length >= 5 )
+        return true;
+    else
+        return false;
+}

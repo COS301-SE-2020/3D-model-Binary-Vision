@@ -1,0 +1,2 @@
+14/10/2020@22:23:0@Practice: Practice Registered!
+::1 - -[14/10/2020:22:23:53 -120] (GET /practiceRegistration HTTP/1.0) 400 0

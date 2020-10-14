@@ -247,12 +247,12 @@ function testID() {
 function addpatient()
 {
 
-    var n = document.getElementBy("name").value;
-    var s = document.getElementBy("surname").value;
-    var id= document.getElementBy("idNumber").value;
-    var g = document.getElementBy("gender").value;
-    var e = document.getElementBy("email").value;
-    var c = document.getElementBy("cell").value;
+    var n = document.getElementById("name").value;
+    var s = document.getElementById("surname").value;
+    var id= document.getElementById("idNumber").value;
+    var g = document.getElementById("gender").value;
+    var e = document.getElementById("email").value;
+    var c = document.getElementById("cell").value;
     var p = '';
     if(document.getElementById("practice"))
     {

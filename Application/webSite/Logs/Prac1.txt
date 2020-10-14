@@ -30,3 +30,5 @@
 ::1 - admin[14/10/2020:21:52:6 -120] (GET /makeBooking HTTP/1.0) 200 0
 ::1 - admin[14/10/2020:21:52:20 -120] (GET /makeBooking HTTP/1.0) 200 0
 ::1 - admin[14/10/2020:21:52:33 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:59:6 -120] (GET /makeBooking HTTP/1.0) 200 0
+::1 - admin[14/10/2020:21:59:17 -120] (GET /makeBooking HTTP/1.0) 200 0
