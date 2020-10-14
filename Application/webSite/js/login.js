@@ -10,7 +10,7 @@ function login()
     if(!clicked)
     {
         clicked=true;
-        loadNow();
+        var loadingscreen = document.querySelector("#loadingGIF").style.visibility = 'visible';
         document.getElementById("errorResponse").innerHTML = "";
 
         var username = document.querySelector("#username");
@@ -69,10 +69,7 @@ function login()
 
 
 
-function loadNow(opacity) {
-   var loadingscreen = document.querySelector("#loadingGIF").style.visibility = 'visible';
-   loadingscreen.style.display = 'block'
-}
+
 
 function displayContent() {
     loader.style.display = 'none';
