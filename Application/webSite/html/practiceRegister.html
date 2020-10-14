@@ -48,18 +48,17 @@
 			<br><br><br><br>
 
 			<div id="containerLogin">
-				<img src="../css/images/45RS.gif" alt="tooth" style="position: relative; margin-left: auto; margin-right: auto; width:  300px;">
+				<img src="../css/images/tooth.png" alt="tooth" style="position: relative; margin-left: auto; margin-right: auto; width:  300px;">
 				<form  action="/registerPractice" method="POST" style="border-top-right-radius:10px; border-top-left-radius: 10px; padding: 20px; margin-left: auto; margin-right: auto; position: relative; text-align: center;">
 				  <br>
-				  <h2> REGISTER PRACTICE </h2>
 				  	<div id="errorResponse" style="color: red; font-style: italic;"></div><br>
-						<label for="practice" style="color: white;">Enter Practice Name </label><br>
-				    <input class="form-control" name="practice" placeholder="practice" id="practice" onchange="checkRegFields();"/><br>
-						<label for="securityCode" style="color: white;">Enter security Code </label><br>
-	                <input class="form-control"  name="securityCode" type="securityCode" placeholder="security code" id="securityCode" onchange="checkRegFields();"/><br>
-	                <label for="headReceptionist" style="color: white;">Enter Head receptionist Email </label>
+						<label for="practice" style="color: white;">Practice</label><br>
+				    <input class="form-control" name="practice" placeholder="Enter Practice Name" id="practice" onchange="checkRegFields();"/><br>
+						<label for="securityCode" style="color: white;">Security Code</label><br>
+	                <input class="form-control"  name="securityCode" type="securityCode" placeholder="Enter security code" id="securityCode" onchange="checkRegFields();"/><br>
+	                <label for="headReceptionist" style="color: white;">Head Receptionist Email</label>
 	                <p id="errorForEmail" style="color: red; display: none;"> Invlaid email!</p>
-				    <input class="form-control"  name="headReceptionist" type="headReceptionist" placeholder="head receptionist email" id="headReceptionist" onchange="checkRegFields(); checkEmail();"/><br>
+				    <input class="form-control"  name="headReceptionist" type="email" placeholder="Enter Head receptionist Email" id="headReceptionist" onchange="checkRegFields(); checkEmail();"/><br>
 				    <button class="btn btn-primary" type="submit" id="submitPatientInfo" style="display: none; position: relative; margin: 0px auto; text-align: center;" >Submit</button> 
 				</form>
 				<button class="btn btn-secondary" id="noSubmitButton" style="display: block; transform: translateY(-20px);">Submit</button><br>
