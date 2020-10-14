@@ -656,7 +656,7 @@ async function madeBookingEmail(booking){
             console.log(error);
         }
         else{
-            console.log(info);
+            //console.log(info);
         }
     });
 }

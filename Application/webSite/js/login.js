@@ -42,6 +42,12 @@ function login()
                     clicked = false;
                     document.querySelector("#errorResponse").innerHTML="Invalid login credentials";
                 }
+                else if(res.status == 402)
+                {
+                    document.querySelector("#loadingGIF").style.visibility = "hidden";
+                    clicked = false;
+                    document.querySelector("#errorResponse").innerHTML="Your account is not yet active. Please ask the head of your practice to check their email.";
+                }
                 else
                 {
                     window.location.href= res.url;

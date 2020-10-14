@@ -92,7 +92,7 @@ module.exports = {
             {        //there was no doctor and we will now check if it is a receptionist
 
                 Receptionist.findOne({username,"active":true}, function(err, receptionist){
-                
+                        
                     if (err)
                     {
                       res.status(404).send(err);
@@ -116,11 +116,29 @@ module.exports = {
                                return;
                            }
                         });
-
+                    
                     }
                     else
                     {
-                        res.sendStatus(404);
+                        Receptionist.findOne({username,"active":false}, function(err, rec){
+                            if(rec)
+                            {
+                                res.sendStatus(402);
+                            }
+                            else
+                            {
+                                Doctor.findOne({username,"active":false}, function(err, doc){
+                                    if(doc)
+                                    {
+                                        res.sendStatus(402);
+                                    }
+                                    else
+                                    {
+                                        res.sendStatus(404);
+                                    }
+                                });
+                            }
+                        });
                     }         
                 });
             }
@@ -1208,7 +1226,7 @@ module.exports = {
     {
         var {email , password , code} = req.body;
 
-        console.log("here");
+        //console.log("here");
 
         password = frontsalt+password+backSalt;
         var updated = false;
@@ -1603,8 +1621,6 @@ module.exports = {
 // Function developed by: Jacobus Janse van Rensburg 
 // Function sends a email to head receptionist to confirm / reject a user signing up
 function sendsignupConfirmationEmail(practice , user){
-
-    console.log("HeadReceptionistEmail: "+ practice.headReceptionist);
     var emailOptions={
         from: 'flap.jacks.cs@gmail.com',
             to:practice.headReceptionist,//send email to the head receptionist
@@ -1643,9 +1659,6 @@ function sendsignupConfirmationEmail(practice , user){
         if(error)
         {
             console.log(error);
-        }
-        else{
-            console.log(info);
         }
     });
 }
@@ -1704,9 +1717,9 @@ async function deletedBookingEmail(booking){
         {
             console.log(error);
         }
-        else{
-            console.log(info);
-        }
+        //else{
+        //    console.log(info);
+        //}
     });
 }
 
@@ -1741,9 +1754,9 @@ async function updateBookingEmail(booking){
         {
             console.log(error);
         }
-        else{
-            console.log(info);
-        }
+        //else{
+        //    console.log(info);
+        //}
     });    
 }
 
@@ -1765,10 +1778,7 @@ async function reminder()
         {
             sendReminderEmail(booking[i],sendEmail.days);
         }
-            
-    }
-
-    
+    } 
 }
 
 
@@ -1836,10 +1846,10 @@ async function sendReminderEmail(booking,days)
         {
             console.log(error);
         }
-        else
-        {
-            console.log(info);
-        }
+        //else
+        //{
+        //    console.log(info);
+        //}
     }); 
 }
 
