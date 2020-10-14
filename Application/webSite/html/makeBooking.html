@@ -20,7 +20,7 @@
         <script type="text/javascript" src="../js/provileAvatar.js"></script>
     </head>
 
-    <body onload="initPage()">
+    <body onload="initPage()" style="background-image: url('../css/images/back3.png'); background-repeat: no-repeat;background-attachment: fixed; background-size: cover;">
         <nav class="navbar navbar-expand-md  navbar-dark">
             <a class="navbar-brand" href="newHome.html">
                 <img src="../css/images/tooth.png" alt="Profile Picture" width="30px" height="30px">
@@ -89,7 +89,7 @@
           <!--<button style="position:fixed; margin-left:60px; display:none; top: 10px;
           z-index:4;" class="btn" id="buttonShow" type="button" onclick="moveSideBar();"><u>Profile Info</u></button>-->
 
-          <div id="sideBody" style="background-color: white; height: 100%; position: fixed;">
+          <div id="sideBody" style="background-color: white; height: 100%; position: fixed; ">
             <img src="../css/images/arrow.png" class="arrowSideBody" id="arrowSideBody" onclick="rotateArrowBooking('arrowSideBody')" style="top: 60px;">
             <label id="sideBarLabel" for="arrowSideBody" style="transform: translate(300px, 73px); display: none; position: relative;" onclick="rotateArrowBooking('arrowSideBody')">Profile Info</label>
             <div id="sideBar" >
@@ -127,7 +127,7 @@
                       <br><label for="reasonForBooking" style="color: white;">Reason for booking</label><br>
                       <input type="text" type="form-control" name="reason" id="reasonForBooking" style="margin-bottom: 20px; width: 450px; padding: 10px; border-radius: 5px; border: none;">
                     </div><br>
-                    <input id="commonButton" type="button" class="btn btn-info btn-lg" onclick="fuzzyLogic()" value="Choose Common Type of Booking" disabled></input><br><br>
+                    <input id="commonButton" type="button" class="btn btn-primary btn-lg" onclick="fuzzyLogic()" value="Choose Common Type of Booking" disabled></input><br><br>
                     <div id="currentOverlay"></div>
                     
                     <div id="individual"></div>
@@ -138,8 +138,8 @@
                 
 
                 <!--right Nav-->
-                <div class="containerRight">
-                  <div id="rightSideBody" >
+                <div class="containerRight" style="">
+                  <div id="rightSideBody">
                     <input type="button" class="btn btn-info" value="Select Patient" name="patientSelect" onclick="displayPatientSearchOverlay()" style="margin: 5px; margin-top:100px;">
                     <input id="docButton" type="button" class="btn btn-info" value="Select Doctor" name="drSelect" onclick="displayDoctorOverlay()" style="margin: 5px;" disabled>
                     <input id="dateButton" type="button" class="btn btn-info" value="Select Date" name="timeSelect" onclick="displayTimeTableOverlay()" style="margin: 5px;" disabled><br><br>
