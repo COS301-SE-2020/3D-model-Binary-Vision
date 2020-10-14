@@ -134,6 +134,7 @@ function addPatient()
         {
             //patient successfuly added and we can do something
             alert("Patient added successfully");
+            window.location.href = res.url;
             console.log("patient added successfully: check database for confirmation");
         }
         else

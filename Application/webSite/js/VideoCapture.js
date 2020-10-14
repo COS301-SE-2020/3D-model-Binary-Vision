@@ -202,7 +202,7 @@ function submitVideo(video, videoStreamed)
 	if (!videoStreamed)
 	{
 		var submitVideoElement = document.getElementById('submitVideoUploadElement');
-		submitVideoElement.innerHTML = '<br><button class="btn btn-info" id="submitVideo">Submit Video</button><br><br><br>';
+		submitVideoElement.innerHTML = '<br><button class="btn btn-info" id="submitVideo" onclick="onlyOnce();">Submit Video</button><br><br><br>';
 	}
 	else
 	{
@@ -375,4 +375,8 @@ function closeModel() {
 
 	var butt = document.getElementById("closeButtonRender");
 	butt.style.display = "block";
+}
+
+function onlyOnce(){
+	document.getElementById("submitVideo").disabled = true;
 }
