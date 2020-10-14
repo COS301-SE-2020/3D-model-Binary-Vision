@@ -312,7 +312,7 @@ function createPatientSearchOverlay()
     overlay.style.position = "relative";
     overlay.style.display = "inline-block";
     overlay.style.backgroundColor= "#003366";
-    overlay.style.width= "300px";
+    overlay.style.width= "100%";
     overlay.style.color= "white";
     overlay.style.textAlign = "center";
     overlay.style.borderRadius = "5px";
@@ -324,7 +324,7 @@ function createPatientSearchOverlay()
     overlay.innerHTML+='<div class="change" class="custom-control"><input type="checkbox"  id="searchByName" name="searchBy" onclick="searchByInputDisplay()" checked><label class="form-check-label" style="color:white; padding: 5px; left: 0px;" for="searchByName">  Search By Name </label><br>';
     overlay.innerHTML+='<input type="checkbox" id="searchBySurname" name="searchBy" onclick="searchByInputDisplay()"><label class="form-check-label" style="color:white; padding: 5px; left: 0px;" for="searchBySurname">  Search By Surname </label><br>';
     overlay.innerHTML+='<input type="checkbox" id="searchByPatientID" name="searchBy" onclick="searchByInputDisplay()"><label class="form-check-label" style="color:white; padding: 5px; left: 0px;" for="searchByPatientID">  Search By Patient ID </label> <br><br></div>';
-    overlay.innerHTML+='<div id="inputBoxes" ></div><input style="margin-bottom: 20px;" class="btn btn-danger" type="submit" class="btn" value="Search" onclick="createPatientsListForBooking()"></div></div>';
+    overlay.innerHTML+='<div id="inputBoxes" ></div><input style="margin-bottom: 20px;" class="btn btn-info" type="submit" class="btn" value="Search" onclick="createPatientsListForBooking()"></div></div>';
     searchByInputDisplay();
 }
 
