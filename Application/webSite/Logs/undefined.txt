@@ -1,0 +1,13 @@
+rec1@Logout - Cornell[14/10/2020:21:49:14 -120] undefined undefined undefined
+rec1@Logged in - Cornell[14/10/2020:21:49:26 -120] undefined undefined undefined
+rec1@Logout - Cornell[14/10/2020:21:50:10 -120] undefined undefined undefined
+rec1@Logged in - Cornell[14/10/2020:21:56:8 -120] undefined undefined undefined
+rec1@Logout - Cornell[14/10/2020:21:57:29 -120] undefined undefined undefined
+doc2@Logged in - Cornellz[14/10/2020:21:57:37 -120] undefined undefined undefined
+doc3@Logged in - Cornell[14/10/2020:21:57:45 -120] undefined undefined undefined
+doc3@Logout - Cornell[14/10/2020:21:58:13 -120] undefined undefined undefined
+rec1@Logged in - Cornell[14/10/2020:22:2:24 -120] undefined undefined undefined
+rec1@Logged in - Cornell[14/10/2020:22:2:34 -120] undefined undefined undefined
+rec1@Logged in - Cornell[14/10/2020:22:2:44 -120] undefined undefined undefined
+rec1@Logged in - Cornell[14/10/2020:22:2:50 -120] undefined undefined undefined
+rec1@Logged in - Cornell[14/10/2020:22:2:58 -120] undefined undefined undefined
