@@ -1632,15 +1632,19 @@ function sendsignupConfirmationEmail(practice , user){
     });
 }
 
-function updateLogFile(linedesc,practice)
+//======================================================================================================
+//Function developed by: Steven Visser
+//writes new entries to the log file
+function updateLogFile(ip,username,request,status,objsize,practice)
 {
     var today = new Date();
     var date = today.getDate() + '/' + (today.getMonth()+1) +'/'+ today.getFullYear();
     var hours = today.getHours();
     var minutes = today.getMinutes();
     var seconds = today.getSeconds();
+    var timezone = today.getTimezoneOffset();
     var time = hours + ":" + minutes + ":" + seconds ;
-    var line = date + "@" + time + "@" + linedesc + "\n";
+    var line = ip + " - " + username +"["+ date + ":" + time + " " + timezone + "] " + request + " " + status + " " + objsize + "\n";
     var fname = "./webSite/Logs/"+practice+".txt";
     fs.appendFile(fname,line,function(err)
     {
