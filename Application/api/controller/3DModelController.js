@@ -114,7 +114,7 @@ module.exports = {
 
             }
         });
-        res.status(404);
+        res.sendStatus(404);
         return;
     },
 
