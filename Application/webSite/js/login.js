@@ -4,57 +4,74 @@
 //===============================================================================================
 //Function developed by: Jacobus Janse van Rensburg
 //function used to handel the login of a patient
+var clicked= false;
 function login()
 {
-    document.getElementById("errorResponse").innerHTML = "";
-
-    var username = document.querySelector("#username");
-    var password = document.querySelector("#password");
-
-    if(username.value != "" && password.value!="")
+    if(!clicked)
     {
-        //salt and hash the password
-        var frontSalt ="COS301";
-        var backSalt ="FlapJacks";
+        clicked=true;
+        var loadingscreen = document.querySelector("#loadingGIF").style.visibility = 'visible';
+        document.getElementById("errorResponse").innerHTML = "";
 
-        var saltedPasword = frontSalt+ password.value+backSalt;
-        var frontEndHashedPassword = CryptoJS.MD5(saltedPasword).toString();
+        var username = document.querySelector("#username");
+        var password = document.querySelector("#password");
 
-        var response = fetch("/login",
+        if(username.value != "" && password.value!="")
         {
-            method:"POST",
-            headers:{'Content-Type':'application/json; charset=utf-8'},
-            body:JSON.stringify({"username":username.value,"password":frontEndHashedPassword})
-        });
+            //salt and hash the password
+            var frontSalt ="COS301";
+            var backSalt ="FlapJacks";
 
-        response.then(res => 
-        {
+            var saltedPasword = frontSalt+ password.value+backSalt;
+            var frontEndHashedPassword = CryptoJS.MD5(saltedPasword).toString();
 
-            if(res.status == 404)
+            var response = fetch("/login",
             {
-                document.querySelector("#errorResponse").innerHTML="Invalid login credentials";
-            }
-            else
-            {
-                window.location.href= res.url;
-            }
-        });
+                method:"POST",
+                headers:{'Content-Type':'application/json; charset=utf-8'},
+                body:JSON.stringify({"username":username.value,"password":frontEndHashedPassword})
+            });
 
-    }
-    else
-    {
-        //indicate that some fields are missing
-        if (username.value == "" && password.value == "") 
+            response.then(res => 
+            {
+
+                if(res.status == 404)
+                {
+                    var loadingscreen = document.querySelector("#loadingGIF").style.visibility = hidden;
+                    clicked = false;
+                    document.querySelector("#errorResponse").innerHTML="Invalid login credentials";
+                }
+                else
+                {
+                    window.location.href= res.url;
+                }
+            });
+
+        }
+        else
         {
-            document.querySelector("#errorResponse").innerHTML="Please enter username and password";
-        } 
-        else if (username.value == "") 
-        {
-            document.querySelector("#errorResponse").innerHTML="Please enter username";
-        } 
-        else if (password.value == "") 
-        {
-            document.querySelector("#errorResponse").innerHTML="Please enter password";
+            //indicate that some fields are missing
+            if (username.value == "" && password.value == "") 
+            {
+                document.querySelector("#errorResponse").innerHTML="Please enter username and password";
+            } 
+            else if (username.value == "") 
+            {
+                document.querySelector("#errorResponse").innerHTML="Please enter username";
+            } 
+            else if (password.value == "") 
+            {
+                document.querySelector("#errorResponse").innerHTML="Please enter password";
+            }
         }
     }
+}
+
+
+
+
+
+function displayContent() {
+    loader.style.display = 'none';
+    document.getElementById('content').style.display = 'block';
 }
