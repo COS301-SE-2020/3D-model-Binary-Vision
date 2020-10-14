@@ -65,7 +65,7 @@ module.exports = {
         {         
             if (err) 
             {
-                console.log("error");
+                console.status(404).log("error");
                 return;
             }
             if (doctor) 
@@ -80,7 +80,7 @@ module.exports = {
                         return;
                     }
                     else{
-                        res.send(erro);
+                        res.status(404).send(erro);
                         return;
                     }
                 })        
@@ -92,7 +92,7 @@ module.exports = {
 
             if (err)
             {
-              res.send(err);
+              res.status(404).send(err);
               return;
             }
     
@@ -106,7 +106,8 @@ module.exports = {
                         return;
                    }
                    else{
-                       res.send(error);
+                       res.status(404).send(error);
+                       
                        return;
                    }
                     
@@ -114,8 +115,6 @@ module.exports = {
 
             }
         });
-        res.sendStatus(404);
-        return;
     },
 
     //======================================================================================
