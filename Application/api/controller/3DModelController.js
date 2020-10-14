@@ -230,7 +230,7 @@ module.exports = {
         {
             if (err)
             {
-                res.status(400);
+                res.sendStatus(400);
                 return;
             }
             if(practice != null)
@@ -248,7 +248,7 @@ module.exports = {
                             if(doc != null)
                             {
                                 bool = true;
-                                res.status(403);
+                                res.sendStatus(403);
                                 return;
                             }
                         });
@@ -256,7 +256,7 @@ module.exports = {
                             if(doc != null)
                             {
                                 bool = true;
-                                res.status(402);
+                                res.sendStatus(402);
                                 return;
                             }
                         });
@@ -264,7 +264,7 @@ module.exports = {
                             if(rec != null)
                             {
                                 bool = true;
-                                res.status(403);
+                                res.sendStatus(403);
                                 return;
                             }
                         });
@@ -272,7 +272,7 @@ module.exports = {
                             if(rec != null)
                             {
                                 bool = true;
-                                res.status(402);
+                                res.sendStatus(402);
                                 return;
                             }
                         });
