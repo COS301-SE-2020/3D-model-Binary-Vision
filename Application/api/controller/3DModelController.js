@@ -92,7 +92,7 @@ module.exports = {
             {        //there was no doctor and we will now check if it is a receptionist
 
                 Receptionist.findOne({username,"active":true}, function(err, receptionist){
-                
+                        
                     if (err)
                     {
                       res.status(404).send(err);
@@ -116,11 +116,29 @@ module.exports = {
                                return;
                            }
                         });
-
+                    
                     }
                     else
                     {
-                        res.sendStatus(404);
+                        Receptionist.findOne({username,"active":false}, function(err, rec){
+                            if(rec)
+                            {
+                                res.sendStatus(402);
+                            }
+                            else
+                            {
+                                Doctor.findOne({username,"active":false}, function(err, doc){
+                                    if(doc)
+                                    {
+                                        res.sendStatus(402);
+                                    }
+                                    else
+                                    {
+                                        res.sendStatus(404);
+                                    }
+                                });
+                            }
+                        });
                     }         
                 });
             }
