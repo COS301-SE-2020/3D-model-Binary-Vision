@@ -11,6 +11,15 @@
   <script src="../js/registration.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  <style>
+    table, th, td {
+      /*border: 1px solid black;*/
+      border-collapse: collapse;
+      color: black;
+    }
+  </style>
+
 </head>
 <body style="background-image: url('../css/images/back3.png'); background-repeat: no-repeat;background-attachment: fixed; background-size: cover;">
 <nav class="navbar navbar-expand-lg navbar-dark">
@@ -45,7 +54,39 @@
 </div>
 
 <br><br><br>
-  
+  <div id="loginDetailsContainer">
+    <p style="color: black; position: relative; margin: 0px auto; text-align: center;">Please use these login credential to use our system</p>
+    <table style="width:50%; position: relative; margin: 0px auto; text-align: center;">
+      <tr>
+        <th>User Type</th>
+        <th>Username</th>
+        <th>Password</th>
+      </tr>
+      <tr>
+        <td>Doctor<!--User type--></td>
+        <td>demoDoc1<!--Username--></td>
+        <td>DemoDay1!<!--Password--></td>
+      </tr>
+      <tr>
+        <td>Doctor<!--User type--></td>
+        <td>demoDoc2<!--Username--></td>
+        <td>DemoDay1!<!--Password--></td>
+      </tr>
+      <tr>
+        <td>Receptionist</td>
+        <td>demoRec1</td>
+        <td>DemoDay1!</td>
+      </tr>
+      <tr>
+        <td>Receptionist</td>
+        <td>demoRec2</td>
+        <td>DemoDay1!</td>
+      </tr>
+    </table>
+  </div>
+
+<br>
+
 <div id="container">
   <div class="container">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
