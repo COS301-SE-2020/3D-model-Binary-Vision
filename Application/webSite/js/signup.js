@@ -397,7 +397,7 @@ function addUser(name , surname, email ,username,choice,practice , securityCode)
             }
             else
             {
-                alert("Please view your email to make verify your account");
+                alert("Please give the head receptionist time to activate your account.");
                 window.location.href = res.url;
             }
         });
