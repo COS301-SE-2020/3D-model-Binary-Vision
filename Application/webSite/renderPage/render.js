@@ -1,6 +1,6 @@
 //make API calls in there scripts to get the names of the object files, texturews and the mtl file
-var objectFile = 'sample_test.obj';
-var mtlFile = 'sample_test.mtl';
+var objectFile = 'teeth.obj';
+var mtlFile = 'teeth.mtl';
 var assetPath = 'assets/';
 //assets/bookingid 
 
@@ -11,13 +11,13 @@ function getUrls()
     //this is used to set the paths and object names from the URL    
     var url = window.location.href;
     var parts = url.split("=");
-    if(parts.length > 1)
-    {
-        var consID = parts[1];
-        assetPath = 'assets/' + consID + '/';
-        objectFile = consID + '.obj';
-        mtlFile = consID + '.mtl';
-    }
+    //if(parts.length > 1)
+    //{
+    //    var consID = parts[1];
+    //    assetPath = 'assets/' + consID + '/';
+    //    objectFile = consID + '.obj';
+    //    mtlFile = consID + '.mtl';
+    //}
     document.getElementById("returnbutton").href = "../recordPage.html?pid=" + parts[3] + "=" + parts[2];
     run();
 }
