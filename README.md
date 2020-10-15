@@ -4,7 +4,6 @@
 Link To Live Project : https://flapjacks.goodx.co.za/
 
 [![Build Status](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision.svg?branch=Feature%2FImprovements)](https://travis-ci.org/COS301-SE-2020/3D-model-Binary-Vision)
-[![Coverage Status](https://coveralls.io/repos/github/COS301-SE-2020/3D-model-Binary-Vision/badge.svg?branch=Redemo)](https://coveralls.io/github/COS301-SE-2020/3D-model-Binary-Vision?branch=Redemo)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/633d60ca4ab54b6d9405531e01ec3862)](https://app.codacy.com/manual/github/COS301-SE-2020/3D-model-Binary-Vision?utm_source=github.com&utm_medium=referral&utm_content=github/COS301-SE-2020/3D-model-Binary-Vision&utm_campaign=Badge_Grade_Dashboard)
 
 https://vanillav.github.io/FlapJacks.github.io/
