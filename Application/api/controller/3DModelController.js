@@ -5,6 +5,9 @@
 //that pertain to Logging in/Out, Registration to the system, and functions for most areas of the program that
 //require data to be returned from the database.
 
+var link = "https://flapjacks.goodx.co.za/";
+//var link = "http://105.186.253.77:3000/";
+
 "use strict";
 //set up the database first
 
@@ -1348,7 +1351,7 @@ module.exports = {
 
                 }
                 else if(doctor){
-                    var url = "https://flapjacks.goodx.co.za/QRAddPatient.html?practice="+doctor.practition;
+                    var url = link + "QRAddPatient.html?practice="+doctor.practition;
                     res.contentType('png');
                     qrCode.toFileStream(res , url);//return the qr code
                 }
@@ -1358,7 +1361,7 @@ module.exports = {
 
                         }
                         else if(recep){
-                            var url = "https://flapjacks.goodx.co.za/QRAddPatient.html?practice="+recep.practition;
+                            var url = link + "QRAddPatient.html?practice="+recep.practition;
                             res.contentType('png');
                             qrCode.toFileStream(res , url);
                         }
@@ -1620,7 +1623,7 @@ function sendsignupConfirmationEmail(practice , user){
     //do href to a page with the information url encoded to be extracted on that page and take nescasary actions
     // var href ="localhost:3000/ValidateSignup.html";
 
-    var href ="https://flapjacks.goodx.co.za/ValidateSignup.html";
+    var href = link + "ValidateSignup.html";
     //create url encoded hrefs
     var reject = href+"?action=reject&user="+user._id;
     var accept = href+"?action=accept&user="+user._id;

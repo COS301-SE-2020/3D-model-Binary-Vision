@@ -2,6 +2,9 @@
 //
 //This file contains the API function declarations and implementations for all functionality of sending emails to users
 
+var link = "https://flapjacks.goodx.co.za/";
+//var link = "http://105.186.253.77:3000/";
+
 var nodeMailer = require('nodemailer');
 const { Doctor, Receptionist, PasswordChanges } = require('../model/3DModelModel');
 
@@ -111,7 +114,7 @@ function sendPasswordResetEmail(req)
 
     // setting the variants in the email that is dependent on certain users
     // var resetURL="lacalhost:3000/ResetPassword.html?email="+req.body.email+"&code="+id;
-    var resetURL="https://flapjacks.goodx.co.za/ResetPassword.html?email="+req.body.email+"&code="+id;
+    var resetURL= link + "ResetPassword.html?email="+req.body.email+"&code="+id;
     passwordChangeOptions.html = passwordChangeOptions.html.replace('RESET_PASSWORD_URL',resetURL);
     passwordChangeOptions.html = passwordChangeOptions.html.replace('USER_EMAIL_HERE',req.body.email);
     //send the actual email
