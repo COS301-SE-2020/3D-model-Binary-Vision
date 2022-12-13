@@ -19,7 +19,7 @@
     "bcrypt": "^5.0.0",
     "benchmark": "^2.1.4",
     "cookie-parser": "^1.4.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "formidable": "^1.2.2",
     "mocha-performance": "^0.1.1",
     "mongoose": "^5.9.17",
